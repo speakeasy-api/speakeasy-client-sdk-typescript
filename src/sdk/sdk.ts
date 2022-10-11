@@ -29,7 +29,7 @@ export class SDK {
     this.defaultClient = axios.create({baseURL: this.serverURL});
     this.securityClient = axios.create({baseURL: this.serverURL});
     opts.forEach(o => o(this));
-	if this.serverURL == "" {
+	if (this.serverURL == "") {
 		this.serverURL = Servers[0];
 	}
   }
@@ -75,8 +75,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -129,8 +130,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -183,8 +185,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -237,8 +240,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -290,8 +294,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: string
                     try {
-                        let out: string = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -303,8 +308,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -356,8 +362,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: string
                     try {
-                        let out: string = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -369,8 +376,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -422,8 +430,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.ApiEndpoint
                     try {
-                        let out: shared.ApiEndpoint = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -433,8 +442,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -486,8 +496,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.GenerateOpenApiSpecDiff
                     try {
-                        let out: shared.GenerateOpenApiSpecDiff = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -497,8 +508,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -550,8 +562,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.GenerateOpenApiSpecDiff
                     try {
-                        let out: shared.GenerateOpenApiSpecDiff = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -561,8 +574,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -614,8 +628,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: string
                     try {
-                        let out: string = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -625,8 +640,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -678,8 +694,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: string
                     try {
-                        let out: string = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -689,8 +706,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -742,8 +760,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: string
                     try {
-                        let out: string = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -753,8 +772,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -806,8 +826,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.ApiEndpoint[]
                     try {
-                        let out: shared.ApiEndpoint[] = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -817,8 +838,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -872,8 +894,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Api[]
                     try {
-                        let out: shared.Api[] = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -883,8 +906,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -936,8 +960,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.ApiEndpoint[]
                     try {
-                        let out: shared.ApiEndpoint[] = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -947,8 +972,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1000,8 +1026,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.ApiEndpoint
                     try {
-                        let out: shared.ApiEndpoint = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1011,8 +1038,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1066,8 +1094,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Api[]
                     try {
-                        let out: shared.Api[] = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1077,8 +1106,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1132,8 +1162,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.EmbedAccessTokenResponse
                     try {
-                        let out: shared.EmbedAccessTokenResponse = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1143,8 +1174,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1196,8 +1228,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.UnboundedRequest
                     try {
-                        let out: shared.UnboundedRequest = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1207,8 +1240,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1260,8 +1294,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Schema
                     try {
-                        let out: shared.Schema = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1271,8 +1306,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1324,8 +1360,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.SchemaDiff
                     try {
-                        let out: shared.SchemaDiff = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1335,8 +1372,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1388,8 +1426,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Schema
                     try {
-                        let out: shared.Schema = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1399,8 +1438,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1452,8 +1492,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Schema[]
                     try {
-                        let out: shared.Schema[] = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1463,8 +1504,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1516,8 +1558,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.EmbedToken[]
                     try {
-                        let out: shared.EmbedToken[] = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1527,8 +1570,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1580,8 +1624,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.VersionMetadata[]
                     try {
-                        let out: shared.VersionMetadata[] = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1591,8 +1636,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1653,8 +1699,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.VersionMetadata
                     try {
-                        let out: shared.VersionMetadata = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1664,8 +1711,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1719,8 +1767,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.BoundedRequest[]
                     try {
-                        let out: shared.BoundedRequest[] = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1730,8 +1779,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1793,8 +1843,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1847,8 +1898,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1909,8 +1961,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Api
                     try {
-                        let out: shared.Api = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1920,8 +1973,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1982,8 +2036,9 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.ApiEndpoint
                     try {
-                        let out: shared.ApiEndpoint = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
@@ -1993,8 +2048,9 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
+                    let out: shared.Error
                     try {
-                        let out: shared.Error = UnmarshalJsonFromResponseBody(httpRes.data, out)
+                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
                     } catch (e: unknown) {
                         return new Error("Error unmarshaling response body JSON", {cause: e});
                     }
