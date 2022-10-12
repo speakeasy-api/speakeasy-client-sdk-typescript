@@ -1,6 +1,6 @@
 import {Metadata} from "../../../internal/utils/utils";
 
-export type Filter = {
+export class Filter {
     @Metadata("json, name=key")
     Key: string;
     @Metadata("json, name=operator")
@@ -8,6 +8,11 @@ export type Filter = {
     @Metadata("json, name=value")
     Value: string;
     
+    constructor(Key: string, Operator: string, Value: string) {
+		this.Key = Key;
+		this.Operator = Operator;
+		this.Value = Value;
+	}
 }
 
 

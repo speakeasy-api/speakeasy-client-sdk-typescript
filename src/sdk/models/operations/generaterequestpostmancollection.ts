@@ -1,18 +1,25 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GenerateRequestPostmanCollectionPathParams = {
+export class GenerateRequestPostmanCollectionPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=requestID")
     RequestId: string;
     
+    constructor(RequestId: string) {
+		this.RequestId = RequestId;
+	}
 }
 
-export type GenerateRequestPostmanCollectionRequest = {
+export class GenerateRequestPostmanCollectionRequest {
     
     PathParams: GenerateRequestPostmanCollectionPathParams;
     
+    constructor(PathParams: GenerateRequestPostmanCollectionPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GenerateRequestPostmanCollectionResponse = {
+export class GenerateRequestPostmanCollectionResponse {
     
     ContentType: string;
     
@@ -22,6 +29,12 @@ export type GenerateRequestPostmanCollectionResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, PostmanCollection?: string) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.PostmanCollection = PostmanCollection;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

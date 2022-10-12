@@ -1,6 +1,7 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GetSchemaDiffPathParams = {
+export class GetSchemaDiffPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
     ApiId: string;
     @Metadata("pathParam, style=simple;explode=false;name=baseRevisionID")
@@ -10,15 +11,24 @@ export type GetSchemaDiffPathParams = {
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiId: string, BaseRevisionId: string, TargetRevisionId: string, VersionId: string) {
+		this.ApiId = ApiId;
+		this.BaseRevisionId = BaseRevisionId;
+		this.TargetRevisionId = TargetRevisionId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type GetSchemaDiffRequest = {
+export class GetSchemaDiffRequest {
     
     PathParams: GetSchemaDiffPathParams;
     
+    constructor(PathParams: GetSchemaDiffPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GetSchemaDiffResponse = {
+export class GetSchemaDiffResponse {
     
     ContentType: string;
     
@@ -28,6 +38,12 @@ export type GetSchemaDiffResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, SchemaDiff?: SchemaDiff) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.SchemaDiff = SchemaDiff;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

@@ -1,6 +1,7 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type DeleteApiEndpointPathParams = {
+export class DeleteApiEndpointPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiEndpointID")
     ApiEndpointId: string;
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
@@ -8,15 +9,23 @@ export type DeleteApiEndpointPathParams = {
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiEndpointId: string, ApiId: string, VersionId: string) {
+		this.ApiEndpointId = ApiEndpointId;
+		this.ApiId = ApiId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type DeleteApiEndpointRequest = {
+export class DeleteApiEndpointRequest {
     
     PathParams: DeleteApiEndpointPathParams;
     
+    constructor(PathParams: DeleteApiEndpointPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type DeleteApiEndpointResponse = {
+export class DeleteApiEndpointResponse {
     
     ContentType: string;
     
@@ -24,6 +33,11 @@ export type DeleteApiEndpointResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

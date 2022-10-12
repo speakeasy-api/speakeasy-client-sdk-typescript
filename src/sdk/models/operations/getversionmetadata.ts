@@ -1,20 +1,28 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GetVersionMetadataPathParams = {
+export class GetVersionMetadataPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
     ApiId: string;
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiId: string, VersionId: string) {
+		this.ApiId = ApiId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type GetVersionMetadataRequest = {
+export class GetVersionMetadataRequest {
     
     PathParams: GetVersionMetadataPathParams;
     
+    constructor(PathParams: GetVersionMetadataPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GetVersionMetadataResponse = {
+export class GetVersionMetadataResponse {
     
     ContentType: string;
     
@@ -24,6 +32,12 @@ export type GetVersionMetadataResponse = {
     
     VersionMetadata?: shared.VersionMetadata[];
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, VersionMetadata?: shared.VersionMetadata[]) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+		this.VersionMetadata = VersionMetadata;
+	}
 }
 
 

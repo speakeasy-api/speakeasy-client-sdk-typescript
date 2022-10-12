@@ -1,6 +1,7 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type DownloadSchemaRevisionPathParams = {
+export class DownloadSchemaRevisionPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
     ApiId: string;
     @Metadata("pathParam, style=simple;explode=false;name=revisionID")
@@ -8,15 +9,23 @@ export type DownloadSchemaRevisionPathParams = {
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiId: string, RevisionId: string, VersionId: string) {
+		this.ApiId = ApiId;
+		this.RevisionId = RevisionId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type DownloadSchemaRevisionRequest = {
+export class DownloadSchemaRevisionRequest {
     
     PathParams: DownloadSchemaRevisionPathParams;
     
+    constructor(PathParams: DownloadSchemaRevisionPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type DownloadSchemaRevisionResponse = {
+export class DownloadSchemaRevisionResponse {
     
     ContentType: string;
     
@@ -26,6 +35,12 @@ export type DownloadSchemaRevisionResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, Schema?: string) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.Schema = Schema;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

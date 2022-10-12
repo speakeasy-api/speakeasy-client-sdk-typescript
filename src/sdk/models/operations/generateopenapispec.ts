@@ -1,20 +1,28 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GenerateOpenApiSpecPathParams = {
+export class GenerateOpenApiSpecPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
     ApiId: string;
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiId: string, VersionId: string) {
+		this.ApiId = ApiId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type GenerateOpenApiSpecRequest = {
+export class GenerateOpenApiSpecRequest {
     
     PathParams: GenerateOpenApiSpecPathParams;
     
+    constructor(PathParams: GenerateOpenApiSpecPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GenerateOpenApiSpecResponse = {
+export class GenerateOpenApiSpecResponse {
     
     ContentType: string;
     
@@ -24,6 +32,12 @@ export type GenerateOpenApiSpecResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, GenerateOpenApiSpecDiff?: GenerateOpenApiSpecDiff) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.GenerateOpenApiSpecDiff = GenerateOpenApiSpecDiff;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

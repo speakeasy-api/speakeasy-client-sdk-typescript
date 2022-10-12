@@ -1,6 +1,7 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GenerateOpenApiSpecForApiEndpointPathParams = {
+export class GenerateOpenApiSpecForApiEndpointPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiEndpointID")
     ApiEndpointId: string;
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
@@ -8,15 +9,23 @@ export type GenerateOpenApiSpecForApiEndpointPathParams = {
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiEndpointId: string, ApiId: string, VersionId: string) {
+		this.ApiEndpointId = ApiEndpointId;
+		this.ApiId = ApiId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type GenerateOpenApiSpecForApiEndpointRequest = {
+export class GenerateOpenApiSpecForApiEndpointRequest {
     
     PathParams: GenerateOpenApiSpecForApiEndpointPathParams;
     
+    constructor(PathParams: GenerateOpenApiSpecForApiEndpointPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GenerateOpenApiSpecForApiEndpointResponse = {
+export class GenerateOpenApiSpecForApiEndpointResponse {
     
     ContentType: string;
     
@@ -26,6 +35,12 @@ export type GenerateOpenApiSpecForApiEndpointResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, GenerateOpenApiSpecDiff?: GenerateOpenApiSpecDiff) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.GenerateOpenApiSpecDiff = GenerateOpenApiSpecDiff;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

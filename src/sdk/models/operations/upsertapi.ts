@@ -1,20 +1,28 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type UpsertApiPathParams = {
+export class UpsertApiPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
     ApiId: string;
     
+    constructor(ApiId: string) {
+		this.ApiId = ApiId;
+	}
 }
 
-export type UpsertApiRequest = {
+export class UpsertApiRequest {
     
     PathParams: UpsertApiPathParams;
     @Metadata("request, media_type=application/json")
     Request: shared.Api;
     
+    constructor(PathParams: UpsertApiPathParams, Request: Api) {
+		this.PathParams = PathParams;
+		this.Request = Request;
+	}
 }
 
-export type UpsertApiResponse = {
+export class UpsertApiResponse {
     
     Api?: shared.Api;
     
@@ -24,6 +32,12 @@ export type UpsertApiResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Api?: Api, Error?: Error) {
+		this.Api = Api;
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

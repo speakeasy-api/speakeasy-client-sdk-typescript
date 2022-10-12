@@ -1,18 +1,25 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GetRequestFromEventLogPathParams = {
+export class GetRequestFromEventLogPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=requestID")
     RequestId: string;
     
+    constructor(RequestId: string) {
+		this.RequestId = RequestId;
+	}
 }
 
-export type GetRequestFromEventLogRequest = {
+export class GetRequestFromEventLogRequest {
     
     PathParams: GetRequestFromEventLogPathParams;
     
+    constructor(PathParams: GetRequestFromEventLogPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GetRequestFromEventLogResponse = {
+export class GetRequestFromEventLogResponse {
     
     ContentType: string;
     
@@ -22,6 +29,12 @@ export type GetRequestFromEventLogResponse = {
     
     UnboundedRequest?: shared.UnboundedRequest;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, UnboundedRequest?: UnboundedRequest) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+		this.UnboundedRequest = UnboundedRequest;
+	}
 }
 
 

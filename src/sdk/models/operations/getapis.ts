@@ -1,26 +1,37 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GetApisOp = {
+export class GetApisOp {
     @Metadata("queryParam, name=and")
     And: boolean;
     
+    constructor(And: boolean) {
+		this.And = And;
+	}
 }
 
-export type GetApisQueryParams = {
+export class GetApisQueryParams {
     @Metadata("queryParam, style=deepObject;explode=true;name=metadata")
     Metadata?: Map<string, string[]>;
     @Metadata("queryParam, style=deepObject;explode=true;name=op")
     Op?: GetApisOp;
     
+    constructor(Metadata?: Map<string, string[]>, Op?: GetApisOp) {
+		this.Metadata = Metadata;
+		this.Op = Op;
+	}
 }
 
-export type GetApisRequest = {
+export class GetApisRequest {
     
     QueryParams: GetApisQueryParams;
     
+    constructor(QueryParams: GetApisQueryParams) {
+		this.QueryParams = QueryParams;
+	}
 }
 
-export type GetApisResponse = {
+export class GetApisResponse {
     
     Apis?: shared.Api[];
     
@@ -30,6 +41,12 @@ export type GetApisResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Apis?: shared.Api[], Error?: Error) {
+		this.Apis = Apis;
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

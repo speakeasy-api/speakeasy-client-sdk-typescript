@@ -1,6 +1,6 @@
+import * as shared from "../shared";
 
-
-export type GetValidEmbedAccessTokensResponse = {
+export class GetValidEmbedAccessTokensResponse {
     
     ContentType: string;
     
@@ -10,6 +10,12 @@ export type GetValidEmbedAccessTokensResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, EmbedTokens?: shared.EmbedToken[], Error?: Error) {
+		this.ContentType = ContentType;
+		this.EmbedTokens = EmbedTokens;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

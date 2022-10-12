@@ -1,18 +1,25 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type QueryEventLogQueryParams = {
+export class QueryEventLogQueryParams {
     @Metadata("queryParam, serialization=json;name=filters")
     Filters?: shared.Filters;
     
+    constructor(Filters?: Filters) {
+		this.Filters = Filters;
+	}
 }
 
-export type QueryEventLogRequest = {
+export class QueryEventLogRequest {
     
     QueryParams: QueryEventLogQueryParams;
     
+    constructor(QueryParams: QueryEventLogQueryParams) {
+		this.QueryParams = QueryParams;
+	}
 }
 
-export type QueryEventLogResponse = {
+export class QueryEventLogResponse {
     
     BoundedRequests?: shared.BoundedRequest[];
     
@@ -22,6 +29,12 @@ export type QueryEventLogResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, BoundedRequests?: shared.BoundedRequest[], Error?: Error) {
+		this.BoundedRequests = BoundedRequests;
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

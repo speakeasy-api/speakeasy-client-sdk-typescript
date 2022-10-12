@@ -1,6 +1,7 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GetApiEndpointPathParams = {
+export class GetApiEndpointPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiEndpointID")
     ApiEndpointId: string;
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
@@ -8,15 +9,23 @@ export type GetApiEndpointPathParams = {
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiEndpointId: string, ApiId: string, VersionId: string) {
+		this.ApiEndpointId = ApiEndpointId;
+		this.ApiId = ApiId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type GetApiEndpointRequest = {
+export class GetApiEndpointRequest {
     
     PathParams: GetApiEndpointPathParams;
     
+    constructor(PathParams: GetApiEndpointPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GetApiEndpointResponse = {
+export class GetApiEndpointResponse {
     
     ApiEndpoint?: shared.ApiEndpoint;
     
@@ -26,6 +35,12 @@ export type GetApiEndpointResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, ApiEndpoint?: ApiEndpoint, Error?: Error) {
+		this.ApiEndpoint = ApiEndpoint;
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

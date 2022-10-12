@@ -1,6 +1,7 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GeneratePostmanCollectionForApiEndpointPathParams = {
+export class GeneratePostmanCollectionForApiEndpointPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiEndpointID")
     ApiEndpointId: string;
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
@@ -8,15 +9,23 @@ export type GeneratePostmanCollectionForApiEndpointPathParams = {
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiEndpointId: string, ApiId: string, VersionId: string) {
+		this.ApiEndpointId = ApiEndpointId;
+		this.ApiId = ApiId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type GeneratePostmanCollectionForApiEndpointRequest = {
+export class GeneratePostmanCollectionForApiEndpointRequest {
     
     PathParams: GeneratePostmanCollectionForApiEndpointPathParams;
     
+    constructor(PathParams: GeneratePostmanCollectionForApiEndpointPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GeneratePostmanCollectionForApiEndpointResponse = {
+export class GeneratePostmanCollectionForApiEndpointResponse {
     
     ContentType: string;
     
@@ -26,6 +35,12 @@ export type GeneratePostmanCollectionForApiEndpointResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, PostmanCollection?: string) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.PostmanCollection = PostmanCollection;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

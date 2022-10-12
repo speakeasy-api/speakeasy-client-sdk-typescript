@@ -1,6 +1,7 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type Filters = {
+export class Filters {
     @Metadata("json, name=filters")
     Filters: Filter[];
     @Metadata("json, name=limit")
@@ -10,6 +11,12 @@ export type Filters = {
     @Metadata("json, name=operator")
     Operator: string;
     
+    constructor(Filters: shared.Filter[], Limit: number, Offset: number, Operator: string) {
+		this.Filters = Filters;
+		this.Limit = Limit;
+		this.Offset = Offset;
+		this.Operator = Operator;
+	}
 }
 
 

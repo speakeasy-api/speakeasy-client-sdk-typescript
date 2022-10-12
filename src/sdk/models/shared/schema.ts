@@ -1,6 +1,6 @@
 import {Metadata} from "../../../internal/utils/utils";
 
-export type Schema = {
+export class Schema {
     @Metadata("json, name=api_id")
     ApiId: string;
     @Metadata("json, name=created_at")
@@ -14,6 +14,14 @@ export type Schema = {
     @Metadata("json, name=workspace_id")
     WorkspaceId: string;
     
+    constructor(ApiId: string, CreatedAt: string, Description: string, RevisionId: string, VersionId: string, WorkspaceId: string) {
+		this.ApiId = ApiId;
+		this.CreatedAt = CreatedAt;
+		this.Description = Description;
+		this.RevisionId = RevisionId;
+		this.VersionId = VersionId;
+		this.WorkspaceId = WorkspaceId;
+	}
 }
 
 

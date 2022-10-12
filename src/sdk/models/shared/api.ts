@@ -1,6 +1,6 @@
 import {Metadata} from "../../../internal/utils/utils";
 
-export type Api = {
+export class Api {
     @Metadata("json, name=api_id")
     ApiId: string;
     @Metadata("json, name=created_at")
@@ -18,6 +18,16 @@ export type Api = {
     @Metadata("json, name=workspace_id")
     WorkspaceId: string;
     
+    constructor(ApiId: string, CreatedAt: string, Description: string, UpdatedAt: string, VersionId: string, WorkspaceId: string, Matched?: boolean, MetaData?: Map<string, string[]>) {
+		this.ApiId = ApiId;
+		this.CreatedAt = CreatedAt;
+		this.Description = Description;
+		this.Matched = Matched;
+		this.MetaData = MetaData;
+		this.UpdatedAt = UpdatedAt;
+		this.VersionId = VersionId;
+		this.WorkspaceId = WorkspaceId;
+	}
 }
 
 

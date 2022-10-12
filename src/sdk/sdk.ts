@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import * as shared from "./models/shared";
+import * as operations from "./models/operations";
 
 
 const Servers = [
@@ -14,7 +15,7 @@ export function WithServerURL(serverURL: string, params: Map<string, string>): F
     sdk.serverURL = serverURL;
   }
 }
-export function WithSecurity(security: Security): Function {
+export function WithSecurity(security: shared.Security): Function {
   return function(sdk: SDK) {
     sdk.securityClient = CreateSecurityClient(security);
   }
@@ -37,7 +38,7 @@ export class SDK {
   DeleteApi = async (
     props: operations.DeleteApiRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.DeleteApiResponse>> => {
+): Promise<AxiosResponse<operations.DeleteApiResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}", props.PathParams);
     
@@ -49,7 +50,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.DeleteApiResponse>
+    let httpRes: AxiosResponse<operations.DeleteApiResponse> | undefined = undefined;
     try {
         httpRes = await client.delete<
             operations.DeleteApiResponse,
@@ -61,12 +62,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: DeleteApiResponse = {
+	let res: operations.DeleteApiResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -75,24 +78,19 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   DeleteApiEndpoint = async (
     props: operations.DeleteApiEndpointRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.DeleteApiEndpointResponse>> => {
+): Promise<AxiosResponse<operations.DeleteApiEndpointResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", props.PathParams);
     
@@ -104,7 +102,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.DeleteApiEndpointResponse>
+    let httpRes: AxiosResponse<operations.DeleteApiEndpointResponse> | undefined = undefined;
     try {
         httpRes = await client.delete<
             operations.DeleteApiEndpointResponse,
@@ -116,12 +114,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: DeleteApiEndpointResponse = {
+	let res: operations.DeleteApiEndpointResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -130,24 +130,19 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   DeleteSchema = async (
     props: operations.DeleteSchemaRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.DeleteSchemaResponse>> => {
+): Promise<AxiosResponse<operations.DeleteSchemaResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", props.PathParams);
     
@@ -159,7 +154,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.DeleteSchemaResponse>
+    let httpRes: AxiosResponse<operations.DeleteSchemaResponse> | undefined = undefined;
     try {
         httpRes = await client.delete<
             operations.DeleteSchemaResponse,
@@ -171,12 +166,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: DeleteSchemaResponse = {
+	let res: operations.DeleteSchemaResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -185,24 +182,19 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   DeleteVersionMetadata = async (
     props: operations.DeleteVersionMetadataRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.DeleteVersionMetadataResponse>> => {
+): Promise<AxiosResponse<operations.DeleteVersionMetadataResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", props.PathParams);
     
@@ -214,7 +206,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.DeleteVersionMetadataResponse>
+    let httpRes: AxiosResponse<operations.DeleteVersionMetadataResponse> | undefined = undefined;
     try {
         httpRes = await client.delete<
             operations.DeleteVersionMetadataResponse,
@@ -226,12 +218,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: DeleteVersionMetadataResponse = {
+	let res: operations.DeleteVersionMetadataResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -240,24 +234,19 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   DownloadSchema = async (
     props: operations.DownloadSchemaRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.DownloadSchemaResponse>> => {
+): Promise<AxiosResponse<operations.DownloadSchemaResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", props.PathParams);
     
@@ -269,7 +258,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.DownloadSchemaResponse>
+    let httpRes: AxiosResponse<operations.DownloadSchemaResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.DownloadSchemaResponse,
@@ -281,12 +270,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: DownloadSchemaResponse = {
+	let res: operations.DownloadSchemaResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -294,38 +285,29 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: string
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Schema = out
+                    res.Schema = httpRes.data;
+                    break;
                 case `application/x-yaml`:
-                    res.Schema = httpRes.data
+                    res.Schema = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   DownloadSchemaRevision = async (
     props: operations.DownloadSchemaRevisionRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.DownloadSchemaRevisionResponse>> => {
+): Promise<AxiosResponse<operations.DownloadSchemaRevisionResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", props.PathParams);
     
@@ -337,7 +319,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.DownloadSchemaRevisionResponse>
+    let httpRes: AxiosResponse<operations.DownloadSchemaRevisionResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.DownloadSchemaRevisionResponse,
@@ -349,12 +331,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: DownloadSchemaRevisionResponse = {
+	let res: operations.DownloadSchemaRevisionResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -362,38 +346,29 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: string
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Schema = out
+                    res.Schema = httpRes.data;
+                    break;
                 case `application/x-yaml`:
-                    res.Schema = httpRes.data
+                    res.Schema = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   FindApiEndpoint = async (
     props: operations.FindApiEndpointRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.FindApiEndpointResponse>> => {
+): Promise<AxiosResponse<operations.FindApiEndpointResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", props.PathParams);
     
@@ -405,7 +380,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.FindApiEndpointResponse>
+    let httpRes: AxiosResponse<operations.FindApiEndpointResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.FindApiEndpointResponse,
@@ -417,12 +392,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: FindApiEndpointResponse = {
+	let res: operations.FindApiEndpointResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -430,36 +407,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.ApiEndpoint
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.ApiEndpoint = out
+                    res.ApiEndpoint = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GenerateOpenApiSpec = async (
     props: operations.GenerateOpenApiSpecRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GenerateOpenApiSpecResponse>> => {
+): Promise<AxiosResponse<operations.GenerateOpenApiSpecResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", props.PathParams);
     
@@ -471,7 +438,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GenerateOpenApiSpecResponse>
+    let httpRes: AxiosResponse<operations.GenerateOpenApiSpecResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GenerateOpenApiSpecResponse,
@@ -483,12 +450,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GenerateOpenApiSpecResponse = {
+	let res: operations.GenerateOpenApiSpecResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -496,36 +465,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.GenerateOpenApiSpecDiff
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.GenerateOpenApiSpecDiff = out
+                    res.GenerateOpenApiSpecDiff = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GenerateOpenApiSpecForApiEndpoint = async (
     props: operations.GenerateOpenApiSpecForApiEndpointRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GenerateOpenApiSpecForApiEndpointResponse>> => {
+): Promise<AxiosResponse<operations.GenerateOpenApiSpecForApiEndpointResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", props.PathParams);
     
@@ -537,7 +496,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GenerateOpenApiSpecForApiEndpointResponse>
+    let httpRes: AxiosResponse<operations.GenerateOpenApiSpecForApiEndpointResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GenerateOpenApiSpecForApiEndpointResponse,
@@ -549,12 +508,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GenerateOpenApiSpecForApiEndpointResponse = {
+	let res: operations.GenerateOpenApiSpecForApiEndpointResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -562,36 +523,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.GenerateOpenApiSpecDiff
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.GenerateOpenApiSpecDiff = out
+                    res.GenerateOpenApiSpecDiff = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GeneratePostmanCollection = async (
     props: operations.GeneratePostmanCollectionRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GeneratePostmanCollectionResponse>> => {
+): Promise<AxiosResponse<operations.GeneratePostmanCollectionResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", props.PathParams);
     
@@ -603,7 +554,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GeneratePostmanCollectionResponse>
+    let httpRes: AxiosResponse<operations.GeneratePostmanCollectionResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GeneratePostmanCollectionResponse,
@@ -615,12 +566,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GeneratePostmanCollectionResponse = {
+	let res: operations.GeneratePostmanCollectionResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -628,36 +581,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: string
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.PostmanCollection = out
+                    res.PostmanCollection = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GeneratePostmanCollectionForApiEndpoint = async (
     props: operations.GeneratePostmanCollectionForApiEndpointRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GeneratePostmanCollectionForApiEndpointResponse>> => {
+): Promise<AxiosResponse<operations.GeneratePostmanCollectionForApiEndpointResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", props.PathParams);
     
@@ -669,7 +612,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GeneratePostmanCollectionForApiEndpointResponse>
+    let httpRes: AxiosResponse<operations.GeneratePostmanCollectionForApiEndpointResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GeneratePostmanCollectionForApiEndpointResponse,
@@ -681,12 +624,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GeneratePostmanCollectionForApiEndpointResponse = {
+	let res: operations.GeneratePostmanCollectionForApiEndpointResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -694,36 +639,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: string
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.PostmanCollection = out
+                    res.PostmanCollection = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GenerateRequestPostmanCollection = async (
     props: operations.GenerateRequestPostmanCollectionRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GenerateRequestPostmanCollectionResponse>> => {
+): Promise<AxiosResponse<operations.GenerateRequestPostmanCollectionResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", props.PathParams);
     
@@ -735,7 +670,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GenerateRequestPostmanCollectionResponse>
+    let httpRes: AxiosResponse<operations.GenerateRequestPostmanCollectionResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GenerateRequestPostmanCollectionResponse,
@@ -747,12 +682,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GenerateRequestPostmanCollectionResponse = {
+	let res: operations.GenerateRequestPostmanCollectionResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -760,36 +697,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: string
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.PostmanCollection = out
+                    res.PostmanCollection = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetAllApiEndpoints = async (
     props: operations.GetAllApiEndpointsRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetAllApiEndpointsResponse>> => {
+): Promise<AxiosResponse<operations.GetAllApiEndpointsResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/api_endpoints", props.PathParams);
     
@@ -801,7 +728,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetAllApiEndpointsResponse>
+    let httpRes: AxiosResponse<operations.GetAllApiEndpointsResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetAllApiEndpointsResponse,
@@ -813,12 +740,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetAllApiEndpointsResponse = {
+	let res: operations.GetAllApiEndpointsResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -826,36 +755,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.ApiEndpoint[]
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.ApiEndpoints = out
+                    res.ApiEndpoints = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetAllApiVersions = async (
     props: operations.GetAllApiVersionsRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetAllApiVersionsResponse>> => {
+): Promise<AxiosResponse<operations.GetAllApiVersionsResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}", props.PathParams);
     
@@ -869,7 +788,7 @@ export class SDK {
     const queryParams = GetQueryParams(props.QueryParams)
     
 
-    let httpRes: AxiosResponse<operations.GetAllApiVersionsResponse>
+    let httpRes: AxiosResponse<operations.GetAllApiVersionsResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetAllApiVersionsResponse,
@@ -881,12 +800,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetAllApiVersionsResponse = {
+	let res: operations.GetAllApiVersionsResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -894,36 +815,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Api[]
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Apis = out
+                    res.Apis = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetAllForVersionApiEndpoints = async (
     props: operations.GetAllForVersionApiEndpointsRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetAllForVersionApiEndpointsResponse>> => {
+): Promise<AxiosResponse<operations.GetAllForVersionApiEndpointsResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", props.PathParams);
     
@@ -935,7 +846,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetAllForVersionApiEndpointsResponse>
+    let httpRes: AxiosResponse<operations.GetAllForVersionApiEndpointsResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetAllForVersionApiEndpointsResponse,
@@ -947,12 +858,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetAllForVersionApiEndpointsResponse = {
+	let res: operations.GetAllForVersionApiEndpointsResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -960,36 +873,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.ApiEndpoint[]
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.ApiEndpoints = out
+                    res.ApiEndpoints = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetApiEndpoint = async (
     props: operations.GetApiEndpointRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetApiEndpointResponse>> => {
+): Promise<AxiosResponse<operations.GetApiEndpointResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", props.PathParams);
     
@@ -1001,7 +904,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetApiEndpointResponse>
+    let httpRes: AxiosResponse<operations.GetApiEndpointResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetApiEndpointResponse,
@@ -1013,12 +916,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetApiEndpointResponse = {
+	let res: operations.GetApiEndpointResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1026,36 +931,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.ApiEndpoint
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.ApiEndpoint = out
+                    res.ApiEndpoint = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetApis = async (
     props: operations.GetApisRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetApisResponse>> => {
+): Promise<AxiosResponse<operations.GetApisResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/apis";
     
@@ -1069,7 +964,7 @@ export class SDK {
     const queryParams = GetQueryParams(props.QueryParams)
     
 
-    let httpRes: AxiosResponse<operations.GetApisResponse>
+    let httpRes: AxiosResponse<operations.GetApisResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetApisResponse,
@@ -1081,12 +976,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetApisResponse = {
+	let res: operations.GetApisResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1094,36 +991,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Api[]
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Apis = out
+                    res.Apis = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetEmbedAccessToken = async (
     props: operations.GetEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetEmbedAccessTokenResponse>> => {
+): Promise<AxiosResponse<operations.GetEmbedAccessTokenResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-token";
     
@@ -1137,7 +1024,7 @@ export class SDK {
     const queryParams = GetQueryParams(props.QueryParams)
     
 
-    let httpRes: AxiosResponse<operations.GetEmbedAccessTokenResponse>
+    let httpRes: AxiosResponse<operations.GetEmbedAccessTokenResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetEmbedAccessTokenResponse,
@@ -1149,12 +1036,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetEmbedAccessTokenResponse = {
+	let res: operations.GetEmbedAccessTokenResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1162,36 +1051,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.EmbedAccessTokenResponse
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.EmbedAccessTokenResponse = out
+                    res.EmbedAccessTokenResponse = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetRequestFromEventLog = async (
     props: operations.GetRequestFromEventLogRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetRequestFromEventLogResponse>> => {
+): Promise<AxiosResponse<operations.GetRequestFromEventLogResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/eventlog/{requestID}", props.PathParams);
     
@@ -1203,7 +1082,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetRequestFromEventLogResponse>
+    let httpRes: AxiosResponse<operations.GetRequestFromEventLogResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetRequestFromEventLogResponse,
@@ -1215,12 +1094,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetRequestFromEventLogResponse = {
+	let res: operations.GetRequestFromEventLogResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1228,36 +1109,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.UnboundedRequest
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.UnboundedRequest = out
+                    res.UnboundedRequest = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetSchema = async (
     props: operations.GetSchemaRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetSchemaResponse>> => {
+): Promise<AxiosResponse<operations.GetSchemaResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", props.PathParams);
     
@@ -1269,7 +1140,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetSchemaResponse>
+    let httpRes: AxiosResponse<operations.GetSchemaResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetSchemaResponse,
@@ -1281,12 +1152,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetSchemaResponse = {
+	let res: operations.GetSchemaResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1294,36 +1167,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Schema
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Schema = out
+                    res.Schema = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetSchemaDiff = async (
     props: operations.GetSchemaDiffRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetSchemaDiffResponse>> => {
+): Promise<AxiosResponse<operations.GetSchemaDiffResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", props.PathParams);
     
@@ -1335,7 +1198,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetSchemaDiffResponse>
+    let httpRes: AxiosResponse<operations.GetSchemaDiffResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetSchemaDiffResponse,
@@ -1347,12 +1210,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetSchemaDiffResponse = {
+	let res: operations.GetSchemaDiffResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1360,36 +1225,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.SchemaDiff
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.SchemaDiff = out
+                    res.SchemaDiff = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetSchemaRevision = async (
     props: operations.GetSchemaRevisionRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetSchemaRevisionResponse>> => {
+): Promise<AxiosResponse<operations.GetSchemaRevisionResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", props.PathParams);
     
@@ -1401,7 +1256,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetSchemaRevisionResponse>
+    let httpRes: AxiosResponse<operations.GetSchemaRevisionResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetSchemaRevisionResponse,
@@ -1413,12 +1268,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetSchemaRevisionResponse = {
+	let res: operations.GetSchemaRevisionResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1426,36 +1283,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Schema
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Schema = out
+                    res.Schema = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetSchemas = async (
     props: operations.GetSchemasRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetSchemasResponse>> => {
+): Promise<AxiosResponse<operations.GetSchemasResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", props.PathParams);
     
@@ -1467,7 +1314,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetSchemasResponse>
+    let httpRes: AxiosResponse<operations.GetSchemasResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetSchemasResponse,
@@ -1479,12 +1326,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetSchemasResponse = {
+	let res: operations.GetSchemasResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1492,36 +1341,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Schema[]
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Schemata = out
+                    res.Schemata = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetValidEmbedAccessTokens = async (
     
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetValidEmbedAccessTokensResponse>> => {
+): Promise<AxiosResponse<operations.GetValidEmbedAccessTokensResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-tokens/valid";
     
@@ -1533,7 +1372,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetValidEmbedAccessTokensResponse>
+    let httpRes: AxiosResponse<operations.GetValidEmbedAccessTokensResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetValidEmbedAccessTokensResponse,
@@ -1545,12 +1384,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetValidEmbedAccessTokensResponse = {
+	let res: operations.GetValidEmbedAccessTokensResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1558,36 +1399,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.EmbedToken[]
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.EmbedTokens = out
+                    res.EmbedTokens = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   GetVersionMetadata = async (
     props: operations.GetVersionMetadataRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.GetVersionMetadataResponse>> => {
+): Promise<AxiosResponse<operations.GetVersionMetadataResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", props.PathParams);
     
@@ -1599,7 +1430,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.GetVersionMetadataResponse>
+    let httpRes: AxiosResponse<operations.GetVersionMetadataResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.GetVersionMetadataResponse,
@@ -1611,12 +1442,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: GetVersionMetadataResponse = {
+	let res: operations.GetVersionMetadataResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1624,43 +1457,35 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.VersionMetadata[]
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.VersionMetadata = out
+                    res.VersionMetadata = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   InsertVersionMetadata = async (
     props: operations.InsertVersionMetadataRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.InsertVersionMetadataResponse>> => {
+): Promise<AxiosResponse<operations.InsertVersionMetadataResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", props.PathParams);
     
     try {
         let [bodyReader, reqContentType] = SerializeRequestBody(props);
     } catch (e: unknown) {
-        return new Error("Error serializing request body", { cause: e });
+        if (e instanceof Error) {
+            return new Error("Error serializing request body", { cause: e });
+        }
     }
     bodyReader ?? return new Error("request body is required");
     
@@ -1674,7 +1499,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.InsertVersionMetadataResponse>
+    let httpRes: AxiosResponse<operations.InsertVersionMetadataResponse> | undefined = undefined;
     try {
         httpRes = await client.post<
             operations.InsertVersionMetadataResponse,
@@ -1686,12 +1511,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: InsertVersionMetadataResponse = {
+	let res: operations.InsertVersionMetadataResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1699,36 +1526,26 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.VersionMetadata
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.VersionMetadata = out
+                    res.VersionMetadata = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   QueryEventLog = async (
     props: operations.QueryEventLogRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.QueryEventLogResponse>> => {
+): Promise<AxiosResponse<operations.QueryEventLogResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/eventlog/query";
     
@@ -1742,7 +1559,7 @@ export class SDK {
     const queryParams = GetQueryParams(props.QueryParams)
     
 
-    let httpRes: AxiosResponse<operations.QueryEventLogResponse>
+    let httpRes: AxiosResponse<operations.QueryEventLogResponse> | undefined = undefined;
     try {
         httpRes = await client.get<
             operations.QueryEventLogResponse,
@@ -1754,12 +1571,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: QueryEventLogResponse = {
+	let res: operations.QueryEventLogResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1767,43 +1586,35 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.BoundedRequest[]
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.BoundedRequests = out
+                    res.BoundedRequests = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   RegisterSchema = async (
     props: operations.RegisterSchemaRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.RegisterSchemaResponse>> => {
+): Promise<AxiosResponse<operations.RegisterSchemaResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", props.PathParams);
     
     try {
         let [bodyReader, reqContentType] = SerializeRequestBody(props);
     } catch (e: unknown) {
-        return new Error("Error serializing request body", { cause: e });
+        if (e instanceof Error) {
+            return new Error("Error serializing request body", { cause: e });
+        }
     }
     bodyReader ?? return new Error("request body is required");
     
@@ -1817,7 +1628,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.RegisterSchemaResponse>
+    let httpRes: AxiosResponse<operations.RegisterSchemaResponse> | undefined = undefined;
     try {
         httpRes = await client.post<
             operations.RegisterSchemaResponse,
@@ -1829,12 +1640,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: RegisterSchemaResponse = {
+	let res: operations.RegisterSchemaResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1843,24 +1656,19 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   RevokeEmbedAccessToken = async (
     props: operations.RevokeEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.RevokeEmbedAccessTokenResponse>> => {
+): Promise<AxiosResponse<operations.RevokeEmbedAccessTokenResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", props.PathParams);
     
@@ -1872,7 +1680,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.RevokeEmbedAccessTokenResponse>
+    let httpRes: AxiosResponse<operations.RevokeEmbedAccessTokenResponse> | undefined = undefined;
     try {
         httpRes = await client.delete<
             operations.RevokeEmbedAccessTokenResponse,
@@ -1884,12 +1692,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: RevokeEmbedAccessTokenResponse = {
+	let res: operations.RevokeEmbedAccessTokenResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1898,31 +1708,28 @@ export class SDK {
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   UpsertApi = async (
     props: operations.UpsertApiRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.UpsertApiResponse>> => {
+): Promise<AxiosResponse<operations.UpsertApiResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}", props.PathParams);
     
     try {
         let [bodyReader, reqContentType] = SerializeRequestBody(props);
     } catch (e: unknown) {
-        return new Error("Error serializing request body", { cause: e });
+        if (e instanceof Error) {
+            return new Error("Error serializing request body", { cause: e });
+        }
     }
     bodyReader ?? return new Error("request body is required");
     
@@ -1936,7 +1743,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.UpsertApiResponse>
+    let httpRes: AxiosResponse<operations.UpsertApiResponse> | undefined = undefined;
     try {
         httpRes = await client.put<
             operations.UpsertApiResponse,
@@ -1948,12 +1755,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: UpsertApiResponse = {
+	let res: operations.UpsertApiResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -1961,43 +1770,35 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Api
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Api = out
+                    res.Api = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
   UpsertApiEndpoint = async (
     props: operations.UpsertApiEndpointRequest,
     config?: AxiosRequestConfig
-): Promise<AxiosResponse<operations.UpsertApiEndpointResponse>> => {
+): Promise<AxiosResponse<operations.UpsertApiEndpointResponse> | Error> => {
     let baseURL: string = props.ServerURL ?? this.serverURL;
     const url: string = GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", props.PathParams);
     
     try {
         let [bodyReader, reqContentType] = SerializeRequestBody(props);
     } catch (e: unknown) {
-        return new Error("Error serializing request body", { cause: e });
+        if (e instanceof Error) {
+            return new Error("Error serializing request body", { cause: e });
+        }
     }
     bodyReader ?? return new Error("request body is required");
     
@@ -2011,7 +1812,7 @@ export class SDK {
 
     
 
-    let httpRes: AxiosResponse<operations.UpsertApiEndpointResponse>
+    let httpRes: AxiosResponse<operations.UpsertApiEndpointResponse> | undefined = undefined;
     try {
         httpRes = await client.put<
             operations.UpsertApiEndpointResponse,
@@ -2023,12 +1824,14 @@ export class SDK {
             ...config,
         });
     } catch (e: unknown) {
-        return new Error("Error sending request", {cause: e});
+        if (e instanceof Error) {
+            return new Error("Error sending request", {cause: e});
+        }
     }
 
-    const contentType = httpRes.headers?.["Content-Type"];
+    const contentType = httpRes?.headers?.getContentType;
 
-	let res: UpsertApiEndpointResponse = {
+	let res: operations.UpsertApiEndpointResponse = {
 		StatusCode: httpRes.status,
         ContentType: contentType,
 	}
@@ -2036,30 +1839,20 @@ export class SDK {
         case 200:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.ApiEndpoint
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.ApiEndpoint = out
+                    res.ApiEndpoint = httpRes.data;
+                    break;
             }
+            break;
         default:
             switch (contentType) {
                 case `application/json`:
-                    let out: shared.Error
-                    try {
-                        out = UnmarshalJsonFromResponseBody(httpRes.data, out)
-                    } catch (e: unknown) {
-                        return new Error("Error unmarshaling response body JSON", {cause: e});
-                    }
-
-                    res.Error = out
+                    res.Error = httpRes.data;
+                    break;
             }
+            break;
     }
     return res;
-});
+};
 
   
 }

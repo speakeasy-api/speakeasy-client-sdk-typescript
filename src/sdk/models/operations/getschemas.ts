@@ -1,20 +1,28 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GetSchemasPathParams = {
+export class GetSchemasPathParams {
     @Metadata("pathParam, style=simple;explode=false;name=apiID")
     ApiId: string;
     @Metadata("pathParam, style=simple;explode=false;name=versionID")
     VersionId: string;
     
+    constructor(ApiId: string, VersionId: string) {
+		this.ApiId = ApiId;
+		this.VersionId = VersionId;
+	}
 }
 
-export type GetSchemasRequest = {
+export class GetSchemasRequest {
     
     PathParams: GetSchemasPathParams;
     
+    constructor(PathParams: GetSchemasPathParams) {
+		this.PathParams = PathParams;
+	}
 }
 
-export type GetSchemasResponse = {
+export class GetSchemasResponse {
     
     ContentType: string;
     
@@ -24,6 +32,12 @@ export type GetSchemasResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, Error?: Error, Schemata?: shared.Schema[]) {
+		this.ContentType = ContentType;
+		this.Error = Error;
+		this.Schemata = Schemata;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

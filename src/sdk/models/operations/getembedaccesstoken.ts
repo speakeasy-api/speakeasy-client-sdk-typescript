@@ -1,6 +1,7 @@
 import {Metadata} from "../../../internal/utils/utils";
+import * as shared from "../shared";
 
-export type GetEmbedAccessTokenQueryParams = {
+export class GetEmbedAccessTokenQueryParams {
     @Metadata("queryParam, style=form;explode=true;name=description")
     Description?: string;
     @Metadata("queryParam, style=form;explode=true;name=duration")
@@ -8,15 +9,23 @@ export type GetEmbedAccessTokenQueryParams = {
     @Metadata("queryParam, serialization=json;name=filters")
     Filters?: shared.Filters;
     
+    constructor(Description?: string, Duration?: number, Filters?: Filters) {
+		this.Description = Description;
+		this.Duration = Duration;
+		this.Filters = Filters;
+	}
 }
 
-export type GetEmbedAccessTokenRequest = {
+export class GetEmbedAccessTokenRequest {
     
     QueryParams: GetEmbedAccessTokenQueryParams;
     
+    constructor(QueryParams: GetEmbedAccessTokenQueryParams) {
+		this.QueryParams = QueryParams;
+	}
 }
 
-export type GetEmbedAccessTokenResponse = {
+export class GetEmbedAccessTokenResponse {
     
     ContentType: string;
     
@@ -26,6 +35,12 @@ export type GetEmbedAccessTokenResponse = {
     
     StatusCode: number;
     
+    constructor(ContentType: string, StatusCode: number, EmbedAccessTokenResponse?: EmbedAccessTokenResponse, Error?: Error) {
+		this.ContentType = ContentType;
+		this.EmbedAccessTokenResponse = EmbedAccessTokenResponse;
+		this.Error = Error;
+		this.StatusCode = StatusCode;
+	}
 }
 
 

@@ -1,6 +1,6 @@
 import {Metadata} from "../../../internal/utils/utils";
 
-export type UnboundedRequest = {
+export class UnboundedRequest {
     @Metadata("json, name=created_at")
     CreatedAt: string;
     @Metadata("json, name=har")
@@ -12,6 +12,13 @@ export type UnboundedRequest = {
     @Metadata("json, name=workspace_id")
     WorkspaceId: string;
     
+    constructor(CreatedAt: string, Har: string, HarSizeBytes: number, RequestId: string, WorkspaceId: string) {
+		this.CreatedAt = CreatedAt;
+		this.Har = Har;
+		this.HarSizeBytes = HarSizeBytes;
+		this.RequestId = RequestId;
+		this.WorkspaceId = WorkspaceId;
+	}
 }
 
 
