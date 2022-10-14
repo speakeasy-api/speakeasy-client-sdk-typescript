@@ -2,35 +2,35 @@ import {Metadata} from "../../../internal/utils/utils";
 
 export class BoundedRequest {
     @Metadata("json, name=api_endpoint_id")
-    ApiEndpointId?: string;
+    ApiEndpointId: string;
     @Metadata("json, name=api_id")
-    ApiId?: string;
+    ApiId: string;
     @Metadata("json, name=created_at")
-    CreatedAt?: string;
+    CreatedAt: string;
     @Metadata("json, name=customer_id")
-    CustomerId?: string;
+    CustomerId: string;
     @Metadata("json, name=latency")
-    Latency?: number;
+    Latency: number;
     @Metadata("json, name=metadata")
     Metadata?: Map<string, string[]>;
     @Metadata("json, name=method")
-    Method?: string;
+    Method: string;
     @Metadata("json, name=path")
-    Path?: string;
+    Path: string;
     @Metadata("json, name=request_finish_time")
-    RequestFinishTime?: string;
+    RequestFinishTime: string;
     @Metadata("json, name=request_id")
-    RequestId?: string;
+    RequestId: string;
     @Metadata("json, name=request_start_time")
-    RequestStartTime?: string;
+    RequestStartTime: string;
     @Metadata("json, name=status")
-    Status?: number;
+    Status: number;
     @Metadata("json, name=version_id")
-    VersionId?: string;
+    VersionId: string;
     @Metadata("json, name=workspace_id")
-    WorkspaceId?: string;
+    WorkspaceId: string;
     
-    constructor(ApiEndpointId?: string, ApiId?: string, CreatedAt?: string, CustomerId?: string, Latency?: number, Metadata?: Map<string, string[]>, Method?: string, Path?: string, RequestFinishTime?: string, RequestId?: string, RequestStartTime?: string, Status?: number, VersionId?: string, WorkspaceId?: string) {
+    constructor(ApiEndpointId: string, ApiId: string, CreatedAt: string, CustomerId: string, Latency: number, Method: string, Path: string, RequestFinishTime: string, RequestId: string, RequestStartTime: string, Status: number, VersionId: string, WorkspaceId: string, Metadata?: Map<string, string[]>) {
 		this.ApiEndpointId = ApiEndpointId;
 		this.ApiId = ApiId;
 		this.CreatedAt = CreatedAt;
