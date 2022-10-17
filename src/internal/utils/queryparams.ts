@@ -1,19 +1,37 @@
+import { ParamsSerializerOptions } from "axios";
+import qs from "qs";
 import { ParamDecorator } from "./pathparams";
 
 export const qpMetadataKey = "queryParam";
 
-export function GetQueryParamDecoratorValues(queryParams: any): [ParamDecorator, unknown][] {
-    let qpDecorators: [ParamDecorator, unknown][] = [];
+export function GetQueryParamSerializer(queryParams: any): ParamsSerializerOptions | undefined {
     const fieldNames: string[] = Object.getOwnPropertyNames(queryParams);
     fieldNames.forEach((fname) => {
         const qpAnn: string = Reflect.getMetadata(qpMetadataKey, queryParams, fname);
         if (qpAnn == null) return;
         const qpDecorator: ParamDecorator = ParseQueryParamDecorator(qpAnn, fname);
         if (qpDecorator == null) return;
-        let qpDecoratorValuePair: [ParamDecorator, unknown] = [qpDecorator, queryParams[fname]];
-        qpDecorators.push(qpDecoratorValuePair);
+        let qpValue: unknown = queryParams[fname];
+        queryParams[qpDecorator.ParamName] = qpValue;
+        if (qpDecorator.Serialization === "json")
+            return null;
+        else {
+            switch (qpDecorator.Style) {
+                case "deepObject":
+                    return {
+                        encode: (params: unknown) => {
+                            return qs.stringify(params, {arrayFormat: "repeat"});
+                        },
+                    };
+                case "form":
+                    return {encode: FormSerializer};
+                case "default":
+                    // go to next query parameter field, assume first implemented serializer will serialize all query parameters for this request
+                    return;
+            }
+        }
     })
-    return qpDecorators;
+    return undefined;
 }
 
 export function FormSerializer(params: unknown): string {
@@ -46,3 +64,4 @@ function ParseQueryParamDecorator(qpAnn: string, fName: string): ParamDecorator 
     });
     return qpDecorator;
 }
+
