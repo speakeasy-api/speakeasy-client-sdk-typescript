@@ -6,6 +6,7 @@ import * as shared from "./models/shared";
 import * as operations from "./models/operations";
 import { ParamsSerializerOptions } from "axios";
 import { GetQueryParamSerializer } from "internal/utils/queryparams";
+import { SerializeRequestBody } from "../internal/utils/requestbody";
 
 const Servers = ["http://api.prod.speakeasyapi.dev"] as const;
 
@@ -1468,9 +1469,12 @@ export class SDK {
       props.PathParams
     );
 
-    let reqContentType = "application/json";
+    let [reqContentType, reqBody]: [string, unknown] = [
+      "application/json",
+      props.Request,
+    ];
     try {
-      reqContentType = utils.SerializeRequestBody(props);
+      [reqContentType, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
         return new Error("Error serializing request body", {
@@ -1495,7 +1499,7 @@ export class SDK {
         operations.InsertVersionMetadataResponse,
         AxiosResponse<operations.InsertVersionMetadataResponse>,
         unknown
-      >(url, {
+      >(url, reqBody, {
         headers: headers,
         ...config,
       });
@@ -1602,9 +1606,12 @@ export class SDK {
       props.PathParams
     );
 
-    let reqContentType = "application/json";
+    let [reqContentType, reqBody]: [string, unknown] = [
+      "application/json",
+      props.Request,
+    ];
     try {
-      reqContentType = utils.SerializeRequestBody(props);
+      [reqContentType, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
         return new Error("Error serializing request body", {
@@ -1628,7 +1635,7 @@ export class SDK {
         operations.RegisterSchemaResponse,
         AxiosResponse<operations.RegisterSchemaResponse>,
         unknown
-      >(url, {
+      >(url, reqBody, {
         headers: headers,
         ...config,
       });
@@ -1719,9 +1726,12 @@ export class SDK {
       props.PathParams
     );
 
-    let reqContentType = "application/json";
+    let [reqContentType, reqBody]: [string, unknown] = [
+      "application/json",
+      props.Request,
+    ];
     try {
-      reqContentType = utils.SerializeRequestBody(props);
+      [reqContentType, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
         return new Error("Error serializing request body", {
@@ -1745,7 +1755,7 @@ export class SDK {
         operations.UpsertApiResponse,
         AxiosResponse<operations.UpsertApiResponse>,
         unknown
-      >(url, {
+      >(url, reqBody, {
         headers: headers,
         ...config,
       });
@@ -1791,9 +1801,12 @@ export class SDK {
       props.PathParams
     );
 
-    let reqContentType = "application/json";
+    let [reqContentType, reqBody]: [string, unknown] = [
+      "application/json",
+      props.Request,
+    ];
     try {
-      reqContentType = utils.SerializeRequestBody(props);
+      [reqContentType, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
         return new Error("Error serializing request body", {
@@ -1818,7 +1831,7 @@ export class SDK {
         operations.UpsertApiEndpointResponse,
         AxiosResponse<operations.UpsertApiEndpointResponse>,
         unknown
-      >(url, {
+      >(url, reqBody, {
         headers: headers,
         ...config,
       });

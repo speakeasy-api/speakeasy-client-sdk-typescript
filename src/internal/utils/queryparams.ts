@@ -36,7 +36,7 @@ export function GetQueryParamSerializer(
               encode: FormSerializer,
             };
           }
-        case "default":
+        default:
           // go to next query parameter field, assume first implemented serializer will serialize all query parameters for this request
           return;
       }
