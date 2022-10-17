@@ -4,6 +4,11 @@ import { Security } from "./models/shared";
 import * as utils from "../internal/utils/utils";
 import * as shared from "./models/shared";
 import * as operations from "./models/operations";
+import * as qs from "qs";
+import { ParamsSerializerOptions } from "axios";
+import { ParamDecorator } from "internal/utils/pathparams";
+import { GetQueryParamDecoratorValues } from "internal/utils/queryparams";
+import { FormSerializer } from "internal/utils/queryparams";
 
 const Servers = ["http://api.prod.speakeasyapi.dev"] as const;
 
@@ -774,7 +779,39 @@ export class SDK {
 
     if (this.securityClient != null) client = this.securityClient;
 
-    const queryParams = utils.GetQueryParams(props.QueryParams);
+    const queryParams: Record<string, unknown> = {};
+    let qpSerializer: ParamsSerializerOptions | undefined = undefined;
+    const qpDecoratorValues: [ParamDecorator, unknown][] =
+      GetQueryParamDecoratorValues(props.QueryParams);
+    qpDecoratorValues.forEach((qpDecoratorValue) => {
+      const qpDecorator: ParamDecorator = qpDecoratorValue[0];
+      const qpValue: unknown = qpDecoratorValue[1];
+      queryParams[qpDecorator.ParamName] = qpValue;
+      if (qpDecorator.Serialization !== "json") {
+        switch (qpDecorator.Style) {
+          case "deepObject":
+            qpSerializer = {
+              encode: (params: unknown) => {
+                return qs.stringify(params, { arrayFormat: "repeat" });
+              },
+            };
+            break;
+          case "form":
+            qpSerializer = { encode: FormSerializer };
+            break;
+          case "default":
+            return new Error(
+              `Unsupported query parameter serialization style: ${qpDecorator.Style}`
+            );
+        }
+      }
+    });
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: queryParams,
+    };
+    if (qpSerializer != null) requestConfig.paramsSerializer = qpSerializer;
 
     let httpRes:
       | AxiosResponse<operations.GetAllApiVersionsResponse>
@@ -785,9 +822,7 @@ export class SDK {
         AxiosResponse<operations.GetAllApiVersionsResponse>,
         unknown
       >(url, {
-        params: queryParams,
-
-        ...config,
+        ...requestConfig,
       });
     } catch (e: unknown) {
       if (e instanceof Error) {
@@ -944,7 +979,39 @@ export class SDK {
 
     if (this.securityClient != null) client = this.securityClient;
 
-    const queryParams = utils.GetQueryParams(props.QueryParams);
+    const queryParams: Record<string, unknown> = {};
+    let qpSerializer: ParamsSerializerOptions | undefined = undefined;
+    const qpDecoratorValues: [ParamDecorator, unknown][] =
+      GetQueryParamDecoratorValues(props.QueryParams);
+    qpDecoratorValues.forEach((qpDecoratorValue) => {
+      const qpDecorator: ParamDecorator = qpDecoratorValue[0];
+      const qpValue: unknown = qpDecoratorValue[1];
+      queryParams[qpDecorator.ParamName] = qpValue;
+      if (qpDecorator.Serialization !== "json") {
+        switch (qpDecorator.Style) {
+          case "deepObject":
+            qpSerializer = {
+              encode: (params: unknown) => {
+                return qs.stringify(params, { arrayFormat: "repeat" });
+              },
+            };
+            break;
+          case "form":
+            qpSerializer = { encode: FormSerializer };
+            break;
+          case "default":
+            return new Error(
+              `Unsupported query parameter serialization style: ${qpDecorator.Style}`
+            );
+        }
+      }
+    });
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: queryParams,
+    };
+    if (qpSerializer != null) requestConfig.paramsSerializer = qpSerializer;
 
     let httpRes: AxiosResponse<operations.GetApisResponse> | undefined =
       undefined;
@@ -954,9 +1021,7 @@ export class SDK {
         AxiosResponse<operations.GetApisResponse>,
         unknown
       >(url, {
-        params: queryParams,
-
-        ...config,
+        ...requestConfig,
       });
     } catch (e: unknown) {
       if (e instanceof Error) {
@@ -1001,7 +1066,39 @@ export class SDK {
 
     if (this.securityClient != null) client = this.securityClient;
 
-    const queryParams = utils.GetQueryParams(props.QueryParams);
+    const queryParams: Record<string, unknown> = {};
+    let qpSerializer: ParamsSerializerOptions | undefined = undefined;
+    const qpDecoratorValues: [ParamDecorator, unknown][] =
+      GetQueryParamDecoratorValues(props.QueryParams);
+    qpDecoratorValues.forEach((qpDecoratorValue) => {
+      const qpDecorator: ParamDecorator = qpDecoratorValue[0];
+      const qpValue: unknown = qpDecoratorValue[1];
+      queryParams[qpDecorator.ParamName] = qpValue;
+      if (qpDecorator.Serialization !== "json") {
+        switch (qpDecorator.Style) {
+          case "deepObject":
+            qpSerializer = {
+              encode: (params: unknown) => {
+                return qs.stringify(params, { arrayFormat: "repeat" });
+              },
+            };
+            break;
+          case "form":
+            qpSerializer = { encode: FormSerializer };
+            break;
+          case "default":
+            return new Error(
+              `Unsupported query parameter serialization style: ${qpDecorator.Style}`
+            );
+        }
+      }
+    });
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: queryParams,
+    };
+    if (qpSerializer != null) requestConfig.paramsSerializer = qpSerializer;
 
     let httpRes:
       | AxiosResponse<operations.GetEmbedAccessTokenResponse>
@@ -1012,9 +1109,7 @@ export class SDK {
         AxiosResponse<operations.GetEmbedAccessTokenResponse>,
         unknown
       >(url, {
-        params: queryParams,
-
-        ...config,
+        ...requestConfig,
       });
     } catch (e: unknown) {
       if (e instanceof Error) {
@@ -1524,7 +1619,39 @@ export class SDK {
 
     if (this.securityClient != null) client = this.securityClient;
 
-    const queryParams = utils.GetQueryParams(props.QueryParams);
+    const queryParams: Record<string, unknown> = {};
+    let qpSerializer: ParamsSerializerOptions | undefined = undefined;
+    const qpDecoratorValues: [ParamDecorator, unknown][] =
+      GetQueryParamDecoratorValues(props.QueryParams);
+    qpDecoratorValues.forEach((qpDecoratorValue) => {
+      const qpDecorator: ParamDecorator = qpDecoratorValue[0];
+      const qpValue: unknown = qpDecoratorValue[1];
+      queryParams[qpDecorator.ParamName] = qpValue;
+      if (qpDecorator.Serialization !== "json") {
+        switch (qpDecorator.Style) {
+          case "deepObject":
+            qpSerializer = {
+              encode: (params: unknown) => {
+                return qs.stringify(params, { arrayFormat: "repeat" });
+              },
+            };
+            break;
+          case "form":
+            qpSerializer = { encode: FormSerializer };
+            break;
+          case "default":
+            return new Error(
+              `Unsupported query parameter serialization style: ${qpDecorator.Style}`
+            );
+        }
+      }
+    });
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: queryParams,
+    };
+    if (qpSerializer != null) requestConfig.paramsSerializer = qpSerializer;
 
     let httpRes: AxiosResponse<operations.QueryEventLogResponse> | undefined =
       undefined;
@@ -1534,9 +1661,7 @@ export class SDK {
         AxiosResponse<operations.QueryEventLogResponse>,
         unknown
       >(url, {
-        params: queryParams,
-
-        ...config,
+        ...requestConfig,
       });
     } catch (e: unknown) {
       if (e instanceof Error) {

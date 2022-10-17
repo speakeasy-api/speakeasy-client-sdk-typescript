@@ -3,6 +3,7 @@
     "lint:fix": "tsc --noemit && eslint \"./src\" --ext .ts,.tsx --fix"
   },
   "dependencies": {
+    "@types/qs": "^6.9.7",
     "axios": "^1.1.2",
     "reflect-metadata": "^0.1.13"
   },
