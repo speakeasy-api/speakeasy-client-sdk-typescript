@@ -30,7 +30,7 @@ export function GetSimplePathParams(
   paramName: string,
   paramValue: any
 ): Map<string, string> {
-  let pathParams: Map<string, string> = new Map<string, string>();
+  const pathParams: Map<string, string> = new Map<string, string>();
   if (typeof paramValue === "string") pathParams.set(paramName, paramValue);
   else pathParams.set(paramName, JSON.stringify(paramValue));
   return pathParams;

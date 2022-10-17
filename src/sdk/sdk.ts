@@ -7,6 +7,7 @@ import * as operations from "./models/operations";
 import { ParamsSerializerOptions } from "axios";
 import { GetQueryParamSerializer } from "internal/utils/queryparams";
 import { SerializeRequestBody } from "../internal/utils/requestbody";
+import FormData from "form-data";
 
 const Servers = ["http://api.prod.speakeasyapi.dev"] as const;
 
@@ -1469,12 +1470,9 @@ export class SDK {
       props.PathParams
     );
 
-    let [reqContentType, reqBody]: [string, unknown] = [
-      "application/json",
-      props.Request,
-    ];
+    let [reqHeaders, reqBody]: [object, string | FormData] = [{}, ""];
     try {
-      [reqContentType, reqBody] = SerializeRequestBody(props);
+      [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
         return new Error("Error serializing request body", {
@@ -1486,10 +1484,7 @@ export class SDK {
     let client: AxiosInstance | undefined = this.defaultClient;
 
     if (this.securityClient != null) client = this.securityClient;
-
-    const headers = config?.headers ?? { "Content-Type": reqContentType };
-    if (headers["Content-Type"] == null)
-      headers["Content-Type"] = reqContentType;
+    const headers = { ...reqHeaders, ...config?.headers };
 
     let httpRes:
       | AxiosResponse<operations.InsertVersionMetadataResponse>
@@ -1606,12 +1601,9 @@ export class SDK {
       props.PathParams
     );
 
-    let [reqContentType, reqBody]: [string, unknown] = [
-      "application/json",
-      props.Request,
-    ];
+    let [reqHeaders, reqBody]: [object, string | FormData] = [{}, ""];
     try {
-      [reqContentType, reqBody] = SerializeRequestBody(props);
+      [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
         return new Error("Error serializing request body", {
@@ -1623,10 +1615,7 @@ export class SDK {
     let client: AxiosInstance | undefined = this.defaultClient;
 
     if (this.securityClient != null) client = this.securityClient;
-
-    const headers = config?.headers ?? { "Content-Type": reqContentType };
-    if (headers["Content-Type"] == null)
-      headers["Content-Type"] = reqContentType;
+    const headers = { ...reqHeaders, ...config?.headers };
 
     let httpRes: AxiosResponse<operations.RegisterSchemaResponse> | undefined =
       undefined;
@@ -1726,12 +1715,9 @@ export class SDK {
       props.PathParams
     );
 
-    let [reqContentType, reqBody]: [string, unknown] = [
-      "application/json",
-      props.Request,
-    ];
+    let [reqHeaders, reqBody]: [object, string | FormData] = [{}, ""];
     try {
-      [reqContentType, reqBody] = SerializeRequestBody(props);
+      [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
         return new Error("Error serializing request body", {
@@ -1743,10 +1729,7 @@ export class SDK {
     let client: AxiosInstance | undefined = this.defaultClient;
 
     if (this.securityClient != null) client = this.securityClient;
-
-    const headers = config?.headers ?? { "Content-Type": reqContentType };
-    if (headers["Content-Type"] == null)
-      headers["Content-Type"] = reqContentType;
+    const headers = { ...reqHeaders, ...config?.headers };
 
     let httpRes: AxiosResponse<operations.UpsertApiResponse> | undefined =
       undefined;
@@ -1801,12 +1784,9 @@ export class SDK {
       props.PathParams
     );
 
-    let [reqContentType, reqBody]: [string, unknown] = [
-      "application/json",
-      props.Request,
-    ];
+    let [reqHeaders, reqBody]: [object, string | FormData] = [{}, ""];
     try {
-      [reqContentType, reqBody] = SerializeRequestBody(props);
+      [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
         return new Error("Error serializing request body", {
@@ -1818,10 +1798,7 @@ export class SDK {
     let client: AxiosInstance | undefined = this.defaultClient;
 
     if (this.securityClient != null) client = this.securityClient;
-
-    const headers = config?.headers ?? { "Content-Type": reqContentType };
-    if (headers["Content-Type"] == null)
-      headers["Content-Type"] = reqContentType;
+    const headers = { ...reqHeaders, ...config?.headers };
 
     let httpRes:
       | AxiosResponse<operations.UpsertApiEndpointResponse>
