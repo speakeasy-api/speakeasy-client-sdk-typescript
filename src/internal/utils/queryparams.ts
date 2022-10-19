@@ -7,6 +7,7 @@ export const qpMetadataKey = "queryParam";
 export function GetQueryParamSerializer(
   queryParams: any
 ): ParamsSerializerOptions | undefined {
+  if (queryParams == null) return undefined;
   const fieldNames: string[] = Object.getOwnPropertyNames(queryParams);
   fieldNames.forEach((fname) => {
     const qpAnn: string = Reflect.getMetadata(

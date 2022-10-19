@@ -2,9 +2,8 @@
   "compilerOptions": {
     "target": "es5",
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "esnext",
+      "DOM"
     ],
     "baseUrl": "src",
     "rootDir": "src",
@@ -23,7 +22,6 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "declaration": true,
-    "jsx": "react-jsx"
   },
   "include": [
     "src"

@@ -1,4 +1,5 @@
 import { Metadata } from "../../../internal/utils/utils";
+import { Filter } from "./filter";
 
 export class Filters {
   @Metadata("json, name=filters")

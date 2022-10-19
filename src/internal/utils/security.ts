@@ -49,6 +49,7 @@ function ParseSecurityDecorator(securityAnn: string): SecurityDecorator {
 }
 
 function ParseSecurityClass(serverURL: string, security: any): AxiosInstance {
+  let client: AxiosInstance = axios.create({ baseURL: serverURL });
   const fieldNames: string[] = Object.getOwnPropertyNames(security);
   fieldNames.forEach((fname) => {
     const securityAnn: string = Reflect.getMetadata(
@@ -61,13 +62,17 @@ function ParseSecurityClass(serverURL: string, security: any): AxiosInstance {
       ParseSecurityDecorator(securityAnn);
     if (securityDecorator == null) return;
     if (securityDecorator.Option) {
-      return ParseSecurityOption(serverURL, security[fname]);
+      client = ParseSecurityOption(serverURL, security[fname]);
     } else if (securityDecorator.Scheme) {
-      return ParseSecurityScheme(serverURL, securityDecorator, security[fname]);
+      client = ParseSecurityScheme(
+        serverURL,
+        securityDecorator,
+        security[fname]
+      );
     }
   });
 
-  return axios.create({ baseURL: serverURL });
+  return client;
 }
 
 function ParseSecurityOption(

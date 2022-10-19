@@ -23,9 +23,9 @@ export class GetApisQueryParams {
 }
 
 export class GetApisRequest {
-  QueryParams: GetApisQueryParams;
+  QueryParams?: GetApisQueryParams;
 
-  constructor(QueryParams: GetApisQueryParams) {
+  constructor(QueryParams?: GetApisQueryParams) {
     this.QueryParams = QueryParams;
   }
 }
