@@ -19,7 +19,7 @@ export function ReplaceParameters(
   let res: string = stringWithParams;
   params.forEach((value, key) => {
     const match: string = "{" + key + "}";
-    res = stringWithParams.replaceAll(match, value);
+    res = res.replaceAll(match, value);
   });
   return res;
 }
@@ -29,7 +29,7 @@ export function GenerateURL(
   path: string,
   pathParams: any
 ): string {
-  const url: string = serverURL.replace(/\/$/, "");
+  const url: string = serverURL.replace(/\/$/, "") + path;
   const parsedParameters: Map<string, string> = new Map<string, string>();
   const fieldNames: string[] = Object.getOwnPropertyNames(pathParams);
   fieldNames.forEach((fname) => {

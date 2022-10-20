@@ -3,11 +3,9 @@ import FormData from "form-data";
 const requestMetadataKey = "request";
 const mpFormMetadataKey = "multipart_form";
 
-export function SerializeRequestBody(
-  request: any
-): [object, string | FormData] {
+export function SerializeRequestBody(request: any): [object, any] {
   const fieldNames: string[] = Object.getOwnPropertyNames(request);
-  let [requestHeaders, requestBody]: [object, string | FormData] = [{}, ""];
+  let [requestHeaders, requestBody]: [object, any] = [{}, {}];
   fieldNames.forEach((fname) => {
     const requestAnn: string = Reflect.getMetadata(
       requestMetadataKey,
@@ -27,7 +25,7 @@ export function SerializeRequestBody(
       case "text/json":
       default:
         [requestHeaders, requestBody] = [
-          { "Content-Type": `"${requestDecorator.MediaType}"` },
+          { "Content-Type": `${requestDecorator.MediaType}` },
           request[fname],
         ];
     }

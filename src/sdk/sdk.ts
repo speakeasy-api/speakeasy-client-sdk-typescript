@@ -1414,7 +1414,8 @@ export class SDK {
       props.PathParams
     );
 
-    let [reqHeaders, reqBody]: [object, string | FormData] = [{}, ""];
+    let [reqHeaders, reqBody]: [object, any] = [{}, {}];
+
     try {
       [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
@@ -1432,11 +1433,14 @@ export class SDK {
       | AxiosResponse<operations.InsertVersionMetadataResponse>
       | undefined = undefined;
     try {
+      let body: unknown;
+      if (reqBody instanceof FormData) body = reqBody;
+      else body = { ...reqBody };
       httpRes = await client!.post<
         operations.InsertVersionMetadataResponse,
         AxiosResponse<operations.InsertVersionMetadataResponse>,
         unknown
-      >(url, reqBody, {
+      >(url, body, {
         headers: headers,
         ...config,
       });
@@ -1537,7 +1541,8 @@ export class SDK {
       props.PathParams
     );
 
-    let [reqHeaders, reqBody]: [object, string | FormData] = [{}, ""];
+    let [reqHeaders, reqBody]: [object, any] = [{}, {}];
+
     try {
       [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
@@ -1554,11 +1559,15 @@ export class SDK {
     let httpRes: AxiosResponse<operations.RegisterSchemaResponse> | undefined =
       undefined;
     try {
+      let body: unknown;
+      if (reqBody instanceof FormData) body = reqBody;
+      else body = { ...reqBody };
+
       httpRes = await client!.post<
         operations.RegisterSchemaResponse,
         AxiosResponse<operations.RegisterSchemaResponse>,
         unknown
-      >(url, reqBody, {
+      >(url, body, {
         headers: headers,
         ...config,
       });
@@ -1651,7 +1660,8 @@ export class SDK {
       props.PathParams
     );
 
-    let [reqHeaders, reqBody]: [object, string | FormData] = [{}, ""];
+    let [reqHeaders, reqBody]: [object, any] = [{}, {}];
+
     try {
       [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
@@ -1668,11 +1678,15 @@ export class SDK {
     let httpRes: AxiosResponse<operations.UpsertApiResponse> | undefined =
       undefined;
     try {
+      let body: unknown;
+      if (reqBody instanceof FormData) body = reqBody;
+      else body = { ...reqBody };
+
       httpRes = await client!.put<
         operations.UpsertApiResponse,
         AxiosResponse<operations.UpsertApiResponse>,
         unknown
-      >(url, reqBody, {
+      >(url, body, {
         headers: headers,
         ...config,
       });
@@ -1715,7 +1729,8 @@ export class SDK {
       props.PathParams
     );
 
-    let [reqHeaders, reqBody]: [object, string | FormData] = [{}, ""];
+    let [reqHeaders, reqBody]: [object, any] = [{}, {}];
+
     try {
       [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
@@ -1733,11 +1748,15 @@ export class SDK {
       | AxiosResponse<operations.UpsertApiEndpointResponse>
       | undefined = undefined;
     try {
+      let body: unknown;
+      if (reqBody instanceof FormData) body = reqBody;
+      else body = { ...reqBody };
+
       httpRes = await client!.put<
         operations.UpsertApiEndpointResponse,
         AxiosResponse<operations.UpsertApiEndpointResponse>,
         unknown
-      >(url, reqBody, {
+      >(url, body, {
         headers: headers,
         ...config,
       });
