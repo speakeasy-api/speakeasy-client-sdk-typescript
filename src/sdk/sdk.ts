@@ -245,7 +245,7 @@ export class SDK {
           case 200:
             if (MatchContentType(contentType, "application/json"))
               res.Schema = httpRes?.data;
-            if (MatchContentType(contentType, "application/x-yaml"))
+            if (MatchContentType(contentType, "application/json"))
               res.Schema = httpRes?.data;
             break;
           default:
@@ -292,7 +292,7 @@ export class SDK {
           case 200:
             if (MatchContentType(contentType, "application/json"))
               res.Schema = httpRes?.data;
-            if (MatchContentType(contentType, "application/x-yaml"))
+            if (MatchContentType(contentType, "application/json"))
               res.Schema = httpRes?.data;
             break;
           default:
