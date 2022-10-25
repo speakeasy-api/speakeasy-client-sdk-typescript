@@ -78,7 +78,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -119,7 +121,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -160,7 +164,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -201,7 +207,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -237,7 +245,7 @@ export class SDK {
           case 200:
             if (MatchContentType(contentType, "application/json"))
               res.Schema = httpRes?.data;
-            if (MatchContentType(contentType, "application/json"))
+            if (MatchContentType(contentType, "application/x-yaml"))
               res.Schema = httpRes?.data;
             break;
           default:
@@ -246,7 +254,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -282,7 +292,7 @@ export class SDK {
           case 200:
             if (MatchContentType(contentType, "application/json"))
               res.Schema = httpRes?.data;
-            if (MatchContentType(contentType, "application/json"))
+            if (MatchContentType(contentType, "application/x-yaml"))
               res.Schema = httpRes?.data;
             break;
           default:
@@ -291,7 +301,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -334,7 +346,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -377,7 +391,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -422,7 +438,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -465,7 +483,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -510,7 +530,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -555,7 +577,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -598,7 +622,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -651,7 +677,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -694,7 +722,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -737,7 +767,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -786,7 +818,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -836,7 +870,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -879,7 +915,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -922,7 +960,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -965,7 +1005,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1008,7 +1050,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1051,7 +1095,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1090,7 +1136,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1133,7 +1181,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1192,7 +1242,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1241,7 +1293,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1298,7 +1352,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1339,7 +1395,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1398,7 +1456,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
@@ -1457,7 +1517,9 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        if (httpRes?.status != null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        res.StatusCode = httpRes.status;
         res.ContentType = contentType;
 
         return res;
