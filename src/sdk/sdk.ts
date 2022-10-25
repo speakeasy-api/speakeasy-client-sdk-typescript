@@ -1,4 +1,10 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from "axios";
+import { MatchContentType } from "../internal/utils/contenttype";
 import { CreateSecurityClient } from "../internal/utils/security";
 import { Security } from "./models/shared";
 import * as utils from "../internal/utils/utils";
@@ -15,7 +21,7 @@ export function WithServerURL(
   serverURL: string,
   params?: Map<string, string>
 ): Function {
-  return function (sdk: SDK) {
+  return (sdk: SDK) => {
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
@@ -24,7 +30,7 @@ export function WithServerURL(
   };
 }
 export function WithSecurity(serverURL: string, security: Security): Function {
-  return function (sdk: SDK) {
+  return (sdk: SDK) => {
     sdk.serverURL = serverURL;
     sdk.securityClient = CreateSecurityClient(serverURL, security);
   };
@@ -33,7 +39,7 @@ export function WithSecurity(serverURL: string, security: Security): Function {
 export class SDK {
   defaultClient?: AxiosInstance;
   securityClient?: AxiosInstance;
-  serverURL?: string;
+  serverURL: string;
   constructor(...opts: Function[]) {
     opts.forEach((o) => o(this));
     if (this.serverURL == "") {
@@ -41,1373 +47,1107 @@ export class SDK {
     }
   }
 
-  DeleteApi = async (
+  DeleteApi = (
     props: operations.DeleteApiRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteApiResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.DeleteApiResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes: AxiosResponse<operations.DeleteApiResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.delete<
-        operations.DeleteApiResponse,
-        AxiosResponse<operations.DeleteApiResponse>,
-        unknown
-      >(url, {
+    return client
+      .delete(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.DeleteApiResponse =
+          new operations.DeleteApiResponse();
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.DeleteApiResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  DeleteApiEndpoint = async (
+  DeleteApiEndpoint = (
     props: operations.DeleteApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteApiEndpointResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.DeleteApiEndpointResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.DeleteApiEndpointResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.delete<
-        operations.DeleteApiEndpointResponse,
-        AxiosResponse<operations.DeleteApiEndpointResponse>,
-        unknown
-      >(url, {
+    return client
+      .delete(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.DeleteApiEndpointResponse =
+          new operations.DeleteApiEndpointResponse();
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.DeleteApiEndpointResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  DeleteSchema = async (
+  DeleteSchema = (
     props: operations.DeleteSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteSchemaResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.DeleteSchemaResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes: AxiosResponse<operations.DeleteSchemaResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.delete<
-        operations.DeleteSchemaResponse,
-        AxiosResponse<operations.DeleteSchemaResponse>,
-        unknown
-      >(url, {
+    return client
+      .delete(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.DeleteSchemaResponse =
+          new operations.DeleteSchemaResponse();
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.DeleteSchemaResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  DeleteVersionMetadata = async (
+  DeleteVersionMetadata = (
     props: operations.DeleteVersionMetadataRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteVersionMetadataResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.DeleteVersionMetadataResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.DeleteVersionMetadataResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.delete<
-        operations.DeleteVersionMetadataResponse,
-        AxiosResponse<operations.DeleteVersionMetadataResponse>,
-        unknown
-      >(url, {
+    return client
+      .delete(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.DeleteVersionMetadataResponse =
+          new operations.DeleteVersionMetadataResponse();
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.DeleteVersionMetadataResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  DownloadSchema = async (
+  DownloadSchema = (
     props: operations.DownloadSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DownloadSchemaResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.DownloadSchemaResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/download",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes: AxiosResponse<operations.DownloadSchemaResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.get<
-        operations.DownloadSchemaResponse,
-        AxiosResponse<operations.DownloadSchemaResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.DownloadSchemaResponse =
+          new operations.DownloadSchemaResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.Schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json"))
+              res.Schema = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.DownloadSchemaResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-        if (contentType.includes("application/x-yaml")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  DownloadSchemaRevision = async (
+  DownloadSchemaRevision = (
     props: operations.DownloadSchemaRevisionRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DownloadSchemaRevisionResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.DownloadSchemaRevisionResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.DownloadSchemaRevisionResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.DownloadSchemaRevisionResponse,
-        AxiosResponse<operations.DownloadSchemaRevisionResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.DownloadSchemaRevisionResponse =
+          new operations.DownloadSchemaRevisionResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.Schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json"))
+              res.Schema = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.DownloadSchemaRevisionResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-        if (contentType.includes("application/x-yaml")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  FindApiEndpoint = async (
+  FindApiEndpoint = (
     props: operations.FindApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.FindApiEndpointResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.FindApiEndpointResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes: AxiosResponse<operations.FindApiEndpointResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.get<
-        operations.FindApiEndpointResponse,
-        AxiosResponse<operations.FindApiEndpointResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.FindApiEndpointResponse =
+          new operations.FindApiEndpointResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.ApiEndpoint = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.FindApiEndpointResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GenerateOpenApiSpec = async (
+  GenerateOpenApiSpec = (
     props: operations.GenerateOpenApiSpecRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateOpenApiSpecResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GenerateOpenApiSpecResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/generate/openapi",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GenerateOpenApiSpecResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GenerateOpenApiSpecResponse,
-        AxiosResponse<operations.GenerateOpenApiSpecResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GenerateOpenApiSpecResponse =
+          new operations.GenerateOpenApiSpecResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.GenerateOpenApiSpecDiff = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GenerateOpenApiSpecResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GenerateOpenApiSpecForApiEndpoint = async (
+  GenerateOpenApiSpecForApiEndpoint = (
     props: operations.GenerateOpenApiSpecForApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateOpenApiSpecForApiEndpointResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<
+    operations.GenerateOpenApiSpecForApiEndpointResponse | AxiosError
+  > => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GenerateOpenApiSpecForApiEndpointResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GenerateOpenApiSpecForApiEndpointResponse,
-        AxiosResponse<operations.GenerateOpenApiSpecForApiEndpointResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GenerateOpenApiSpecForApiEndpointResponse =
+          new operations.GenerateOpenApiSpecForApiEndpointResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.GenerateOpenApiSpecDiff = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GenerateOpenApiSpecForApiEndpointResponse | undefined =
-      undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GeneratePostmanCollection = async (
+  GeneratePostmanCollection = (
     props: operations.GeneratePostmanCollectionRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GeneratePostmanCollectionResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GeneratePostmanCollectionResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/generate/postman",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GeneratePostmanCollectionResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GeneratePostmanCollectionResponse,
-        AxiosResponse<operations.GeneratePostmanCollectionResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GeneratePostmanCollectionResponse =
+          new operations.GeneratePostmanCollectionResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.PostmanCollection = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GeneratePostmanCollectionResponse | undefined =
-      undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GeneratePostmanCollectionForApiEndpoint = async (
+  GeneratePostmanCollectionForApiEndpoint = (
     props: operations.GeneratePostmanCollectionForApiEndpointRequest,
     config?: AxiosRequestConfig
   ): Promise<
-    operations.GeneratePostmanCollectionForApiEndpointResponse | Error
+    operations.GeneratePostmanCollectionForApiEndpointResponse | AxiosError
   > => {
-    const baseURL: string = this.serverURL!;
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GeneratePostmanCollectionForApiEndpointResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GeneratePostmanCollectionForApiEndpointResponse,
-        AxiosResponse<operations.GeneratePostmanCollectionForApiEndpointResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GeneratePostmanCollectionForApiEndpointResponse =
+          new operations.GeneratePostmanCollectionForApiEndpointResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.PostmanCollection = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res:
-      | operations.GeneratePostmanCollectionForApiEndpointResponse
-      | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GenerateRequestPostmanCollection = async (
+  GenerateRequestPostmanCollection = (
     props: operations.GenerateRequestPostmanCollectionRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateRequestPostmanCollectionResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<
+    operations.GenerateRequestPostmanCollectionResponse | AxiosError
+  > => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/eventlog/{requestID}/generate/postman",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GenerateRequestPostmanCollectionResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GenerateRequestPostmanCollectionResponse,
-        AxiosResponse<operations.GenerateRequestPostmanCollectionResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GenerateRequestPostmanCollectionResponse =
+          new operations.GenerateRequestPostmanCollectionResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.PostmanCollection = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GenerateRequestPostmanCollectionResponse | undefined =
-      undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetAllApiEndpoints = async (
+  GetAllApiEndpoints = (
     props: operations.GetAllApiEndpointsRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetAllApiEndpointsResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetAllApiEndpointsResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/api_endpoints",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GetAllApiEndpointsResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetAllApiEndpointsResponse,
-        AxiosResponse<operations.GetAllApiEndpointsResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetAllApiEndpointsResponse =
+          new operations.GetAllApiEndpointsResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.ApiEndpoints = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetAllApiEndpointsResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetAllApiVersions = async (
+  GetAllApiVersions = (
     props: operations.GetAllApiVersionsRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetAllApiVersionsResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetAllApiVersionsResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    const qpSerializer: ParamsSerializerOptions | undefined =
-      GetQueryParamSerializer(props.QueryParams);
+    const qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(
+      props.QueryParams
+    );
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
       params: props.QueryParams,
+      paramsSerializer: qpSerializer,
     };
-    if (qpSerializer != null) requestConfig.paramsSerializer = qpSerializer;
 
-    let httpRes:
-      | AxiosResponse<operations.GetAllApiVersionsResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetAllApiVersionsResponse,
-        AxiosResponse<operations.GetAllApiVersionsResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetAllApiVersionsResponse =
+          new operations.GetAllApiVersionsResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.Apis = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetAllApiVersionsResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetAllForVersionApiEndpoints = async (
+  GetAllForVersionApiEndpoints = (
     props: operations.GetAllForVersionApiEndpointsRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetAllForVersionApiEndpointsResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetAllForVersionApiEndpointsResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GetAllForVersionApiEndpointsResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetAllForVersionApiEndpointsResponse,
-        AxiosResponse<operations.GetAllForVersionApiEndpointsResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetAllForVersionApiEndpointsResponse =
+          new operations.GetAllForVersionApiEndpointsResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.ApiEndpoints = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetAllForVersionApiEndpointsResponse | undefined =
-      undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetApiEndpoint = async (
+  GetApiEndpoint = (
     props: operations.GetApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetApiEndpointResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetApiEndpointResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes: AxiosResponse<operations.GetApiEndpointResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetApiEndpointResponse,
-        AxiosResponse<operations.GetApiEndpointResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetApiEndpointResponse =
+          new operations.GetApiEndpointResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.ApiEndpoint = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetApiEndpointResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetApis = async (
+  GetApis = (
     props: operations.GetApisRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetApisResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetApisResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/apis";
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    const qpSerializer: ParamsSerializerOptions | undefined =
-      GetQueryParamSerializer(props.QueryParams);
+    const qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(
+      props.QueryParams
+    );
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
       params: props.QueryParams,
+      paramsSerializer: qpSerializer,
     };
-    if (qpSerializer != null) requestConfig.paramsSerializer = qpSerializer;
 
-    let httpRes: AxiosResponse<operations.GetApisResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetApisResponse,
-        AxiosResponse<operations.GetApisResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetApisResponse =
+          new operations.GetApisResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.Apis = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetApisResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetEmbedAccessToken = async (
+  GetEmbedAccessToken = (
     props: operations.GetEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetEmbedAccessTokenResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetEmbedAccessTokenResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string =
       baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-token";
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    const qpSerializer: ParamsSerializerOptions | undefined =
-      GetQueryParamSerializer(props.QueryParams);
+    const qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(
+      props.QueryParams
+    );
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
       params: props.QueryParams,
+      paramsSerializer: qpSerializer,
     };
-    if (qpSerializer != null) requestConfig.paramsSerializer = qpSerializer;
 
-    let httpRes:
-      | AxiosResponse<operations.GetEmbedAccessTokenResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetEmbedAccessTokenResponse,
-        AxiosResponse<operations.GetEmbedAccessTokenResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetEmbedAccessTokenResponse =
+          new operations.GetEmbedAccessTokenResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.EmbedAccessTokenResponse = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetEmbedAccessTokenResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetRequestFromEventLog = async (
+  GetRequestFromEventLog = (
     props: operations.GetRequestFromEventLogRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetRequestFromEventLogResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetRequestFromEventLogResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/eventlog/{requestID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GetRequestFromEventLogResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetRequestFromEventLogResponse,
-        AxiosResponse<operations.GetRequestFromEventLogResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetRequestFromEventLogResponse =
+          new operations.GetRequestFromEventLogResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.UnboundedRequest = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetRequestFromEventLogResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetSchema = async (
+  GetSchema = (
     props: operations.GetSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetSchemaResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetSchemaResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes: AxiosResponse<operations.GetSchemaResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetSchemaResponse,
-        AxiosResponse<operations.GetSchemaResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetSchemaResponse =
+          new operations.GetSchemaResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.Schema = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetSchemaResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetSchemaDiff = async (
+  GetSchemaDiff = (
     props: operations.GetSchemaDiffRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetSchemaDiffResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetSchemaDiffResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes: AxiosResponse<operations.GetSchemaDiffResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetSchemaDiffResponse,
-        AxiosResponse<operations.GetSchemaDiffResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetSchemaDiffResponse =
+          new operations.GetSchemaDiffResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.SchemaDiff = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetSchemaDiffResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetSchemaRevision = async (
+  GetSchemaRevision = (
     props: operations.GetSchemaRevisionRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetSchemaRevisionResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetSchemaRevisionResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GetSchemaRevisionResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetSchemaRevisionResponse,
-        AxiosResponse<operations.GetSchemaRevisionResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetSchemaRevisionResponse =
+          new operations.GetSchemaRevisionResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.Schema = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetSchemaRevisionResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetSchemas = async (
+  GetSchemas = (
     props: operations.GetSchemasRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetSchemasResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetSchemasResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schemas",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes: AxiosResponse<operations.GetSchemasResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetSchemasResponse,
-        AxiosResponse<operations.GetSchemasResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetSchemasResponse =
+          new operations.GetSchemasResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.Schemata = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetSchemasResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetValidEmbedAccessTokens = async (
+  GetValidEmbedAccessTokens = (
     config?: AxiosRequestConfig
-  ): Promise<operations.GetValidEmbedAccessTokensResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetValidEmbedAccessTokensResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string =
       baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-tokens/valid";
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GetValidEmbedAccessTokensResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetValidEmbedAccessTokensResponse,
-        AxiosResponse<operations.GetValidEmbedAccessTokensResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetValidEmbedAccessTokensResponse =
+          new operations.GetValidEmbedAccessTokensResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.EmbedTokens = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetValidEmbedAccessTokensResponse | undefined =
-      undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  GetVersionMetadata = async (
+  GetVersionMetadata = (
     props: operations.GetVersionMetadataRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetVersionMetadataResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.GetVersionMetadataResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/metadata",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.GetVersionMetadataResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.get<
-        operations.GetVersionMetadataResponse,
-        AxiosResponse<operations.GetVersionMetadataResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.GetVersionMetadataResponse =
+          new operations.GetVersionMetadataResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.VersionMetadata = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.GetVersionMetadataResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  InsertVersionMetadata = async (
+  InsertVersionMetadata = (
     props: operations.InsertVersionMetadataRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.InsertVersionMetadataResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.InsertVersionMetadataResponse | AxiosError> | Error => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/metadata",
@@ -1424,117 +1164,98 @@ export class SDK {
       }
     }
 
-    let client: AxiosInstance | undefined = this.defaultClient;
-
-    if (this.securityClient != null) client = this.securityClient;
+    const client: AxiosInstance = this.securityClient!;
     const headers = { ...reqHeaders, ...config?.headers };
 
-    let httpRes:
-      | AxiosResponse<operations.InsertVersionMetadataResponse>
-      | undefined = undefined;
-    try {
-      let body: unknown;
-      if (reqBody instanceof FormData) body = reqBody;
-      else body = { ...reqBody };
-      httpRes = await client!.post<
-        operations.InsertVersionMetadataResponse,
-        AxiosResponse<operations.InsertVersionMetadataResponse>,
-        unknown
-      >(url, body, {
+    let body: unknown;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = { ...reqBody };
+
+    return client
+      .post(url, body, {
         headers: headers,
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.InsertVersionMetadataResponse =
+          new operations.InsertVersionMetadataResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.VersionMetadata = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.InsertVersionMetadataResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  QueryEventLog = async (
+  QueryEventLog = (
     props: operations.QueryEventLogRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.QueryEventLogResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.QueryEventLogResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/eventlog/query";
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    const qpSerializer: ParamsSerializerOptions | undefined =
-      GetQueryParamSerializer(props.QueryParams);
+    const qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(
+      props.QueryParams
+    );
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
       params: props.QueryParams,
+      paramsSerializer: qpSerializer,
     };
-    if (qpSerializer != null) requestConfig.paramsSerializer = qpSerializer;
 
-    let httpRes: AxiosResponse<operations.QueryEventLogResponse> | undefined =
-      undefined;
-    try {
-      httpRes = await client!.get<
-        operations.QueryEventLogResponse,
-        AxiosResponse<operations.QueryEventLogResponse>,
-        unknown
-      >(url, {
+    return client
+      .get(url, {
         ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.QueryEventLogResponse =
+          new operations.QueryEventLogResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.BoundedRequests = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.QueryEventLogResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  RegisterSchema = async (
+  RegisterSchema = (
     props: operations.RegisterSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.RegisterSchemaResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.RegisterSchemaResponse | AxiosError> | Error => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema",
@@ -1551,109 +1272,88 @@ export class SDK {
       }
     }
 
-    let client: AxiosInstance | undefined = this.defaultClient;
-
-    if (this.securityClient != null) client = this.securityClient;
+    const client: AxiosInstance = this.securityClient!;
     const headers = { ...reqHeaders, ...config?.headers };
 
-    let httpRes: AxiosResponse<operations.RegisterSchemaResponse> | undefined =
-      undefined;
-    try {
-      let body: unknown;
-      if (reqBody instanceof FormData) body = reqBody;
-      else body = { ...reqBody };
+    let body: unknown;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = { ...reqBody };
 
-      httpRes = await client!.post<
-        operations.RegisterSchemaResponse,
-        AxiosResponse<operations.RegisterSchemaResponse>,
-        unknown
-      >(url, body, {
+    return client
+      .post(url, body, {
         headers: headers,
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.RegisterSchemaResponse =
+          new operations.RegisterSchemaResponse();
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.RegisterSchemaResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  RevokeEmbedAccessToken = async (
+  RevokeEmbedAccessToken = (
     props: operations.RevokeEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.RevokeEmbedAccessTokenResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.RevokeEmbedAccessTokenResponse | AxiosError> => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/workspace/embed-access-tokens/{tokenID}",
       props.PathParams
     );
 
-    let client: AxiosInstance | undefined = this.defaultClient;
+    const client: AxiosInstance = this.securityClient!;
 
-    if (this.securityClient != null) client = this.securityClient;
-
-    let httpRes:
-      | AxiosResponse<operations.RevokeEmbedAccessTokenResponse>
-      | undefined = undefined;
-    try {
-      httpRes = await client!.delete<
-        operations.RevokeEmbedAccessTokenResponse,
-        AxiosResponse<operations.RevokeEmbedAccessTokenResponse>,
-        unknown
-      >(url, {
+    return client
+      .delete(url, {
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.RevokeEmbedAccessTokenResponse =
+          new operations.RevokeEmbedAccessTokenResponse();
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.RevokeEmbedAccessTokenResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  UpsertApi = async (
+  UpsertApi = (
     props: operations.UpsertApiRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.UpsertApiResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.UpsertApiResponse | AxiosError> | Error => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}",
@@ -1670,59 +1370,49 @@ export class SDK {
       }
     }
 
-    let client: AxiosInstance | undefined = this.defaultClient;
-
-    if (this.securityClient != null) client = this.securityClient;
+    const client: AxiosInstance = this.securityClient!;
     const headers = { ...reqHeaders, ...config?.headers };
 
-    let httpRes: AxiosResponse<operations.UpsertApiResponse> | undefined =
-      undefined;
-    try {
-      let body: unknown;
-      if (reqBody instanceof FormData) body = reqBody;
-      else body = { ...reqBody };
+    let body: unknown;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = { ...reqBody };
 
-      httpRes = await client!.put<
-        operations.UpsertApiResponse,
-        AxiosResponse<operations.UpsertApiResponse>,
-        unknown
-      >(url, body, {
+    return client
+      .put(url, body, {
         headers: headers,
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.UpsertApiResponse =
+          new operations.UpsertApiResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.Api = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.UpsertApiResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 
-  UpsertApiEndpoint = async (
+  UpsertApiEndpoint = (
     props: operations.UpsertApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.UpsertApiEndpointResponse | Error> => {
-    const baseURL: string = this.serverURL!;
+  ): Promise<operations.UpsertApiEndpointResponse | AxiosError> | Error => {
+    const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
@@ -1739,52 +1429,41 @@ export class SDK {
       }
     }
 
-    let client: AxiosInstance | undefined = this.defaultClient;
-
-    if (this.securityClient != null) client = this.securityClient;
+    const client: AxiosInstance = this.securityClient!;
     const headers = { ...reqHeaders, ...config?.headers };
 
-    let httpRes:
-      | AxiosResponse<operations.UpsertApiEndpointResponse>
-      | undefined = undefined;
-    try {
-      let body: unknown;
-      if (reqBody instanceof FormData) body = reqBody;
-      else body = { ...reqBody };
+    let body: unknown;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = { ...reqBody };
 
-      httpRes = await client!.put<
-        operations.UpsertApiEndpointResponse,
-        AxiosResponse<operations.UpsertApiEndpointResponse>,
-        unknown
-      >(url, body, {
+    return client
+      .put(url, body, {
         headers: headers,
         ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        const res: operations.UpsertApiEndpointResponse =
+          new operations.UpsertApiEndpointResponse();
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json"))
+              res.ApiEndpoint = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json"))
+              res.Error = httpRes?.data;
+            break;
+        }
+
+        if (httpRes?.status != null) res.StatusCode = httpRes.status;
+        res.ContentType = contentType;
+
+        return res;
+      })
+      .catch((error: AxiosError) => {
+        return error;
       });
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        return new Error(`Error sending request, cause: ${e.message}`);
-      }
-    }
-
-    const contentType: string = httpRes?.headers?.["content-type"]!;
-
-    let res: operations.UpsertApiEndpointResponse | undefined = undefined;
-    switch (httpRes?.status) {
-      case 200:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-      default:
-        if (contentType.includes("application/json")) res = httpRes?.data!;
-        break;
-    }
-
-    if (res == null)
-      return new Error(
-        `Failed to get valid response for content-type: ${contentType}`
-      );
-    res.StatusCode = httpRes?.status!;
-    res.ContentType = contentType!;
-
-    return res;
   };
 }

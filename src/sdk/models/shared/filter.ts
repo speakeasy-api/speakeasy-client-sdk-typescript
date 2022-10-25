@@ -7,10 +7,4 @@ export class Filter {
   Operator: string;
   @Metadata("json, name=value")
   Value: string;
-
-  constructor(Key: string, Operator: string, Value: string) {
-    this.Key = Key;
-    this.Operator = Operator;
-    this.Value = Value;
-  }
 }

@@ -10,16 +10,4 @@ export class Filters {
   Offset: number;
   @Metadata("json, name=operator")
   Operator: string;
-
-  constructor(
-    Filters: Filter[],
-    Limit: number,
-    Offset: number,
-    Operator: string
-  ) {
-    this.Filters = Filters;
-    this.Limit = Limit;
-    this.Offset = Offset;
-    this.Operator = Operator;
-  }
 }

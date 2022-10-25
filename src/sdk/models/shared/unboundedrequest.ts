@@ -11,18 +11,4 @@ export class UnboundedRequest {
   RequestId: string;
   @Metadata("json, name=workspace_id")
   WorkspaceId: string;
-
-  constructor(
-    CreatedAt: string,
-    Har: string,
-    HarSizeBytes: number,
-    RequestId: string,
-    WorkspaceId: string
-  ) {
-    this.CreatedAt = CreatedAt;
-    this.Har = Har;
-    this.HarSizeBytes = HarSizeBytes;
-    this.RequestId = RequestId;
-    this.WorkspaceId = WorkspaceId;
-  }
 }

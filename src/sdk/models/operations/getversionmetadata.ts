@@ -6,19 +6,10 @@ export class GetVersionMetadataPathParams {
   ApiId: string;
   @Metadata("pathParam, style=simple;explode=false;name=versionID")
   VersionId: string;
-
-  constructor(ApiId: string, VersionId: string) {
-    this.ApiId = ApiId;
-    this.VersionId = VersionId;
-  }
 }
 
 export class GetVersionMetadataRequest {
   PathParams: GetVersionMetadataPathParams;
-
-  constructor(PathParams: GetVersionMetadataPathParams) {
-    this.PathParams = PathParams;
-  }
 }
 
 export class GetVersionMetadataResponse {
@@ -29,16 +20,4 @@ export class GetVersionMetadataResponse {
   StatusCode: number;
 
   VersionMetadata?: shared.VersionMetadata[];
-
-  constructor(
-    ContentType: string,
-    StatusCode: number,
-    Error?: shared.Error,
-    VersionMetadata?: shared.VersionMetadata[]
-  ) {
-    this.ContentType = ContentType;
-    this.Error = Error;
-    this.StatusCode = StatusCode;
-    this.VersionMetadata = VersionMetadata;
-  }
 }

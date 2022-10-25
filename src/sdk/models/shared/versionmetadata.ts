@@ -13,20 +13,4 @@ export class VersionMetadata {
   VersionId: string;
   @Metadata("json, name=workspace_id")
   WorkspaceId: string;
-
-  constructor(
-    ApiId: string,
-    CreatedAt: string,
-    MetaKey: string,
-    MetaValue: string,
-    VersionId: string,
-    WorkspaceId: string
-  ) {
-    this.ApiId = ApiId;
-    this.CreatedAt = CreatedAt;
-    this.MetaKey = MetaKey;
-    this.MetaValue = MetaValue;
-    this.VersionId = VersionId;
-    this.WorkspaceId = WorkspaceId;
-  }
 }

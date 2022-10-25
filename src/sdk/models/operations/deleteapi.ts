@@ -6,19 +6,10 @@ export class DeleteApiPathParams {
   ApiId: string;
   @Metadata("pathParam, style=simple;explode=false;name=versionID")
   VersionId: string;
-
-  constructor(ApiId: string, VersionId: string) {
-    this.ApiId = ApiId;
-    this.VersionId = VersionId;
-  }
 }
 
 export class DeleteApiRequest {
   PathParams: DeleteApiPathParams;
-
-  constructor(PathParams: DeleteApiPathParams) {
-    this.PathParams = PathParams;
-  }
 }
 
 export class DeleteApiResponse {
@@ -27,10 +18,4 @@ export class DeleteApiResponse {
   Error?: shared.Error;
 
   StatusCode: number;
-
-  constructor(ContentType: string, StatusCode: number, Error?: shared.Error) {
-    this.ContentType = ContentType;
-    this.Error = Error;
-    this.StatusCode = StatusCode;
-  }
 }

@@ -8,20 +8,10 @@ export class GeneratePostmanCollectionForApiEndpointPathParams {
   ApiId: string;
   @Metadata("pathParam, style=simple;explode=false;name=versionID")
   VersionId: string;
-
-  constructor(ApiEndpointId: string, ApiId: string, VersionId: string) {
-    this.ApiEndpointId = ApiEndpointId;
-    this.ApiId = ApiId;
-    this.VersionId = VersionId;
-  }
 }
 
 export class GeneratePostmanCollectionForApiEndpointRequest {
   PathParams: GeneratePostmanCollectionForApiEndpointPathParams;
-
-  constructor(PathParams: GeneratePostmanCollectionForApiEndpointPathParams) {
-    this.PathParams = PathParams;
-  }
 }
 
 export class GeneratePostmanCollectionForApiEndpointResponse {
@@ -32,16 +22,4 @@ export class GeneratePostmanCollectionForApiEndpointResponse {
   PostmanCollection?: string;
 
   StatusCode: number;
-
-  constructor(
-    ContentType: string,
-    StatusCode: number,
-    Error?: shared.Error,
-    PostmanCollection?: string
-  ) {
-    this.ContentType = ContentType;
-    this.Error = Error;
-    this.PostmanCollection = PostmanCollection;
-    this.StatusCode = StatusCode;
-  }
 }
