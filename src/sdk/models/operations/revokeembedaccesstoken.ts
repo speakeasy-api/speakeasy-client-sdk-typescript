@@ -4,10 +4,18 @@ import * as shared from "../shared";
 export class RevokeEmbedAccessTokenPathParams {
   @Metadata("pathParam, style=simple;explode=false;name=tokenID")
   TokenId: string;
+
+  constructor(TokenId: string) {
+    this.TokenId = TokenId;
+  }
 }
 
 export class RevokeEmbedAccessTokenRequest {
   PathParams: RevokeEmbedAccessTokenPathParams;
+
+  constructor(PathParams: RevokeEmbedAccessTokenPathParams) {
+    this.PathParams = PathParams;
+  }
 }
 
 export class RevokeEmbedAccessTokenResponse {
@@ -16,4 +24,10 @@ export class RevokeEmbedAccessTokenResponse {
   Error?: shared.Error;
 
   StatusCode: number;
+
+  constructor(ContentType: string, StatusCode: number, Error?: shared.Error) {
+    this.ContentType = ContentType;
+    this.Error = Error;
+    this.StatusCode = StatusCode;
+  }
 }

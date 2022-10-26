@@ -21,4 +21,28 @@ export class EmbedToken {
   RevokedBy?: string;
   @Metadata("json, name=workspace_id")
   WorkspaceId: string;
+
+  constructor(
+    CreatedAt: string,
+    CreatedBy: string,
+    Description: string,
+    ExpiresAt: string,
+    Filters: string,
+    Id: string,
+    WorkspaceId: string,
+    LastUsed?: string,
+    RevokedAt?: string,
+    RevokedBy?: string
+  ) {
+    this.CreatedAt = CreatedAt;
+    this.CreatedBy = CreatedBy;
+    this.Description = Description;
+    this.ExpiresAt = ExpiresAt;
+    this.Filters = Filters;
+    this.Id = Id;
+    this.LastUsed = LastUsed;
+    this.RevokedAt = RevokedAt;
+    this.RevokedBy = RevokedBy;
+    this.WorkspaceId = WorkspaceId;
+  }
 }

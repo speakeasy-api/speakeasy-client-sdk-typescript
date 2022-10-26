@@ -65,10 +65,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.DeleteApiResponse =
-          new operations.DeleteApiResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.DeleteApiResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             break;
@@ -77,11 +81,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -108,10 +107,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.DeleteApiEndpointResponse =
-          new operations.DeleteApiEndpointResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.DeleteApiEndpointResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             break;
@@ -120,11 +123,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -151,10 +149,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.DeleteSchemaResponse =
-          new operations.DeleteSchemaResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.DeleteSchemaResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             break;
@@ -163,11 +165,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -194,10 +191,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.DeleteVersionMetadataResponse =
-          new operations.DeleteVersionMetadataResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.DeleteVersionMetadataResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             break;
@@ -206,11 +207,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -237,10 +233,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.DownloadSchemaResponse =
-          new operations.DownloadSchemaResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.DownloadSchemaResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -253,11 +253,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -284,10 +279,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.DownloadSchemaRevisionResponse =
-          new operations.DownloadSchemaRevisionResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.DownloadSchemaRevisionResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -300,11 +299,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -331,10 +325,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.FindApiEndpointResponse =
-          new operations.FindApiEndpointResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.FindApiEndpointResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -345,11 +343,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -376,10 +369,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GenerateOpenApiSpecResponse =
-          new operations.GenerateOpenApiSpecResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GenerateOpenApiSpecResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -390,11 +387,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -423,10 +415,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GenerateOpenApiSpecForApiEndpointResponse =
-          new operations.GenerateOpenApiSpecForApiEndpointResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GenerateOpenApiSpecForApiEndpointResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -437,11 +433,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -468,10 +459,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GeneratePostmanCollectionResponse =
-          new operations.GeneratePostmanCollectionResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GeneratePostmanCollectionResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -482,11 +477,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -515,10 +505,15 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
         const res: operations.GeneratePostmanCollectionForApiEndpointResponse =
-          new operations.GeneratePostmanCollectionForApiEndpointResponse();
+          {
+            StatusCode: httpRes.status,
+            ContentType: contentType,
+          };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -529,11 +524,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -562,10 +552,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GenerateRequestPostmanCollectionResponse =
-          new operations.GenerateRequestPostmanCollectionResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GenerateRequestPostmanCollectionResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -576,11 +570,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -607,10 +596,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetAllApiEndpointsResponse =
-          new operations.GetAllApiEndpointsResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetAllApiEndpointsResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -621,11 +614,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -662,10 +650,14 @@ export class SDK {
         ...requestConfig,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetAllApiVersionsResponse =
-          new operations.GetAllApiVersionsResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetAllApiVersionsResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -676,11 +668,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -707,10 +694,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetAllForVersionApiEndpointsResponse =
-          new operations.GetAllForVersionApiEndpointsResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetAllForVersionApiEndpointsResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -721,11 +712,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -752,10 +738,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetApiEndpointResponse =
-          new operations.GetApiEndpointResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetApiEndpointResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -766,11 +756,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -803,10 +788,14 @@ export class SDK {
         ...requestConfig,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetApisResponse =
-          new operations.GetApisResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetApisResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -817,11 +806,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -855,10 +839,14 @@ export class SDK {
         ...requestConfig,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetEmbedAccessTokenResponse =
-          new operations.GetEmbedAccessTokenResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetEmbedAccessTokenResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -869,11 +857,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -900,10 +883,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetRequestFromEventLogResponse =
-          new operations.GetRequestFromEventLogResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetRequestFromEventLogResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -914,11 +901,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -945,10 +927,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetSchemaResponse =
-          new operations.GetSchemaResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetSchemaResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -959,11 +945,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -990,10 +971,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetSchemaDiffResponse =
-          new operations.GetSchemaDiffResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetSchemaDiffResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1004,11 +989,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -1035,10 +1015,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetSchemaRevisionResponse =
-          new operations.GetSchemaRevisionResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetSchemaRevisionResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1049,11 +1033,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -1080,10 +1059,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetSchemasResponse =
-          new operations.GetSchemasResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetSchemasResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1094,11 +1077,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -1121,10 +1099,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetValidEmbedAccessTokensResponse =
-          new operations.GetValidEmbedAccessTokensResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetValidEmbedAccessTokensResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1135,11 +1117,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -1166,10 +1143,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.GetVersionMetadataResponse =
-          new operations.GetVersionMetadataResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.GetVersionMetadataResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1181,11 +1162,6 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
-
         return res;
       })
       .catch((error: AxiosError) => {
@@ -1196,7 +1172,7 @@ export class SDK {
   InsertVersionMetadata = (
     props: operations.InsertVersionMetadataRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.InsertVersionMetadataResponse | AxiosError> | Error => {
+  ): Promise<operations.InsertVersionMetadataResponse | AxiosError> => {
     const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
@@ -1210,7 +1186,7 @@ export class SDK {
       [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
-        return new Error(`Error serializing request body, cause: ${e.message}`);
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
 
@@ -1227,10 +1203,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.InsertVersionMetadataResponse =
-          new operations.InsertVersionMetadataResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.InsertVersionMetadataResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1241,11 +1221,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -1278,10 +1253,14 @@ export class SDK {
         ...requestConfig,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.QueryEventLogResponse =
-          new operations.QueryEventLogResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.QueryEventLogResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1293,11 +1272,6 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
-
         return res;
       })
       .catch((error: AxiosError) => {
@@ -1308,7 +1282,7 @@ export class SDK {
   RegisterSchema = (
     props: operations.RegisterSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.RegisterSchemaResponse | AxiosError> | Error => {
+  ): Promise<operations.RegisterSchemaResponse | AxiosError> => {
     const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
@@ -1322,7 +1296,7 @@ export class SDK {
       [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
-        return new Error(`Error serializing request body, cause: ${e.message}`);
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
 
@@ -1339,10 +1313,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.RegisterSchemaResponse =
-          new operations.RegisterSchemaResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.RegisterSchemaResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             break;
@@ -1351,11 +1329,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -1382,10 +1355,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.RevokeEmbedAccessTokenResponse =
-          new operations.RevokeEmbedAccessTokenResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.RevokeEmbedAccessTokenResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             break;
@@ -1394,11 +1371,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })
@@ -1410,7 +1382,7 @@ export class SDK {
   UpsertApi = (
     props: operations.UpsertApiRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.UpsertApiResponse | AxiosError> | Error => {
+  ): Promise<operations.UpsertApiResponse | AxiosError> => {
     const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
@@ -1424,7 +1396,7 @@ export class SDK {
       [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
-        return new Error(`Error serializing request body, cause: ${e.message}`);
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
 
@@ -1441,10 +1413,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.UpsertApiResponse =
-          new operations.UpsertApiResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.UpsertApiResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1456,11 +1432,6 @@ export class SDK {
             break;
         }
 
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
-
         return res;
       })
       .catch((error: AxiosError) => {
@@ -1471,7 +1442,7 @@ export class SDK {
   UpsertApiEndpoint = (
     props: operations.UpsertApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.UpsertApiEndpointResponse | AxiosError> | Error => {
+  ): Promise<operations.UpsertApiEndpointResponse | AxiosError> => {
     const baseURL: string = this.serverURL;
     const url: string = utils.GenerateURL(
       baseURL,
@@ -1485,7 +1456,7 @@ export class SDK {
       [reqHeaders, reqBody] = SerializeRequestBody(props);
     } catch (e: unknown) {
       if (e instanceof Error) {
-        return new Error(`Error serializing request body, cause: ${e.message}`);
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
 
@@ -1502,10 +1473,14 @@ export class SDK {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+        const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
 
-        const res: operations.UpsertApiEndpointResponse =
-          new operations.UpsertApiEndpointResponse();
+        if (httpRes?.status == null)
+          throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.UpsertApiEndpointResponse = {
+          StatusCode: httpRes.status,
+          ContentType: contentType,
+        };
         switch (httpRes?.status) {
           case 200:
             if (MatchContentType(contentType, "application/json"))
@@ -1516,11 +1491,6 @@ export class SDK {
               res.Error = httpRes?.data;
             break;
         }
-
-        if (httpRes?.status != null)
-          throw new Error(`status code not found in response: ${httpRes}`);
-        res.StatusCode = httpRes.status;
-        res.ContentType = contentType;
 
         return res;
       })

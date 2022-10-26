@@ -29,4 +29,36 @@ export class BoundedRequest {
   VersionId: string;
   @Metadata("json, name=workspace_id")
   WorkspaceId: string;
+
+  constructor(
+    ApiEndpointId: string,
+    ApiId: string,
+    CreatedAt: string,
+    CustomerId: string,
+    Latency: number,
+    Method: string,
+    Path: string,
+    RequestFinishTime: string,
+    RequestId: string,
+    RequestStartTime: string,
+    Status: number,
+    VersionId: string,
+    WorkspaceId: string,
+    Metadata?: Map<string, string[]>
+  ) {
+    this.ApiEndpointId = ApiEndpointId;
+    this.ApiId = ApiId;
+    this.CreatedAt = CreatedAt;
+    this.CustomerId = CustomerId;
+    this.Latency = Latency;
+    this.Metadata = Metadata;
+    this.Method = Method;
+    this.Path = Path;
+    this.RequestFinishTime = RequestFinishTime;
+    this.RequestId = RequestId;
+    this.RequestStartTime = RequestStartTime;
+    this.Status = Status;
+    this.VersionId = VersionId;
+    this.WorkspaceId = WorkspaceId;
+  }
 }

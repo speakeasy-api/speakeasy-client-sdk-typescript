@@ -8,4 +8,16 @@ export class GetValidEmbedAccessTokensResponse {
   Error?: shared.Error;
 
   StatusCode: number;
+
+  constructor(
+    ContentType: string,
+    StatusCode: number,
+    EmbedTokens?: shared.EmbedToken[],
+    Error?: shared.Error
+  ) {
+    this.ContentType = ContentType;
+    this.EmbedTokens = EmbedTokens;
+    this.Error = Error;
+    this.StatusCode = StatusCode;
+  }
 }
