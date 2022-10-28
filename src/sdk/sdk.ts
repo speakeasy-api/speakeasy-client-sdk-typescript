@@ -1193,9 +1193,12 @@ export class SDK {
     const client: AxiosInstance = this.securityClient!;
     const headers = { ...reqHeaders, ...config?.headers };
 
-    let body: unknown;
+    let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = { ...reqBody };
+
+    if (body == null || Object.keys(body).length === 0)
+      throw new Error("request body is required");
 
     return client
       .post(url, body, {
@@ -1303,9 +1306,12 @@ export class SDK {
     const client: AxiosInstance = this.securityClient!;
     const headers = { ...reqHeaders, ...config?.headers };
 
-    let body: unknown;
+    let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = { ...reqBody };
+
+    if (body == null || Object.keys(body).length === 0)
+      throw new Error("request body is required");
 
     return client
       .post(url, body, {
@@ -1403,9 +1409,12 @@ export class SDK {
     const client: AxiosInstance = this.securityClient!;
     const headers = { ...reqHeaders, ...config?.headers };
 
-    let body: unknown;
+    let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = { ...reqBody };
+
+    if (body == null || Object.keys(body).length === 0)
+      throw new Error("request body is required");
 
     return client
       .put(url, body, {
@@ -1463,9 +1472,12 @@ export class SDK {
     const client: AxiosInstance = this.securityClient!;
     const headers = { ...reqHeaders, ...config?.headers };
 
-    let body: unknown;
+    let body: any;
     if (reqBody instanceof FormData) body = reqBody;
     else body = { ...reqBody };
+
+    if (body == null || Object.keys(body).length === 0)
+      throw new Error("request body is required");
 
     return client
       .put(url, body, {

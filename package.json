@@ -1,4 +1,7 @@
 {
+  "name": "openapi",
+  "version": "0.0.1",
+  "author": "speakeasy-client-sdk-generator",
   "scripts": {
     "lint:fix": "tsc --noemit && eslint \"./src\" --ext .ts,.tsx --fix"
   },
