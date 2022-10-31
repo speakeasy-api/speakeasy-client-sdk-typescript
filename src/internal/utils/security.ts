@@ -64,11 +64,7 @@ function ParseSecurityClass(serverURL: string, security: any): AxiosInstance {
     if (securityDecorator.Option) {
       client = ParseSecurityOption(serverURL, security[fname]);
     } else if (securityDecorator.Scheme) {
-      client = ParseSecurityScheme(
-        serverURL,
-        securityDecorator,
-        security[fname]
-      );
+      client = ParseSecurityScheme(serverURL, securityDecorator, security[fname]);
     }
   });
 

@@ -29,7 +29,7 @@ export function GenerateURL(
   path: string,
   pathParams: any
 ): string {
-  const url: string = serverURL.replace(/\/$/, "") + path;
+  let url: string = serverURL.replace(/\/$/, "") + path;
   const parsedParameters: Map<string, string> = new Map<string, string>();
   const fieldNames: string[] = Object.getOwnPropertyNames(pathParams);
   fieldNames.forEach((fname) => {
