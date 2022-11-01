@@ -1,46 +1,32 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class DeleteVersionMetadataPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=apiID")
-    ApiId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=metaKey")
-    MetaKey: string;
-    @Metadata("pathParam, style=simple;explode=false;name=metaValue")
-    MetaValue: string;
-    @Metadata("pathParam, style=simple;explode=false;name=versionID")
-    VersionId: string;
-    
-    constructor(ApiId: string, MetaKey: string, MetaValue: string, VersionId: string) {
-		this.ApiId = ApiId;
-		this.MetaKey = MetaKey;
-		this.MetaValue = MetaValue;
-		this.VersionId = VersionId;
-	}
+export class DeleteVersionMetadataPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  ApiId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=metaKey" })
+  MetaKey: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=metaValue" })
+  MetaValue: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  VersionId: string;
+  
 }
 
-export class DeleteVersionMetadataRequest {
-    
-    PathParams: DeleteVersionMetadataPathParams;
-    
-    constructor(PathParams: DeleteVersionMetadataPathParams) {
-		this.PathParams = PathParams;
-	}
+export class DeleteVersionMetadataRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: DeleteVersionMetadataPathParams;
+  
 }
 
-export class DeleteVersionMetadataResponse {
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, Error?: shared.Error) {
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-	}
+export class DeleteVersionMetadataResponse extends SpeakeasyBase {
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 

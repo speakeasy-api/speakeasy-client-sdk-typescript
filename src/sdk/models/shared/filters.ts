@@ -1,22 +1,17 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
 import { Filter } from "./filter";
 
-export class Filters {
-    @Metadata("json, name=filters")
-    Filters: Filter[];
-    @Metadata("json, name=limit")
-    Limit: number;
-    @Metadata("json, name=offset")
-    Offset: number;
-    @Metadata("json, name=operator")
-    Operator: string;
-    
-    constructor(Filters: Filter[], Limit: number, Offset: number, Operator: string) {
-		this.Filters = Filters;
-		this.Limit = Limit;
-		this.Offset = Offset;
-		this.Operator = Operator;
-	}
+export class Filters extends SpeakeasyBase {
+  @Metadata({ data: "json, name=filters", elemType: shared.Filter })
+  Filters: Filter[];
+  @Metadata({ data: "json, name=limit" })
+  Limit: number;
+  @Metadata({ data: "json, name=offset" })
+  Offset: number;
+  @Metadata({ data: "json, name=operator" })
+  Operator: string;
+  
 }
 
 

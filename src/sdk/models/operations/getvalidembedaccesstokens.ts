@@ -1,21 +1,16 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class GetValidEmbedAccessTokensResponse {
-    
-    ContentType: string;
-    
-    EmbedTokens?: shared.EmbedToken[];
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, EmbedTokens?: shared.EmbedToken[], Error?: shared.Error) {
-		this.ContentType = ContentType;
-		this.EmbedTokens = EmbedTokens;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-	}
+export class GetValidEmbedAccessTokensResponse extends SpeakeasyBase {
+  @Metadata()
+  ContentType: string;
+  @Metadata({ elemType: shared.EmbedToken })
+  EmbedTokens?: shared.EmbedToken[];
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 

@@ -1,18 +1,13 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
-export class Filter {
-    @Metadata("json, name=key")
-    Key: string;
-    @Metadata("json, name=operator")
-    Operator: string;
-    @Metadata("json, name=value")
-    Value: string;
-    
-    constructor(Key: string, Operator: string, Value: string) {
-		this.Key = Key;
-		this.Operator = Operator;
-		this.Value = Value;
-	}
+export class Filter extends SpeakeasyBase {
+  @Metadata({ data: "json, name=key" })
+  Key: string;
+  @Metadata({ data: "json, name=operator" })
+  Operator: string;
+  @Metadata({ data: "json, name=value" })
+  Value: string;
+  
 }
 
 

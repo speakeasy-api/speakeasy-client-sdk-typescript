@@ -1,40 +1,28 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class GetRequestFromEventLogPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=requestID")
-    RequestId: string;
-    
-    constructor(RequestId: string) {
-		this.RequestId = RequestId;
-	}
+export class GetRequestFromEventLogPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=requestID" })
+  RequestId: string;
+  
 }
 
-export class GetRequestFromEventLogRequest {
-    
-    PathParams: GetRequestFromEventLogPathParams;
-    
-    constructor(PathParams: GetRequestFromEventLogPathParams) {
-		this.PathParams = PathParams;
-	}
+export class GetRequestFromEventLogRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: GetRequestFromEventLogPathParams;
+  
 }
 
-export class GetRequestFromEventLogResponse {
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    UnboundedRequest?: shared.UnboundedRequest;
-    
-    constructor(ContentType: string, StatusCode: number, Error?: shared.Error, UnboundedRequest?: shared.UnboundedRequest) {
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-		this.UnboundedRequest = UnboundedRequest;
-	}
+export class GetRequestFromEventLogResponse extends SpeakeasyBase {
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  @Metadata()
+  UnboundedRequest?: shared.UnboundedRequest;
+  
 }
 
 

@@ -1,43 +1,30 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class GetVersionMetadataPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=apiID")
-    ApiId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=versionID")
-    VersionId: string;
-    
-    constructor(ApiId: string, VersionId: string) {
-		this.ApiId = ApiId;
-		this.VersionId = VersionId;
-	}
+export class GetVersionMetadataPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  ApiId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  VersionId: string;
+  
 }
 
-export class GetVersionMetadataRequest {
-    
-    PathParams: GetVersionMetadataPathParams;
-    
-    constructor(PathParams: GetVersionMetadataPathParams) {
-		this.PathParams = PathParams;
-	}
+export class GetVersionMetadataRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: GetVersionMetadataPathParams;
+  
 }
 
-export class GetVersionMetadataResponse {
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    VersionMetadata?: shared.VersionMetadata[];
-    
-    constructor(ContentType: string, StatusCode: number, Error?: shared.Error, VersionMetadata?: shared.VersionMetadata[]) {
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-		this.VersionMetadata = VersionMetadata;
-	}
+export class GetVersionMetadataResponse extends SpeakeasyBase {
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  @Metadata({ elemType: shared.VersionMetadata })
+  VersionMetadata?: shared.VersionMetadata[];
+  
 }
 
 

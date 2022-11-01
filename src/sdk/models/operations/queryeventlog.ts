@@ -1,40 +1,28 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class QueryEventLogQueryParams {
-    @Metadata("queryParam, serialization=json;name=filters")
-    Filters?: shared.Filters;
-    
-    constructor(Filters?: shared.Filters) {
-		this.Filters = Filters;
-	}
+export class QueryEventLogQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, serialization=json;name=filters" })
+  Filters?: shared.Filters;
+  
 }
 
-export class QueryEventLogRequest {
-    
-    QueryParams: QueryEventLogQueryParams;
-    
-    constructor(QueryParams: QueryEventLogQueryParams) {
-		this.QueryParams = QueryParams;
-	}
+export class QueryEventLogRequest extends SpeakeasyBase {
+  @Metadata()
+  QueryParams: QueryEventLogQueryParams;
+  
 }
 
-export class QueryEventLogResponse {
-    
-    BoundedRequests?: shared.BoundedRequest[];
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, BoundedRequests?: shared.BoundedRequest[], Error?: shared.Error) {
-		this.BoundedRequests = BoundedRequests;
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-	}
+export class QueryEventLogResponse extends SpeakeasyBase {
+  @Metadata({ elemType: shared.BoundedRequest })
+  BoundedRequests?: shared.BoundedRequest[];
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 

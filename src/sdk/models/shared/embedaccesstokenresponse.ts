@@ -1,12 +1,9 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
-export class EmbedAccessTokenResponse {
-    @Metadata("json, name=access_token")
-    AccessToken: string;
-    
-    constructor(AccessToken: string) {
-		this.AccessToken = AccessToken;
-	}
+export class EmbedAccessTokenResponse extends SpeakeasyBase {
+  @Metadata({ data: "json, name=access_token" })
+  AccessToken: string;
+  
 }
 
 

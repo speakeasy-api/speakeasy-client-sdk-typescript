@@ -1,49 +1,34 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class GetSchemaDiffPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=apiID")
-    ApiId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=baseRevisionID")
-    BaseRevisionId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=targetRevisionID")
-    TargetRevisionId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=versionID")
-    VersionId: string;
-    
-    constructor(ApiId: string, BaseRevisionId: string, TargetRevisionId: string, VersionId: string) {
-		this.ApiId = ApiId;
-		this.BaseRevisionId = BaseRevisionId;
-		this.TargetRevisionId = TargetRevisionId;
-		this.VersionId = VersionId;
-	}
+export class GetSchemaDiffPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  ApiId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=baseRevisionID" })
+  BaseRevisionId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=targetRevisionID" })
+  TargetRevisionId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  VersionId: string;
+  
 }
 
-export class GetSchemaDiffRequest {
-    
-    PathParams: GetSchemaDiffPathParams;
-    
-    constructor(PathParams: GetSchemaDiffPathParams) {
-		this.PathParams = PathParams;
-	}
+export class GetSchemaDiffRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: GetSchemaDiffPathParams;
+  
 }
 
-export class GetSchemaDiffResponse {
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    SchemaDiff?: shared.SchemaDiff;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, Error?: shared.Error, SchemaDiff?: shared.SchemaDiff) {
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.SchemaDiff = SchemaDiff;
-		this.StatusCode = StatusCode;
-	}
+export class GetSchemaDiffResponse extends SpeakeasyBase {
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  SchemaDiff?: shared.SchemaDiff;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 

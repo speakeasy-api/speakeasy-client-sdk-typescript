@@ -1,40 +1,28 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class GenerateRequestPostmanCollectionPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=requestID")
-    RequestId: string;
-    
-    constructor(RequestId: string) {
-		this.RequestId = RequestId;
-	}
+export class GenerateRequestPostmanCollectionPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=requestID" })
+  RequestId: string;
+  
 }
 
-export class GenerateRequestPostmanCollectionRequest {
-    
-    PathParams: GenerateRequestPostmanCollectionPathParams;
-    
-    constructor(PathParams: GenerateRequestPostmanCollectionPathParams) {
-		this.PathParams = PathParams;
-	}
+export class GenerateRequestPostmanCollectionRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: GenerateRequestPostmanCollectionPathParams;
+  
 }
 
-export class GenerateRequestPostmanCollectionResponse {
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    PostmanCollection?: string;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, Error?: shared.Error, PostmanCollection?: string) {
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.PostmanCollection = PostmanCollection;
-		this.StatusCode = StatusCode;
-	}
+export class GenerateRequestPostmanCollectionResponse extends SpeakeasyBase {
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  PostmanCollection?: string;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 

@@ -1,15 +1,11 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
-export class Error {
-    @Metadata("json, name=message")
-    Message: string;
-    @Metadata("json, name=status_code")
-    StatusCode: number;
-    
-    constructor(Message: string, StatusCode: number) {
-		this.Message = Message;
-		this.StatusCode = StatusCode;
-	}
+export class Error extends SpeakeasyBase {
+  @Metadata({ data: "json, name=message" })
+  Message: string;
+  @Metadata({ data: "json, name=status_code" })
+  StatusCode: number;
+  
 }
 
 
