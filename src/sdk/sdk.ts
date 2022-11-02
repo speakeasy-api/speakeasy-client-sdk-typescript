@@ -20,7 +20,7 @@ export function WithServerURL(serverURL: string, params?: Map<string, string>): 
     }
     sdk.serverURL = serverURL;
     sdk.defaultClient = axios.create({ baseURL: serverURL });
-  }
+  };
 }
 
 export function WithSecurity(serverURL: string, security: Security): Function {
@@ -30,7 +30,7 @@ export function WithSecurity(serverURL: string, security: Security): Function {
   return (sdk: SDK) => {
     sdk.serverURL = serverURL;
     sdk.securityClient = CreateSecurityClient(serverURL, security);
-  }
+  };
 }
 
 export class SDK {
@@ -57,23 +57,26 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.delete(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.DeleteApiResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteApiResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   DeleteApiEndpoint(
@@ -88,23 +91,26 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.delete(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.DeleteApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   DeleteSchema(
@@ -119,23 +125,26 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.delete(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.DeleteSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   DeleteVersionMetadata(
@@ -150,23 +159,26 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.delete(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.DeleteVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   DownloadSchema(
@@ -181,25 +193,28 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.DownloadSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
-          if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DownloadSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   DownloadSchemaRevision(
@@ -214,25 +229,28 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.DownloadSchemaRevisionResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
-          if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DownloadSchemaRevisionResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   FindApiEndpoint(
@@ -247,24 +265,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.FindApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.FindApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GenerateOpenApiSpec(
@@ -279,24 +300,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GenerateOpenApiSpecResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.GenerateOpenApiSpecDiff = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GenerateOpenApiSpecResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.GenerateOpenApiSpecDiff = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GenerateOpenApiSpecForApiEndpoint(
@@ -311,24 +335,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GenerateOpenApiSpecForApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.GenerateOpenApiSpecDiff = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GenerateOpenApiSpecForApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.GenerateOpenApiSpecDiff = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GeneratePostmanCollection(
@@ -343,24 +370,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GeneratePostmanCollectionResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GeneratePostmanCollectionResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GeneratePostmanCollectionForApiEndpoint(
@@ -375,24 +405,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GeneratePostmanCollectionForApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GeneratePostmanCollectionForApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GenerateRequestPostmanCollection(
@@ -407,24 +440,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GenerateRequestPostmanCollectionResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GenerateRequestPostmanCollectionResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetAllApiEndpoints(
@@ -439,24 +475,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/api_endpoints", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetAllApiEndpointsResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.ApiEndpoints = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetAllApiEndpointsResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.ApiEndpoints = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetAllApiVersions(
@@ -479,24 +518,27 @@ export class SDK {
       paramsSerializer: qpSerializer,
     };
     
-    return client.get(url, {
-      ...requestConfig,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetAllApiVersionsResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.Apis = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetAllApiVersionsResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.Apis = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetAllForVersionApiEndpoints(
@@ -511,24 +553,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetAllForVersionApiEndpointsResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.ApiEndpoints = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetAllForVersionApiEndpointsResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.ApiEndpoints = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetApiEndpoint(
@@ -543,24 +588,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetApis(
@@ -583,24 +631,27 @@ export class SDK {
       paramsSerializer: qpSerializer,
     };
     
-    return client.get(url, {
-      ...requestConfig,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetApisResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.Apis = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetApisResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.Apis = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetEmbedAccessToken(
@@ -623,24 +674,27 @@ export class SDK {
       paramsSerializer: qpSerializer,
     };
     
-    return client.get(url, {
-      ...requestConfig,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetEmbedAccessTokenResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.EmbedAccessTokenResponse = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetEmbedAccessTokenResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.EmbedAccessTokenResponse = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetRequestFromEventLog(
@@ -655,24 +709,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetRequestFromEventLogResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.UnboundedRequest = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetRequestFromEventLogResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.UnboundedRequest = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetSchema(
@@ -687,24 +744,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetSchemaDiff(
@@ -719,24 +779,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetSchemaDiffResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.SchemaDiff = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetSchemaDiffResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.SchemaDiff = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetSchemaRevision(
@@ -751,24 +814,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetSchemaRevisionResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetSchemaRevisionResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetSchemas(
@@ -783,24 +849,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetSchemasResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.Schemata = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetSchemasResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.Schemata = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetValidEmbedAccessTokens(
@@ -811,24 +880,27 @@ export class SDK {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-tokens/valid";
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetValidEmbedAccessTokensResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.EmbedTokens = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetValidEmbedAccessTokensResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.EmbedTokens = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   GetVersionMetadata(
@@ -843,24 +915,27 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.get(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.GetVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.VersionMetadata = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.GetVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.VersionMetadata = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   InsertVersionMetadata(
@@ -893,25 +968,28 @@ export class SDK {
     
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
     
-    return client.post(url, body, {
-      headers: headers,
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      post(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.InsertVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.VersionMetadata = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.InsertVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.VersionMetadata = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   QueryEventLog(
@@ -934,24 +1012,27 @@ export class SDK {
       paramsSerializer: qpSerializer,
     };
     
-    return client.get(url, {
-      ...requestConfig,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      get(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.QueryEventLogResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.BoundedRequests = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.QueryEventLogResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.BoundedRequests = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   RegisterSchema(
@@ -984,24 +1065,27 @@ export class SDK {
     
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
     
-    return client.post(url, body, {
-      headers: headers,
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      post(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.RegisterSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.RegisterSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   RevokeEmbedAccessToken(
@@ -1016,23 +1100,26 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.delete(url, {
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.RevokeEmbedAccessTokenResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.RevokeEmbedAccessTokenResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   UpsertApi(
@@ -1065,25 +1152,28 @@ export class SDK {
     
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
     
-    return client.put(url, body, {
-      headers: headers,
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.UpsertApiResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.Api = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpsertApiResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.Api = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
   
   UpsertApiEndpoint(
@@ -1116,25 +1206,28 @@ export class SDK {
     
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
     
-    return client.put(url, body, {
-      headers: headers,
-      ...config,
-    }).then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    return client.
+      put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-      let res: operations.UpsertApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
-      switch (httpRes?.status) {
-        case 200:
-          if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
-          break;
-        default:
-          if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
-          break;
-      }
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpsertApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
+            break;
+          default:
+            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            break;
+        }
 
-      return res;
-    }).catch((error: AxiosError) => {return error});
+        return res;
+      })
+      .catch((error: AxiosError) => {return error});
   }
 }
 
