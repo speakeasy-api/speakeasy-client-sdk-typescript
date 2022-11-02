@@ -25,6 +25,9 @@ export function WithServerURL(serverURL: string, params?: Map<string, string>): 
   }
 }
 export function WithSecurity(serverURL: string, security: Security): Function {
+  if (!(security instanceof utils.SpeakeasyBase)) {
+    security = new Security(security);
+  }
   return (sdk: SDK) => {
     sdk.serverURL = serverURL;
     sdk.securityClient = CreateSecurityClient(serverURL, security);

@@ -1,7 +1,7 @@
 {
-  "name": "",
-  "version": "",
-  "author": "",
+  "name": "@speakeasy-api/speakeasy-client-sdk-typescript",
+  "version": "0.0.1",
+  "author": "Speakeasy",
   "scripts": {
     "lint:fix": "tsc --noemit && eslint \"./src\" --ext .ts,.tsx --fix"
   },
