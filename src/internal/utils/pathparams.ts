@@ -27,12 +27,26 @@ export function ParsePathParamDecorator(
 }
 
 export function GetSimplePathParams(
-  paramName: string,
-  paramValue: any
+    paramName: string,
+    paramValue: any,
+    explode: boolean
 ): Map<string, string> {
-  let pathParams: Map<string, string> = new Map<string, string>();
-  if (typeof paramValue === "string") pathParams.set(paramName, paramValue);
-  else pathParams.set(paramName, JSON.stringify(paramValue));
+  const pathParams: Map<string, string> = new Map<string, string>();
+  const ppVals: string[] = [];
+  if (Array.isArray(paramValue)) {
+    paramValue.forEach((param) => {
+      ppVals.push(String(param));
+    });
+    pathParams.set(paramName, ppVals.join(","));
+  } else if (paramValue instanceof Object) {
+    Object.getOwnPropertyNames(paramValue).forEach((paramName: string) => {
+      if (explode) ppVals.push(`${paramName}=${paramValue[paramName]}`);
+      else ppVals.push(`${paramName},${paramValue[paramName]}`);
+    });
+    pathParams.set(paramName, ppVals.join(","));
+  } else {
+    pathParams.set(paramName, String(paramValue));
+  }
   return pathParams;
 }
 

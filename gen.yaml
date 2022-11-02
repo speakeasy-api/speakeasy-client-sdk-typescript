@@ -1,0 +1,4 @@
+typescript:
+  packagename: "@speakeasy-api/speakeasy-client-sdk-typescript"
+  version: 0.0.1
+  author: Speakeasy

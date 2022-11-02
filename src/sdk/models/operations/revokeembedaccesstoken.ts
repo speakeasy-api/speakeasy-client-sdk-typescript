@@ -1,37 +1,26 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class RevokeEmbedAccessTokenPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=tokenID")
-    TokenId: string;
-    
-    constructor(TokenId: string) {
-		this.TokenId = TokenId;
-	}
+export class RevokeEmbedAccessTokenPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=tokenID" })
+  TokenId: string;
+  
 }
 
-export class RevokeEmbedAccessTokenRequest {
-    
-    PathParams: RevokeEmbedAccessTokenPathParams;
-    
-    constructor(PathParams: RevokeEmbedAccessTokenPathParams) {
-		this.PathParams = PathParams;
-	}
+export class RevokeEmbedAccessTokenRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: RevokeEmbedAccessTokenPathParams;
+  
 }
 
-export class RevokeEmbedAccessTokenResponse {
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, Error?: shared.Error) {
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-	}
+export class RevokeEmbedAccessTokenResponse extends SpeakeasyBase {
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 

@@ -12,7 +12,7 @@ import FormData from 'form-data';
 
 
 const Servers = [
-	"http://api.prod.speakeasyapi.dev",
+	"https://api.prod.speakeasyapi.dev",
 ] as const;
 
 export function WithServerURL(serverURL: string, params?: Map<string, string>): Function {
@@ -25,6 +25,9 @@ export function WithServerURL(serverURL: string, params?: Map<string, string>): 
   }
 }
 export function WithSecurity(serverURL: string, security: Security): Function {
+  if (!(security instanceof utils.SpeakeasyBase)) {
+    security = new Security(security);
+  }
   return (sdk: SDK) => {
     sdk.serverURL = serverURL;
     sdk.securityClient = CreateSecurityClient(serverURL, security);
@@ -43,11 +46,15 @@ export class SDK {
   }
   
   DeleteApi = (
-    props: operations.DeleteApiRequest,
+    req: operations.DeleteApiRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.DeleteApiResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteApiRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}", req.PathParams);
     
 
     
@@ -63,7 +70,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.DeleteApiResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -81,11 +88,15 @@ export class SDK {
 
   
   DeleteApiEndpoint = (
-    props: operations.DeleteApiEndpointRequest,
+    req: operations.DeleteApiEndpointRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.DeleteApiEndpointResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteApiEndpointRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
     
 
     
@@ -101,7 +112,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.DeleteApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -119,11 +130,15 @@ export class SDK {
 
   
   DeleteSchema = (
-    props: operations.DeleteSchemaRequest,
+    req: operations.DeleteSchemaRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.DeleteSchemaResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteSchemaRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.PathParams);
     
 
     
@@ -139,7 +154,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.DeleteSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -157,11 +172,15 @@ export class SDK {
 
   
   DeleteVersionMetadata = (
-    props: operations.DeleteVersionMetadataRequest,
+    req: operations.DeleteVersionMetadataRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.DeleteVersionMetadataResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteVersionMetadataRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", req.PathParams);
     
 
     
@@ -177,7 +196,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.DeleteVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -195,11 +214,15 @@ export class SDK {
 
   
   DownloadSchema = (
-    props: operations.DownloadSchemaRequest,
+    req: operations.DownloadSchemaRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.DownloadSchemaResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DownloadSchemaRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", req.PathParams);
     
 
     
@@ -215,7 +238,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.DownloadSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -235,11 +258,15 @@ export class SDK {
 
   
   DownloadSchemaRevision = (
-    props: operations.DownloadSchemaRevisionRequest,
+    req: operations.DownloadSchemaRevisionRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.DownloadSchemaRevisionResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DownloadSchemaRevisionRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", req.PathParams);
     
 
     
@@ -255,7 +282,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.DownloadSchemaRevisionResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -275,11 +302,15 @@ export class SDK {
 
   
   FindApiEndpoint = (
-    props: operations.FindApiEndpointRequest,
+    req: operations.FindApiEndpointRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.FindApiEndpointResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.FindApiEndpointRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", req.PathParams);
     
 
     
@@ -295,7 +326,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.FindApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -314,11 +345,15 @@ export class SDK {
 
   
   GenerateOpenApiSpec = (
-    props: operations.GenerateOpenApiSpecRequest,
+    req: operations.GenerateOpenApiSpecRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GenerateOpenApiSpecResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GenerateOpenApiSpecRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", req.PathParams);
     
 
     
@@ -334,7 +369,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GenerateOpenApiSpecResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -353,11 +388,15 @@ export class SDK {
 
   
   GenerateOpenApiSpecForApiEndpoint = (
-    props: operations.GenerateOpenApiSpecForApiEndpointRequest,
+    req: operations.GenerateOpenApiSpecForApiEndpointRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GenerateOpenApiSpecForApiEndpointResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GenerateOpenApiSpecForApiEndpointRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", req.PathParams);
     
 
     
@@ -373,7 +412,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GenerateOpenApiSpecForApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -392,11 +431,15 @@ export class SDK {
 
   
   GeneratePostmanCollection = (
-    props: operations.GeneratePostmanCollectionRequest,
+    req: operations.GeneratePostmanCollectionRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GeneratePostmanCollectionResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GeneratePostmanCollectionRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", req.PathParams);
     
 
     
@@ -412,7 +455,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GeneratePostmanCollectionResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -431,11 +474,15 @@ export class SDK {
 
   
   GeneratePostmanCollectionForApiEndpoint = (
-    props: operations.GeneratePostmanCollectionForApiEndpointRequest,
+    req: operations.GeneratePostmanCollectionForApiEndpointRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GeneratePostmanCollectionForApiEndpointResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GeneratePostmanCollectionForApiEndpointRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", req.PathParams);
     
 
     
@@ -451,7 +498,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GeneratePostmanCollectionForApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -470,11 +517,15 @@ export class SDK {
 
   
   GenerateRequestPostmanCollection = (
-    props: operations.GenerateRequestPostmanCollectionRequest,
+    req: operations.GenerateRequestPostmanCollectionRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GenerateRequestPostmanCollectionResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GenerateRequestPostmanCollectionRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", req.PathParams);
     
 
     
@@ -490,7 +541,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GenerateRequestPostmanCollectionResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -509,11 +560,15 @@ export class SDK {
 
   
   GetAllApiEndpoints = (
-    props: operations.GetAllApiEndpointsRequest,
+    req: operations.GetAllApiEndpointsRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetAllApiEndpointsResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetAllApiEndpointsRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/api_endpoints", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/api_endpoints", req.PathParams);
     
 
     
@@ -529,7 +584,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetAllApiEndpointsResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -548,11 +603,15 @@ export class SDK {
 
   
   GetAllApiVersions = (
-    props: operations.GetAllApiVersionsRequest,
+    req: operations.GetAllApiVersionsRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetAllApiVersionsResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetAllApiVersionsRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}", req.PathParams);
     
 
     
@@ -560,11 +619,11 @@ export class SDK {
     
 
     
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(props.QueryParams);
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.QueryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
-      params: props.QueryParams,
+      params: req.QueryParams,
       paramsSerializer: qpSerializer,
     };
     
@@ -576,7 +635,7 @@ export class SDK {
         ...requestConfig,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetAllApiVersionsResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -595,11 +654,15 @@ export class SDK {
 
   
   GetAllForVersionApiEndpoints = (
-    props: operations.GetAllForVersionApiEndpointsRequest,
+    req: operations.GetAllForVersionApiEndpointsRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetAllForVersionApiEndpointsResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetAllForVersionApiEndpointsRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", req.PathParams);
     
 
     
@@ -615,7 +678,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetAllForVersionApiEndpointsResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -634,11 +697,15 @@ export class SDK {
 
   
   GetApiEndpoint = (
-    props: operations.GetApiEndpointRequest,
+    req: operations.GetApiEndpointRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetApiEndpointResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetApiEndpointRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
     
 
     
@@ -654,7 +721,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -673,9 +740,13 @@ export class SDK {
 
   
   GetApis = (
-    props: operations.GetApisRequest,
+    req: operations.GetApisRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetApisResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetApisRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/apis";
     
@@ -685,11 +756,11 @@ export class SDK {
     
 
     
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(props.QueryParams);
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.QueryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
-      params: props.QueryParams,
+      params: req.QueryParams,
       paramsSerializer: qpSerializer,
     };
     
@@ -701,7 +772,7 @@ export class SDK {
         ...requestConfig,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetApisResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -720,9 +791,13 @@ export class SDK {
 
   
   GetEmbedAccessToken = (
-    props: operations.GetEmbedAccessTokenRequest,
+    req: operations.GetEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetEmbedAccessTokenResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetEmbedAccessTokenRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-token";
     
@@ -732,11 +807,11 @@ export class SDK {
     
 
     
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(props.QueryParams);
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.QueryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
-      params: props.QueryParams,
+      params: req.QueryParams,
       paramsSerializer: qpSerializer,
     };
     
@@ -748,7 +823,7 @@ export class SDK {
         ...requestConfig,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetEmbedAccessTokenResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -767,11 +842,15 @@ export class SDK {
 
   
   GetRequestFromEventLog = (
-    props: operations.GetRequestFromEventLogRequest,
+    req: operations.GetRequestFromEventLogRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetRequestFromEventLogResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetRequestFromEventLogRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}", req.PathParams);
     
 
     
@@ -787,7 +866,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetRequestFromEventLogResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -806,11 +885,15 @@ export class SDK {
 
   
   GetSchema = (
-    props: operations.GetSchemaRequest,
+    req: operations.GetSchemaRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetSchemaResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetSchemaRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.PathParams);
     
 
     
@@ -826,7 +909,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -845,11 +928,15 @@ export class SDK {
 
   
   GetSchemaDiff = (
-    props: operations.GetSchemaDiffRequest,
+    req: operations.GetSchemaDiffRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetSchemaDiffResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetSchemaDiffRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", req.PathParams);
     
 
     
@@ -865,7 +952,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetSchemaDiffResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -884,11 +971,15 @@ export class SDK {
 
   
   GetSchemaRevision = (
-    props: operations.GetSchemaRevisionRequest,
+    req: operations.GetSchemaRevisionRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetSchemaRevisionResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetSchemaRevisionRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.PathParams);
     
 
     
@@ -904,7 +995,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetSchemaRevisionResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -923,11 +1014,15 @@ export class SDK {
 
   
   GetSchemas = (
-    props: operations.GetSchemasRequest,
+    req: operations.GetSchemasRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetSchemasResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetSchemasRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", req.PathParams);
     
 
     
@@ -943,7 +1038,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetSchemasResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -982,7 +1077,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetValidEmbedAccessTokensResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -1001,11 +1096,15 @@ export class SDK {
 
   
   GetVersionMetadata = (
-    props: operations.GetVersionMetadataRequest,
+    req: operations.GetVersionMetadataRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.GetVersionMetadataResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.GetVersionMetadataRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.PathParams);
     
 
     
@@ -1021,7 +1120,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.GetVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -1040,16 +1139,20 @@ export class SDK {
 
   
   InsertVersionMetadata = (
-    props: operations.InsertVersionMetadataRequest,
+    req: operations.InsertVersionMetadataRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.InsertVersionMetadataResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.InsertVersionMetadataRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.PathParams);
     
     let [reqHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqHeaders, reqBody] = SerializeRequestBody(props);
+      [reqHeaders, reqBody] = SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -1077,7 +1180,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.InsertVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -1096,9 +1199,13 @@ export class SDK {
 
   
   QueryEventLog = (
-    props: operations.QueryEventLogRequest,
+    req: operations.QueryEventLogRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.QueryEventLogResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.QueryEventLogRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/eventlog/query";
     
@@ -1108,11 +1215,11 @@ export class SDK {
     
 
     
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(props.QueryParams);
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.QueryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
-      params: props.QueryParams,
+      params: req.QueryParams,
       paramsSerializer: qpSerializer,
     };
     
@@ -1124,7 +1231,7 @@ export class SDK {
         ...requestConfig,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.QueryEventLogResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -1143,16 +1250,20 @@ export class SDK {
 
   
   RegisterSchema = (
-    props: operations.RegisterSchemaRequest,
+    req: operations.RegisterSchemaRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.RegisterSchemaResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.RegisterSchemaRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.PathParams);
     
     let [reqHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqHeaders, reqBody] = SerializeRequestBody(props);
+      [reqHeaders, reqBody] = SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -1180,7 +1291,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.RegisterSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -1198,11 +1309,15 @@ export class SDK {
 
   
   RevokeEmbedAccessToken = (
-    props: operations.RevokeEmbedAccessTokenRequest,
+    req: operations.RevokeEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.RevokeEmbedAccessTokenResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.RevokeEmbedAccessTokenRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", req.PathParams);
     
 
     
@@ -1218,7 +1333,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.RevokeEmbedAccessTokenResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -1236,16 +1351,20 @@ export class SDK {
 
   
   UpsertApi = (
-    props: operations.UpsertApiRequest,
+    req: operations.UpsertApiRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.UpsertApiResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpsertApiRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}", req.PathParams);
     
     let [reqHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqHeaders, reqBody] = SerializeRequestBody(props);
+      [reqHeaders, reqBody] = SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -1273,7 +1392,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.UpsertApiResponse = {StatusCode: httpRes.status, ContentType: contentType};
@@ -1292,16 +1411,20 @@ export class SDK {
 
   
   UpsertApiEndpoint = (
-    props: operations.UpsertApiEndpointRequest,
+    req: operations.UpsertApiEndpointRequest,
     config?: AxiosRequestConfig
 ): Promise<operations.UpsertApiEndpointResponse | AxiosError> => {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpsertApiEndpointRequest(req);
+    }
+    
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", props.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
     
     let [reqHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqHeaders, reqBody] = SerializeRequestBody(props);
+      [reqHeaders, reqBody] = SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -1329,7 +1452,7 @@ export class SDK {
         ...config,
     }).then((httpRes: AxiosResponse) => {
 
-    const contentType: string = httpRes?.headers?.["Content-Type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
     if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
     let res: operations.UpsertApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};

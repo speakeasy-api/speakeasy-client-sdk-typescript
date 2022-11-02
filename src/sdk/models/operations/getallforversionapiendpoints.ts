@@ -1,43 +1,30 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class GetAllForVersionApiEndpointsPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=apiID")
-    ApiId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=versionID")
-    VersionId: string;
-    
-    constructor(ApiId: string, VersionId: string) {
-		this.ApiId = ApiId;
-		this.VersionId = VersionId;
-	}
+export class GetAllForVersionApiEndpointsPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  ApiId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  VersionId: string;
+  
 }
 
-export class GetAllForVersionApiEndpointsRequest {
-    
-    PathParams: GetAllForVersionApiEndpointsPathParams;
-    
-    constructor(PathParams: GetAllForVersionApiEndpointsPathParams) {
-		this.PathParams = PathParams;
-	}
+export class GetAllForVersionApiEndpointsRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: GetAllForVersionApiEndpointsPathParams;
+  
 }
 
-export class GetAllForVersionApiEndpointsResponse {
-    
-    ApiEndpoints?: shared.ApiEndpoint[];
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, ApiEndpoints?: shared.ApiEndpoint[], Error?: shared.Error) {
-		this.ApiEndpoints = ApiEndpoints;
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-	}
+export class GetAllForVersionApiEndpointsResponse extends SpeakeasyBase {
+  @Metadata({ elemType: shared.ApiEndpoint })
+  ApiEndpoints?: shared.ApiEndpoint[];
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 

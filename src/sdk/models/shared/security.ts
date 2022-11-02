@@ -1,21 +1,15 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
-export class SchemeApiKey {
-    @Metadata("security, name=x-api-key")
-    ApiKey: string;
-    
-    constructor(ApiKey: string) {
-		this.ApiKey = ApiKey;
-	}
+export class SchemeApiKey extends SpeakeasyBase {
+  @Metadata({ data: "security, name=x-api-key" })
+  ApiKey: string;
+  
 }
 
-export class Security {
-    @Metadata("security, scheme=true;type=apiKey;subtype=header")
-    ApiKey: SchemeApiKey;
-    
-    constructor(ApiKey: SchemeApiKey) {
-		this.ApiKey = ApiKey;
-	}
+export class Security extends SpeakeasyBase {
+  @Metadata({ data: "security, scheme=true;type=apiKey;subtype=header" })
+  ApiKey: SchemeApiKey;
+  
 }
 
 

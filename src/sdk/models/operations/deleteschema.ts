@@ -1,43 +1,30 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class DeleteSchemaPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=apiID")
-    ApiId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=revisionID")
-    RevisionId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=versionID")
-    VersionId: string;
-    
-    constructor(ApiId: string, RevisionId: string, VersionId: string) {
-		this.ApiId = ApiId;
-		this.RevisionId = RevisionId;
-		this.VersionId = VersionId;
-	}
+export class DeleteSchemaPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  ApiId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=revisionID" })
+  RevisionId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  VersionId: string;
+  
 }
 
-export class DeleteSchemaRequest {
-    
-    PathParams: DeleteSchemaPathParams;
-    
-    constructor(PathParams: DeleteSchemaPathParams) {
-		this.PathParams = PathParams;
-	}
+export class DeleteSchemaRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: DeleteSchemaPathParams;
+  
 }
 
-export class DeleteSchemaResponse {
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, Error?: shared.Error) {
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-	}
+export class DeleteSchemaResponse extends SpeakeasyBase {
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 

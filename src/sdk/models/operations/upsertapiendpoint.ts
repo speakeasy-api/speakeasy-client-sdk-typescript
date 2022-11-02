@@ -1,49 +1,34 @@
-import {Metadata} from "../../../internal/utils/utils";
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
-export class UpsertApiEndpointPathParams {
-    @Metadata("pathParam, style=simple;explode=false;name=apiEndpointID")
-    ApiEndpointId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=apiID")
-    ApiId: string;
-    @Metadata("pathParam, style=simple;explode=false;name=versionID")
-    VersionId: string;
-    
-    constructor(ApiEndpointId: string, ApiId: string, VersionId: string) {
-		this.ApiEndpointId = ApiEndpointId;
-		this.ApiId = ApiId;
-		this.VersionId = VersionId;
-	}
+export class UpsertApiEndpointPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiEndpointID" })
+  ApiEndpointId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  ApiId: string;
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  VersionId: string;
+  
 }
 
-export class UpsertApiEndpointRequest {
-    
-    PathParams: UpsertApiEndpointPathParams;
-    @Metadata("request, media_type=application/json")
-    Request: shared.ApiEndpoint;
-    
-    constructor(PathParams: UpsertApiEndpointPathParams, Request: shared.ApiEndpoint) {
-		this.PathParams = PathParams;
-		this.Request = Request;
-	}
+export class UpsertApiEndpointRequest extends SpeakeasyBase {
+  @Metadata()
+  PathParams: UpsertApiEndpointPathParams;
+  @Metadata({ data: "request, media_type=application/json" })
+  Request: shared.ApiEndpoint;
+  
 }
 
-export class UpsertApiEndpointResponse {
-    
-    ApiEndpoint?: shared.ApiEndpoint;
-    
-    ContentType: string;
-    
-    Error?: shared.Error;
-    
-    StatusCode: number;
-    
-    constructor(ContentType: string, StatusCode: number, ApiEndpoint?: shared.ApiEndpoint, Error?: shared.Error) {
-		this.ApiEndpoint = ApiEndpoint;
-		this.ContentType = ContentType;
-		this.Error = Error;
-		this.StatusCode = StatusCode;
-	}
+export class UpsertApiEndpointResponse extends SpeakeasyBase {
+  @Metadata()
+  ApiEndpoint?: shared.ApiEndpoint;
+  @Metadata()
+  ContentType: string;
+  @Metadata()
+  Error?: shared.Error;
+  @Metadata()
+  StatusCode: number;
+  
 }
 
 
