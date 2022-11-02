@@ -10,7 +10,7 @@ import { SerializeRequestBody } from "../internal/utils/requestbody";
 import FormData from 'form-data';
 
 const Servers = [
-	"https://api.prod.speakeasyapi.dev",
+  "https://api.prod.speakeasyapi.dev",
 ] as const;
 
 export function WithServerURL(serverURL: string, params?: Map<string, string>): Function {
@@ -57,8 +57,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      delete(url, {
+    return client
+      .delete(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -91,8 +91,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      delete(url, {
+    return client
+      .delete(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -125,8 +125,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      delete(url, {
+    return client
+      .delete(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -159,8 +159,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      delete(url, {
+    return client
+      .delete(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -193,8 +193,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -229,8 +229,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -265,8 +265,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -300,8 +300,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -335,8 +335,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -370,8 +370,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -405,8 +405,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -440,8 +440,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -475,8 +475,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/api_endpoints", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -518,8 +518,8 @@ export class SDK {
       paramsSerializer: qpSerializer,
     };
     
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...requestConfig,
       })
       .then((httpRes: AxiosResponse) => {
@@ -553,8 +553,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -588,8 +588,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -631,8 +631,8 @@ export class SDK {
       paramsSerializer: qpSerializer,
     };
     
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...requestConfig,
       })
       .then((httpRes: AxiosResponse) => {
@@ -674,8 +674,8 @@ export class SDK {
       paramsSerializer: qpSerializer,
     };
     
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...requestConfig,
       })
       .then((httpRes: AxiosResponse) => {
@@ -709,8 +709,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -744,8 +744,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -779,8 +779,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -814,8 +814,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -849,8 +849,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -880,8 +880,8 @@ export class SDK {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-tokens/valid";
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -915,8 +915,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -968,8 +968,8 @@ export class SDK {
     
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
     
-    return client.
-      post(url, body, {
+    return client
+      .post(url, body, {
         headers: headers,
         ...config,
       })
@@ -1012,8 +1012,8 @@ export class SDK {
       paramsSerializer: qpSerializer,
     };
     
-    return client.
-      get(url, {
+    return client
+      .get(url, {
         ...requestConfig,
       })
       .then((httpRes: AxiosResponse) => {
@@ -1065,8 +1065,8 @@ export class SDK {
     
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
     
-    return client.
-      post(url, body, {
+    return client
+      .post(url, body, {
         headers: headers,
         ...config,
       })
@@ -1100,8 +1100,8 @@ export class SDK {
     const url: string = utils.GenerateURL(baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", req.PathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    return client.
-      delete(url, {
+    return client
+      .delete(url, {
         ...config,
       })
       .then((httpRes: AxiosResponse) => {
@@ -1152,8 +1152,8 @@ export class SDK {
     
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
     
-    return client.
-      put(url, body, {
+    return client
+      .put(url, body, {
         headers: headers,
         ...config,
       })
@@ -1206,8 +1206,8 @@ export class SDK {
     
     if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
     
-    return client.
-      put(url, body, {
+    return client
+      .put(url, body, {
         headers: headers,
         ...config,
       })
