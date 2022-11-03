@@ -3,40 +3,40 @@ import * as shared from "../shared";
 
 export class GetAllApiVersionsPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 }
 
 export class GetAllApiVersionsOp extends SpeakeasyBase {
   @Metadata({ data: "queryParam, name=and" })
-  And: boolean;
+  and: boolean;
 }
 
 export class GetAllApiVersionsQueryParams extends SpeakeasyBase {
   @Metadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
-  Metadata?: Map<string, string[]>;
+  metadata?: Map<string, string[]>;
 
   @Metadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
-  Op?: GetAllApiVersionsOp;
+  op?: GetAllApiVersionsOp;
 }
 
 export class GetAllApiVersionsRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: GetAllApiVersionsPathParams;
+  pathParams: GetAllApiVersionsPathParams;
 
   @Metadata()
-  QueryParams: GetAllApiVersionsQueryParams;
+  queryParams: GetAllApiVersionsQueryParams;
 }
 
 export class GetAllApiVersionsResponse extends SpeakeasyBase {
   @Metadata({ elemType: shared.Api })
-  Apis?: shared.Api[];
+  apis?: shared.Api[];
 
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

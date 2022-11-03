@@ -3,27 +3,27 @@ import * as shared from "../shared";
 
 export class GetAllForVersionApiEndpointsPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class GetAllForVersionApiEndpointsRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: GetAllForVersionApiEndpointsPathParams;
+  pathParams: GetAllForVersionApiEndpointsPathParams;
 }
 
 export class GetAllForVersionApiEndpointsResponse extends SpeakeasyBase {
   @Metadata({ elemType: shared.ApiEndpoint })
-  ApiEndpoints?: shared.ApiEndpoint[];
+  apiEndpoints?: shared.ApiEndpoint[];
 
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

@@ -2,20 +2,20 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 export class VersionMetadata extends SpeakeasyBase {
   @Metadata({ data: "json, name=api_id" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "json, name=created_at" })
-  CreatedAt: string;
+  createdAt: string;
 
   @Metadata({ data: "json, name=meta_key" })
-  MetaKey: string;
+  metaKey: string;
 
   @Metadata({ data: "json, name=meta_value" })
-  MetaValue: string;
+  metaValue: string;
 
   @Metadata({ data: "json, name=version_id" })
-  VersionId: string;
+  versionId: string;
 
   @Metadata({ data: "json, name=workspace_id" })
-  WorkspaceId: string;
+  workspaceId: string;
 }

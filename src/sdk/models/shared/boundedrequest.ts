@@ -2,44 +2,44 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 export class BoundedRequest extends SpeakeasyBase {
   @Metadata({ data: "json, name=api_endpoint_id" })
-  ApiEndpointId: string;
+  apiEndpointId: string;
 
   @Metadata({ data: "json, name=api_id" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "json, name=created_at" })
-  CreatedAt: string;
+  createdAt: string;
 
   @Metadata({ data: "json, name=customer_id" })
-  CustomerId: string;
+  customerId: string;
 
   @Metadata({ data: "json, name=latency" })
-  Latency: number;
+  latency: number;
 
   @Metadata({ data: "json, name=metadata" })
-  Metadata?: Map<string, string[]>;
+  metadata?: Map<string, string[]>;
 
   @Metadata({ data: "json, name=method" })
-  Method: string;
+  method: string;
 
   @Metadata({ data: "json, name=path" })
-  Path: string;
+  path: string;
 
   @Metadata({ data: "json, name=request_finish_time" })
-  RequestFinishTime: string;
+  requestFinishTime: string;
 
   @Metadata({ data: "json, name=request_id" })
-  RequestId: string;
+  requestId: string;
 
   @Metadata({ data: "json, name=request_start_time" })
-  RequestStartTime: string;
+  requestStartTime: string;
 
   @Metadata({ data: "json, name=status" })
-  Status: number;
+  status: number;
 
   @Metadata({ data: "json, name=version_id" })
-  VersionId: string;
+  versionId: string;
 
   @Metadata({ data: "json, name=workspace_id" })
-  WorkspaceId: string;
+  workspaceId: string;
 }

@@ -3,30 +3,30 @@ import * as shared from "../shared";
 
 export class GetEmbedAccessTokenQueryParams extends SpeakeasyBase {
   @Metadata({ data: "queryParam, style=form;explode=true;name=description" })
-  Description?: string;
+  description?: string;
 
   @Metadata({ data: "queryParam, style=form;explode=true;name=duration" })
-  Duration?: number;
+  duration?: number;
 
   @Metadata({ data: "queryParam, serialization=json;name=filters" })
-  Filters?: shared.Filters;
+  filters?: shared.Filters;
 }
 
 export class GetEmbedAccessTokenRequest extends SpeakeasyBase {
   @Metadata()
-  QueryParams: GetEmbedAccessTokenQueryParams;
+  queryParams: GetEmbedAccessTokenQueryParams;
 }
 
 export class GetEmbedAccessTokenResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  EmbedAccessTokenResponse?: shared.EmbedAccessTokenResponse;
+  embedAccessTokenResponse?: shared.EmbedAccessTokenResponse;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

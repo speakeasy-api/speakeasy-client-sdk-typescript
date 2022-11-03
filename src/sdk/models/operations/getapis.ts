@@ -3,32 +3,32 @@ import * as shared from "../shared";
 
 export class GetApisOp extends SpeakeasyBase {
   @Metadata({ data: "queryParam, name=and" })
-  And: boolean;
+  and: boolean;
 }
 
 export class GetApisQueryParams extends SpeakeasyBase {
   @Metadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
-  Metadata?: Map<string, string[]>;
+  metadata?: Map<string, string[]>;
 
   @Metadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
-  Op?: GetApisOp;
+  op?: GetApisOp;
 }
 
 export class GetApisRequest extends SpeakeasyBase {
   @Metadata()
-  QueryParams: GetApisQueryParams;
+  queryParams: GetApisQueryParams;
 }
 
 export class GetApisResponse extends SpeakeasyBase {
   @Metadata({ elemType: shared.Api })
-  Apis?: shared.Api[];
+  apis?: shared.Api[];
 
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

@@ -3,21 +3,21 @@ import * as shared from "../shared";
 
 export class RevokeEmbedAccessTokenPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=tokenID" })
-  TokenId: string;
+  tokenId: string;
 }
 
 export class RevokeEmbedAccessTokenRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: RevokeEmbedAccessTokenPathParams;
+  pathParams: RevokeEmbedAccessTokenPathParams;
 }
 
 export class RevokeEmbedAccessTokenResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

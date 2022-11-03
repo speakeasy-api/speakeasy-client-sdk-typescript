@@ -3,19 +3,19 @@ import * as shared from "../shared";
 
 export class SchemaDiffValueChange extends SpeakeasyBase {
   @Metadata({ data: "json, name=From" })
-  From: string;
+  from: string;
 
   @Metadata({ data: "json, name=To" })
-  To: string;
+  to: string;
 }
 
 export class SchemaDiff extends SpeakeasyBase {
   @Metadata({ data: "json, name=additions" })
-  Additions: string[];
+  additions: string[];
 
   @Metadata({ data: "json, name=deletions" })
-  Deletions: string[];
+  deletions: string[];
 
   @Metadata({ data: "json, name=modifications", elemType: shared.SchemaDiffValueChange })
-  Modifications: Map<string, SchemaDiffValueChange>;
+  modifications: Map<string, SchemaDiffValueChange>;
 }

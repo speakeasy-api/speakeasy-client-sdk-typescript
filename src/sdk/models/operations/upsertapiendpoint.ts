@@ -3,33 +3,33 @@ import * as shared from "../shared";
 
 export class UpsertApiEndpointPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiEndpointID" })
-  ApiEndpointId: string;
+  apiEndpointId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class UpsertApiEndpointRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: UpsertApiEndpointPathParams;
+  pathParams: UpsertApiEndpointPathParams;
 
   @Metadata({ data: "request, media_type=application/json" })
-  Request: shared.ApiEndpoint;
+  request: shared.ApiEndpoint;
 }
 
 export class UpsertApiEndpointResponse extends SpeakeasyBase {
   @Metadata()
-  ApiEndpoint?: shared.ApiEndpoint;
+  apiEndpoint?: shared.ApiEndpoint;
 
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

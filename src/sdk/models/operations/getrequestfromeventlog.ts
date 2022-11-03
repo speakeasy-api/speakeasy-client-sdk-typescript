@@ -3,24 +3,24 @@ import * as shared from "../shared";
 
 export class GetRequestFromEventLogPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=requestID" })
-  RequestId: string;
+  requestId: string;
 }
 
 export class GetRequestFromEventLogRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: GetRequestFromEventLogPathParams;
+  pathParams: GetRequestFromEventLogPathParams;
 }
 
 export class GetRequestFromEventLogResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 
   @Metadata()
-  UnboundedRequest?: shared.UnboundedRequest;
+  unboundedRequest?: shared.UnboundedRequest;
 }

@@ -3,33 +3,33 @@ import * as shared from "../shared";
 
 export class GetSchemaDiffPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=baseRevisionID" })
-  BaseRevisionId: string;
+  baseRevisionId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=targetRevisionID" })
-  TargetRevisionId: string;
+  targetRevisionId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class GetSchemaDiffRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: GetSchemaDiffPathParams;
+  pathParams: GetSchemaDiffPathParams;
 }
 
 export class GetSchemaDiffResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  SchemaDiff?: shared.SchemaDiff;
+  schemaDiff?: shared.SchemaDiff;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

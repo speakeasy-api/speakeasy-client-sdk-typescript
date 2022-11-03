@@ -2,35 +2,35 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 export class ApiEndpoint extends SpeakeasyBase {
   @Metadata({ data: "json, name=api_endpoint_id" })
-  ApiEndpointId: string;
+  apiEndpointId: string;
 
   @Metadata({ data: "json, name=api_id" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "json, name=created_at" })
-  CreatedAt: string;
+  createdAt: string;
 
   @Metadata({ data: "json, name=description" })
-  Description: string;
+  description: string;
 
   @Metadata({ data: "json, name=display_name" })
-  DisplayName: string;
+  displayName: string;
 
   @Metadata({ data: "json, name=matched" })
-  Matched?: boolean;
+  matched?: boolean;
 
   @Metadata({ data: "json, name=method" })
-  Method: string;
+  method: string;
 
   @Metadata({ data: "json, name=path" })
-  Path: string;
+  path: string;
 
   @Metadata({ data: "json, name=updated_at" })
-  UpdatedAt: string;
+  updatedAt: string;
 
   @Metadata({ data: "json, name=version_id" })
-  VersionId: string;
+  versionId: string;
 
   @Metadata({ data: "json, name=workspace_id" })
-  WorkspaceId: string;
+  workspaceId: string;
 }

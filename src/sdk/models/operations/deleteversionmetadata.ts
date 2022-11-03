@@ -3,30 +3,30 @@ import * as shared from "../shared";
 
 export class DeleteVersionMetadataPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=metaKey" })
-  MetaKey: string;
+  metaKey: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=metaValue" })
-  MetaValue: string;
+  metaValue: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class DeleteVersionMetadataRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: DeleteVersionMetadataPathParams;
+  pathParams: DeleteVersionMetadataPathParams;
 }
 
 export class DeleteVersionMetadataResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

@@ -3,40 +3,40 @@ import * as shared from "../shared";
 
 export class RegisterSchemaPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class RegisterSchemaRequestBodyFile extends SpeakeasyBase {
   @Metadata({ data: "multipart_form, content=true" })
-  Content: string;
+  content: string;
 
   @Metadata({ data: "multipart_form, name=file" })
-  File: string;
+  file: string;
 }
 
 export class RegisterSchemaRequestBody extends SpeakeasyBase {
   @Metadata({ data: "multipart_form, file=true" })
-  File: RegisterSchemaRequestBodyFile;
+  file: RegisterSchemaRequestBodyFile;
 }
 
 export class RegisterSchemaRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: RegisterSchemaPathParams;
+  pathParams: RegisterSchemaPathParams;
 
   @Metadata({ data: "request, media_type=multipart/form-data" })
-  Request: RegisterSchemaRequestBody;
+  request: RegisterSchemaRequestBody;
 }
 
 export class RegisterSchemaResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

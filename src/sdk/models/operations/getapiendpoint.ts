@@ -3,30 +3,30 @@ import * as shared from "../shared";
 
 export class GetApiEndpointPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiEndpointID" })
-  ApiEndpointId: string;
+  apiEndpointId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class GetApiEndpointRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: GetApiEndpointPathParams;
+  pathParams: GetApiEndpointPathParams;
 }
 
 export class GetApiEndpointResponse extends SpeakeasyBase {
   @Metadata()
-  ApiEndpoint?: shared.ApiEndpoint;
+  apiEndpoint?: shared.ApiEndpoint;
 
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

@@ -4,14 +4,14 @@ import { Filter } from "./filter";
 
 export class Filters extends SpeakeasyBase {
   @Metadata({ data: "json, name=filters", elemType: shared.Filter })
-  Filters: Filter[];
+  filters: Filter[];
 
   @Metadata({ data: "json, name=limit" })
-  Limit: number;
+  limit: number;
 
   @Metadata({ data: "json, name=offset" })
-  Offset: number;
+  offset: number;
 
   @Metadata({ data: "json, name=operator" })
-  Operator: string;
+  operator: string;
 }

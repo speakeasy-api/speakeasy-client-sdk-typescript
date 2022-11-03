@@ -3,27 +3,27 @@ import * as shared from "../shared";
 
 export class GeneratePostmanCollectionPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class GeneratePostmanCollectionRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: GeneratePostmanCollectionPathParams;
+  pathParams: GeneratePostmanCollectionPathParams;
 }
 
 export class GeneratePostmanCollectionResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  PostmanCollection?: string;
+  postmanCollection?: string;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

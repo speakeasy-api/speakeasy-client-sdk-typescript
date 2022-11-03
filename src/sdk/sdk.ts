@@ -48,13 +48,13 @@ export class SDK {
   DeleteApi(
     req: operations.DeleteApiRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteApiResponse | AxiosError> {
+  ): Promise<operations.DeleteApiResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.DeleteApiRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -65,30 +65,31 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.DeleteApiResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   DeleteApiEndpoint(
     req: operations.DeleteApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteApiEndpointResponse | AxiosError> {
+  ): Promise<operations.DeleteApiEndpointResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.DeleteApiEndpointRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -99,30 +100,31 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.DeleteApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   DeleteSchema(
     req: operations.DeleteSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteSchemaResponse | AxiosError> {
+  ): Promise<operations.DeleteSchemaResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.DeleteSchemaRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -133,30 +135,31 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.DeleteSchemaResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   DeleteVersionMetadata(
     req: operations.DeleteVersionMetadataRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DeleteVersionMetadataResponse | AxiosError> {
+  ): Promise<operations.DeleteVersionMetadataResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.DeleteVersionMetadataRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -167,30 +170,31 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DeleteVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.DeleteVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   DownloadSchema(
     req: operations.DownloadSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DownloadSchemaResponse | AxiosError> {
+  ): Promise<operations.DownloadSchemaResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.DownloadSchemaRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -201,32 +205,33 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DownloadSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.DownloadSchemaResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
-            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   DownloadSchemaRevision(
     req: operations.DownloadSchemaRevisionRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.DownloadSchemaRevisionResponse | AxiosError> {
+  ): Promise<operations.DownloadSchemaRevisionResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.DownloadSchemaRevisionRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -237,32 +242,33 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.DownloadSchemaRevisionResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.DownloadSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
-            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   FindApiEndpoint(
     req: operations.FindApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.FindApiEndpointResponse | AxiosError> {
+  ): Promise<operations.FindApiEndpointResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.FindApiEndpointRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -273,31 +279,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.FindApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.FindApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.apiEndpoint = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GenerateOpenApiSpec(
     req: operations.GenerateOpenApiSpecRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateOpenApiSpecResponse | AxiosError> {
+  ): Promise<operations.GenerateOpenApiSpecResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GenerateOpenApiSpecRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -308,31 +315,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenerateOpenApiSpecResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GenerateOpenApiSpecResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.GenerateOpenApiSpecDiff = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.generateOpenApiSpecDiff = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GenerateOpenApiSpecForApiEndpoint(
     req: operations.GenerateOpenApiSpecForApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateOpenApiSpecForApiEndpointResponse | AxiosError> {
+  ): Promise<operations.GenerateOpenApiSpecForApiEndpointResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GenerateOpenApiSpecForApiEndpointRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -343,31 +351,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenerateOpenApiSpecForApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GenerateOpenApiSpecForApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.GenerateOpenApiSpecDiff = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.generateOpenApiSpecDiff = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GeneratePostmanCollection(
     req: operations.GeneratePostmanCollectionRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GeneratePostmanCollectionResponse | AxiosError> {
+  ): Promise<operations.GeneratePostmanCollectionResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GeneratePostmanCollectionRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -378,31 +387,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GeneratePostmanCollectionResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GeneratePostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.postmanCollection = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GeneratePostmanCollectionForApiEndpoint(
     req: operations.GeneratePostmanCollectionForApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GeneratePostmanCollectionForApiEndpointResponse | AxiosError> {
+  ): Promise<operations.GeneratePostmanCollectionForApiEndpointResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GeneratePostmanCollectionForApiEndpointRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -413,31 +423,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GeneratePostmanCollectionForApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GeneratePostmanCollectionForApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.postmanCollection = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GenerateRequestPostmanCollection(
     req: operations.GenerateRequestPostmanCollectionRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GenerateRequestPostmanCollectionResponse | AxiosError> {
+  ): Promise<operations.GenerateRequestPostmanCollectionResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GenerateRequestPostmanCollectionRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -448,31 +459,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GenerateRequestPostmanCollectionResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GenerateRequestPostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.PostmanCollection = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.postmanCollection = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetAllApiEndpoints(
     req: operations.GetAllApiEndpointsRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetAllApiEndpointsResponse | AxiosError> {
+  ): Promise<operations.GetAllApiEndpointsResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetAllApiEndpointsRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/api_endpoints", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/api_endpoints", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -483,38 +495,39 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAllApiEndpointsResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetAllApiEndpointsResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.ApiEndpoints = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.apiEndpoints = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetAllApiVersions(
     req: operations.GetAllApiVersionsRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetAllApiVersionsResponse | AxiosError> {
+  ): Promise<operations.GetAllApiVersionsResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetAllApiVersionsRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.QueryParams);
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
-      params: req.QueryParams,
+      params: req.queryParams,
       paramsSerializer: qpSerializer,
     };
     
@@ -526,31 +539,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAllApiVersionsResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetAllApiVersionsResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.Apis = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.apis = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetAllForVersionApiEndpoints(
     req: operations.GetAllForVersionApiEndpointsRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetAllForVersionApiEndpointsResponse | AxiosError> {
+  ): Promise<operations.GetAllForVersionApiEndpointsResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetAllForVersionApiEndpointsRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -561,31 +575,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetAllForVersionApiEndpointsResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetAllForVersionApiEndpointsResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.ApiEndpoints = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.apiEndpoints = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetApiEndpoint(
     req: operations.GetApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetApiEndpointResponse | AxiosError> {
+  ): Promise<operations.GetApiEndpointResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetApiEndpointRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -596,25 +611,26 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.apiEndpoint = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetApis(
     req: operations.GetApisRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetApisResponse | AxiosError> {
+  ): Promise<operations.GetApisResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetApisRequest(req);
     }
@@ -623,11 +639,11 @@ export class SDK {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/apis";
     
     const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.QueryParams);
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
-      params: req.QueryParams,
+      params: req.queryParams,
       paramsSerializer: qpSerializer,
     };
     
@@ -639,25 +655,26 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetApisResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetApisResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.Apis = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.apis = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetEmbedAccessToken(
     req: operations.GetEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetEmbedAccessTokenResponse | AxiosError> {
+  ): Promise<operations.GetEmbedAccessTokenResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetEmbedAccessTokenRequest(req);
     }
@@ -666,11 +683,11 @@ export class SDK {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-token";
     
     const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.QueryParams);
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
-      params: req.QueryParams,
+      params: req.queryParams,
       paramsSerializer: qpSerializer,
     };
     
@@ -682,31 +699,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetEmbedAccessTokenResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetEmbedAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.EmbedAccessTokenResponse = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.embedAccessTokenResponse = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetRequestFromEventLog(
     req: operations.GetRequestFromEventLogRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetRequestFromEventLogResponse | AxiosError> {
+  ): Promise<operations.GetRequestFromEventLogResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetRequestFromEventLogRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -717,31 +735,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetRequestFromEventLogResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetRequestFromEventLogResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.UnboundedRequest = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.unboundedRequest = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetSchema(
     req: operations.GetSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetSchemaResponse | AxiosError> {
+  ): Promise<operations.GetSchemaResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetSchemaRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -752,31 +771,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetSchemaResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetSchemaDiff(
     req: operations.GetSchemaDiffRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetSchemaDiffResponse | AxiosError> {
+  ): Promise<operations.GetSchemaDiffResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetSchemaDiffRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -787,31 +807,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSchemaDiffResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetSchemaDiffResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.SchemaDiff = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.schemaDiff = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetSchemaRevision(
     req: operations.GetSchemaRevisionRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetSchemaRevisionResponse | AxiosError> {
+  ): Promise<operations.GetSchemaRevisionResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetSchemaRevisionRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -822,31 +843,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSchemaRevisionResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.Schema = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetSchemas(
     req: operations.GetSchemasRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetSchemasResponse | AxiosError> {
+  ): Promise<operations.GetSchemasResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetSchemasRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -857,25 +879,26 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetSchemasResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetSchemasResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.Schemata = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.schemata = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetValidEmbedAccessTokens(
     
     config?: AxiosRequestConfig
-  ): Promise<operations.GetValidEmbedAccessTokensResponse | AxiosError> {
+  ): Promise<operations.GetValidEmbedAccessTokensResponse> {
     let baseURL: string = this.serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-tokens/valid";
     
@@ -888,31 +911,32 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetValidEmbedAccessTokensResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetValidEmbedAccessTokensResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.EmbedTokens = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.embedTokens = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   GetVersionMetadata(
     req: operations.GetVersionMetadataRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.GetVersionMetadataResponse | AxiosError> {
+  ): Promise<operations.GetVersionMetadataResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetVersionMetadataRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -923,44 +947,44 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.GetVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.GetVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.VersionMetadata = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.versionMetadata = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   InsertVersionMetadata(
     req: operations.InsertVersionMetadataRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.InsertVersionMetadataResponse | AxiosError> {
+  ): Promise<operations.InsertVersionMetadataResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.InsertVersionMetadataRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.pathParams);
     
-    let [reqHeaders, reqBody]: [object, any] = [{}, {}];
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;
-    const headers = { ...reqHeaders, ...config?.headers};
+    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
     
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
@@ -977,25 +1001,26 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.InsertVersionMetadataResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.InsertVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.VersionMetadata = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.versionMetadata = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   QueryEventLog(
     req: operations.QueryEventLogRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.QueryEventLogResponse | AxiosError> {
+  ): Promise<operations.QueryEventLogResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.QueryEventLogRequest(req);
     }
@@ -1004,11 +1029,11 @@ export class SDK {
     const url: string = baseURL.replace(/\/$/, "") + "/v1/eventlog/query";
     
     const client: AxiosInstance = this.securityClient!;
-    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.QueryParams);
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
-      params: req.QueryParams,
+      params: req.queryParams,
       paramsSerializer: qpSerializer,
     };
     
@@ -1020,44 +1045,44 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.QueryEventLogResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.QueryEventLogResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.BoundedRequests = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.boundedRequests = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   RegisterSchema(
     req: operations.RegisterSchemaRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.RegisterSchemaResponse | AxiosError> {
+  ): Promise<operations.RegisterSchemaResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.RegisterSchemaRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.pathParams);
     
-    let [reqHeaders, reqBody]: [object, any] = [{}, {}];
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;
-    const headers = { ...reqHeaders, ...config?.headers};
+    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
     
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
@@ -1074,30 +1099,31 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RegisterSchemaResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.RegisterSchemaResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   RevokeEmbedAccessToken(
     req: operations.RevokeEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.RevokeEmbedAccessTokenResponse | AxiosError> {
+  ): Promise<operations.RevokeEmbedAccessTokenResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.RevokeEmbedAccessTokenRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/workspace/embed-access-tokens/{tokenID}", req.pathParams);
     
     const client: AxiosInstance = this.securityClient!;
     return client
@@ -1108,43 +1134,43 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.RevokeEmbedAccessTokenResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.RevokeEmbedAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   UpsertApi(
     req: operations.UpsertApiRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.UpsertApiResponse | AxiosError> {
+  ): Promise<operations.UpsertApiResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.UpsertApiRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}", req.pathParams);
     
-    let [reqHeaders, reqBody]: [object, any] = [{}, {}];
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;
-    const headers = { ...reqHeaders, ...config?.headers};
+    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
     
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
@@ -1161,44 +1187,44 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpsertApiResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.UpsertApiResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.Api = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.api = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
   
   UpsertApiEndpoint(
     req: operations.UpsertApiEndpointRequest,
     config?: AxiosRequestConfig
-  ): Promise<operations.UpsertApiEndpointResponse | AxiosError> {
+  ): Promise<operations.UpsertApiEndpointResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.UpsertApiEndpointRequest(req);
     }
     
     let baseURL: string = this.serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.PathParams);
+    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}", req.pathParams);
     
-    let [reqHeaders, reqBody]: [object, any] = [{}, {}];
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqHeaders, reqBody] = SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
     
-    const client: AxiosInstance = this.securityClient!;
-    const headers = { ...reqHeaders, ...config?.headers};
+    const client: AxiosInstance = this.securityClient!;const headers = { ...reqBodyHeaders, ...config?.headers};
     
     let body: any;
     if (reqBody instanceof FormData) body = reqBody;
@@ -1215,18 +1241,19 @@ export class SDK {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        let res: operations.UpsertApiEndpointResponse = {StatusCode: httpRes.status, ContentType: contentType};
+        let res: operations.UpsertApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.ApiEndpoint = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.apiEndpoint = httpRes?.data;
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.Error = httpRes?.data;
+            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
             break;
         }
 
         return res;
       })
-      .catch((error: AxiosError) => {return error});
+      .catch((error: AxiosError) => {throw error});
   }
+
 }

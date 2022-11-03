@@ -3,14 +3,14 @@ import * as shared from "../shared";
 
 export class GetValidEmbedAccessTokensResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata({ elemType: shared.EmbedToken })
-  EmbedTokens?: shared.EmbedToken[];
+  embedTokens?: shared.EmbedToken[];
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

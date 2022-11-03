@@ -3,27 +3,27 @@ import * as shared from "../shared";
 
 export class UpsertApiPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 }
 
 export class UpsertApiRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: UpsertApiPathParams;
+  pathParams: UpsertApiPathParams;
 
   @Metadata({ data: "request, media_type=application/json" })
-  Request: shared.Api;
+  request: shared.Api;
 }
 
 export class UpsertApiResponse extends SpeakeasyBase {
   @Metadata()
-  Api?: shared.Api;
+  api?: shared.Api;
 
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

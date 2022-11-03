@@ -3,27 +3,27 @@ import * as shared from "../shared";
 
 export class DeleteApiEndpointPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiEndpointID" })
-  ApiEndpointId: string;
+  apiEndpointId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class DeleteApiEndpointRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: DeleteApiEndpointPathParams;
+  pathParams: DeleteApiEndpointPathParams;
 }
 
 export class DeleteApiEndpointResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

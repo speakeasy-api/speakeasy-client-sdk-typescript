@@ -3,30 +3,30 @@ import * as shared from "../shared";
 
 export class InsertVersionMetadataPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class InsertVersionMetadataRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: InsertVersionMetadataPathParams;
+  pathParams: InsertVersionMetadataPathParams;
 
   @Metadata({ data: "request, media_type=application/json" })
-  Request: shared.VersionMetadata;
+  request: shared.VersionMetadata;
 }
 
 export class InsertVersionMetadataResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 
   @Metadata()
-  VersionMetadata?: shared.VersionMetadata;
+  versionMetadata?: shared.VersionMetadata;
 }

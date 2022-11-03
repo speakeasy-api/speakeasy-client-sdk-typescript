@@ -3,30 +3,30 @@ import * as shared from "../shared";
 
 export class DownloadSchemaRevisionPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=revisionID" })
-  RevisionId: string;
+  revisionId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class DownloadSchemaRevisionRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: DownloadSchemaRevisionPathParams;
+  pathParams: DownloadSchemaRevisionPathParams;
 }
 
 export class DownloadSchemaRevisionResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  Schema?: string;
+  schema?: string;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

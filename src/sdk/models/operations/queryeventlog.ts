@@ -3,24 +3,24 @@ import * as shared from "../shared";
 
 export class QueryEventLogQueryParams extends SpeakeasyBase {
   @Metadata({ data: "queryParam, serialization=json;name=filters" })
-  Filters?: shared.Filters;
+  filters?: shared.Filters;
 }
 
 export class QueryEventLogRequest extends SpeakeasyBase {
   @Metadata()
-  QueryParams: QueryEventLogQueryParams;
+  queryParams: QueryEventLogQueryParams;
 }
 
 export class QueryEventLogResponse extends SpeakeasyBase {
   @Metadata({ elemType: shared.BoundedRequest })
-  BoundedRequests?: shared.BoundedRequest[];
+  boundedRequests?: shared.BoundedRequest[];
 
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

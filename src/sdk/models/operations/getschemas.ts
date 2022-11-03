@@ -3,27 +3,27 @@ import * as shared from "../shared";
 
 export class GetSchemasPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  ApiId: string;
+  apiId: string;
 
   @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  VersionId: string;
+  versionId: string;
 }
 
 export class GetSchemasRequest extends SpeakeasyBase {
   @Metadata()
-  PathParams: GetSchemasPathParams;
+  pathParams: GetSchemasPathParams;
 }
 
 export class GetSchemasResponse extends SpeakeasyBase {
   @Metadata()
-  ContentType: string;
+  contentType: string;
 
   @Metadata()
-  Error?: shared.Error;
+  error?: shared.Error;
 
   @Metadata({ elemType: shared.Schema })
-  Schemata?: shared.Schema[];
+  schemata?: shared.Schema[];
 
   @Metadata()
-  StatusCode: number;
+  statusCode: number;
 }

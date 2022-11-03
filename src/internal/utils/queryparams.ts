@@ -1,22 +1,28 @@
 import { ParamsSerializerOptions } from "axios";
 import qs from "qs";
 import { ParamDecorator } from "./pathparams";
+import { ParseParamDecorator } from "./utils";
 
 export const qpMetadataKey = "queryParam";
 
 export function GetQueryParamSerializer(
-  queryParams: any
+    queryParams: any
 ): ParamsSerializerOptions {
   if (queryParams == null) return { encode: FormSerializerExplode };
   const fieldNames: string[] = Object.getOwnPropertyNames(queryParams);
   fieldNames.forEach((fname) => {
     const qpAnn: string = Reflect.getMetadata(
-      qpMetadataKey,
-      queryParams,
-      fname
+        qpMetadataKey,
+        queryParams,
+        fname
     );
     if (qpAnn == null) return { encode: (params: unknown) => "" };
-    const qpDecorator: ParamDecorator = ParseQueryParamDecorator(qpAnn, fname);
+    const qpDecorator: ParamDecorator = ParseParamDecorator(
+        qpAnn,
+        fname,
+        "form",
+        true
+    );
     if (qpDecorator == null) return;
     if (qpDecorator.Serialization === "json")
       return {
@@ -60,8 +66,8 @@ function FormSerializer(params: unknown): string {
       query.push(`${key}=${values}`);
     } else {
       const values: string = Object.entries(Object.assign({}, value))
-        .map(([objKey, objValue]) => `${objKey},${objValue}`)
-        .join(",");
+          .map(([objKey, objValue]) => `${objKey},${objValue}`)
+          .join(",");
       query.push(`${key}=${values}`);
     }
   });
@@ -76,39 +82,10 @@ function FormSerializerExplode(params: unknown): string {
       query.push(value.map((aValue) => `${key}=${aValue}`).join("&"));
     } else
       query.push(
-        Object.entries(Object.assign({}, value))
-          .map(([objKey, objValue]) => `${objKey}=${objValue}`)
-          .join("&")
+          Object.entries(Object.assign({}, value))
+              .map(([objKey, objValue]) => `${objKey}=${objValue}`)
+              .join("&")
       );
   });
   return query.join("&");
-}
-
-function ParseQueryParamDecorator(
-  qpAnn: string,
-  fName: string
-): ParamDecorator {
-  // style=simple;explode=false;name=apiID
-  const qpDecorator: ParamDecorator = new ParamDecorator(
-    "form",
-    true,
-    fName.toLowerCase()
-  );
-  qpAnn.split(";").forEach((qpAnnPart) => {
-    const [qpKey, qpVal]: string[] = qpAnnPart.split("=");
-    switch (qpKey) {
-      case "style":
-        qpDecorator.Style = qpVal;
-        break;
-      case "explode":
-        qpDecorator.Explode = qpVal == "true";
-        break;
-      case "name":
-        qpDecorator.ParamName = qpVal;
-        break;
-      case "serialization":
-        qpDecorator.Serialization = qpVal;
-    }
-  });
-  return qpDecorator;
 }
