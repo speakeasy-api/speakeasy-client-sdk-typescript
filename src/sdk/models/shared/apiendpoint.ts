@@ -1,5 +1,10 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
+
+// ApiEndpoint
+/** 
+ * An ApiEndpoint is a description of an Endpoint for an API.
+**/
 export class ApiEndpoint extends SpeakeasyBase {
   @Metadata({ data: "json, name=api_endpoint_id" })
   apiEndpointId: string;

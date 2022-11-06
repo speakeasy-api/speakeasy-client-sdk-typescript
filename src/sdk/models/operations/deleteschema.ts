@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
+
 export class DeleteSchemaPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
   apiId: string;
@@ -12,10 +13,12 @@ export class DeleteSchemaPathParams extends SpeakeasyBase {
   versionId: string;
 }
 
+
 export class DeleteSchemaRequest extends SpeakeasyBase {
   @Metadata()
   pathParams: DeleteSchemaPathParams;
 }
+
 
 export class DeleteSchemaResponse extends SpeakeasyBase {
   @Metadata()

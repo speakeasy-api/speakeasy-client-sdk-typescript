@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
+
 export class GeneratePostmanCollectionForApiEndpointPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiEndpointID" })
   apiEndpointId: string;
@@ -12,10 +13,12 @@ export class GeneratePostmanCollectionForApiEndpointPathParams extends Speakeasy
   versionId: string;
 }
 
+
 export class GeneratePostmanCollectionForApiEndpointRequest extends SpeakeasyBase {
   @Metadata()
   pathParams: GeneratePostmanCollectionForApiEndpointPathParams;
 }
+
 
 export class GeneratePostmanCollectionForApiEndpointResponse extends SpeakeasyBase {
   @Metadata()

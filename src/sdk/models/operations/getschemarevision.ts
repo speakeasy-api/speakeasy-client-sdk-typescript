@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
+
 export class GetSchemaRevisionPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
   apiId: string;
@@ -12,10 +13,12 @@ export class GetSchemaRevisionPathParams extends SpeakeasyBase {
   versionId: string;
 }
 
+
 export class GetSchemaRevisionRequest extends SpeakeasyBase {
   @Metadata()
   pathParams: GetSchemaRevisionPathParams;
 }
+
 
 export class GetSchemaRevisionResponse extends SpeakeasyBase {
   @Metadata()

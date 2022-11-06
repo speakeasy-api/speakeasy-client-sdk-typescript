@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
+
 export class SchemaDiffValueChange extends SpeakeasyBase {
   @Metadata({ data: "json, name=From" })
   from: string;
@@ -9,6 +10,11 @@ export class SchemaDiffValueChange extends SpeakeasyBase {
   to: string;
 }
 
+
+// SchemaDiff
+/** 
+ * A SchemaDiff represents a diff of two Schemas.
+**/
 export class SchemaDiff extends SpeakeasyBase {
   @Metadata({ data: "json, name=additions" })
   additions: string[];

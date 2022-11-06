@@ -1,5 +1,10 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
+
+// BoundedRequest
+/** 
+ * A BoundedRequest is a request that has been logged by the Speakeasy without the contents of the request.
+**/
 export class BoundedRequest extends SpeakeasyBase {
   @Metadata({ data: "json, name=api_endpoint_id" })
   apiEndpointId: string;

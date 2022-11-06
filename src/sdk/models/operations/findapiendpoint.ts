@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
+
 export class FindApiEndpointPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
   apiId: string;
@@ -12,10 +13,12 @@ export class FindApiEndpointPathParams extends SpeakeasyBase {
   versionId: string;
 }
 
+
 export class FindApiEndpointRequest extends SpeakeasyBase {
   @Metadata()
   pathParams: FindApiEndpointPathParams;
 }
+
 
 export class FindApiEndpointResponse extends SpeakeasyBase {
   @Metadata()

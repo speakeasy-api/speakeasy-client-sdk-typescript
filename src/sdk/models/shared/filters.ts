@@ -2,6 +2,11 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 import { Filter } from "./filter";
 
+
+// Filters
+/** 
+ * Filters are used to query requests.
+**/
 export class Filters extends SpeakeasyBase {
   @Metadata({ data: "json, name=filters", elemType: shared.Filter })
   filters: Filter[];

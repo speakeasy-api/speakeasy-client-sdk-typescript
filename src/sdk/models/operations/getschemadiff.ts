@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
+
 export class GetSchemaDiffPathParams extends SpeakeasyBase {
   @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
   apiId: string;
@@ -15,10 +16,12 @@ export class GetSchemaDiffPathParams extends SpeakeasyBase {
   versionId: string;
 }
 
+
 export class GetSchemaDiffRequest extends SpeakeasyBase {
   @Metadata()
   pathParams: GetSchemaDiffPathParams;
 }
+
 
 export class GetSchemaDiffResponse extends SpeakeasyBase {
   @Metadata()

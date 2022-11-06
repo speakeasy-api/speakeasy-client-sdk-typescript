@@ -1,5 +1,10 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
+
+// Schema
+/** 
+ * A Schema represents an API schema for a particular Api and Version.
+**/
 export class Schema extends SpeakeasyBase {
   @Metadata({ data: "json, name=api_id" })
   apiId: string;
