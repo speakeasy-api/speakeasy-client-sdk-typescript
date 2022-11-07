@@ -1,9 +1,11 @@
 {
   "name": "@speakeasy-api/speakeasy-client-sdk-typescript",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "author": "Speakeasy",
   "scripts": {
-    "lint:fix": "tsc --noemit && eslint \"./src\" --ext .ts,.tsx --fix"
+    "lint:fix": "tsc --noemit && eslint \"./src\" --ext .ts,.tsx --fix",
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "axios": "^1.1.3",
