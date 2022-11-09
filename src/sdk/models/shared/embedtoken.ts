@@ -7,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 **/
 export class EmbedToken extends SpeakeasyBase {
   @Metadata({ data: "json, name=created_at" })
-  createdAt: string;
+  createdAt: Date;
 
   @Metadata({ data: "json, name=created_by" })
   createdBy: string;
@@ -16,7 +16,7 @@ export class EmbedToken extends SpeakeasyBase {
   description: string;
 
   @Metadata({ data: "json, name=expires_at" })
-  expiresAt: string;
+  expiresAt: Date;
 
   @Metadata({ data: "json, name=filters" })
   filters: string;
@@ -25,10 +25,10 @@ export class EmbedToken extends SpeakeasyBase {
   id: string;
 
   @Metadata({ data: "json, name=last_used" })
-  lastUsed?: string;
+  lastUsed?: Date;
 
   @Metadata({ data: "json, name=revoked_at" })
-  revokedAt?: string;
+  revokedAt?: Date;
 
   @Metadata({ data: "json, name=revoked_by" })
   revokedBy?: string;

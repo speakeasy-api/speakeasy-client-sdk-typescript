@@ -13,7 +13,7 @@ export class BoundedRequest extends SpeakeasyBase {
   apiId: string;
 
   @Metadata({ data: "json, name=created_at" })
-  createdAt: string;
+  createdAt: Date;
 
   @Metadata({ data: "json, name=customer_id" })
   customerId: string;
@@ -31,13 +31,13 @@ export class BoundedRequest extends SpeakeasyBase {
   path: string;
 
   @Metadata({ data: "json, name=request_finish_time" })
-  requestFinishTime: string;
+  requestFinishTime: Date;
 
   @Metadata({ data: "json, name=request_id" })
   requestId: string;
 
   @Metadata({ data: "json, name=request_start_time" })
-  requestStartTime: string;
+  requestStartTime: Date;
 
   @Metadata({ data: "json, name=status" })
   status: number;

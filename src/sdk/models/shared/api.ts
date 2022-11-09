@@ -10,7 +10,7 @@ export class Api extends SpeakeasyBase {
   apiId: string;
 
   @Metadata({ data: "json, name=created_at" })
-  createdAt: string;
+  createdAt: Date;
 
   @Metadata({ data: "json, name=description" })
   description: string;
@@ -22,7 +22,7 @@ export class Api extends SpeakeasyBase {
   metaData?: Map<string, string[]>;
 
   @Metadata({ data: "json, name=updated_at" })
-  updatedAt: string;
+  updatedAt: Date;
 
   @Metadata({ data: "json, name=version_id" })
   versionId: string;

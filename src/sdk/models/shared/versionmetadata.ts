@@ -10,7 +10,7 @@ export class VersionMetadata extends SpeakeasyBase {
   apiId: string;
 
   @Metadata({ data: "json, name=created_at" })
-  createdAt: string;
+  createdAt: Date;
 
   @Metadata({ data: "json, name=meta_key" })
   metaKey: string;

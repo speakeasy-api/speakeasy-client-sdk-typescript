@@ -7,7 +7,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 **/
 export class UnboundedRequest extends SpeakeasyBase {
   @Metadata({ data: "json, name=created_at" })
-  createdAt: string;
+  createdAt: Date;
 
   @Metadata({ data: "json, name=har" })
   har: string;

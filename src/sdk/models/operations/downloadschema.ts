@@ -25,7 +25,7 @@ export class DownloadSchemaResponse extends SpeakeasyBase {
   error?: shared.Error;
 
   @Metadata()
-  schema?: string;
+  schema?: Uint8Array;
 
   @Metadata()
   statusCode: number;

@@ -13,7 +13,7 @@ export class RegisterSchemaPathParams extends SpeakeasyBase {
 
 export class RegisterSchemaRequestBodyFile extends SpeakeasyBase {
   @Metadata({ data: "multipart_form, content=true" })
-  content: string;
+  content: Uint8Array;
 
   @Metadata({ data: "multipart_form, name=file" })
   file: string;

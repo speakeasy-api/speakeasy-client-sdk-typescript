@@ -1,14 +1,12 @@
-import axios, { AxiosInstance } from "axios";
-
-import { Security } from "../../sdk/models/shared/security";
+import { AxiosInstance } from "axios";
 
 const securityMetadataKey = "security";
 
 export function CreateSecurityClient(
-  serverURL: string,
-  security: Security
+  client: AxiosInstance,
+  security: any
 ): AxiosInstance {
-  return ParseSecurityClass(serverURL, security);
+  return ParseSecurityClass(client, security);
 }
 
 function ParseSecurityDecorator(securityAnn: string): SecurityDecorator {
@@ -48,8 +46,10 @@ function ParseSecurityDecorator(securityAnn: string): SecurityDecorator {
   );
 }
 
-function ParseSecurityClass(serverURL: string, security: any): AxiosInstance {
-  let client: AxiosInstance = axios.create({ baseURL: serverURL });
+function ParseSecurityClass(
+  client: AxiosInstance,
+  security: any
+): AxiosInstance {
   const fieldNames: string[] = Object.getOwnPropertyNames(security);
   fieldNames.forEach((fname) => {
     const securityAnn: string = Reflect.getMetadata(
@@ -62,9 +62,9 @@ function ParseSecurityClass(serverURL: string, security: any): AxiosInstance {
       ParseSecurityDecorator(securityAnn);
     if (securityDecorator == null) return;
     if (securityDecorator.Option) {
-      client = ParseSecurityOption(serverURL, security[fname]);
+      return ParseSecurityOption(client, security[fname]);
     } else if (securityDecorator.Scheme) {
-      client = ParseSecurityScheme(serverURL, securityDecorator, security[fname]);
+      return ParseSecurityScheme(client, securityDecorator, security[fname]);
     }
   });
 
@@ -72,7 +72,7 @@ function ParseSecurityClass(serverURL: string, security: any): AxiosInstance {
 }
 
 function ParseSecurityOption(
-  serverURL: string,
+  client: AxiosInstance,
   optionType: any
 ): AxiosInstance {
   const fieldNames: string[] = Object.getOwnPropertyNames(optionType);
@@ -87,23 +87,17 @@ function ParseSecurityOption(
       ParseSecurityDecorator(securityAnn);
     if (securityDecorator != null && securityDecorator.Scheme) return;
     if (securityDecorator.Scheme)
-      return ParseSecurityScheme(
-        serverURL,
-        securityDecorator,
-        optionType[fname]
-      );
+      return ParseSecurityScheme(client, securityDecorator, optionType[fname]);
   });
 
-  return axios.create({ baseURL: serverURL });
+  return client;
 }
 
 function ParseSecurityScheme(
-  serverURL: string,
+  client: AxiosInstance,
   schemeDecorator: SecurityDecorator,
   scheme: any
 ): AxiosInstance {
-  const client: AxiosInstance = axios.create({ baseURL: serverURL });
-
   const fieldNames: string[] = Object.getOwnPropertyNames(scheme);
   fieldNames.forEach((fname) => {
     const securityAnn: string = Reflect.getMetadata(

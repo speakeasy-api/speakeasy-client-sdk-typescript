@@ -8,7 +8,10 @@ export const qpMetadataKey = "queryParam";
 export function GetQueryParamSerializer(
     queryParams: any
 ): ParamsSerializerOptions {
-  if (queryParams == null) return { encode: FormSerializerExplode };
+  let paramsSerializer: ParamsSerializerOptions = {
+    encode: FormSerializerExplode,
+  };
+  if (queryParams == null) return paramsSerializer;
   const fieldNames: string[] = Object.getOwnPropertyNames(queryParams);
   fieldNames.forEach((fname) => {
     const qpAnn: string = Reflect.getMetadata(
@@ -25,7 +28,7 @@ export function GetQueryParamSerializer(
     );
     if (qpDecorator == null) return;
     if (qpDecorator.Serialization === "json")
-      return {
+      paramsSerializer = {
         encode: (params: unknown) => {
           return JSON.stringify(params);
         },
@@ -33,28 +36,30 @@ export function GetQueryParamSerializer(
     else {
       switch (qpDecorator.Style) {
         case "deepObject":
-          return {
+          paramsSerializer = {
             encode: (params: unknown) => {
               return qs.stringify(params, { arrayFormat: "repeat" });
             },
           };
+          break;
         case "form":
           if (qpDecorator.Explode) {
-            return {
+            paramsSerializer = {
               encode: FormSerializerExplode,
             };
           } else {
-            return {
+            paramsSerializer = {
               encode: FormSerializer,
             };
           }
+          break;
         default:
           // go to next query parameter field, assume first implemented serializer will serialize all query parameters for this request
           return;
       }
     }
   });
-  return { encode: FormSerializerExplode };
+  return paramsSerializer;
 }
 
 function FormSerializer(params: unknown): string {

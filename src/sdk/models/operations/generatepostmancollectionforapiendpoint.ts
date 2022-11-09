@@ -28,7 +28,7 @@ export class GeneratePostmanCollectionForApiEndpointResponse extends SpeakeasyBa
   error?: shared.Error;
 
   @Metadata()
-  postmanCollection?: string;
+  postmanCollection?: Uint8Array;
 
   @Metadata()
   statusCode: number;

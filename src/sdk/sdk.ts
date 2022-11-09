@@ -1,35 +1,44 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import { MatchContentType } from "../internal/utils/contenttype";
-import { CreateSecurityClient } from "../internal/utils/security";
-import { Security } from "./models/shared";
-import * as utils from "../internal/utils/utils";
 import * as operations from "./models/operations";
 import { ParamsSerializerOptions } from "axios";
 import { GetQueryParamSerializer } from "../internal/utils/queryparams";
 import { SerializeRequestBody } from "../internal/utils/requestbody";
 import FormData from 'form-data';
+import { CreateSecurityClient } from "../internal/utils/security";
+import * as utils from "../internal/utils/utils";
+import { Security } from "./models/shared";
+
+type OptsFunc = (sdk: SDK) => void;
 
 const Servers = [
   "https://api.prod.speakeasyapi.dev",
 ] as const;
 
-export function WithServerURL(serverURL: string, params?: Map<string, string>): Function {
+export function WithServerURL(
+  serverURL: string,
+  params?: Map<string, string>
+): OptsFunc {
   return (sdk: SDK) => {
     if (params != null) {
       serverURL = utils.ReplaceParameters(serverURL, params);
     }
     sdk.serverURL = serverURL;
-    sdk.defaultClient = axios.create({ baseURL: serverURL });
   };
 }
 
-export function WithSecurity(serverURL: string, security: Security): Function {
+export function WithClient(client: AxiosInstance): OptsFunc {
+  return (sdk: SDK) => {
+    sdk.defaultClient = client;
+  };
+}
+
+export function WithSecurity(security: Security): OptsFunc {
   if (!(security instanceof utils.SpeakeasyBase)) {
     security = new Security(security);
   }
   return (sdk: SDK) => {
-    sdk.serverURL = serverURL;
-    sdk.securityClient = CreateSecurityClient(serverURL, security);
+    sdk.security = security;
   };
 }
 
@@ -37,12 +46,28 @@ export function WithSecurity(serverURL: string, security: Security): Function {
 export class SDK {
   defaultClient?: AxiosInstance;
   securityClient?: AxiosInstance;
+  security?: Security;
   serverURL: string;
 
-  constructor(...opts: Function[]) {
+  constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
     if (this.serverURL == "") {
       this.serverURL = Servers[0];
+    }
+
+    if (!this.defaultClient) {
+      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    }
+
+    if (!this.securityClient) {
+      if (this.security) {
+        this.securityClient = CreateSecurityClient(
+          this.defaultClient,
+          this.security
+        );
+      } else {
+        this.securityClient = this.defaultClient;
+      }
     }
   }
   
@@ -75,7 +100,9 @@ export class SDK {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -114,7 +141,9 @@ export class SDK {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -150,7 +179,9 @@ export class SDK {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -186,7 +217,9 @@ export class SDK {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -220,11 +253,20 @@ export class SDK {
         let res: operations.DownloadSchemaResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
-            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.schema = httpRes?.data;
+            }
+            if (MatchContentType(contentType, `application/x-yaml`)) {
+                const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+                let out: Uint8Array = new Uint8Array(resBody.length);
+                for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
+                res.schema = out;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -258,11 +300,20 @@ export class SDK {
         let res: operations.DownloadSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
-            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.schema = httpRes?.data;
+            }
+            if (MatchContentType(contentType, `application/x-yaml`)) {
+                const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+                let out: Uint8Array = new Uint8Array(resBody.length);
+                for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
+                res.schema = out;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -300,10 +351,14 @@ export class SDK {
         let res: operations.FindApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.apiEndpoint = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.apiEndpoint = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -341,10 +396,14 @@ export class SDK {
         let res: operations.GenerateOpenApiSpecResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.generateOpenApiSpecDiff = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.generateOpenApiSpecDiff = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -382,10 +441,14 @@ export class SDK {
         let res: operations.GenerateOpenApiSpecForApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.generateOpenApiSpecDiff = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.generateOpenApiSpecDiff = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -422,10 +485,14 @@ export class SDK {
         let res: operations.GeneratePostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.postmanCollection = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.postmanCollection = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -462,10 +529,14 @@ export class SDK {
         let res: operations.GeneratePostmanCollectionForApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.postmanCollection = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.postmanCollection = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -503,10 +574,14 @@ export class SDK {
         let res: operations.GenerateRequestPostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.postmanCollection = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.postmanCollection = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -540,10 +615,14 @@ export class SDK {
         let res: operations.GetAllApiEndpointsResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.apiEndpoints = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.apiEndpoints = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -589,10 +668,14 @@ export class SDK {
         let res: operations.GetAllApiVersionsResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.apis = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.apis = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -626,10 +709,14 @@ export class SDK {
         let res: operations.GetAllForVersionApiEndpointsResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.apiEndpoints = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.apiEndpoints = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -663,10 +750,14 @@ export class SDK {
         let res: operations.GetApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.apiEndpoint = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.apiEndpoint = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -712,10 +803,14 @@ export class SDK {
         let res: operations.GetApisResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.apis = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.apis = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -761,10 +856,14 @@ export class SDK {
         let res: operations.GetEmbedAccessTokenResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.embedAccessTokenResponse = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.embedAccessTokenResponse = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -798,10 +897,14 @@ export class SDK {
         let res: operations.GetRequestFromEventLogResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.unboundedRequest = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.unboundedRequest = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -839,10 +942,14 @@ export class SDK {
         let res: operations.GetSchemaResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.schema = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -876,10 +983,14 @@ export class SDK {
         let res: operations.GetSchemaDiffResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.schemaDiff = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.schemaDiff = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -917,10 +1028,14 @@ export class SDK {
         let res: operations.GetSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.schema = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.schema = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -958,10 +1073,14 @@ export class SDK {
         let res: operations.GetSchemasResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.schemata = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.schemata = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -991,10 +1110,14 @@ export class SDK {
         let res: operations.GetValidEmbedAccessTokensResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.embedTokens = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.embedTokens = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -1028,10 +1151,14 @@ export class SDK {
         let res: operations.GetVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.versionMetadata = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.versionMetadata = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -1083,10 +1210,14 @@ export class SDK {
         let res: operations.InsertVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.versionMetadata = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.versionMetadata = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -1132,10 +1263,14 @@ export class SDK {
         let res: operations.QueryEventLogResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.boundedRequests = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.boundedRequests = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -1193,7 +1328,9 @@ export class SDK {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -1229,7 +1366,9 @@ export class SDK {
           case 200:
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -1285,10 +1424,14 @@ export class SDK {
         let res: operations.UpsertApiResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.api = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.api = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 
@@ -1343,10 +1486,14 @@ export class SDK {
         let res: operations.UpsertApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (httpRes?.status) {
           case 200:
-            if (MatchContentType(contentType, "application/json")) res.apiEndpoint = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.apiEndpoint = httpRes?.data;
+            }
             break;
           default:
-            if (MatchContentType(contentType, "application/json")) res.error = httpRes?.data;
+            if (MatchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
             break;
         }
 

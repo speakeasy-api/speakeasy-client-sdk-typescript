@@ -25,7 +25,7 @@ export class GeneratePostmanCollectionResponse extends SpeakeasyBase {
   error?: shared.Error;
 
   @Metadata()
-  postmanCollection?: string;
+  postmanCollection?: Uint8Array;
 
   @Metadata()
   statusCode: number;
