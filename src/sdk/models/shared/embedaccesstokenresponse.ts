@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 
+
 // EmbedAccessTokenResponse
 /** 
  * An EmbedAccessTokenResponse contains a token that can be used to embed a Speakeasy dashboard.

@@ -11,8 +11,8 @@ import { Security } from "./models/shared";
 
 type OptsFunc = (sdk: SDK) => void;
 
-const Servers = [
-  "https://api.prod.speakeasyapi.dev",
+export const Servers = [
+	"https://api.prod.speakeasyapi.dev",
 ] as const;
 
 export function WithServerURL(
@@ -71,8 +71,9 @@ export class SDK {
     }
   }
   
-  // DeleteApi - Delete an Api.
-  /** 
+  /**
+   * DeleteApi - Delete an Api.
+   *
    * Delete a particular version of an Api. The will also delete all associated ApiEndpoints, Metadata, Schemas & Request Logs (if using a Postgres datastore).
   **/
   DeleteApi(
@@ -112,8 +113,9 @@ export class SDK {
   }
 
   
-  // DeleteApiEndpoint - Delete an ApiEndpoint.
-  /** 
+  /**
+   * DeleteApiEndpoint - Delete an ApiEndpoint.
+   *
    * Delete an ApiEndpoint. This will also delete all associated Request Logs (if using a Postgres datastore).
   **/
   DeleteApiEndpoint(
@@ -153,7 +155,9 @@ export class SDK {
   }
 
   
-  // DeleteSchema - Delete a particular schema revision for an Api.
+  /**
+   * DeleteSchema - Delete a particular schema revision for an Api.
+  **/
   DeleteSchema(
     req: operations.DeleteSchemaRequest,
     config?: AxiosRequestConfig
@@ -191,7 +195,9 @@ export class SDK {
   }
 
   
-  // DeleteVersionMetadata - Delete metadata for a particular apiID and versionID.
+  /**
+   * DeleteVersionMetadata - Delete metadata for a particular apiID and versionID.
+  **/
   DeleteVersionMetadata(
     req: operations.DeleteVersionMetadataRequest,
     config?: AxiosRequestConfig
@@ -229,7 +235,9 @@ export class SDK {
   }
 
   
-  // DownloadSchema - Download the latest schema for a particular apiID.
+  /**
+   * DownloadSchema - Download the latest schema for a particular apiID.
+  **/
   DownloadSchema(
     req: operations.DownloadSchemaRequest,
     config?: AxiosRequestConfig
@@ -276,7 +284,9 @@ export class SDK {
   }
 
   
-  // DownloadSchemaRevision - Download a particular schema revision for an Api.
+  /**
+   * DownloadSchemaRevision - Download a particular schema revision for an Api.
+  **/
   DownloadSchemaRevision(
     req: operations.DownloadSchemaRevisionRequest,
     config?: AxiosRequestConfig
@@ -323,8 +333,9 @@ export class SDK {
   }
 
   
-  // FindApiEndpoint - Find an ApiEndpoint via its displayName.
-  /** 
+  /**
+   * FindApiEndpoint - Find an ApiEndpoint via its displayName.
+   *
    * Find an ApiEndpoint via its displayName (set by operationId from a registered OpenAPI schema).
    * This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID} endpoints.
   **/
@@ -368,8 +379,9 @@ export class SDK {
   }
 
   
-  // GenerateOpenApiSpec - Generate an OpenAPI specification for a particular Api.
-  /** 
+  /**
+   * GenerateOpenApiSpec - Generate an OpenAPI specification for a particular Api.
+   *
    * This endpoint will generate any missing operations in any registered OpenAPI document if the operation does not already exist in the document.
    * Returns the original document and the newly generated document allowing a diff to be performed to see what has changed.
   **/
@@ -413,8 +425,9 @@ export class SDK {
   }
 
   
-  // GenerateOpenApiSpecForApiEndpoint - Generate an OpenAPI specification for a particular ApiEndpoint.
-  /** 
+  /**
+   * GenerateOpenApiSpecForApiEndpoint - Generate an OpenAPI specification for a particular ApiEndpoint.
+   *
    * This endpoint will generate a new operation in any registered OpenAPI document if the operation does not already exist in the document.
    * Returns the original document and the newly generated document allowing a diff to be performed to see what has changed.
   **/
@@ -458,8 +471,9 @@ export class SDK {
   }
 
   
-  // GeneratePostmanCollection - Generate a Postman collection for a particular Api.
-  /** 
+  /**
+   * GeneratePostmanCollection - Generate a Postman collection for a particular Api.
+   *
    * Generates a postman collection containing all endpoints for a particular API. Includes variables produced for any path/query/header parameters included in the OpenAPI document.
   **/
   GeneratePostmanCollection(
@@ -502,8 +516,9 @@ export class SDK {
   }
 
   
-  // GeneratePostmanCollectionForApiEndpoint - Generate a Postman collection for a particular ApiEndpoint.
-  /** 
+  /**
+   * GeneratePostmanCollectionForApiEndpoint - Generate a Postman collection for a particular ApiEndpoint.
+   *
    * Generates a postman collection that allows the endpoint to be called from postman variables produced for any path/query/header parameters included in the OpenAPI document.
   **/
   GeneratePostmanCollectionForApiEndpoint(
@@ -546,8 +561,9 @@ export class SDK {
   }
 
   
-  // GenerateRequestPostmanCollection - Generate a Postman collection for a particular request.
-  /** 
+  /**
+   * GenerateRequestPostmanCollection - Generate a Postman collection for a particular request.
+   *
    * Generates a Postman collection for a particular request. 
    * Allowing it to be replayed with the same inputs that were captured by the SDK.
   **/
@@ -591,7 +607,9 @@ export class SDK {
   }
 
   
-  // GetAllApiEndpoints - Get all Api endpoints for a particular apiID.
+  /**
+   * GetAllApiEndpoints - Get all Api endpoints for a particular apiID.
+  **/
   GetAllApiEndpoints(
     req: operations.GetAllApiEndpointsRequest,
     config?: AxiosRequestConfig
@@ -632,8 +650,9 @@ export class SDK {
   }
 
   
-  // GetAllApiVersions - Get all Api versions for a particular ApiEndpoint.
-  /** 
+  /**
+   * GetAllApiVersions - Get all Api versions for a particular ApiEndpoint.
+   *
    * Get all Api versions for a particular ApiEndpoint.
    * Supports filtering the versions based on metadata attributes.
   **/
@@ -685,7 +704,9 @@ export class SDK {
   }
 
   
-  // GetAllForVersionApiEndpoints - Get all ApiEndpoints for a particular apiID and versionID.
+  /**
+   * GetAllForVersionApiEndpoints - Get all ApiEndpoints for a particular apiID and versionID.
+  **/
   GetAllForVersionApiEndpoints(
     req: operations.GetAllForVersionApiEndpointsRequest,
     config?: AxiosRequestConfig
@@ -726,7 +747,9 @@ export class SDK {
   }
 
   
-  // GetApiEndpoint - Get an ApiEndpoint.
+  /**
+   * GetApiEndpoint - Get an ApiEndpoint.
+  **/
   GetApiEndpoint(
     req: operations.GetApiEndpointRequest,
     config?: AxiosRequestConfig
@@ -767,8 +790,9 @@ export class SDK {
   }
 
   
-  // GetApis - Get a list of Apis for a given workspace
-  /** 
+  /**
+   * GetApis - Get a list of Apis for a given workspace
+   *
    * Get a list of all Apis and their versions for a given workspace.
    * Supports filtering the APIs based on metadata attributes.
   **/
@@ -820,8 +844,9 @@ export class SDK {
   }
 
   
-  // GetEmbedAccessToken - Get an embed access token for the current workspace.
-  /** 
+  /**
+   * GetEmbedAccessToken - Get an embed access token for the current workspace.
+   *
    * Returns an embed access token for the current workspace. This can be used to authenticate access to externally embedded content.
    * Filters can be applied allowing views to be filtered to things like particular customerIds.
   **/
@@ -873,7 +898,9 @@ export class SDK {
   }
 
   
-  // GetRequestFromEventLog - Get information about a particular request.
+  /**
+   * GetRequestFromEventLog - Get information about a particular request.
+  **/
   GetRequestFromEventLog(
     req: operations.GetRequestFromEventLogRequest,
     config?: AxiosRequestConfig
@@ -914,8 +941,9 @@ export class SDK {
   }
 
   
-  // GetSchema - Get information about the latest schema.
-  /** 
+  /**
+   * GetSchema - Get information about the latest schema.
+   *
    * Returns information about the last uploaded schema for a particular API version. 
    * This won't include the schema itself, that can be retrieved via the downloadSchema operation.
   **/
@@ -959,7 +987,9 @@ export class SDK {
   }
 
   
-  // GetSchemaDiff - Get a diff of two schema revisions for an Api.
+  /**
+   * GetSchemaDiff - Get a diff of two schema revisions for an Api.
+  **/
   GetSchemaDiff(
     req: operations.GetSchemaDiffRequest,
     config?: AxiosRequestConfig
@@ -1000,8 +1030,9 @@ export class SDK {
   }
 
   
-  // GetSchemaRevision - Get information about a particular schema revision for an Api.
-  /** 
+  /**
+   * GetSchemaRevision - Get information about a particular schema revision for an Api.
+   *
    * Returns information about the last uploaded schema for a particular schema revision. 
    * This won't include the schema itself, that can be retrieved via the downloadSchema operation.
   **/
@@ -1045,8 +1076,9 @@ export class SDK {
   }
 
   
-  // GetSchemas - Get information about all schemas associated with a particular apiID.
-  /** 
+  /**
+   * GetSchemas - Get information about all schemas associated with a particular apiID.
+   *
    * Returns information the schemas associated with a particular apiID. 
    * This won't include the schemas themselves, they can be retrieved via the downloadSchema operation.
   **/
@@ -1090,7 +1122,9 @@ export class SDK {
   }
 
   
-  // GetValidEmbedAccessTokens - Get all valid embed access tokens for the current workspace.
+  /**
+   * GetValidEmbedAccessTokens - Get all valid embed access tokens for the current workspace.
+  **/
   GetValidEmbedAccessTokens(
     
     config?: AxiosRequestConfig
@@ -1127,7 +1161,9 @@ export class SDK {
   }
 
   
-  // GetVersionMetadata - Get all metadata for a particular apiID and versionID.
+  /**
+   * GetVersionMetadata - Get all metadata for a particular apiID and versionID.
+  **/
   GetVersionMetadata(
     req: operations.GetVersionMetadataRequest,
     config?: AxiosRequestConfig
@@ -1168,7 +1204,9 @@ export class SDK {
   }
 
   
-  // InsertVersionMetadata - Insert metadata for a particular apiID and versionID.
+  /**
+   * InsertVersionMetadata - Insert metadata for a particular apiID and versionID.
+  **/
   InsertVersionMetadata(
     req: operations.InsertVersionMetadataRequest,
     config?: AxiosRequestConfig
@@ -1227,8 +1265,9 @@ export class SDK {
   }
 
   
-  // QueryEventLog - Query the event log to retrieve a list of requests.
-  /** 
+  /**
+   * QueryEventLog - Query the event log to retrieve a list of requests.
+   *
    * Supports retrieving a list of request captured by the SDK for this workspace.
    * Allows the filtering of requests on a number of criteria such as ApiID, VersionID, Path, Method, etc.
   **/
@@ -1280,8 +1319,9 @@ export class SDK {
   }
 
   
-  // RegisterSchema - Register a schema.
-  /** 
+  /**
+   * RegisterSchema - Register a schema.
+   *
    * Allows uploading a schema for a particular API version.
    * This will be used to populate ApiEndpoints and used as a base for any schema generation if present.
   **/
@@ -1340,7 +1380,9 @@ export class SDK {
   }
 
   
-  // RevokeEmbedAccessToken - Revoke an embed access EmbedToken.
+  /**
+   * RevokeEmbedAccessToken - Revoke an embed access EmbedToken.
+  **/
   RevokeEmbedAccessToken(
     req: operations.RevokeEmbedAccessTokenRequest,
     config?: AxiosRequestConfig
@@ -1378,8 +1420,9 @@ export class SDK {
   }
 
   
-  // UpsertApi - Upsert an Api
-  /** 
+  /**
+   * UpsertApi - Upsert an Api
+   *
    * Upsert an Api. If the Api does not exist, it will be created.
    * If the Api exists, it will be updated.
   **/
@@ -1441,8 +1484,9 @@ export class SDK {
   }
 
   
-  // UpsertApiEndpoint - Upsert an ApiEndpoint.
-  /** 
+  /**
+   * UpsertApiEndpoint - Upsert an ApiEndpoint.
+   *
    * Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, otherwise it will be updated.
   **/
   UpsertApiEndpoint(

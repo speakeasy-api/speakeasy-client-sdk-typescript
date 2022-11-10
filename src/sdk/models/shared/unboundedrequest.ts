@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 
+
 // UnboundedRequest
 /** 
  * An UnboundedRequest represents the HAR content capture by Speakeasy when logging a request.

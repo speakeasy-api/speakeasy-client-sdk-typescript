@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 
+
 // BoundedRequest
 /** 
  * A BoundedRequest is a request that has been logged by the Speakeasy without the contents of the request.

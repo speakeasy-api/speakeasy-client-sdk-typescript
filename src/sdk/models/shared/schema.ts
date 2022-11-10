@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 
+
 // Schema
 /** 
  * A Schema represents an API schema for a particular Api and Version.

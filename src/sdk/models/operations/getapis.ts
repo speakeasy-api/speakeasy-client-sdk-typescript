@@ -2,6 +2,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
 
+
 export class GetApisOp extends SpeakeasyBase {
   @Metadata({ data: "queryParam, name=and" })
   and: boolean;

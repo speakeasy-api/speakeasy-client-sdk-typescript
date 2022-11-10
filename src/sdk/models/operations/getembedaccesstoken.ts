@@ -2,6 +2,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
 
+
 export class GetEmbedAccessTokenQueryParams extends SpeakeasyBase {
   @Metadata({ data: "queryParam, style=form;explode=true;name=description" })
   description?: string;

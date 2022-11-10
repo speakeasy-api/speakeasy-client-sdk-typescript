@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 
+
 // EmbedToken
 /** 
  * A representation of an embed token granted for working with Speakeasy components.

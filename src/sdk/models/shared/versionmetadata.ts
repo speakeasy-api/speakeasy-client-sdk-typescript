@@ -1,6 +1,20 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 
+
+// VersionMetadataInput
+/** 
+ * A set of keys and associated values, attached to a particular version of an Api.
+**/
+export class VersionMetadataInput extends SpeakeasyBase {
+  @Metadata({ data: "json, name=meta_key" })
+  metaKey: string;
+
+  @Metadata({ data: "json, name=meta_value" })
+  metaValue: string;
+}
+
+
 // VersionMetadata
 /** 
  * A set of keys and associated values, attached to a particular version of an Api.

@@ -2,6 +2,7 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 import * as shared from "../shared";
 
 
+
 export class SchemaDiffValueChange extends SpeakeasyBase {
   @Metadata({ data: "json, name=From" })
   from: string;

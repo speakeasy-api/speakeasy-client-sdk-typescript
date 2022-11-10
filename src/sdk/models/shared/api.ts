@@ -1,6 +1,7 @@
 import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
 
 
+
 // Api
 /** 
  * An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
@@ -29,4 +30,23 @@ export class Api extends SpeakeasyBase {
 
   @Metadata({ data: "json, name=workspace_id" })
   workspaceId: string;
+}
+
+
+// ApiInput
+/** 
+ * An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
+**/
+export class ApiInput extends SpeakeasyBase {
+  @Metadata({ data: "json, name=api_id" })
+  apiId: string;
+
+  @Metadata({ data: "json, name=description" })
+  description: string;
+
+  @Metadata({ data: "json, name=meta_data" })
+  metaData?: Map<string, string[]>;
+
+  @Metadata({ data: "json, name=version_id" })
+  versionId: string;
 }
