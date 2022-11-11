@@ -1,6 +1,6 @@
 {
   "name": "@speakeasy-api/speakeasy-client-sdk-typescript",
-  "version": "0.1.6",
+  "version": "0.2.6",
   "author": "Speakeasy",
   "scripts": {
     "lint:fix": "tsc --noemit && eslint \"./src\" --ext .ts,.tsx --fix",

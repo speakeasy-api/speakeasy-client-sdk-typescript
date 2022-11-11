@@ -1,5 +1,6 @@
 import { ParamDecorator } from "./pathparams";
 import { ParseParamDecorator } from "./utils";
+import { AxiosResponseHeaders, RawAxiosResponseHeaders } from "axios";
 
 export const headerMetadataKey = "headerParam";
 
@@ -28,6 +29,13 @@ export function GetHeadersFromRequest(headerParams: any): any {
         if (value != "") headers[headerDecorator.ParamName] = value;
     });
     return headers;
+}
+
+export function GetHeadersFromResponse(
+    headers: RawAxiosResponseHeaders | AxiosResponseHeaders
+): Map<string, string[]> {
+    // TODO: convert Axios response headers to map
+    return new Map<string, string[]>();
 }
 
 function SerializeHeader(header: any, explode: boolean): string {

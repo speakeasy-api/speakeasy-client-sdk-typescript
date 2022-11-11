@@ -5,7 +5,6 @@ import { ParamsSerializerOptions } from "axios";
 import { GetQueryParamSerializer } from "../internal/utils/queryparams";
 import { SerializeRequestBody } from "../internal/utils/requestbody";
 import FormData from 'form-data';
-import { CreateSecurityClient } from "../internal/utils/security";
 import * as utils from "../internal/utils/utils";
 import { Security } from "./models/shared";
 
