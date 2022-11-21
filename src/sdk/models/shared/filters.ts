@@ -1,5 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import { Filter } from "./filter";
 
 
@@ -9,15 +8,15 @@ import { Filter } from "./filter";
  * Filters are used to query requests.
 **/
 export class Filters extends SpeakeasyBase {
-  @Metadata({ data: "json, name=filters", elemType: shared.Filter })
+  @SpeakeasyMetadata({ data: "json, name=filters", elemType: Filter })
   filters: Filter[];
 
-  @Metadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata({ data: "json, name=limit" })
   limit: number;
 
-  @Metadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata({ data: "json, name=offset" })
   offset: number;
 
-  @Metadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata({ data: "json, name=operator" })
   operator: string;
 }

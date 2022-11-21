@@ -1,13 +1,12 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
-import * as shared from "../shared";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
 
 export class SchemaDiffValueChange extends SpeakeasyBase {
-  @Metadata({ data: "json, name=From" })
+  @SpeakeasyMetadata({ data: "json, name=From" })
   from: string;
 
-  @Metadata({ data: "json, name=To" })
+  @SpeakeasyMetadata({ data: "json, name=To" })
   to: string;
 }
 
@@ -17,12 +16,12 @@ export class SchemaDiffValueChange extends SpeakeasyBase {
  * A SchemaDiff represents a diff of two Schemas.
 **/
 export class SchemaDiff extends SpeakeasyBase {
-  @Metadata({ data: "json, name=additions" })
+  @SpeakeasyMetadata({ data: "json, name=additions" })
   additions: string[];
 
-  @Metadata({ data: "json, name=deletions" })
+  @SpeakeasyMetadata({ data: "json, name=deletions" })
   deletions: string[];
 
-  @Metadata({ data: "json, name=modifications", elemType: shared.SchemaDiffValueChange })
+  @SpeakeasyMetadata({ data: "json, name=modifications", elemType: SchemaDiffValueChange })
   modifications: Map<string, SchemaDiffValueChange>;
 }

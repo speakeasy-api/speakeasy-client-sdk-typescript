@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
 
@@ -7,45 +7,45 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A BoundedRequest is a request that has been logged by the Speakeasy without the contents of the request.
 **/
 export class BoundedRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=api_endpoint_id" })
+  @SpeakeasyMetadata({ data: "json, name=api_endpoint_id" })
   apiEndpointId: string;
 
-  @Metadata({ data: "json, name=api_id" })
+  @SpeakeasyMetadata({ data: "json, name=api_id" })
   apiId: string;
 
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=customer_id" })
+  @SpeakeasyMetadata({ data: "json, name=customer_id" })
   customerId: string;
 
-  @Metadata({ data: "json, name=latency" })
+  @SpeakeasyMetadata({ data: "json, name=latency" })
   latency: number;
 
-  @Metadata({ data: "json, name=metadata" })
+  @SpeakeasyMetadata({ data: "json, name=metadata" })
   metadata?: Map<string, string[]>;
 
-  @Metadata({ data: "json, name=method" })
+  @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;
 
-  @Metadata({ data: "json, name=path" })
+  @SpeakeasyMetadata({ data: "json, name=path" })
   path: string;
 
-  @Metadata({ data: "json, name=request_finish_time" })
+  @SpeakeasyMetadata({ data: "json, name=request_finish_time" })
   requestFinishTime: Date;
 
-  @Metadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata({ data: "json, name=request_id" })
   requestId: string;
 
-  @Metadata({ data: "json, name=request_start_time" })
+  @SpeakeasyMetadata({ data: "json, name=request_start_time" })
   requestStartTime: Date;
 
-  @Metadata({ data: "json, name=status" })
+  @SpeakeasyMetadata({ data: "json, name=status" })
   status: number;
 
-  @Metadata({ data: "json, name=version_id" })
+  @SpeakeasyMetadata({ data: "json, name=version_id" })
   versionId: string;
 
-  @Metadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
   workspaceId: string;
 }

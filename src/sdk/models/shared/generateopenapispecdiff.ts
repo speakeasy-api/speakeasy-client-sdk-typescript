@@ -1,11 +1,11 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
 
 export class GenerateOpenApiSpecDiff extends SpeakeasyBase {
-  @Metadata({ data: "json, name=current_schema" })
+  @SpeakeasyMetadata({ data: "json, name=current_schema" })
   currentSchema: string;
 
-  @Metadata({ data: "json, name=new_schema" })
+  @SpeakeasyMetadata({ data: "json, name=new_schema" })
   newSchema: string;
 }

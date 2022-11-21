@@ -1,30 +1,30 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
 
 export class QueryEventLogQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, serialization=json;name=filters" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
   filters?: shared.Filters;
 }
 
 
 export class QueryEventLogRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: QueryEventLogQueryParams;
 }
 
 
 export class QueryEventLogResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.BoundedRequest })
+  @SpeakeasyMetadata({ elemType: shared.BoundedRequest })
   boundedRequests?: shared.BoundedRequest[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
 
 export class GetEmbedAccessTokenQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=form;explode=true;name=description" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" })
   description?: string;
 
-  @Metadata({ data: "queryParam, style=form;explode=true;name=duration" })
+  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=duration" })
   duration?: number;
 
-  @Metadata({ data: "queryParam, serialization=json;name=filters" })
+  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
   filters?: shared.Filters;
 }
 
 
 export class GetEmbedAccessTokenRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetEmbedAccessTokenQueryParams;
 }
 
 
 export class GetEmbedAccessTokenResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   embedAccessTokenResponse?: shared.EmbedAccessTokenResponse;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

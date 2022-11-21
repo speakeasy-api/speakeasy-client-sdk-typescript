@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
 
 export class DeleteVersionMetadataPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=metaKey" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=metaKey" })
   metaKey: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=metaValue" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=metaValue" })
   metaValue: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
   versionId: string;
 }
 
 
 export class DeleteVersionMetadataRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: DeleteVersionMetadataPathParams;
 }
 
 
 export class DeleteVersionMetadataResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

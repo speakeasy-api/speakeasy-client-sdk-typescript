@@ -1,48 +1,48 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
 
 export class GetAllApiVersionsPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
   apiId: string;
 }
 
 
 export class GetAllApiVersionsOp extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=and" })
+  @SpeakeasyMetadata({ data: "queryParam, name=and" })
   and: boolean;
 }
 
 
 export class GetAllApiVersionsQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
+  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
   metadata?: Map<string, string[]>;
 
-  @Metadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
+  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
   op?: GetAllApiVersionsOp;
 }
 
 
 export class GetAllApiVersionsRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetAllApiVersionsPathParams;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetAllApiVersionsQueryParams;
 }
 
 
 export class GetAllApiVersionsResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Api })
+  @SpeakeasyMetadata({ elemType: shared.Api })
   apis?: shared.Api[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

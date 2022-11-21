@@ -1,39 +1,39 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
 
 export class GetApisOp extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, name=and" })
+  @SpeakeasyMetadata({ data: "queryParam, name=and" })
   and: boolean;
 }
 
 
 export class GetApisQueryParams extends SpeakeasyBase {
-  @Metadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
+  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
   metadata?: Map<string, string[]>;
 
-  @Metadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
+  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
   op?: GetApisOp;
 }
 
 
 export class GetApisRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   queryParams: GetApisQueryParams;
 }
 
 
 export class GetApisResponse extends SpeakeasyBase {
-  @Metadata({ elemType: shared.Api })
+  @SpeakeasyMetadata({ elemType: shared.Api })
   apis?: shared.Api[];
 
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

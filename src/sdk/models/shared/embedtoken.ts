@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
 
@@ -7,33 +7,33 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * A representation of an embed token granted for working with Speakeasy components.
 **/
 export class EmbedToken extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata({ data: "json, name=created_by" })
   createdBy: string;
 
-  @Metadata({ data: "json, name=description" })
+  @SpeakeasyMetadata({ data: "json, name=description" })
   description: string;
 
-  @Metadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata({ data: "json, name=expires_at" })
   expiresAt: Date;
 
-  @Metadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata({ data: "json, name=filters" })
   filters: string;
 
-  @Metadata({ data: "json, name=id" })
+  @SpeakeasyMetadata({ data: "json, name=id" })
   id: string;
 
-  @Metadata({ data: "json, name=last_used" })
+  @SpeakeasyMetadata({ data: "json, name=last_used" })
   lastUsed?: Date;
 
-  @Metadata({ data: "json, name=revoked_at" })
+  @SpeakeasyMetadata({ data: "json, name=revoked_at" })
   revokedAt?: Date;
 
-  @Metadata({ data: "json, name=revoked_by" })
+  @SpeakeasyMetadata({ data: "json, name=revoked_by" })
   revokedBy?: string;
 
-  @Metadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
   workspaceId: string;
 }

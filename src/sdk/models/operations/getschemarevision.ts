@@ -1,36 +1,36 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 import * as shared from "../shared";
 
 
 
 export class GetSchemaRevisionPathParams extends SpeakeasyBase {
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
   apiId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=revisionID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=revisionID" })
   revisionId: string;
 
-  @Metadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
   versionId: string;
 }
 
 
 export class GetSchemaRevisionRequest extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   pathParams: GetSchemaRevisionPathParams;
 }
 
 
 export class GetSchemaRevisionResponse extends SpeakeasyBase {
-  @Metadata()
+  @SpeakeasyMetadata()
   contentType: string;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   error?: shared.Error;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   schema?: shared.Schema;
 
-  @Metadata()
+  @SpeakeasyMetadata()
   statusCode: number;
 }

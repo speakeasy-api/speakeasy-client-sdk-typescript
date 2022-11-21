@@ -1,4 +1,4 @@
-import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
 
 
 
@@ -7,18 +7,18 @@ import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
  * An UnboundedRequest represents the HAR content capture by Speakeasy when logging a request.
 **/
 export class UnboundedRequest extends SpeakeasyBase {
-  @Metadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata({ data: "json, name=created_at" })
   createdAt: Date;
 
-  @Metadata({ data: "json, name=har" })
+  @SpeakeasyMetadata({ data: "json, name=har" })
   har: string;
 
-  @Metadata({ data: "json, name=har_size_bytes" })
+  @SpeakeasyMetadata({ data: "json, name=har_size_bytes" })
   harSizeBytes: number;
 
-  @Metadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata({ data: "json, name=request_id" })
   requestId: string;
 
-  @Metadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
   workspaceId: string;
 }
