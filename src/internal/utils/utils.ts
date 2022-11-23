@@ -1,8 +1,8 @@
 import "reflect-metadata";
 
 import {
-  GetSimplePathParams,
   ParamDecorator,
+  getSimplePathParams,
   ppMetadataKey,
 } from "./pathparams";
 
@@ -135,7 +135,7 @@ export function SpeakeasyMetadata<
   };
 }
 
-export function ReplaceParameters(
+export function replaceParameters(
   stringWithParams: string,
   params: Map<string, string>
 ): string {
@@ -147,7 +147,7 @@ export function ReplaceParameters(
   return res;
 }
 
-export function GenerateURL(
+export function generateURL(
   serverURL: string,
   path: string,
   pathParams: any
@@ -158,7 +158,7 @@ export function GenerateURL(
   fieldNames.forEach((fname) => {
     const ppAnn: string = Reflect.getMetadata(ppMetadataKey, pathParams, fname);
     if (ppAnn == null) return;
-    const ppDecorator: ParamDecorator = ParseParamDecorator(
+    const ppDecorator: ParamDecorator = parseParamDecorator(
       ppAnn,
       fname,
       "simple",
@@ -167,7 +167,7 @@ export function GenerateURL(
     if (ppDecorator == null) return;
     switch (ppDecorator.Style) {
       case "simple":
-        const simpleParams: Map<string, string> = GetSimplePathParams(
+        const simpleParams: Map<string, string> = getSimplePathParams(
           ppDecorator.ParamName,
           pathParams[fname],
           ppDecorator.Explode
@@ -177,10 +177,10 @@ export function GenerateURL(
         });
     }
   });
-  return ReplaceParameters(url, parsedParameters);
+  return replaceParameters(url, parsedParameters);
 }
 
-export function ParseParamDecorator(
+export function parseParamDecorator(
   ann: string,
   fName: string,
   defaultStyle: string,

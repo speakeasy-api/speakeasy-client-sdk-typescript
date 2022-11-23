@@ -34,7 +34,7 @@ export class Requests {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/eventlog/{requestID}/generate/postman", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -50,12 +50,12 @@ export class Requests {
         const res: operations.GenerateRequestPostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.postmanCollection = httpRes?.data;
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -79,7 +79,7 @@ export class Requests {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/eventlog/{requestID}", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/eventlog/{requestID}", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -95,12 +95,12 @@ export class Requests {
         const res: operations.GetRequestFromEventLogResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.unboundedRequest = httpRes?.data;
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -131,7 +131,7 @@ export class Requests {
     
     const client: AxiosInstance = this._securityClient!;
     
-    const qpSerializer: ParamsSerializerOptions = utils.GetQueryParamSerializer(req.queryParams);
+    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
       ...config,
@@ -151,12 +151,12 @@ export class Requests {
         const res: operations.QueryEventLogResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.boundedRequests = httpRes?.data;
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;

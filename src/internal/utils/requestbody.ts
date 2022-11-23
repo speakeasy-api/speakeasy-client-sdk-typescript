@@ -1,12 +1,13 @@
-import FormData from "form-data";
 import { createReadStream, writeFileSync } from "fs";
+
+import FormData from "form-data";
 import { join } from "path";
 import qs from "qs";
 
 const requestMetadataKey = "request";
 const mpFormMetadataKey = "multipart_form";
 
-export function SerializeRequestBody(request: any): [object, any] {
+export function serializeRequestBody(request: any): [object, any] {
   const fieldNames: string[] = Object.getOwnPropertyNames(request);
   let [requestHeaders, requestBody]: [object, any] = [{}, {}];
   fieldNames.forEach((fname) => {
@@ -17,11 +18,11 @@ export function SerializeRequestBody(request: any): [object, any] {
     );
     if (requestAnn == null) return;
     const requestDecorator: RequestDecorator =
-      ParseRequestDecorator(requestAnn);
+      parseRequestDecorator(requestAnn);
     switch (requestDecorator.MediaType) {
       case "multipart/form-data":
       case "multipart/mixed":
-        requestBody = EncodeMultipartFormData(request[fname]);
+        requestBody = encodeMultipartFormData(request[fname]);
         requestHeaders = (requestBody as FormData).getHeaders();
         break;
       case "application/x-www-form-urlencoded":
@@ -42,7 +43,7 @@ export function SerializeRequestBody(request: any): [object, any] {
   return [requestHeaders, requestBody];
 }
 
-function EncodeMultipartFormData(form: any): FormData {
+function encodeMultipartFormData(form: any): FormData {
   const formData: FormData = new FormData();
   const fieldNames: string[] = Object.getOwnPropertyNames(form);
   fieldNames.forEach((fname) => {
@@ -53,9 +54,9 @@ function EncodeMultipartFormData(form: any): FormData {
     );
     if (mpFormAnn == null) return;
     const mpFormDecorator: MultipartFormDecorator =
-      ParseMultipartFormDecorator(mpFormAnn);
+      parseMultipartFormDecorator(mpFormAnn);
     if (mpFormDecorator.File)
-      return EncodeMultipartFormDataFile(formData, form[fname]);
+      return encodeMultipartFormDataFile(formData, form[fname]);
     else if (mpFormDecorator.JSON) {
       formData.append(mpFormDecorator.Name, { ...form[fname] });
     } else {
@@ -71,7 +72,7 @@ function EncodeMultipartFormData(form: any): FormData {
   return formData;
 }
 
-function EncodeMultipartFormDataFile(formData: FormData, file: any): FormData {
+function encodeMultipartFormDataFile(formData: FormData, file: any): FormData {
   if (typeof file !== "object" || Array.isArray(file) || file == null) {
     throw new Error("invalid type for multipart/form-data file");
   }
@@ -88,7 +89,7 @@ function EncodeMultipartFormDataFile(formData: FormData, file: any): FormData {
     );
     if (mpFormAnn == null) return;
     const mpFormDecorator: MultipartFormDecorator =
-      ParseMultipartFormDecorator(mpFormAnn);
+      parseMultipartFormDecorator(mpFormAnn);
     if (!mpFormDecorator.Content && mpFormDecorator.Name == "") return;
     if (mpFormDecorator.Content) content = file[fname];
     else {
@@ -109,7 +110,7 @@ function EncodeMultipartFormDataFile(formData: FormData, file: any): FormData {
   return formData;
 }
 
-function ParseMultipartFormDecorator(
+function parseMultipartFormDecorator(
   mpFormAnn: string
 ): MultipartFormDecorator {
   // example "name=file"
@@ -152,7 +153,7 @@ class MultipartFormDecorator {
   }
 }
 
-function ParseRequestDecorator(requestAnn: string): RequestDecorator {
+function parseRequestDecorator(requestAnn: string): RequestDecorator {
   // example "media_type=multipart/form-data"
   const requestDecorator: RequestDecorator = new RequestDecorator(
     "application/octet-stream"

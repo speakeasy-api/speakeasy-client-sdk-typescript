@@ -15,25 +15,25 @@ export const ServerList = [
 	"https://api.prod.speakeasyapi.dev",
 ] as const;
 
-export function WithServerURL(
+export function withServerURL(
   serverURL: string,
   params?: Map<string, string>
 ): OptsFunc {
   return (sdk: SDK) => {
     if (params != null) {
-      serverURL = utils.ReplaceParameters(serverURL, params);
+      serverURL = utils.replaceParameters(serverURL, params);
     }
     sdk._serverURL = serverURL;
   };
 }
 
-export function WithClient(client: AxiosInstance): OptsFunc {
+export function withClient(client: AxiosInstance): OptsFunc {
   return (sdk: SDK) => {
     sdk._defaultClient = client;
   };
 }
 
-export function WithSecurity(security: Security): OptsFunc {
+export function withSecurity(security: Security): OptsFunc {
   if (!(security instanceof utils.SpeakeasyBase)) {
     security = new Security(security);
   }
@@ -56,7 +56,7 @@ export class SDK {
   public _security?: Security;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.3.0";
+  private _sdkVersion = "0.3.1";
   private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
@@ -71,7 +71,7 @@ export class SDK {
 
     if (!this._securityClient) {
       if (this._security) {
-        this._securityClient = utils.CreateSecurityClient(
+        this._securityClient = utils.createSecurityClient(
           this._defaultClient,
           this._security
         );

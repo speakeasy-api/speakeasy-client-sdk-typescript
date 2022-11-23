@@ -2,14 +2,14 @@ import { AxiosInstance } from "axios";
 
 const securityMetadataKey = "security";
 
-export function CreateSecurityClient(
+export function createSecurityClient(
   client: AxiosInstance,
   security: any
 ): AxiosInstance {
-  return ParseSecurityClass(client, security);
+  return parseSecurityClass(client, security);
 }
 
-function ParseSecurityDecorator(securityAnn: string): SecurityDecorator {
+function parseSecurityDecorator(securityAnn: string): SecurityDecorator {
   // scheme=true;type=apiKey;subtype=header"
   let option = false;
   let scheme = false;
@@ -46,7 +46,7 @@ function ParseSecurityDecorator(securityAnn: string): SecurityDecorator {
   );
 }
 
-function ParseSecurityClass(
+function parseSecurityClass(
   client: AxiosInstance,
   security: any
 ): AxiosInstance {
@@ -59,19 +59,19 @@ function ParseSecurityClass(
     );
     if (securityAnn == null) return;
     const securityDecorator: SecurityDecorator =
-      ParseSecurityDecorator(securityAnn);
+      parseSecurityDecorator(securityAnn);
     if (securityDecorator == null) return;
     if (securityDecorator.Option) {
-      return ParseSecurityOption(client, security[fname]);
+      return parseSecurityOption(client, security[fname]);
     } else if (securityDecorator.Scheme) {
-      return ParseSecurityScheme(client, securityDecorator, security[fname]);
+      return parseSecurityScheme(client, securityDecorator, security[fname]);
     }
   });
 
   return client;
 }
 
-function ParseSecurityOption(
+function parseSecurityOption(
   client: AxiosInstance,
   optionType: any
 ): AxiosInstance {
@@ -84,23 +84,23 @@ function ParseSecurityOption(
     );
     if (securityAnn == null) return;
     const securityDecorator: SecurityDecorator =
-      ParseSecurityDecorator(securityAnn);
+      parseSecurityDecorator(securityAnn);
     if (securityDecorator != null && securityDecorator.Scheme) return;
     if (securityDecorator.Scheme) {
-      return ParseSecurityScheme(client, securityDecorator, optionType[fname]);
+      return parseSecurityScheme(client, securityDecorator, optionType[fname]);
     }
   });
 
   return client;
 }
 
-function ParseSecurityScheme(
+function parseSecurityScheme(
   client: AxiosInstance,
   schemeDecorator: SecurityDecorator,
   scheme: any
 ): AxiosInstance {
   if (schemeDecorator.Type === "http" && schemeDecorator.SubType === "basic") {
-    return ParseBasicAuthScheme(client, scheme);
+    return parseBasicAuthScheme(client, scheme);
   }
 
   const fieldNames: string[] = Object.getOwnPropertyNames(scheme);
@@ -112,7 +112,7 @@ function ParseSecurityScheme(
     );
     if (securityAnn == null) return;
     const securityDecorator: SecurityDecorator =
-      ParseSecurityDecorator(securityAnn);
+      parseSecurityDecorator(securityAnn);
     if (securityDecorator == null || securityDecorator.Name === "") return;
 
     switch (schemeDecorator.Type) {
@@ -162,7 +162,7 @@ function ParseSecurityScheme(
   return client;
 }
 
-function ParseBasicAuthScheme(
+function parseBasicAuthScheme(
   client: AxiosInstance,
   scheme: any
 ): AxiosInstance {
@@ -178,7 +178,7 @@ function ParseBasicAuthScheme(
     );
     if (securityAnn == null) return;
     const securityDecorator: SecurityDecorator =
-      ParseSecurityDecorator(securityAnn);
+      parseSecurityDecorator(securityAnn);
     if (securityDecorator == null || securityDecorator.Name === "") return;
 
     switch (securityDecorator.Name) {

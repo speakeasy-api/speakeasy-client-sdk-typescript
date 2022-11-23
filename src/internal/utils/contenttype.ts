@@ -1,4 +1,4 @@
-export function MatchContentType(
+export function matchContentType(
   contentType: string,
   pattern: string
 ): boolean {

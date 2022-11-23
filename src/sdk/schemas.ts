@@ -32,7 +32,7 @@ export class Schemas {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -50,7 +50,7 @@ export class Schemas {
           case httpRes?.status == 200:
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -74,7 +74,7 @@ export class Schemas {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/download", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -90,10 +90,10 @@ export class Schemas {
         const res: operations.DownloadSchemaResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.schema = httpRes?.data;
             }
-            if (utils.MatchContentType(contentType, `application/x-yaml`)) {
+            if (utils.matchContentType(contentType, `application/x-yaml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -101,7 +101,7 @@ export class Schemas {
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -125,7 +125,7 @@ export class Schemas {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -141,10 +141,10 @@ export class Schemas {
         const res: operations.DownloadSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.schema = httpRes?.data;
             }
-            if (utils.MatchContentType(contentType, `application/x-yaml`)) {
+            if (utils.matchContentType(contentType, `application/x-yaml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
                 let out: Uint8Array = new Uint8Array(resBody.length);
                 for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
@@ -152,7 +152,7 @@ export class Schemas {
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -179,7 +179,7 @@ export class Schemas {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -195,12 +195,12 @@ export class Schemas {
         const res: operations.GetSchemaResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.schema = httpRes?.data;
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -224,7 +224,7 @@ export class Schemas {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -240,12 +240,12 @@ export class Schemas {
         const res: operations.GetSchemaDiffResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.schemaDiff = httpRes?.data;
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -272,7 +272,7 @@ export class Schemas {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -288,12 +288,12 @@ export class Schemas {
         const res: operations.GetSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.schema = httpRes?.data;
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -320,7 +320,7 @@ export class Schemas {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schemas", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -336,12 +336,12 @@ export class Schemas {
         const res: operations.GetSchemasResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.schemata = httpRes?.data;
             }
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;
@@ -368,12 +368,12 @@ export class Schemas {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.GenerateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/schema", req.pathParams);
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.SerializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -402,7 +402,7 @@ export class Schemas {
           case httpRes?.status == 200:
             break;
           default:
-            if (utils.MatchContentType(contentType, `application/json`)) {
+            if (utils.matchContentType(contentType, `application/json`)) {
                 res.error = httpRes?.data;
             }
             break;

@@ -1,9 +1,9 @@
 export const ppMetadataKey = "pathParam";
 
-export function GetSimplePathParams(
-    paramName: string,
-    paramValue: any,
-    explode: boolean
+export function getSimplePathParams(
+  paramName: string,
+  paramValue: any,
+  explode: boolean
 ): Map<string, string> {
   const pathParams: Map<string, string> = new Map<string, string>();
   const ppVals: string[] = [];
@@ -35,8 +35,8 @@ export function GetSimplePathParams(
 function isEmpty(value: any): boolean {
   // check for undefined, null, and NaN
   let res: boolean = false;
-  if (typeof value === 'number') res = Number.isNaN(value);
-  else if (typeof value === 'string') res = value === "";
+  if (typeof value === "number") res = Number.isNaN(value);
+  else if (typeof value === "string") res = value === "";
   return res || value == null;
 }
 
@@ -46,10 +46,10 @@ export class ParamDecorator {
   ParamName: string;
   Serialization?: string;
   constructor(
-      Style: string,
-      Explode: boolean,
-      ParamName: string,
-      Serialization?: string
+    Style: string,
+    Explode: boolean,
+    ParamName: string,
+    Serialization?: string
   ) {
     this.Style = Style;
     this.Explode = Explode;
