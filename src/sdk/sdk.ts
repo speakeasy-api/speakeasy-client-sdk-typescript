@@ -56,7 +56,7 @@ export class SDK {
   public _security?: Security;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.3.1";
+  private _sdkVersion = "0.3.2";
   private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
