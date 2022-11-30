@@ -56,12 +56,12 @@ export class SDK {
   public _security?: Security;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.3.2";
+  private _sdkVersion = "0.3.3";
   private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
-    if (this._serverURL == "") {
+    if (!this._serverURL) {
       this._serverURL = ServerList[0];
     }
 
