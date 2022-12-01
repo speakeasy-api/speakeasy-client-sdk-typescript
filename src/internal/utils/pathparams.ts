@@ -1,3 +1,5 @@
+import { parseParamDecorator } from "./utils";
+
 export const ppMetadataKey = "pathParam";
 
 export function getSimplePathParams(
@@ -20,10 +22,26 @@ export function getSimplePathParams(
     pathParams.set(paramName, ppVals.join(","));
   } else if (paramValue instanceof Object) {
     Object.getOwnPropertyNames(paramValue).forEach((paramName: string) => {
+      const ppAnn: string = Reflect.getMetadata(
+        ppMetadataKey,
+        paramValue,
+        paramName
+      );
+      if (ppAnn == null) return;
+      const ppDecorator: ParamDecorator = parseParamDecorator(
+        ppAnn,
+        paramName,
+        "simple",
+        explode
+      );
+      if (ppDecorator == null) return;
+
       const paramFieldValue = paramValue[paramName];
+
       if (isEmpty(paramFieldValue)) return;
-      else if (explode) ppVals.push(`${paramName}=${paramFieldValue}`);
-      else ppVals.push(`${paramName},${paramFieldValue}`);
+      else if (explode)
+        ppVals.push(`${ppDecorator.ParamName}=${paramFieldValue}`);
+      else ppVals.push(`${ppDecorator.ParamName},${paramFieldValue}`);
     });
     pathParams.set(paramName, ppVals.join(","));
   } else {

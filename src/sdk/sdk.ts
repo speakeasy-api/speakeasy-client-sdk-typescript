@@ -11,9 +11,11 @@ import { Schemas } from "./schemas";
 
 type OptsFunc = (sdk: SDK) => void;
 
-export const ServerList = [
-	"https://api.prod.speakeasyapi.dev",
-] as const;
+export const ServerProd = "prod";
+
+export const ServerList: Record<string, string> = {
+	[ServerProd]: "https://api.prod.speakeasyapi.dev",
+} as const;
 
 export function withServerURL(
   serverURL: string,
@@ -24,6 +26,18 @@ export function withServerURL(
       serverURL = utils.replaceParameters(serverURL, params);
     }
     sdk._serverURL = serverURL;
+  };
+}
+
+export function withServer(
+  server: string,
+  params?: Map<string, string>
+): OptsFunc {
+  return (sdk: SDK) => {
+    if (!ServerList.hasOwnProperty(server)) {
+      throw new Error("Invalid server: " + server);
+    }
+    withServerURL(ServerList[server], params)(sdk);
   };
 }
 
@@ -56,13 +70,13 @@ export class SDK {
   public _security?: Security;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.3.3";
+  private _sdkVersion = "0.4.0";
   private _genVersion = "internal";
 
   constructor(...opts: OptsFunc[]) {
     opts.forEach((o) => o(this));
     if (!this._serverURL) {
-      this._serverURL = ServerList[0];
+      this._serverURL = ServerList[ServerProd];
     }
 
     if (!this._defaultClient) {

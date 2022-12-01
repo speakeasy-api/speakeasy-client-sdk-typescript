@@ -9,7 +9,7 @@ export function getQueryParamSerializer(
   queryParams: any
 ): ParamsSerializerOptions {
   let paramsSerializer: ParamsSerializerOptions = {
-    encode: formSerializerExplode,
+    serialize: formSerializerExplode,
   };
   if (queryParams == null) return paramsSerializer;
   const fieldNames: string[] = Object.getOwnPropertyNames(queryParams);
@@ -19,7 +19,7 @@ export function getQueryParamSerializer(
       queryParams,
       fname
     );
-    if (qpAnn == null) return { encode: (params: unknown) => "" };
+    if (qpAnn == null) return { serialize: (params: any) => "" };
     const qpDecorator: ParamDecorator = parseParamDecorator(
       qpAnn,
       fname,
@@ -29,7 +29,7 @@ export function getQueryParamSerializer(
     if (qpDecorator == null) return;
     if (qpDecorator.Serialization === "json")
       paramsSerializer = {
-        encode: (params: unknown) => {
+        serialize: (params: any) => {
           return JSON.stringify(params);
         },
       };
@@ -37,7 +37,7 @@ export function getQueryParamSerializer(
       switch (qpDecorator.Style) {
         case "deepObject":
           paramsSerializer = {
-            encode: (params: unknown) => {
+            encode: (params: any) => {
               return qs.stringify(params, { arrayFormat: "repeat" });
             },
           };
@@ -45,11 +45,11 @@ export function getQueryParamSerializer(
         case "form":
           if (qpDecorator.Explode) {
             paramsSerializer = {
-              encode: formSerializerExplode,
+              serialize: formSerializerExplode,
             };
           } else {
             paramsSerializer = {
-              encode: formSerializer,
+              serialize: formSerializer,
             };
           }
           break;
@@ -62,7 +62,7 @@ export function getQueryParamSerializer(
   return paramsSerializer;
 }
 
-function formSerializer(params: unknown): string {
+function formSerializer(params: any): string {
   const query: string[] = [];
   Object.entries(Object.assign({}, params)).forEach(([key, value]) => {
     if (value !== Object(value)) query.push(`${key}=${value}`);
@@ -79,7 +79,7 @@ function formSerializer(params: unknown): string {
   return query.join("&");
 }
 
-function formSerializerExplode(params: unknown): string {
+function formSerializerExplode(params: any): string {
   const query: string[] = [];
   Object.entries(Object.assign({}, params)).forEach(([key, value]) => {
     if (value !== Object(value)) query.push(`${key}=${value}`);
