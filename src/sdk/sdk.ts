@@ -70,7 +70,7 @@ export class SDK {
   public _security?: Security;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.5.0";
+  private _sdkVersion = "0.5.1";
   private _genVersion = "";
 
   constructor(...opts: OptsFunc[]) {

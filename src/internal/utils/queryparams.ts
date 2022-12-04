@@ -37,8 +37,8 @@ export function getQueryParamSerializer(
       switch (qpDecorator.Style) {
         case "deepObject":
           paramsSerializer = {
-            encode: (params: any) => {
-              return qs.stringify(params, { arrayFormat: "repeat" });
+            serialize: (params: any) => {
+              return qs.stringify(params);
             },
           };
           break;
