@@ -1,19 +1,20 @@
-import { createReadStream, writeFileSync } from "fs";
-
 import FormData from "form-data";
-import { join } from "path";
 import qs from "qs";
 
 const requestMetadataKey = "request";
 const mpFormMetadataKey = "multipart_form";
 
 export function serializeRequestBody(request: any): [object, any] {
-  const fieldNames: string[] = Object.getOwnPropertyNames(request);
+  if (!request.hasOwnProperty(requestMetadataKey)) {
+    throw new Error("request body not found");
+  }
+  const requestBodyObj = request[requestMetadataKey];
+  const fieldNames: string[] = Object.getOwnPropertyNames(requestBodyObj);
   let [requestHeaders, requestBody]: [object, any] = [{}, {}];
   fieldNames.forEach((fname) => {
     const requestAnn: string = Reflect.getMetadata(
       requestMetadataKey,
-      request,
+      requestBodyObj,
       fname
     );
     if (requestAnn == null) return;
@@ -22,22 +23,35 @@ export function serializeRequestBody(request: any): [object, any] {
     switch (requestDecorator.MediaType) {
       case "multipart/form-data":
       case "multipart/mixed":
-        requestBody = encodeMultipartFormData(request[fname]);
+        requestBody = encodeMultipartFormData(requestBodyObj[fname]);
         requestHeaders = (requestBody as FormData).getHeaders();
         break;
       case "application/x-www-form-urlencoded":
         [requestHeaders, requestBody] = [
           { "Content-Type": `${requestDecorator.MediaType}` },
-          qs.stringify({ ...request[fname] }),
+          qs.stringify(requestBodyObj[fname]),
         ];
         break;
       case "application/json":
       case "text/json":
-      default:
         [requestHeaders, requestBody] = [
           { "Content-Type": `${requestDecorator.MediaType}` },
-          { ...request[fname] },
+          { ...requestBodyObj[fname] },
         ];
+        break;
+      default:
+        requestBody = requestBodyObj[fname];
+        const requestBodyType: string = typeof requestBody;
+        if (
+            requestBodyType === "string" ||
+            requestBody instanceof String ||
+            requestBody instanceof Uint8Array
+        )
+          requestHeaders = { "Content-Type": `${requestDecorator.MediaType}` };
+        else
+          throw new Error(
+              `invalid request body type ${requestBodyType} for mediaType ${requestDecorator.MediaType}`
+          );
     }
   });
   return [requestHeaders, requestBody];
@@ -58,14 +72,14 @@ function encodeMultipartFormData(form: any): FormData {
     if (mpFormDecorator.File)
       return encodeMultipartFormDataFile(formData, form[fname]);
     else if (mpFormDecorator.JSON) {
-      formData.append(mpFormDecorator.Name, { ...form[fname] });
+      formData.append(mpFormDecorator.Name, JSON.stringify(form[fname]));
     } else {
       if (Array.isArray(form[fname])) {
         form[fname].forEach((val: any) => {
-          formData.append(mpFormDecorator.Name + "[]", JSON.stringify(val));
+          formData.append(mpFormDecorator.Name + "[]", String(val));
         });
       } else {
-        formData.append(mpFormDecorator.Name, JSON.stringify(form[fname]));
+        formData.append(mpFormDecorator.Name, String(form[fname]));
       }
     }
   });
@@ -98,14 +112,12 @@ function encodeMultipartFormDataFile(formData: FormData, file: any): FormData {
     }
   });
 
-  if (mpFormDecoratorName === "" || fileName === "" || content == null)
+  if (mpFormDecoratorName === "" || fileName === "" || content == null) {
     throw new Error("invalid multipart/form-data file");
-  writeFileSync(join(__dirname, fileName), content, {
-    flag: "w",
-  });
+  }
   formData.append(
     mpFormDecoratorName,
-    createReadStream(join(__dirname, fileName))
+    Buffer.from(content)
   );
   return formData;
 }

@@ -1,5 +1,4 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import FormData from "form-data";
 import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
 
@@ -133,16 +132,13 @@ export class Metadata {
     
     const client: AxiosInstance = this._securityClient!;
     const headers = {...reqBodyHeaders, ...config?.headers};
-    let body: any;
-    if (reqBody instanceof FormData) body = reqBody;
-    else body = {...reqBody};
-    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
     return client
       .request({
         url: url,
         method: "post",
         headers: headers,
-        data: body, 
+        data: reqBody, 
         ...config,
       }).then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";

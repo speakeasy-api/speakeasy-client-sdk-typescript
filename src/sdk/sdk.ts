@@ -17,43 +17,14 @@ export const ServerList: Record<string, string> = {
 	[ServerProd]: "https://api.prod.speakeasyapi.dev",
 } as const;
 
-export function withServerURL(
-  serverURL: string,
-  params?: Map<string, string>
-): OptsFunc {
-  return (sdk: SDK) => {
-    if (params != null) {
-      serverURL = utils.replaceParameters(serverURL, params);
-    }
-    sdk._serverURL = serverURL;
-  };
-}
 
-export function withServer(
-  server: string,
-  params?: Map<string, string>
-): OptsFunc {
-  return (sdk: SDK) => {
-    if (!ServerList.hasOwnProperty(server)) {
-      throw new Error("Invalid server: " + server);
-    }
-    withServerURL(ServerList[server], params)(sdk);
-  };
-}
 
-export function withClient(client: AxiosInstance): OptsFunc {
-  return (sdk: SDK) => {
-    sdk._defaultClient = client;
-  };
-}
+export type SDKProps = {
+  defaultClient?: AxiosInstance;
 
-export function withSecurity(security: Security): OptsFunc {
-  if (!(security instanceof utils.SpeakeasyBase)) {
-    security = new Security(security);
-  }
-  return (sdk: SDK) => {
-    sdk._security = security;
-  };
+  security?: Security;
+
+  serverUrl?: string;
 }
 
 /* SDK Documentation: https://docs.speakeasyapi.dev - The Speakeasy Platform Documentation*/
@@ -67,31 +38,22 @@ export class SDK {
 
   public _defaultClient: AxiosInstance;
   public _securityClient: AxiosInstance;
-  public _security?: Security;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.5.1";
+  private _sdkVersion = "0.5.2";
   private _genVersion = "";
 
-  constructor(...opts: OptsFunc[]) {
-    opts.forEach((o) => o(this));
-    if (!this._serverURL) {
-      this._serverURL = ServerList[ServerProd];
-    }
+  constructor(props: SDKProps) {
+    this._serverURL = props.serverUrl ?? ServerList[ServerProd];
 
-    if (!this._defaultClient) {
-      this._defaultClient = axios.create({ baseURL: this._serverURL });
-    }
-
-    if (!this._securityClient) {
-      if (this._security) {
-        this._securityClient = utils.createSecurityClient(
-          this._defaultClient,
-          this._security
-        );
-      } else {
-        this._securityClient = this._defaultClient;
-      }
+    this._defaultClient = props.defaultClient ?? axios.create({ baseURL: this._serverURL });
+    if (props.security) {
+      this._securityClient = utils.createSecurityClient(
+        this._defaultClient,
+        props.security
+      );
+    } else {
+      this._securityClient = this._defaultClient;
     }
     
     this.apiEndpoints = new ApiEndpoints(
