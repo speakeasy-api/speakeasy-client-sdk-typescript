@@ -69,6 +69,12 @@ function formSerializer(params: any): string {
     else if (Array.isArray(value)) {
       const values: string = value.join(",");
       query.push(`${key}=${values}`);
+    } else if (value instanceof Map) {
+      const values: string[] = [];
+      value.forEach((v, k) => {
+        values.push(`${k},${v}`);
+      });
+      query.push(`${key}=${values.join(",")}`);
     } else {
       const values: string = Object.entries(Object.assign({}, value))
         .map(([objKey, objValue]) => `${objKey},${objValue}`)
@@ -85,6 +91,12 @@ function formSerializerExplode(params: any): string {
     if (value !== Object(value)) query.push(`${key}=${value}`);
     else if (Array.isArray(value)) {
       query.push(value.map((aValue) => `${key}=${aValue}`).join("&"));
+    } else if (value instanceof Map) {
+      const values: string[] = [];
+      value.forEach((v, k) => {
+        values.push(`${k}=${v}`);
+      });
+      query.push(values.join("&"));
     } else
       query.push(
         Object.entries(Object.assign({}, value))
