@@ -17,7 +17,7 @@ export class GetAllApiVersionsOp extends SpeakeasyBase {
 
 export class GetAllApiVersionsQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
-  metadata?: Map<string, string[]>;
+  metadata?: Record<string, string[]>;
 
   @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
   op?: GetAllApiVersionsOp;

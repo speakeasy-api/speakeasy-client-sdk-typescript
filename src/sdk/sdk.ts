@@ -40,7 +40,7 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.5.4";
+  private _sdkVersion = "0.5.5";
   private _genVersion = "";
 
   constructor(props: SDKProps) {

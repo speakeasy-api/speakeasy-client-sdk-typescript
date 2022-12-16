@@ -23,7 +23,7 @@ export class BoundedRequest extends SpeakeasyBase {
   latency: number;
 
   @SpeakeasyMetadata({ data: "json, name=metadata" })
-  metadata?: Map<string, string[]>;
+  metadata?: Record<string, string[]>;
 
   @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;

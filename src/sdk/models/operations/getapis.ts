@@ -11,7 +11,7 @@ export class GetApisOp extends SpeakeasyBase {
 
 export class GetApisQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
-  metadata?: Map<string, string[]>;
+  metadata?: Record<string, string[]>;
 
   @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
   op?: GetApisOp;

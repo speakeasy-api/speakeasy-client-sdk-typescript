@@ -23,5 +23,5 @@ export class SchemaDiff extends SpeakeasyBase {
   deletions: string[];
 
   @SpeakeasyMetadata({ data: "json, name=modifications", elemType: SchemaDiffValueChange })
-  modifications: Map<string, SchemaDiffValueChange>;
+  modifications: Record<string, SchemaDiffValueChange>;
 }

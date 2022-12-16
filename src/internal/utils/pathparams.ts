@@ -1,4 +1,5 @@
 import { parseParamDecorator } from "./utils";
+import { isStringRecord, isNumberRecord, isBooleanRecord, isEmpty } from "./utils";
 
 export const ppMetadataKey = "pathParam";
 
@@ -14,29 +15,29 @@ export function getSimplePathParams(
       ppVals.push(String(param));
     });
     pathParams.set(paramName, ppVals.join(","));
-  } else if (paramValue instanceof Map) {
-    paramValue.forEach((paramVal, paramName) => {
-      if (explode) ppVals.push(`${paramName}=${paramVal}`);
-      else ppVals.push(`${paramName},${paramVal}`);
+  } else if (isStringRecord(paramValue) || isNumberRecord(paramValue) || isBooleanRecord(paramValue)) {
+    Object.getOwnPropertyNames(paramValue).forEach((paramKey: string) => {
+      if (explode) ppVals.push(`${paramKey}=${paramValue[paramKey]}`);
+      else ppVals.push(`${paramKey},${paramValue[paramKey]}`);
     });
     pathParams.set(paramName, ppVals.join(","));
   } else if (paramValue instanceof Object) {
-    Object.getOwnPropertyNames(paramValue).forEach((paramName: string) => {
+    Object.getOwnPropertyNames(paramValue).forEach((paramKey: string) => {
       const ppAnn: string = Reflect.getMetadata(
         ppMetadataKey,
         paramValue,
-        paramName
+        paramKey
       );
       if (ppAnn == null) return;
       const ppDecorator: ParamDecorator = parseParamDecorator(
         ppAnn,
-        paramName,
+        paramKey,
         "simple",
         explode
       );
       if (ppDecorator == null) return;
 
-      const paramFieldValue = paramValue[paramName];
+      const paramFieldValue = paramValue[paramKey];
 
       if (isEmpty(paramFieldValue)) return;
       else if (explode)
@@ -48,14 +49,6 @@ export function getSimplePathParams(
     pathParams.set(paramName, String(paramValue));
   }
   return pathParams;
-}
-
-function isEmpty(value: any): boolean {
-  // check for undefined, null, and NaN
-  let res: boolean = false;
-  if (typeof value === "number") res = Number.isNaN(value);
-  else if (typeof value === "string") res = value === "";
-  return res || value == null;
 }
 
 export class ParamDecorator {
