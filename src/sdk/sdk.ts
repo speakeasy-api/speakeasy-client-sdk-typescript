@@ -9,7 +9,6 @@ import { Metadata } from "./metadata";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
 
-type OptsFunc = (sdk: SDK) => void;
 
 export const ServerProd = "prod";
 
@@ -40,8 +39,8 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.5.6";
-  private _genVersion = "0.15.14";
+  private _sdkVersion = "0.6.0";
+  private _genVersion = "0.16.0";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];

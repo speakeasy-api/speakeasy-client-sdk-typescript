@@ -1,4 +1,4 @@
-import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
 
@@ -59,7 +59,6 @@ export class ApiEndpoints {
 
         return res;
       })
-      .catch((error: AxiosError) => {throw error});
   }
 
   
@@ -107,7 +106,6 @@ export class ApiEndpoints {
 
         return res;
       })
-      .catch((error: AxiosError) => {throw error});
   }
 
   
@@ -155,7 +153,6 @@ export class ApiEndpoints {
 
         return res;
       })
-      .catch((error: AxiosError) => {throw error});
   }
 
   
@@ -202,7 +199,6 @@ export class ApiEndpoints {
 
         return res;
       })
-      .catch((error: AxiosError) => {throw error});
   }
 
   
@@ -247,7 +243,6 @@ export class ApiEndpoints {
 
         return res;
       })
-      .catch((error: AxiosError) => {throw error});
   }
 
   
@@ -292,7 +287,6 @@ export class ApiEndpoints {
 
         return res;
       })
-      .catch((error: AxiosError) => {throw error});
   }
 
   
@@ -337,7 +331,6 @@ export class ApiEndpoints {
 
         return res;
       })
-      .catch((error: AxiosError) => {throw error});
   }
 
   
@@ -398,7 +391,6 @@ export class ApiEndpoints {
 
         return res;
       })
-      .catch((error: AxiosError) => {throw error});
   }
 
 }
