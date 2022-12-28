@@ -39,17 +39,20 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.6.0";
-  private _genVersion = "0.16.0";
+  private _sdkVersion = "0.6.1";
+  private _genVersion = "0.16.1";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
 
     this._defaultClient = props.defaultClient ?? axios.create({ baseURL: this._serverURL });
     if (props.security) {
+      let security: Security = props.security;
+      if (!(security instanceof utils.SpeakeasyBase))
+        security = new Security(security);
       this._securityClient = utils.createSecurityClient(
         this._defaultClient,
-        props.security
+        security
       );
     } else {
       this._securityClient = this._defaultClient;
