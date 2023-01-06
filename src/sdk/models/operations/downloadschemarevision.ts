@@ -5,13 +5,13 @@ import * as shared from "../shared";
 
 export class DownloadSchemaRevisionPathParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  apiId: string;
+  apiID: string;
 
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=revisionID" })
-  revisionId: string;
+  revisionID: string;
 
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  versionId: string;
+  versionID: string;
 }
 
 

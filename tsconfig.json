@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["es2021"],
+    "lib": [
+      "es2021",
+    ],
     "baseUrl": "src",
     "rootDir": "src",
     "outDir": "dist",
@@ -20,7 +22,11 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "declaration": true,
-    "types": ["reflect-metadata"]
+    "types": [
+      "reflect-metadata"
+    ]
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

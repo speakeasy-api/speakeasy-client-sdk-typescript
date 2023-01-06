@@ -5,7 +5,7 @@ import * as shared from "../shared";
 
 export class GenerateRequestPostmanCollectionPathParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=requestID" })
-  requestId: string;
+  requestID: string;
 }
 
 

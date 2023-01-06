@@ -5,13 +5,13 @@ import * as shared from "../shared";
 
 export class GenerateOpenApiSpecForApiEndpointPathParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiEndpointID" })
-  apiEndpointId: string;
+  apiEndpointID: string;
 
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  apiId: string;
+  apiID: string;
 
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  versionId: string;
+  versionID: string;
 }
 
 

@@ -5,16 +5,16 @@ import * as shared from "../shared";
 
 export class GetSchemaDiffPathParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
-  apiId: string;
+  apiID: string;
 
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=baseRevisionID" })
-  baseRevisionId: string;
+  baseRevisionID: string;
 
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=targetRevisionID" })
-  targetRevisionId: string;
+  targetRevisionID: string;
 
   @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
-  versionId: string;
+  versionID: string;
 }
 
 
