@@ -35,12 +35,14 @@ export class Metadata {
     
     const client: AxiosInstance = this._securityClient!;
     
-    return client
-      .request({
-        url: url,
-        method: "delete",
-        ...config,
-      }).then((httpRes: AxiosResponse) => {
+    
+    const r = client.request({
+      url: url,
+      method: "delete",
+      ...config,
+    });
+    
+    return r.then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
@@ -76,12 +78,14 @@ export class Metadata {
     
     const client: AxiosInstance = this._securityClient!;
     
-    return client
-      .request({
-        url: url,
-        method: "get",
-        ...config,
-      }).then((httpRes: AxiosResponse) => {
+    
+    const r = client.request({
+      url: url,
+      method: "get",
+      ...config,
+    });
+    
+    return r.then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
@@ -132,14 +136,16 @@ export class Metadata {
     
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
-    return client
-      .request({
-        url: url,
-        method: "post",
-        headers: headers,
-        data: reqBody, 
-        ...config,
-      }).then((httpRes: AxiosResponse) => {
+    
+    const r = client.request({
+      url: url,
+      method: "post",
+      headers: headers,
+      data: reqBody, 
+      ...config,
+    });
+    
+    return r.then((httpRes: AxiosResponse) => {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
