@@ -23,7 +23,7 @@ export class GetSchemasResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  error?: shared.Error;
+  error?: shared.ErrorT;
 
   @SpeakeasyMetadata({ elemType: shared.Schema })
   schemata?: shared.Schema[];

@@ -1,6 +1,8 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
 
 import { ApiEndpoints } from "./apiendpoints";
 import { Apis } from "./apis";
@@ -39,8 +41,8 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.8.1";
-  private _genVersion = "0.18.1";
+  private _sdkVersion = "0.9.0";
+  private _genVersion = "0.18.3";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
@@ -48,8 +50,8 @@ export class SDK {
     this._defaultClient = props.defaultClient ?? axios.create({ baseURL: this._serverURL });
     if (props.security) {
       let security: Security = props.security;
-      if (!(security instanceof utils.SpeakeasyBase))
-        security = new Security(security);
+      if (!(props.security instanceof utils.SpeakeasyBase))
+        security = new Security(props.security);
       this._securityClient = utils.createSecurityClient(
         this._defaultClient,
         security
@@ -57,6 +59,7 @@ export class SDK {
     } else {
       this._securityClient = this._defaultClient;
     }
+    
     
     this.apiEndpoints = new ApiEndpoints(
       this._defaultClient,
@@ -112,4 +115,42 @@ export class SDK {
       this._genVersion
     );
   }
+  
+  /**
+   * validateApiKey - Validate the current api key.
+  **/
+  validateApiKey(
+    config?: AxiosRequestConfig
+  ): Promise<operations.ValidateApiKeyResponse> {
+    const baseURL: string = this._serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/v1/auth/validate";
+    
+    const client: AxiosInstance = this._securityClient!;
+    
+    
+    const r = client.request({
+      url: url,
+      method: "get",
+      ...config,
+    });
+    
+    return r.then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.ValidateApiKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            break;
+          default:
+            if (utils.matchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+  }
+
 }

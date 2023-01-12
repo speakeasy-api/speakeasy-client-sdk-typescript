@@ -26,7 +26,7 @@ export class GetSchemaRevisionResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  error?: shared.Error;
+  error?: shared.ErrorT;
 
   @SpeakeasyMetadata()
   schema?: shared.Schema;

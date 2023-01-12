@@ -29,7 +29,7 @@ export class GetEmbedAccessTokenResponse extends SpeakeasyBase {
   embedAccessTokenResponse?: shared.EmbedAccessTokenResponse;
 
   @SpeakeasyMetadata()
-  error?: shared.Error;
+  error?: shared.ErrorT;
 
   @SpeakeasyMetadata()
   statusCode: number;

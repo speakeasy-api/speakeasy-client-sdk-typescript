@@ -7,7 +7,14 @@ export function serializeRequestBody(request: any): [object, any] {
     if (!request.hasOwnProperty(requestMetadataKey)) {
         throw new Error("request body not found");
     }
-    const requestBodyObj = request[requestMetadataKey];
+    let requestBodyObj = request;
+    const firstLevelRequestAnn: string = Reflect.getMetadata(
+        requestMetadataKey,
+        request,
+        requestMetadataKey
+    );
+    if (firstLevelRequestAnn == null)
+        requestBodyObj = request[requestMetadataKey];
     const fieldNames: string[] = Object.getOwnPropertyNames(requestBodyObj);
     let [requestHeaders, requestBody]: [object, any] = [{}, {}];
     fieldNames.forEach((fname) => {

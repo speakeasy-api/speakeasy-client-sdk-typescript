@@ -23,7 +23,7 @@ export class DownloadSchemaResponse extends SpeakeasyBase {
   contentType: string;
 
   @SpeakeasyMetadata()
-  error?: shared.Error;
+  error?: shared.ErrorT;
 
   @SpeakeasyMetadata()
   schema?: Uint8Array;

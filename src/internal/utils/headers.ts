@@ -1,8 +1,13 @@
 import { AxiosResponseHeaders, RawAxiosResponseHeaders } from "axios";
+import {
+  isBooleanRecord,
+  isEmpty,
+  isNumberRecord,
+  isStringRecord,
+  parseParamDecorator,
+} from "./utils";
 
 import { ParamDecorator } from "./pathparams";
-import { parseParamDecorator } from "./utils";
-import { isStringRecord, isNumberRecord, isBooleanRecord, isEmpty } from "./utils";
 
 export const headerMetadataKey = "header";
 
@@ -35,9 +40,30 @@ export function getHeadersFromRequest(headerParams: any): any {
 
 export function getHeadersFromResponse(
   headers: RawAxiosResponseHeaders | AxiosResponseHeaders
-): Map<string, string[]> {
-  // TODO: convert Axios response headers to map
-  return new Map<string, string[]>();
+): Record<string, string[]> {
+  const reponseHeaders: Record<string, string[]> = {};
+
+  Object.keys(headers).forEach((key) => {
+    const value = headers[key];
+
+    if (!value) return;
+
+    if (Array.isArray(value)) {
+      const h: string[] = [];
+
+      value.forEach((val: any) => {
+        if (val) {
+          h.push(String(val));
+        }
+      });
+
+      reponseHeaders[key] = h;
+    } else {
+      reponseHeaders[key] = [value];
+    }
+  });
+
+  return reponseHeaders;
 }
 
 function serializeHeader(header: any, explode: boolean): string {
@@ -46,7 +72,11 @@ function serializeHeader(header: any, explode: boolean): string {
     header.forEach((val: any) => {
       headerVals.push(String(val));
     });
-  } else if (isStringRecord(header) || isNumberRecord(header) || isBooleanRecord(header)) {
+  } else if (
+    isStringRecord(header) ||
+    isNumberRecord(header) ||
+    isBooleanRecord(header)
+  ) {
     Object.getOwnPropertyNames(header).forEach((headerKey: string) => {
       if (explode) headerVals.push(`${headerKey}=${header[headerKey]}`);
       else headerVals.push(`${headerKey},${header[headerKey]}`);
