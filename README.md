@@ -57,10 +57,6 @@ sdk.Apis.getApis(request).then((res: GetApisResponse | AxiosError) => {
 <!-- Start SDK Available Operations -->
 ## SDK Available Operations
 
-### SDK SDK
-
-* `validateApiKey` - Validate the current api key.
-
 ### ApiEndpoints
 
 * `deleteApiEndpoint` - Delete an ApiEndpoint.

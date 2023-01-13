@@ -29,4 +29,3 @@ export * from "./registerschema";
 export * from "./revokeembedaccesstoken";
 export * from "./upsertapi";
 export * from "./upsertapiendpoint";
-export * from "./validateapikey";
