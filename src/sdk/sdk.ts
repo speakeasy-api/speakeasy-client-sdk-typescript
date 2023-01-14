@@ -1,6 +1,8 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
 import { Security } from "./models/shared";
+
 
 import { ApiEndpoints } from "./apiendpoints";
 import { Apis } from "./apis";
@@ -39,8 +41,8 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.10.0";
-  private _genVersion = "0.20.0";
+  private _sdkVersion = "0.11.0";
+  private _genVersion = "0.20.1";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
@@ -57,6 +59,7 @@ export class SDK {
     } else {
       this._securityClient = this._defaultClient;
     }
+    
     
     this.apiEndpoints = new ApiEndpoints(
       this._defaultClient,
@@ -112,4 +115,42 @@ export class SDK {
       this._genVersion
     );
   }
+  
+  /**
+   * validateApiKey - Validate the current api key.
+  **/
+  validateApiKey(
+    config?: AxiosRequestConfig
+  ): Promise<operations.ValidateApiKeyResponse> {
+    const baseURL: string = this._serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/v1/auth/validate";
+    
+    const client: AxiosInstance = this._securityClient!;
+    
+    
+    const r = client.request({
+      url: url,
+      method: "get",
+      ...config,
+    });
+    
+    return r.then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        const res: operations.ValidateApiKeyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (true) {
+          case httpRes?.status == 200:
+            break;
+          default:
+            if (utils.matchContentType(contentType, `application/json`)) {
+                res.error = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+  }
+
 }
