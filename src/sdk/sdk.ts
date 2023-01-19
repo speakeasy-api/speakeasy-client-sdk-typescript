@@ -41,8 +41,8 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.11.1";
-  private _genVersion = "0.20.5";
+  private _sdkVersion = "0.11.2";
+  private _genVersion = "0.20.6";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
