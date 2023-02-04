@@ -93,6 +93,12 @@ sdk.Apis.getApis(request).then((res: GetApisResponse | AxiosError) => {
 * `getVersionMetadata` - Get all metadata for a particular apiID and versionID.
 * `insertVersionMetadata` - Insert metadata for a particular apiID and versionID.
 
+### Plugins
+
+* `getPlugins` - Get all plugins for the current workspace.
+* `runPlugin` - Run a plugin
+* `upsertPlugin` - Upsert a plugin
+
 ### Requests
 
 * `generateRequestPostmanCollection` - Generate a Postman collection for a particular request.

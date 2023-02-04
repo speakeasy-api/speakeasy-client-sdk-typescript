@@ -1,4 +1,5 @@
 import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { RequestMetadata } from "./requestmetadata";
 
 
 
@@ -22,8 +23,8 @@ export class BoundedRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=latency" })
   latency: number;
 
-  @SpeakeasyMetadata({ data: "json, name=metadata" })
-  metadata?: Record<string, string[]>;
+  @SpeakeasyMetadata({ data: "json, name=metadata", elemType: RequestMetadata })
+  metadata?: RequestMetadata[];
 
   @SpeakeasyMetadata({ data: "json, name=method" })
   method: string;

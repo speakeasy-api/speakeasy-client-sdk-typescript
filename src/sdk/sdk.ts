@@ -8,6 +8,7 @@ import { ApiEndpoints } from "./apiendpoints";
 import { Apis } from "./apis";
 import { Embeds } from "./embeds";
 import { Metadata } from "./metadata";
+import { Plugins } from "./plugins";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
 
@@ -34,6 +35,7 @@ export class SDK {
   public apis: Apis;
   public embeds: Embeds;
   public metadata: Metadata;
+  public plugins: Plugins;
   public requests: Requests;
   public schemas: Schemas;
 
@@ -41,8 +43,8 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.13.0";
-  private _genVersion = "0.22.0";
+  private _sdkVersion = "0.13.1";
+  private _genVersion = "0.22.1";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
@@ -89,6 +91,15 @@ export class SDK {
     );
     
     this.metadata = new Metadata(
+      this._defaultClient,
+      this._securityClient,
+      this._serverURL,
+      this._language,
+      this._sdkVersion,
+      this._genVersion
+    );
+    
+    this.plugins = new Plugins(
       this._defaultClient,
       this._securityClient,
       this._serverURL,
