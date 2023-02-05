@@ -15,9 +15,20 @@ const sdk = new SDK(withSecurity(
 const req: GetApisRequest = {
   queryParams: {
     metadata: {
-      "voluptas": [
-        "expedita",
-        "consequuntur",
+      "deserunt": [
+        "nulla",
+        "id",
+        "vero",
+      ],
+      "perspiciatis": [
+        "nihil",
+        "fuga",
+        "facilis",
+        "eum",
+      ],
+      "iusto": [
+        "saepe",
+        "inventore",
       ],
     },
     op: {

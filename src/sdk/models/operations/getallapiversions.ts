@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class GetAllApiVersionsPathParams extends SpeakeasyBase {
@@ -8,12 +7,10 @@ export class GetAllApiVersionsPathParams extends SpeakeasyBase {
   apiID: string;
 }
 
-
 export class GetAllApiVersionsOp extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, name=and" })
   and: boolean;
 }
-
 
 export class GetAllApiVersionsQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
@@ -23,7 +20,6 @@ export class GetAllApiVersionsQueryParams extends SpeakeasyBase {
   op?: GetAllApiVersionsOp;
 }
 
-
 export class GetAllApiVersionsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: GetAllApiVersionsPathParams;
@@ -31,7 +27,6 @@ export class GetAllApiVersionsRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   queryParams: GetAllApiVersionsQueryParams;
 }
-
 
 export class GetAllApiVersionsResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: shared.Api })

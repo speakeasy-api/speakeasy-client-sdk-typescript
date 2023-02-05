@@ -1,17 +1,14 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
-import { Security } from "./models/shared";
-
-
 import { ApiEndpoints } from "./apiendpoints";
 import { Apis } from "./apis";
 import { Embeds } from "./embeds";
 import { Metadata } from "./metadata";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
 import { Plugins } from "./plugins";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
-
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export const ServerProd = "prod";
 
@@ -43,8 +40,8 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "0.13.1";
-  private _genVersion = "0.22.1";
+  private _sdkVersion = "1.0.0";
+  private _genVersion = "1.0.0";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
@@ -61,7 +58,6 @@ export class SDK {
     } else {
       this._securityClient = this._defaultClient;
     }
-    
     
     this.apiEndpoints = new ApiEndpoints(
       this._defaultClient,

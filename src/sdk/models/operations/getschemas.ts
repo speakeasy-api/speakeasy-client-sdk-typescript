@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class GetSchemasPathParams extends SpeakeasyBase {
@@ -11,12 +10,10 @@ export class GetSchemasPathParams extends SpeakeasyBase {
   versionID: string;
 }
 
-
 export class GetSchemasRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: GetSchemasPathParams;
 }
-
 
 export class GetSchemasResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

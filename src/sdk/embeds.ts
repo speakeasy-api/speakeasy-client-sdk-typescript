@@ -1,6 +1,6 @@
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
-import * as operations from "./models/operations";
 import * as utils from "../internal/utils";
+import * as operations from "./models/operations";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
 
 export class Embeds {
   _defaultClient: AxiosInstance;

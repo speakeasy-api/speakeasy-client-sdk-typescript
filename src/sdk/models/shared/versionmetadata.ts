@@ -1,6 +1,17 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
+// VersionMetadataInput
+/** 
+ * A set of keys and associated values, attached to a particular version of an Api.
+**/
+export class VersionMetadataInput extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "json, name=meta_key" })
+  metaKey: string;
+
+  @SpeakeasyMetadata({ data: "json, name=meta_value" })
+  metaValue: string;
+}
 
 // VersionMetadata
 /** 
@@ -24,17 +35,4 @@ export class VersionMetadata extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "json, name=workspace_id" })
   workspaceId: string;
-}
-
-
-// VersionMetadataInput
-/** 
- * A set of keys and associated values, attached to a particular version of an Api.
-**/
-export class VersionMetadataInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=meta_key" })
-  metaKey: string;
-
-  @SpeakeasyMetadata({ data: "json, name=meta_value" })
-  metaValue: string;
 }

@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class UpsertApiEndpointPathParams extends SpeakeasyBase {
@@ -14,7 +13,6 @@ export class UpsertApiEndpointPathParams extends SpeakeasyBase {
   versionID: string;
 }
 
-
 export class UpsertApiEndpointRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: UpsertApiEndpointPathParams;
@@ -22,7 +20,6 @@ export class UpsertApiEndpointRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.ApiEndpointInput;
 }
-
 
 export class UpsertApiEndpointResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class DeleteApiEndpointPathParams extends SpeakeasyBase {
@@ -14,12 +13,10 @@ export class DeleteApiEndpointPathParams extends SpeakeasyBase {
   versionID: string;
 }
 
-
 export class DeleteApiEndpointRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: DeleteApiEndpointPathParams;
 }
-
 
 export class DeleteApiEndpointResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

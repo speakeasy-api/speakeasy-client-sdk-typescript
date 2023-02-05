@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class FindApiEndpointPathParams extends SpeakeasyBase {
@@ -14,12 +13,10 @@ export class FindApiEndpointPathParams extends SpeakeasyBase {
   versionID: string;
 }
 
-
 export class FindApiEndpointRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: FindApiEndpointPathParams;
 }
-
 
 export class FindApiEndpointResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

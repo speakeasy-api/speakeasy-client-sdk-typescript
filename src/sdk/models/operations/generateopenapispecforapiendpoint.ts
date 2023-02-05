@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class GenerateOpenApiSpecForApiEndpointPathParams extends SpeakeasyBase {
@@ -14,12 +13,10 @@ export class GenerateOpenApiSpecForApiEndpointPathParams extends SpeakeasyBase {
   versionID: string;
 }
 
-
 export class GenerateOpenApiSpecForApiEndpointRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: GenerateOpenApiSpecForApiEndpointPathParams;
 }
-
 
 export class GenerateOpenApiSpecForApiEndpointResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

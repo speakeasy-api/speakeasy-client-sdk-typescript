@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class RunPluginPathParams extends SpeakeasyBase {
@@ -8,12 +7,10 @@ export class RunPluginPathParams extends SpeakeasyBase {
   pluginID: string;
 }
 
-
 export class RunPluginQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
   filters?: shared.Filters;
 }
-
 
 export class RunPluginRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -22,7 +19,6 @@ export class RunPluginRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   queryParams: RunPluginQueryParams;
 }
-
 
 export class RunPluginResponse extends SpeakeasyBase {
   @SpeakeasyMetadata({ elemType: shared.BoundedRequest })

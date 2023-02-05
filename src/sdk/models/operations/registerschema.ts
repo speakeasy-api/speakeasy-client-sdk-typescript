@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class RegisterSchemaPathParams extends SpeakeasyBase {
@@ -11,7 +10,6 @@ export class RegisterSchemaPathParams extends SpeakeasyBase {
   versionID: string;
 }
 
-
 export class RegisterSchemaRequestBodyFile extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
@@ -20,12 +18,10 @@ export class RegisterSchemaRequestBodyFile extends SpeakeasyBase {
   file: string;
 }
 
-
 export class RegisterSchemaRequestBody extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "multipart_form, file=true" })
   file: RegisterSchemaRequestBodyFile;
 }
-
 
 export class RegisterSchemaRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
@@ -34,7 +30,6 @@ export class RegisterSchemaRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
   request: RegisterSchemaRequestBody;
 }
-
 
 export class RegisterSchemaResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

@@ -1,5 +1,4 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
-
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 
 
 export class SchemaDiffValueChange extends SpeakeasyBase {
@@ -9,7 +8,6 @@ export class SchemaDiffValueChange extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "json, name=To" })
   to: string;
 }
-
 
 // SchemaDiff
 /** 

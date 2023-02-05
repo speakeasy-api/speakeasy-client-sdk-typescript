@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class GenerateRequestPostmanCollectionPathParams extends SpeakeasyBase {
@@ -8,12 +7,10 @@ export class GenerateRequestPostmanCollectionPathParams extends SpeakeasyBase {
   requestID: string;
 }
 
-
 export class GenerateRequestPostmanCollectionRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: GenerateRequestPostmanCollectionPathParams;
 }
-
 
 export class GenerateRequestPostmanCollectionResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

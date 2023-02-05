@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class GetEmbedAccessTokenQueryParams extends SpeakeasyBase {
@@ -14,12 +13,10 @@ export class GetEmbedAccessTokenQueryParams extends SpeakeasyBase {
   filters?: shared.Filters;
 }
 
-
 export class GetEmbedAccessTokenRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   queryParams: GetEmbedAccessTokenQueryParams;
 }
-
 
 export class GetEmbedAccessTokenResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

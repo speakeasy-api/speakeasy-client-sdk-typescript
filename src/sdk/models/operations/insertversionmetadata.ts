@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class InsertVersionMetadataPathParams extends SpeakeasyBase {
@@ -11,7 +10,6 @@ export class InsertVersionMetadataPathParams extends SpeakeasyBase {
   versionID: string;
 }
 
-
 export class InsertVersionMetadataRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: InsertVersionMetadataPathParams;
@@ -19,7 +17,6 @@ export class InsertVersionMetadataRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "request, media_type=application/json" })
   request: shared.VersionMetadataInput;
 }
-
 
 export class InsertVersionMetadataResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()

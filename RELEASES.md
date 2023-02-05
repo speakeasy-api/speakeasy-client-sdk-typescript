@@ -1,9 +1,9 @@
 
 
-## Version 0.13.1
+## Version 1.0.0
 ### Changes
 Based on:
 - OpenAPI Doc 0.2.0 https://docs.speakeasyapi.dev/openapi.yaml
-- Speakeasy CLI 0.22.1 https://github.com/speakeasy-api/speakeasy
+- Speakeasy CLI 1.0.0 https://github.com/speakeasy-api/speakeasy
 ### Releases
-- [NPM v0.13.1] https://www.npmjs.com/package/@speakeasy-api/speakeasy-client-sdk-typescript/v/0.13.1 - .
+- [NPM v1.0.0] https://www.npmjs.com/package/@speakeasy-api/speakeasy-client-sdk-typescript/v/1.0.0 - .

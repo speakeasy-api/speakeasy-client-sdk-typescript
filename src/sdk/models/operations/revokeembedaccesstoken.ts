@@ -1,6 +1,5 @@
-import { SpeakeasyMetadata, SpeakeasyBase } from "../../../internal/utils";
+import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
-
 
 
 export class RevokeEmbedAccessTokenPathParams extends SpeakeasyBase {
@@ -8,12 +7,10 @@ export class RevokeEmbedAccessTokenPathParams extends SpeakeasyBase {
   tokenID: string;
 }
 
-
 export class RevokeEmbedAccessTokenRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   pathParams: RevokeEmbedAccessTokenPathParams;
 }
-
 
 export class RevokeEmbedAccessTokenResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
