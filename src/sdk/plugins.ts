@@ -72,7 +72,7 @@ export class Plugins {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/plugin/{pluginID}", req.pathParams);
+    const url: string = utils.generateURL(baseURL, "/v1/plugins/{pluginID}", req.pathParams);
     
     const client: AxiosInstance = this._securityClient!;
     
@@ -126,7 +126,7 @@ export class Plugins {
     }
     
     const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/plugin";
+    const url: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
