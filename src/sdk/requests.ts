@@ -52,8 +52,11 @@ export class Requests {
         const res: operations.GenerateRequestPostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType};
         switch (true) {
           case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-                res.postmanCollection = httpRes?.data;
+            if (utils.matchContentType(contentType, `application/octet-stream`)) {
+                const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+                let out: Uint8Array = new Uint8Array(resBody.length);
+                for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
+                res.postmanCollection = out;
             }
             break;
           default:
