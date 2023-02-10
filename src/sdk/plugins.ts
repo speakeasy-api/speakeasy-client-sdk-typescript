@@ -30,10 +30,13 @@ export class Plugins {
     
     const client: AxiosInstance = this._securityClient!;
     
+    const headers = {...config?.headers};
+    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
       url: url,
       method: "get",
+      headers: headers,
       ...config,
     });
     
@@ -76,6 +79,7 @@ export class Plugins {
     
     const client: AxiosInstance = this._securityClient!;
     
+    const headers = {...config?.headers};
     const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
@@ -84,10 +88,12 @@ export class Plugins {
       paramsSerializer: qpSerializer,
     };
     
+    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
       url: url,
       method: "post",
+      headers: headers,
       ...requestConfig,
     });
     
@@ -142,6 +148,7 @@ export class Plugins {
     
     const headers = {...reqBodyHeaders, ...config?.headers};
     if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
+    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
       url: url,

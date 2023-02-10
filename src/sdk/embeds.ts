@@ -38,6 +38,7 @@ export class Embeds {
     
     const client: AxiosInstance = this._securityClient!;
     
+    const headers = {...config?.headers};
     const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
 
     const requestConfig: AxiosRequestConfig = {
@@ -46,10 +47,12 @@ export class Embeds {
       paramsSerializer: qpSerializer,
     };
     
+    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
       url: url,
       method: "get",
+      headers: headers,
       ...requestConfig,
     });
     
@@ -87,10 +90,13 @@ export class Embeds {
     
     const client: AxiosInstance = this._securityClient!;
     
+    const headers = {...config?.headers};
+    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
       url: url,
       method: "get",
+      headers: headers,
       ...config,
     });
     
@@ -133,10 +139,13 @@ export class Embeds {
     
     const client: AxiosInstance = this._securityClient!;
     
+    const headers = {...config?.headers};
+    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
       url: url,
       method: "delete",
+      headers: headers,
       ...config,
     });
     

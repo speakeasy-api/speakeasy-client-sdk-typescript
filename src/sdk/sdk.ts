@@ -40,8 +40,8 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "1.2.0";
-  private _genVersion = "1.2.0";
+  private _sdkVersion = "1.3.0";
+  private _genVersion = "1.3.1";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
@@ -134,10 +134,13 @@ export class SDK {
     
     const client: AxiosInstance = this._securityClient!;
     
+    const headers = {...config?.headers};
+    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
       url: url,
       method: "get",
+      headers: headers,
       ...config,
     });
     
