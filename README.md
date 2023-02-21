@@ -1,8 +1,4 @@
-# speakeasy-client-sdk-typescript
-
-This is the Speakeasy API Client SDK for Typescript. It is generated from our OpenAPI spec found at https://docs.speakeasyapi.dev/openapi.yaml and used for interacting with the [Speakeasy API](https://docs.speakeasyapi.dev/docs/speakeasy-api/speakeasy-api).
-
-This SDK was generated using Speakeasy's SDK Generator. For more information on how to use the generator to generate your own SDKs, please see the [Speakeasy Client SDK Generator Docs](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks).
+# @speakeasy-api/speakeasy-client-sdk-typescript
 
 <!-- Start SDK Installation -->
 ## SDK Installation
@@ -20,39 +16,51 @@ yarn add @speakeasy-api/speakeasy-client-sdk-typescript
 ```
 <!-- End SDK Installation -->
 
-## Example usage
-
+## SDK Example Usage
+<!-- Start SDK Example Usage -->
 ```typescript
-// Replace relative paths below with npm module once it's published 
-import {
-    SDK,
-    WithSecurity,
-} from "speakeasy-client-sdk-typescript";
-import {
-    Security,
-    SchemeApiKey,
-} from "speakeasy-client-sdk-typescript/src/sdk/models/shared";
-import {
-    GetApisResponse,
-    GetApisRequest,
-    GetApisQueryParams,
-    GetApisOp,
-} from "speakeasy-client-sdk-typescript/src/sdk/models/operations";
+import { SDK, withSecurity} from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import { GetApisRequest, GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/src/sdk/models/operations";
 import { AxiosError } from "axios";
 
-const security: Security = new Security(new SchemeApiKey("YOUR_API_KEY")); // Replace with your API key from your Speakeasy Workspace
-const sdk: SDK = new SDK(WithSecurity(security));
+const sdk = new SDK(withSecurity(
+  security: {
+    apiKey: {
+      apiKey: "YOUR_API_KEY_HERE",
+    },
+  }
+));
+    
+const req: GetApisRequest = {
+  queryParams: {
+    metadata: {
+      "deserunt": [
+        "nulla",
+        "id",
+        "vero",
+      ],
+      "perspiciatis": [
+        "nihil",
+        "fuga",
+        "facilis",
+        "eum",
+      ],
+      "iusto": [
+        "saepe",
+        "inventore",
+      ],
+    },
+    op: {
+      and: false,
+    },
+  },
+};
 
-const metadata: Map<string, string[]> = new Map([["label", ["1"]]]);
-const op: GetApisOp = new GetApisOp(true);
-
-const request: GetApisRequest = new GetApisRequest(
-    new GetApisQueryParams(metadata, op)
-);
-sdk.Apis.getApis(request).then((res: GetApisResponse | AxiosError) => {
-    console.log(res);
+sdk.apis.getApis(req).then((res: GetApisResponse | AxiosError) => {
+   // handle response
 });
 ```
+<!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
 ## SDK Available Operations
