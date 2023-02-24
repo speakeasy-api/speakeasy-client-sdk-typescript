@@ -19,17 +19,21 @@ yarn add @speakeasy-api/speakeasy-client-sdk-typescript
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
 ```typescript
-import { SDK, withSecurity} from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetApisRequest, GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/src/sdk/models/operations";
-import { AxiosError } from "axios";
+import {
+  GetApisRequest,
+  GetApisResponse 
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new SDK(withSecurity(
+import { AxiosError } from "axios";
+import { SDK } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+const sdk = new SDK({
   security: {
     apiKey: {
       apiKey: "YOUR_API_KEY_HERE",
     },
   }
-));
+});
     
 const req: GetApisRequest = {
   queryParams: {
