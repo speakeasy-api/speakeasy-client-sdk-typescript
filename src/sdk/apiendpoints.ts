@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
+import * as shared from "./models/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class ApiEndpoints {
   _defaultClient: AxiosInstance;
@@ -57,7 +59,11 @@ export class ApiEndpoints {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -104,12 +110,20 @@ export class ApiEndpoints {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.apiEndpoint = httpRes?.data;
+              res.apiEndpoint = plainToInstance(
+                shared.ApiEndpoint,
+                httpRes?.data as shared.ApiEndpoint,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -156,12 +170,20 @@ export class ApiEndpoints {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.generateOpenApiSpecDiff = httpRes?.data;
+              res.generateOpenApiSpecDiff = plainToInstance(
+                shared.GenerateOpenApiSpecDiff,
+                httpRes?.data as shared.GenerateOpenApiSpecDiff,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -215,7 +237,11 @@ export class ApiEndpoints {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -259,12 +285,20 @@ export class ApiEndpoints {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.apiEndpoints = httpRes?.data;
+              res.apiEndpoints = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -308,12 +342,20 @@ export class ApiEndpoints {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.apiEndpoints = httpRes?.data;
+              res.apiEndpoints = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -357,12 +399,20 @@ export class ApiEndpoints {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.apiEndpoint = httpRes?.data;
+              res.apiEndpoint = plainToInstance(
+                shared.ApiEndpoint,
+                httpRes?.data as shared.ApiEndpoint,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -420,12 +470,20 @@ export class ApiEndpoints {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.apiEndpoint = httpRes?.data;
+              res.apiEndpoint = plainToInstance(
+                shared.ApiEndpoint,
+                httpRes?.data as shared.ApiEndpoint,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

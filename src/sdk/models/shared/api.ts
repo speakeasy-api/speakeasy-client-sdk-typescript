@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 // ApiInput
@@ -6,16 +7,20 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
 **/
 export class ApiInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=api_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_id" })
   apiId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description: string;
 
-  @SpeakeasyMetadata({ data: "json, name=meta_data" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "meta_data" })
   metaData?: Record<string, string[]>;
 
-  @SpeakeasyMetadata({ data: "json, name=version_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "version_id" })
   versionId: string;
 }
 
@@ -24,27 +29,37 @@ export class ApiInput extends SpeakeasyBase {
  * An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
 **/
 export class Api extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=api_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_id" })
   apiId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description: string;
 
-  @SpeakeasyMetadata({ data: "json, name=matched" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "matched" })
   matched?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=meta_data" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "meta_data" })
   metaData?: Record<string, string[]>;
 
-  @SpeakeasyMetadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updatedAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=version_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "version_id" })
   versionId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "workspace_id" })
   workspaceId: string;
 }

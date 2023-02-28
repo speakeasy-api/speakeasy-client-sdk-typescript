@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Plugins {
   _defaultClient: AxiosInstance;
@@ -48,12 +50,20 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugins = httpRes?.data;
+              res.plugins = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -80,21 +90,14 @@ export class Plugins {
     const client: AxiosInstance = this._securityClient!;
     
     const headers = {...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "post",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -105,12 +108,20 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.boundedRequests = httpRes?.data;
+              res.boundedRequests = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -166,12 +177,20 @@ export class Plugins {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.plugin = httpRes?.data;
+              res.plugin = plainToInstance(
+                shared.Plugin,
+                httpRes?.data as shared.Plugin,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

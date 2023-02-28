@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 // ApiEndpointInput
@@ -6,22 +7,28 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * An ApiEndpoint is a description of an Endpoint for an API.
 **/
 export class ApiEndpointInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=api_endpoint_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_endpoint_id" })
   apiEndpointId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description: string;
 
-  @SpeakeasyMetadata({ data: "json, name=display_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "display_name" })
   displayName: string;
 
-  @SpeakeasyMetadata({ data: "json, name=method" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "method" })
   method: string;
 
-  @SpeakeasyMetadata({ data: "json, name=path" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "path" })
   path: string;
 
-  @SpeakeasyMetadata({ data: "json, name=version_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "version_id" })
   versionId: string;
 }
 
@@ -30,36 +37,49 @@ export class ApiEndpointInput extends SpeakeasyBase {
  * An ApiEndpoint is a description of an Endpoint for an API.
 **/
 export class ApiEndpoint extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=api_endpoint_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_endpoint_id" })
   apiEndpointId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=api_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_id" })
   apiId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description: string;
 
-  @SpeakeasyMetadata({ data: "json, name=display_name" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "display_name" })
   displayName: string;
 
-  @SpeakeasyMetadata({ data: "json, name=matched" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "matched" })
   matched?: boolean;
 
-  @SpeakeasyMetadata({ data: "json, name=method" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "method" })
   method: string;
 
-  @SpeakeasyMetadata({ data: "json, name=path" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "path" })
   path: string;
 
-  @SpeakeasyMetadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updatedAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=version_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "version_id" })
   versionId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "workspace_id" })
   workspaceId: string;
 }

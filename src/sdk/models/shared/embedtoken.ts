@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 // EmbedToken
@@ -6,33 +7,47 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * A representation of an embed token granted for working with Speakeasy components.
 **/
 export class EmbedToken extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=created_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_by" })
   createdBy: string;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description: string;
 
-  @SpeakeasyMetadata({ data: "json, name=expires_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "expires_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   expiresAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=filters" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "filters" })
   filters: string;
 
-  @SpeakeasyMetadata({ data: "json, name=id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "id" })
   id: string;
 
-  @SpeakeasyMetadata({ data: "json, name=last_used" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "last_used" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   lastUsed?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=revoked_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "revoked_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   revokedAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=revoked_by" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "revoked_by" })
   revokedBy?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "workspace_id" })
   workspaceId: string;
 }

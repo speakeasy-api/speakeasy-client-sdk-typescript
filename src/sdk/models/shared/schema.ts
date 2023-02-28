@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 // Schema
@@ -6,21 +7,28 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * A Schema represents an API schema for a particular Api and Version.
 **/
 export class Schema extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=api_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_id" })
   apiId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=description" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "description" })
   description: string;
 
-  @SpeakeasyMetadata({ data: "json, name=revision_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "revision_id" })
   revisionId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=version_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "version_id" })
   versionId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "workspace_id" })
   workspaceId: string;
 }

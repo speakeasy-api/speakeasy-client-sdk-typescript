@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 // Plugin
@@ -6,24 +7,33 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * A plugin is a short script that is run against ingested requests
 **/
 export class Plugin extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=code" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "code" })
   code: string;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=eval_hash" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "eval_hash" })
   evalHash?: string;
 
-  @SpeakeasyMetadata({ data: "json, name=plugin_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "plugin_id" })
   pluginId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=title" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "title" })
   title: string;
 
-  @SpeakeasyMetadata({ data: "json, name=updated_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "updated_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   updatedAt?: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "workspace_id" })
   workspaceId: string;
 }

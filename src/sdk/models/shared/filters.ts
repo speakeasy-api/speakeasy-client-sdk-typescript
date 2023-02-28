@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Filter } from "./filter";
+import { Expose, Type } from "class-transformer";
 
 
 // Filters
@@ -7,15 +8,20 @@ import { Filter } from "./filter";
  * Filters are used to query requests.
 **/
 export class Filters extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=filters", elemType: Filter })
+  @SpeakeasyMetadata({ elemType: Filter })
+  @Expose({ name: "filters" })
+  @Type(() => Filter)
   filters: Filter[];
 
-  @SpeakeasyMetadata({ data: "json, name=limit" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "limit" })
   limit: number;
 
-  @SpeakeasyMetadata({ data: "json, name=offset" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "offset" })
   offset: number;
 
-  @SpeakeasyMetadata({ data: "json, name=operator" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "operator" })
   operator: string;
 }

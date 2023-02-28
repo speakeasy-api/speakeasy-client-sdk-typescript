@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, ParamsSerializerOptions } from "axios";
+import * as shared from "./models/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Requests {
   _defaultClient: AxiosInstance;
@@ -64,7 +66,11 @@ export class Requests {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -108,12 +114,20 @@ export class Requests {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.unboundedRequest = httpRes?.data;
+              res.unboundedRequest = plainToInstance(
+                shared.UnboundedRequest,
+                httpRes?.data as shared.UnboundedRequest,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -143,21 +157,14 @@ export class Requests {
     const client: AxiosInstance = this._securityClient!;
     
     const headers = {...config?.headers};
-    const qpSerializer: ParamsSerializerOptions = utils.getQueryParamSerializer(req.queryParams);
-
-    const requestConfig: AxiosRequestConfig = {
-      ...config,
-      params: req.queryParams,
-      paramsSerializer: qpSerializer,
-    };
-    
+    const queryParams: string = utils.serializeQueryParams(req.queryParams);
     headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
     
     const r = client.request({
-      url: url,
+      url: url + queryParams,
       method: "get",
       headers: headers,
-      ...requestConfig,
+      ...config,
     });
     
     return r.then((httpRes: AxiosResponse) => {
@@ -168,12 +175,20 @@ export class Requests {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.boundedRequests = httpRes?.data;
+              res.boundedRequests = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 // ErrorT
@@ -6,9 +7,11 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * The `Status` type defines a logical error model
 **/
 export class ErrorT extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=message" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "message" })
   message: string;
 
-  @SpeakeasyMetadata({ data: "json, name=status_code" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "status_code" })
   statusCode: number;
 }

@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose, Transform } from "class-transformer";
 
 
 // VersionMetadataInput
@@ -6,10 +7,12 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * A set of keys and associated values, attached to a particular version of an Api.
 **/
 export class VersionMetadataInput extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=meta_key" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "meta_key" })
   metaKey: string;
 
-  @SpeakeasyMetadata({ data: "json, name=meta_value" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "meta_value" })
   metaValue: string;
 }
 
@@ -18,21 +21,28 @@ export class VersionMetadataInput extends SpeakeasyBase {
  * A set of keys and associated values, attached to a particular version of an Api.
 **/
 export class VersionMetadata extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=api_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_id" })
   apiId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=meta_key" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "meta_key" })
   metaKey: string;
 
-  @SpeakeasyMetadata({ data: "json, name=meta_value" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "meta_value" })
   metaValue: string;
 
-  @SpeakeasyMetadata({ data: "json, name=version_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "version_id" })
   versionId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "workspace_id" })
   workspaceId: string;
 }

@@ -1,5 +1,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { RequestMetadata } from "./requestmetadata";
+import { Expose, Transform, Type } from "class-transformer";
 
 
 // BoundedRequest
@@ -7,45 +8,63 @@ import { RequestMetadata } from "./requestmetadata";
  * A BoundedRequest is a request that has been logged by the Speakeasy without the contents of the request.
 **/
 export class BoundedRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=api_endpoint_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_endpoint_id" })
   apiEndpointId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=api_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "api_id" })
   apiId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=created_at" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "created_at" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   createdAt: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=customer_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "customer_id" })
   customerId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=latency" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "latency" })
   latency: number;
 
-  @SpeakeasyMetadata({ data: "json, name=metadata", elemType: RequestMetadata })
+  @SpeakeasyMetadata({ elemType: RequestMetadata })
+  @Expose({ name: "metadata" })
+  @Type(() => RequestMetadata)
   metadata?: RequestMetadata[];
 
-  @SpeakeasyMetadata({ data: "json, name=method" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "method" })
   method: string;
 
-  @SpeakeasyMetadata({ data: "json, name=path" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "path" })
   path: string;
 
-  @SpeakeasyMetadata({ data: "json, name=request_finish_time" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "request_finish_time" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   requestFinishTime: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=request_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "request_id" })
   requestId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=request_start_time" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "request_start_time" })
+  @Transform(({ value }) => new Date(value), { toClassOnly: true })
   requestStartTime: Date;
 
-  @SpeakeasyMetadata({ data: "json, name=status" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "status" })
   status: number;
 
-  @SpeakeasyMetadata({ data: "json, name=version_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "version_id" })
   versionId: string;
 
-  @SpeakeasyMetadata({ data: "json, name=workspace_id" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "workspace_id" })
   workspaceId: string;
 }

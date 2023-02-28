@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
+import * as shared from "./models/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Schemas {
   _defaultClient: AxiosInstance;
@@ -55,7 +57,11 @@ export class Schemas {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -99,7 +105,11 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.schema = httpRes?.data;
+              res.schema = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `application/x-yaml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -110,7 +120,11 @@ export class Schemas {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -154,7 +168,11 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.schema = httpRes?.data;
+              res.schema = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             if (utils.matchContentType(contentType, `application/x-yaml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -165,7 +183,11 @@ export class Schemas {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -212,12 +234,20 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.schema = httpRes?.data;
+              res.schema = plainToInstance(
+                shared.Schema,
+                httpRes?.data as shared.Schema,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -261,12 +291,20 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.schemaDiff = httpRes?.data;
+              res.schemaDiff = plainToInstance(
+                shared.SchemaDiff,
+                httpRes?.data as shared.SchemaDiff,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -313,12 +351,20 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.schema = httpRes?.data;
+              res.schema = plainToInstance(
+                shared.Schema,
+                httpRes?.data as shared.Schema,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -365,12 +411,20 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.schemata = httpRes?.data;
+              res.schemata = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -431,7 +485,11 @@ export class Schemas {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

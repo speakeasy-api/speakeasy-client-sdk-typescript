@@ -1,12 +1,13 @@
 configVersion: 1.0.0
 management:
-    docChecksum: 2bba3b8f9d211b02569b3f9aff0d34b4
-    docVersion: 0.3.0
-    speakeasyVersion: 1.5.3
+  docChecksum: 2bba3b8f9d211b02569b3f9aff0d34b4
+  docVersion: 0.3.0
+  speakeasyVersion: 1.5.4
 generation:
-    telemetryEnabled: true
-    sdkClassName: SDK
+  telemetryEnabled: true
+  sdkClassName: SDK
+  sdkFlattening: false
 typescript:
-    version: 1.5.2
-    author: Speakeasy
-    packageName: '@speakeasy-api/speakeasy-client-sdk-typescript'
+  version: 1.5.3
+  author: Speakeasy
+  packageName: '@speakeasy-api/speakeasy-client-sdk-typescript'

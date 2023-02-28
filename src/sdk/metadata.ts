@@ -1,6 +1,8 @@
 import * as utils from "../internal/utils";
 import * as operations from "./models/operations";
+import * as shared from "./models/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export class Metadata {
   _defaultClient: AxiosInstance;
@@ -55,7 +57,11 @@ export class Metadata {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -99,12 +105,20 @@ export class Metadata {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.versionMetadata = httpRes?.data;
+              res.versionMetadata = plainToInstance(
+                ,
+                httpRes?.data as ,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
@@ -160,12 +174,20 @@ export class Metadata {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.versionMetadata = httpRes?.data;
+              res.versionMetadata = plainToInstance(
+                shared.VersionMetadata,
+                httpRes?.data as shared.VersionMetadata,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }

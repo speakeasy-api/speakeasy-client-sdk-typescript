@@ -1,4 +1,5 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { Expose } from "class-transformer";
 
 
 // EmbedAccessTokenResponse
@@ -6,6 +7,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
  * An EmbedAccessTokenResponse contains a token that can be used to embed a Speakeasy dashboard.
 **/
 export class EmbedAccessTokenResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "json, name=access_token" })
+  @SpeakeasyMetadata()
+  @Expose({ name: "access_token" })
   accessToken: string;
 }

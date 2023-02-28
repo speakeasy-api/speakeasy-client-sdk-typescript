@@ -4,11 +4,12 @@ import { Apis } from "./apis";
 import { Embeds } from "./embeds";
 import { Metadata } from "./metadata";
 import * as operations from "./models/operations";
-import { Security } from "./models/shared";
+import * as shared from "./models/shared";
 import { Plugins } from "./plugins";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { plainToInstance } from "class-transformer";
 
 export const ServerProd = "prod";
 
@@ -21,7 +22,7 @@ export const ServerList: Record<string, string> = {
 export type SDKProps = {
   defaultClient?: AxiosInstance;
 
-  security?: Security;
+  security?: shared.Security;
 
   serverUrl?: string;
 }
@@ -40,17 +41,17 @@ export class SDK {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "1.5.2";
-  private _genVersion = "1.5.3";
+  private _sdkVersion = "1.5.3";
+  private _genVersion = "1.5.4";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
 
     this._defaultClient = props.defaultClient ?? axios.create({ baseURL: this._serverURL });
     if (props.security) {
-      let security: Security = props.security;
+      let security: shared.Security = props.security;
       if (!(props.security instanceof utils.SpeakeasyBase))
-        security = new Security(props.security);
+        security = new shared.Security(props.security);
       this._securityClient = utils.createSecurityClient(
         this._defaultClient,
         security
@@ -154,7 +155,11 @@ export class SDK {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-                res.error = httpRes?.data;
+              res.error = plainToInstance(
+                shared.ErrorT,
+                httpRes?.data as shared.ErrorT,
+                { excludeExtraneousValues: true }
+              );
             }
             break;
         }
