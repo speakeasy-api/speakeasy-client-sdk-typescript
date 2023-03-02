@@ -105,11 +105,7 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.schema = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.schema = httpRes?.data;
             }
             if (utils.matchContentType(contentType, `application/x-yaml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -168,11 +164,7 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.schema = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.schema = httpRes?.data;
             }
             if (utils.matchContentType(contentType, `application/x-yaml`)) {
                 const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -411,11 +403,7 @@ export class Schemas {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.schemata = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.schemata = httpRes?.data;
             }
             break;
           default:

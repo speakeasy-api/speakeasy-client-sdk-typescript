@@ -175,11 +175,7 @@ export class Requests {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.boundedRequests = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.boundedRequests = httpRes?.data;
             }
             break;
           default:

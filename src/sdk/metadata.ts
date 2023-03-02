@@ -105,11 +105,7 @@ export class Metadata {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.versionMetadata = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.versionMetadata = httpRes?.data;
             }
             break;
           default:

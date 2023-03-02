@@ -229,11 +229,7 @@ export class Apis {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apis = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.apis = httpRes?.data;
             }
             break;
           default:
@@ -290,11 +286,7 @@ export class Apis {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apis = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.apis = httpRes?.data;
             }
             break;
           default:

@@ -285,11 +285,7 @@ export class ApiEndpoints {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apiEndpoints = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.apiEndpoints = httpRes?.data;
             }
             break;
           default:
@@ -342,11 +338,7 @@ export class ApiEndpoints {
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apiEndpoints = plainToInstance(
-                ,
-                httpRes?.data as ,
-                { excludeExtraneousValues: true }
-              );
+              res.apiEndpoints = httpRes?.data;
             }
             break;
           default:
