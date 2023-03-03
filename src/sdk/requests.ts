@@ -54,7 +54,7 @@ export class Requests {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateRequestPostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GenerateRequestPostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/octet-stream`)) {
@@ -110,7 +110,7 @@ export class Requests {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetRequestFromEventLogResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetRequestFromEventLogResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -171,7 +171,7 @@ export class Requests {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.QueryEventLogResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.QueryEventLogResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {

@@ -6,13 +6,11 @@ import {
 } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 import { AxiosError } from "axios";
-import { SDK } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const sdk = new SDK({
+const sdk = new Speakeasy({
   security: {
-    apiKey: {
-      apiKey: "YOUR_API_KEY_HERE",
-    },
+    apiKey: "YOUR_API_KEY_HERE",
   }
 });
     

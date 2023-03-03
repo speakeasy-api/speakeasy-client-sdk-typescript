@@ -51,7 +51,7 @@ export class Metadata {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.DeleteVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
         switch (true) {
           case httpRes?.status == 200:
             break;
@@ -101,7 +101,7 @@ export class Metadata {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.GetVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -166,7 +166,7 @@ export class Metadata {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.InsertVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType};
+        const res: operations.InsertVersionMetadataResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
