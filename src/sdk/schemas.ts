@@ -51,7 +51,7 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.DeleteSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             break;
@@ -101,7 +101,7 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DownloadSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.DownloadSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -160,7 +160,7 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DownloadSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.DownloadSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -222,7 +222,7 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.GetSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -279,7 +279,7 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetSchemaDiffResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.GetSchemaDiffResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -339,7 +339,7 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.GetSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -399,7 +399,7 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetSchemasResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.GetSchemasResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -467,7 +467,7 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.RegisterSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.RegisterSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             break;

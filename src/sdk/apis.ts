@@ -53,7 +53,7 @@ export class Apis {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteApiResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.DeleteApiResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             break;
@@ -106,7 +106,7 @@ export class Apis {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateOpenApiSpecResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.GenerateOpenApiSpecResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -165,7 +165,7 @@ export class Apis {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GeneratePostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.GeneratePostmanCollectionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/octet-stream`)) {
@@ -225,7 +225,7 @@ export class Apis {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetAllApiVersionsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.GetAllApiVersionsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -282,7 +282,7 @@ export class Apis {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetApisResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.GetApisResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -350,7 +350,7 @@ export class Apis {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpsertApiResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes,};
+        const res: operations.UpsertApiResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
