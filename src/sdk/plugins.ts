@@ -46,19 +46,29 @@ export class Plugins {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetPluginsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetPluginsResponse =
+            new operations.GetPluginsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.plugins = httpRes?.data;
+              res.plugins = [];
+              const resFieldDepth: number = utils.getResFieldDepth(res);
+              res.plugins = utils.deserializeJSONResponse(
+                httpRes?.data,
+                shared.Plugin,
+                resFieldDepth
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -100,19 +110,29 @@ export class Plugins {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.RunPluginResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.RunPluginResponse =
+            new operations.RunPluginResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.boundedRequests = httpRes?.data;
+              res.boundedRequests = [];
+              const resFieldDepth: number = utils.getResFieldDepth(res);
+              res.boundedRequests = utils.deserializeJSONResponse(
+                httpRes?.data,
+                shared.BoundedRequest,
+                resFieldDepth
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -165,23 +185,26 @@ export class Plugins {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpsertPluginResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.UpsertPluginResponse =
+            new operations.UpsertPluginResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.plugin = plainToInstance(
+              res.plugin = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.Plugin,
-                httpRes?.data as shared.Plugin,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;

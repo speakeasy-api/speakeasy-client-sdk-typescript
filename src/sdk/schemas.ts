@@ -51,16 +51,20 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.DeleteSchemaResponse =
+            new operations.DeleteSchemaResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -101,7 +105,12 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DownloadSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.DownloadSchemaResponse =
+            new operations.DownloadSchemaResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -116,10 +125,9 @@ export class Schemas {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -160,7 +168,12 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DownloadSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.DownloadSchemaRevisionResponse =
+            new operations.DownloadSchemaRevisionResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
@@ -175,10 +188,9 @@ export class Schemas {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -222,23 +234,26 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetSchemaResponse =
+            new operations.GetSchemaResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.schema = plainToInstance(
+              res.schema = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.Schema,
-                httpRes?.data as shared.Schema,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -279,23 +294,26 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetSchemaDiffResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetSchemaDiffResponse =
+            new operations.GetSchemaDiffResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.schemaDiff = plainToInstance(
+              res.schemaDiff = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.SchemaDiff,
-                httpRes?.data as shared.SchemaDiff,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -339,23 +357,26 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetSchemaRevisionResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetSchemaRevisionResponse =
+            new operations.GetSchemaRevisionResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.schema = plainToInstance(
+              res.schema = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.Schema,
-                httpRes?.data as shared.Schema,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -399,19 +420,29 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetSchemasResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetSchemasResponse =
+            new operations.GetSchemasResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.schemata = httpRes?.data;
+              res.schemata = [];
+              const resFieldDepth: number = utils.getResFieldDepth(res);
+              res.schemata = utils.deserializeJSONResponse(
+                httpRes?.data,
+                shared.Schema,
+                resFieldDepth
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -467,16 +498,20 @@ export class Schemas {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.RegisterSchemaResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.RegisterSchemaResponse =
+            new operations.RegisterSchemaResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;

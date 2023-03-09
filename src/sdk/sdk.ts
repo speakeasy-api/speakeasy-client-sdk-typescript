@@ -42,8 +42,8 @@ export class Speakeasy {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "1.8.5";
-  private _genVersion = "1.8.6";
+  private _sdkVersion = "1.8.6";
+  private _genVersion = "1.8.7";
 
   constructor(props: SDKProps) {
     this._serverURL = props.serverUrl ?? ServerList[ServerProd];
@@ -150,16 +150,20 @@ export class Speakeasy {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ValidateApiKeyResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.ValidateApiKeyResponse =
+            new operations.ValidateApiKeyResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;

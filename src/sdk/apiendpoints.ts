@@ -53,16 +53,20 @@ export class ApiEndpoints {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.DeleteApiEndpointResponse =
+            new operations.DeleteApiEndpointResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -106,23 +110,26 @@ export class ApiEndpoints {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.FindApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.FindApiEndpointResponse =
+            new operations.FindApiEndpointResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apiEndpoint = plainToInstance(
+              res.apiEndpoint = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ApiEndpoint,
-                httpRes?.data as shared.ApiEndpoint,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -166,23 +173,26 @@ export class ApiEndpoints {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateOpenApiSpecForApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GenerateOpenApiSpecForApiEndpointResponse =
+            new operations.GenerateOpenApiSpecForApiEndpointResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.generateOpenApiSpecDiff = plainToInstance(
+              res.generateOpenApiSpecDiff = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.GenerateOpenApiSpecDiff,
-                httpRes?.data as shared.GenerateOpenApiSpecDiff,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -225,7 +235,12 @@ export class ApiEndpoints {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GeneratePostmanCollectionForApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GeneratePostmanCollectionForApiEndpointResponse =
+            new operations.GeneratePostmanCollectionForApiEndpointResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/octet-stream`)) {
@@ -237,10 +252,9 @@ export class ApiEndpoints {
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -281,19 +295,29 @@ export class ApiEndpoints {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetAllApiEndpointsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetAllApiEndpointsResponse =
+            new operations.GetAllApiEndpointsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apiEndpoints = httpRes?.data;
+              res.apiEndpoints = [];
+              const resFieldDepth: number = utils.getResFieldDepth(res);
+              res.apiEndpoints = utils.deserializeJSONResponse(
+                httpRes?.data,
+                shared.ApiEndpoint,
+                resFieldDepth
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -334,19 +358,29 @@ export class ApiEndpoints {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetAllForVersionApiEndpointsResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetAllForVersionApiEndpointsResponse =
+            new operations.GetAllForVersionApiEndpointsResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apiEndpoints = httpRes?.data;
+              res.apiEndpoints = [];
+              const resFieldDepth: number = utils.getResFieldDepth(res);
+              res.apiEndpoints = utils.deserializeJSONResponse(
+                httpRes?.data,
+                shared.ApiEndpoint,
+                resFieldDepth
+              );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -387,23 +421,26 @@ export class ApiEndpoints {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.GetApiEndpointResponse =
+            new operations.GetApiEndpointResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apiEndpoint = plainToInstance(
+              res.apiEndpoint = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ApiEndpoint,
-                httpRes?.data as shared.ApiEndpoint,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
@@ -458,23 +495,26 @@ export class ApiEndpoints {
         const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
         if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpsertApiEndpointResponse = {statusCode: httpRes.status, contentType: contentType, rawResponse: httpRes};
+        const res: operations.UpsertApiEndpointResponse =
+            new operations.UpsertApiEndpointResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes
+            });
         switch (true) {
           case httpRes?.status == 200:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.apiEndpoint = plainToInstance(
+              res.apiEndpoint = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ApiEndpoint,
-                httpRes?.data as shared.ApiEndpoint,
-                { excludeExtraneousValues: true }
               );
             }
             break;
           default:
             if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = plainToInstance(
+              res.error = utils.deserializeJSONResponse(
+                httpRes?.data,
                 shared.ErrorT,
-                httpRes?.data as shared.ErrorT,
-                { excludeExtraneousValues: true }
               );
             }
             break;
