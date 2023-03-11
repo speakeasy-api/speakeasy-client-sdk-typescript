@@ -2,7 +2,7 @@
 ```typescript
 import {
   GetApisRequest,
-  GetApisResponse 
+  GetApisResponse
 } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 import { AxiosError } from "axios";
