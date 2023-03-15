@@ -1,11 +1,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
-
 // Plugin
-/** 
+/**
  * A plugin is a short script that is run against ingested requests
-**/
+ **/
 export class Plugin extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "code" })

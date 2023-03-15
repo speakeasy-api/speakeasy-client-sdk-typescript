@@ -2,11 +2,10 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { RequestMetadata } from "./requestmetadata";
 import { Expose, Transform, Type } from "class-transformer";
 
-
 // BoundedRequest
-/** 
+/**
  * A BoundedRequest is a request that has been logged by the Speakeasy without the contents of the request.
-**/
+ **/
 export class BoundedRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "api_endpoint_id" })

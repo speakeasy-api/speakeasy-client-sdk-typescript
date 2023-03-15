@@ -12,7 +12,14 @@ export class Metadata {
   _sdkVersion: string;
   _genVersion: string;
 
-  constructor(defaultClient: AxiosInstance, securityClient: AxiosInstance, serverURL: string, language: string, sdkVersion: string, genVersion: string) {
+  constructor(
+    defaultClient: AxiosInstance,
+    securityClient: AxiosInstance,
+    serverURL: string,
+    language: string,
+    sdkVersion: string,
+    genVersion: string
+  ) {
     this._defaultClient = defaultClient;
     this._securityClient = securityClient;
     this._serverURL = serverURL;
@@ -20,10 +27,10 @@ export class Metadata {
     this._sdkVersion = sdkVersion;
     this._genVersion = genVersion;
   }
-  
+
   /**
    * deleteVersionMetadata - Delete metadata for a particular apiID and versionID.
-  **/
+   **/
   deleteVersionMetadata(
     req: operations.DeleteVersionMetadataRequest,
     config?: AxiosRequestConfig
@@ -31,53 +38,59 @@ export class Metadata {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.DeleteVersionMetadataRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}", req.pathParams);
-    
+    const url: string = utils.generateURL(
+      baseURL,
+      "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}",
+      req.pathParams
+    );
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...config?.headers};
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+
+    const headers = { ...config?.headers };
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url,
       method: "delete",
       headers: headers,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteVersionMetadataResponse =
-            new operations.DeleteVersionMetadataResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.DeleteVersionMetadataResponse =
+        new operations.DeleteVersionMetadataResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
 
-  
   /**
    * getVersionMetadata - Get all metadata for a particular apiID and versionID.
-  **/
+   **/
   getVersionMetadata(
     req: operations.GetVersionMetadataRequest,
     config?: AxiosRequestConfig
@@ -85,62 +98,68 @@ export class Metadata {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetVersionMetadataRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.pathParams);
-    
+    const url: string = utils.generateURL(
+      baseURL,
+      "/v1/apis/{apiID}/version/{versionID}/metadata",
+      req.pathParams
+    );
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...config?.headers};
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+
+    const headers = { ...config?.headers };
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetVersionMetadataResponse =
-            new operations.GetVersionMetadataResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.versionMetadata = [];
-              const resFieldDepth: number = utils.getResFieldDepth(res);
-              res.versionMetadata = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.VersionMetadata,
-                resFieldDepth
-              );
-            }
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.GetVersionMetadataResponse =
+        new operations.GetVersionMetadataResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.versionMetadata = [];
+            const resFieldDepth: number = utils.getResFieldDepth(res);
+            res.versionMetadata = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.VersionMetadata,
+              resFieldDepth
+            );
+          }
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
 
-  
   /**
    * insertVersionMetadata - Insert metadata for a particular apiID and versionID.
-  **/
+   **/
   insertVersionMetadata(
     req: operations.InsertVersionMetadataRequest,
     config?: AxiosRequestConfig
@@ -148,9 +167,13 @@ export class Metadata {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.InsertVersionMetadataRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/metadata", req.pathParams);
+    const url: string = utils.generateURL(
+      baseURL,
+      "/v1/apis/{apiID}/version/{versionID}/metadata",
+      req.pathParams
+    );
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -161,52 +184,55 @@ export class Metadata {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
-    
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...reqBodyHeaders, ...config?.headers};
-    if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+
+    const headers = { ...reqBodyHeaders, ...config?.headers };
+    if (reqBody == null || Object.keys(reqBody).length === 0)
+      throw new Error("request body is required");
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url,
       method: "post",
       headers: headers,
-      data: reqBody, 
+      data: reqBody,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.InsertVersionMetadataResponse =
-            new operations.InsertVersionMetadataResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.versionMetadata = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.VersionMetadata,
-              );
-            }
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.InsertVersionMetadataResponse =
+        new operations.InsertVersionMetadataResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.versionMetadata = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.VersionMetadata
+            );
+          }
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
-
 }

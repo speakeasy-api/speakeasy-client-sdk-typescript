@@ -3,9 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class RevokeEmbedAccessTokenPathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=tokenID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=tokenID",
+  })
   tokenID: string;
 }
 

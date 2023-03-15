@@ -14,21 +14,18 @@ import { plainToInstance } from "class-transformer";
 export const ServerProd = "prod";
 
 export const ServerList: Record<string, string> = {
-	[ServerProd]: "https://api.prod.speakeasyapi.dev",
+  [ServerProd]: "https://api.prod.speakeasyapi.dev",
 } as const;
 
-
-
 export type SDKProps = {
-  defaultClient?: AxiosInstance;
-
   security?: shared.Security;
-
+  defaultClient?: AxiosInstance;
   serverUrl?: string;
-}
+};
 
 /* SDK Documentation: The Speakeasy API allows teams to manage common operations with their APIs
- * https://docs.speakeasyapi.dev - The Speakeasy Platform Documentation*/
+ * https://docs.speakeasyapi.dev - The Speakeasy Platform Documentation
+ */
 export class Speakeasy {
   public apiEndpoints: ApiEndpoints;
   public apis: Apis;
@@ -42,13 +39,15 @@ export class Speakeasy {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "1.9.1";
-  private _genVersion = "1.9.2";
+  private _sdkVersion = "1.10.0";
+  private _genVersion = "1.11.0";
+  private _globals: any;
 
   constructor(props?: SDKProps) {
     this._serverURL = props?.serverUrl ?? ServerList[ServerProd];
 
-    this._defaultClient = props?.defaultClient ?? axios.create({ baseURL: this._serverURL });
+    this._defaultClient =
+      props?.defaultClient ?? axios.create({ baseURL: this._serverURL });
     if (props?.security) {
       let security: shared.Security = props.security;
       if (!(props.security instanceof utils.SpeakeasyBase))
@@ -60,7 +59,7 @@ export class Speakeasy {
     } else {
       this._securityClient = this._defaultClient;
     }
-    
+
     this.apiEndpoints = new ApiEndpoints(
       this._defaultClient,
       this._securityClient,
@@ -69,7 +68,7 @@ export class Speakeasy {
       this._sdkVersion,
       this._genVersion
     );
-    
+
     this.apis = new Apis(
       this._defaultClient,
       this._securityClient,
@@ -78,7 +77,7 @@ export class Speakeasy {
       this._sdkVersion,
       this._genVersion
     );
-    
+
     this.embeds = new Embeds(
       this._defaultClient,
       this._securityClient,
@@ -87,7 +86,7 @@ export class Speakeasy {
       this._sdkVersion,
       this._genVersion
     );
-    
+
     this.metadata = new Metadata(
       this._defaultClient,
       this._securityClient,
@@ -96,7 +95,7 @@ export class Speakeasy {
       this._sdkVersion,
       this._genVersion
     );
-    
+
     this.plugins = new Plugins(
       this._defaultClient,
       this._securityClient,
@@ -105,7 +104,7 @@ export class Speakeasy {
       this._sdkVersion,
       this._genVersion
     );
-    
+
     this.requests = new Requests(
       this._defaultClient,
       this._securityClient,
@@ -114,7 +113,7 @@ export class Speakeasy {
       this._sdkVersion,
       this._genVersion
     );
-    
+
     this.schemas = new Schemas(
       this._defaultClient,
       this._securityClient,
@@ -124,53 +123,55 @@ export class Speakeasy {
       this._genVersion
     );
   }
-  
+
   /**
    * validateApiKey - Validate the current api key.
-  **/
+   **/
   validateApiKey(
     config?: AxiosRequestConfig
   ): Promise<operations.ValidateApiKeyResponse> {
     const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/auth/validate";
-    
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...config?.headers};
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+
+    const headers = { ...config?.headers };
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.ValidateApiKeyResponse =
-            new operations.ValidateApiKeyResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.ValidateApiKeyResponse =
+        new operations.ValidateApiKeyResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
-
 }

@@ -1,11 +1,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
-
 // VersionMetadataInput
-/** 
+/**
  * A set of keys and associated values, attached to a particular version of an Api.
-**/
+ **/
 export class VersionMetadataInput extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "meta_key" })
@@ -17,9 +16,9 @@ export class VersionMetadataInput extends SpeakeasyBase {
 }
 
 // VersionMetadata
-/** 
+/**
  * A set of keys and associated values, attached to a particular version of an Api.
-**/
+ **/
 export class VersionMetadata extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "api_id" })

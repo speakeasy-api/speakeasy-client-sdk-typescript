@@ -7,11 +7,10 @@ import {
 
 import { AxiosError } from "axios";
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-
 const sdk = new Speakeasy({
   security: {
     apiKey: "YOUR_API_KEY_HERE",
-  }
+  },
 });
     
 const req: GetApisRequest = {

@@ -1,11 +1,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
-
 // EmbedToken
-/** 
+/**
  * A representation of an embed token granted for working with Speakeasy components.
-**/
+ **/
 export class EmbedToken extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "created_at" })

@@ -3,15 +3,20 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class DeleteApiEndpointPathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiEndpointID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=apiEndpointID",
+  })
   apiEndpointID: string;
 
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=apiID",
+  })
   apiID: string;
 
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=versionID",
+  })
   versionID: string;
 }
 

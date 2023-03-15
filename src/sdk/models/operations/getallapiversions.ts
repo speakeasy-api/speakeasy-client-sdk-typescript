@@ -3,9 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class GetAllApiVersionsPathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=apiID",
+  })
   apiID: string;
 }
 
@@ -15,10 +16,14 @@ export class GetAllApiVersionsOp extends SpeakeasyBase {
 }
 
 export class GetAllApiVersionsQueryParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=deepObject;explode=true;name=metadata",
+  })
   metadata?: Record<string, string[]>;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=deepObject;explode=true;name=op",
+  })
   op?: GetAllApiVersionsOp;
 }
 

@@ -3,7 +3,6 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class QueryEventLogQueryParams extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
   filters?: shared.Filters;

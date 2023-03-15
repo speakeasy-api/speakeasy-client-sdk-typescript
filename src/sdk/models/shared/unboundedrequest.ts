@@ -1,11 +1,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
-
 // UnboundedRequest
-/** 
+/**
  * An UnboundedRequest represents the HAR content capture by Speakeasy when logging a request.
-**/
+ **/
 export class UnboundedRequest extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "created_at" })

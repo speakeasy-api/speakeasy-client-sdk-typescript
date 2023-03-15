@@ -1,11 +1,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
-
 // ApiEndpointInput
-/** 
+/**
  * An ApiEndpoint is a description of an Endpoint for an API.
-**/
+ **/
 export class ApiEndpointInput extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "api_endpoint_id" })
@@ -33,9 +32,9 @@ export class ApiEndpointInput extends SpeakeasyBase {
 }
 
 // ApiEndpoint
-/** 
+/**
  * An ApiEndpoint is a description of an Endpoint for an API.
-**/
+ **/
 export class ApiEndpoint extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "api_endpoint_id" })

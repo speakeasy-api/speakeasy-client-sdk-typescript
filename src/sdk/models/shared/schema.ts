@@ -1,11 +1,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
-
 // Schema
-/** 
+/**
  * A Schema represents an API schema for a particular Api and Version.
-**/
+ **/
 export class Schema extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "api_id" })

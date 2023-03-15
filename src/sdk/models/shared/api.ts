@@ -1,11 +1,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
-
 // ApiInput
-/** 
+/**
  * An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
-**/
+ **/
 export class ApiInput extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "api_id" })
@@ -25,9 +24,9 @@ export class ApiInput extends SpeakeasyBase {
 }
 
 // Api
-/** 
+/**
  * An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
-**/
+ **/
 export class Api extends SpeakeasyBase {
   @SpeakeasyMetadata()
   @Expose({ name: "api_id" })

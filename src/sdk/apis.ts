@@ -12,7 +12,14 @@ export class Apis {
   _sdkVersion: string;
   _genVersion: string;
 
-  constructor(defaultClient: AxiosInstance, securityClient: AxiosInstance, serverURL: string, language: string, sdkVersion: string, genVersion: string) {
+  constructor(
+    defaultClient: AxiosInstance,
+    securityClient: AxiosInstance,
+    serverURL: string,
+    language: string,
+    sdkVersion: string,
+    genVersion: string
+  ) {
     this._defaultClient = defaultClient;
     this._securityClient = securityClient;
     this._serverURL = serverURL;
@@ -20,12 +27,12 @@ export class Apis {
     this._sdkVersion = sdkVersion;
     this._genVersion = genVersion;
   }
-  
+
   /**
    * deleteApi - Delete an Api.
    *
    * Delete a particular version of an Api. The will also delete all associated ApiEndpoints, Metadata, Schemas & Request Logs (if using a Postgres datastore).
-  **/
+   **/
   deleteApi(
     req: operations.DeleteApiRequest,
     config?: AxiosRequestConfig
@@ -33,56 +40,62 @@ export class Apis {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.DeleteApiRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}", req.pathParams);
-    
+    const url: string = utils.generateURL(
+      baseURL,
+      "/v1/apis/{apiID}/version/{versionID}",
+      req.pathParams
+    );
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...config?.headers};
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+
+    const headers = { ...config?.headers };
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url,
       method: "delete",
       headers: headers,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.DeleteApiResponse =
-            new operations.DeleteApiResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.DeleteApiResponse =
+        new operations.DeleteApiResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
 
-  
   /**
    * generateOpenApiSpec - Generate an OpenAPI specification for a particular Api.
    *
    * This endpoint will generate any missing operations in any registered OpenAPI document if the operation does not already exist in the document.
    * Returns the original document and the newly generated document allowing a diff to be performed to see what has changed.
-  **/
+   **/
   generateOpenApiSpec(
     req: operations.GenerateOpenApiSpecRequest,
     config?: AxiosRequestConfig
@@ -90,61 +103,67 @@ export class Apis {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GenerateOpenApiSpecRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/openapi", req.pathParams);
-    
+    const url: string = utils.generateURL(
+      baseURL,
+      "/v1/apis/{apiID}/version/{versionID}/generate/openapi",
+      req.pathParams
+    );
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...config?.headers};
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+
+    const headers = { ...config?.headers };
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GenerateOpenApiSpecResponse =
-            new operations.GenerateOpenApiSpecResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.generateOpenApiSpecDiff = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.GenerateOpenApiSpecDiff,
-              );
-            }
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.GenerateOpenApiSpecResponse =
+        new operations.GenerateOpenApiSpecResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.generateOpenApiSpecDiff = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.GenerateOpenApiSpecDiff
+            );
+          }
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
 
-  
   /**
    * generatePostmanCollection - Generate a Postman collection for a particular Api.
    *
    * Generates a postman collection containing all endpoints for a particular API. Includes variables produced for any path/query/header parameters included in the OpenAPI document.
-  **/
+   **/
   generatePostmanCollection(
     req: operations.GeneratePostmanCollectionRequest,
     config?: AxiosRequestConfig
@@ -152,62 +171,69 @@ export class Apis {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GeneratePostmanCollectionRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/version/{versionID}/generate/postman", req.pathParams);
-    
+    const url: string = utils.generateURL(
+      baseURL,
+      "/v1/apis/{apiID}/version/{versionID}/generate/postman",
+      req.pathParams
+    );
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...config?.headers};
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+
+    const headers = { ...config?.headers };
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GeneratePostmanCollectionResponse =
-            new operations.GeneratePostmanCollectionResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/octet-stream`)) {
-                const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-                let out: Uint8Array = new Uint8Array(resBody.length);
-                for (let i: number = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
-                res.postmanCollection = out;
-            }
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.GeneratePostmanCollectionResponse =
+        new operations.GeneratePostmanCollectionResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          if (utils.matchContentType(contentType, `application/octet-stream`)) {
+            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+            let out: Uint8Array = new Uint8Array(resBody.length);
+            for (let i: number = 0; i < resBody.length; i++)
+              out[i] = resBody.charCodeAt(i);
+            res.postmanCollection = out;
+          }
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
 
-  
   /**
    * getAllApiVersions - Get all Api versions for a particular ApiEndpoint.
    *
    * Get all Api versions for a particular ApiEndpoint.
    * Supports filtering the versions based on metadata attributes.
-  **/
+   **/
   getAllApiVersions(
     req: operations.GetAllApiVersionsRequest,
     config?: AxiosRequestConfig
@@ -215,66 +241,72 @@ export class Apis {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetAllApiVersionsRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}", req.pathParams);
-    
+    const url: string = utils.generateURL(
+      baseURL,
+      "/v1/apis/{apiID}",
+      req.pathParams
+    );
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...config?.headers};
+
+    const headers = { ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req.queryParams);
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url + queryParams,
       method: "get",
       headers: headers,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetAllApiVersionsResponse =
-            new operations.GetAllApiVersionsResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.apis = [];
-              const resFieldDepth: number = utils.getResFieldDepth(res);
-              res.apis = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.Api,
-                resFieldDepth
-              );
-            }
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.GetAllApiVersionsResponse =
+        new operations.GetAllApiVersionsResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.apis = [];
+            const resFieldDepth: number = utils.getResFieldDepth(res);
+            res.apis = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.Api,
+              resFieldDepth
+            );
+          }
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
 
-  
   /**
    * getApis - Get a list of Apis for a given workspace
    *
    * Get a list of all Apis and their versions for a given workspace.
    * Supports filtering the APIs based on metadata attributes.
-  **/
+   **/
   getApis(
     req: operations.GetApisRequest,
     config?: AxiosRequestConfig
@@ -282,66 +314,67 @@ export class Apis {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.GetApisRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/apis";
-    
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...config?.headers};
+
+    const headers = { ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req.queryParams);
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url + queryParams,
       method: "get",
       headers: headers,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.GetApisResponse =
-            new operations.GetApisResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.apis = [];
-              const resFieldDepth: number = utils.getResFieldDepth(res);
-              res.apis = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.Api,
-                resFieldDepth
-              );
-            }
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.GetApisResponse = new operations.GetApisResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+      switch (true) {
+        case httpRes?.status == 200:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.apis = [];
+            const resFieldDepth: number = utils.getResFieldDepth(res);
+            res.apis = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.Api,
+              resFieldDepth
+            );
+          }
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
 
-  
   /**
    * upsertApi - Upsert an Api
    *
    * Upsert an Api. If the Api does not exist, it will be created.
    * If the Api exists, it will be updated.
-  **/
+   **/
   upsertApi(
     req: operations.UpsertApiRequest,
     config?: AxiosRequestConfig
@@ -349,9 +382,13 @@ export class Apis {
     if (!(req instanceof utils.SpeakeasyBase)) {
       req = new operations.UpsertApiRequest(req);
     }
-    
+
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}", req.pathParams);
+    const url: string = utils.generateURL(
+      baseURL,
+      "/v1/apis/{apiID}",
+      req.pathParams
+    );
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
@@ -362,52 +399,52 @@ export class Apis {
         throw new Error(`Error serializing request body, cause: ${e.message}`);
       }
     }
-    
+
     const client: AxiosInstance = this._securityClient!;
-    
-    const headers = {...reqBodyHeaders, ...config?.headers};
-    if (reqBody == null || Object.keys(reqBody).length === 0) throw new Error("request body is required");
-    headers["user-agent"] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-    
+
+    const headers = { ...reqBodyHeaders, ...config?.headers };
+    if (reqBody == null || Object.keys(reqBody).length === 0)
+      throw new Error("request body is required");
+    headers[
+      "user-agent"
+    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
     const r = client.request({
       url: url,
       method: "put",
       headers: headers,
-      data: reqBody, 
+      data: reqBody,
       ...config,
     });
-    
+
     return r.then((httpRes: AxiosResponse) => {
-        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
-        const res: operations.UpsertApiResponse =
-            new operations.UpsertApiResponse({
-                statusCode: httpRes.status,
-                contentType: contentType,
-                rawResponse: httpRes
-            });
-        switch (true) {
-          case httpRes?.status == 200:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.api = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.Api,
-              );
-            }
-            break;
-          default:
-            if (utils.matchContentType(contentType, `application/json`)) {
-              res.error = utils.deserializeJSONResponse(
-                httpRes?.data,
-                shared.ErrorT,
-              );
-            }
-            break;
-        }
+      if (httpRes?.status == null)
+        throw new Error(`status code not found in response: ${httpRes}`);
+      const res: operations.UpsertApiResponse =
+        new operations.UpsertApiResponse({
+          statusCode: httpRes.status,
+          contentType: contentType,
+          rawResponse: httpRes,
+        });
+      switch (true) {
+        case httpRes?.status == 200:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.api = utils.deserializeJSONResponse(httpRes?.data, shared.Api);
+          }
+          break;
+        default:
+          if (utils.matchContentType(contentType, `application/json`)) {
+            res.error = utils.deserializeJSONResponse(
+              httpRes?.data,
+              shared.ErrorT
+            );
+          }
+          break;
+      }
 
-        return res;
-      })
+      return res;
+    });
   }
-
 }

@@ -3,9 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class GetAllApiEndpointsPathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=apiID",
+  })
   apiID: string;
 }
 

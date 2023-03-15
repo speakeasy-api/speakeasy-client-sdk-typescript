@@ -3,9 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class RunPluginPathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pluginID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=pluginID",
+  })
   pluginID: string;
 }
 

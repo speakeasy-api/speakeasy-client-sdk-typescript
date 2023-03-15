@@ -3,18 +3,25 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class GetSchemaDiffPathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=apiID",
+  })
   apiID: string;
 
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=baseRevisionID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=baseRevisionID",
+  })
   baseRevisionID: string;
 
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=targetRevisionID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=targetRevisionID",
+  })
   targetRevisionID: string;
 
-  @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=versionID",
+  })
   versionID: string;
 }
 

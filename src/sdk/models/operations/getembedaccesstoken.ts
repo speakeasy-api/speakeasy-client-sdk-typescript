@@ -3,12 +3,15 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-
 export class GetEmbedAccessTokenQueryParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=description",
+  })
   description?: string;
 
-  @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=duration" })
+  @SpeakeasyMetadata({
+    data: "queryParam, style=form;explode=true;name=duration",
+  })
   duration?: number;
 
   @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
