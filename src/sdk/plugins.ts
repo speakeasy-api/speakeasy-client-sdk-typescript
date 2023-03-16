@@ -103,13 +103,13 @@ export class Plugins {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/plugins/{pluginID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
 
     const headers = { ...config?.headers };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const queryParams: string = utils.serializeQueryParams(req);
     headers[
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
@@ -162,11 +162,11 @@ export class Plugins {
    * upsertPlugin - Upsert a plugin
    **/
   upsertPlugin(
-    req: operations.UpsertPluginRequest,
+    req: shared.Plugin,
     config?: AxiosRequestConfig
   ): Promise<operations.UpsertPluginResponse> {
     if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.UpsertPluginRequest(req);
+      req = new shared.Plugin(req);
     }
 
     const baseURL: string = this._serverURL;
@@ -175,7 +175,11 @@ export class Plugins {
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "request",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);

@@ -3,19 +3,14 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class UpsertApiPathParams extends SpeakeasyBase {
+export class UpsertApiRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  apiInput: shared.ApiInput;
+
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=apiID",
   })
   apiID: string;
-}
-
-export class UpsertApiRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: UpsertApiPathParams;
-
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request: shared.ApiInput;
 }
 
 export class UpsertApiResponse extends SpeakeasyBase {

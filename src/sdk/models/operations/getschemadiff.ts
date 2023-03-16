@@ -3,7 +3,7 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class GetSchemaDiffPathParams extends SpeakeasyBase {
+export class GetSchemaDiffRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=apiID",
   })
@@ -23,11 +23,6 @@ export class GetSchemaDiffPathParams extends SpeakeasyBase {
     data: "pathParam, style=simple;explode=false;name=versionID",
   })
   versionID: string;
-}
-
-export class GetSchemaDiffRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: GetSchemaDiffPathParams;
 }
 
 export class GetSchemaDiffResponse extends SpeakeasyBase {

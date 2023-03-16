@@ -3,7 +3,7 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class DeleteSchemaPathParams extends SpeakeasyBase {
+export class DeleteSchemaRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=apiID",
   })
@@ -18,11 +18,6 @@ export class DeleteSchemaPathParams extends SpeakeasyBase {
     data: "pathParam, style=simple;explode=false;name=versionID",
   })
   versionID: string;
-}
-
-export class DeleteSchemaRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: DeleteSchemaPathParams;
 }
 
 export class DeleteSchemaResponse extends SpeakeasyBase {

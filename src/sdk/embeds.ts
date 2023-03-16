@@ -49,7 +49,7 @@ export class Embeds {
     const client: AxiosInstance = this._securityClient!;
 
     const headers = { ...config?.headers };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const queryParams: string = utils.serializeQueryParams(req);
     headers[
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
@@ -171,7 +171,7 @@ export class Embeds {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/workspace/embed-access-tokens/{tokenID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;

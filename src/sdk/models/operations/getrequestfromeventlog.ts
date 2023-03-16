@@ -3,16 +3,11 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class GetRequestFromEventLogPathParams extends SpeakeasyBase {
+export class GetRequestFromEventLogRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=requestID",
   })
   requestID: string;
-}
-
-export class GetRequestFromEventLogRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: GetRequestFromEventLogPathParams;
 }
 
 export class GetRequestFromEventLogResponse extends SpeakeasyBase {

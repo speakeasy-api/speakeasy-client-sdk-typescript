@@ -8,7 +8,7 @@ export class GetApisOp extends SpeakeasyBase {
   and: boolean;
 }
 
-export class GetApisQueryParams extends SpeakeasyBase {
+export class GetApisRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "queryParam, style=deepObject;explode=true;name=metadata",
   })
@@ -18,11 +18,6 @@ export class GetApisQueryParams extends SpeakeasyBase {
     data: "queryParam, style=deepObject;explode=true;name=op",
   })
   op?: GetApisOp;
-}
-
-export class GetApisRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetApisQueryParams;
 }
 
 export class GetApisResponse extends SpeakeasyBase {

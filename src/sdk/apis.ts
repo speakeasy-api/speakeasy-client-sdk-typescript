@@ -45,7 +45,7 @@ export class Apis {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -108,7 +108,7 @@ export class Apis {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/generate/openapi",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -176,7 +176,7 @@ export class Apis {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/generate/postman",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -243,16 +243,12 @@ export class Apis {
     }
 
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/v1/apis/{apiID}",
-      req.pathParams
-    );
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}", req);
 
     const client: AxiosInstance = this._securityClient!;
 
     const headers = { ...config?.headers };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const queryParams: string = utils.serializeQueryParams(req);
     headers[
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
@@ -321,7 +317,7 @@ export class Apis {
     const client: AxiosInstance = this._securityClient!;
 
     const headers = { ...config?.headers };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const queryParams: string = utils.serializeQueryParams(req);
     headers[
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
@@ -384,16 +380,16 @@ export class Apis {
     }
 
     const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/v1/apis/{apiID}",
-      req.pathParams
-    );
+    const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}", req);
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "apiInput",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);

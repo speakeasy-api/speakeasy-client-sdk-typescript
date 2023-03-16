@@ -3,16 +3,11 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class RevokeEmbedAccessTokenPathParams extends SpeakeasyBase {
+export class RevokeEmbedAccessTokenRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=tokenID",
   })
   tokenID: string;
-}
-
-export class RevokeEmbedAccessTokenRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: RevokeEmbedAccessTokenPathParams;
 }
 
 export class RevokeEmbedAccessTokenResponse extends SpeakeasyBase {

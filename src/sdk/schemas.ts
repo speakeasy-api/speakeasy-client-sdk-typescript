@@ -43,7 +43,7 @@ export class Schemas {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -103,7 +103,7 @@ export class Schemas {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/download",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -173,7 +173,7 @@ export class Schemas {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -246,7 +246,7 @@ export class Schemas {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -312,7 +312,7 @@ export class Schemas {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -381,7 +381,7 @@ export class Schemas {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -450,7 +450,7 @@ export class Schemas {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schemas",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -522,13 +522,17 @@ export class Schemas {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/schema",
-      req.pathParams
+      req
     );
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "requestBody",
+        "multipart"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);

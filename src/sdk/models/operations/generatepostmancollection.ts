@@ -3,7 +3,7 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class GeneratePostmanCollectionPathParams extends SpeakeasyBase {
+export class GeneratePostmanCollectionRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=apiID",
   })
@@ -13,11 +13,6 @@ export class GeneratePostmanCollectionPathParams extends SpeakeasyBase {
     data: "pathParam, style=simple;explode=false;name=versionID",
   })
   versionID: string;
-}
-
-export class GeneratePostmanCollectionRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: GeneratePostmanCollectionPathParams;
 }
 
 export class GeneratePostmanCollectionResponse extends SpeakeasyBase {

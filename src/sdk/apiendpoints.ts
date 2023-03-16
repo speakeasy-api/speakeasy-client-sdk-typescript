@@ -45,7 +45,7 @@ export class ApiEndpoints {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -108,7 +108,7 @@ export class ApiEndpoints {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -177,7 +177,7 @@ export class ApiEndpoints {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -245,7 +245,7 @@ export class ApiEndpoints {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -312,7 +312,7 @@ export class ApiEndpoints {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/api_endpoints",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -381,7 +381,7 @@ export class ApiEndpoints {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -450,7 +450,7 @@ export class ApiEndpoints {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -518,13 +518,17 @@ export class ApiEndpoints {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
-      req.pathParams
+      req
     );
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "apiEndpointInput",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);

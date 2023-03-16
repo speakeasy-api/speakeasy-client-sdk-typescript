@@ -3,11 +3,6 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class UpsertPluginRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request: shared.Plugin;
-}
-
 export class UpsertPluginResponse extends SpeakeasyBase {
   @SpeakeasyMetadata()
   contentType: string;

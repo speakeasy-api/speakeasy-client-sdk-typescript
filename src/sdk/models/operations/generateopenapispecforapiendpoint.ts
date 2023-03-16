@@ -3,7 +3,7 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class GenerateOpenApiSpecForApiEndpointPathParams extends SpeakeasyBase {
+export class GenerateOpenApiSpecForApiEndpointRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=apiEndpointID",
   })
@@ -18,11 +18,6 @@ export class GenerateOpenApiSpecForApiEndpointPathParams extends SpeakeasyBase {
     data: "pathParam, style=simple;explode=false;name=versionID",
   })
   versionID: string;
-}
-
-export class GenerateOpenApiSpecForApiEndpointRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: GenerateOpenApiSpecForApiEndpointPathParams;
 }
 
 export class GenerateOpenApiSpecForApiEndpointResponse extends SpeakeasyBase {

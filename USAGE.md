@@ -12,29 +12,27 @@ const sdk = new Speakeasy({
     apiKey: "YOUR_API_KEY_HERE",
   },
 });
-    
+
 const req: GetApisRequest = {
-  queryParams: {
-    metadata: {
-      "deserunt": [
-        "nulla",
-        "id",
-        "vero",
-      ],
-      "perspiciatis": [
-        "nihil",
-        "fuga",
-        "facilis",
-        "eum",
-      ],
-      "iusto": [
-        "saepe",
-        "inventore",
-      ],
-    },
-    op: {
-      and: false,
-    },
+  metadata: {
+    "deserunt": [
+      "nulla",
+      "id",
+      "vero",
+    ],
+    "perspiciatis": [
+      "nihil",
+      "fuga",
+      "facilis",
+      "eum",
+    ],
+    "iusto": [
+      "saepe",
+      "inventore",
+    ],
+  },
+  op: {
+    and: false,
   },
 };
 

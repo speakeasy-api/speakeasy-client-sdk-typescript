@@ -3,7 +3,7 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class GetEmbedAccessTokenQueryParams extends SpeakeasyBase {
+export class GetEmbedAccessTokenRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "queryParam, style=form;explode=true;name=description",
   })
@@ -16,11 +16,6 @@ export class GetEmbedAccessTokenQueryParams extends SpeakeasyBase {
 
   @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
   filters?: shared.Filters;
-}
-
-export class GetEmbedAccessTokenRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  queryParams: GetEmbedAccessTokenQueryParams;
 }
 
 export class GetEmbedAccessTokenResponse extends SpeakeasyBase {

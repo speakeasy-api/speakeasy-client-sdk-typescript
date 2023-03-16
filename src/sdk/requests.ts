@@ -46,7 +46,7 @@ export class Requests {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/eventlog/{requestID}/generate/postman",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -113,7 +113,7 @@ export class Requests {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/eventlog/{requestID}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -184,7 +184,7 @@ export class Requests {
     const client: AxiosInstance = this._securityClient!;
 
     const headers = { ...config?.headers };
-    const queryParams: string = utils.serializeQueryParams(req.queryParams);
+    const queryParams: string = utils.serializeQueryParams(req);
     headers[
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;

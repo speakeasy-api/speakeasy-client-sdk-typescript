@@ -3,7 +3,7 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class DeleteVersionMetadataPathParams extends SpeakeasyBase {
+export class DeleteVersionMetadataRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=apiID",
   })
@@ -23,11 +23,6 @@ export class DeleteVersionMetadataPathParams extends SpeakeasyBase {
     data: "pathParam, style=simple;explode=false;name=versionID",
   })
   versionID: string;
-}
-
-export class DeleteVersionMetadataRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: DeleteVersionMetadataPathParams;
 }
 
 export class DeleteVersionMetadataResponse extends SpeakeasyBase {

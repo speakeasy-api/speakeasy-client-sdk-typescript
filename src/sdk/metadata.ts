@@ -43,7 +43,7 @@ export class Metadata {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -103,7 +103,7 @@ export class Metadata {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/metadata",
-      req.pathParams
+      req
     );
 
     const client: AxiosInstance = this._securityClient!;
@@ -172,13 +172,17 @@ export class Metadata {
     const url: string = utils.generateURL(
       baseURL,
       "/v1/apis/{apiID}/version/{versionID}/metadata",
-      req.pathParams
+      req
     );
 
     let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
 
     try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req);
+      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+        req,
+        "versionMetadataInput",
+        "json"
+      );
     } catch (e: unknown) {
       if (e instanceof Error) {
         throw new Error(`Error serializing request body, cause: ${e.message}`);

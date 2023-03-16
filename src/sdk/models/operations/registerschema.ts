@@ -3,18 +3,6 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class RegisterSchemaPathParams extends SpeakeasyBase {
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=apiID",
-  })
-  apiID: string;
-
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=versionID",
-  })
-  versionID: string;
-}
-
 export class RegisterSchemaRequestBodyFile extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "multipart_form, content=true" })
   content: Uint8Array;
@@ -29,11 +17,18 @@ export class RegisterSchemaRequestBody extends SpeakeasyBase {
 }
 
 export class RegisterSchemaRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: RegisterSchemaPathParams;
-
   @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
-  request: RegisterSchemaRequestBody;
+  requestBody: RegisterSchemaRequestBody;
+
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=apiID",
+  })
+  apiID: string;
+
+  @SpeakeasyMetadata({
+    data: "pathParam, style=simple;explode=false;name=versionID",
+  })
+  versionID: string;
 }
 
 export class RegisterSchemaResponse extends SpeakeasyBase {

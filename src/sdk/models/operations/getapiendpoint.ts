@@ -3,7 +3,7 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class GetApiEndpointPathParams extends SpeakeasyBase {
+export class GetApiEndpointRequest extends SpeakeasyBase {
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=apiEndpointID",
   })
@@ -18,11 +18,6 @@ export class GetApiEndpointPathParams extends SpeakeasyBase {
     data: "pathParam, style=simple;explode=false;name=versionID",
   })
   versionID: string;
-}
-
-export class GetApiEndpointRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: GetApiEndpointPathParams;
 }
 
 export class GetApiEndpointResponse extends SpeakeasyBase {

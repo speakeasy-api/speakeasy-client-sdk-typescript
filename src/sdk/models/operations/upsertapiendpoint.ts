@@ -3,7 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
-export class UpsertApiEndpointPathParams extends SpeakeasyBase {
+export class UpsertApiEndpointRequest extends SpeakeasyBase {
+  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+  apiEndpointInput: shared.ApiEndpointInput;
+
   @SpeakeasyMetadata({
     data: "pathParam, style=simple;explode=false;name=apiEndpointID",
   })
@@ -18,14 +21,6 @@ export class UpsertApiEndpointPathParams extends SpeakeasyBase {
     data: "pathParam, style=simple;explode=false;name=versionID",
   })
   versionID: string;
-}
-
-export class UpsertApiEndpointRequest extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  pathParams: UpsertApiEndpointPathParams;
-
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  request: shared.ApiEndpointInput;
 }
 
 export class UpsertApiEndpointResponse extends SpeakeasyBase {
