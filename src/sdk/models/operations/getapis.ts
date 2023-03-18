@@ -3,6 +3,10 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 import { Type } from "class-transformer";
 
+// GetApisOp
+/**
+ * Configuration for filter operations
+ **/
 export class GetApisOp extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "queryParam, name=and" })
   and: boolean;
