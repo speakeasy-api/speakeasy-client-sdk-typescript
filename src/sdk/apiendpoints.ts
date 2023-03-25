@@ -55,7 +55,7 @@ export class ApiEndpoints {
       req
     );
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[
@@ -119,7 +119,7 @@ export class ApiEndpoints {
       req
     );
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[
@@ -189,7 +189,7 @@ export class ApiEndpoints {
       req
     );
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[
@@ -258,7 +258,7 @@ export class ApiEndpoints {
       req
     );
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[
@@ -287,8 +287,8 @@ export class ApiEndpoints {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/octet-stream`)) {
             const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            let out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i: number = 0; i < resBody.length; i++)
+            const out: Uint8Array = new Uint8Array(resBody.length);
+            for (let i = 0; i < resBody.length; i++)
               out[i] = resBody.charCodeAt(i);
             res.postmanCollection = out;
           }
@@ -325,7 +325,7 @@ export class ApiEndpoints {
       req
     );
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[
@@ -394,7 +394,7 @@ export class ApiEndpoints {
       req
     );
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[
@@ -463,7 +463,7 @@ export class ApiEndpoints {
       req
     );
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[
@@ -546,7 +546,7 @@ export class ApiEndpoints {
       }
     }
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...reqBodyHeaders, ...config?.headers };
     if (reqBody == null || Object.keys(reqBody).length === 0)

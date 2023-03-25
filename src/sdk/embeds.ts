@@ -53,7 +53,7 @@ export class Embeds {
     const url: string =
       baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-token";
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     const queryParams: string = utils.serializeQueryParams(req);
@@ -112,7 +112,7 @@ export class Embeds {
     const url: string =
       baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-tokens/valid";
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[
@@ -181,7 +181,7 @@ export class Embeds {
       req
     );
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[

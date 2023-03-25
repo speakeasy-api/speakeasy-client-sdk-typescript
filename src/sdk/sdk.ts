@@ -80,8 +80,8 @@ export class Speakeasy {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "1.13.0";
-  private _genVersion = "2.15.0";
+  private _sdkVersion = "1.14.0";
+  private _genVersion = "2.16.1";
   private _globals: any;
 
   constructor(props?: SDKProps) {
@@ -174,7 +174,7 @@ export class Speakeasy {
     const baseURL: string = this._serverURL;
     const url: string = baseURL.replace(/\/$/, "") + "/v1/auth/validate";
 
-    const client: AxiosInstance = this._securityClient!;
+    const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
     headers[

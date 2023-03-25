@@ -5,7 +5,6 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../shared";
 import { AxiosResponse } from "axios";
-import { Type } from "class-transformer";
 
 export class RegisterSchemaRequestBodyFile extends SpeakeasyBase {
   @SpeakeasyMetadata({ data: "multipart_form, content=true" })
