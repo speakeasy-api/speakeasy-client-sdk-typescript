@@ -34,20 +34,20 @@ const sdk = new Speakeasy({
 
 const req: GetApisRequest = {
   metadata: {
-    "deserunt": [
+    "provident": [
+      "quibusdam",
+      "unde",
       "nulla",
-      "id",
-      "vero",
     ],
-    "perspiciatis": [
-      "nihil",
-      "fuga",
-      "facilis",
-      "eum",
+    "corrupti": [
+      "vel",
+      "error",
+      "deserunt",
+      "suscipit",
     ],
-    "iusto": [
-      "saepe",
-      "inventore",
+    "iure": [
+      "debitis",
+      "ipsa",
     ],
   },
   op: {
@@ -62,7 +62,7 @@ sdk.apis.getApis(req).then((res: GetApisResponse | AxiosError) => {
 <!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
-## SDK Available Operations
+## Available Resources and Operations
 
 ### Speakeasy SDK
 
