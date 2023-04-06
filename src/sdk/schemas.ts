@@ -140,7 +140,11 @@ export class Schemas {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.schema = httpRes?.data;
+            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+            const out: Uint8Array = new Uint8Array(resBody.length);
+            for (let i = 0; i < resBody.length; i++)
+              out[i] = resBody.charCodeAt(i);
+            res.schema = out;
           }
           if (utils.matchContentType(contentType, `application/x-yaml`)) {
             const resBody: string = JSON.stringify(httpRes?.data, null, 0);
@@ -210,7 +214,11 @@ export class Schemas {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.schema = httpRes?.data;
+            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+            const out: Uint8Array = new Uint8Array(resBody.length);
+            for (let i = 0; i < resBody.length; i++)
+              out[i] = resBody.charCodeAt(i);
+            res.schema = out;
           }
           if (utils.matchContentType(contentType, `application/x-yaml`)) {
             const resBody: string = JSON.stringify(httpRes?.data, null, 0);
