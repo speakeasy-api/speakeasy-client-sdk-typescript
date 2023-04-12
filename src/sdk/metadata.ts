@@ -82,10 +82,7 @@ export class Metadata {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -142,7 +139,7 @@ export class Metadata {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.versionMetadata = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.versionMetadata = utils.deserializeJSONResponse(
+            res.versionMetadata = utils.objectToClass(
               httpRes?.data,
               shared.VersionMetadata,
               resFieldDepth
@@ -151,10 +148,7 @@ export class Metadata {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -226,7 +220,7 @@ export class Metadata {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.versionMetadata = utils.deserializeJSONResponse(
+            res.versionMetadata = utils.objectToClass(
               httpRes?.data,
               shared.VersionMetadata
             );
@@ -234,10 +228,7 @@ export class Metadata {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }

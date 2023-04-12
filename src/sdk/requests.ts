@@ -93,10 +93,7 @@ export class Requests {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -151,7 +148,7 @@ export class Requests {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.unboundedRequest = utils.deserializeJSONResponse(
+            res.unboundedRequest = utils.objectToClass(
               httpRes?.data,
               shared.UnboundedRequest
             );
@@ -159,10 +156,7 @@ export class Requests {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -220,7 +214,7 @@ export class Requests {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.boundedRequests = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.boundedRequests = utils.deserializeJSONResponse(
+            res.boundedRequests = utils.objectToClass(
               httpRes?.data,
               shared.BoundedRequest,
               resFieldDepth
@@ -229,10 +223,7 @@ export class Requests {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }

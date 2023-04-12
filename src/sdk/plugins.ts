@@ -73,7 +73,7 @@ export class Plugins {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.plugins = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.plugins = utils.deserializeJSONResponse(
+            res.plugins = utils.objectToClass(
               httpRes?.data,
               shared.Plugin,
               resFieldDepth
@@ -82,10 +82,7 @@ export class Plugins {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -143,7 +140,7 @@ export class Plugins {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.boundedRequests = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.boundedRequests = utils.deserializeJSONResponse(
+            res.boundedRequests = utils.objectToClass(
               httpRes?.data,
               shared.BoundedRequest,
               resFieldDepth
@@ -152,10 +149,7 @@ export class Plugins {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -223,18 +217,12 @@ export class Plugins {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.plugin = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.Plugin
-            );
+            res.plugin = utils.objectToClass(httpRes?.data, shared.Plugin);
           }
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }

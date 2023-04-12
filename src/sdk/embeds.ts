@@ -82,7 +82,7 @@ export class Embeds {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.embedAccessTokenResponse = utils.deserializeJSONResponse(
+            res.embedAccessTokenResponse = utils.objectToClass(
               httpRes?.data,
               shared.EmbedAccessTokenResponse
             );
@@ -90,10 +90,7 @@ export class Embeds {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -142,7 +139,7 @@ export class Embeds {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.embedTokens = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.embedTokens = utils.deserializeJSONResponse(
+            res.embedTokens = utils.objectToClass(
               httpRes?.data,
               shared.EmbedToken,
               resFieldDepth
@@ -151,10 +148,7 @@ export class Embeds {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -211,10 +205,7 @@ export class Embeds {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }

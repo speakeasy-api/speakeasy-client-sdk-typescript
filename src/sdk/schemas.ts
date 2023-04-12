@@ -82,10 +82,7 @@ export class Schemas {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -156,10 +153,7 @@ export class Schemas {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -230,10 +224,7 @@ export class Schemas {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -292,18 +283,12 @@ export class Schemas {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.schema = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.Schema
-            );
+            res.schema = utils.objectToClass(httpRes?.data, shared.Schema);
           }
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -358,7 +343,7 @@ export class Schemas {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.schemaDiff = utils.deserializeJSONResponse(
+            res.schemaDiff = utils.objectToClass(
               httpRes?.data,
               shared.SchemaDiff
             );
@@ -366,10 +351,7 @@ export class Schemas {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -428,18 +410,12 @@ export class Schemas {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.schema = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.Schema
-            );
+            res.schema = utils.objectToClass(httpRes?.data, shared.Schema);
           }
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -500,7 +476,7 @@ export class Schemas {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.schemata = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.schemata = utils.deserializeJSONResponse(
+            res.schemata = utils.objectToClass(
               httpRes?.data,
               shared.Schema,
               resFieldDepth
@@ -509,10 +485,7 @@ export class Schemas {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -590,10 +563,7 @@ export class Schemas {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }

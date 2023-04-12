@@ -85,10 +85,7 @@ export class ApiEndpoints {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -147,7 +144,7 @@ export class ApiEndpoints {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.apiEndpoint = utils.deserializeJSONResponse(
+            res.apiEndpoint = utils.objectToClass(
               httpRes?.data,
               shared.ApiEndpoint
             );
@@ -155,10 +152,7 @@ export class ApiEndpoints {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -217,7 +211,7 @@ export class ApiEndpoints {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.generateOpenApiSpecDiff = utils.deserializeJSONResponse(
+            res.generateOpenApiSpecDiff = utils.objectToClass(
               httpRes?.data,
               shared.GenerateOpenApiSpecDiff
             );
@@ -225,10 +219,7 @@ export class ApiEndpoints {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -295,10 +286,7 @@ export class ApiEndpoints {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -355,7 +343,7 @@ export class ApiEndpoints {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.apiEndpoints = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.apiEndpoints = utils.deserializeJSONResponse(
+            res.apiEndpoints = utils.objectToClass(
               httpRes?.data,
               shared.ApiEndpoint,
               resFieldDepth
@@ -364,10 +352,7 @@ export class ApiEndpoints {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -424,7 +409,7 @@ export class ApiEndpoints {
           if (utils.matchContentType(contentType, `application/json`)) {
             res.apiEndpoints = [];
             const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.apiEndpoints = utils.deserializeJSONResponse(
+            res.apiEndpoints = utils.objectToClass(
               httpRes?.data,
               shared.ApiEndpoint,
               resFieldDepth
@@ -433,10 +418,7 @@ export class ApiEndpoints {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -491,7 +473,7 @@ export class ApiEndpoints {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.apiEndpoint = utils.deserializeJSONResponse(
+            res.apiEndpoint = utils.objectToClass(
               httpRes?.data,
               shared.ApiEndpoint
             );
@@ -499,10 +481,7 @@ export class ApiEndpoints {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
@@ -577,7 +556,7 @@ export class ApiEndpoints {
       switch (true) {
         case httpRes?.status == 200:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.apiEndpoint = utils.deserializeJSONResponse(
+            res.apiEndpoint = utils.objectToClass(
               httpRes?.data,
               shared.ApiEndpoint
             );
@@ -585,10 +564,7 @@ export class ApiEndpoints {
           break;
         default:
           if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.deserializeJSONResponse(
-              httpRes?.data,
-              shared.ErrorT
-            );
+            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
           }
           break;
       }
