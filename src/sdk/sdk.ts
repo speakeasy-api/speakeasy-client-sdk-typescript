@@ -81,8 +81,8 @@ export class Speakeasy {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "1.15.1";
-  private _genVersion = "2.17.9";
+  private _sdkVersion = "1.16.0";
+  private _genVersion = "2.18.0";
   private _globals: any;
 
   constructor(props?: SDKProps) {
