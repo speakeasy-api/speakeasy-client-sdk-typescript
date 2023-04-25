@@ -1,4 +1,10 @@
-<!-- Start SDK Example Usage -->
+# getApis
+Available in: `apis`
+
+Get a list of all Apis and their versions for a given workspace.
+Supports filtering the APIs based on metadata attributes.
+
+## Example Usage
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { GetApisRequest, GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
@@ -12,20 +18,14 @@ const sdk = new Speakeasy({
 
 const req: GetApisRequest = {
   metadata: {
-    "provident": [
-      "quibusdam",
-      "unde",
-      "nulla",
+    "esse": [
+      "excepturi",
     ],
-    "corrupti": [
-      "vel",
-      "error",
-      "deserunt",
-      "suscipit",
+    "aspernatur": [
+      "ad",
     ],
-    "iure": [
-      "debitis",
-      "ipsa",
+    "natus": [
+      "iste",
     ],
   },
   op: {
@@ -39,4 +39,3 @@ sdk.apis.getApis(req).then((res: GetApisResponse | AxiosError) => {
   }
 });
 ```
-<!-- End SDK Example Usage -->
