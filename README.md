@@ -65,62 +65,62 @@ sdk.apis.getApis(req).then((res: GetApisResponse | AxiosError) => {
 
 ### [Speakeasy SDK](docs/speakeasy/README.md)
 
-* [validateApiKey](docs/speakeasy/validateapikey.md) - Validate the current api key.
+* [validateApiKey](docs/speakeasy/README.md#validateapikey) - Validate the current api key.
 
 ### [apiEndpoints](docs/apiendpoints/README.md)
 
-* [deleteApiEndpoint](docs/apiendpoints/deleteapiendpoint.md) - Delete an ApiEndpoint.
-* [findApiEndpoint](docs/apiendpoints/findapiendpoint.md) - Find an ApiEndpoint via its displayName.
-* [generateOpenApiSpecForApiEndpoint](docs/apiendpoints/generateopenapispecforapiendpoint.md) - Generate an OpenAPI specification for a particular ApiEndpoint.
-* [generatePostmanCollectionForApiEndpoint](docs/apiendpoints/generatepostmancollectionforapiendpoint.md) - Generate a Postman collection for a particular ApiEndpoint.
-* [getAllApiEndpoints](docs/apiendpoints/getallapiendpoints.md) - Get all Api endpoints for a particular apiID.
-* [getAllForVersionApiEndpoints](docs/apiendpoints/getallforversionapiendpoints.md) - Get all ApiEndpoints for a particular apiID and versionID.
-* [getApiEndpoint](docs/apiendpoints/getapiendpoint.md) - Get an ApiEndpoint.
-* [upsertApiEndpoint](docs/apiendpoints/upsertapiendpoint.md) - Upsert an ApiEndpoint.
+* [deleteApiEndpoint](docs/apiendpoints/README.md#deleteapiendpoint) - Delete an ApiEndpoint.
+* [findApiEndpoint](docs/apiendpoints/README.md#findapiendpoint) - Find an ApiEndpoint via its displayName.
+* [generateOpenApiSpecForApiEndpoint](docs/apiendpoints/README.md#generateopenapispecforapiendpoint) - Generate an OpenAPI specification for a particular ApiEndpoint.
+* [generatePostmanCollectionForApiEndpoint](docs/apiendpoints/README.md#generatepostmancollectionforapiendpoint) - Generate a Postman collection for a particular ApiEndpoint.
+* [getAllApiEndpoints](docs/apiendpoints/README.md#getallapiendpoints) - Get all Api endpoints for a particular apiID.
+* [getAllForVersionApiEndpoints](docs/apiendpoints/README.md#getallforversionapiendpoints) - Get all ApiEndpoints for a particular apiID and versionID.
+* [getApiEndpoint](docs/apiendpoints/README.md#getapiendpoint) - Get an ApiEndpoint.
+* [upsertApiEndpoint](docs/apiendpoints/README.md#upsertapiendpoint) - Upsert an ApiEndpoint.
 
 ### [apis](docs/apis/README.md)
 
-* [deleteApi](docs/apis/deleteapi.md) - Delete an Api.
-* [generateOpenApiSpec](docs/apis/generateopenapispec.md) - Generate an OpenAPI specification for a particular Api.
-* [generatePostmanCollection](docs/apis/generatepostmancollection.md) - Generate a Postman collection for a particular Api.
-* [getAllApiVersions](docs/apis/getallapiversions.md) - Get all Api versions for a particular ApiEndpoint.
-* [getApis](docs/apis/getapis.md) - Get a list of Apis for a given workspace
-* [upsertApi](docs/apis/upsertapi.md) - Upsert an Api
+* [deleteApi](docs/apis/README.md#deleteapi) - Delete an Api.
+* [generateOpenApiSpec](docs/apis/README.md#generateopenapispec) - Generate an OpenAPI specification for a particular Api.
+* [generatePostmanCollection](docs/apis/README.md#generatepostmancollection) - Generate a Postman collection for a particular Api.
+* [getAllApiVersions](docs/apis/README.md#getallapiversions) - Get all Api versions for a particular ApiEndpoint.
+* [getApis](docs/apis/README.md#getapis) - Get a list of Apis for a given workspace
+* [upsertApi](docs/apis/README.md#upsertapi) - Upsert an Api
 
 ### [embeds](docs/embeds/README.md)
 
-* [getEmbedAccessToken](docs/embeds/getembedaccesstoken.md) - Get an embed access token for the current workspace.
-* [getValidEmbedAccessTokens](docs/embeds/getvalidembedaccesstokens.md) - Get all valid embed access tokens for the current workspace.
-* [revokeEmbedAccessToken](docs/embeds/revokeembedaccesstoken.md) - Revoke an embed access EmbedToken.
+* [getEmbedAccessToken](docs/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
+* [getValidEmbedAccessTokens](docs/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
+* [revokeEmbedAccessToken](docs/embeds/README.md#revokeembedaccesstoken) - Revoke an embed access EmbedToken.
 
 ### [metadata](docs/metadata/README.md)
 
-* [deleteVersionMetadata](docs/metadata/deleteversionmetadata.md) - Delete metadata for a particular apiID and versionID.
-* [getVersionMetadata](docs/metadata/getversionmetadata.md) - Get all metadata for a particular apiID and versionID.
-* [insertVersionMetadata](docs/metadata/insertversionmetadata.md) - Insert metadata for a particular apiID and versionID.
+* [deleteVersionMetadata](docs/metadata/README.md#deleteversionmetadata) - Delete metadata for a particular apiID and versionID.
+* [getVersionMetadata](docs/metadata/README.md#getversionmetadata) - Get all metadata for a particular apiID and versionID.
+* [insertVersionMetadata](docs/metadata/README.md#insertversionmetadata) - Insert metadata for a particular apiID and versionID.
 
 ### [plugins](docs/plugins/README.md)
 
-* [getPlugins](docs/plugins/getplugins.md) - Get all plugins for the current workspace.
-* [runPlugin](docs/plugins/runplugin.md) - Run a plugin
-* [upsertPlugin](docs/plugins/upsertplugin.md) - Upsert a plugin
+* [getPlugins](docs/plugins/README.md#getplugins) - Get all plugins for the current workspace.
+* [runPlugin](docs/plugins/README.md#runplugin) - Run a plugin
+* [upsertPlugin](docs/plugins/README.md#upsertplugin) - Upsert a plugin
 
 ### [requests](docs/requests/README.md)
 
-* [generateRequestPostmanCollection](docs/requests/generaterequestpostmancollection.md) - Generate a Postman collection for a particular request.
-* [getRequestFromEventLog](docs/requests/getrequestfromeventlog.md) - Get information about a particular request.
-* [queryEventLog](docs/requests/queryeventlog.md) - Query the event log to retrieve a list of requests.
+* [generateRequestPostmanCollection](docs/requests/README.md#generaterequestpostmancollection) - Generate a Postman collection for a particular request.
+* [getRequestFromEventLog](docs/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
+* [queryEventLog](docs/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
 
 ### [schemas](docs/schemas/README.md)
 
-* [deleteSchema](docs/schemas/deleteschema.md) - Delete a particular schema revision for an Api.
-* [downloadSchema](docs/schemas/downloadschema.md) - Download the latest schema for a particular apiID.
-* [downloadSchemaRevision](docs/schemas/downloadschemarevision.md) - Download a particular schema revision for an Api.
-* [getSchema](docs/schemas/getschema.md) - Get information about the latest schema.
-* [getSchemaDiff](docs/schemas/getschemadiff.md) - Get a diff of two schema revisions for an Api.
-* [getSchemaRevision](docs/schemas/getschemarevision.md) - Get information about a particular schema revision for an Api.
-* [getSchemas](docs/schemas/getschemas.md) - Get information about all schemas associated with a particular apiID.
-* [registerSchema](docs/schemas/registerschema.md) - Register a schema.
+* [deleteSchema](docs/schemas/README.md#deleteschema) - Delete a particular schema revision for an Api.
+* [downloadSchema](docs/schemas/README.md#downloadschema) - Download the latest schema for a particular apiID.
+* [downloadSchemaRevision](docs/schemas/README.md#downloadschemarevision) - Download a particular schema revision for an Api.
+* [getSchema](docs/schemas/README.md#getschema) - Get information about the latest schema.
+* [getSchemaDiff](docs/schemas/README.md#getschemadiff) - Get a diff of two schema revisions for an Api.
+* [getSchemaRevision](docs/schemas/README.md#getschemarevision) - Get information about a particular schema revision for an Api.
+* [getSchemas](docs/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
+* [registerSchema](docs/schemas/README.md#registerschema) - Register a schema.
 <!-- End SDK Available Operations -->
 
 ### SDK Generated by [Speakeasy](https://docs.speakeasyapi.dev/docs/using-speakeasy/client-sdks)
