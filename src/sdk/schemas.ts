@@ -37,7 +37,7 @@ export class Schemas {
   /**
    * Delete a particular schema revision for an Api.
    */
-  deleteSchema(
+  async deleteSchema(
     req: operations.DeleteSchemaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteSchemaResponse> {
@@ -59,42 +59,43 @@ export class Schemas {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "delete",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.DeleteSchemaResponse =
-        new operations.DeleteSchemaResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.DeleteSchemaResponse =
+      new operations.DeleteSchemaResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
    * Download the latest schema for a particular apiID.
    */
-  downloadSchema(
+  async downloadSchema(
     req: operations.DownloadSchemaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DownloadSchemaResponse> {
@@ -116,56 +117,57 @@ export class Schemas {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.DownloadSchemaResponse =
-        new operations.DownloadSchemaResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            const out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i = 0; i < resBody.length; i++)
-              out[i] = resBody.charCodeAt(i);
-            res.schema = out;
-          }
-          if (utils.matchContentType(contentType, `application/x-yaml`)) {
-            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            const out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i = 0; i < resBody.length; i++)
-              out[i] = resBody.charCodeAt(i);
-            res.schema = out;
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.DownloadSchemaResponse =
+      new operations.DownloadSchemaResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+          const out: Uint8Array = new Uint8Array(resBody.length);
+          for (let i = 0; i < resBody.length; i++)
+            out[i] = resBody.charCodeAt(i);
+          res.schema = out;
+        }
+        if (utils.matchContentType(contentType, `application/x-yaml`)) {
+          const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+          const out: Uint8Array = new Uint8Array(resBody.length);
+          for (let i = 0; i < resBody.length; i++)
+            out[i] = resBody.charCodeAt(i);
+          res.schema = out;
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
    * Download a particular schema revision for an Api.
    */
-  downloadSchemaRevision(
+  async downloadSchemaRevision(
     req: operations.DownloadSchemaRevisionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DownloadSchemaRevisionResponse> {
@@ -187,50 +189,51 @@ export class Schemas {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.DownloadSchemaRevisionResponse =
-        new operations.DownloadSchemaRevisionResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            const out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i = 0; i < resBody.length; i++)
-              out[i] = resBody.charCodeAt(i);
-            res.schema = out;
-          }
-          if (utils.matchContentType(contentType, `application/x-yaml`)) {
-            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            const out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i = 0; i < resBody.length; i++)
-              out[i] = resBody.charCodeAt(i);
-            res.schema = out;
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.DownloadSchemaRevisionResponse =
+      new operations.DownloadSchemaRevisionResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+          const out: Uint8Array = new Uint8Array(resBody.length);
+          for (let i = 0; i < resBody.length; i++)
+            out[i] = resBody.charCodeAt(i);
+          res.schema = out;
+        }
+        if (utils.matchContentType(contentType, `application/x-yaml`)) {
+          const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+          const out: Uint8Array = new Uint8Array(resBody.length);
+          for (let i = 0; i < resBody.length; i++)
+            out[i] = resBody.charCodeAt(i);
+          res.schema = out;
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -240,7 +243,7 @@ export class Schemas {
    * Returns information about the last uploaded schema for a particular API version.
    * This won't include the schema itself, that can be retrieved via the downloadSchema operation.
    */
-  getSchema(
+  async getSchema(
     req: operations.GetSchemaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSchemaResponse> {
@@ -262,45 +265,45 @@ export class Schemas {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GetSchemaResponse =
-        new operations.GetSchemaResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.schema = utils.objectToClass(httpRes?.data, shared.Schema);
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
+    const res: operations.GetSchemaResponse = new operations.GetSchemaResponse({
+      statusCode: httpRes.status,
+      contentType: contentType,
+      rawResponse: httpRes,
     });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.schema = utils.objectToClass(httpRes?.data, shared.Schema);
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
    * Get a diff of two schema revisions for an Api.
    */
-  getSchemaDiff(
+  async getSchemaDiff(
     req: operations.GetSchemaDiffRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSchemaDiffResponse> {
@@ -322,42 +325,43 @@ export class Schemas {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GetSchemaDiffResponse =
-        new operations.GetSchemaDiffResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.schemaDiff = utils.objectToClass(
-              httpRes?.data,
-              shared.SchemaDiff
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GetSchemaDiffResponse =
+      new operations.GetSchemaDiffResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.schemaDiff = utils.objectToClass(
+            httpRes?.data,
+            shared.SchemaDiff
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -367,7 +371,7 @@ export class Schemas {
    * Returns information about the last uploaded schema for a particular schema revision.
    * This won't include the schema itself, that can be retrieved via the downloadSchema operation.
    */
-  getSchemaRevision(
+  async getSchemaRevision(
     req: operations.GetSchemaRevisionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSchemaRevisionResponse> {
@@ -389,39 +393,40 @@ export class Schemas {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GetSchemaRevisionResponse =
-        new operations.GetSchemaRevisionResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.schema = utils.objectToClass(httpRes?.data, shared.Schema);
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GetSchemaRevisionResponse =
+      new operations.GetSchemaRevisionResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.schema = utils.objectToClass(httpRes?.data, shared.Schema);
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -431,7 +436,7 @@ export class Schemas {
    * Returns information the schemas associated with a particular apiID.
    * This won't include the schemas themselves, they can be retrieved via the downloadSchema operation.
    */
-  getSchemas(
+  async getSchemas(
     req: operations.GetSchemasRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetSchemasResponse> {
@@ -453,45 +458,46 @@ export class Schemas {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GetSchemasResponse =
-        new operations.GetSchemasResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.schemata = [];
-            const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.schemata = utils.objectToClass(
-              httpRes?.data,
-              shared.Schema,
-              resFieldDepth
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GetSchemasResponse =
+      new operations.GetSchemasResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.schemata = [];
+          const resFieldDepth: number = utils.getResFieldDepth(res);
+          res.schemata = utils.objectToClass(
+            httpRes?.data,
+            shared.Schema,
+            resFieldDepth
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -501,7 +507,7 @@ export class Schemas {
    * Allows uploading a schema for a particular API version.
    * This will be used to populate ApiEndpoints and used as a base for any schema generation if present.
    */
-  registerSchema(
+  async registerSchema(
     req: operations.RegisterSchemaRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.RegisterSchemaResponse> {
@@ -539,7 +545,8 @@ export class Schemas {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "post",
       headers: headers,
@@ -547,28 +554,28 @@ export class Schemas {
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.RegisterSchemaResponse =
-        new operations.RegisterSchemaResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.RegisterSchemaResponse =
+      new operations.RegisterSchemaResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 }

@@ -19,8 +19,7 @@ Filters can be applied allowing views to be filtered to things like particular c
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetEmbedAccessTokenRequest, GetEmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetEmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -28,7 +27,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetEmbedAccessTokenRequest = {
+sdk.embeds.getEmbedAccessToken({
   description: "laborum",
   duration: 170909,
   filters: {
@@ -43,10 +42,8 @@ const req: GetEmbedAccessTokenRequest = {
     offset: 607831,
     operator: "nemo",
   },
-};
-
-sdk.embeds.getEmbedAccessToken(req).then((res: GetEmbedAccessTokenResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetEmbedAccessTokenResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -61,7 +58,6 @@ Get all valid embed access tokens for the current workspace.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { GetValidEmbedAccessTokensResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
 
 const sdk = new Speakeasy({
   security: {
@@ -69,8 +65,8 @@ const sdk = new Speakeasy({
   },
 });
 
-sdk.embeds.getValidEmbedAccessTokens().then((res: GetValidEmbedAccessTokensResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+sdk.embeds.getValidEmbedAccessTokens().then((res: GetValidEmbedAccessTokensResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -84,8 +80,7 @@ Revoke an embed access EmbedToken.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { RevokeEmbedAccessTokenRequest, RevokeEmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { RevokeEmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -93,12 +88,10 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: RevokeEmbedAccessTokenRequest = {
+sdk.embeds.revokeEmbedAccessToken({
   tokenID: "minima",
-};
-
-sdk.embeds.revokeEmbedAccessToken(req).then((res: RevokeEmbedAccessTokenResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: RevokeEmbedAccessTokenResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });

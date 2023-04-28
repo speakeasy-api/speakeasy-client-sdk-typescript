@@ -41,7 +41,7 @@ export class Requests {
    * Generates a Postman collection for a particular request.
    * Allowing it to be replayed with the same inputs that were captured by the SDK.
    */
-  generateRequestPostmanCollection(
+  async generateRequestPostmanCollection(
     req: operations.GenerateRequestPostmanCollectionRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenerateRequestPostmanCollectionResponse> {
@@ -63,49 +63,50 @@ export class Requests {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GenerateRequestPostmanCollectionResponse =
-        new operations.GenerateRequestPostmanCollectionResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/octet-stream`)) {
-            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            const out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i = 0; i < resBody.length; i++)
-              out[i] = resBody.charCodeAt(i);
-            res.postmanCollection = out;
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GenerateRequestPostmanCollectionResponse =
+      new operations.GenerateRequestPostmanCollectionResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/octet-stream`)) {
+          const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+          const out: Uint8Array = new Uint8Array(resBody.length);
+          for (let i = 0; i < resBody.length; i++)
+            out[i] = resBody.charCodeAt(i);
+          res.postmanCollection = out;
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
    * Get information about a particular request.
    */
-  getRequestFromEventLog(
+  async getRequestFromEventLog(
     req: operations.GetRequestFromEventLogRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetRequestFromEventLogResponse> {
@@ -127,42 +128,43 @@ export class Requests {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GetRequestFromEventLogResponse =
-        new operations.GetRequestFromEventLogResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.unboundedRequest = utils.objectToClass(
-              httpRes?.data,
-              shared.UnboundedRequest
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GetRequestFromEventLogResponse =
+      new operations.GetRequestFromEventLogResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.unboundedRequest = utils.objectToClass(
+            httpRes?.data,
+            shared.UnboundedRequest
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -172,7 +174,7 @@ export class Requests {
    * Supports retrieving a list of request captured by the SDK for this workspace.
    * Allows the filtering of requests on a number of criteria such as ApiID, VersionID, Path, Method, etc.
    */
-  queryEventLog(
+  async queryEventLog(
     req: operations.QueryEventLogRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.QueryEventLogResponse> {
@@ -191,44 +193,45 @@ export class Requests {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url + queryParams,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.QueryEventLogResponse =
-        new operations.QueryEventLogResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.boundedRequests = [];
-            const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.boundedRequests = utils.objectToClass(
-              httpRes?.data,
-              shared.BoundedRequest,
-              resFieldDepth
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.QueryEventLogResponse =
+      new operations.QueryEventLogResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.boundedRequests = [];
+          const resFieldDepth: number = utils.getResFieldDepth(res);
+          res.boundedRequests = utils.objectToClass(
+            httpRes?.data,
+            shared.BoundedRequest,
+            resFieldDepth
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 }

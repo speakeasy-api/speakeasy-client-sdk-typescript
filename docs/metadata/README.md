@@ -18,8 +18,7 @@ Delete metadata for a particular apiID and versionID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DeleteVersionMetadataRequest, DeleteVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { DeleteVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -27,15 +26,13 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: DeleteVersionMetadataRequest = {
+sdk.metadata.deleteVersionMetadata({
   apiID: "excepturi",
   metaKey: "accusantium",
   metaValue: "iure",
   versionID: "culpa",
-};
-
-sdk.metadata.deleteVersionMetadata(req).then((res: DeleteVersionMetadataResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: DeleteVersionMetadataResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -49,8 +46,7 @@ Get all metadata for a particular apiID and versionID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetVersionMetadataRequest, GetVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -58,13 +54,11 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetVersionMetadataRequest = {
+sdk.metadata.getVersionMetadata({
   apiID: "doloribus",
   versionID: "sapiente",
-};
-
-sdk.metadata.getVersionMetadata(req).then((res: GetVersionMetadataResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetVersionMetadataResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -78,8 +72,7 @@ Insert metadata for a particular apiID and versionID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { InsertVersionMetadataRequest, InsertVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { InsertVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -87,17 +80,15 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: InsertVersionMetadataRequest = {
+sdk.metadata.insertVersionMetadata({
   versionMetadataInput: {
     metaKey: "architecto",
     metaValue: "mollitia",
   },
   apiID: "dolorem",
   versionID: "culpa",
-};
-
-sdk.metadata.insertVersionMetadata(req).then((res: InsertVersionMetadataResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: InsertVersionMetadataResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });

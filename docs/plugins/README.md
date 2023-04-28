@@ -19,7 +19,6 @@ Get all plugins for the current workspace.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { GetPluginsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
 
 const sdk = new Speakeasy({
   security: {
@@ -27,8 +26,8 @@ const sdk = new Speakeasy({
   },
 });
 
-sdk.plugins.getPlugins().then((res: GetPluginsResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+sdk.plugins.getPlugins().then((res: GetPluginsResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -42,8 +41,7 @@ Run a plugin
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { RunPluginRequest, RunPluginResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { RunPluginResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -51,7 +49,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: RunPluginRequest = {
+sdk.plugins.runPlugin({
   filters: {
     filters: [
       {
@@ -65,10 +63,8 @@ const req: RunPluginRequest = {
     operator: "quam",
   },
   pluginID: "molestiae",
-};
-
-sdk.plugins.runPlugin(req).then((res: RunPluginResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: RunPluginResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -82,8 +78,7 @@ Upsert a plugin
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { Plugin, UpsertPluginResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { UpsertPluginResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -91,7 +86,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: shared.Plugin = {
+sdk.plugins.upsertPlugin({
   code: "velit",
   createdAt: new Date("2022-09-06T22:51:09.401Z"),
   evalHash: "quis",
@@ -99,10 +94,8 @@ const req: shared.Plugin = {
   title: "Miss",
   updatedAt: new Date("2022-05-14T10:37:30.872Z"),
   workspaceId: "odit",
-};
-
-sdk.plugins.upsertPlugin(req).then((res: UpsertPluginResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: UpsertPluginResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });

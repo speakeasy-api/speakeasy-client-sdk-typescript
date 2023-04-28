@@ -40,7 +40,7 @@ export class ApiEndpoints {
    * @remarks
    * Delete an ApiEndpoint. This will also delete all associated Request Logs (if using a Postgres datastore).
    */
-  deleteApiEndpoint(
+  async deleteApiEndpoint(
     req: operations.DeleteApiEndpointRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.DeleteApiEndpointResponse> {
@@ -62,36 +62,37 @@ export class ApiEndpoints {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "delete",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.DeleteApiEndpointResponse =
-        new operations.DeleteApiEndpointResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.DeleteApiEndpointResponse =
+      new operations.DeleteApiEndpointResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -101,7 +102,7 @@ export class ApiEndpoints {
    * Find an ApiEndpoint via its displayName (set by operationId from a registered OpenAPI schema).
    * This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID} endpoints.
    */
-  findApiEndpoint(
+  async findApiEndpoint(
     req: operations.FindApiEndpointRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.FindApiEndpointResponse> {
@@ -123,42 +124,43 @@ export class ApiEndpoints {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.FindApiEndpointResponse =
-        new operations.FindApiEndpointResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.apiEndpoint = utils.objectToClass(
-              httpRes?.data,
-              shared.ApiEndpoint
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.FindApiEndpointResponse =
+      new operations.FindApiEndpointResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.apiEndpoint = utils.objectToClass(
+            httpRes?.data,
+            shared.ApiEndpoint
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -168,7 +170,7 @@ export class ApiEndpoints {
    * This endpoint will generate a new operation in any registered OpenAPI document if the operation does not already exist in the document.
    * Returns the original document and the newly generated document allowing a diff to be performed to see what has changed.
    */
-  generateOpenApiSpecForApiEndpoint(
+  async generateOpenApiSpecForApiEndpoint(
     req: operations.GenerateOpenApiSpecForApiEndpointRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GenerateOpenApiSpecForApiEndpointResponse> {
@@ -190,42 +192,43 @@ export class ApiEndpoints {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GenerateOpenApiSpecForApiEndpointResponse =
-        new operations.GenerateOpenApiSpecForApiEndpointResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.generateOpenApiSpecDiff = utils.objectToClass(
-              httpRes?.data,
-              shared.GenerateOpenApiSpecDiff
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GenerateOpenApiSpecForApiEndpointResponse =
+      new operations.GenerateOpenApiSpecForApiEndpointResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.generateOpenApiSpecDiff = utils.objectToClass(
+            httpRes?.data,
+            shared.GenerateOpenApiSpecDiff
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -234,7 +237,7 @@ export class ApiEndpoints {
    * @remarks
    * Generates a postman collection that allows the endpoint to be called from postman variables produced for any path/query/header parameters included in the OpenAPI document.
    */
-  generatePostmanCollectionForApiEndpoint(
+  async generatePostmanCollectionForApiEndpoint(
     req: operations.GeneratePostmanCollectionForApiEndpointRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GeneratePostmanCollectionForApiEndpointResponse> {
@@ -256,49 +259,50 @@ export class ApiEndpoints {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GeneratePostmanCollectionForApiEndpointResponse =
-        new operations.GeneratePostmanCollectionForApiEndpointResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/octet-stream`)) {
-            const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-            const out: Uint8Array = new Uint8Array(resBody.length);
-            for (let i = 0; i < resBody.length; i++)
-              out[i] = resBody.charCodeAt(i);
-            res.postmanCollection = out;
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GeneratePostmanCollectionForApiEndpointResponse =
+      new operations.GeneratePostmanCollectionForApiEndpointResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/octet-stream`)) {
+          const resBody: string = JSON.stringify(httpRes?.data, null, 0);
+          const out: Uint8Array = new Uint8Array(resBody.length);
+          for (let i = 0; i < resBody.length; i++)
+            out[i] = resBody.charCodeAt(i);
+          res.postmanCollection = out;
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
    * Get all Api endpoints for a particular apiID.
    */
-  getAllApiEndpoints(
+  async getAllApiEndpoints(
     req: operations.GetAllApiEndpointsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAllApiEndpointsResponse> {
@@ -320,51 +324,52 @@ export class ApiEndpoints {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GetAllApiEndpointsResponse =
-        new operations.GetAllApiEndpointsResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.apiEndpoints = [];
-            const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.apiEndpoints = utils.objectToClass(
-              httpRes?.data,
-              shared.ApiEndpoint,
-              resFieldDepth
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GetAllApiEndpointsResponse =
+      new operations.GetAllApiEndpointsResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.apiEndpoints = [];
+          const resFieldDepth: number = utils.getResFieldDepth(res);
+          res.apiEndpoints = utils.objectToClass(
+            httpRes?.data,
+            shared.ApiEndpoint,
+            resFieldDepth
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
    * Get all ApiEndpoints for a particular apiID and versionID.
    */
-  getAllForVersionApiEndpoints(
+  async getAllForVersionApiEndpoints(
     req: operations.GetAllForVersionApiEndpointsRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetAllForVersionApiEndpointsResponse> {
@@ -386,51 +391,52 @@ export class ApiEndpoints {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GetAllForVersionApiEndpointsResponse =
-        new operations.GetAllForVersionApiEndpointsResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.apiEndpoints = [];
-            const resFieldDepth: number = utils.getResFieldDepth(res);
-            res.apiEndpoints = utils.objectToClass(
-              httpRes?.data,
-              shared.ApiEndpoint,
-              resFieldDepth
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GetAllForVersionApiEndpointsResponse =
+      new operations.GetAllForVersionApiEndpointsResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.apiEndpoints = [];
+          const resFieldDepth: number = utils.getResFieldDepth(res);
+          res.apiEndpoints = utils.objectToClass(
+            httpRes?.data,
+            shared.ApiEndpoint,
+            resFieldDepth
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
    * Get an ApiEndpoint.
    */
-  getApiEndpoint(
+  async getApiEndpoint(
     req: operations.GetApiEndpointRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.GetApiEndpointResponse> {
@@ -452,42 +458,43 @@ export class ApiEndpoints {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.GetApiEndpointResponse =
-        new operations.GetApiEndpointResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.apiEndpoint = utils.objectToClass(
-              httpRes?.data,
-              shared.ApiEndpoint
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.GetApiEndpointResponse =
+      new operations.GetApiEndpointResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.apiEndpoint = utils.objectToClass(
+            httpRes?.data,
+            shared.ApiEndpoint
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 
   /**
@@ -496,7 +503,7 @@ export class ApiEndpoints {
    * @remarks
    * Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, otherwise it will be updated.
    */
-  upsertApiEndpoint(
+  async upsertApiEndpoint(
     req: operations.UpsertApiEndpointRequest,
     config?: AxiosRequestConfig
   ): Promise<operations.UpsertApiEndpointResponse> {
@@ -534,7 +541,8 @@ export class ApiEndpoints {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "put",
       headers: headers,
@@ -542,34 +550,34 @@ export class ApiEndpoints {
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.UpsertApiEndpointResponse =
-        new operations.UpsertApiEndpointResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.apiEndpoint = utils.objectToClass(
-              httpRes?.data,
-              shared.ApiEndpoint
-            );
-          }
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.UpsertApiEndpointResponse =
+      new operations.UpsertApiEndpointResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.apiEndpoint = utils.objectToClass(
+            httpRes?.data,
+            shared.ApiEndpoint
+          );
+        }
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 }

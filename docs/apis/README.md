@@ -21,8 +21,7 @@ Delete a particular version of an Api. The will also delete all associated ApiEn
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DeleteApiRequest, DeleteApiResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { DeleteApiResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -30,13 +29,11 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: DeleteApiRequest = {
+sdk.apis.deleteApi({
   apiID: "quod",
   versionID: "esse",
-};
-
-sdk.apis.deleteApi(req).then((res: DeleteApiResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: DeleteApiResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -51,8 +48,7 @@ Returns the original document and the newly generated document allowing a diff t
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GenerateOpenApiSpecRequest, GenerateOpenApiSpecResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GenerateOpenApiSpecResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -60,13 +56,11 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GenerateOpenApiSpecRequest = {
+sdk.apis.generateOpenApiSpec({
   apiID: "totam",
   versionID: "porro",
-};
-
-sdk.apis.generateOpenApiSpec(req).then((res: GenerateOpenApiSpecResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GenerateOpenApiSpecResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -80,8 +74,7 @@ Generates a postman collection containing all endpoints for a particular API. In
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GeneratePostmanCollectionRequest, GeneratePostmanCollectionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GeneratePostmanCollectionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -89,13 +82,11 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GeneratePostmanCollectionRequest = {
+sdk.apis.generatePostmanCollection({
   apiID: "dolorum",
   versionID: "dicta",
-};
-
-sdk.apis.generatePostmanCollection(req).then((res: GeneratePostmanCollectionResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GeneratePostmanCollectionResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -110,8 +101,7 @@ Supports filtering the versions based on metadata attributes.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetAllApiVersionsRequest, GetAllApiVersionsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetAllApiVersionsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -119,7 +109,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetAllApiVersionsRequest = {
+sdk.apis.getAllApiVersions({
   apiID: "nam",
   metadata: {
     "occaecati": [
@@ -138,10 +128,8 @@ const req: GetAllApiVersionsRequest = {
   op: {
     and: false,
   },
-};
-
-sdk.apis.getAllApiVersions(req).then((res: GetAllApiVersionsResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetAllApiVersionsResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -156,8 +144,7 @@ Supports filtering the APIs based on metadata attributes.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetApisRequest, GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -165,7 +152,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetApisRequest = {
+sdk.apis.getApis({
   metadata: {
     "esse": [
       "excepturi",
@@ -180,10 +167,8 @@ const req: GetApisRequest = {
   op: {
     and: false,
   },
-};
-
-sdk.apis.getApis(req).then((res: GetApisResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetApisResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -198,8 +183,7 @@ If the Api exists, it will be updated.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { UpsertApiRequest, UpsertApiResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { UpsertApiResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -207,7 +191,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: UpsertApiRequest = {
+sdk.apis.upsertApi({
   apiInput: {
     apiId: "dolor",
     description: "natus",
@@ -228,10 +212,8 @@ const req: UpsertApiRequest = {
     versionId: "est",
   },
   apiID: "mollitia",
-};
-
-sdk.apis.upsertApi(req).then((res: UpsertApiResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: UpsertApiResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });

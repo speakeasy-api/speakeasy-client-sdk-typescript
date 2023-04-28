@@ -23,8 +23,7 @@ Delete a particular schema revision for an Api.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DeleteSchemaRequest, DeleteSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { DeleteSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -32,14 +31,12 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: DeleteSchemaRequest = {
+sdk.schemas.deleteSchema({
   apiID: "ipsa",
   revisionID: "omnis",
   versionID: "voluptate",
-};
-
-sdk.schemas.deleteSchema(req).then((res: DeleteSchemaResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: DeleteSchemaResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -53,8 +50,7 @@ Download the latest schema for a particular apiID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DownloadSchemaRequest, DownloadSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { DownloadSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -62,13 +58,11 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: DownloadSchemaRequest = {
+sdk.schemas.downloadSchema({
   apiID: "cum",
   versionID: "perferendis",
-};
-
-sdk.schemas.downloadSchema(req).then((res: DownloadSchemaResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: DownloadSchemaResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -82,8 +76,7 @@ Download a particular schema revision for an Api.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DownloadSchemaRevisionRequest, DownloadSchemaRevisionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { DownloadSchemaRevisionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -91,14 +84,12 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: DownloadSchemaRevisionRequest = {
+sdk.schemas.downloadSchemaRevision({
   apiID: "doloremque",
   revisionID: "reprehenderit",
   versionID: "ut",
-};
-
-sdk.schemas.downloadSchemaRevision(req).then((res: DownloadSchemaRevisionResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: DownloadSchemaRevisionResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -113,8 +104,7 @@ This won't include the schema itself, that can be retrieved via the downloadSche
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetSchemaRequest, GetSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -122,13 +112,11 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetSchemaRequest = {
+sdk.schemas.getSchema({
   apiID: "maiores",
   versionID: "dicta",
-};
-
-sdk.schemas.getSchema(req).then((res: GetSchemaResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetSchemaResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -142,8 +130,7 @@ Get a diff of two schema revisions for an Api.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetSchemaDiffRequest, GetSchemaDiffResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetSchemaDiffResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -151,15 +138,13 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetSchemaDiffRequest = {
+sdk.schemas.getSchemaDiff({
   apiID: "corporis",
   baseRevisionID: "dolore",
   targetRevisionID: "iusto",
   versionID: "dicta",
-};
-
-sdk.schemas.getSchemaDiff(req).then((res: GetSchemaDiffResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetSchemaDiffResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -174,8 +159,7 @@ This won't include the schema itself, that can be retrieved via the downloadSche
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetSchemaRevisionRequest, GetSchemaRevisionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetSchemaRevisionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -183,14 +167,12 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetSchemaRevisionRequest = {
+sdk.schemas.getSchemaRevision({
   apiID: "harum",
   revisionID: "enim",
   versionID: "accusamus",
-};
-
-sdk.schemas.getSchemaRevision(req).then((res: GetSchemaRevisionResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetSchemaRevisionResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -205,8 +187,7 @@ This won't include the schemas themselves, they can be retrieved via the downloa
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetSchemasRequest, GetSchemasResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetSchemasResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -214,13 +195,11 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetSchemasRequest = {
+sdk.schemas.getSchemas({
   apiID: "commodi",
   versionID: "repudiandae",
-};
-
-sdk.schemas.getSchemas(req).then((res: GetSchemasResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetSchemasResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -235,8 +214,7 @@ This will be used to populate ApiEndpoints and used as a base for any schema gen
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { RegisterSchemaRequest, RegisterSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { RegisterSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -244,7 +222,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: RegisterSchemaRequest = {
+sdk.schemas.registerSchema({
   requestBody: {
     file: {
       content: "quae".encode(),
@@ -253,10 +231,8 @@ const req: RegisterSchemaRequest = {
   },
   apiID: "quidem",
   versionID: "molestias",
-};
-
-sdk.schemas.registerSchema(req).then((res: RegisterSchemaResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: RegisterSchemaResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });

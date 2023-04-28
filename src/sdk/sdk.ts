@@ -81,8 +81,8 @@ export class Speakeasy {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "1.20.0";
-  private _genVersion = "2.22.0";
+  private _sdkVersion = "1.21.0";
+  private _genVersion = "2.23.2";
   private _globals: any;
 
   constructor(props?: SDKProps) {
@@ -169,7 +169,7 @@ export class Speakeasy {
   /**
    * Validate the current api key.
    */
-  validateApiKey(
+  async validateApiKey(
     config?: AxiosRequestConfig
   ): Promise<operations.ValidateApiKeyResponse> {
     const baseURL: string = this._serverURL;
@@ -182,35 +182,36 @@ export class Speakeasy {
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const r = client.request({
+    const httpRes: AxiosResponse = await client.request({
+      validateStatus: () => true,
       url: url,
       method: "get",
       headers: headers,
       ...config,
     });
 
-    return r.then((httpRes: AxiosResponse) => {
-      const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-      if (httpRes?.status == null)
-        throw new Error(`status code not found in response: ${httpRes}`);
-      const res: operations.ValidateApiKeyResponse =
-        new operations.ValidateApiKeyResponse({
-          statusCode: httpRes.status,
-          contentType: contentType,
-          rawResponse: httpRes,
-        });
-      switch (true) {
-        case httpRes?.status == 200:
-          break;
-        default:
-          if (utils.matchContentType(contentType, `application/json`)) {
-            res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-          }
-          break;
-      }
+    if (httpRes?.status == null) {
+      throw new Error(`status code not found in response: ${httpRes}`);
+    }
 
-      return res;
-    });
+    const res: operations.ValidateApiKeyResponse =
+      new operations.ValidateApiKeyResponse({
+        statusCode: httpRes.status,
+        contentType: contentType,
+        rawResponse: httpRes,
+      });
+    switch (true) {
+      case httpRes?.status == 200:
+        break;
+      default:
+        if (utils.matchContentType(contentType, `application/json`)) {
+          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        }
+        break;
+    }
+
+    return res;
   }
 }

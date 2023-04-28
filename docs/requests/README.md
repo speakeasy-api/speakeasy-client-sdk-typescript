@@ -19,11 +19,7 @@ Allowing it to be replayed with the same inputs that were captured by the SDK.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import {
-  GenerateRequestPostmanCollectionRequest,
-  GenerateRequestPostmanCollectionResponse,
-} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GenerateRequestPostmanCollectionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -31,12 +27,10 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GenerateRequestPostmanCollectionRequest = {
+sdk.requests.generateRequestPostmanCollection({
   requestID: "quo",
-};
-
-sdk.requests.generateRequestPostmanCollection(req).then((res: GenerateRequestPostmanCollectionResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GenerateRequestPostmanCollectionResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -50,8 +44,7 @@ Get information about a particular request.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetRequestFromEventLogRequest, GetRequestFromEventLogResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetRequestFromEventLogResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -59,12 +52,10 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetRequestFromEventLogRequest = {
+sdk.requests.getRequestFromEventLog({
   requestID: "sequi",
-};
-
-sdk.requests.getRequestFromEventLog(req).then((res: GetRequestFromEventLogResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetRequestFromEventLogResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -79,8 +70,7 @@ Allows the filtering of requests on a number of criteria such as ApiID, VersionI
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { QueryEventLogRequest, QueryEventLogResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { QueryEventLogResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -88,7 +78,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: QueryEventLogRequest = {
+sdk.requests.queryEventLog({
   filters: {
     filters: [
       {
@@ -116,10 +106,8 @@ const req: QueryEventLogRequest = {
     offset: 509624,
     operator: "voluptatibus",
   },
-};
-
-sdk.requests.queryEventLog(req).then((res: QueryEventLogResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: QueryEventLogResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });

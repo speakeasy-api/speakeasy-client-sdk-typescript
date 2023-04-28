@@ -23,8 +23,7 @@ Delete an ApiEndpoint. This will also delete all associated Request Logs (if usi
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DeleteApiEndpointRequest, DeleteApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { DeleteApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -32,14 +31,12 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: DeleteApiEndpointRequest = {
+sdk.apiEndpoints.deleteApiEndpoint({
   apiEndpointID: "delectus",
   apiID: "tempora",
   versionID: "suscipit",
-};
-
-sdk.apiEndpoints.deleteApiEndpoint(req).then((res: DeleteApiEndpointResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: DeleteApiEndpointResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -54,8 +51,7 @@ This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiI
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { FindApiEndpointRequest, FindApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { FindApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -63,14 +59,12 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: FindApiEndpointRequest = {
+sdk.apiEndpoints.findApiEndpoint({
   apiID: "molestiae",
   displayName: "minus",
   versionID: "placeat",
-};
-
-sdk.apiEndpoints.findApiEndpoint(req).then((res: FindApiEndpointResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: FindApiEndpointResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -85,11 +79,7 @@ Returns the original document and the newly generated document allowing a diff t
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import {
-  GenerateOpenApiSpecForApiEndpointRequest,
-  GenerateOpenApiSpecForApiEndpointResponse,
-} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GenerateOpenApiSpecForApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -97,14 +87,12 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GenerateOpenApiSpecForApiEndpointRequest = {
+sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
   apiEndpointID: "voluptatum",
   apiID: "iusto",
   versionID: "excepturi",
-};
-
-sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint(req).then((res: GenerateOpenApiSpecForApiEndpointResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GenerateOpenApiSpecForApiEndpointResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -118,11 +106,7 @@ Generates a postman collection that allows the endpoint to be called from postma
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import {
-  GeneratePostmanCollectionForApiEndpointRequest,
-  GeneratePostmanCollectionForApiEndpointResponse,
-} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GeneratePostmanCollectionForApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -130,14 +114,12 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GeneratePostmanCollectionForApiEndpointRequest = {
+sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
   apiEndpointID: "nisi",
   apiID: "recusandae",
   versionID: "temporibus",
-};
-
-sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint(req).then((res: GeneratePostmanCollectionForApiEndpointResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GeneratePostmanCollectionForApiEndpointResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -151,8 +133,7 @@ Get all Api endpoints for a particular apiID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetAllApiEndpointsRequest, GetAllApiEndpointsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetAllApiEndpointsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -160,12 +141,10 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetAllApiEndpointsRequest = {
+sdk.apiEndpoints.getAllApiEndpoints({
   apiID: "ab",
-};
-
-sdk.apiEndpoints.getAllApiEndpoints(req).then((res: GetAllApiEndpointsResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetAllApiEndpointsResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -179,8 +158,7 @@ Get all ApiEndpoints for a particular apiID and versionID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetAllForVersionApiEndpointsRequest, GetAllForVersionApiEndpointsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetAllForVersionApiEndpointsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -188,13 +166,11 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetAllForVersionApiEndpointsRequest = {
+sdk.apiEndpoints.getAllForVersionApiEndpoints({
   apiID: "quis",
   versionID: "veritatis",
-};
-
-sdk.apiEndpoints.getAllForVersionApiEndpoints(req).then((res: GetAllForVersionApiEndpointsResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetAllForVersionApiEndpointsResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -208,8 +184,7 @@ Get an ApiEndpoint.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetApiEndpointRequest, GetApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -217,14 +192,12 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetApiEndpointRequest = {
+sdk.apiEndpoints.getApiEndpoint({
   apiEndpointID: "deserunt",
   apiID: "perferendis",
   versionID: "ipsam",
-};
-
-sdk.apiEndpoints.getApiEndpoint(req).then((res: GetApiEndpointResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetApiEndpointResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
@@ -238,8 +211,7 @@ Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, oth
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { UpsertApiEndpointRequest, UpsertApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { UpsertApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -247,7 +219,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: UpsertApiEndpointRequest = {
+sdk.apiEndpoints.upsertApiEndpoint({
   apiEndpointInput: {
     apiEndpointId: "repellendus",
     description: "sapiente",
@@ -259,10 +231,8 @@ const req: UpsertApiEndpointRequest = {
   apiEndpointID: "maiores",
   apiID: "molestiae",
   versionID: "quod",
-};
-
-sdk.apiEndpoints.upsertApiEndpoint(req).then((res: UpsertApiEndpointResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: UpsertApiEndpointResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });

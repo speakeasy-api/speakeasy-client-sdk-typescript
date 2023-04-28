@@ -1,8 +1,7 @@
 <!-- Start SDK Example Usage -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetApisRequest, GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
-import { AxiosError } from "axios";
+import { GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
 const sdk = new Speakeasy({
   security: {
@@ -10,7 +9,7 @@ const sdk = new Speakeasy({
   },
 });
 
-const req: GetApisRequest = {
+sdk.apis.getApis({
   metadata: {
     "provident": [
       "quibusdam",
@@ -31,10 +30,8 @@ const req: GetApisRequest = {
   op: {
     and: false,
   },
-};
-
-sdk.apis.getApis(req).then((res: GetApisResponse | AxiosError) => {
-  if (res instanceof UsageExamplePostResponse && res.statusCode == 200) {
+}).then((res: GetApisResponse) => {
+  if (res.statusCode == 200) {
     // handle response
   }
 });
