@@ -81,8 +81,8 @@ export class Speakeasy {
   public _securityClient: AxiosInstance;
   public _serverURL: string;
   private _language = "typescript";
-  private _sdkVersion = "1.27.0";
-  private _genVersion = "2.30.0";
+  private _sdkVersion = "1.28.0";
+  private _genVersion = "2.31.0";
   private _globals: any;
 
   constructor(props?: SDKProps) {
@@ -178,6 +178,7 @@ export class Speakeasy {
     const client: AxiosInstance = this._securityClient || this._defaultClient;
 
     const headers = { ...config?.headers };
+    headers["Accept"] = "application/json";
     headers[
       "user-agent"
     ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
