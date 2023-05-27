@@ -7,48 +7,44 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class InsertVersionMetadataRequest extends SpeakeasyBase {
-  /**
-   * A JSON representation of the metadata to insert.
-   */
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  versionMetadataInput: shared.VersionMetadataInput;
+    /**
+     * A JSON representation of the metadata to insert.
+     */
+    @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+    versionMetadataInput: shared.VersionMetadataInput;
 
-  /**
-   * The ID of the Api to insert metadata for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=apiID",
-  })
-  apiID: string;
+    /**
+     * The ID of the Api to insert metadata for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+    apiID: string;
 
-  /**
-   * The version ID of the Api to insert metadata for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=versionID",
-  })
-  versionID: string;
+    /**
+     * The version ID of the Api to insert metadata for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+    versionID: string;
 }
 
 export class InsertVersionMetadataResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata()
-  versionMetadata?: shared.VersionMetadata;
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    versionMetadata?: shared.VersionMetadata;
 }

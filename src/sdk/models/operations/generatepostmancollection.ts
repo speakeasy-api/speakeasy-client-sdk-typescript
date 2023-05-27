@@ -7,42 +7,38 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GeneratePostmanCollectionRequest extends SpeakeasyBase {
-  /**
-   * The ID of the Api to generate a Postman collection for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=apiID",
-  })
-  apiID: string;
+    /**
+     * The ID of the Api to generate a Postman collection for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+    apiID: string;
 
-  /**
-   * The version ID of the Api to generate a Postman collection for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=versionID",
-  })
-  versionID: string;
+    /**
+     * The version ID of the Api to generate a Postman collection for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+    versionID: string;
 }
 
 export class GeneratePostmanCollectionResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata()
-  postmanCollection?: Uint8Array;
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    postmanCollection?: Uint8Array;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

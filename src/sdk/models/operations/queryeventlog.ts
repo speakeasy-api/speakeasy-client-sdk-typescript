@@ -7,32 +7,32 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class QueryEventLogRequest extends SpeakeasyBase {
-  /**
-   * The filter to apply to the query.
-   */
-  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
-  filters?: shared.Filters;
+    /**
+     * The filter to apply to the query.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
+    filters?: shared.Filters;
 }
 
 export class QueryEventLogResponse extends SpeakeasyBase {
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata({ elemType: shared.BoundedRequest })
-  boundedRequests?: shared.BoundedRequest[];
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.BoundedRequest })
+    boundedRequests?: shared.BoundedRequest[];
 
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

@@ -10,32 +10,32 @@ import { Expose, Type } from "class-transformer";
  * Filters are used to query requests.
  */
 export class Filters extends SpeakeasyBase {
-  /**
-   * A list of filters to apply to the query.
-   */
-  @SpeakeasyMetadata({ elemType: Filter })
-  @Expose({ name: "filters" })
-  @Type(() => Filter)
-  filters: Filter[];
+    /**
+     * A list of filters to apply to the query.
+     */
+    @SpeakeasyMetadata({ elemType: Filter })
+    @Expose({ name: "filters" })
+    @Type(() => Filter)
+    filters: Filter[];
 
-  /**
-   * The maximum number of results to return.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "limit" })
-  limit: number;
+    /**
+     * The maximum number of results to return.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "limit" })
+    limit: number;
 
-  /**
-   * The offset to start the query from.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "offset" })
-  offset: number;
+    /**
+     * The offset to start the query from.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "offset" })
+    offset: number;
 
-  /**
-   * The operator to use when combining filters.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "operator" })
-  operator: string;
+    /**
+     * The operator to use when combining filters.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "operator" })
+    operator: string;
 }

@@ -7,40 +7,38 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class RunPluginRequest extends SpeakeasyBase {
-  /**
-   * The filter to apply to the query.
-   */
-  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
-  filters?: shared.Filters;
+    /**
+     * The filter to apply to the query.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
+    filters?: shared.Filters;
 
-  /**
-   * The ID of the plugin to run.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=pluginID",
-  })
-  pluginID: string;
+    /**
+     * The ID of the plugin to run.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=pluginID" })
+    pluginID: string;
 }
 
 export class RunPluginResponse extends SpeakeasyBase {
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata({ elemType: shared.BoundedRequest })
-  boundedRequests?: shared.BoundedRequest[];
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.BoundedRequest })
+    boundedRequests?: shared.BoundedRequest[];
 
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

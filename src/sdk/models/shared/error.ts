@@ -9,17 +9,17 @@ import { Expose } from "class-transformer";
  * The `Status` type defines a logical error model
  */
 export class ErrorT extends SpeakeasyBase {
-  /**
-   * A developer-facing error message.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "message" })
-  message: string;
+    /**
+     * A developer-facing error message.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "message" })
+    message: string;
 
-  /**
-   * The HTTP status code
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "status_code" })
-  statusCode: number;
+    /**
+     * The HTTP status code
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "status_code" })
+    statusCode: number;
 }

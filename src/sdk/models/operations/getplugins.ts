@@ -7,24 +7,24 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GetPluginsResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata({ elemType: shared.Plugin })
-  plugins?: shared.Plugin[];
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.Plugin })
+    plugins?: shared.Plugin[];
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

@@ -11,212 +11,210 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
  * REST APIs for managing embeds
  */
 export class Embeds {
-  _defaultClient: AxiosInstance;
-  _securityClient: AxiosInstance;
-  _serverURL: string;
-  _language: string;
-  _sdkVersion: string;
-  _genVersion: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    _language: string;
+    _sdkVersion: string;
+    _genVersion: string;
 
-  constructor(
-    defaultClient: AxiosInstance,
-    securityClient: AxiosInstance,
-    serverURL: string,
-    language: string,
-    sdkVersion: string,
-    genVersion: string
-  ) {
-    this._defaultClient = defaultClient;
-    this._securityClient = securityClient;
-    this._serverURL = serverURL;
-    this._language = language;
-    this._sdkVersion = sdkVersion;
-    this._genVersion = genVersion;
-  }
-
-  /**
-   * Get an embed access token for the current workspace.
-   *
-   * @remarks
-   * Returns an embed access token for the current workspace. This can be used to authenticate access to externally embedded content.
-   * Filters can be applied allowing views to be filtered to things like particular customerIds.
-   */
-  async getEmbedAccessToken(
-    req: operations.GetEmbedAccessTokenRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetEmbedAccessTokenResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetEmbedAccessTokenRequest(req);
+    constructor(
+        defaultClient: AxiosInstance,
+        securityClient: AxiosInstance,
+        serverURL: string,
+        language: string,
+        sdkVersion: string,
+        genVersion: string
+    ) {
+        this._defaultClient = defaultClient;
+        this._securityClient = securityClient;
+        this._serverURL = serverURL;
+        this._language = language;
+        this._sdkVersion = sdkVersion;
+        this._genVersion = genVersion;
     }
 
-    const baseURL: string = this._serverURL;
-    const url: string =
-      baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-token";
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    const queryParams: string = utils.serializeQueryParams(req);
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url + queryParams,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.GetEmbedAccessTokenResponse =
-      new operations.GetEmbedAccessTokenResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.embedAccessTokenResponse = utils.objectToClass(
-            httpRes?.data,
-            shared.EmbedAccessTokenResponse
-          );
+    /**
+     * Get an embed access token for the current workspace.
+     *
+     * @remarks
+     * Returns an embed access token for the current workspace. This can be used to authenticate access to externally embedded content.
+     * Filters can be applied allowing views to be filtered to things like particular customerIds.
+     */
+    async getEmbedAccessToken(
+        req: operations.GetEmbedAccessTokenRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.GetEmbedAccessTokenResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.GetEmbedAccessTokenRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+
+        const baseURL: string = this._serverURL;
+        const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-token";
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url + queryParams,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-    }
 
-    return res;
-  }
-
-  /**
-   * Get all valid embed access tokens for the current workspace.
-   */
-  async getValidEmbedAccessTokens(
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetValidEmbedAccessTokensResponse> {
-    const baseURL: string = this._serverURL;
-    const url: string =
-      baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-tokens/valid";
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.GetValidEmbedAccessTokensResponse =
-      new operations.GetValidEmbedAccessTokensResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.embedTokens = [];
-          const resFieldDepth: number = utils.getResFieldDepth(res);
-          res.embedTokens = utils.objectToClass(
-            httpRes?.data,
-            shared.EmbedToken,
-            resFieldDepth
-          );
+        const res: operations.GetEmbedAccessTokenResponse =
+            new operations.GetEmbedAccessTokenResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.embedAccessTokenResponse = utils.objectToClass(
+                        httpRes?.data,
+                        shared.EmbedAccessTokenResponse
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+
+        return res;
+    }
+
+    /**
+     * Get all valid embed access tokens for the current workspace.
+     */
+    async getValidEmbedAccessTokens(
+        config?: AxiosRequestConfig
+    ): Promise<operations.GetValidEmbedAccessTokensResponse> {
+        const baseURL: string = this._serverURL;
+        const url: string = baseURL.replace(/\/$/, "") + "/v1/workspace/embed-access-tokens/valid";
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-    }
 
-    return res;
-  }
-
-  /**
-   * Revoke an embed access EmbedToken.
-   */
-  async revokeEmbedAccessToken(
-    req: operations.RevokeEmbedAccessTokenRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.RevokeEmbedAccessTokenResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.RevokeEmbedAccessTokenRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/v1/workspace/embed-access-tokens/{tokenID}",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "delete",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.RevokeEmbedAccessTokenResponse =
-      new operations.RevokeEmbedAccessTokenResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+        const res: operations.GetValidEmbedAccessTokensResponse =
+            new operations.GetValidEmbedAccessTokensResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.embedTokens = [];
+                    const resFieldDepth: number = utils.getResFieldDepth(res);
+                    res.embedTokens = utils.objectToClass(
+                        httpRes?.data,
+                        shared.EmbedToken,
+                        resFieldDepth
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
+    /**
+     * Revoke an embed access EmbedToken.
+     */
+    async revokeEmbedAccessToken(
+        req: operations.RevokeEmbedAccessTokenRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.RevokeEmbedAccessTokenResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.RevokeEmbedAccessTokenRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/v1/workspace/embed-access-tokens/{tokenID}",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "delete",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.RevokeEmbedAccessTokenResponse =
+            new operations.RevokeEmbedAccessTokenResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
+        }
+
+        return res;
+    }
 }

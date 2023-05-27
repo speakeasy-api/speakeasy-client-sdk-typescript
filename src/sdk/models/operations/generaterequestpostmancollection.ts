@@ -7,34 +7,32 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GenerateRequestPostmanCollectionRequest extends SpeakeasyBase {
-  /**
-   * The ID of the request to retrieve.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=requestID",
-  })
-  requestID: string;
+    /**
+     * The ID of the request to retrieve.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=requestID" })
+    requestID: string;
 }
 
 export class GenerateRequestPostmanCollectionResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata()
-  postmanCollection?: Uint8Array;
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    postmanCollection?: Uint8Array;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

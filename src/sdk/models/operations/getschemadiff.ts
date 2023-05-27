@@ -7,58 +7,50 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GetSchemaDiffRequest extends SpeakeasyBase {
-  /**
-   * The ID of the Api to retrieve schemas for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=apiID",
-  })
-  apiID: string;
+    /**
+     * The ID of the Api to retrieve schemas for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+    apiID: string;
 
-  /**
-   * The base revision ID of the schema to retrieve.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=baseRevisionID",
-  })
-  baseRevisionID: string;
+    /**
+     * The base revision ID of the schema to retrieve.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=baseRevisionID" })
+    baseRevisionID: string;
 
-  /**
-   * The target revision ID of the schema to retrieve.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=targetRevisionID",
-  })
-  targetRevisionID: string;
+    /**
+     * The target revision ID of the schema to retrieve.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=targetRevisionID" })
+    targetRevisionID: string;
 
-  /**
-   * The version ID of the Api to delete metadata for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=versionID",
-  })
-  versionID: string;
+    /**
+     * The version ID of the Api to delete metadata for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+    versionID: string;
 }
 
 export class GetSchemaDiffResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata()
-  schemaDiff?: shared.SchemaDiff;
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    schemaDiff?: shared.SchemaDiff;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

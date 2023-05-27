@@ -7,48 +7,44 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GetEmbedAccessTokenRequest extends SpeakeasyBase {
-  /**
-   * The description of the embed access token.
-   */
-  @SpeakeasyMetadata({
-    data: "queryParam, style=form;explode=true;name=description",
-  })
-  description?: string;
+    /**
+     * The description of the embed access token.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=description" })
+    description?: string;
 
-  /**
-   * The duration (in minutes) of the embed access token.
-   */
-  @SpeakeasyMetadata({
-    data: "queryParam, style=form;explode=true;name=duration",
-  })
-  duration?: number;
+    /**
+     * The duration (in minutes) of the embed access token.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=duration" })
+    duration?: number;
 
-  /**
-   * The filter to apply to the query.
-   */
-  @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
-  filters?: shared.Filters;
+    /**
+     * The filter to apply to the query.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, serialization=json;name=filters" })
+    filters?: shared.Filters;
 }
 
 export class GetEmbedAccessTokenResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata()
-  embedAccessTokenResponse?: shared.EmbedAccessTokenResponse;
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    embedAccessTokenResponse?: shared.EmbedAccessTokenResponse;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

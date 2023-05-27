@@ -11,235 +11,235 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
  * REST APIs for managing Version Metadata entities
  */
 export class Metadata {
-  _defaultClient: AxiosInstance;
-  _securityClient: AxiosInstance;
-  _serverURL: string;
-  _language: string;
-  _sdkVersion: string;
-  _genVersion: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    _language: string;
+    _sdkVersion: string;
+    _genVersion: string;
 
-  constructor(
-    defaultClient: AxiosInstance,
-    securityClient: AxiosInstance,
-    serverURL: string,
-    language: string,
-    sdkVersion: string,
-    genVersion: string
-  ) {
-    this._defaultClient = defaultClient;
-    this._securityClient = securityClient;
-    this._serverURL = serverURL;
-    this._language = language;
-    this._sdkVersion = sdkVersion;
-    this._genVersion = genVersion;
-  }
-
-  /**
-   * Delete metadata for a particular apiID and versionID.
-   */
-  async deleteVersionMetadata(
-    req: operations.DeleteVersionMetadataRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.DeleteVersionMetadataResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.DeleteVersionMetadataRequest(req);
+    constructor(
+        defaultClient: AxiosInstance,
+        securityClient: AxiosInstance,
+        serverURL: string,
+        language: string,
+        sdkVersion: string,
+        genVersion: string
+    ) {
+        this._defaultClient = defaultClient;
+        this._securityClient = securityClient;
+        this._serverURL = serverURL;
+        this._language = language;
+        this._sdkVersion = sdkVersion;
+        this._genVersion = genVersion;
     }
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "delete",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.DeleteVersionMetadataResponse =
-      new operations.DeleteVersionMetadataResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+    /**
+     * Delete metadata for a particular apiID and versionID.
+     */
+    async deleteVersionMetadata(
+        req: operations.DeleteVersionMetadataRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.DeleteVersionMetadataResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.DeleteVersionMetadataRequest(req);
         }
-        break;
-    }
 
-    return res;
-  }
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}",
+            req
+        );
 
-  /**
-   * Get all metadata for a particular apiID and versionID.
-   */
-  async getVersionMetadata(
-    req: operations.GetVersionMetadataRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetVersionMetadataResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.GetVersionMetadataRequest(req);
-    }
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
 
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/v1/apis/{apiID}/version/{versionID}/metadata",
-      req
-    );
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
 
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "delete",
+            headers: headers,
+            ...config,
+        });
 
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
 
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.GetVersionMetadataResponse =
-      new operations.GetVersionMetadataResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.versionMetadata = [];
-          const resFieldDepth: number = utils.getResFieldDepth(res);
-          res.versionMetadata = utils.objectToClass(
-            httpRes?.data,
-            shared.VersionMetadata,
-            resFieldDepth
-          );
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+
+        const res: operations.DeleteVersionMetadataResponse =
+            new operations.DeleteVersionMetadataResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
-
-  /**
-   * Insert metadata for a particular apiID and versionID.
-   */
-  async insertVersionMetadata(
-    req: operations.InsertVersionMetadataRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.InsertVersionMetadataResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.InsertVersionMetadataRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/v1/apis/{apiID}/version/{versionID}/metadata",
-      req
-    );
-
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
-        req,
-        "versionMetadataInput",
-        "json"
-      );
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...reqBodyHeaders, ...config?.headers };
-    if (reqBody == null || Object.keys(reqBody).length === 0)
-      throw new Error("request body is required");
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "post",
-      headers: headers,
-      data: reqBody,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.InsertVersionMetadataResponse =
-      new operations.InsertVersionMetadataResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.versionMetadata = utils.objectToClass(
-            httpRes?.data,
-            shared.VersionMetadata
-          );
+    /**
+     * Get all metadata for a particular apiID and versionID.
+     */
+    async getVersionMetadata(
+        req: operations.GetVersionMetadataRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.GetVersionMetadataResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.GetVersionMetadataRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/v1/apis/{apiID}/version/{versionID}/metadata",
+            req
+        );
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
+
+        const res: operations.GetVersionMetadataResponse =
+            new operations.GetVersionMetadataResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.versionMetadata = [];
+                    const resFieldDepth: number = utils.getResFieldDepth(res);
+                    res.versionMetadata = utils.objectToClass(
+                        httpRes?.data,
+                        shared.VersionMetadata,
+                        resFieldDepth
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
+        }
+
+        return res;
     }
 
-    return res;
-  }
+    /**
+     * Insert metadata for a particular apiID and versionID.
+     */
+    async insertVersionMetadata(
+        req: operations.InsertVersionMetadataRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.InsertVersionMetadataResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.InsertVersionMetadataRequest(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(
+            baseURL,
+            "/v1/apis/{apiID}/version/{versionID}/metadata",
+            req
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "versionMetadataInput",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        if (reqBody == null || Object.keys(reqBody).length === 0)
+            throw new Error("request body is required");
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "post",
+            headers: headers,
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.InsertVersionMetadataResponse =
+            new operations.InsertVersionMetadataResponse({
+                statusCode: httpRes.status,
+                contentType: contentType,
+                rawResponse: httpRes,
+            });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.versionMetadata = utils.objectToClass(
+                        httpRes?.data,
+                        shared.VersionMetadata
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
+        }
+
+        return res;
+    }
 }

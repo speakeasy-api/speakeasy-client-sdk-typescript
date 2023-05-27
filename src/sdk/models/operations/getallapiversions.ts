@@ -10,58 +10,52 @@ import { AxiosResponse } from "axios";
  * Configuration for filter operations
  */
 export class GetAllApiVersionsOp extends SpeakeasyBase {
-  /**
-   * Whether to AND or OR the filters
-   */
-  @SpeakeasyMetadata({ data: "queryParam, name=and" })
-  and: boolean;
+    /**
+     * Whether to AND or OR the filters
+     */
+    @SpeakeasyMetadata({ data: "queryParam, name=and" })
+    and: boolean;
 }
 
 export class GetAllApiVersionsRequest extends SpeakeasyBase {
-  /**
-   * The ID of the Api to retrieve.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=apiID",
-  })
-  apiID: string;
+    /**
+     * The ID of the Api to retrieve.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+    apiID: string;
 
-  /**
-   * Metadata to filter Apis on
-   */
-  @SpeakeasyMetadata({
-    data: "queryParam, style=deepObject;explode=true;name=metadata",
-  })
-  metadata?: Record<string, string[]>;
+    /**
+     * Metadata to filter Apis on
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
+    metadata?: Record<string, string[]>;
 
-  /**
-   * Configuration for filter operations
-   */
-  @SpeakeasyMetadata({
-    data: "queryParam, style=deepObject;explode=true;name=op",
-  })
-  op?: GetAllApiVersionsOp;
+    /**
+     * Configuration for filter operations
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
+    op?: GetAllApiVersionsOp;
 }
 
 export class GetAllApiVersionsResponse extends SpeakeasyBase {
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata({ elemType: shared.Api })
-  apis?: shared.Api[];
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.Api })
+    apis?: shared.Api[];
 
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

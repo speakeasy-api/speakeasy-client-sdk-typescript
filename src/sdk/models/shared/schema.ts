@@ -9,46 +9,46 @@ import { Expose, Transform } from "class-transformer";
  * A Schema represents an API schema for a particular Api and Version.
  */
 export class Schema extends SpeakeasyBase {
-  /**
-   * The ID of the Api this Schema belongs to.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "api_id" })
-  apiId: string;
+    /**
+     * The ID of the Api this Schema belongs to.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "api_id" })
+    apiId: string;
 
-  /**
-   * Creation timestamp.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "created_at" })
-  @Transform(({ value }) => new Date(value), { toClassOnly: true })
-  createdAt: Date;
+    /**
+     * Creation timestamp.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "created_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    createdAt: Date;
 
-  /**
-   * A detailed description of the Schema.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "description" })
-  description: string;
+    /**
+     * A detailed description of the Schema.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "description" })
+    description: string;
 
-  /**
-   * An ID referencing this particular revision of the Schema.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "revision_id" })
-  revisionId: string;
+    /**
+     * An ID referencing this particular revision of the Schema.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "revision_id" })
+    revisionId: string;
 
-  /**
-   * The version ID of the Api this Schema belongs to.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "version_id" })
-  versionId: string;
+    /**
+     * The version ID of the Api this Schema belongs to.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "version_id" })
+    versionId: string;
 
-  /**
-   * The workspace ID this Schema belongs to.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "workspace_id" })
-  workspaceId: string;
+    /**
+     * The workspace ID this Schema belongs to.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "workspace_id" })
+    workspaceId: string;
 }

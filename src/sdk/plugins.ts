@@ -11,228 +11,212 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
  * REST APIs for managing and running plugins
  */
 export class Plugins {
-  _defaultClient: AxiosInstance;
-  _securityClient: AxiosInstance;
-  _serverURL: string;
-  _language: string;
-  _sdkVersion: string;
-  _genVersion: string;
+    _defaultClient: AxiosInstance;
+    _securityClient: AxiosInstance;
+    _serverURL: string;
+    _language: string;
+    _sdkVersion: string;
+    _genVersion: string;
 
-  constructor(
-    defaultClient: AxiosInstance,
-    securityClient: AxiosInstance,
-    serverURL: string,
-    language: string,
-    sdkVersion: string,
-    genVersion: string
-  ) {
-    this._defaultClient = defaultClient;
-    this._securityClient = securityClient;
-    this._serverURL = serverURL;
-    this._language = language;
-    this._sdkVersion = sdkVersion;
-    this._genVersion = genVersion;
-  }
-
-  /**
-   * Get all plugins for the current workspace.
-   */
-  async getPlugins(
-    config?: AxiosRequestConfig
-  ): Promise<operations.GetPluginsResponse> {
-    const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "get",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
+    constructor(
+        defaultClient: AxiosInstance,
+        securityClient: AxiosInstance,
+        serverURL: string,
+        language: string,
+        sdkVersion: string,
+        genVersion: string
+    ) {
+        this._defaultClient = defaultClient;
+        this._securityClient = securityClient;
+        this._serverURL = serverURL;
+        this._language = language;
+        this._sdkVersion = sdkVersion;
+        this._genVersion = genVersion;
     }
 
-    const res: operations.GetPluginsResponse =
-      new operations.GetPluginsResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.plugins = [];
-          const resFieldDepth: number = utils.getResFieldDepth(res);
-          res.plugins = utils.objectToClass(
-            httpRes?.data,
-            shared.Plugin,
-            resFieldDepth
-          );
+    /**
+     * Get all plugins for the current workspace.
+     */
+    async getPlugins(config?: AxiosRequestConfig): Promise<operations.GetPluginsResponse> {
+        const baseURL: string = this._serverURL;
+        const url: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "get",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+
+        const res: operations.GetPluginsResponse = new operations.GetPluginsResponse({
+            statusCode: httpRes.status,
+            contentType: contentType,
+            rawResponse: httpRes,
+        });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.plugins = [];
+                    const resFieldDepth: number = utils.getResFieldDepth(res);
+                    res.plugins = utils.objectToClass(httpRes?.data, shared.Plugin, resFieldDepth);
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
         }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
-
-  /**
-   * Run a plugin
-   */
-  async runPlugin(
-    req: operations.RunPluginRequest,
-    config?: AxiosRequestConfig
-  ): Promise<operations.RunPluginResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new operations.RunPluginRequest(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = utils.generateURL(
-      baseURL,
-      "/v1/plugins/{pluginID}",
-      req
-    );
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...config?.headers };
-    const queryParams: string = utils.serializeQueryParams(req);
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url + queryParams,
-      method: "post",
-      headers: headers,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.RunPluginResponse = new operations.RunPluginResponse({
-      statusCode: httpRes.status,
-      contentType: contentType,
-      rawResponse: httpRes,
-    });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.boundedRequests = [];
-          const resFieldDepth: number = utils.getResFieldDepth(res);
-          res.boundedRequests = utils.objectToClass(
-            httpRes?.data,
-            shared.BoundedRequest,
-            resFieldDepth
-          );
+    /**
+     * Run a plugin
+     */
+    async runPlugin(
+        req: operations.RunPluginRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.RunPluginResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.RunPluginRequest(req);
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+
+        const baseURL: string = this._serverURL;
+        const url: string = utils.generateURL(baseURL, "/v1/plugins/{pluginID}", req);
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...config?.headers };
+        const queryParams: string = utils.serializeQueryParams(req);
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url + queryParams,
+            method: "post",
+            headers: headers,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
         }
-        break;
-    }
 
-    return res;
-  }
-
-  /**
-   * Upsert a plugin
-   */
-  async upsertPlugin(
-    req: shared.Plugin,
-    config?: AxiosRequestConfig
-  ): Promise<operations.UpsertPluginResponse> {
-    if (!(req instanceof utils.SpeakeasyBase)) {
-      req = new shared.Plugin(req);
-    }
-
-    const baseURL: string = this._serverURL;
-    const url: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
-
-    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
-
-    try {
-      [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
-        req,
-        "request",
-        "json"
-      );
-    } catch (e: unknown) {
-      if (e instanceof Error) {
-        throw new Error(`Error serializing request body, cause: ${e.message}`);
-      }
-    }
-
-    const client: AxiosInstance = this._securityClient || this._defaultClient;
-
-    const headers = { ...reqBodyHeaders, ...config?.headers };
-    if (reqBody == null || Object.keys(reqBody).length === 0)
-      throw new Error("request body is required");
-    headers["Accept"] = "application/json;q=1, application/json;q=0";
-    headers[
-      "user-agent"
-    ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
-
-    const httpRes: AxiosResponse = await client.request({
-      validateStatus: () => true,
-      url: url,
-      method: "put",
-      headers: headers,
-      data: reqBody,
-      ...config,
-    });
-
-    const contentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-    if (httpRes?.status == null) {
-      throw new Error(`status code not found in response: ${httpRes}`);
-    }
-
-    const res: operations.UpsertPluginResponse =
-      new operations.UpsertPluginResponse({
-        statusCode: httpRes.status,
-        contentType: contentType,
-        rawResponse: httpRes,
-      });
-    switch (true) {
-      case httpRes?.status == 200:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.plugin = utils.objectToClass(httpRes?.data, shared.Plugin);
+        const res: operations.RunPluginResponse = new operations.RunPluginResponse({
+            statusCode: httpRes.status,
+            contentType: contentType,
+            rawResponse: httpRes,
+        });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.boundedRequests = [];
+                    const resFieldDepth: number = utils.getResFieldDepth(res);
+                    res.boundedRequests = utils.objectToClass(
+                        httpRes?.data,
+                        shared.BoundedRequest,
+                        resFieldDepth
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
         }
-        break;
-      default:
-        if (utils.matchContentType(contentType, `application/json`)) {
-          res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
-        }
-        break;
+
+        return res;
     }
 
-    return res;
-  }
+    /**
+     * Upsert a plugin
+     */
+    async upsertPlugin(
+        req: shared.Plugin,
+        config?: AxiosRequestConfig
+    ): Promise<operations.UpsertPluginResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new shared.Plugin(req);
+        }
+
+        const baseURL: string = this._serverURL;
+        const url: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "request", "json");
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+
+        const client: AxiosInstance = this._securityClient || this._defaultClient;
+
+        const headers = { ...reqBodyHeaders, ...config?.headers };
+        if (reqBody == null || Object.keys(reqBody).length === 0)
+            throw new Error("request body is required");
+        headers["Accept"] = "application/json;q=1, application/json;q=0";
+        headers[
+            "user-agent"
+        ] = `speakeasy-sdk/${this._language} ${this._sdkVersion} ${this._genVersion}`;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: url,
+            method: "put",
+            headers: headers,
+            data: reqBody,
+            ...config,
+        });
+
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.UpsertPluginResponse = new operations.UpsertPluginResponse({
+            statusCode: httpRes.status,
+            contentType: contentType,
+            rawResponse: httpRes,
+        });
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.plugin = utils.objectToClass(httpRes?.data, shared.Plugin);
+                }
+                break;
+            default:
+                if (utils.matchContentType(contentType, `application/json`)) {
+                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                }
+                break;
+        }
+
+        return res;
+    }
 }

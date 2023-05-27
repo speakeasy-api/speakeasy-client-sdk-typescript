@@ -7,24 +7,24 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class UpsertPluginResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata()
-  plugin?: shared.Plugin;
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    plugin?: shared.Plugin;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

@@ -10,50 +10,46 @@ import { AxiosResponse } from "axios";
  * Configuration for filter operations
  */
 export class GetApisOp extends SpeakeasyBase {
-  /**
-   * Whether to AND or OR the filters
-   */
-  @SpeakeasyMetadata({ data: "queryParam, name=and" })
-  and: boolean;
+    /**
+     * Whether to AND or OR the filters
+     */
+    @SpeakeasyMetadata({ data: "queryParam, name=and" })
+    and: boolean;
 }
 
 export class GetApisRequest extends SpeakeasyBase {
-  /**
-   * Metadata to filter Apis on
-   */
-  @SpeakeasyMetadata({
-    data: "queryParam, style=deepObject;explode=true;name=metadata",
-  })
-  metadata?: Record<string, string[]>;
+    /**
+     * Metadata to filter Apis on
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=metadata" })
+    metadata?: Record<string, string[]>;
 
-  /**
-   * Configuration for filter operations
-   */
-  @SpeakeasyMetadata({
-    data: "queryParam, style=deepObject;explode=true;name=op",
-  })
-  op?: GetApisOp;
+    /**
+     * Configuration for filter operations
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
+    op?: GetApisOp;
 }
 
 export class GetApisResponse extends SpeakeasyBase {
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata({ elemType: shared.Api })
-  apis?: shared.Api[];
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.Api })
+    apis?: shared.Api[];
 
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

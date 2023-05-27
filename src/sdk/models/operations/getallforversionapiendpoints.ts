@@ -7,42 +7,38 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GetAllForVersionApiEndpointsRequest extends SpeakeasyBase {
-  /**
-   * The ID of the Api to retrieve ApiEndpoints for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=apiID",
-  })
-  apiID: string;
+    /**
+     * The ID of the Api to retrieve ApiEndpoints for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+    apiID: string;
 
-  /**
-   * The version ID of the Api to retrieve ApiEndpoints for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=versionID",
-  })
-  versionID: string;
+    /**
+     * The version ID of the Api to retrieve ApiEndpoints for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+    versionID: string;
 }
 
 export class GetAllForVersionApiEndpointsResponse extends SpeakeasyBase {
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata({ elemType: shared.ApiEndpoint })
-  apiEndpoints?: shared.ApiEndpoint[];
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.ApiEndpoint })
+    apiEndpoints?: shared.ApiEndpoint[];
 
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

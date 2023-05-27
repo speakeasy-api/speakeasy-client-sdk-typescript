@@ -9,24 +9,24 @@ import { Expose } from "class-transformer";
  * A filter is a key-value pair that can be used to filter a list of requests.
  */
 export class Filter extends SpeakeasyBase {
-  /**
-   * The key of the filter.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "key" })
-  key: string;
+    /**
+     * The key of the filter.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "key" })
+    key: string;
 
-  /**
-   * The operator of the filter.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "operator" })
-  operator: string;
+    /**
+     * The operator of the filter.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "operator" })
+    operator: string;
 
-  /**
-   * The value of the filter.
-   */
-  @SpeakeasyMetadata()
-  @Expose({ name: "value" })
-  value: string;
+    /**
+     * The value of the filter.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "value" })
+    value: string;
 }

@@ -9,11 +9,11 @@ import { Expose } from "class-transformer";
  * Key-Value pairs associated with a request
  */
 export class RequestMetadata extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  @Expose({ name: "key" })
-  key?: string;
+    @SpeakeasyMetadata()
+    @Expose({ name: "key" })
+    key?: string;
 
-  @SpeakeasyMetadata()
-  @Expose({ name: "value" })
-  value?: string;
+    @SpeakeasyMetadata()
+    @Expose({ name: "value" })
+    value?: string;
 }

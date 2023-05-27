@@ -7,58 +7,54 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class RegisterSchemaRequestBodyFile extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "multipart_form, content=true" })
-  content: Uint8Array;
+    @SpeakeasyMetadata({ data: "multipart_form, content=true" })
+    content: Uint8Array;
 
-  @SpeakeasyMetadata({ data: "multipart_form, name=file" })
-  file: string;
+    @SpeakeasyMetadata({ data: "multipart_form, name=file" })
+    file: string;
 }
 
 /**
  * The schema file to upload provided as a multipart/form-data file segment.
  */
 export class RegisterSchemaRequestBody extends SpeakeasyBase {
-  @SpeakeasyMetadata({ data: "multipart_form, file=true" })
-  file: RegisterSchemaRequestBodyFile;
+    @SpeakeasyMetadata({ data: "multipart_form, file=true" })
+    file: RegisterSchemaRequestBodyFile;
 }
 
 export class RegisterSchemaRequest extends SpeakeasyBase {
-  /**
-   * The schema file to upload provided as a multipart/form-data file segment.
-   */
-  @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
-  requestBody: RegisterSchemaRequestBody;
+    /**
+     * The schema file to upload provided as a multipart/form-data file segment.
+     */
+    @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
+    requestBody: RegisterSchemaRequestBody;
 
-  /**
-   * The ID of the Api to get the schema for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=apiID",
-  })
-  apiID: string;
+    /**
+     * The ID of the Api to get the schema for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+    apiID: string;
 
-  /**
-   * The version ID of the Api to delete metadata for.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=versionID",
-  })
-  versionID: string;
+    /**
+     * The version ID of the Api to delete metadata for.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=versionID" })
+    versionID: string;
 }
 
 export class RegisterSchemaResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

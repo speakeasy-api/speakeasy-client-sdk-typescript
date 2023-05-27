@@ -7,34 +7,32 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GetRequestFromEventLogRequest extends SpeakeasyBase {
-  /**
-   * The ID of the request to retrieve.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=requestID",
-  })
-  requestID: string;
+    /**
+     * The ID of the request to retrieve.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=requestID" })
+    requestID: string;
 }
 
 export class GetRequestFromEventLogResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata()
-  unboundedRequest?: shared.UnboundedRequest;
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    unboundedRequest?: shared.UnboundedRequest;
 }

@@ -7,24 +7,24 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class GetValidEmbedAccessTokensResponse extends SpeakeasyBase {
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata({ elemType: shared.EmbedToken })
-  embedTokens?: shared.EmbedToken[];
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.EmbedToken })
+    embedTokens?: shared.EmbedToken[];
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }

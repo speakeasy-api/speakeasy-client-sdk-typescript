@@ -7,40 +7,38 @@ import * as shared from "../shared";
 import { AxiosResponse } from "axios";
 
 export class UpsertApiRequest extends SpeakeasyBase {
-  /**
-   * A JSON representation of the Api to upsert
-   */
-  @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-  apiInput: shared.ApiInput;
+    /**
+     * A JSON representation of the Api to upsert
+     */
+    @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+    apiInput: shared.ApiInput;
 
-  /**
-   * The ID of the Api to upsert.
-   */
-  @SpeakeasyMetadata({
-    data: "pathParam, style=simple;explode=false;name=apiID",
-  })
-  apiID: string;
+    /**
+     * The ID of the Api to upsert.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=apiID" })
+    apiID: string;
 }
 
 export class UpsertApiResponse extends SpeakeasyBase {
-  /**
-   * OK
-   */
-  @SpeakeasyMetadata()
-  api?: shared.Api;
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    api?: shared.Api;
 
-  @SpeakeasyMetadata()
-  contentType: string;
+    @SpeakeasyMetadata()
+    contentType: string;
 
-  /**
-   * Default error response
-   */
-  @SpeakeasyMetadata()
-  error?: shared.ErrorT;
+    /**
+     * Default error response
+     */
+    @SpeakeasyMetadata()
+    error?: shared.ErrorT;
 
-  @SpeakeasyMetadata()
-  statusCode: number;
+    @SpeakeasyMetadata()
+    statusCode: number;
 
-  @SpeakeasyMetadata()
-  rawResponse?: AxiosResponse;
+    @SpeakeasyMetadata()
+    rawResponse?: AxiosResponse;
 }
