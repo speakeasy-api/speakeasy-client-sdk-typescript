@@ -7,6 +7,7 @@ src/sdk/requests.ts
 src/sdk/schemas.ts
 src/sdk/sdk.ts
 .eslintrc.yml
+.gitignore
 jest.config.js
 package-lock.json
 package.json
