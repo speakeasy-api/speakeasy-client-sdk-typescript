@@ -54,8 +54,8 @@ export class SDKConfiguration {
     serverURL: string;
     serverDefaults: any;
     language = "typescript";
-    sdkVersion = "1.31.1";
-    genVersion = "2.35.3";
+    sdkVersion = "1.31.2";
+    genVersion = "2.35.9";
 
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -63,7 +63,7 @@ export class SDKConfiguration {
 }
 
 /**
- * The Speakeasy API allows teams to manage common operations with their APIs
+ * Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
  *
  * @see {@link https://docs.speakeasyapi.dev} - The Speakeasy Platform Documentation
  */
