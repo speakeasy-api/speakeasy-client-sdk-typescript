@@ -27,7 +27,7 @@ import { DeleteSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typesc
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -54,7 +54,7 @@ import { DownloadSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-type
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -80,7 +80,7 @@ import { DownloadSchemaRevisionResponse } from "@speakeasy-api/speakeasy-client-
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -108,7 +108,7 @@ import { GetSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescrip
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -134,7 +134,7 @@ import { GetSchemaDiffResponse } from "@speakeasy-api/speakeasy-client-sdk-types
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -163,7 +163,7 @@ import { GetSchemaRevisionResponse } from "@speakeasy-api/speakeasy-client-sdk-t
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -191,7 +191,7 @@ import { GetSchemasResponse } from "@speakeasy-api/speakeasy-client-sdk-typescri
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -218,7 +218,7 @@ import { RegisterSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-type
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 

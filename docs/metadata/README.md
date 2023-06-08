@@ -22,7 +22,7 @@ import { DeleteVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-s
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -50,7 +50,7 @@ import { GetVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -76,7 +76,7 @@ import { InsertVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-s
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 

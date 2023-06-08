@@ -24,7 +24,7 @@ import { GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 

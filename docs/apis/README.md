@@ -25,7 +25,7 @@ import { DeleteApiResponse } from "@speakeasy-api/speakeasy-client-sdk-typescrip
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -52,7 +52,7 @@ import { GenerateOpenApiSpecResponse } from "@speakeasy-api/speakeasy-client-sdk
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -78,7 +78,7 @@ import { GeneratePostmanCollectionResponse } from "@speakeasy-api/speakeasy-clie
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -105,7 +105,7 @@ import { GetAllApiVersionsResponse } from "@speakeasy-api/speakeasy-client-sdk-t
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -148,7 +148,7 @@ import { GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -187,7 +187,7 @@ import { UpsertApiResponse } from "@speakeasy-api/speakeasy-client-sdk-typescrip
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 

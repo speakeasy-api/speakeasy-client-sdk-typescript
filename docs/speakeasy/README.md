@@ -22,7 +22,7 @@ import { ValidateApiKeyResponse } from "@speakeasy-api/speakeasy-client-sdk-type
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 

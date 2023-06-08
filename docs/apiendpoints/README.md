@@ -27,7 +27,7 @@ import { DeleteApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-t
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -55,7 +55,7 @@ import { FindApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typ
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -83,7 +83,7 @@ import { GenerateOpenApiSpecForApiEndpointResponse } from "@speakeasy-api/speake
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -110,7 +110,7 @@ import { GeneratePostmanCollectionForApiEndpointResponse } from "@speakeasy-api/
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -137,7 +137,7 @@ import { GetAllApiEndpointsResponse } from "@speakeasy-api/speakeasy-client-sdk-
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -162,7 +162,7 @@ import { GetAllForVersionApiEndpointsResponse } from "@speakeasy-api/speakeasy-c
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -188,7 +188,7 @@ import { GetApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-type
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -215,7 +215,7 @@ import { UpsertApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-t
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 

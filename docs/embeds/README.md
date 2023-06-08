@@ -23,7 +23,7 @@ import { GetEmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-sdk
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -61,7 +61,7 @@ import { GetValidEmbedAccessTokensResponse } from "@speakeasy-api/speakeasy-clie
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
@@ -84,7 +84,7 @@ import { RevokeEmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-
 
 const sdk = new Speakeasy({
   security: {
-    apiKey: "YOUR_API_KEY_HERE",
+    apiKey: "",
   },
 });
 
