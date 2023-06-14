@@ -57,6 +57,7 @@ export class Requests {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -72,18 +73,16 @@ export class Requests {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/octet-stream`)) {
-                    const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-                    const out: Uint8Array = new Uint8Array(resBody.length);
-                    for (let i = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
-                    res.postmanCollection = out;
+                    res.postmanCollection = httpRes?.data;
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -122,6 +121,7 @@ export class Requests {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -137,18 +137,19 @@ export class Requests {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.unboundedRequest = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.UnboundedRequest
                     );
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -192,6 +193,7 @@ export class Requests {
             url: url + queryParams,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -206,13 +208,14 @@ export class Requests {
             contentType: contentType,
             rawResponse: httpRes,
         });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.boundedRequests = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
                     res.boundedRequests = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.BoundedRequest,
                         resFieldDepth
                     );
@@ -220,7 +223,7 @@ export class Requests {
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }

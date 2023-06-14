@@ -56,6 +56,7 @@ export class ApiEndpoints {
             url: url,
             method: "delete",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -70,12 +71,13 @@ export class ApiEndpoints {
             contentType: contentType,
             rawResponse: httpRes,
         });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -122,6 +124,7 @@ export class ApiEndpoints {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -136,15 +139,19 @@ export class ApiEndpoints {
             contentType: contentType,
             rawResponse: httpRes,
         });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.apiEndpoint = utils.objectToClass(httpRes?.data, shared.ApiEndpoint);
+                    res.apiEndpoint = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ApiEndpoint
+                    );
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -191,6 +198,7 @@ export class ApiEndpoints {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -206,18 +214,19 @@ export class ApiEndpoints {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.generateOpenApiSpecDiff = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.GenerateOpenApiSpecDiff
                     );
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -263,6 +272,7 @@ export class ApiEndpoints {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -278,18 +288,16 @@ export class ApiEndpoints {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/octet-stream`)) {
-                    const resBody: string = JSON.stringify(httpRes?.data, null, 0);
-                    const out: Uint8Array = new Uint8Array(resBody.length);
-                    for (let i = 0; i < resBody.length; i++) out[i] = resBody.charCodeAt(i);
-                    res.postmanCollection = out;
+                    res.postmanCollection = httpRes?.data;
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -328,6 +336,7 @@ export class ApiEndpoints {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -343,13 +352,14 @@ export class ApiEndpoints {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.apiEndpoints = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
                     res.apiEndpoints = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.ApiEndpoint,
                         resFieldDepth
                     );
@@ -357,7 +367,7 @@ export class ApiEndpoints {
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -400,6 +410,7 @@ export class ApiEndpoints {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -415,13 +426,14 @@ export class ApiEndpoints {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.apiEndpoints = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
                     res.apiEndpoints = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.ApiEndpoint,
                         resFieldDepth
                     );
@@ -429,7 +441,7 @@ export class ApiEndpoints {
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -472,6 +484,7 @@ export class ApiEndpoints {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -486,15 +499,19 @@ export class ApiEndpoints {
             contentType: contentType,
             rawResponse: httpRes,
         });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.apiEndpoint = utils.objectToClass(httpRes?.data, shared.ApiEndpoint);
+                    res.apiEndpoint = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ApiEndpoint
+                    );
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -552,6 +569,7 @@ export class ApiEndpoints {
             url: url,
             method: "put",
             headers: headers,
+            responseType: "arraybuffer",
             data: reqBody,
             ...config,
         });
@@ -567,15 +585,19 @@ export class ApiEndpoints {
             contentType: contentType,
             rawResponse: httpRes,
         });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.apiEndpoint = utils.objectToClass(httpRes?.data, shared.ApiEndpoint);
+                    res.apiEndpoint = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.ApiEndpoint
+                    );
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }

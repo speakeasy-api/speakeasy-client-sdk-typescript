@@ -54,6 +54,7 @@ export class Embeds {
             url: url + queryParams,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -69,18 +70,19 @@ export class Embeds {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.embedAccessTokenResponse = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.EmbedAccessTokenResponse
                     );
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -114,6 +116,7 @@ export class Embeds {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -129,13 +132,14 @@ export class Embeds {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.embedTokens = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
                     res.embedTokens = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.EmbedToken,
                         resFieldDepth
                     );
@@ -143,7 +147,7 @@ export class Embeds {
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -186,6 +190,7 @@ export class Embeds {
             url: url,
             method: "delete",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -201,12 +206,13 @@ export class Embeds {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }

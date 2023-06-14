@@ -42,6 +42,7 @@ export class Plugins {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -56,17 +57,22 @@ export class Plugins {
             contentType: contentType,
             rawResponse: httpRes,
         });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.plugins = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
-                    res.plugins = utils.objectToClass(httpRes?.data, shared.Plugin, resFieldDepth);
+                    res.plugins = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.Plugin,
+                        resFieldDepth
+                    );
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -106,6 +112,7 @@ export class Plugins {
             url: url + queryParams,
             method: "post",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -120,13 +127,14 @@ export class Plugins {
             contentType: contentType,
             rawResponse: httpRes,
         });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.boundedRequests = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
                     res.boundedRequests = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.BoundedRequest,
                         resFieldDepth
                     );
@@ -134,7 +142,7 @@ export class Plugins {
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -185,6 +193,7 @@ export class Plugins {
             url: url,
             method: "put",
             headers: headers,
+            responseType: "arraybuffer",
             data: reqBody,
             ...config,
         });
@@ -200,15 +209,16 @@ export class Plugins {
             contentType: contentType,
             rawResponse: httpRes,
         });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.plugin = utils.objectToClass(httpRes?.data, shared.Plugin);
+                    res.plugin = utils.objectToClass(JSON.parse(decodedRes), shared.Plugin);
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }

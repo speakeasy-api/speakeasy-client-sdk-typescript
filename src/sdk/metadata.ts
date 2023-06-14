@@ -53,6 +53,7 @@ export class Metadata {
             url: url,
             method: "delete",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -68,12 +69,13 @@ export class Metadata {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -116,6 +118,7 @@ export class Metadata {
             url: url,
             method: "get",
             headers: headers,
+            responseType: "arraybuffer",
             ...config,
         });
 
@@ -131,13 +134,14 @@ export class Metadata {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.versionMetadata = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
                     res.versionMetadata = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.VersionMetadata,
                         resFieldDepth
                     );
@@ -145,7 +149,7 @@ export class Metadata {
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
@@ -204,6 +208,7 @@ export class Metadata {
             url: url,
             method: "post",
             headers: headers,
+            responseType: "arraybuffer",
             data: reqBody,
             ...config,
         });
@@ -220,18 +225,19 @@ export class Metadata {
                 contentType: contentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.versionMetadata = utils.objectToClass(
-                        httpRes?.data,
+                        JSON.parse(decodedRes),
                         shared.VersionMetadata
                     );
                 }
                 break;
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
-                    res.error = utils.objectToClass(httpRes?.data, shared.ErrorT);
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 }
                 break;
         }
