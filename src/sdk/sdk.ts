@@ -55,7 +55,7 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.3.0";
-    sdkVersion = "1.37.0";
+    sdkVersion = "1.37.1";
     genVersion = "2.50.2";
 
     public constructor(init?: Partial<SDKConfiguration>) {
@@ -66,7 +66,7 @@ export class SDKConfiguration {
 /**
  * Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
  *
- * @see {@link https://docs.speakeasyapi.dev} - The Speakeasy Platform Documentation
+ * @see {@link https://speakeasyapi.dev/docs/} - The Speakeasy Platform Documentation
  */
 export class Speakeasy {
     /**
