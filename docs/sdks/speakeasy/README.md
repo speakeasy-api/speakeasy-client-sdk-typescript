@@ -5,7 +5,7 @@
 Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
 
 The Speakeasy Platform Documentation
-<https://docs.speakeasyapi.dev>
+<https://speakeasyapi.dev/docs/>
 ### Available Operations
 
 * [validateApiKey](#validateapikey) - Validate the current api key.
