@@ -7,6 +7,7 @@ import { ApiEndpoints } from "./apiendpoints";
 import { Apis } from "./apis";
 import { Embeds } from "./embeds";
 import { Metadata } from "./metadata";
+import * as errors from "./models/errors";
 import * as operations from "./models/operations";
 import * as shared from "./models/shared";
 import { Plugins } from "./plugins";
@@ -55,8 +56,8 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.3.0";
-    sdkVersion = "1.44.0";
-    genVersion = "2.65.0";
+    sdkVersion = "1.45.0";
+    genVersion = "2.70.0";
 
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -180,6 +181,13 @@ export class Speakeasy {
             default:
                 if (utils.matchContentType(contentType, `application/json`)) {
                     res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + contentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
                 }
                 break;
         }
