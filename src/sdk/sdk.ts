@@ -17,7 +17,6 @@ import axios from "axios";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 export const ServerProd = "prod";
-
 /**
  * Contains the list of servers available to the SDK
  */
@@ -56,8 +55,8 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.3.0";
-    sdkVersion = "1.55.0";
-    genVersion = "2.91.2";
+    sdkVersion = "1.55.1";
+    genVersion = "2.93.0";
 
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
