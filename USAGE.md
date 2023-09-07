@@ -13,20 +13,8 @@ const sdk = new Speakeasy({
 
 sdk.apis.getApis({
   metadata: {
-    "provident": [
-      "quibusdam",
-      "unde",
-      "nulla",
-    ],
     "corrupti": [
-      "vel",
-      "error",
-      "deserunt",
-      "suscipit",
-    ],
-    "iure": [
-      "debitis",
-      "ipsa",
+      "provident",
     ],
   },
   op: {

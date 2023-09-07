@@ -65,16 +65,16 @@ sdk.plugins.runPlugin({
   filters: {
     filters: [
       {
-        key: "repellat",
-        operator: "mollitia",
-        value: "occaecati",
+        key: "ipsum",
+        operator: "excepturi",
+        value: "aspernatur",
       },
     ],
-    limit: 253291,
-    offset: 414369,
-    operator: "quam",
+    limit: 18789,
+    offset: 324141,
+    operator: "natus",
   },
-  pluginID: "molestiae",
+  pluginID: "sed",
 }).then((res: RunPluginResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -112,13 +112,13 @@ const sdk = new Speakeasy({
 });
 
 sdk.plugins.upsertPlugin({
-  code: "velit",
-  createdAt: new Date("2022-09-06T22:51:09.401Z"),
-  evalHash: "quis",
-  pluginId: "vitae",
-  title: "Miss",
-  updatedAt: new Date("2022-05-14T10:37:30.872Z"),
-  workspaceId: "odit",
+  code: "iste",
+  createdAt: new Date("2022-05-20T19:39:29.035Z"),
+  evalHash: "laboriosam",
+  pluginId: "hic",
+  title: "Dr.",
+  updatedAt: new Date("2022-02-06T12:52:33.708Z"),
+  workspaceId: "corporis",
 }).then((res: UpsertPluginResponse) => {
   if (res.statusCode == 200) {
     // handle response

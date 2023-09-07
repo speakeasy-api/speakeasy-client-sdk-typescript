@@ -28,19 +28,19 @@ const sdk = new Speakeasy({
 });
 
 sdk.embeds.getEmbedAccessToken({
-  description: "laborum",
-  duration: 170909,
+  description: "porro",
+  duration: 678880,
   filters: {
     filters: [
       {
-        key: "corporis",
-        operator: "explicabo",
-        value: "nobis",
+        key: "dicta",
+        operator: "nam",
+        value: "officia",
       },
     ],
-    limit: 315428,
-    offset: 607831,
-    operator: "nemo",
+    limit: 582020,
+    offset: 143353,
+    operator: "deleniti",
   },
 }).then((res: GetEmbedAccessTokenResponse) => {
   if (res.statusCode == 200) {
@@ -114,7 +114,7 @@ const sdk = new Speakeasy({
 });
 
 sdk.embeds.revokeEmbedAccessToken({
-  tokenID: "minima",
+  tokenID: "hic",
 }).then((res: RevokeEmbedAccessTokenResponse) => {
   if (res.statusCode == 200) {
     // handle response

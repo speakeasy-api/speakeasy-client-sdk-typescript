@@ -30,8 +30,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.deleteApi({
-  apiID: "quod",
-  versionID: "esse",
+  apiID: "quis",
+  versionID: "veritatis",
 }).then((res: DeleteApiResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -70,8 +70,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.generateOpenApiSpec({
-  apiID: "totam",
-  versionID: "porro",
+  apiID: "deserunt",
+  versionID: "perferendis",
 }).then((res: GenerateOpenApiSpecResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -109,8 +109,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.generatePostmanCollection({
-  apiID: "dolorum",
-  versionID: "dicta",
+  apiID: "ipsam",
+  versionID: "repellendus",
 }).then((res: GeneratePostmanCollectionResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -149,19 +149,10 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.getAllApiVersions({
-  apiID: "nam",
+  apiID: "sapiente",
   metadata: {
-    "occaecati": [
-      "deleniti",
-    ],
-    "hic": [
-      "totam",
-      "beatae",
-      "commodi",
-      "molestiae",
-    ],
-    "modi": [
-      "impedit",
+    "quo": [
+      "odit",
     ],
   },
   op: {
@@ -206,14 +197,8 @@ const sdk = new Speakeasy({
 
 sdk.apis.getApis({
   metadata: {
-    "esse": [
-      "excepturi",
-    ],
-    "aspernatur": [
-      "ad",
-    ],
-    "natus": [
-      "iste",
+    "at": [
+      "at",
     ],
   },
   op: {
@@ -258,25 +243,16 @@ const sdk = new Speakeasy({
 
 sdk.apis.upsertApi({
   apiInput: {
-    apiId: "dolor",
-    description: "natus",
+    apiId: "maiores",
+    description: "molestiae",
     metaData: {
-      "hic": [
-        "fuga",
-        "in",
-        "corporis",
-        "iste",
-      ],
-      "iure": [
-        "quidem",
-        "architecto",
-        "ipsa",
-        "reiciendis",
+      "quod": [
+        "quod",
       ],
     },
-    versionId: "est",
+    versionId: "esse",
   },
-  apiID: "mollitia",
+  apiID: "totam",
 }).then((res: UpsertApiResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -27,10 +27,10 @@ const sdk = new Speakeasy({
 });
 
 sdk.metadata.deleteVersionMetadata({
-  apiID: "excepturi",
-  metaKey: "accusantium",
-  metaValue: "iure",
-  versionID: "culpa",
+  apiID: "optio",
+  metaKey: "totam",
+  metaValue: "beatae",
+  versionID: "commodi",
 }).then((res: DeleteVersionMetadataResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -68,8 +68,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.metadata.getVersionMetadata({
-  apiID: "doloribus",
-  versionID: "sapiente",
+  apiID: "molestiae",
+  versionID: "modi",
 }).then((res: GetVersionMetadataResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -108,11 +108,11 @@ const sdk = new Speakeasy({
 
 sdk.metadata.insertVersionMetadata({
   versionMetadataInput: {
-    metaKey: "architecto",
-    metaValue: "mollitia",
+    metaKey: "qui",
+    metaValue: "impedit",
   },
-  apiID: "dolorem",
-  versionID: "culpa",
+  apiID: "cum",
+  versionID: "esse",
 }).then((res: InsertVersionMetadataResponse) => {
   if (res.statusCode == 200) {
     // handle response

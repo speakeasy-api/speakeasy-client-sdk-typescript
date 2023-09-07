@@ -32,9 +32,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.schemas.deleteSchema({
-  apiID: "ipsa",
-  revisionID: "omnis",
-  versionID: "voluptate",
+  apiID: "mollitia",
+  revisionID: "laborum",
+  versionID: "dolores",
 }).then((res: DeleteSchemaResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -72,8 +72,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.schemas.downloadSchema({
-  apiID: "cum",
-  versionID: "perferendis",
+  apiID: "dolorem",
+  versionID: "corporis",
 }).then((res: DownloadSchemaResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -111,9 +111,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.schemas.downloadSchemaRevision({
-  apiID: "doloremque",
-  revisionID: "reprehenderit",
-  versionID: "ut",
+  apiID: "explicabo",
+  revisionID: "nobis",
+  versionID: "enim",
 }).then((res: DownloadSchemaRevisionResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -152,8 +152,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.schemas.getSchema({
-  apiID: "maiores",
-  versionID: "dicta",
+  apiID: "omnis",
+  versionID: "nemo",
 }).then((res: GetSchemaResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -191,10 +191,10 @@ const sdk = new Speakeasy({
 });
 
 sdk.schemas.getSchemaDiff({
-  apiID: "corporis",
-  baseRevisionID: "dolore",
-  targetRevisionID: "iusto",
-  versionID: "dicta",
+  apiID: "minima",
+  baseRevisionID: "excepturi",
+  targetRevisionID: "accusantium",
+  versionID: "iure",
 }).then((res: GetSchemaDiffResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -233,9 +233,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.schemas.getSchemaRevision({
-  apiID: "harum",
-  revisionID: "enim",
-  versionID: "accusamus",
+  apiID: "culpa",
+  revisionID: "doloribus",
+  versionID: "sapiente",
 }).then((res: GetSchemaRevisionResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -274,8 +274,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.schemas.getSchemas({
-  apiID: "commodi",
-  versionID: "repudiandae",
+  apiID: "architecto",
+  versionID: "mollitia",
 }).then((res: GetSchemasResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -316,12 +316,12 @@ const sdk = new Speakeasy({
 sdk.schemas.registerSchema({
   requestBody: {
     file: {
-      content: "quae".encode(),
-      file: "ipsum",
+      content: "dolorem".encode(),
+      file: "culpa",
     },
   },
-  apiID: "quidem",
-  versionID: "molestias",
+  apiID: "consequuntur",
+  versionID: "repellat",
 }).then((res: RegisterSchemaResponse) => {
   if (res.statusCode == 200) {
     // handle response

@@ -28,7 +28,7 @@ const sdk = new Speakeasy({
 });
 
 sdk.requests.generateRequestPostmanCollection({
-  requestID: "quo",
+  requestID: "iste",
 }).then((res: GenerateRequestPostmanCollectionResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -66,7 +66,7 @@ const sdk = new Speakeasy({
 });
 
 sdk.requests.getRequestFromEventLog({
-  requestID: "sequi",
+  requestID: "iure",
 }).then((res: GetRequestFromEventLogResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -108,29 +108,14 @@ sdk.requests.queryEventLog({
   filters: {
     filters: [
       {
-        key: "ipsam",
-        operator: "id",
-        value: "possimus",
-      },
-      {
-        key: "aut",
-        operator: "quasi",
-        value: "error",
-      },
-      {
-        key: "temporibus",
-        operator: "laborum",
-        value: "quasi",
-      },
-      {
-        key: "reiciendis",
-        operator: "voluptatibus",
-        value: "vero",
+        key: "saepe",
+        operator: "quidem",
+        value: "architecto",
       },
     ],
-    limit: 468651,
-    offset: 509624,
-    operator: "voluptatibus",
+    limit: 60225,
+    offset: 969810,
+    operator: "est",
   },
 }).then((res: QueryEventLogResponse) => {
   if (res.statusCode == 200) {
