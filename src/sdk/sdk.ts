@@ -46,6 +46,10 @@ export type SDKProps = {
      * Allows overriding the default server URL used by the SDK
      */
     serverURL?: string;
+    /**
+     * Allows overriding the default retry config used by the SDK
+     */
+    retryConfig?: utils.RetryConfig;
 };
 
 export class SDKConfiguration {
@@ -55,9 +59,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.3.0";
-    sdkVersion = "1.56.1";
-    genVersion = "2.101.0";
-
+    sdkVersion = "1.56.2";
+    genVersion = "2.107.3";
+    retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
     }
@@ -113,6 +117,7 @@ export class Speakeasy {
             defaultClient: defaultClient,
             security: props?.security,
             serverURL: serverURL,
+            retryConfig: props?.retryConfig,
         });
 
         this.apiEndpoints = new ApiEndpoints(this.sdkConfiguration);

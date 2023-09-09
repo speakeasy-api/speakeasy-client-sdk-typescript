@@ -1,7 +1,5 @@
 # GenerateOpenApiSpecDiff
 
-OK
-
 
 ## Fields
 
