@@ -32,9 +32,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.deleteApiEndpoint({
-  apiEndpointID: "distinctio",
-  apiID: "quibusdam",
-  versionID: "unde",
+  apiEndpointID: "unde",
+  apiID: "nulla",
+  versionID: "corrupti",
 }).then((res: DeleteApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -73,9 +73,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.findApiEndpoint({
-  apiID: "nulla",
-  displayName: "corrupti",
-  versionID: "illum",
+  apiID: "illum",
+  displayName: "vel",
+  versionID: "error",
 }).then((res: FindApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -114,9 +114,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
-  apiEndpointID: "vel",
-  apiID: "error",
-  versionID: "deserunt",
+  apiEndpointID: "deserunt",
+  apiID: "suscipit",
+  versionID: "iure",
 }).then((res: GenerateOpenApiSpecForApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -154,9 +154,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
-  apiEndpointID: "suscipit",
-  apiID: "iure",
-  versionID: "magnam",
+  apiEndpointID: "magnam",
+  apiID: "debitis",
+  versionID: "ipsa",
 }).then((res: GeneratePostmanCollectionForApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -194,7 +194,7 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.getAllApiEndpoints({
-  apiID: "debitis",
+  apiID: "delectus",
 }).then((res: GetAllApiEndpointsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -232,8 +232,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.getAllForVersionApiEndpoints({
-  apiID: "ipsa",
-  versionID: "delectus",
+  apiID: "tempora",
+  versionID: "suscipit",
 }).then((res: GetAllForVersionApiEndpointsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -271,9 +271,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.getApiEndpoint({
-  apiEndpointID: "tempora",
-  apiID: "suscipit",
-  versionID: "molestiae",
+  apiEndpointID: "molestiae",
+  apiID: "minus",
+  versionID: "placeat",
 }).then((res: GetApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -312,16 +312,16 @@ const sdk = new Speakeasy({
 
 sdk.apiEndpoints.upsertApiEndpoint({
   apiEndpointInput: {
-    apiEndpointId: "minus",
-    description: "placeat",
-    displayName: "voluptatum",
-    method: "iusto",
-    path: "excepturi",
-    versionId: "nisi",
+    apiEndpointId: "voluptatum",
+    description: "iusto",
+    displayName: "excepturi",
+    method: "nisi",
+    path: "recusandae",
+    versionId: "temporibus",
   },
-  apiEndpointID: "recusandae",
-  apiID: "temporibus",
-  versionID: "ab",
+  apiEndpointID: "ab",
+  apiID: "quis",
+  versionID: "veritatis",
 }).then((res: UpsertApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response

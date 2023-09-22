@@ -79,14 +79,6 @@ src/sdk/models/shared/schemadiff.ts
 src/sdk/models/shared/security.ts
 src/sdk/models/shared/index.ts
 src/sdk/models/errors/index.ts
-docs/sdks/speakeasy/README.md
-docs/sdks/apiendpoints/README.md
-docs/sdks/apis/README.md
-docs/sdks/embeds/README.md
-docs/sdks/metadata/README.md
-docs/sdks/plugins/README.md
-docs/sdks/requests/README.md
-docs/sdks/schemas/README.md
 USAGE.md
 docs/models/operations/deleteapiendpointrequest.md
 docs/models/operations/deleteapiendpointresponse.md
@@ -178,4 +170,12 @@ docs/models/shared/schema.md
 docs/models/shared/schemadiffvaluechange.md
 docs/models/shared/schemadiff.md
 docs/models/shared/security.md
+docs/sdks/speakeasy/README.md
+docs/sdks/apiendpoints/README.md
+docs/sdks/apis/README.md
+docs/sdks/embeds/README.md
+docs/sdks/metadata/README.md
+docs/sdks/plugins/README.md
+docs/sdks/requests/README.md
+docs/sdks/schemas/README.md
 .gitattributes

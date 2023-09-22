@@ -65,16 +65,16 @@ sdk.plugins.runPlugin({
   filters: {
     filters: [
       {
-        key: "ipsum",
-        operator: "excepturi",
-        value: "aspernatur",
+        key: "aspernatur",
+        operator: "perferendis",
+        value: "ad",
       },
     ],
-    limit: 18789,
-    offset: 324141,
-    operator: "natus",
+    limit: 617636,
+    offset: 149675,
+    operator: "iste",
   },
-  pluginID: "sed",
+  pluginID: "dolor",
 }).then((res: RunPluginResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -112,13 +112,13 @@ const sdk = new Speakeasy({
 });
 
 sdk.plugins.upsertPlugin({
-  code: "iste",
-  createdAt: new Date("2022-05-20T19:39:29.035Z"),
-  evalHash: "laboriosam",
-  pluginId: "hic",
-  title: "Dr.",
-  updatedAt: new Date("2022-02-06T12:52:33.708Z"),
-  workspaceId: "corporis",
+  code: "natus",
+  createdAt: new Date("2022-01-21T12:46:00.641Z"),
+  evalHash: "saepe",
+  pluginId: "fuga",
+  title: "Ms.",
+  updatedAt: new Date("2022-05-22T05:33:50.280Z"),
+  workspaceId: "iure",
 }).then((res: UpsertPluginResponse) => {
   if (res.statusCode == 200) {
     // handle response

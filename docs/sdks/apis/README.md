@@ -30,8 +30,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.deleteApi({
-  apiID: "quis",
-  versionID: "veritatis",
+  apiID: "deserunt",
+  versionID: "perferendis",
 }).then((res: DeleteApiResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -70,8 +70,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.generateOpenApiSpec({
-  apiID: "deserunt",
-  versionID: "perferendis",
+  apiID: "ipsam",
+  versionID: "repellendus",
 }).then((res: GenerateOpenApiSpecResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -109,8 +109,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.generatePostmanCollection({
-  apiID: "ipsam",
-  versionID: "repellendus",
+  apiID: "sapiente",
+  versionID: "quo",
 }).then((res: GeneratePostmanCollectionResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -149,10 +149,10 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.getAllApiVersions({
-  apiID: "sapiente",
+  apiID: "odit",
   metadata: {
-    "quo": [
-      "odit",
+    "at": [
+      "at",
     ],
   },
   op: {
@@ -197,8 +197,8 @@ const sdk = new Speakeasy({
 
 sdk.apis.getApis({
   metadata: {
-    "at": [
-      "at",
+    "maiores": [
+      "molestiae",
     ],
   },
   op: {
@@ -243,16 +243,16 @@ const sdk = new Speakeasy({
 
 sdk.apis.upsertApi({
   apiInput: {
-    apiId: "maiores",
-    description: "molestiae",
+    apiId: "quod",
+    description: "quod",
     metaData: {
-      "quod": [
-        "quod",
+      "esse": [
+        "totam",
       ],
     },
-    versionId: "esse",
+    versionId: "porro",
   },
-  apiID: "totam",
+  apiID: "dolorum",
 }).then((res: UpsertApiResponse) => {
   if (res.statusCode == 200) {
     // handle response
