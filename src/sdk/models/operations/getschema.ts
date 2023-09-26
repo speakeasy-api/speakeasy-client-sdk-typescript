@@ -21,6 +21,9 @@ export class GetSchemaRequest extends SpeakeasyBase {
 }
 
 export class GetSchemaResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -36,9 +39,15 @@ export class GetSchemaResponse extends SpeakeasyBase {
     @SpeakeasyMetadata()
     schema?: shared.Schema;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 }

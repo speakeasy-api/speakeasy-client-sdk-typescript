@@ -21,6 +21,9 @@ export class GetVersionMetadataRequest extends SpeakeasyBase {
 }
 
 export class GetVersionMetadataResponse extends SpeakeasyBase {
+    /**
+     * HTTP response content type for this operation
+     */
     @SpeakeasyMetadata()
     contentType: string;
 
@@ -30,9 +33,15 @@ export class GetVersionMetadataResponse extends SpeakeasyBase {
     @SpeakeasyMetadata()
     error?: shared.ErrorT;
 
+    /**
+     * HTTP response status code for this operation
+     */
     @SpeakeasyMetadata()
     statusCode: number;
 
+    /**
+     * Raw HTTP response; suitable for custom response parsing
+     */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
 
