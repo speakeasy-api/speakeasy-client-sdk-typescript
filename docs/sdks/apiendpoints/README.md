@@ -33,9 +33,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.deleteApiEndpoint({
-  apiEndpointID: "unde",
-  apiID: "nulla",
-  versionID: "corrupti",
+  apiEndpointID: "bus Gasoline Southwest",
+  apiID: "candela",
+  versionID: "indexing maxime bypassing",
 }).then((res: DeleteApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -74,9 +74,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.findApiEndpoint({
-  apiID: "illum",
-  displayName: "vel",
-  versionID: "error",
+  apiID: "insignificant",
+  displayName: "payment",
+  versionID: "Highland North Awesome",
 }).then((res: FindApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -115,9 +115,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
-  apiEndpointID: "deserunt",
-  apiID: "suscipit",
-  versionID: "iure",
+  apiEndpointID: "Tactics ew explicabo",
+  apiID: "gray act",
+  versionID: "bah",
 }).then((res: GenerateOpenApiSpecForApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -155,9 +155,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
-  apiEndpointID: "magnam",
-  apiID: "debitis",
-  versionID: "ipsa",
+  apiEndpointID: "silver Bronze Outdoors",
+  apiID: "Virtual admirable Southeast",
+  versionID: "Northeast Bicycle mark",
 }).then((res: GeneratePostmanCollectionForApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -195,7 +195,7 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.getAllApiEndpoints({
-  apiID: "delectus",
+  apiID: "Director JSON candela",
 }).then((res: GetAllApiEndpointsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -233,8 +233,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.getAllForVersionApiEndpoints({
-  apiID: "tempora",
-  versionID: "suscipit",
+  apiID: "THX Tuna sparkling",
+  versionID: "Assurance",
 }).then((res: GetAllForVersionApiEndpointsResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -272,9 +272,9 @@ const sdk = new Speakeasy({
 });
 
 sdk.apiEndpoints.getApiEndpoint({
-  apiEndpointID: "molestiae",
-  apiID: "minus",
-  versionID: "placeat",
+  apiEndpointID: "Optimized male SSD",
+  apiID: "Soul Land",
+  versionID: "Androgyne Hydrogen",
 }).then((res: GetApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -313,16 +313,16 @@ const sdk = new Speakeasy({
 
 sdk.apiEndpoints.upsertApiEndpoint({
   apiEndpointInput: {
-    apiEndpointId: "voluptatum",
-    description: "iusto",
-    displayName: "excepturi",
-    method: "nisi",
-    path: "recusandae",
-    versionId: "temporibus",
+    apiEndpointId: "Convertible Turner Cotton",
+    description: "Triple-buffered optimal methodology",
+    displayName: "Langosh Northwest Mabelle",
+    method: "South",
+    path: "/rescue",
+    versionId: "East Land viral",
   },
-  apiEndpointID: "ab",
-  apiID: "quis",
-  versionID: "veritatis",
+  apiEndpointID: "Electric Operations systems",
+  apiID: "Operations East Unbranded",
+  versionID: "parsing Convertible",
 }).then((res: UpsertApiEndpointResponse) => {
   if (res.statusCode == 200) {
     // handle response

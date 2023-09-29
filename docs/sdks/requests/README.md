@@ -29,7 +29,7 @@ const sdk = new Speakeasy({
 });
 
 sdk.requests.generateRequestPostmanCollection({
-  requestID: "saepe",
+  requestID: "payment male Rustic",
 }).then((res: GenerateRequestPostmanCollectionResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -67,7 +67,7 @@ const sdk = new Speakeasy({
 });
 
 sdk.requests.getRequestFromEventLog({
-  requestID: "quidem",
+  requestID: "Tuna Concrete North",
 }).then((res: GetRequestFromEventLogResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -109,14 +109,14 @@ sdk.requests.queryEventLog({
   filters: {
     filters: [
       {
-        key: "architecto",
-        operator: "ipsa",
-        value: "reiciendis",
+        key: "<key>",
+        operator: "payment",
+        value: "West Practical port",
       },
     ],
-    limit: 666767,
-    offset: 653140,
-    operator: "laborum",
+    limit: 736151,
+    offset: 477827,
+    operator: "Burg",
   },
 }).then((res: QueryEventLogResponse) => {
   if (res.statusCode == 200) {

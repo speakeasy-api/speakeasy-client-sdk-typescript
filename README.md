@@ -30,8 +30,8 @@ const sdk = new Speakeasy({
 
 sdk.apis.getApis({
   metadata: {
-    "distinctio": [
-      "quibusdam",
+    "aut": [
+      "bypassing",
     ],
   },
   op: {

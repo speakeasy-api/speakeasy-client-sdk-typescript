@@ -28,10 +28,10 @@ const sdk = new Speakeasy({
 });
 
 sdk.metadata.deleteVersionMetadata({
-  apiID: "beatae",
-  metaKey: "commodi",
-  metaValue: "molestiae",
-  versionID: "modi",
+  apiID: "East static North",
+  metaKey: "veniam",
+  metaValue: "cocoa",
+  versionID: "deposit",
 }).then((res: DeleteVersionMetadataResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -69,8 +69,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.metadata.getVersionMetadata({
-  apiID: "qui",
-  versionID: "impedit",
+  apiID: "Games",
+  versionID: "Centralized cyan",
 }).then((res: GetVersionMetadataResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -109,11 +109,11 @@ const sdk = new Speakeasy({
 
 sdk.metadata.insertVersionMetadata({
   versionMetadataInput: {
-    metaKey: "cum",
-    metaValue: "esse",
+    metaKey: "calculating",
+    metaValue: "Bedfordshire",
   },
-  apiID: "ipsum",
-  versionID: "excepturi",
+  apiID: "West Northeast",
+  versionID: "candela",
 }).then((res: InsertVersionMetadataResponse) => {
   if (res.statusCode == 200) {
     // handle response

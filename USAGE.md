@@ -13,8 +13,8 @@ const sdk = new Speakeasy({
 
 sdk.apis.getApis({
   metadata: {
-    "corrupti": [
-      "provident",
+    "aut": [
+      "bypassing",
     ],
   },
   op: {

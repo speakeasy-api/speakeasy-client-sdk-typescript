@@ -66,16 +66,16 @@ sdk.plugins.runPlugin({
   filters: {
     filters: [
       {
-        key: "aspernatur",
-        operator: "perferendis",
-        value: "ad",
+        key: "<key>",
+        operator: "West parse Pickup",
+        value: "purple Pants",
       },
     ],
-    limit: 617636,
-    offset: 149675,
-    operator: "iste",
+    limit: 996936,
+    offset: 273299,
+    operator: "Bedfordshire meaningfully",
   },
-  pluginID: "dolor",
+  pluginID: "Botswana Metal",
 }).then((res: RunPluginResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -113,13 +113,13 @@ const sdk = new Speakeasy({
 });
 
 sdk.plugins.upsertPlugin({
-  code: "natus",
-  createdAt: new Date("2022-01-21T12:46:00.641Z"),
-  evalHash: "saepe",
-  pluginId: "fuga",
-  title: "Ms.",
-  updatedAt: new Date("2022-05-22T05:33:50.280Z"),
-  workspaceId: "iure",
+  code: "drafty",
+  createdAt: new Date("2023-03-17T19:17:52.123Z"),
+  evalHash: "Benin Berkshire",
+  pluginId: "Soul Kuna",
+  title: "Plastic siemens navigate",
+  updatedAt: new Date("2022-12-27T19:05:38.030Z"),
+  workspaceId: "owlishly JSON till",
 }).then((res: UpsertPluginResponse) => {
   if (res.statusCode == 200) {
     // handle response

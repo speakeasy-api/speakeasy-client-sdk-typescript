@@ -31,8 +31,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.deleteApi({
-  apiID: "deserunt",
-  versionID: "perferendis",
+  apiID: "Applications Mercedes fuchsia",
+  versionID: "Conroe",
 }).then((res: DeleteApiResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -71,8 +71,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.generateOpenApiSpec({
-  apiID: "ipsam",
-  versionID: "repellendus",
+  apiID: "frictionless District South",
+  versionID: "West Global",
 }).then((res: GenerateOpenApiSpecResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -110,8 +110,8 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.generatePostmanCollection({
-  apiID: "sapiente",
-  versionID: "quo",
+  apiID: "extend Security",
+  versionID: "reconfirm",
 }).then((res: GeneratePostmanCollectionResponse) => {
   if (res.statusCode == 200) {
     // handle response
@@ -150,10 +150,10 @@ const sdk = new Speakeasy({
 });
 
 sdk.apis.getAllApiVersions({
-  apiID: "odit",
+  apiID: "yum Rustic Berkshire",
   metadata: {
-    "at": [
-      "at",
+    "assumenda": [
+      "Fresh",
     ],
   },
   op: {
@@ -198,8 +198,8 @@ const sdk = new Speakeasy({
 
 sdk.apis.getApis({
   metadata: {
-    "maiores": [
-      "molestiae",
+    "aut": [
+      "bypassing",
     ],
   },
   op: {
@@ -244,16 +244,16 @@ const sdk = new Speakeasy({
 
 sdk.apis.upsertApi({
   apiInput: {
-    apiId: "quod",
-    description: "quod",
+    apiId: "Martinique redefine Garland",
+    description: "Balanced 24/7 utilisation",
     metaData: {
-      "esse": [
-        "totam",
+      "deleniti": [
+        "male",
       ],
     },
-    versionId: "porro",
+    versionId: "Forward",
   },
-  apiID: "dolorum",
+  apiID: "Facilitator",
 }).then((res: UpsertApiResponse) => {
   if (res.statusCode == 200) {
     // handle response

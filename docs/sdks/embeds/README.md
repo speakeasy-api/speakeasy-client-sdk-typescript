@@ -29,19 +29,19 @@ const sdk = new Speakeasy({
 });
 
 sdk.embeds.getEmbedAccessToken({
-  description: "dicta",
-  duration: 720633,
+  description: "Versatile asynchronous leverage",
+  duration: 554373,
   filters: {
     filters: [
       {
-        key: "officia",
-        operator: "occaecati",
-        value: "fugit",
+        key: "<key>",
+        operator: "Account",
+        value: "unless to frame",
       },
     ],
-    limit: 537373,
-    offset: 944669,
-    operator: "optio",
+    limit: 792058,
+    offset: 425010,
+    operator: "kilogram innovative Virginia",
   },
 }).then((res: GetEmbedAccessTokenResponse) => {
   if (res.statusCode == 200) {
@@ -115,7 +115,7 @@ const sdk = new Speakeasy({
 });
 
 sdk.embeds.revokeEmbedAccessToken({
-  tokenID: "totam",
+  tokenID: "Small",
 }).then((res: RevokeEmbedAccessTokenResponse) => {
   if (res.statusCode == 200) {
     // handle response
