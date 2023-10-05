@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 8c4f3932e054e1b349a9a34f12cf7e8c
   docVersion: 0.3.0
-  speakeasyVersion: 1.92.3
-  generationVersion: 2.143.2
+  speakeasyVersion: 1.94.0
+  generationVersion: 2.147.0
 generation:
   sdkClassName: speakeasy
   singleTagPerOp: false
@@ -11,14 +11,14 @@ generation:
 features:
   typescript:
     acceptHeaders: 2.81.1
-    core: 2.90.1
+    core: 2.90.3
     examples: 2.81.2
     globalSecurity: 2.81.1
     globalServerURLs: 2.82.0
     inputOutputModels: 2.81.1
     serverIDs: 2.81.1
 typescript:
-  version: 1.59.1
+  version: 1.59.2
   author: Speakeasy
   maxMethodParams: 0
   packageName: '@speakeasy-api/speakeasy-client-sdk-typescript'
