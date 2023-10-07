@@ -20,21 +20,22 @@ Allowing it to be replayed with the same inputs that were captured by the SDK.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GenerateRequestPostmanCollectionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.requests.generateRequestPostmanCollection({
-  requestID: "payment male Rustic",
-}).then((res: GenerateRequestPostmanCollectionResponse) => {
+  const res = await sdk.requests.generateRequestPostmanCollection({
+    requestID: "payment male Rustic",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -58,21 +59,22 @@ Get information about a particular request.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetRequestFromEventLogResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.requests.getRequestFromEventLog({
-  requestID: "Tuna Concrete North",
-}).then((res: GetRequestFromEventLogResponse) => {
+  const res = await sdk.requests.getRequestFromEventLog({
+    requestID: "Tuna Concrete North",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -97,32 +99,33 @@ Allows the filtering of requests on a number of criteria such as ApiID, VersionI
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { QueryEventLogResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.requests.queryEventLog({
-  filters: {
-    filters: [
-      {
-        key: "<key>",
-        operator: "payment",
-        value: "West Practical port",
-      },
-    ],
-    limit: 736151,
-    offset: 477827,
-    operator: "Burg",
-  },
-}).then((res: QueryEventLogResponse) => {
+  const res = await sdk.requests.queryEventLog({
+    filters: {
+      filters: [
+        {
+          key: "<key>",
+          operator: "payment",
+          value: "West Practical port",
+        },
+      ],
+      limit: 736151,
+      offset: 477827,
+      operator: "Burg",
+    },
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

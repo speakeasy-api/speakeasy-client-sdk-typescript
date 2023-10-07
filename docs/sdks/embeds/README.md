@@ -20,34 +20,33 @@ Filters can be applied allowing views to be filtered to things like particular c
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetEmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.embeds.getEmbedAccessToken({
-  description: "Versatile asynchronous leverage",
-  duration: 554373,
-  filters: {
-    filters: [
-      {
-        key: "<key>",
-        operator: "Account",
-        value: "unless to frame",
-      },
-    ],
-    limit: 792058,
-    offset: 425010,
-    operator: "kilogram innovative Virginia",
-  },
-}).then((res: GetEmbedAccessTokenResponse) => {
+  const res = await sdk.embeds.getEmbedAccessToken({
+    filters: {
+      filters: [
+        {
+          key: "<key>",
+          operator: "Northeast compress Account",
+          value: "unless to frame",
+        },
+      ],
+      limit: 792058,
+      offset: 425010,
+      operator: "kilogram innovative Virginia",
+    },
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -71,19 +70,20 @@ Get all valid embed access tokens for the current workspace.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetValidEmbedAccessTokensResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.embeds.getValidEmbedAccessTokens().then((res: GetValidEmbedAccessTokensResponse) => {
+  const res = await sdk.embeds.getValidEmbedAccessTokens();
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -106,21 +106,22 @@ Revoke an embed access EmbedToken.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { RevokeEmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.embeds.revokeEmbedAccessToken({
-  tokenID: "Small",
-}).then((res: RevokeEmbedAccessTokenResponse) => {
+  const res = await sdk.embeds.revokeEmbedAccessToken({
+    tokenID: "Small",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

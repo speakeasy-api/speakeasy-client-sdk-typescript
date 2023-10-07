@@ -24,23 +24,24 @@ Delete a particular schema revision for an Api.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DeleteSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.schemas.deleteSchema({
-  apiID: "Hybrid",
-  revisionID: "Funk Garden Specialist",
-  versionID: "male",
-}).then((res: DeleteSchemaResponse) => {
+  const res = await sdk.schemas.deleteSchema({
+    apiID: "Hybrid",
+    revisionID: "Funk Garden Specialist",
+    versionID: "male",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -64,22 +65,23 @@ Download the latest schema for a particular apiID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DownloadSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.schemas.downloadSchema({
-  apiID: "Specialist correctly",
-  versionID: "customer Exclusive oof",
-}).then((res: DownloadSchemaResponse) => {
+  const res = await sdk.schemas.downloadSchema({
+    apiID: "Specialist correctly",
+    versionID: "customer Exclusive oof",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -103,23 +105,24 @@ Download a particular schema revision for an Api.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DownloadSchemaRevisionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.schemas.downloadSchemaRevision({
-  apiID: "Belarus hacking firewall",
-  revisionID: "Coupe affidavit Cheese",
-  versionID: "pink deposit",
-}).then((res: DownloadSchemaRevisionResponse) => {
+  const res = await sdk.schemas.downloadSchemaRevision({
+    apiID: "Belarus hacking firewall",
+    revisionID: "Coupe affidavit Cheese",
+    versionID: "pink deposit",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -144,22 +147,23 @@ This won't include the schema itself, that can be retrieved via the downloadSche
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.schemas.getSchema({
-  apiID: "Assistant",
-  versionID: "banter Cotton withdrawal",
-}).then((res: GetSchemaResponse) => {
+  const res = await sdk.schemas.getSchema({
+    apiID: "Assistant",
+    versionID: "banter Cotton withdrawal",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -183,24 +187,25 @@ Get a diff of two schema revisions for an Api.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetSchemaDiffResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.schemas.getSchemaDiff({
-  apiID: "Tuna",
-  baseRevisionID: "South Van",
-  targetRevisionID: "whoever",
-  versionID: "henry Tulare",
-}).then((res: GetSchemaDiffResponse) => {
+  const res = await sdk.schemas.getSchemaDiff({
+    apiID: "Tuna",
+    baseRevisionID: "South Van",
+    targetRevisionID: "whoever",
+    versionID: "henry Tulare",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -225,23 +230,24 @@ This won't include the schema itself, that can be retrieved via the downloadSche
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetSchemaRevisionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.schemas.getSchemaRevision({
-  apiID: "Mauritius",
-  revisionID: "West Rustic Plastic",
-  versionID: "Yttrium Loan",
-}).then((res: GetSchemaRevisionResponse) => {
+  const res = await sdk.schemas.getSchemaRevision({
+    apiID: "Mauritius",
+    revisionID: "West Rustic Plastic",
+    versionID: "Yttrium Loan",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -266,22 +272,23 @@ This won't include the schemas themselves, they can be retrieved via the downloa
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetSchemasResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.schemas.getSchemas({
-  apiID: "white",
-  versionID: "optical round",
-}).then((res: GetSchemasResponse) => {
+  const res = await sdk.schemas.getSchemas({
+    apiID: "white",
+    versionID: "optical round",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -306,28 +313,29 @@ This will be used to populate ApiEndpoints and used as a base for any schema gen
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { RegisterSchemaResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
-
-sdk.schemas.registerSchema({
-  requestBody: {
-    file: {
-      content: "mg|mf\".]!\" as bytes <<<>>>,
-      file: "Bronze Table Blues",
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
     },
-  },
-  apiID: "Oganesson",
-  versionID: "matrix Pennsylvania Southeast",
-}).then((res: RegisterSchemaResponse) => {
+  });
+
+  const res = await sdk.schemas.registerSchema({
+    requestBody: {
+      file: {
+        content: "mg|mf\".]!\" as bytes <<<>>>,
+        file: "Bronze Table Blues",
+      },
+    },
+    apiID: "Oganesson",
+    versionID: "matrix Pennsylvania Southeast",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

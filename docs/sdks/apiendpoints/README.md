@@ -24,23 +24,24 @@ Delete an ApiEndpoint. This will also delete all associated Request Logs (if usi
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DeleteApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apiEndpoints.deleteApiEndpoint({
-  apiEndpointID: "bus Gasoline Southwest",
-  apiID: "candela",
-  versionID: "indexing maxime bypassing",
-}).then((res: DeleteApiEndpointResponse) => {
+  const res = await sdk.apiEndpoints.deleteApiEndpoint({
+    apiEndpointID: "bus Gasoline Southwest",
+    apiID: "candela",
+    versionID: "indexing maxime bypassing",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -65,23 +66,24 @@ This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiI
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { FindApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apiEndpoints.findApiEndpoint({
-  apiID: "insignificant",
-  displayName: "payment",
-  versionID: "Highland North Awesome",
-}).then((res: FindApiEndpointResponse) => {
+  const res = await sdk.apiEndpoints.findApiEndpoint({
+    apiID: "insignificant",
+    displayName: "payment",
+    versionID: "Highland North Awesome",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -106,23 +108,24 @@ Returns the original document and the newly generated document allowing a diff t
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GenerateOpenApiSpecForApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
-  apiEndpointID: "Tactics ew explicabo",
-  apiID: "gray act",
-  versionID: "bah",
-}).then((res: GenerateOpenApiSpecForApiEndpointResponse) => {
+  const res = await sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
+    apiEndpointID: "Tactics ew explicabo",
+    apiID: "gray act",
+    versionID: "bah",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -146,23 +149,24 @@ Generates a postman collection that allows the endpoint to be called from postma
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GeneratePostmanCollectionForApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
-  apiEndpointID: "silver Bronze Outdoors",
-  apiID: "Virtual admirable Southeast",
-  versionID: "Northeast Bicycle mark",
-}).then((res: GeneratePostmanCollectionForApiEndpointResponse) => {
+  const res = await sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
+    apiEndpointID: "silver Bronze Outdoors",
+    apiID: "Virtual admirable Southeast",
+    versionID: "Northeast Bicycle mark",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -186,21 +190,22 @@ Get all Api endpoints for a particular apiID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetAllApiEndpointsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apiEndpoints.getAllApiEndpoints({
-  apiID: "Director JSON candela",
-}).then((res: GetAllApiEndpointsResponse) => {
+  const res = await sdk.apiEndpoints.getAllApiEndpoints({
+    apiID: "Director JSON candela",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -224,22 +229,23 @@ Get all ApiEndpoints for a particular apiID and versionID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetAllForVersionApiEndpointsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apiEndpoints.getAllForVersionApiEndpoints({
-  apiID: "THX Tuna sparkling",
-  versionID: "Assurance",
-}).then((res: GetAllForVersionApiEndpointsResponse) => {
+  const res = await sdk.apiEndpoints.getAllForVersionApiEndpoints({
+    apiID: "THX Tuna sparkling",
+    versionID: "Assurance",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -263,23 +269,24 @@ Get an ApiEndpoint.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apiEndpoints.getApiEndpoint({
-  apiEndpointID: "Optimized male SSD",
-  apiID: "Soul Land",
-  versionID: "Androgyne Hydrogen",
-}).then((res: GetApiEndpointResponse) => {
+  const res = await sdk.apiEndpoints.getApiEndpoint({
+    apiEndpointID: "Optimized male SSD",
+    apiID: "Soul Land",
+    versionID: "Androgyne Hydrogen",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -303,31 +310,32 @@ Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, oth
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { UpsertApiEndpointResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apiEndpoints.upsertApiEndpoint({
-  apiEndpointInput: {
-    apiEndpointId: "Convertible Turner Cotton",
-    description: "Triple-buffered optimal methodology",
-    displayName: "Langosh Northwest Mabelle",
-    method: "South",
-    path: "/rescue",
-    versionId: "East Land viral",
-  },
-  apiEndpointID: "Electric Operations systems",
-  apiID: "Operations East Unbranded",
-  versionID: "parsing Convertible",
-}).then((res: UpsertApiEndpointResponse) => {
+  const res = await sdk.apiEndpoints.upsertApiEndpoint({
+    apiEndpointInput: {
+      apiEndpointId: "Convertible Turner Cotton",
+      description: "Triple-buffered optimal methodology",
+      displayName: "Langosh Northwest Mabelle",
+      method: "South",
+      path: "/rescue",
+      versionId: "East Land viral",
+    },
+    apiEndpointID: "Electric Operations systems",
+    apiID: "Operations East Unbranded",
+    versionID: "parsing Convertible",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

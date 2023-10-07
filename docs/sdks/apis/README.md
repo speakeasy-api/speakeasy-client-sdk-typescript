@@ -22,22 +22,23 @@ Delete a particular version of an Api. The will also delete all associated ApiEn
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DeleteApiResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apis.deleteApi({
-  apiID: "Applications Mercedes fuchsia",
-  versionID: "Conroe",
-}).then((res: DeleteApiResponse) => {
+  const res = await sdk.apis.deleteApi({
+    apiID: "Applications Mercedes fuchsia",
+    versionID: "Conroe",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -62,22 +63,23 @@ Returns the original document and the newly generated document allowing a diff t
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GenerateOpenApiSpecResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apis.generateOpenApiSpec({
-  apiID: "frictionless District South",
-  versionID: "West Global",
-}).then((res: GenerateOpenApiSpecResponse) => {
+  const res = await sdk.apis.generateOpenApiSpec({
+    apiID: "frictionless District South",
+    versionID: "West Global",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -101,22 +103,23 @@ Generates a postman collection containing all endpoints for a particular API. In
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GeneratePostmanCollectionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apis.generatePostmanCollection({
-  apiID: "extend Security",
-  versionID: "reconfirm",
-}).then((res: GeneratePostmanCollectionResponse) => {
+  const res = await sdk.apis.generatePostmanCollection({
+    apiID: "extend Security",
+    versionID: "reconfirm",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -141,29 +144,30 @@ Supports filtering the versions based on metadata attributes.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetAllApiVersionsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apis.getAllApiVersions({
-  apiID: "yum Rustic Berkshire",
-  metadata: {
-    "assumenda": [
-      "Fresh",
-    ],
-  },
-  op: {
-    and: false,
-  },
-}).then((res: GetAllApiVersionsResponse) => {
+  const res = await sdk.apis.getAllApiVersions({
+    apiID: "yum Rustic Berkshire",
+    metadata: {
+      "Dodge": [
+        "Salad",
+      ],
+    },
+    op: {
+      and: false,
+    },
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -188,28 +192,29 @@ Supports filtering the APIs based on metadata attributes.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetApisResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.apis.getApis({
-  metadata: {
-    "aut": [
-      "bypassing",
-    ],
-  },
-  op: {
-    and: false,
-  },
-}).then((res: GetApisResponse) => {
+  const res = await sdk.apis.getApis({
+    metadata: {
+      "South": [
+        "Southwest",
+      ],
+    },
+    op: {
+      and: false,
+    },
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -234,31 +239,32 @@ If the Api exists, it will be updated.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { UpsertApiResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
-
-sdk.apis.upsertApi({
-  apiInput: {
-    apiId: "Martinique redefine Garland",
-    description: "Balanced 24/7 utilisation",
-    metaData: {
-      "deleniti": [
-        "male",
-      ],
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
     },
-    versionId: "Forward",
-  },
-  apiID: "Facilitator",
-}).then((res: UpsertApiResponse) => {
+  });
+
+  const res = await sdk.apis.upsertApi({
+    apiInput: {
+      apiId: "Martinique redefine Garland",
+      description: "Balanced 24/7 utilisation",
+      metaData: {
+        "pixel": [
+          "Buckinghamshire",
+        ],
+      },
+      versionId: "Forward",
+    },
+    apiID: "Facilitator",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

@@ -19,19 +19,20 @@ Get all plugins for the current workspace.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetPluginsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.plugins.getPlugins().then((res: GetPluginsResponse) => {
+  const res = await sdk.plugins.getPlugins();
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -54,33 +55,34 @@ Run a plugin
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { RunPluginResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.plugins.runPlugin({
-  filters: {
-    filters: [
-      {
-        key: "<key>",
-        operator: "West parse Pickup",
-        value: "purple Pants",
-      },
-    ],
-    limit: 996936,
-    offset: 273299,
-    operator: "Bedfordshire meaningfully",
-  },
-  pluginID: "Botswana Metal",
-}).then((res: RunPluginResponse) => {
+  const res = await sdk.plugins.runPlugin({
+    filters: {
+      filters: [
+        {
+          key: "<key>",
+          operator: "West parse Pickup",
+          value: "purple Pants",
+        },
+      ],
+      limit: 996936,
+      offset: 273299,
+      operator: "Bedfordshire meaningfully",
+    },
+    pluginID: "Botswana Metal",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -104,27 +106,25 @@ Upsert a plugin
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { UpsertPluginResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.plugins.upsertPlugin({
-  code: "drafty",
-  createdAt: new Date("2023-03-17T19:17:52.123Z"),
-  evalHash: "Benin Berkshire",
-  pluginId: "Soul Kuna",
-  title: "Plastic siemens navigate",
-  updatedAt: new Date("2022-12-27T19:05:38.030Z"),
-  workspaceId: "owlishly JSON till",
-}).then((res: UpsertPluginResponse) => {
+  const res = await sdk.plugins.upsertPlugin({
+    code: "drafty",
+    pluginId: "Rock North exuding",
+    title: "navigating schemas",
+    workspaceId: "Plastic siemens navigate",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters

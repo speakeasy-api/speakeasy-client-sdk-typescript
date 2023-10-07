@@ -19,24 +19,25 @@ Delete metadata for a particular apiID and versionID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DeleteVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.metadata.deleteVersionMetadata({
-  apiID: "East static North",
-  metaKey: "veniam",
-  metaValue: "cocoa",
-  versionID: "deposit",
-}).then((res: DeleteVersionMetadataResponse) => {
+  const res = await sdk.metadata.deleteVersionMetadata({
+    apiID: "East static North",
+    metaKey: "veniam",
+    metaValue: "cocoa",
+    versionID: "deposit",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -60,22 +61,23 @@ Get all metadata for a particular apiID and versionID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GetVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.metadata.getVersionMetadata({
-  apiID: "Games",
-  versionID: "Centralized cyan",
-}).then((res: GetVersionMetadataResponse) => {
+  const res = await sdk.metadata.getVersionMetadata({
+    apiID: "Games",
+    versionID: "Centralized cyan",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
@@ -99,26 +101,27 @@ Insert metadata for a particular apiID and versionID.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { InsertVersionMetadataResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/operations";
 
-const sdk = new Speakeasy({
-  security: {
-    apiKey: "",
-  },
-});
+(async() => {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "",
+    },
+  });
 
-sdk.metadata.insertVersionMetadata({
-  versionMetadataInput: {
-    metaKey: "calculating",
-    metaValue: "Bedfordshire",
-  },
-  apiID: "West Northeast",
-  versionID: "candela",
-}).then((res: InsertVersionMetadataResponse) => {
+  const res = await sdk.metadata.insertVersionMetadata({
+    versionMetadataInput: {
+      metaKey: "calculating",
+      metaValue: "Bedfordshire",
+    },
+    apiID: "West Northeast",
+    versionID: "candela",
+  });
+
   if (res.statusCode == 200) {
     // handle response
   }
-});
+})();
 ```
 
 ### Parameters
