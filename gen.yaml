@@ -1,9 +1,9 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 8c4f3932e054e1b349a9a34f12cf7e8c
+  docChecksum: ba638b2ad28966c596e28321a2003686
   docVersion: 0.3.0
-  speakeasyVersion: 1.96.1
-  generationVersion: 2.150.0
+  speakeasyVersion: 1.99.2
+  generationVersion: 2.155.1
 generation:
   sdkClassName: speakeasy
   singleTagPerOp: false
@@ -18,7 +18,7 @@ features:
     inputOutputModels: 2.81.1
     serverIDs: 2.81.1
 typescript:
-  version: 1.60.0
+  version: 1.60.1
   author: Speakeasy
   flattenGlobalSecurity: false
   maxMethodParams: 0
