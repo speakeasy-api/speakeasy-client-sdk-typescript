@@ -28,10 +28,10 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.metadata.deleteVersionMetadata({
-    apiID: "East static North",
-    metaKey: "veniam",
-    metaValue: "cocoa",
-    versionID: "deposit",
+    apiID: "Hydrogen",
+    metaKey: "Cargo",
+    metaValue: "Minnetonka",
+    versionID: "communities",
   });
 
   if (res.statusCode == 200) {
@@ -70,8 +70,8 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.metadata.getVersionMetadata({
-    apiID: "Games",
-    versionID: "Centralized cyan",
+    apiID: "Bronze",
+    versionID: "Buckinghamshire",
   });
 
   if (res.statusCode == 200) {
@@ -111,11 +111,11 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
   const res = await sdk.metadata.insertVersionMetadata({
     versionMetadataInput: {
-      metaKey: "calculating",
-      metaValue: "Bedfordshire",
+      metaKey: "Borders",
+      metaValue: "Potassium",
     },
-    apiID: "West Northeast",
-    versionID: "candela",
+    apiID: "Bedfordshire",
+    versionID: "Dram",
   });
 
   if (res.statusCode == 200) {

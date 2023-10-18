@@ -31,8 +31,8 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apis.deleteApi({
-    apiID: "Applications Mercedes fuchsia",
-    versionID: "Conroe",
+    apiID: "plaintive",
+    versionID: "THX",
   });
 
   if (res.statusCode == 200) {
@@ -72,8 +72,8 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apis.generateOpenApiSpec({
-    apiID: "frictionless District South",
-    versionID: "West Global",
+    apiID: "fixed",
+    versionID: "bandwidth",
   });
 
   if (res.statusCode == 200) {
@@ -112,8 +112,8 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apis.generatePostmanCollection({
-    apiID: "extend Security",
-    versionID: "reconfirm",
+    apiID: "Paradigm",
+    versionID: "olive",
   });
 
   if (res.statusCode == 200) {
@@ -153,10 +153,10 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apis.getAllApiVersions({
-    apiID: "yum Rustic Berkshire",
+    apiID: "azure",
     metadata: {
-      "Dodge": [
-        "Salad",
+      "enhance": [
+        "Garrison",
       ],
     },
     op: {
@@ -249,16 +249,16 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
   const res = await sdk.apis.upsertApi({
     apiInput: {
-      apiId: "Martinique redefine Garland",
-      description: "Balanced 24/7 utilisation",
+      apiId: "Van",
+      description: "Front-line zero defect algorithm",
       metaData: {
-        "pixel": [
-          "Buckinghamshire",
+        "Balanced": [
+          "West",
         ],
       },
-      versionId: "Forward",
+      versionId: "pixel",
     },
-    apiID: "Facilitator",
+    apiID: "Buckinghamshire",
   });
 
   if (res.statusCode == 200) {

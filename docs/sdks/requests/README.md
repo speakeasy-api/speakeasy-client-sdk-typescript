@@ -29,7 +29,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.requests.generateRequestPostmanCollection({
-    requestID: "payment male Rustic",
+    requestID: "Architect",
   });
 
   if (res.statusCode == 200) {
@@ -68,7 +68,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.requests.getRequestFromEventLog({
-    requestID: "Tuna Concrete North",
+    requestID: "Chevrolet",
   });
 
   if (res.statusCode == 200) {
@@ -112,13 +112,13 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
       filters: [
         {
           key: "<key>",
-          operator: "payment",
-          value: "West Practical port",
+          operator: "Cotton",
+          value: "Interactions",
         },
       ],
-      limit: 736151,
-      offset: 477827,
-      operator: "Burg",
+      limit: 6323,
+      offset: 788512,
+      operator: "Practical",
     },
   });
 

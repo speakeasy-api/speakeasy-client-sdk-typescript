@@ -68,15 +68,15 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
       filters: [
         {
           key: "<key>",
-          operator: "West parse Pickup",
-          value: "purple Pants",
+          operator: "Designer",
+          value: "Pickup",
         },
       ],
-      limit: 996936,
-      offset: 273299,
-      operator: "Bedfordshire meaningfully",
+      limit: 455139,
+      offset: 173644,
+      operator: "Indiana",
     },
-    pluginID: "Botswana Metal",
+    pluginID: "Chrysler",
   });
 
   if (res.statusCode == 200) {
@@ -115,10 +115,10 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.plugins.upsertPlugin({
-    code: "drafty",
-    pluginId: "Rock North exuding",
-    title: "navigating schemas",
-    workspaceId: "Plastic siemens navigate",
+    code: "Fish",
+    pluginId: "Rock",
+    title: "North",
+    workspaceId: "exuding",
   });
 
   if (res.statusCode == 200) {

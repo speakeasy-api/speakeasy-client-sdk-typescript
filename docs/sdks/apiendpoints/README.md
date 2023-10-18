@@ -33,9 +33,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apiEndpoints.deleteApiEndpoint({
-    apiEndpointID: "bus Gasoline Southwest",
-    apiID: "candela",
-    versionID: "indexing maxime bypassing",
+    apiEndpointID: "blue",
+    apiID: "Gasoline",
+    versionID: "Southwest",
   });
 
   if (res.statusCode == 200) {
@@ -75,9 +75,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apiEndpoints.findApiEndpoint({
-    apiID: "insignificant",
-    displayName: "payment",
-    versionID: "Highland North Awesome",
+    apiID: "Cotton",
+    displayName: "Chief",
+    versionID: "Wooden",
   });
 
   if (res.statusCode == 200) {
@@ -117,9 +117,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
-    apiEndpointID: "Tactics ew explicabo",
-    apiID: "gray act",
-    versionID: "bah",
+    apiEndpointID: "Mazda",
+    apiID: "web",
+    versionID: "explicabo",
   });
 
   if (res.statusCode == 200) {
@@ -158,9 +158,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
-    apiEndpointID: "silver Bronze Outdoors",
-    apiID: "Virtual admirable Southeast",
-    versionID: "Northeast Bicycle mark",
+    apiEndpointID: "indigo",
+    apiID: "barring",
+    versionID: "Senior",
   });
 
   if (res.statusCode == 200) {
@@ -199,7 +199,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apiEndpoints.getAllApiEndpoints({
-    apiID: "Director JSON candela",
+    apiID: "unless",
   });
 
   if (res.statusCode == 200) {
@@ -238,8 +238,8 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apiEndpoints.getAllForVersionApiEndpoints({
-    apiID: "THX Tuna sparkling",
-    versionID: "Assurance",
+    apiID: "now",
+    versionID: "Diesel",
   });
 
   if (res.statusCode == 200) {
@@ -278,9 +278,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apiEndpoints.getApiEndpoint({
-    apiEndpointID: "Optimized male SSD",
-    apiID: "Soul Land",
-    versionID: "Androgyne Hydrogen",
+    apiEndpointID: "flog",
+    apiID: "synthesize",
+    versionID: "Barium",
   });
 
   if (res.statusCode == 200) {
@@ -320,16 +320,16 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
   const res = await sdk.apiEndpoints.upsertApiEndpoint({
     apiEndpointInput: {
-      apiEndpointId: "Convertible Turner Cotton",
-      description: "Triple-buffered optimal methodology",
-      displayName: "Langosh Northwest Mabelle",
-      method: "South",
-      path: "/rescue",
-      versionId: "East Land viral",
+      apiEndpointId: "Facilitator",
+      description: "Cross-group bottom-line productivity",
+      displayName: "nor",
+      method: "Northwest",
+      path: "/private",
+      versionId: "what",
     },
-    apiEndpointID: "Electric Operations systems",
-    apiID: "Operations East Unbranded",
-    versionID: "parsing Convertible",
+    apiEndpointID: "Trans",
+    apiID: "Kia",
+    versionID: "Electronic",
   });
 
   if (res.statusCode == 200) {
