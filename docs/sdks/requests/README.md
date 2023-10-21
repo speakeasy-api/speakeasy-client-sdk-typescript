@@ -29,7 +29,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.requests.generateRequestPostmanCollection({
-    requestID: "Architect",
+    requestID: "string",
   });
 
   if (res.statusCode == 200) {
@@ -68,7 +68,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.requests.getRequestFromEventLog({
-    requestID: "Chevrolet",
+    requestID: "string",
   });
 
   if (res.statusCode == 200) {
@@ -112,13 +112,13 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
       filters: [
         {
           key: "<key>",
-          operator: "Cotton",
-          value: "Interactions",
+          operator: "string",
+          value: "string",
         },
       ],
-      limit: 6323,
-      offset: 788512,
-      operator: "Practical",
+      limit: 241978,
+      offset: 451388,
+      operator: "string",
     },
   });
 

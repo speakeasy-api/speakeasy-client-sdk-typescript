@@ -30,7 +30,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
     const res = await sdk.apis.getApis({
         metadata: {
-            South: ["Southwest"],
+            key: ["string"],
         },
         op: {
             and: false,

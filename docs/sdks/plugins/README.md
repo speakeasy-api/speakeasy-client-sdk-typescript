@@ -68,15 +68,15 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
       filters: [
         {
           key: "<key>",
-          operator: "Designer",
-          value: "Pickup",
+          operator: "string",
+          value: "string",
         },
       ],
-      limit: 455139,
-      offset: 173644,
-      operator: "Indiana",
+      limit: 669298,
+      offset: 94585,
+      operator: "string",
     },
-    pluginID: "Chrysler",
+    pluginID: "string",
   });
 
   if (res.statusCode == 200) {
@@ -115,10 +115,10 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.plugins.upsertPlugin({
-    code: "Fish",
-    pluginId: "Rock",
-    title: "North",
-    workspaceId: "exuding",
+    code: "string",
+    pluginId: "string",
+    title: "string",
+    workspaceId: "string",
   });
 
   if (res.statusCode == 200) {
