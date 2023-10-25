@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: ba638b2ad28966c596e28321a2003686
   docVersion: 0.3.0
-  speakeasyVersion: 1.104.0
-  generationVersion: 2.169.0
+  speakeasyVersion: 1.107.0
+  generationVersion: 2.171.0
 generation:
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   sdkClassName: speakeasy
@@ -12,14 +12,14 @@ generation:
 features:
   typescript:
     acceptHeaders: 2.81.1
-    core: 2.93.0
+    core: 2.94.0
     examples: 2.81.3
     globalSecurity: 2.82.0
     globalServerURLs: 2.82.0
     inputOutputModels: 2.81.1
     serverIDs: 2.81.1
 typescript:
-  version: 1.61.0
+  version: 1.62.0
   author: Speakeasy
   flattenGlobalSecurity: false
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
