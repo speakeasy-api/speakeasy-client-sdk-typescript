@@ -35,6 +35,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     versionID: "string",
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -76,6 +77,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     versionID: "string",
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -115,6 +117,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     apiID: "string",
     versionID: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -164,6 +167,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     },
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -210,6 +214,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
       and: false,
     },
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -260,6 +265,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     },
     apiID: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response

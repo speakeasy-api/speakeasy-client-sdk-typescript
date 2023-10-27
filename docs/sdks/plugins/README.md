@@ -29,6 +29,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
   const res = await sdk.plugins.getPlugins();
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -79,6 +80,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     pluginID: "string",
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -120,6 +122,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     title: "string",
     workspaceId: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response

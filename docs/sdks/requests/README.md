@@ -32,6 +32,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     requestID: "string",
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -70,6 +71,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   const res = await sdk.requests.getRequestFromEventLog({
     requestID: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -121,6 +123,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
       operator: "string",
     },
   });
+
 
   if (res.statusCode == 200) {
     // handle response

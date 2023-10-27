@@ -29,6 +29,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
   const res = await sdk.speakeasy.validateApiKey();
 
+
   if (res.statusCode == 200) {
     // handle response
   }

@@ -43,6 +43,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     },
   });
 
+
   if (res.statusCode == 200) {
     // handle response
   }
@@ -79,6 +80,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.embeds.getValidEmbedAccessTokens();
+
 
   if (res.statusCode == 200) {
     // handle response
@@ -117,6 +119,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   const res = await sdk.embeds.revokeEmbedAccessToken({
     tokenID: "string",
   });
+
 
   if (res.statusCode == 200) {
     // handle response

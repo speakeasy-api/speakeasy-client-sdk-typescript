@@ -20,7 +20,7 @@ export const ServerProd = "prod";
 /**
  * Contains the list of servers available to the SDK
  */
-export const ServerList: Record<string, string> = {
+export const ServerList = {
     [ServerProd]: "https://api.prod.speakeasyapi.dev",
 } as const;
 
@@ -41,7 +41,7 @@ export type SDKProps = {
     /**
      * Allows overriding the default server used by the SDK
      */
-    server?: string;
+    server?: keyof typeof ServerList;
 
     /**
      * Allows overriding the default server URL used by the SDK
@@ -60,10 +60,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.3.0";
-    sdkVersion = "1.62.0";
-    genVersion = "2.171.0";
+    sdkVersion = "1.62.1";
+    genVersion = "2.172.4";
     userAgent =
-        "speakeasy-sdk/typescript 1.62.0 2.171.0 0.3.0 @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 1.62.1 2.172.4 0.3.0 @speakeasy-api/speakeasy-client-sdk-typescript";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
