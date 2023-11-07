@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class GetVersionMetadataRequest extends SpeakeasyBase {
@@ -49,5 +49,5 @@ export class GetVersionMetadataResponse extends SpeakeasyBase {
      * OK
      */
     @SpeakeasyMetadata({ elemType: shared.VersionMetadata })
-    versionMetadata?: shared.VersionMetadata[];
+    classes?: shared.VersionMetadata[];
 }

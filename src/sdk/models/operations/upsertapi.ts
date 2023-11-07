@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class UpsertApiRequest extends SpeakeasyBase {
@@ -11,7 +11,7 @@ export class UpsertApiRequest extends SpeakeasyBase {
      * A JSON representation of the Api to upsert
      */
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    apiInput: shared.ApiInput;
+    api: shared.ApiInput;
 
     /**
      * The ID of the Api to upsert.

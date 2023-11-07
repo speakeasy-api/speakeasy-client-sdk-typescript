@@ -5,7 +5,7 @@
 import { objectToClass, SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose, Transform } from "class-transformer";
 
-export class SchemaDiffValueChange extends SpeakeasyBase {
+export class ValueChange extends SpeakeasyBase {
     /**
      * Represents the previous value of the element.
      */
@@ -42,17 +42,17 @@ export class SchemaDiff extends SpeakeasyBase {
     /**
      * Holds every modification change in the diff.
      */
-    @SpeakeasyMetadata({ elemType: SchemaDiffValueChange })
+    @SpeakeasyMetadata({ elemType: ValueChange })
     @Expose({ name: "modifications" })
     @Transform(
         ({ value }) => {
-            const obj: Record<string, SchemaDiffValueChange> = {};
+            const obj: Record<string, ValueChange> = {};
             for (const key in value) {
-                obj[key] = objectToClass(value[key], SchemaDiffValueChange);
+                obj[key] = objectToClass(value[key], ValueChange);
             }
             return obj;
         },
         { toClassOnly: true }
     )
-    modifications: Record<string, SchemaDiffValueChange>;
+    modifications: Record<string, ValueChange>;
 }

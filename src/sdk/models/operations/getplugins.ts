@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class GetPluginsResponse extends SpeakeasyBase {
@@ -20,12 +20,6 @@ export class GetPluginsResponse extends SpeakeasyBase {
     error?: shared.ErrorT;
 
     /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.Plugin })
-    plugins?: shared.Plugin[];
-
-    /**
      * HTTP response status code for this operation
      */
     @SpeakeasyMetadata()
@@ -36,4 +30,10 @@ export class GetPluginsResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
+
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.Plugin })
+    classes?: shared.Plugin[];
 }

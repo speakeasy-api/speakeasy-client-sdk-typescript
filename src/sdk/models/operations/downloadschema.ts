@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class DownloadSchemaRequest extends SpeakeasyBase {
@@ -22,6 +22,18 @@ export class DownloadSchemaRequest extends SpeakeasyBase {
 
 export class DownloadSchemaResponse extends SpeakeasyBase {
     /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    twoHundredApplicationJsonSchema?: Uint8Array;
+
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    twoHundredApplicationXYamlSchema?: Uint8Array;
+
+    /**
      * HTTP response content type for this operation
      */
     @SpeakeasyMetadata()
@@ -32,12 +44,6 @@ export class DownloadSchemaResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     error?: shared.ErrorT;
-
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata()
-    schema?: Uint8Array;
 
     /**
      * HTTP response status code for this operation

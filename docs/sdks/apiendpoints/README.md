@@ -1,5 +1,5 @@
 # ApiEndpoints
-(*apiEndpoints*)
+(*.apiEndpoints*)
 
 ## Overview
 
@@ -326,7 +326,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apiEndpoints.upsertApiEndpoint({
-    apiEndpointInput: {
+    apiEndpoint: {
       apiEndpointId: "string",
       description: "Public-key systematic attitude",
       displayName: "string",

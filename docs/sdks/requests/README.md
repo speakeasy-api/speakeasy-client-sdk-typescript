@@ -1,5 +1,5 @@
 # Requests
-(*requests*)
+(*.requests*)
 
 ## Overview
 

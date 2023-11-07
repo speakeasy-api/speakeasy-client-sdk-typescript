@@ -27,7 +27,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     },
   });
 
-  const res = await sdk.speakeasy.validateApiKey();
+  const res = await sdk.validateApiKey();
 
 
   if (res.statusCode == 200) {

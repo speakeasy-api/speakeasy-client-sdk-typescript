@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class GetValidEmbedAccessTokensResponse extends SpeakeasyBase {
@@ -12,12 +12,6 @@ export class GetValidEmbedAccessTokensResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     contentType: string;
-
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.EmbedToken })
-    embedTokens?: shared.EmbedToken[];
 
     /**
      * Default error response
@@ -36,4 +30,10 @@ export class GetValidEmbedAccessTokensResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
+
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.EmbedToken })
+    classes?: shared.EmbedToken[];
 }

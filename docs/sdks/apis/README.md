@@ -1,5 +1,5 @@
 # Apis
-(*apis*)
+(*.apis*)
 
 ## Overview
 
@@ -253,7 +253,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.apis.upsertApi({
-    apiInput: {
+    api: {
       apiId: "string",
       description: "Synchronised 5th generation knowledge user",
       metaData: {

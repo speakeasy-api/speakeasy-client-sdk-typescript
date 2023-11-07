@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class InsertVersionMetadataRequest extends SpeakeasyBase {
@@ -11,7 +11,7 @@ export class InsertVersionMetadataRequest extends SpeakeasyBase {
      * A JSON representation of the metadata to insert.
      */
     @SpeakeasyMetadata({ data: "request, media_type=application/json" })
-    versionMetadataInput: shared.VersionMetadataInput;
+    versionMetadata: shared.VersionMetadataInput;
 
     /**
      * The ID of the Api to insert metadata for.

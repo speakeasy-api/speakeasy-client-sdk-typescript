@@ -3,13 +3,13 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 /**
  * Configuration for filter operations
  */
-export class GetAllApiVersionsOp extends SpeakeasyBase {
+export class Op extends SpeakeasyBase {
     /**
      * Whether to AND or OR the filters
      */
@@ -34,16 +34,10 @@ export class GetAllApiVersionsRequest extends SpeakeasyBase {
      * Configuration for filter operations
      */
     @SpeakeasyMetadata({ data: "queryParam, style=deepObject;explode=true;name=op" })
-    op?: GetAllApiVersionsOp;
+    op?: Op;
 }
 
 export class GetAllApiVersionsResponse extends SpeakeasyBase {
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.Api })
-    apis?: shared.Api[];
-
     /**
      * HTTP response content type for this operation
      */
@@ -67,4 +61,10 @@ export class GetAllApiVersionsResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
+
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.Api })
+    classes?: shared.Api[];
 }

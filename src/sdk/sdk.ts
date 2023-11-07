@@ -3,13 +3,13 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "../sdk/models/errors";
+import * as operations from "../sdk/models/operations";
+import * as shared from "../sdk/models/shared";
 import { ApiEndpoints } from "./apiendpoints";
 import { Apis } from "./apis";
 import { Embeds } from "./embeds";
 import { Metadata } from "./metadata";
-import * as errors from "./models/errors";
-import * as operations from "./models/operations";
-import * as shared from "./models/shared";
 import { Plugins } from "./plugins";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
@@ -60,10 +60,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.3.0";
-    sdkVersion = "1.62.1";
-    genVersion = "2.172.4";
+    sdkVersion = "2.0.0";
+    genVersion = "2.181.1";
     userAgent =
-        "speakeasy-sdk/typescript 1.62.1 2.172.4 0.3.0 @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 2.0.0 2.181.1 0.3.0 @speakeasy-api/speakeasy-client-sdk-typescript";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -77,33 +77,33 @@ export class SDKConfiguration {
  */
 export class Speakeasy {
     /**
-     * REST APIs for managing ApiEndpoint entities
-     */
-    public apiEndpoints: ApiEndpoints;
-    /**
      * REST APIs for managing Api entities
      */
     public apis: Apis;
     /**
-     * REST APIs for managing embeds
+     * REST APIs for managing ApiEndpoint entities
      */
-    public embeds: Embeds;
+    public apiEndpoints: ApiEndpoints;
     /**
      * REST APIs for managing Version Metadata entities
      */
     public metadata: Metadata;
     /**
-     * REST APIs for managing and running plugins
+     * REST APIs for managing Schema entities
      */
-    public plugins: Plugins;
+    public schemas: Schemas;
     /**
      * REST APIs for retrieving request information
      */
     public requests: Requests;
     /**
-     * REST APIs for managing Schema entities
+     * REST APIs for managing and running plugins
      */
-    public schemas: Schemas;
+    public plugins: Plugins;
+    /**
+     * REST APIs for managing embeds
+     */
+    public embeds: Embeds;
 
     private sdkConfiguration: SDKConfiguration;
 
@@ -123,13 +123,13 @@ export class Speakeasy {
             retryConfig: props?.retryConfig,
         });
 
-        this.apiEndpoints = new ApiEndpoints(this.sdkConfiguration);
         this.apis = new Apis(this.sdkConfiguration);
-        this.embeds = new Embeds(this.sdkConfiguration);
+        this.apiEndpoints = new ApiEndpoints(this.sdkConfiguration);
         this.metadata = new Metadata(this.sdkConfiguration);
-        this.plugins = new Plugins(this.sdkConfiguration);
-        this.requests = new Requests(this.sdkConfiguration);
         this.schemas = new Schemas(this.sdkConfiguration);
+        this.requests = new Requests(this.sdkConfiguration);
+        this.plugins = new Plugins(this.sdkConfiguration);
+        this.embeds = new Embeds(this.sdkConfiguration);
     }
 
     /**

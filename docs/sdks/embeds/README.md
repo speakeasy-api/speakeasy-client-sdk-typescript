@@ -1,5 +1,5 @@
 # Embeds
-(*embeds*)
+(*.embeds*)
 
 ## Overview
 

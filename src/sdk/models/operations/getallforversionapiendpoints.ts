@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class GetAllForVersionApiEndpointsRequest extends SpeakeasyBase {
@@ -21,12 +21,6 @@ export class GetAllForVersionApiEndpointsRequest extends SpeakeasyBase {
 }
 
 export class GetAllForVersionApiEndpointsResponse extends SpeakeasyBase {
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.ApiEndpoint })
-    apiEndpoints?: shared.ApiEndpoint[];
-
     /**
      * HTTP response content type for this operation
      */
@@ -50,4 +44,10 @@ export class GetAllForVersionApiEndpointsResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
+
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.ApiEndpoint })
+    classes?: shared.ApiEndpoint[];
 }

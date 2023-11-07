@@ -1,5 +1,5 @@
 # Metadata
-(*metadata*)
+(*.metadata*)
 
 ## Overview
 
@@ -112,7 +112,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   });
 
   const res = await sdk.metadata.insertVersionMetadata({
-    versionMetadataInput: {
+    versionMetadata: {
       metaKey: "string",
       metaValue: "string",
     },

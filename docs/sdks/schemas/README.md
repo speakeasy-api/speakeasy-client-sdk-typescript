@@ -1,5 +1,5 @@
 # Schemas
-(*schemas*)
+(*.schemas*)
 
 ## Overview
 
@@ -331,8 +331,8 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   const res = await sdk.schemas.registerSchema({
     requestBody: {
       file: {
-        content: "mg|mf\".]!\" as bytes <<<>>>,
-        file: "string",
+        content: new TextEncoder().encode("0xCAFCA03e0e"),
+        fileName: "bronze_table_blues.m2a",
       },
     },
     apiID: "string",
