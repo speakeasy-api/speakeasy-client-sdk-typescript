@@ -1,5 +1,5 @@
 # Plugins
-(*.plugins*)
+(*plugins*)
 
 ## Overview
 
@@ -29,7 +29,6 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
   const res = await sdk.plugins.getPlugins();
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -45,8 +44,12 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 ### Response
 
-**Promise<[operations.GetPluginsResponse](../../models/operations/getpluginsresponse.md)>**
+**Promise<[operations.GetPluginsResponse](../../sdk/models/operations/getpluginsresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## runPlugin
 
@@ -80,7 +83,6 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     pluginID: "string",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -89,16 +91,20 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `request`                                                                  | [operations.RunPluginRequest](../../models/operations/runpluginrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
-| `config`                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)               | :heavy_minus_sign:                                                         | Available config options for making requests.                              |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `request`                                                                      | [operations.RunPluginRequest](../../sdk/models/operations/runpluginrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `config`                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                   | :heavy_minus_sign:                                                             | Available config options for making requests.                                  |
 
 
 ### Response
 
-**Promise<[operations.RunPluginResponse](../../models/operations/runpluginresponse.md)>**
+**Promise<[operations.RunPluginResponse](../../sdk/models/operations/runpluginresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
 
 ## upsertPlugin
 
@@ -123,7 +129,6 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     workspaceId: "string",
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -134,11 +139,15 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 | Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `request`                                                    | [shared.Plugin](../../models/shared/plugin.md)               | :heavy_check_mark:                                           | The request object to use for the request.                   |
+| `request`                                                    | [shared.Plugin](../../sdk/models/shared/plugin.md)           | :heavy_check_mark:                                           | The request object to use for the request.                   |
 | `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
 
 
 ### Response
 
-**Promise<[operations.UpsertPluginResponse](../../models/operations/upsertpluginresponse.md)>**
+**Promise<[operations.UpsertPluginResponse](../../sdk/models/operations/upsertpluginresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |

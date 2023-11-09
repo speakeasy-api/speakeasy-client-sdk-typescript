@@ -60,10 +60,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.3.0";
-    sdkVersion = "2.0.0";
-    genVersion = "2.181.1";
+    sdkVersion = "2.1.0";
+    genVersion = "2.185.0";
     userAgent =
-        "speakeasy-sdk/typescript 2.0.0 2.181.1 0.3.0 @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 2.1.0 2.185.0 0.3.0 @speakeasy-api/speakeasy-client-sdk-typescript";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -115,7 +115,7 @@ export class Speakeasy {
             serverURL = ServerList[server];
         }
 
-        const defaultClient = props?.defaultClient ?? axios.create({ baseURL: serverURL });
+        const defaultClient = props?.defaultClient ?? axios.create();
         this.sdkConfiguration = new SDKConfiguration({
             defaultClient: defaultClient,
             security: props?.security,
@@ -140,7 +140,7 @@ export class Speakeasy {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/v1/auth/validate";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/auth/validate";
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -157,7 +157,7 @@ export class Speakeasy {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",

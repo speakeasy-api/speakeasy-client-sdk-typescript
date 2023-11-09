@@ -8,53 +8,6 @@ import { Expose, Transform } from "class-transformer";
 /**
  * An ApiEndpoint is a description of an Endpoint for an API.
  */
-export class ApiEndpointInput extends SpeakeasyBase {
-    /**
-     * The ID of this ApiEndpoint. This is a hash of the method and path.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "api_endpoint_id" })
-    apiEndpointId: string;
-
-    /**
-     * A detailed description of the ApiEndpoint.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "description" })
-    description: string;
-
-    /**
-     * A human-readable name for the ApiEndpoint.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "display_name" })
-    displayName: string;
-
-    /**
-     * HTTP verb.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "method" })
-    method: string;
-
-    /**
-     * Path that handles this Api.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "path" })
-    path: string;
-
-    /**
-     * The version ID of the Api this ApiEndpoint belongs to.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "version_id" })
-    versionId: string;
-}
-
-/**
- * An ApiEndpoint is a description of an Endpoint for an API.
- */
 export class ApiEndpoint extends SpeakeasyBase {
     /**
      * The ID of this ApiEndpoint. This is a hash of the method and path.

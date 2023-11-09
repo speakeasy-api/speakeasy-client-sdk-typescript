@@ -28,7 +28,7 @@ export class Plugins {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -45,7 +45,7 @@ export class Plugins {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -115,7 +115,7 @@ export class Plugins {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/v1/plugins/{pluginID}", req);
+        const operationUrl: string = utils.generateURL(baseURL, "/v1/plugins/{pluginID}", req);
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -133,7 +133,7 @@ export class Plugins {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url + queryParams,
+            url: operationUrl + queryParams,
             method: "post",
             headers: headers,
             responseType: "arraybuffer",
@@ -203,7 +203,7 @@ export class Plugins {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/plugins";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
@@ -235,7 +235,7 @@ export class Plugins {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "put",
             headers: headers,
             responseType: "arraybuffer",

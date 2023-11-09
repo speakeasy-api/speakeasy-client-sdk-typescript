@@ -29,7 +29,6 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
   const res = await sdk.validateApiKey();
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -45,5 +44,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 ### Response
 
-**Promise<[operations.ValidateApiKeyResponse](../../models/operations/validateapikeyresponse.md)>**
+**Promise<[operations.ValidateApiKeyResponse](../../sdk/models/operations/validateapikeyresponse.md)>**
+### Errors
 
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |

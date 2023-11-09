@@ -52,7 +52,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 * [validateApiKey](docs/sdks/speakeasy/README.md#validateapikey) - Validate the current api key.
 
-### [.apis](docs/sdks/apis/README.md)
+### [apis](docs/sdks/apis/README.md)
 
 * [deleteApi](docs/sdks/apis/README.md#deleteapi) - Delete an Api.
 * [generateOpenApiSpec](docs/sdks/apis/README.md#generateopenapispec) - Generate an OpenAPI specification for a particular Api.
@@ -61,7 +61,7 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 * [getApis](docs/sdks/apis/README.md#getapis) - Get a list of Apis for a given workspace
 * [upsertApi](docs/sdks/apis/README.md#upsertapi) - Upsert an Api
 
-### [.apiEndpoints](docs/sdks/apiendpoints/README.md)
+### [apiEndpoints](docs/sdks/apiendpoints/README.md)
 
 * [deleteApiEndpoint](docs/sdks/apiendpoints/README.md#deleteapiendpoint) - Delete an ApiEndpoint.
 * [findApiEndpoint](docs/sdks/apiendpoints/README.md#findapiendpoint) - Find an ApiEndpoint via its displayName.
@@ -72,13 +72,13 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 * [getApiEndpoint](docs/sdks/apiendpoints/README.md#getapiendpoint) - Get an ApiEndpoint.
 * [upsertApiEndpoint](docs/sdks/apiendpoints/README.md#upsertapiendpoint) - Upsert an ApiEndpoint.
 
-### [.metadata](docs/sdks/metadata/README.md)
+### [metadata](docs/sdks/metadata/README.md)
 
 * [deleteVersionMetadata](docs/sdks/metadata/README.md#deleteversionmetadata) - Delete metadata for a particular apiID and versionID.
 * [getVersionMetadata](docs/sdks/metadata/README.md#getversionmetadata) - Get all metadata for a particular apiID and versionID.
 * [insertVersionMetadata](docs/sdks/metadata/README.md#insertversionmetadata) - Insert metadata for a particular apiID and versionID.
 
-### [.schemas](docs/sdks/schemas/README.md)
+### [schemas](docs/sdks/schemas/README.md)
 
 * [deleteSchema](docs/sdks/schemas/README.md#deleteschema) - Delete a particular schema revision for an Api.
 * [downloadSchema](docs/sdks/schemas/README.md#downloadschema) - Download the latest schema for a particular apiID.
@@ -89,19 +89,19 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 * [getSchemas](docs/sdks/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
 * [registerSchema](docs/sdks/schemas/README.md#registerschema) - Register a schema.
 
-### [.requests](docs/sdks/requests/README.md)
+### [requests](docs/sdks/requests/README.md)
 
 * [generateRequestPostmanCollection](docs/sdks/requests/README.md#generaterequestpostmancollection) - Generate a Postman collection for a particular request.
 * [getRequestFromEventLog](docs/sdks/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
 * [queryEventLog](docs/sdks/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
 
-### [.plugins](docs/sdks/plugins/README.md)
+### [plugins](docs/sdks/plugins/README.md)
 
 * [getPlugins](docs/sdks/plugins/README.md#getplugins) - Get all plugins for the current workspace.
 * [runPlugin](docs/sdks/plugins/README.md#runplugin) - Run a plugin
 * [upsertPlugin](docs/sdks/plugins/README.md#upsertplugin) - Upsert a plugin
 
-### [.embeds](docs/sdks/embeds/README.md)
+### [embeds](docs/sdks/embeds/README.md)
 
 * [getEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
 * [getValidEmbedAccessTokens](docs/sdks/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
@@ -131,7 +131,36 @@ Here's an example of one such pagination call:
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 400-600         | */*             |
+
+
+## Example
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+(async () => {
+    const sdk = new Speakeasy({
+        security: {
+            apiKey: "",
+        },
+    });
+
+    let res;
+    try {
+        res = await sdk.validateApiKey();
+    } catch (e) {}
+
+    if (res.statusCode == 200) {
+        // handle response
+    }
+})();
+
+```
 <!-- End Error Handling -->
 
 
@@ -221,12 +250,11 @@ const sdk = new Speakeasy({defaultClient: httpClient});
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security scheme globally:
+This SDK supports the following security scheme globally:
 
 | Name     | Type     | Scheme   |
 | -------- | -------- | -------- |

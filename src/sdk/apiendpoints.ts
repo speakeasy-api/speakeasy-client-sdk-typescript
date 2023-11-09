@@ -42,7 +42,7 @@ export class ApiEndpoints {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(
+        const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
             req
@@ -63,7 +63,7 @@ export class ApiEndpoints {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "delete",
             headers: headers,
             responseType: "arraybuffer",
@@ -121,7 +121,7 @@ export class ApiEndpoints {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(
+        const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}",
             req
@@ -142,7 +142,7 @@ export class ApiEndpoints {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -213,7 +213,7 @@ export class ApiEndpoints {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(
+        const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi",
             req
@@ -234,7 +234,7 @@ export class ApiEndpoints {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -306,7 +306,7 @@ export class ApiEndpoints {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(
+        const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman",
             req
@@ -331,7 +331,7 @@ export class ApiEndpoints {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -396,7 +396,11 @@ export class ApiEndpoints {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(baseURL, "/v1/apis/{apiID}/api_endpoints", req);
+        const operationUrl: string = utils.generateURL(
+            baseURL,
+            "/v1/apis/{apiID}/api_endpoints",
+            req
+        );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -413,7 +417,7 @@ export class ApiEndpoints {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -484,7 +488,7 @@ export class ApiEndpoints {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(
+        const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints",
             req
@@ -505,7 +509,7 @@ export class ApiEndpoints {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -576,7 +580,7 @@ export class ApiEndpoints {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(
+        const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
             req
@@ -597,7 +601,7 @@ export class ApiEndpoints {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -667,7 +671,7 @@ export class ApiEndpoints {
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const url: string = utils.generateURL(
+        const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
             req
@@ -703,7 +707,7 @@ export class ApiEndpoints {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: url,
+            url: operationUrl,
             method: "put",
             headers: headers,
             responseType: "arraybuffer",

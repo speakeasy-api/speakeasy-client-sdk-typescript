@@ -4,6 +4,8 @@
 
 export * from "./api";
 export * from "./apiendpoint";
+export * from "./apiendpointinput";
+export * from "./apiinput";
 export * from "./boundedrequest";
 export * from "./embedaccesstokenresponse";
 export * from "./embedtoken";
@@ -18,3 +20,4 @@ export * from "./schemadiff";
 export * from "./security";
 export * from "./unboundedrequest";
 export * from "./versionmetadata";
+export * from "./versionmetadatainput";

@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: ba638b2ad28966c596e28321a2003686
   docVersion: 0.3.0
-  speakeasyVersion: 1.114.1
-  generationVersion: 2.181.1
+  speakeasyVersion: 1.116.0
+  generationVersion: 2.185.0
 generation:
   comments: {}
   sdkClassName: speakeasy
@@ -11,14 +11,14 @@ generation:
 features:
   typescript:
     acceptHeaders: 2.81.1
-    core: 3.1.0
+    core: 3.1.2
     examples: 2.81.3
     globalSecurity: 2.82.0
     globalServerURLs: 2.82.0
-    inputOutputModels: 2.81.1
+    inputOutputModels: 2.82.0
     serverIDs: 2.81.2
 typescript:
-  version: 2.0.0
+  version: 2.1.0
   author: Speakeasy
   clientServerStatusCodesAsErrors: false
   flattenGlobalSecurity: false
@@ -30,8 +30,10 @@ typescript:
       operations: sdk/models/operations
       shared: sdk/models/shared
       webhooks: sdk/models/webhooks
+  inputModelSuffix: input
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
   maxMethodParams: 0
+  outputModelSuffix: output
   packageName: '@speakeasy-api/speakeasy-client-sdk-typescript'
   published: true
   repoSubDirectory: .
