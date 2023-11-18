@@ -1,6 +1,6 @@
 {
   "name": "@speakeasy-api/speakeasy-client-sdk-typescript",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "author": "Speakeasy",
   "scripts": {
     "prepare": "tsc --build",
