@@ -1,6 +1,6 @@
 # @speakeasy-api/speakeasy-client-sdk-typescript
 
-<!-- Start SDK Installation -->
+<!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
 ### NPM
@@ -14,19 +14,20 @@ npm add @speakeasy-api/speakeasy-client-sdk-typescript
 ```bash
 yarn add @speakeasy-api/speakeasy-client-sdk-typescript
 ```
-<!-- End SDK Installation -->
+<!-- End SDK Installation [installation] -->
 
+<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
-<!-- Start SDK Example Usage -->
+
 ### Example
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async () => {
+async function run() {
     const sdk = new Speakeasy({
         security: {
-            apiKey: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -42,12 +43,14 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
 
-<!-- Start SDK Available Operations -->
+<!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
 
 ### [Speakeasy SDK](docs/sdks/speakeasy/README.md)
@@ -108,29 +111,15 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 * [getEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
 * [getValidEmbedAccessTokens](docs/sdks/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
 * [revokeEmbedAccessToken](docs/sdks/embeds/README.md#revokeembedaccesstoken) - Revoke an embed access EmbedToken.
-<!-- End SDK Available Operations -->
+<!-- End Available Resources and Operations [operations] -->
 
 
 
-<!-- Start Dev Containers -->
-
-<!-- End Dev Containers -->
 
 
 
-<!-- Start Pagination -->
-# Pagination
 
-Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
-returned response object will have a `next` method that can be called to pull down the next group of results. If the
-return value of `next` is `null`, then there are no more pages to be fetched.
-
-Here's an example of one such pagination call:
-<!-- End Pagination -->
-
-
-
-<!-- Start Error Handling -->
+<!-- Start Error Handling [errors] -->
 ## Error Handling
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
@@ -144,29 +133,36 @@ Example
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async () => {
+async function run() {
     const sdk = new Speakeasy({
         security: {
-            apiKey: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
     let res;
     try {
         res = await sdk.validateApiKey();
-    } catch (e) {}
+    } catch (err) {
+        if (err instanceof errors.SDKError) {
+            console.error(err); // handle exception
+            throw err;
+        }
+    }
 
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End Error Handling -->
+<!-- End Error Handling [errors] -->
 
 
 
-<!-- Start Server Selection -->
+<!-- Start Server Selection [server] -->
 ## Server Selection
 
 ### Select Server by Name
@@ -176,16 +172,17 @@ You can override the default server globally by passing a server name to the `se
 | Name | Server | Variables |
 | ----- | ------ | --------- |
 | `prod` | `https://api.prod.speakeasyapi.dev` | None |
+
 #### Example
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async () => {
+async function run() {
     const sdk = new Speakeasy({
         server: "prod",
         security: {
-            apiKey: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -194,7 +191,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -205,11 +204,11 @@ The default server can also be overridden globally by passing a URL to the `serv
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async () => {
+async function run() {
     const sdk = new Speakeasy({
         serverURL: "https://api.prod.speakeasyapi.dev",
         security: {
-            apiKey: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -218,23 +217,25 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End Server Selection -->
+<!-- End Server Selection [server] -->
 
 
 
-<!-- Start Custom HTTP Client -->
+<!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
-The Typescript SDK makes API calls using the (axios)[https://axios-http.com/docs/intro] HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
+The Typescript SDK makes API calls using the [axios](https://axios-http.com/docs/intro) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
 
 For example, you could specify a header for every request that your sdk makes as follows:
 
 ```typescript
-from @speakeasy-api/speakeasy-client-sdk-typescript import Speakeasy;
-import axios;
+import { @speakeasy-api/speakeasy-client-sdk-typescript } from "Speakeasy";
+import axios from "axios";
 
 const httpClient = axios.create({
     headers: {'x-custom-header': 'someValue'}
@@ -242,11 +243,11 @@ const httpClient = axios.create({
 
 const sdk = new Speakeasy({defaultClient: httpClient});
 ```
-<!-- End Custom HTTP Client -->
+<!-- End Custom HTTP Client [http-client] -->
 
 
 
-<!-- Start Authentication -->
+<!-- Start Authentication [security] -->
 ## Authentication
 
 ### Per-Client Security Schemes
@@ -261,10 +262,10 @@ You can set the security parameters through the `security` optional parameter wh
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async () => {
+async function run() {
     const sdk = new Speakeasy({
         security: {
-            apiKey: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -273,10 +274,12 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End Authentication -->
+<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

@@ -25,10 +25,10 @@ Delete a particular schema revision for an Api.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -41,7 +41,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -70,10 +72,10 @@ Download the latest schema for a particular apiID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -85,7 +87,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -114,10 +118,10 @@ Download a particular schema revision for an Api.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -130,7 +134,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -160,10 +166,10 @@ This won't include the schema itself, that can be retrieved via the downloadSche
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -175,7 +181,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -204,10 +212,10 @@ Get a diff of two schema revisions for an Api.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -221,7 +229,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -251,10 +261,10 @@ This won't include the schema itself, that can be retrieved via the downloadSche
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -267,7 +277,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -297,10 +309,10 @@ This won't include the schemas themselves, they can be retrieved via the downloa
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -312,7 +324,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -342,10 +356,10 @@ This will be used to populate ApiEndpoints and used as a base for any schema gen
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -363,7 +377,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

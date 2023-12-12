@@ -21,10 +21,10 @@ Filters can be applied allowing views to be filtered to things like particular c
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -46,7 +46,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -75,10 +77,10 @@ Get all valid embed access tokens for the current workspace.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -87,7 +89,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -115,10 +119,10 @@ Revoke an embed access EmbedToken.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -129,7 +133,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

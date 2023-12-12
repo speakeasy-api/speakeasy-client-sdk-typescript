@@ -25,10 +25,10 @@ Delete an ApiEndpoint. This will also delete all associated Request Logs (if usi
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -41,7 +41,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -71,10 +73,10 @@ This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiI
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -87,7 +89,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -117,10 +121,10 @@ Returns the original document and the newly generated document allowing a diff t
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -133,7 +137,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -162,10 +168,10 @@ Generates a postman collection that allows the endpoint to be called from postma
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -178,7 +184,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -207,10 +215,10 @@ Get all Api endpoints for a particular apiID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -221,7 +229,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -250,10 +260,10 @@ Get all ApiEndpoints for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -265,7 +275,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -294,10 +306,10 @@ Get an ApiEndpoint.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -310,7 +322,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -339,10 +353,10 @@ Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, oth
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -363,7 +377,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

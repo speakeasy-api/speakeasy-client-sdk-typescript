@@ -1,11 +1,11 @@
-<!-- Start SDK Example Usage -->
+<!-- Start SDK Example Usage [usage] -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async () => {
+async function run() {
     const sdk = new Speakeasy({
         security: {
-            apiKey: "",
+            apiKey: "<YOUR_API_KEY_HERE>",
         },
     });
 
@@ -21,7 +21,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->

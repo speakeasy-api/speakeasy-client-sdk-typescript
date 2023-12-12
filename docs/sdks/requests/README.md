@@ -21,10 +21,10 @@ Allowing it to be replayed with the same inputs that were captured by the SDK.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -35,7 +35,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -64,10 +66,10 @@ Get information about a particular request.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -78,7 +80,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -108,10 +112,10 @@ Allows the filtering of requests on a number of criteria such as ApiID, VersionI
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-(async() => {
+async function run() {
   const sdk = new Speakeasy({
     security: {
-      apiKey: "",
+      apiKey: "<YOUR_API_KEY_HERE>",
     },
   });
 
@@ -133,7 +137,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
