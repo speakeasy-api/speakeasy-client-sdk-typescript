@@ -38,7 +38,8 @@ export class Metadata {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/metadata/{metaKey}/{metaValue}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -114,7 +115,8 @@ export class Metadata {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/metadata",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -155,9 +157,9 @@ export class Metadata {
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.classes = [];
+                    res.versionMetadata = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
-                    res.classes = utils.objectToClass(
+                    res.versionMetadata = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.VersionMetadata,
                         resFieldDepth
@@ -206,7 +208,8 @@ export class Metadata {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/metadata",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];

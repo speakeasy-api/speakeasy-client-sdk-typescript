@@ -3,18 +3,17 @@
  */
 
 import * as utils from "../internal/utils";
-import * as errors from "../sdk/models/errors";
-import * as operations from "../sdk/models/operations";
 import * as shared from "../sdk/models/shared";
 import { ApiEndpoints } from "./apiendpoints";
 import { Apis } from "./apis";
+import { Auth } from "./auth";
 import { Embeds } from "./embeds";
+import { Events } from "./events";
 import { Metadata } from "./metadata";
-import { Plugins } from "./plugins";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
 import axios from "axios";
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from "axios";
+import { AxiosInstance } from "axios";
 
 export const ServerProd = "prod";
 /**
@@ -32,6 +31,11 @@ export type SDKProps = {
      * The security details required to authenticate the SDK
      */
     security?: shared.Security | (() => Promise<shared.Security>);
+
+    /**
+     * Allows setting the workspaceID parameter for all supported operations
+     */
+    workspaceID?: string;
 
     /**
      * Allows overriding the default axios client used by the SDK
@@ -59,11 +63,12 @@ export class SDKConfiguration {
     serverURL: string;
     serverDefaults: any;
     language = "typescript";
-    openapiDocVersion = "0.3.0";
-    sdkVersion = "2.3.0";
-    genVersion = "2.225.2";
+    openapiDocVersion = "0.4.0";
+    sdkVersion = "3.0.0";
+    genVersion = "2.250.16";
     userAgent =
-        "speakeasy-sdk/typescript 2.3.0 2.225.2 0.3.0 @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 3.0.0 2.250.16 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript";
+    globals: any;
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -93,17 +98,21 @@ export class Speakeasy {
      */
     public schemas: Schemas;
     /**
+     * REST APIs for managing Authentication
+     */
+    public auth: Auth;
+    /**
      * REST APIs for retrieving request information
      */
     public requests: Requests;
     /**
-     * REST APIs for managing and running plugins
-     */
-    public plugins: Plugins;
-    /**
      * REST APIs for managing embeds
      */
     public embeds: Embeds;
+    /**
+     * REST APIs for capturing event data
+     */
+    public events: Events;
 
     private sdkConfiguration: SDKConfiguration;
 
@@ -120,6 +129,14 @@ export class Speakeasy {
             defaultClient: defaultClient,
             security: props?.security,
             serverURL: serverURL,
+            globals: {
+                parameters: {
+                    queryParam: {},
+                    pathParam: {
+                        workspaceID: props?.workspaceID,
+                    },
+                },
+            },
             retryConfig: props?.retryConfig,
         });
 
@@ -127,72 +144,9 @@ export class Speakeasy {
         this.apiEndpoints = new ApiEndpoints(this.sdkConfiguration);
         this.metadata = new Metadata(this.sdkConfiguration);
         this.schemas = new Schemas(this.sdkConfiguration);
+        this.auth = new Auth(this.sdkConfiguration);
         this.requests = new Requests(this.sdkConfiguration);
-        this.plugins = new Plugins(this.sdkConfiguration);
         this.embeds = new Embeds(this.sdkConfiguration);
-    }
-
-    /**
-     * Validate the current api key.
-     */
-    async validateApiKey(config?: AxiosRequestConfig): Promise<operations.ValidateApiKeyResponse> {
-        const baseURL: string = utils.templateUrl(
-            this.sdkConfiguration.serverURL,
-            this.sdkConfiguration.serverDefaults
-        );
-        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/auth/validate";
-        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
-        }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
-        const headers: RawAxiosRequestHeaders = { ...config?.headers, ...properties.headers };
-        headers["Accept"] = "application/json";
-
-        headers["user-agent"] = this.sdkConfiguration.userAgent;
-
-        const httpRes: AxiosResponse = await client.request({
-            validateStatus: () => true,
-            url: operationUrl,
-            method: "get",
-            headers: headers,
-            responseType: "arraybuffer",
-            ...config,
-        });
-
-        const responseContentType: string = httpRes?.headers?.["content-type"] ?? "";
-
-        if (httpRes?.status == null) {
-            throw new Error(`status code not found in response: ${httpRes}`);
-        }
-
-        const res: operations.ValidateApiKeyResponse = new operations.ValidateApiKeyResponse({
-            statusCode: httpRes.status,
-            contentType: responseContentType,
-            rawResponse: httpRes,
-        });
-        const decodedRes = new TextDecoder().decode(httpRes?.data);
-        switch (true) {
-            case httpRes?.status == 200:
-                break;
-            default:
-                if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + responseContentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
-        }
-
-        return res;
+        this.events = new Events(this.sdkConfiguration);
     }
 }

@@ -28,6 +28,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apis.deleteApi({
@@ -75,6 +76,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apis.generateOpenApiSpec({
@@ -121,6 +123,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apis.generatePostmanCollection({
@@ -168,6 +171,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apis.getAllApiVersions({
@@ -222,6 +226,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apis.getApis({
@@ -275,6 +280,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apis.upsertApi({

@@ -22,6 +22,12 @@ export class GetAllForVersionApiEndpointsRequest extends SpeakeasyBase {
 
 export class GetAllForVersionApiEndpointsResponse extends SpeakeasyBase {
     /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.ApiEndpoint })
+    apiEndpoints?: shared.ApiEndpoint[];
+
+    /**
      * HTTP response content type for this operation
      */
     @SpeakeasyMetadata()
@@ -44,10 +50,4 @@ export class GetAllForVersionApiEndpointsResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse: AxiosResponse;
-
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.ApiEndpoint })
-    classes?: shared.ApiEndpoint[];
 }

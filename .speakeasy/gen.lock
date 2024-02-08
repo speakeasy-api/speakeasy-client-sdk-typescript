@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: ba638b2ad28966c596e28321a2003686
-  docVersion: 0.3.0
+  docChecksum: dff663dce4f21ddf3fc2332b7d7be92b
+  docVersion: 0.4.0
   speakeasyVersion: internal
-  generationVersion: 2.225.2
-  releaseVersion: 2.3.0
-  configChecksum: d3cb2bcd3c1a62548523f1084b6281f9
+  generationVersion: 2.250.16
+  releaseVersion: 3.0.0
+  configChecksum: 960170d859286757349f42a181e49caa
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -14,10 +14,11 @@ management:
 features:
   typescript:
     acceptHeaders: 2.81.1
-    core: 3.4.1
+    core: 3.4.6
     examples: 2.81.3
     globalSecurity: 2.82.2
     globalServerURLs: 2.82.1
+    globals: 2.81.1
     inputOutputModels: 2.83.0
     serverIDs: 2.81.2
 generatedFiles:
@@ -25,9 +26,10 @@ generatedFiles:
   - src/sdk/apiendpoints.ts
   - src/sdk/metadata.ts
   - src/sdk/schemas.ts
+  - src/sdk/auth.ts
   - src/sdk/requests.ts
-  - src/sdk/plugins.ts
   - src/sdk/embeds.ts
+  - src/sdk/events.ts
   - src/sdk/sdk.ts
   - .eslintrc.yml
   - jest.config.js
@@ -48,7 +50,6 @@ generatedFiles:
   - src/sdk/types/index.ts
   - src/sdk/types/rfcdate.ts
   - tsconfig.json
-  - src/sdk/models/operations/validateapikey.ts
   - src/sdk/models/operations/deleteapi.ts
   - src/sdk/models/operations/generateopenapispec.ts
   - src/sdk/models/operations/generatepostmancollection.ts
@@ -74,15 +75,14 @@ generatedFiles:
   - src/sdk/models/operations/getschemarevision.ts
   - src/sdk/models/operations/getschemas.ts
   - src/sdk/models/operations/registerschema.ts
+  - src/sdk/models/operations/validateapikey.ts
   - src/sdk/models/operations/generaterequestpostmancollection.ts
   - src/sdk/models/operations/getrequestfromeventlog.ts
   - src/sdk/models/operations/queryeventlog.ts
-  - src/sdk/models/operations/getplugins.ts
-  - src/sdk/models/operations/runplugin.ts
-  - src/sdk/models/operations/upsertplugin.ts
   - src/sdk/models/operations/getembedaccesstoken.ts
   - src/sdk/models/operations/getvalidembedaccesstokens.ts
   - src/sdk/models/operations/revokeembedaccesstoken.ts
+  - src/sdk/models/operations/postworkspaceevents.ts
   - src/sdk/models/shared/error.ts
   - src/sdk/models/shared/generateopenapispecdiff.ts
   - src/sdk/models/shared/api.ts
@@ -93,19 +93,19 @@ generatedFiles:
   - src/sdk/models/shared/versionmetadatainput.ts
   - src/sdk/models/shared/schema.ts
   - src/sdk/models/shared/schemadiff.ts
+  - src/sdk/models/shared/apikeydetails.ts
   - src/sdk/models/shared/unboundedrequest.ts
   - src/sdk/models/shared/boundedrequest.ts
   - src/sdk/models/shared/requestmetadata.ts
   - src/sdk/models/shared/filters.ts
   - src/sdk/models/shared/filter.ts
-  - src/sdk/models/shared/plugin.ts
   - src/sdk/models/shared/embedaccesstokenresponse.ts
   - src/sdk/models/shared/embedtoken.ts
+  - src/sdk/models/shared/clievent.ts
   - src/sdk/models/shared/security.ts
   - src/sdk/models/errors/index.ts
   - src/sdk/models/operations/index.ts
   - src/sdk/models/shared/index.ts
-  - docs/sdk/models/operations/validateapikeyresponse.md
   - docs/sdk/models/operations/deleteapirequest.md
   - docs/sdk/models/operations/deleteapiresponse.md
   - docs/sdk/models/operations/generateopenapispecrequest.md
@@ -160,21 +160,20 @@ generatedFiles:
   - docs/sdk/models/operations/registerschemarequestbody.md
   - docs/sdk/models/operations/registerschemarequest.md
   - docs/sdk/models/operations/registerschemaresponse.md
+  - docs/sdk/models/operations/validateapikeyresponse.md
   - docs/sdk/models/operations/generaterequestpostmancollectionrequest.md
   - docs/sdk/models/operations/generaterequestpostmancollectionresponse.md
   - docs/sdk/models/operations/getrequestfromeventlogrequest.md
   - docs/sdk/models/operations/getrequestfromeventlogresponse.md
   - docs/sdk/models/operations/queryeventlogrequest.md
   - docs/sdk/models/operations/queryeventlogresponse.md
-  - docs/sdk/models/operations/getpluginsresponse.md
-  - docs/sdk/models/operations/runpluginrequest.md
-  - docs/sdk/models/operations/runpluginresponse.md
-  - docs/sdk/models/operations/upsertpluginresponse.md
   - docs/sdk/models/operations/getembedaccesstokenrequest.md
   - docs/sdk/models/operations/getembedaccesstokenresponse.md
   - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
   - docs/sdk/models/operations/revokeembedaccesstokenrequest.md
   - docs/sdk/models/operations/revokeembedaccesstokenresponse.md
+  - docs/sdk/models/operations/postworkspaceeventsrequest.md
+  - docs/sdk/models/operations/postworkspaceeventsresponse.md
   - docs/sdk/models/shared/errort.md
   - docs/sdk/models/shared/generateopenapispecdiff.md
   - docs/sdk/models/shared/api.md
@@ -186,22 +185,26 @@ generatedFiles:
   - docs/sdk/models/shared/schema.md
   - docs/sdk/models/shared/valuechange.md
   - docs/sdk/models/shared/schemadiff.md
+  - docs/sdk/models/shared/apikeydetails.md
   - docs/sdk/models/shared/unboundedrequest.md
   - docs/sdk/models/shared/boundedrequest.md
   - docs/sdk/models/shared/requestmetadata.md
   - docs/sdk/models/shared/filters.md
   - docs/sdk/models/shared/filter.md
-  - docs/sdk/models/shared/plugin.md
   - docs/sdk/models/shared/embedaccesstokenresponse.md
   - docs/sdk/models/shared/embedtoken.md
+  - docs/sdk/models/shared/generatebumptype.md
+  - docs/sdk/models/shared/interactiontype.md
+  - docs/sdk/models/shared/clievent.md
   - docs/sdk/models/shared/security.md
   - docs/sdks/speakeasy/README.md
   - docs/sdks/apis/README.md
   - docs/sdks/apiendpoints/README.md
   - docs/sdks/metadata/README.md
   - docs/sdks/schemas/README.md
+  - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
-  - docs/sdks/plugins/README.md
   - docs/sdks/embeds/README.md
+  - docs/sdks/events/README.md
   - USAGE.md
   - .gitattributes

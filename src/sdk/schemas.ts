@@ -47,7 +47,8 @@ export class Schemas {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -123,7 +124,8 @@ export class Schemas {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/schema/download",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -215,7 +217,8 @@ export class Schemas {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}/download",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -311,7 +314,8 @@ export class Schemas {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/schema",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -396,7 +400,8 @@ export class Schemas {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/schema/{baseRevisionID}/diff/{targetRevisionID}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -485,7 +490,8 @@ export class Schemas {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/schema/{revisionID}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -574,7 +580,8 @@ export class Schemas {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/schemas",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -669,7 +676,8 @@ export class Schemas {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/schema",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];

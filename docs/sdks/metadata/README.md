@@ -25,6 +25,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.metadata.deleteVersionMetadata({
@@ -73,6 +74,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.metadata.getVersionMetadata({
@@ -119,6 +121,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.metadata.insertVersionMetadata({

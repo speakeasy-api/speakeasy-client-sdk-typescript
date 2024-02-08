@@ -6,18 +6,23 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class GetPluginsResponse extends SpeakeasyBase {
+export class PostWorkspaceEventsRequest extends SpeakeasyBase {
+    @SpeakeasyMetadata({ data: "request, media_type=application/json", elemType: shared.CliEvent })
+    requestBody: shared.CliEvent[];
+
+    /**
+     * Unique identifier of the workspace.
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspaceID" })
+    workspaceID?: string;
+}
+
+export class PostWorkspaceEventsResponse extends SpeakeasyBase {
     /**
      * HTTP response content type for this operation
      */
     @SpeakeasyMetadata()
     contentType: string;
-
-    /**
-     * Default error response
-     */
-    @SpeakeasyMetadata()
-    error?: shared.ErrorT;
 
     /**
      * HTTP response status code for this operation
@@ -30,10 +35,4 @@ export class GetPluginsResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse: AxiosResponse;
-
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.Plugin })
-    classes?: shared.Plugin[];
 }

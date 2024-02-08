@@ -7,6 +7,7 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
+        workspaceID: "string",
     });
 
     const res = await sdk.apis.getApis({

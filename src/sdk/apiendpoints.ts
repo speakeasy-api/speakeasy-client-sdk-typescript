@@ -45,7 +45,8 @@ export class ApiEndpoints {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -124,7 +125,8 @@ export class ApiEndpoints {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/find/{displayName}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -216,7 +218,8 @@ export class ApiEndpoints {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/openapi",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -309,7 +312,8 @@ export class ApiEndpoints {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}/generate/postman",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -399,7 +403,8 @@ export class ApiEndpoints {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/api_endpoints",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -440,9 +445,9 @@ export class ApiEndpoints {
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.classes = [];
+                    res.apiEndpoints = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
-                    res.classes = utils.objectToClass(
+                    res.apiEndpoints = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.ApiEndpoint,
                         resFieldDepth
@@ -491,7 +496,8 @@ export class ApiEndpoints {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -532,9 +538,9 @@ export class ApiEndpoints {
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.classes = [];
+                    res.apiEndpoints = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
-                    res.classes = utils.objectToClass(
+                    res.apiEndpoints = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.ApiEndpoint,
                         resFieldDepth
@@ -583,7 +589,8 @@ export class ApiEndpoints {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
@@ -674,7 +681,8 @@ export class ApiEndpoints {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/apis/{apiID}/version/{versionID}/api_endpoints/{apiEndpointID}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];

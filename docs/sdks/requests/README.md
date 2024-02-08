@@ -26,6 +26,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.requests.generateRequestPostmanCollection({
@@ -71,6 +72,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.requests.getRequestFromEventLog({
@@ -117,6 +119,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.requests.queryEventLog({

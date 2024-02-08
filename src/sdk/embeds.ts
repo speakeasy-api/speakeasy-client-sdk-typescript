@@ -51,7 +51,7 @@ export class Embeds {
         }
         const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = { ...config?.headers, ...properties.headers };
-        const queryParams: string = utils.serializeQueryParams(req);
+        const queryParams: string = utils.serializeQueryParams(req, this.sdkConfiguration.globals);
         headers["Accept"] = "application/json";
 
         headers["user-agent"] = this.sdkConfiguration.userAgent;
@@ -162,9 +162,9 @@ export class Embeds {
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.classes = [];
+                    res.embedTokens = [];
                     const resFieldDepth: number = utils.getResFieldDepth(res);
-                    res.classes = utils.objectToClass(
+                    res.embedTokens = utils.objectToClass(
                         JSON.parse(decodedRes),
                         shared.EmbedToken,
                         resFieldDepth
@@ -213,7 +213,8 @@ export class Embeds {
         const operationUrl: string = utils.generateURL(
             baseURL,
             "/v1/workspace/embed-access-tokens/{tokenID}",
-            req
+            req,
+            this.sdkConfiguration.globals
         );
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;

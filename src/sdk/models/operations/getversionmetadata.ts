@@ -49,5 +49,5 @@ export class GetVersionMetadataResponse extends SpeakeasyBase {
      * OK
      */
     @SpeakeasyMetadata({ elemType: shared.VersionMetadata })
-    classes?: shared.VersionMetadata[];
+    versionMetadata?: shared.VersionMetadata[];
 }

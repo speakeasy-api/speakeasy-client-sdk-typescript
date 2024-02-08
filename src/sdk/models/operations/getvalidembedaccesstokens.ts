@@ -14,6 +14,12 @@ export class GetValidEmbedAccessTokensResponse extends SpeakeasyBase {
     contentType: string;
 
     /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.EmbedToken })
+    embedTokens?: shared.EmbedToken[];
+
+    /**
      * Default error response
      */
     @SpeakeasyMetadata()
@@ -30,10 +36,4 @@ export class GetValidEmbedAccessTokensResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse: AxiosResponse;
-
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.EmbedToken })
-    classes?: shared.EmbedToken[];
 }

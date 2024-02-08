@@ -30,6 +30,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apiEndpoints.deleteApiEndpoint({
@@ -78,6 +79,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apiEndpoints.findApiEndpoint({
@@ -126,6 +128,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
@@ -173,6 +176,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
@@ -220,6 +224,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apiEndpoints.getAllApiEndpoints({
@@ -265,6 +270,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apiEndpoints.getAllForVersionApiEndpoints({
@@ -311,6 +317,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apiEndpoints.getApiEndpoint({
@@ -358,6 +365,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
+    workspaceID: "string",
   });
 
   const res = await sdk.apiEndpoints.upsertApiEndpoint({

@@ -16,6 +16,12 @@ export class QueryEventLogRequest extends SpeakeasyBase {
 
 export class QueryEventLogResponse extends SpeakeasyBase {
     /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.BoundedRequest })
+    boundedRequests?: shared.BoundedRequest[];
+
+    /**
      * HTTP response content type for this operation
      */
     @SpeakeasyMetadata()
@@ -38,10 +44,4 @@ export class QueryEventLogResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse: AxiosResponse;
-
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.BoundedRequest })
-    classes?: shared.BoundedRequest[];
 }

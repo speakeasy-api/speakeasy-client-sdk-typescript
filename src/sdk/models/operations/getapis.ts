@@ -33,6 +33,12 @@ export class GetApisRequest extends SpeakeasyBase {
 
 export class GetApisResponse extends SpeakeasyBase {
     /**
+     * OK
+     */
+    @SpeakeasyMetadata({ elemType: shared.Api })
+    apis?: shared.Api[];
+
+    /**
      * HTTP response content type for this operation
      */
     @SpeakeasyMetadata()
@@ -55,10 +61,4 @@ export class GetApisResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse: AxiosResponse;
-
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata({ elemType: shared.Api })
-    classes?: shared.Api[];
 }

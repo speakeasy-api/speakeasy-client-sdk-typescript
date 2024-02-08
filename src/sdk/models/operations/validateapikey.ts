@@ -8,6 +8,12 @@ import { AxiosResponse } from "axios";
 
 export class ValidateApiKeyResponse extends SpeakeasyBase {
     /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    apiKeyDetails?: shared.ApiKeyDetails;
+
+    /**
      * HTTP response content type for this operation
      */
     @SpeakeasyMetadata()
