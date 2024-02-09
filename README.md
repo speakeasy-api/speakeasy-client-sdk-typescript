@@ -356,6 +356,116 @@ run();
 ```
 <!-- End Global Parameters [global-parameters] -->
 
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import {
+    GenerateBumpType,
+    InteractionType,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
+
+async function run() {
+    const sdk = new Speakeasy({
+        security: {
+            apiKey: "<YOUR_API_KEY_HERE>",
+        },
+        workspaceID: "string",
+    });
+
+    const res = await sdk.events.postWorkspaceEvents(
+        {
+            requestBody: [
+                {
+                    createdAt: new Date("2024-11-21T06:58:42.120Z"),
+                    executionId: "string",
+                    id: "<ID>",
+                    interactionType: InteractionType.CliExec,
+                    localStartedAt: new Date("2024-05-07T12:35:47.182Z"),
+                    speakeasyApiKeyName: "string",
+                    speakeasyVersion: "string",
+                    success: false,
+                    workspaceId: "string",
+                },
+            ],
+        },
+        {
+            strategy: "backoff",
+            backoff: {
+                initialInterval: 1,
+                maxInterval: 50,
+                exponent: 1.1,
+                maxElapsedTime: 100,
+            },
+            retryConnectionErrors: false,
+        }
+    );
+
+    if (res.statusCode == 200) {
+        // handle response
+    }
+}
+
+run();
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import {
+    GenerateBumpType,
+    InteractionType,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
+
+async function run() {
+    const sdk = new Speakeasy({
+        retry_config: {
+            strategy: "backoff",
+            backoff: {
+                initialInterval: 1,
+                maxInterval: 50,
+                exponent: 1.1,
+                maxElapsedTime: 100,
+            },
+            retryConnectionErrors: false,
+        },
+        security: {
+            apiKey: "<YOUR_API_KEY_HERE>",
+        },
+        workspaceID: "string",
+    });
+
+    const res = await sdk.events.postWorkspaceEvents({
+        requestBody: [
+            {
+                createdAt: new Date("2024-11-21T06:58:42.120Z"),
+                executionId: "string",
+                id: "<ID>",
+                interactionType: InteractionType.CliExec,
+                localStartedAt: new Date("2024-05-07T12:35:47.182Z"),
+                speakeasyApiKeyName: "string",
+                speakeasyVersion: "string",
+                success: false,
+                workspaceId: "string",
+            },
+        ],
+    });
+
+    if (res.statusCode == 200) {
+        // handle response
+    }
+}
+
+run();
+
+```
+<!-- End Retries [retries] -->
+
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
 

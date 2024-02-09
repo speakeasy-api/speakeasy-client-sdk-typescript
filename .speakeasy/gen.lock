@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: dff663dce4f21ddf3fc2332b7d7be92b
+  docChecksum: 557634d4bb5964b949ae70f79f40d856
   docVersion: 0.4.0
   speakeasyVersion: internal
-  generationVersion: 2.250.16
-  releaseVersion: 3.0.1
-  configChecksum: 99b8e5f3cd48d97507fa9ab6fd6e05cc
+  generationVersion: 2.250.22
+  releaseVersion: 3.1.0
+  configChecksum: 54549759930fcd5f880c2ea492dac967
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -20,6 +20,7 @@ features:
     globalServerURLs: 2.82.1
     globals: 2.81.1
     inputOutputModels: 2.83.0
+    retries: 2.82.1
     serverIDs: 2.81.2
 generatedFiles:
   - src/sdk/apis.ts
@@ -205,6 +206,7 @@ generatedFiles:
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
   - docs/sdks/embeds/README.md
+  - docs/internal/utils/retryconfig.md
   - docs/sdks/events/README.md
   - USAGE.md
   - .gitattributes

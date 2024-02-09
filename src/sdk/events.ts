@@ -3,6 +3,7 @@
  */
 
 import * as utils from "../internal/utils";
+import * as errors from "../sdk/models/errors";
 import * as operations from "../sdk/models/operations";
 import * as shared from "../sdk/models/shared";
 import { SDKConfiguration } from "./sdk";
@@ -27,6 +28,7 @@ export class Events {
      */
     async postWorkspaceEvents(
         req: operations.PostWorkspaceEventsRequest,
+        retries?: utils.RetryConfig,
         config?: AxiosRequestConfig
     ): Promise<operations.PostWorkspaceEventsResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
@@ -68,19 +70,34 @@ export class Events {
             ...properties.headers,
         };
         if (reqBody == null) throw new Error("request body is required");
-        headers["Accept"] = "*/*";
+        headers["Accept"] = "application/json";
 
         headers["user-agent"] = this.sdkConfiguration.userAgent;
 
-        const httpRes: AxiosResponse = await client.request({
-            validateStatus: () => true,
-            url: operationUrl,
-            method: "post",
-            headers: headers,
-            responseType: "arraybuffer",
-            data: reqBody,
-            ...config,
-        });
+        const globalRetryConfig = this.sdkConfiguration.retryConfig;
+        let retryConfig: utils.RetryConfig | undefined = retries;
+        if (!retryConfig) {
+            if (globalRetryConfig) {
+                retryConfig = globalRetryConfig;
+            } else {
+                retryConfig = new utils.RetryConfig(
+                    "backoff",
+                    new utils.BackoffStrategy(100, 2000, 1.5, 30000),
+                    true
+                );
+            }
+        }
+        const httpRes: AxiosResponse = await utils.Retry(() => {
+            return client.request({
+                validateStatus: () => true,
+                url: operationUrl,
+                method: "post",
+                headers: headers,
+                responseType: "arraybuffer",
+                data: reqBody,
+                ...config,
+            });
+        }, new utils.Retries(retryConfig, ["408", "500", "502", "503"]));
 
         const responseContentType: string = httpRes?.headers?.["content-type"] ?? "";
 
@@ -94,8 +111,21 @@ export class Events {
                 contentType: responseContentType,
                 rawResponse: httpRes,
             });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
-            default:
+            case httpRes?.status >= 200 && httpRes?.status < 300:
+                break;
+            case httpRes?.status >= 500 && httpRes?.status < 600:
+                if (utils.matchContentType(responseContentType, `application/json`)) {
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + responseContentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
                 break;
         }
 
