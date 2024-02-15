@@ -30,13 +30,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.deleteSchema({
-    apiID: "string",
-    revisionID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    revisionID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -78,12 +78,12 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.downloadSchema({
-    apiID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -125,13 +125,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.downloadSchemaRevision({
-    apiID: "string",
-    revisionID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    revisionID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -174,12 +174,12 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.getSchema({
-    apiID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -221,14 +221,14 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.getSchemaDiff({
-    apiID: "string",
-    baseRevisionID: "string",
-    targetRevisionID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    baseRevisionID: "<value>",
+    targetRevisionID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -271,13 +271,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.getSchemaRevision({
-    apiID: "string",
-    revisionID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    revisionID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -320,12 +320,12 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.getSchemas({
-    apiID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -368,7 +368,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.registerSchema({
@@ -378,8 +378,8 @@ async function run() {
         fileName: "bronze_table_blues.m2a",
       },
     },
-    apiID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {

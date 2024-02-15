@@ -26,7 +26,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.embeds.getEmbedAccessToken({
@@ -34,13 +34,13 @@ async function run() {
       filters: [
         {
           key: "<key>",
-          operator: "string",
-          value: "string",
+          operator: "<value>",
+          value: "<value>",
         },
       ],
       limit: 964408,
       offset: 95617,
-      operator: "string",
+      operator: "<value>",
     },
   });
 
@@ -83,7 +83,7 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.embeds.getValidEmbedAccessTokens();
@@ -126,11 +126,11 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.embeds.revokeEmbedAccessToken({
-    tokenID: "string",
+    tokenID: "<value>",
   });
 
   if (res.statusCode == 200) {

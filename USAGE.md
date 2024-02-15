@@ -7,12 +7,12 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.getApis({
         metadata: {
-            key: ["string"],
+            key: ["<value>"],
         },
         op: {
             and: false,

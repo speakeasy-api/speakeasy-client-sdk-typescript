@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 557634d4bb5964b949ae70f79f40d856
+  docChecksum: c81aa4e807522359d28c09ee16d252ba
   docVersion: 0.4.0
   speakeasyVersion: internal
-  generationVersion: 2.250.22
-  releaseVersion: 3.1.0
-  configChecksum: 54549759930fcd5f880c2ea492dac967
+  generationVersion: 2.258.0
+  releaseVersion: 3.1.1
+  configChecksum: 9344262737ed5942a40a8c8155a0dd50
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -14,7 +14,7 @@ management:
 features:
   typescript:
     acceptHeaders: 2.81.1
-    core: 3.4.6
+    core: 3.4.7
     examples: 2.81.3
     globalSecurity: 2.82.2
     globalServerURLs: 2.82.1
@@ -76,6 +76,7 @@ generatedFiles:
   - src/sdk/models/operations/getschemarevision.ts
   - src/sdk/models/operations/getschemas.ts
   - src/sdk/models/operations/registerschema.ts
+  - src/sdk/models/operations/getworkspaceaccess.ts
   - src/sdk/models/operations/validateapikey.ts
   - src/sdk/models/operations/generaterequestpostmancollection.ts
   - src/sdk/models/operations/getrequestfromeventlog.ts
@@ -94,6 +95,7 @@ generatedFiles:
   - src/sdk/models/shared/versionmetadatainput.ts
   - src/sdk/models/shared/schema.ts
   - src/sdk/models/shared/schemadiff.ts
+  - src/sdk/models/shared/accessdetails.ts
   - src/sdk/models/shared/apikeydetails.ts
   - src/sdk/models/shared/unboundedrequest.ts
   - src/sdk/models/shared/boundedrequest.ts
@@ -161,6 +163,8 @@ generatedFiles:
   - docs/sdk/models/operations/registerschemarequestbody.md
   - docs/sdk/models/operations/registerschemarequest.md
   - docs/sdk/models/operations/registerschemaresponse.md
+  - docs/sdk/models/operations/getworkspaceaccessrequest.md
+  - docs/sdk/models/operations/getworkspaceaccessresponse.md
   - docs/sdk/models/operations/validateapikeyresponse.md
   - docs/sdk/models/operations/generaterequestpostmancollectionrequest.md
   - docs/sdk/models/operations/generaterequestpostmancollectionresponse.md
@@ -186,6 +190,7 @@ generatedFiles:
   - docs/sdk/models/shared/schema.md
   - docs/sdk/models/shared/valuechange.md
   - docs/sdk/models/shared/schemadiff.md
+  - docs/sdk/models/shared/accessdetails.md
   - docs/sdk/models/shared/apikeydetails.md
   - docs/sdk/models/shared/unboundedrequest.md
   - docs/sdk/models/shared/boundedrequest.md
@@ -203,10 +208,10 @@ generatedFiles:
   - docs/sdks/apiendpoints/README.md
   - docs/sdks/metadata/README.md
   - docs/sdks/schemas/README.md
+  - docs/internal/utils/retryconfig.md
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
   - docs/sdks/embeds/README.md
-  - docs/internal/utils/retryconfig.md
   - docs/sdks/events/README.md
   - USAGE.md
   - .gitattributes

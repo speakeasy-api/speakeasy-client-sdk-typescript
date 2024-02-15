@@ -7,6 +7,10 @@ import { Expose } from "class-transformer";
 
 export class ApiKeyDetails extends SpeakeasyBase {
     @SpeakeasyMetadata()
+    @Expose({ name: "generation_access_unlimited" })
+    generationAccessUnlimited?: boolean;
+
+    @SpeakeasyMetadata()
     @Expose({ name: "workspace_id" })
     workspaceId: string;
 }

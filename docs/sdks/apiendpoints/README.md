@@ -30,13 +30,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apiEndpoints.deleteApiEndpoint({
-    apiEndpointID: "string",
-    apiID: "string",
-    versionID: "string",
+    apiEndpointID: "<value>",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -79,13 +79,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apiEndpoints.findApiEndpoint({
-    apiID: "string",
-    displayName: "string",
-    versionID: "string",
+    apiID: "<value>",
+    displayName: "Don.Strosin",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -128,13 +128,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
-    apiEndpointID: "string",
-    apiID: "string",
-    versionID: "string",
+    apiEndpointID: "<value>",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -176,13 +176,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
-    apiEndpointID: "string",
-    apiID: "string",
-    versionID: "string",
+    apiEndpointID: "<value>",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -224,11 +224,11 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apiEndpoints.getAllApiEndpoints({
-    apiID: "string",
+    apiID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -270,12 +270,12 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apiEndpoints.getAllForVersionApiEndpoints({
-    apiID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -317,13 +317,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apiEndpoints.getApiEndpoint({
-    apiEndpointID: "string",
-    apiID: "string",
-    versionID: "string",
+    apiEndpointID: "<value>",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -365,21 +365,21 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apiEndpoints.upsertApiEndpoint({
     apiEndpoint: {
-      apiEndpointId: "string",
+      apiEndpointId: "<value>",
       description: "Public-key systematic attitude",
-      displayName: "string",
-      method: "string",
-      path: "/etc/periodic",
-      versionId: "string",
+      displayName: "Camille.Schaefer11",
+      method: "<value>",
+      path: "/Library",
+      versionId: "<value>",
     },
-    apiEndpointID: "string",
-    apiID: "string",
-    versionID: "string",
+    apiEndpointID: "<value>",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {

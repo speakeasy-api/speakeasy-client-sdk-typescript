@@ -28,12 +28,12 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apis.deleteApi({
-    apiID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -76,12 +76,12 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apis.generateOpenApiSpec({
-    apiID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -123,12 +123,12 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apis.generatePostmanCollection({
-    apiID: "string",
-    versionID: "string",
+    apiID: "<value>",
+    versionID: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -171,14 +171,14 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apis.getAllApiVersions({
-    apiID: "string",
+    apiID: "<value>",
     metadata: {
       "key": [
-        "string",
+        "<value>",
       ],
     },
     op: {
@@ -226,13 +226,13 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apis.getApis({
     metadata: {
       "key": [
-        "string",
+        "<value>",
       ],
     },
     op: {
@@ -280,21 +280,21 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.apis.upsertApi({
     api: {
-      apiId: "string",
+      apiId: "<value>",
       description: "Synchronised 5th generation knowledge user",
       metaData: {
         "key": [
-          "string",
+          "<value>",
         ],
       },
-      versionId: "string",
+      versionId: "<value>",
     },
-    apiID: "string",
+    apiID: "<value>",
   });
 
   if (res.statusCode == 200) {

@@ -24,21 +24,21 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "string",
+    workspaceID: "<value>",
   });
 
   const res = await sdk.events.postWorkspaceEvents({
     requestBody: [
       {
         createdAt: new Date("2024-11-21T06:58:42.120Z"),
-        executionId: "string",
-        id: "<ID>",
+        executionId: "<value>",
+        id: "<id>",
         interactionType: InteractionType.CliExec,
         localStartedAt: new Date("2024-05-07T12:35:47.182Z"),
-        speakeasyApiKeyName: "string",
-        speakeasyVersion: "string",
+        speakeasyApiKeyName: "<value>",
+        speakeasyVersion: "<value>",
         success: false,
-        workspaceId: "string",
+        workspaceId: "<value>",
       },
     ],
   });

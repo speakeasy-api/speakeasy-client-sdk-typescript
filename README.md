@@ -29,12 +29,12 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.getApis({
         metadata: {
-            key: ["string"],
+            key: ["<value>"],
         },
         op: {
             and: false,
@@ -93,6 +93,7 @@ run();
 
 ### [auth](docs/sdks/auth/README.md)
 
+* [getWorkspaceAccess](docs/sdks/auth/README.md#getworkspaceaccess) - Get access allowances for a particular workspace
 * [validateApiKey](docs/sdks/auth/README.md#validateapikey) - Validate the current api key.
 
 ### [requests](docs/sdks/requests/README.md)
@@ -137,14 +138,14 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
     let res;
     try {
         res = await sdk.apis.deleteApi({
-            apiID: "string",
-            versionID: "string",
+            apiID: "<value>",
+            versionID: "<value>",
         });
     } catch (err) {
         if (err instanceof errors.SDKError) {
@@ -187,12 +188,12 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.deleteApi({
-        apiID: "string",
-        versionID: "string",
+        apiID: "<value>",
+        versionID: "<value>",
     });
 
     if (res.statusCode == 200) {
@@ -217,12 +218,12 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.deleteApi({
-        apiID: "string",
-        versionID: "string",
+        apiID: "<value>",
+        versionID: "<value>",
     });
 
     if (res.statusCode == 200) {
@@ -278,12 +279,12 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.deleteApi({
-        apiID: "string",
-        versionID: "string",
+        apiID: "<value>",
+        versionID: "<value>",
     });
 
     if (res.statusCode == 200) {
@@ -301,7 +302,7 @@ run();
 
 A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
 
-For example, you can set `workspaceID` to `"string"` at SDK initialization and then you do not have to pass the same value on calls to operations like `postWorkspaceEvents`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+For example, you can set `workspaceID` to `"<value>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `postWorkspaceEvents`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
 
 
 ### Available Globals
@@ -327,21 +328,21 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
     const res = await sdk.events.postWorkspaceEvents({
         requestBody: [
             {
                 createdAt: new Date("2024-11-21T06:58:42.120Z"),
-                executionId: "string",
-                id: "<ID>",
+                executionId: "<value>",
+                id: "<id>",
                 interactionType: InteractionType.CliExec,
                 localStartedAt: new Date("2024-05-07T12:35:47.182Z"),
-                speakeasyApiKeyName: "string",
-                speakeasyVersion: "string",
+                speakeasyApiKeyName: "<value>",
+                speakeasyVersion: "<value>",
                 success: false,
-                workspaceId: "string",
+                workspaceId: "<value>",
             },
         ],
     });
@@ -364,35 +365,17 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import {
-    GenerateBumpType,
-    InteractionType,
-} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
 
 async function run() {
     const sdk = new Speakeasy({
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
-    const res = await sdk.events.postWorkspaceEvents(
-        {
-            requestBody: [
-                {
-                    createdAt: new Date("2024-11-21T06:58:42.120Z"),
-                    executionId: "string",
-                    id: "<ID>",
-                    interactionType: InteractionType.CliExec,
-                    localStartedAt: new Date("2024-05-07T12:35:47.182Z"),
-                    speakeasyApiKeyName: "string",
-                    speakeasyVersion: "string",
-                    success: false,
-                    workspaceId: "string",
-                },
-            ],
-        },
+    const res = await sdk.auth.getWorkspaceAccess(
+        {},
         {
             strategy: "backoff",
             backoff: {
@@ -417,10 +400,6 @@ run();
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import {
-    GenerateBumpType,
-    InteractionType,
-} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
 
 async function run() {
     const sdk = new Speakeasy({
@@ -437,24 +416,10 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "string",
+        workspaceID: "<value>",
     });
 
-    const res = await sdk.events.postWorkspaceEvents({
-        requestBody: [
-            {
-                createdAt: new Date("2024-11-21T06:58:42.120Z"),
-                executionId: "string",
-                id: "<ID>",
-                interactionType: InteractionType.CliExec,
-                localStartedAt: new Date("2024-05-07T12:35:47.182Z"),
-                speakeasyApiKeyName: "string",
-                speakeasyVersion: "string",
-                success: false,
-                workspaceId: "string",
-            },
-        ],
-    });
+    const res = await sdk.auth.getWorkspaceAccess({});
 
     if (res.statusCode == 200) {
         // handle response

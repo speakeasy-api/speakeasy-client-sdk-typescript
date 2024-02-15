@@ -27,6 +27,7 @@ export * from "./getschemarevision";
 export * from "./getschemas";
 export * from "./getvalidembedaccesstokens";
 export * from "./getversionmetadata";
+export * from "./getworkspaceaccess";
 export * from "./insertversionmetadata";
 export * from "./postworkspaceevents";
 export * from "./queryeventlog";
