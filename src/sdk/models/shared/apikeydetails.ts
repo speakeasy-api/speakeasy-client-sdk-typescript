@@ -5,7 +5,17 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
+export enum AccountType {
+    Free = "free",
+    ScaleUp = "scale-up",
+    Enterprise = "enterprise",
+}
+
 export class ApiKeyDetails extends SpeakeasyBase {
+    @SpeakeasyMetadata()
+    @Expose({ name: "account_type" })
+    accountType: AccountType;
+
     @SpeakeasyMetadata()
     @Expose({ name: "generation_access_unlimited" })
     generationAccessUnlimited?: boolean;
