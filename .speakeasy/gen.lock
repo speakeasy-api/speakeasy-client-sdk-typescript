@@ -4,9 +4,9 @@ management:
   docChecksum: 90bb5b2f880d4a86868122f9a6b08d40
   docVersion: 0.4.0
   speakeasyVersion: internal
-  generationVersion: 2.262.2
-  releaseVersion: 3.1.2
-  configChecksum: 2b345353b220e635143a63f8478cc4dc
+  generationVersion: 2.263.3
+  releaseVersion: 3.1.3
+  configChecksum: 6e7872afaa92addfa1e52d318a9a621b
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
