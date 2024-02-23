@@ -12,6 +12,18 @@ export class GetWorkspaceAccessRequest extends SpeakeasyBase {
      */
     @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=genLockId" })
     genLockId?: string;
+
+    /**
+     * Skip side-effects like incrementing metrics.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=passive" })
+    passive?: boolean;
+
+    /**
+     * The type of the generated target.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=targetType" })
+    targetType?: string;
 }
 
 export class GetWorkspaceAccessResponse extends SpeakeasyBase {
