@@ -110,6 +110,8 @@ run();
 
 ### [events](docs/sdks/events/README.md)
 
+* [getWorkspaceEvents](docs/sdks/events/README.md#getworkspaceevents) - Load recent events for a particular workspace
+* [getWorkspaceTargets](docs/sdks/events/README.md#getworkspacetargets) - Load targets for a particular workspace
 * [postWorkspaceEvents](docs/sdks/events/README.md#postworkspaceevents) - Post events for a specific workspace
 <!-- End Available Resources and Operations [operations] -->
 
@@ -264,13 +266,14 @@ const sdk = new Speakeasy({defaultClient: httpClient});
 
 ### Per-Client Security Schemes
 
-This SDK supports the following security scheme globally:
+This SDK supports the following security schemes globally:
 
-| Name     | Type     | Scheme   |
-| -------- | -------- | -------- |
-| `apiKey` | apiKey   | API key  |
+| Name        | Type        | Scheme      |
+| ----------- | ----------- | ----------- |
+| `apiKey`    | apiKey      | API key     |
+| `bearer`    | http        | HTTP Bearer |
 
-You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. For example:
+You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -302,7 +305,7 @@ run();
 
 A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
 
-For example, you can set `workspaceID` to `"<value>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `postWorkspaceEvents`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+For example, you can set `workspaceID` to `"<value>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getWorkspaceEvents`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
 
 
 ### Available Globals
@@ -318,10 +321,6 @@ The following global parameter is available.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import {
-    GenerateBumpType,
-    InteractionType,
-} from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
 
 async function run() {
     const sdk = new Speakeasy({
@@ -331,21 +330,7 @@ async function run() {
         workspaceID: "<value>",
     });
 
-    const res = await sdk.events.postWorkspaceEvents({
-        requestBody: [
-            {
-                createdAt: new Date("2024-11-21T06:58:42.120Z"),
-                executionId: "<value>",
-                id: "<id>",
-                interactionType: InteractionType.CliExec,
-                localStartedAt: new Date("2024-05-07T12:35:47.182Z"),
-                speakeasyApiKeyName: "<value>",
-                speakeasyVersion: "<value>",
-                success: false,
-                workspaceId: "<value>",
-            },
-        ],
-    });
+    const res = await sdk.events.getWorkspaceEvents({});
 
     if (res.statusCode == 200) {
         // handle response

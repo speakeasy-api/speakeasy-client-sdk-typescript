@@ -9,3 +9,8 @@ Type of interaction.
 | ---------------- | ---------------- |
 | `CliExec`        | CLI_EXEC         |
 | `TargetGenerate` | TARGET_GENERATE  |
+| `Authenticate`   | AUTHENTICATE     |
+| `Quickstart`     | QUICKSTART       |
+| `Run`            | RUN              |
+| `Configure`      | CONFIGURE        |
+| `Publish`        | PUBLISH          |

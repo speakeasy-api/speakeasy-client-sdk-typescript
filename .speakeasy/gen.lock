@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 10893fff3e9a4e77b8628de48190cd77
+  docChecksum: 1e1fbb7b85b19b149be8f6b8a6916f76
   docVersion: 0.4.0
   speakeasyVersion: internal
   generationVersion: 2.272.4
-  releaseVersion: 3.1.6
-  configChecksum: 6b6504331bdb6e23a4c627f3ea137c72
+  releaseVersion: 3.1.7
+  configChecksum: 76687d62103382dba2c9356ddb1dd007
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -84,6 +84,8 @@ generatedFiles:
   - src/sdk/models/operations/getembedaccesstoken.ts
   - src/sdk/models/operations/getvalidembedaccesstokens.ts
   - src/sdk/models/operations/revokeembedaccesstoken.ts
+  - src/sdk/models/operations/getworkspaceevents.ts
+  - src/sdk/models/operations/getworkspacetargets.ts
   - src/sdk/models/operations/postworkspaceevents.ts
   - src/sdk/models/shared/error.ts
   - src/sdk/models/shared/generateopenapispecdiff.ts
@@ -105,6 +107,7 @@ generatedFiles:
   - src/sdk/models/shared/embedaccesstokenresponse.ts
   - src/sdk/models/shared/embedtoken.ts
   - src/sdk/models/shared/clievent.ts
+  - src/sdk/models/shared/targetsdk.ts
   - src/sdk/models/shared/security.ts
   - src/sdk/models/errors/index.ts
   - src/sdk/models/operations/index.ts
@@ -177,6 +180,10 @@ generatedFiles:
   - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
   - docs/sdk/models/operations/revokeembedaccesstokenrequest.md
   - docs/sdk/models/operations/revokeembedaccesstokenresponse.md
+  - docs/sdk/models/operations/getworkspaceeventsrequest.md
+  - docs/sdk/models/operations/getworkspaceeventsresponse.md
+  - docs/sdk/models/operations/getworkspacetargetsrequest.md
+  - docs/sdk/models/operations/getworkspacetargetsresponse.md
   - docs/sdk/models/operations/postworkspaceeventsrequest.md
   - docs/sdk/models/operations/postworkspaceeventsresponse.md
   - docs/sdk/models/shared/errort.md
@@ -203,6 +210,7 @@ generatedFiles:
   - docs/sdk/models/shared/generatebumptype.md
   - docs/sdk/models/shared/interactiontype.md
   - docs/sdk/models/shared/clievent.md
+  - docs/sdk/models/shared/targetsdk.md
   - docs/sdk/models/shared/security.md
   - docs/sdks/speakeasy/README.md
   - docs/sdks/apis/README.md

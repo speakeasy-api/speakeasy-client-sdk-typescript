@@ -28,6 +28,8 @@ export * from "./getschemas";
 export * from "./getvalidembedaccesstokens";
 export * from "./getversionmetadata";
 export * from "./getworkspaceaccess";
+export * from "./getworkspaceevents";
+export * from "./getworkspacetargets";
 export * from "./insertversionmetadata";
 export * from "./postworkspaceevents";
 export * from "./queryeventlog";

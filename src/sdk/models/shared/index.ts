@@ -20,6 +20,7 @@ export * from "./requestmetadata";
 export * from "./schema";
 export * from "./schemadiff";
 export * from "./security";
+export * from "./targetsdk";
 export * from "./unboundedrequest";
 export * from "./versionmetadata";
 export * from "./versionmetadatainput";

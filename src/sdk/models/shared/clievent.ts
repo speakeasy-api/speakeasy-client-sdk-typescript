@@ -22,6 +22,11 @@ export enum GenerateBumpType {
 export enum InteractionType {
     CliExec = "CLI_EXEC",
     TargetGenerate = "TARGET_GENERATE",
+    Authenticate = "AUTHENTICATE",
+    Quickstart = "QUICKSTART",
+    Run = "RUN",
+    Configure = "CONFIGURE",
+    Publish = "PUBLISH",
 }
 
 export class CliEvent extends SpeakeasyBase {
@@ -76,7 +81,7 @@ export class CliEvent extends SpeakeasyBase {
     generateConfigPostRaw?: string;
 
     /**
-     * Version of the generated target (post generation)
+     * The version of the customer's SDK that we just generated
      */
     @SpeakeasyMetadata()
     @Expose({ name: "generate_config_post_version" })
@@ -97,7 +102,7 @@ export class CliEvent extends SpeakeasyBase {
     generateConfigPreRaw?: string;
 
     /**
-     * Version of the generated target (prior to generation)
+     * The version of the customer's SDK before we generated
      */
     @SpeakeasyMetadata()
     @Expose({ name: "generate_config_pre_version" })
@@ -300,6 +305,34 @@ export class CliEvent extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "management_doc_version" })
     managementDocVersion?: string;
+
+    /**
+     * Name of the published package.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "publish_package_name" })
+    publishPackageName?: string;
+
+    /**
+     * Name of the registry where the package was published.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "publish_package_registry_name" })
+    publishPackageRegistryName?: string;
+
+    /**
+     * URL of the published package.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "publish_package_url" })
+    publishPackageUrl?: string;
+
+    /**
+     * Version of the published package.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "publish_package_version" })
+    publishPackageVersion?: string;
 
     /**
      * Full CLI command.

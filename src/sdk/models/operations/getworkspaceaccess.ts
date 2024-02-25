@@ -39,9 +39,6 @@ export class GetWorkspaceAccessResponse extends SpeakeasyBase {
     @SpeakeasyMetadata()
     contentType: string;
 
-    @SpeakeasyMetadata()
-    error?: shared.ErrorT;
-
     /**
      * HTTP response status code for this operation
      */

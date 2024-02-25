@@ -108,18 +108,6 @@ export class Auth {
                     );
                 }
                 break;
-            case httpRes?.status >= 500 && httpRes?.status < 600:
-                if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + responseContentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
-                break;
         }
 
         return res;
