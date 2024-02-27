@@ -8,6 +8,14 @@ import { AxiosResponse } from "axios";
 
 export class GetWorkspaceTargetsRequest extends SpeakeasyBase {
     /**
+     * Filter to only return targets with events created after this timestamp
+     */
+    @SpeakeasyMetadata({
+        data: "queryParam, style=form;explode=true;name=after_last_event_created_at",
+    })
+    afterLastEventCreatedAt?: Date;
+
+    /**
      * Unique identifier of the workspace.
      */
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspaceID" })

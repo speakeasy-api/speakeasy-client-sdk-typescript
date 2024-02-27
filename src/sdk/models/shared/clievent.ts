@@ -249,7 +249,7 @@ export class CliEvent extends SpeakeasyBase {
     gitUserEmail?: string;
 
     /**
-     * User name from git configuration.
+     * User's name from git configuration. (not GitHub username)
      */
     @SpeakeasyMetadata()
     @Expose({ name: "git_user_name" })

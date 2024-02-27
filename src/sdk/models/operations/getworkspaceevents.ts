@@ -8,7 +8,13 @@ import { AxiosResponse } from "axios";
 
 export class GetWorkspaceEventsRequest extends SpeakeasyBase {
     /**
-     * Filter to only return events corresponding to a particular gen_lock_id
+     * Filter to only return events created after this timestamp
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=after_created_at" })
+    afterCreatedAt?: Date;
+
+    /**
+     * Filter to only return events corresponding to a particular gen_lock_id (gen_lock_id uniquely identifies a target)
      */
     @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=generate_gen_lock_id" })
     generateGenLockId?: string;

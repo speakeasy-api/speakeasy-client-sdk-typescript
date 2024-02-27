@@ -14,14 +14,6 @@ export class TargetSDK extends SpeakeasyBase {
     commitHead?: string;
 
     /**
-     * Timestamp when the event was created in the database.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "created_at" })
-    @Transform(({ value }) => new Date(value), { toClassOnly: true })
-    createdAt: Date;
-
-    /**
      * Version of the generated target (post generation)
      */
     @SpeakeasyMetadata()
@@ -29,11 +21,11 @@ export class TargetSDK extends SpeakeasyBase {
     generateConfigPostVersion?: string;
 
     /**
-     * gen.lock ID (expected to be a uuid).
+     * gen.lock ID (expected to be a uuid). The same as `id`. A unique identifier for the target.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "generate_gen_lock_id" })
-    generateGenLockId?: string;
+    generateGenLockId: string;
 
     /**
      * Indicates whether the target was considered published.
@@ -50,11 +42,39 @@ export class TargetSDK extends SpeakeasyBase {
     generateTarget: string;
 
     /**
-     * The version of the target.
+     * The version of the Speakeasy generator for this target eg v2 of the typescript generator.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "generate_target_version" })
     generateTargetVersion?: string;
+
+    /**
+     * GitHub organization of the action.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "gh_action_organization" })
+    ghActionOrganization?: string;
+
+    /**
+     * GitHub repository of the action.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "gh_action_repository" })
+    ghActionRepository?: string;
+
+    /**
+     * Link to the GitHub action run.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "gh_action_run_link" })
+    ghActionRunLink?: string;
+
+    /**
+     * Version of the GitHub action.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "gh_action_version" })
+    ghActionVersion?: string;
 
     /**
      * Current working directory relative to the git root.
@@ -78,11 +98,54 @@ export class TargetSDK extends SpeakeasyBase {
     gitRemoteDefaultRepo?: string;
 
     /**
-     * Unique identifier for each event.
+     * User email from git configuration.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "git_user_email" })
+    gitUserEmail?: string;
+
+    /**
+     * User's name from git configuration. (not GitHub username)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "git_user_name" })
+    gitUserName?: string;
+
+    /**
+     * Remote hostname.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "hostname" })
+    hostname?: string;
+
+    /**
+     * Unique identifier of the target the same as `generate_gen_lock_id`
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id: string;
+
+    /**
+     * Timestamp when the event was created in the database.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "last_event_created_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    lastEventCreatedAt: Date;
+
+    /**
+     * Unique identifier of the last event for the target
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "last_event_id" })
+    lastEventId: string;
+
+    /**
+     * Label of the git repository.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "repo_label" })
+    repoLabel?: string;
 
     /**
      * Indicates whether the event was successful.
