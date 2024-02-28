@@ -35,11 +35,18 @@ export class TargetSDK extends SpeakeasyBase {
     generatePublished?: boolean;
 
     /**
-     * The target of the event.
+     * eg `typescript`, `terraform`, `python`
      */
     @SpeakeasyMetadata()
     @Expose({ name: "generate_target" })
     generateTarget: string;
+
+    /**
+     * The name of the target as defined by the user.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_target_name" })
+    generateTargetName?: string;
 
     /**
      * The version of the Speakeasy generator for this target eg v2 of the typescript generator.

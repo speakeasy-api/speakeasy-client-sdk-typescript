@@ -9,4 +9,8 @@ export class AccessDetails extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "generation_allowed" })
     generationAllowed: boolean;
+
+    @SpeakeasyMetadata()
+    @Expose({ name: "message" })
+    message: string;
 }
