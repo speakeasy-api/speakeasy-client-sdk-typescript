@@ -93,6 +93,7 @@ run();
 
 ### [auth](docs/sdks/auth/README.md)
 
+* [getAccessToken](docs/sdks/auth/README.md#getaccesstoken) - Get or refresh an access token for the current workspace.
 * [getWorkspaceAccess](docs/sdks/auth/README.md#getworkspaceaccess) - Get access allowances for a particular workspace
 * [validateApiKey](docs/sdks/auth/README.md#validateapikey) - Validate the current api key.
 

@@ -3,6 +3,7 @@
  */
 
 export * from "./accessdetails";
+export * from "./accesstoken";
 export * from "./api";
 export * from "./apiendpoint";
 export * from "./apiendpointinput";

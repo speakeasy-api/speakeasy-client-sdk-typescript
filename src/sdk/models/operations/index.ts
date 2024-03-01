@@ -14,6 +14,7 @@ export * from "./generateopenapispecforapiendpoint";
 export * from "./generatepostmancollection";
 export * from "./generatepostmancollectionforapiendpoint";
 export * from "./generaterequestpostmancollection";
+export * from "./getaccesstoken";
 export * from "./getallapiendpoints";
 export * from "./getallapiversions";
 export * from "./getallforversionapiendpoints";

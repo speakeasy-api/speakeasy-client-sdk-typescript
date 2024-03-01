@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: e7803aa801c8a80e23dbe21edbf4e9c5
+  docChecksum: 9e766720141ee71ea97dae02c573b883
   docVersion: 0.4.0
   speakeasyVersion: internal
-  generationVersion: 2.272.7
-  releaseVersion: 3.1.9
-  configChecksum: c27ee91ff3210b1f1572e2bdd7c4311c
+  generationVersion: 2.275.4
+  releaseVersion: 3.1.10
+  configChecksum: 3e376a1be44287ab44510096f84d58f6
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -76,6 +76,7 @@ generatedFiles:
   - src/sdk/models/operations/getschemarevision.ts
   - src/sdk/models/operations/getschemas.ts
   - src/sdk/models/operations/registerschema.ts
+  - src/sdk/models/operations/getaccesstoken.ts
   - src/sdk/models/operations/getworkspaceaccess.ts
   - src/sdk/models/operations/validateapikey.ts
   - src/sdk/models/operations/generaterequestpostmancollection.ts
@@ -97,6 +98,7 @@ generatedFiles:
   - src/sdk/models/shared/versionmetadatainput.ts
   - src/sdk/models/shared/schema.ts
   - src/sdk/models/shared/schemadiff.ts
+  - src/sdk/models/shared/accesstoken.ts
   - src/sdk/models/shared/accessdetails.ts
   - src/sdk/models/shared/apikeydetails.ts
   - src/sdk/models/shared/unboundedrequest.ts
@@ -166,6 +168,8 @@ generatedFiles:
   - docs/sdk/models/operations/registerschemarequestbody.md
   - docs/sdk/models/operations/registerschemarequest.md
   - docs/sdk/models/operations/registerschemaresponse.md
+  - docs/sdk/models/operations/getaccesstokenrequest.md
+  - docs/sdk/models/operations/getaccesstokenresponse.md
   - docs/sdk/models/operations/getworkspaceaccessrequest.md
   - docs/sdk/models/operations/getworkspaceaccessresponse.md
   - docs/sdk/models/operations/validateapikeyresponse.md
@@ -197,6 +201,10 @@ generatedFiles:
   - docs/sdk/models/shared/schema.md
   - docs/sdk/models/shared/valuechange.md
   - docs/sdk/models/shared/schemadiff.md
+  - docs/sdk/models/shared/claims.md
+  - docs/sdk/models/shared/user.md
+  - docs/sdk/models/shared/workspaces.md
+  - docs/sdk/models/shared/accesstoken.md
   - docs/sdk/models/shared/accessdetails.md
   - docs/sdk/models/shared/accounttype.md
   - docs/sdk/models/shared/apikeydetails.md
