@@ -160,4 +160,11 @@ export class TargetSDK extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "success" })
     success?: boolean;
+
+    /**
+     * Total number of events for the target
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "total_events" })
+    totalEvents: number;
 }

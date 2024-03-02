@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 9e766720141ee71ea97dae02c573b883
+  docChecksum: 9a4517dbb12d2cf1b7c3f411d1e2ff4f
   docVersion: 0.4.0
   speakeasyVersion: internal
-  generationVersion: 2.275.4
-  releaseVersion: 3.1.10
-  configChecksum: 3e376a1be44287ab44510096f84d58f6
+  generationVersion: 2.277.0
+  releaseVersion: 3.1.11
+  configChecksum: 99fe50ab75440f311f56a999d7ac3c36
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
