@@ -38,6 +38,13 @@ export class CliEvent extends SpeakeasyBase {
     commitHead?: string;
 
     /**
+     * Name of the CI environment.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "continuous_integration_environment" })
+    continuousIntegrationEnvironment?: string;
+
+    /**
      * Timestamp when the event was created in the database.
      */
     @SpeakeasyMetadata()

@@ -14,6 +14,13 @@ export class TargetSDK extends SpeakeasyBase {
     commitHead?: string;
 
     /**
+     * Name of the CI environment.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "continuous_integration_environment" })
+    continuousIntegrationEnvironment?: string;
+
+    /**
      * Version of the generated target (post generation)
      */
     @SpeakeasyMetadata()
@@ -26,6 +33,20 @@ export class TargetSDK extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "generate_gen_lock_id" })
     generateGenLockId: string;
+
+    /**
+     * Features prior to generation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_gen_lock_pre_features" })
+    generateGenLockPreFeatures?: string;
+
+    /**
+     * Artifact version for the Previous Generation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_gen_lock_pre_version" })
+    generateGenLockPreVersion?: string;
 
     /**
      * Indicates whether the target was considered published.
@@ -160,11 +181,4 @@ export class TargetSDK extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "success" })
     success?: boolean;
-
-    /**
-     * Total number of events for the target
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "total_events" })
-    totalEvents: number;
 }
