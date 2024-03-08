@@ -3,6 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { InteractionType } from "./interactiontype";
 import { Expose, Transform } from "class-transformer";
 
 export class TargetSDK extends SpeakeasyBase {
@@ -167,6 +168,13 @@ export class TargetSDK extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "last_event_id" })
     lastEventId: string;
+
+    /**
+     * Type of interaction.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "last_event_interaction_type" })
+    lastEventInteractionType: InteractionType;
 
     /**
      * Label of the git repository.

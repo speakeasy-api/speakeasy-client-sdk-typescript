@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 78317aabbf8200a3d43be677bd6fe435
+  docChecksum: 64b423d1904e6c12d31973957d033247
   docVersion: 0.4.0
-  speakeasyVersion: 1.202.0
-  generationVersion: 2.277.0
-  releaseVersion: 3.1.12
-  configChecksum: 4e8e761b7e8c491ad97f6caf26f2b580
+  speakeasyVersion: 1.204.1
+  generationVersion: 2.279.1
+  releaseVersion: 3.1.13
+  configChecksum: 645a9ce456f3047a99b78bbd1f80a2d2
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -109,6 +109,7 @@ generatedFiles:
   - src/sdk/models/shared/embedaccesstokenresponse.ts
   - src/sdk/models/shared/embedtoken.ts
   - src/sdk/models/shared/clievent.ts
+  - src/sdk/models/shared/interactiontype.ts
   - src/sdk/models/shared/targetsdk.ts
   - src/sdk/models/shared/security.ts
   - src/sdk/models/errors/index.ts
@@ -216,8 +217,8 @@ generatedFiles:
   - docs/sdk/models/shared/embedaccesstokenresponse.md
   - docs/sdk/models/shared/embedtoken.md
   - docs/sdk/models/shared/generatebumptype.md
-  - docs/sdk/models/shared/interactiontype.md
   - docs/sdk/models/shared/clievent.md
+  - docs/sdk/models/shared/interactiontype.md
   - docs/sdk/models/shared/targetsdk.md
   - docs/sdk/models/shared/security.md
   - docs/sdks/speakeasy/README.md

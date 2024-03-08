@@ -17,6 +17,7 @@ export * from "./error";
 export * from "./filter";
 export * from "./filters";
 export * from "./generateopenapispecdiff";
+export * from "./interactiontype";
 export * from "./requestmetadata";
 export * from "./schema";
 export * from "./schemadiff";

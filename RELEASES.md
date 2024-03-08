@@ -1267,3 +1267,13 @@ Based on:
 - [typescript v3.1.12] .
 ### Releases
 - [NPM v3.1.12] https://www.npmjs.com/package/@speakeasy-api/speakeasy-client-sdk-typescript/v/3.1.12 - .
+
+## 2024-03-08 00:11:27
+### Changes
+Based on:
+- OpenAPI Doc 0.4.0 https://docs.speakeasyapi.dev/openapi.yaml
+- Speakeasy CLI 1.204.1 (2.279.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [typescript v3.1.13] .
+### Releases
+- [NPM v3.1.13] https://www.npmjs.com/package/@speakeasy-api/speakeasy-client-sdk-typescript/v/3.1.13 - .

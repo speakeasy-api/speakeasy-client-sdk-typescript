@@ -3,6 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { InteractionType } from "./interactiontype";
 import { Expose, Transform } from "class-transformer";
 
 /**
@@ -14,19 +15,6 @@ export enum GenerateBumpType {
     Patch = "patch",
     Custom = "custom",
     None = "none",
-}
-
-/**
- * Type of interaction.
- */
-export enum InteractionType {
-    CliExec = "CLI_EXEC",
-    TargetGenerate = "TARGET_GENERATE",
-    Authenticate = "AUTHENTICATE",
-    Quickstart = "QUICKSTART",
-    Run = "RUN",
-    Configure = "CONFIGURE",
-    Publish = "PUBLISH",
 }
 
 export class CliEvent extends SpeakeasyBase {
