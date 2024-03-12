@@ -5,10 +5,20 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
+export enum Level {
+    Allowed = "allowed",
+    Warning = "warning",
+    Blocked = "blocked",
+}
+
 export class AccessDetails extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "generation_allowed" })
     generationAllowed: boolean;
+
+    @SpeakeasyMetadata()
+    @Expose({ name: "level" })
+    level?: Level;
 
     @SpeakeasyMetadata()
     @Expose({ name: "message" })

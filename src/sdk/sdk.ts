@@ -10,6 +10,7 @@ import { Auth } from "./auth";
 import { Embeds } from "./embeds";
 import { Events } from "./events";
 import { Metadata } from "./metadata";
+import { Organizations } from "./organizations";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
 import axios from "axios";
@@ -64,10 +65,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.4.0";
-    sdkVersion = "3.1.13";
+    sdkVersion = "3.1.14";
     genVersion = "2.279.1";
     userAgent =
-        "speakeasy-sdk/typescript 3.1.13 2.279.1 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 3.1.14 2.279.1 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript";
     globals: any;
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
@@ -105,6 +106,7 @@ export class Speakeasy {
      * REST APIs for retrieving request information
      */
     public requests: Requests;
+    public organizations: Organizations;
     /**
      * REST APIs for managing embeds
      */
@@ -146,6 +148,7 @@ export class Speakeasy {
         this.schemas = new Schemas(this.sdkConfiguration);
         this.auth = new Auth(this.sdkConfiguration);
         this.requests = new Requests(this.sdkConfiguration);
+        this.organizations = new Organizations(this.sdkConfiguration);
         this.embeds = new Embeds(this.sdkConfiguration);
         this.events = new Events(this.sdkConfiguration);
     }

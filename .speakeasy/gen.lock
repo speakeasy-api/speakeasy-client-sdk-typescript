@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 64b423d1904e6c12d31973957d033247
+  docChecksum: 3d1ffb0cc7307a0362c5389c0fa1fdb5
   docVersion: 0.4.0
-  speakeasyVersion: 1.204.1
+  speakeasyVersion: 1.205.2
   generationVersion: 2.279.1
-  releaseVersion: 3.1.13
-  configChecksum: 645a9ce456f3047a99b78bbd1f80a2d2
+  releaseVersion: 3.1.14
+  configChecksum: 8294d0cfe66e849512a410eb62c232a3
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -29,6 +29,7 @@ generatedFiles:
   - src/sdk/schemas.ts
   - src/sdk/auth.ts
   - src/sdk/requests.ts
+  - src/sdk/organizations.ts
   - src/sdk/embeds.ts
   - src/sdk/events.ts
   - src/sdk/sdk.ts
@@ -82,6 +83,7 @@ generatedFiles:
   - src/sdk/models/operations/generaterequestpostmancollection.ts
   - src/sdk/models/operations/getrequestfromeventlog.ts
   - src/sdk/models/operations/queryeventlog.ts
+  - src/sdk/models/operations/getorganizations.ts
   - src/sdk/models/operations/getembedaccesstoken.ts
   - src/sdk/models/operations/getvalidembedaccesstokens.ts
   - src/sdk/models/operations/revokeembedaccesstoken.ts
@@ -106,6 +108,7 @@ generatedFiles:
   - src/sdk/models/shared/requestmetadata.ts
   - src/sdk/models/shared/filters.ts
   - src/sdk/models/shared/filter.ts
+  - src/sdk/models/shared/organization.ts
   - src/sdk/models/shared/embedaccesstokenresponse.ts
   - src/sdk/models/shared/embedtoken.ts
   - src/sdk/models/shared/clievent.ts
@@ -180,6 +183,7 @@ generatedFiles:
   - docs/sdk/models/operations/getrequestfromeventlogresponse.md
   - docs/sdk/models/operations/queryeventlogrequest.md
   - docs/sdk/models/operations/queryeventlogresponse.md
+  - docs/sdk/models/operations/getorganizationsresponse.md
   - docs/sdk/models/operations/getembedaccesstokenrequest.md
   - docs/sdk/models/operations/getembedaccesstokenresponse.md
   - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
@@ -206,6 +210,7 @@ generatedFiles:
   - docs/sdk/models/shared/user.md
   - docs/sdk/models/shared/workspaces.md
   - docs/sdk/models/shared/accesstoken.md
+  - docs/sdk/models/shared/level.md
   - docs/sdk/models/shared/accessdetails.md
   - docs/sdk/models/shared/accounttype.md
   - docs/sdk/models/shared/apikeydetails.md
@@ -214,6 +219,8 @@ generatedFiles:
   - docs/sdk/models/shared/requestmetadata.md
   - docs/sdk/models/shared/filters.md
   - docs/sdk/models/shared/filter.md
+  - docs/sdk/models/shared/organizationaccounttype.md
+  - docs/sdk/models/shared/organization.md
   - docs/sdk/models/shared/embedaccesstokenresponse.md
   - docs/sdk/models/shared/embedtoken.md
   - docs/sdk/models/shared/generatebumptype.md
@@ -229,6 +236,7 @@ generatedFiles:
   - docs/internal/utils/retryconfig.md
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
+  - docs/sdks/organizations/README.md
   - docs/sdks/embeds/README.md
   - docs/sdks/events/README.md
   - USAGE.md

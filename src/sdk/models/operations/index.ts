@@ -21,6 +21,7 @@ export * from "./getallforversionapiendpoints";
 export * from "./getapiendpoint";
 export * from "./getapis";
 export * from "./getembedaccesstoken";
+export * from "./getorganizations";
 export * from "./getrequestfromeventlog";
 export * from "./getschema";
 export * from "./getschemadiff";
