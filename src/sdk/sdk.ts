@@ -65,10 +65,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.4.0";
-    sdkVersion = "3.1.14";
-    genVersion = "2.279.1";
+    sdkVersion = "3.1.15";
+    genVersion = "2.280.6";
     userAgent =
-        "speakeasy-sdk/typescript 3.1.14 2.279.1 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 3.1.15 2.280.6 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript";
     globals: any;
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
@@ -120,9 +120,9 @@ export class Speakeasy {
 
     constructor(props?: SDKProps) {
         let serverURL = props?.serverURL;
-        const server = props?.server ?? ServerProd;
 
         if (!serverURL) {
+            const server = props?.server ?? ServerProd;
             serverURL = ServerList[server];
         }
 
