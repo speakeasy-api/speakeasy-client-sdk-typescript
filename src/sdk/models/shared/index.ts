@@ -25,5 +25,6 @@ export * from "./schemadiff";
 export * from "./security";
 export * from "./targetsdk";
 export * from "./unboundedrequest";
+export * from "./user";
 export * from "./versionmetadata";
 export * from "./versionmetadatainput";

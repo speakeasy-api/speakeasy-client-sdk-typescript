@@ -7,7 +7,7 @@ import { Expose, Transform, Type } from "class-transformer";
 
 export class Claims extends SpeakeasyBase {}
 
-export class User extends SpeakeasyBase {
+export class AccessTokenUser extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "admin" })
     admin?: boolean;
@@ -51,8 +51,8 @@ export class AccessToken extends SpeakeasyBase {
 
     @SpeakeasyMetadata()
     @Expose({ name: "user" })
-    @Type(() => User)
-    user: User;
+    @Type(() => AccessTokenUser)
+    user: AccessTokenUser;
 
     @SpeakeasyMetadata({ elemType: Workspaces })
     @Expose({ name: "workspaces" })

@@ -27,6 +27,7 @@ export * from "./getschema";
 export * from "./getschemadiff";
 export * from "./getschemarevision";
 export * from "./getschemas";
+export * from "./getuser";
 export * from "./getvalidembedaccesstokens";
 export * from "./getversionmetadata";
 export * from "./getworkspaceaccess";

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 3d1ffb0cc7307a0362c5389c0fa1fdb5
+  docChecksum: 17e2e733dfd588a7103c3c70e91b24b5
   docVersion: 0.4.0
-  speakeasyVersion: 1.213.0
-  generationVersion: 2.283.1
-  releaseVersion: 3.1.16
-  configChecksum: 5e243703154e2ff9a7373ce227c7eb13
+  speakeasyVersion: 1.219.2
+  generationVersion: 2.286.7
+  releaseVersion: 3.1.17
+  configChecksum: 2164c0ff922192a589f3a4237c9ef331
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -78,6 +78,7 @@ generatedFiles:
   - src/sdk/models/operations/getschemas.ts
   - src/sdk/models/operations/registerschema.ts
   - src/sdk/models/operations/getaccesstoken.ts
+  - src/sdk/models/operations/getuser.ts
   - src/sdk/models/operations/getworkspaceaccess.ts
   - src/sdk/models/operations/validateapikey.ts
   - src/sdk/models/operations/generaterequestpostmancollection.ts
@@ -101,6 +102,7 @@ generatedFiles:
   - src/sdk/models/shared/schema.ts
   - src/sdk/models/shared/schemadiff.ts
   - src/sdk/models/shared/accesstoken.ts
+  - src/sdk/models/shared/user.ts
   - src/sdk/models/shared/accessdetails.ts
   - src/sdk/models/shared/apikeydetails.ts
   - src/sdk/models/shared/unboundedrequest.ts
@@ -174,6 +176,7 @@ generatedFiles:
   - docs/sdk/models/operations/registerschemaresponse.md
   - docs/sdk/models/operations/getaccesstokenrequest.md
   - docs/sdk/models/operations/getaccesstokenresponse.md
+  - docs/sdk/models/operations/getuserresponse.md
   - docs/sdk/models/operations/getworkspaceaccessrequest.md
   - docs/sdk/models/operations/getworkspaceaccessresponse.md
   - docs/sdk/models/operations/validateapikeyresponse.md
@@ -207,9 +210,10 @@ generatedFiles:
   - docs/sdk/models/shared/valuechange.md
   - docs/sdk/models/shared/schemadiff.md
   - docs/sdk/models/shared/claims.md
-  - docs/sdk/models/shared/user.md
+  - docs/sdk/models/shared/accesstokenuser.md
   - docs/sdk/models/shared/workspaces.md
   - docs/sdk/models/shared/accesstoken.md
+  - docs/sdk/models/shared/user.md
   - docs/sdk/models/shared/level.md
   - docs/sdk/models/shared/accessdetails.md
   - docs/sdk/models/shared/accounttype.md
