@@ -6,6 +6,7 @@ import * as utils from "../internal/utils";
 import * as shared from "../sdk/models/shared";
 import { ApiEndpoints } from "./apiendpoints";
 import { Apis } from "./apis";
+import { Artifacts } from "./artifacts";
 import { Auth } from "./auth";
 import { Embeds } from "./embeds";
 import { Events } from "./events";
@@ -65,10 +66,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.4.0";
-    sdkVersion = "3.2.1";
-    genVersion = "2.292.0";
+    sdkVersion = "3.2.2";
+    genVersion = "2.304.1";
     userAgent =
-        "speakeasy-sdk/typescript 3.2.1 2.292.0 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 3.2.2 2.304.1 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript";
     globals: any;
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
@@ -98,6 +99,7 @@ export class Speakeasy {
      * REST APIs for managing Schema entities
      */
     public schemas: Schemas;
+    public artifacts: Artifacts;
     /**
      * REST APIs for managing Authentication
      */
@@ -146,6 +148,7 @@ export class Speakeasy {
         this.apiEndpoints = new ApiEndpoints(this.sdkConfiguration);
         this.metadata = new Metadata(this.sdkConfiguration);
         this.schemas = new Schemas(this.sdkConfiguration);
+        this.artifacts = new Artifacts(this.sdkConfiguration);
         this.auth = new Auth(this.sdkConfiguration);
         this.requests = new Requests(this.sdkConfiguration);
         this.organizations = new Organizations(this.sdkConfiguration);
