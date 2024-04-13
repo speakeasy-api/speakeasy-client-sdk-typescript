@@ -5,11 +5,8 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { Expose } from "class-transformer";
 
-/**
- * A PreflightToken is a token that allows access to the OCI distribution endpoints.
- */
-export class PreflightToken extends SpeakeasyBase {
+export class PreflightRequest extends SpeakeasyBase {
     @SpeakeasyMetadata()
-    @Expose({ name: "auth_token" })
-    authToken?: string;
+    @Expose({ name: "namespace_name" })
+    namespaceName: string;
 }

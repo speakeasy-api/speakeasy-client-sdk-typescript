@@ -3,9 +3,110 @@
 
 ### Available Operations
 
+* [getBlob](#getblob) - Get blob for a particular digest
+* [getManifest](#getmanifest) - Get manifest for a particular reference
 * [getNamespaces](#getnamespaces) - Each namespace contains many revisions.
 * [getRevisions](#getrevisions)
+* [getTags](#gettags)
 * [preflight](#preflight) - Get access token for communicating with OCI distribution endpoints
+
+## getBlob
+
+Get blob for a particular digest
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+async function run() {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "<YOUR_API_KEY_HERE>",
+    },
+    workspaceID: "<value>",
+  });
+
+  const res = await sdk.artifacts.getBlob({
+    digest: "<value>",
+    namespaceName: "<value>",
+    organizationSlug: "<value>",
+    workspaceSlug: "<value>",
+  });
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `request`                                                                  | [operations.GetBlobRequest](../../sdk/models/operations/getblobrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| `config`                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)               | :heavy_minus_sign:                                                         | Available config options for making requests.                              |
+
+
+### Response
+
+**Promise<[operations.GetBlobResponse](../../sdk/models/operations/getblobresponse.md)>**
+### Errors
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
+
+## getManifest
+
+Get manifest for a particular reference
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+async function run() {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "<YOUR_API_KEY_HERE>",
+    },
+    workspaceID: "<value>",
+  });
+
+  const res = await sdk.artifacts.getManifest({
+    namespaceName: "<value>",
+    organizationSlug: "<value>",
+    revisionReference: "<value>",
+    workspaceSlug: "<value>",
+  });
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `request`                                                                          | [operations.GetManifestRequest](../../sdk/models/operations/getmanifestrequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| `config`                                                                           | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                       | :heavy_minus_sign:                                                                 | Available config options for making requests.                                      |
+
+
+### Response
+
+**Promise<[operations.GetManifestResponse](../../sdk/models/operations/getmanifestresponse.md)>**
+### Errors
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
 
 ## getNamespaces
 
@@ -66,7 +167,7 @@ async function run() {
   });
 
   const res = await sdk.artifacts.getRevisions({
-    namespaceId: "<value>",
+    namespaceName: "<value>",
   });
 
   if (res.statusCode == 200) {
@@ -94,6 +195,50 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4xx-5xx         | */*             |
 
+## getTags
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+async function run() {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "<YOUR_API_KEY_HERE>",
+    },
+    workspaceID: "<value>",
+  });
+
+  const res = await sdk.artifacts.getTags({
+    namespaceName: "<value>",
+  });
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `request`                                                                  | [operations.GetTagsRequest](../../sdk/models/operations/gettagsrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| `config`                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)               | :heavy_minus_sign:                                                         | Available config options for making requests.                              |
+
+
+### Response
+
+**Promise<[operations.GetTagsResponse](../../sdk/models/operations/gettagsresponse.md)>**
+### Errors
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
+
 ## preflight
 
 Get access token for communicating with OCI distribution endpoints
@@ -111,7 +256,9 @@ async function run() {
     workspaceID: "<value>",
   });
 
-  const res = await sdk.artifacts.preflight();
+  const res = await sdk.artifacts.preflight({
+    namespaceName: "<value>",
+  });
 
   if (res.statusCode == 200) {
     // handle response
@@ -123,9 +270,10 @@ run();
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                              | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `request`                                                              | [shared.PreflightRequest](../../sdk/models/shared/preflightrequest.md) | :heavy_check_mark:                                                     | The request object to use for the request.                             |
+| `config`                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)           | :heavy_minus_sign:                                                     | Available config options for making requests.                          |
 
 
 ### Response

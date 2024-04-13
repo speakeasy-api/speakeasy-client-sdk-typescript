@@ -15,11 +15,18 @@ export class Namespace extends SpeakeasyBase {
     createdAt: Date;
 
     /**
-     * A human readable name for the namespace.
+     * {organization_slug}/{workspace_slug}/{namespace_name}
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })
     id: string;
+
+    /**
+     * A human-readable name for the namespace.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name: string;
 
     @SpeakeasyMetadata()
     @Expose({ name: "updated_at" })

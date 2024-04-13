@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 5cec61dd888a82ca19ee8faa021b6fcf
+  docChecksum: 1867bd7891d65aa46bdee0032e33c25a
   docVersion: 0.4.0
-  speakeasyVersion: 1.250.0
-  generationVersion: 2.304.1
-  releaseVersion: 3.2.2
-  configChecksum: 1cb0c1d5083883f80277cf8b6d436317
+  speakeasyVersion: 1.252.0
+  generationVersion: 2.306.0
+  releaseVersion: 3.2.3
+  configChecksum: 67bf620bdcbe1090d569bde949e27d29
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -78,8 +78,11 @@ generatedFiles:
   - src/sdk/models/operations/getschemarevision.ts
   - src/sdk/models/operations/getschemas.ts
   - src/sdk/models/operations/registerschema.ts
+  - src/sdk/models/operations/getblob.ts
+  - src/sdk/models/operations/getmanifest.ts
   - src/sdk/models/operations/getnamespaces.ts
   - src/sdk/models/operations/getrevisions.ts
+  - src/sdk/models/operations/gettags.ts
   - src/sdk/models/operations/preflight.ts
   - src/sdk/models/operations/getaccesstoken.ts
   - src/sdk/models/operations/getuser.ts
@@ -105,11 +108,17 @@ generatedFiles:
   - src/sdk/models/shared/versionmetadatainput.ts
   - src/sdk/models/shared/schema.ts
   - src/sdk/models/shared/schemadiff.ts
+  - src/sdk/models/shared/manifest.ts
+  - src/sdk/models/shared/v2descriptor.ts
+  - src/sdk/models/shared/annotations.ts
   - src/sdk/models/shared/getnamespacesresponse.ts
   - src/sdk/models/shared/namespace.ts
   - src/sdk/models/shared/getrevisionsresponse.ts
   - src/sdk/models/shared/revision.ts
+  - src/sdk/models/shared/gettagsresponse.ts
+  - src/sdk/models/shared/tag.ts
   - src/sdk/models/shared/preflighttoken.ts
+  - src/sdk/models/shared/preflightrequest.ts
   - src/sdk/models/shared/accesstoken.ts
   - src/sdk/models/shared/user.ts
   - src/sdk/models/shared/accessdetails.ts
@@ -183,9 +192,15 @@ generatedFiles:
   - docs/sdk/models/operations/registerschemarequestbody.md
   - docs/sdk/models/operations/registerschemarequest.md
   - docs/sdk/models/operations/registerschemaresponse.md
+  - docs/sdk/models/operations/getblobrequest.md
+  - docs/sdk/models/operations/getblobresponse.md
+  - docs/sdk/models/operations/getmanifestrequest.md
+  - docs/sdk/models/operations/getmanifestresponse.md
   - docs/sdk/models/operations/getnamespacesresponse.md
   - docs/sdk/models/operations/getrevisionsrequest.md
   - docs/sdk/models/operations/getrevisionsresponse.md
+  - docs/sdk/models/operations/gettagsrequest.md
+  - docs/sdk/models/operations/gettagsresponse.md
   - docs/sdk/models/operations/preflightresponse.md
   - docs/sdk/models/operations/getaccesstokenrequest.md
   - docs/sdk/models/operations/getaccesstokenresponse.md
@@ -222,11 +237,17 @@ generatedFiles:
   - docs/sdk/models/shared/schema.md
   - docs/sdk/models/shared/valuechange.md
   - docs/sdk/models/shared/schemadiff.md
+  - docs/sdk/models/shared/manifest.md
+  - docs/sdk/models/shared/v2descriptor.md
+  - docs/sdk/models/shared/annotations.md
   - docs/sdk/models/shared/getnamespacesresponse.md
   - docs/sdk/models/shared/namespace.md
   - docs/sdk/models/shared/getrevisionsresponse.md
   - docs/sdk/models/shared/revision.md
+  - docs/sdk/models/shared/gettagsresponse.md
+  - docs/sdk/models/shared/tag.md
   - docs/sdk/models/shared/preflighttoken.md
+  - docs/sdk/models/shared/preflightrequest.md
   - docs/sdk/models/shared/claims.md
   - docs/sdk/models/shared/accesstokenuser.md
   - docs/sdk/models/shared/workspaces.md

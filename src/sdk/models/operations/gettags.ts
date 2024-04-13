@@ -6,18 +6,12 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class GetRevisionsRequest extends SpeakeasyBase {
+export class GetTagsRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace_name" })
     namespaceName: string;
-
-    /**
-     * Token to retrieve the next page of results
-     */
-    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=next_page_token" })
-    nextPageToken?: string;
 }
 
-export class GetRevisionsResponse extends SpeakeasyBase {
+export class GetTagsResponse extends SpeakeasyBase {
     /**
      * HTTP response content type for this operation
      */
@@ -34,7 +28,7 @@ export class GetRevisionsResponse extends SpeakeasyBase {
      * OK
      */
     @SpeakeasyMetadata()
-    getRevisionsResponse?: shared.GetRevisionsResponse;
+    getTagsResponse?: shared.GetTagsResponse;
 
     /**
      * HTTP response status code for this operation

@@ -6,18 +6,27 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class GetRevisionsRequest extends SpeakeasyBase {
+export class GetBlobRequest extends SpeakeasyBase {
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=digest" })
+    digest: string;
+
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace_name" })
     namespaceName: string;
 
-    /**
-     * Token to retrieve the next page of results
-     */
-    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=next_page_token" })
-    nextPageToken?: string;
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organization_slug" })
+    organizationSlug: string;
+
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=workspace_slug" })
+    workspaceSlug: string;
 }
 
-export class GetRevisionsResponse extends SpeakeasyBase {
+export class GetBlobResponse extends SpeakeasyBase {
+    /**
+     * OK
+     */
+    @SpeakeasyMetadata()
+    blob?: Uint8Array;
+
     /**
      * HTTP response content type for this operation
      */
@@ -29,12 +38,6 @@ export class GetRevisionsResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     error?: shared.ErrorT;
-
-    /**
-     * OK
-     */
-    @SpeakeasyMetadata()
-    getRevisionsResponse?: shared.GetRevisionsResponse;
 
     /**
      * HTTP response status code for this operation
