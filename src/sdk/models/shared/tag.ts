@@ -3,31 +3,28 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { Expose, Transform } from "class-transformer";
+import { Expose } from "class-transformer";
 
 export class Tag extends SpeakeasyBase {
+    /**
+     * Format {namespace_id}/{tag}
+     */
     @SpeakeasyMetadata()
-    @Expose({ name: "created_at" })
-    @Transform(({ value }) => new Date(value), { toClassOnly: true })
-    createdAt: Date;
+    @Expose({ name: "id" })
+    id: string;
 
     /**
      * Human readable tag name
      */
     @SpeakeasyMetadata()
-    @Expose({ name: "id" })
-    id: string;
+    @Expose({ name: "name" })
+    name: string;
 
     @SpeakeasyMetadata()
     @Expose({ name: "namespace_name" })
     namespaceName: string;
 
     @SpeakeasyMetadata()
-    @Expose({ name: "revision_id" })
-    revisionId: string;
-
-    @SpeakeasyMetadata()
-    @Expose({ name: "updated_at" })
-    @Transform(({ value }) => new Date(value), { toClassOnly: true })
-    updatedAt: Date;
+    @Expose({ name: "revision_digest" })
+    revisionDigest: string;
 }

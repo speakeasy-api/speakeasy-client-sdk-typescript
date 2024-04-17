@@ -27,6 +27,7 @@ export * from "./namespace";
 export * from "./organization";
 export * from "./preflightrequest";
 export * from "./preflighttoken";
+export * from "./report";
 export * from "./requestmetadata";
 export * from "./revision";
 export * from "./schema";

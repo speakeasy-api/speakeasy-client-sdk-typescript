@@ -11,8 +11,12 @@ export class Revision extends SpeakeasyBase {
     @Transform(({ value }) => new Date(value), { toClassOnly: true })
     createdAt: Date;
 
+    @SpeakeasyMetadata()
+    @Expose({ name: "digest" })
+    digest: string;
+
     /**
-     * aka digest
+     * Format {namespace_id}/{revision_digest}
      */
     @SpeakeasyMetadata()
     @Expose({ name: "id" })

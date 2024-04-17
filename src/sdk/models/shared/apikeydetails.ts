@@ -11,10 +11,18 @@ export enum AccountType {
     Enterprise = "enterprise",
 }
 
+export enum FeatureFlags {
+    SchemaRegistry = "schema_registry",
+}
+
 export class ApiKeyDetails extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "account_type" })
     accountType: AccountType;
+
+    @SpeakeasyMetadata()
+    @Expose({ name: "feature_flags" })
+    featureFlags: FeatureFlags[];
 
     @SpeakeasyMetadata()
     @Expose({ name: "generation_access_unlimited" })

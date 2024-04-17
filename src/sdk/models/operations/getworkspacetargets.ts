@@ -29,6 +29,9 @@ export class GetWorkspaceTargetsResponse extends SpeakeasyBase {
     @SpeakeasyMetadata()
     contentType: string;
 
+    /**
+     * Error
+     */
     @SpeakeasyMetadata()
     error?: shared.ErrorT;
 

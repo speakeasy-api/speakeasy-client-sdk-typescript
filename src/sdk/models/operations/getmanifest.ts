@@ -13,6 +13,9 @@ export class GetManifestRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=organization_slug" })
     organizationSlug: string;
 
+    /**
+     * Tag or digest
+     */
     @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=revision_reference" })
     revisionReference: string;
 

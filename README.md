@@ -117,6 +117,11 @@ run();
 
 * [getOrganizations](docs/sdks/organizations/README.md#getorganizations) - Get organizations for a user
 
+### [reports](docs/sdks/reports/README.md)
+
+* [getLintingReportSignedUrl](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
+* [uploadReport](docs/sdks/reports/README.md#uploadreport) - Upload a report.
+
 ### [embeds](docs/sdks/embeds/README.md)
 
 * [getEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.

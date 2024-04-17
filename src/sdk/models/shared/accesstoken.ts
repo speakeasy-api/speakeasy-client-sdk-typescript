@@ -34,7 +34,30 @@ export class AccessTokenUser extends SpeakeasyBase {
     id?: string;
 }
 
-export class Workspaces extends SpeakeasyBase {}
+export enum AccessTokenAccountType {
+    Free = "free",
+    ScaleUp = "scale-up",
+    Enterprise = "enterprise",
+}
+
+export class Workspaces extends SpeakeasyBase {
+    @SpeakeasyMetadata()
+    @Expose({ name: "account_type" })
+    accountType?: AccessTokenAccountType;
+
+    @SpeakeasyMetadata()
+    @Expose({ name: "id" })
+    id?: string;
+
+    @SpeakeasyMetadata()
+    @Expose({ name: "name" })
+    name?: string;
+
+    @SpeakeasyMetadata()
+    @Expose({ name: "updated_at" })
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    updatedAt?: Date;
+}
 
 /**
  * An AccessToken is a token that can be used to authenticate with the Speakeasy API.

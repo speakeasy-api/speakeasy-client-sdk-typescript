@@ -6,7 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class File extends SpeakeasyBase {
+export class RegisterSchemaFile extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "multipart_form, content=true" })
     content: Uint8Array;
 
@@ -19,7 +19,7 @@ export class File extends SpeakeasyBase {
  */
 export class RegisterSchemaRequestBody extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "multipart_form, file=true" })
-    file: File;
+    file: RegisterSchemaFile;
 }
 
 export class RegisterSchemaRequest extends SpeakeasyBase {
