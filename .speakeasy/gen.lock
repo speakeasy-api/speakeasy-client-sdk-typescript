@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: fb8d80dde775dc830ade2c3c3fe88d18
+  docChecksum: 2b280a7f12ab57c144a654766cc34af2
   docVersion: 0.4.0
-  speakeasyVersion: 1.253.3
-  generationVersion: 2.306.3
-  releaseVersion: 3.2.4
-  configChecksum: 83833ccb996f879f3990f0e1c6502f52
+  speakeasyVersion: 1.257.1
+  generationVersion: 2.308.2
+  releaseVersion: 3.2.5
+  configChecksum: 5f977ae0b9fbd2ccda7a4153b63b3788
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -93,6 +93,7 @@ generatedFiles:
   - src/sdk/models/operations/getrequestfromeventlog.ts
   - src/sdk/models/operations/queryeventlog.ts
   - src/sdk/models/operations/getorganizations.ts
+  - src/sdk/models/operations/getchangesreportsignedurl.ts
   - src/sdk/models/operations/getlintingreportsignedurl.ts
   - src/sdk/models/operations/uploadreport.ts
   - src/sdk/models/operations/getembedaccesstoken.ts
@@ -219,6 +220,9 @@ generatedFiles:
   - docs/sdk/models/operations/queryeventlogrequest.md
   - docs/sdk/models/operations/queryeventlogresponse.md
   - docs/sdk/models/operations/getorganizationsresponse.md
+  - docs/sdk/models/operations/getchangesreportsignedurlrequest.md
+  - docs/sdk/models/operations/getchangesreportsignedurlsignedaccess.md
+  - docs/sdk/models/operations/getchangesreportsignedurlresponse.md
   - docs/sdk/models/operations/getlintingreportsignedurlrequest.md
   - docs/sdk/models/operations/getlintingreportsignedurlsignedaccess.md
   - docs/sdk/models/operations/getlintingreportsignedurlresponse.md

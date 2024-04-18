@@ -21,6 +21,7 @@ export * from "./getallforversionapiendpoints";
 export * from "./getapiendpoint";
 export * from "./getapis";
 export * from "./getblob";
+export * from "./getchangesreportsignedurl";
 export * from "./getembedaccesstoken";
 export * from "./getlintingreportsignedurl";
 export * from "./getmanifest";
