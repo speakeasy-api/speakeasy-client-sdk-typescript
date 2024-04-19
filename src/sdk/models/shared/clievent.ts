@@ -17,6 +17,16 @@ export enum GenerateBumpType {
     None = "none",
 }
 
+/**
+ * Bump type of the lock file (calculated semver delta, or a custom change (manual release))
+ */
+export enum OpenapiDiffBumpType {
+    Major = "major",
+    Minor = "minor",
+    Patch = "patch",
+    None = "none",
+}
+
 export class CliEvent extends SpeakeasyBase {
     /**
      * Remote commit ID.
@@ -118,6 +128,13 @@ export class CliEvent extends SpeakeasyBase {
     generateGenLockPostFeatures?: string;
 
     /**
+     * Blob digest of the Previous Generation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_gen_lock_pre_blob_digest" })
+    generateGenLockPreBlobDigest?: string;
+
+    /**
      * Checksum of the Previous Rendered OpenAPI document (prior to generation, via gen lock)
      */
     @SpeakeasyMetadata()
@@ -137,6 +154,20 @@ export class CliEvent extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "generate_gen_lock_pre_features" })
     generateGenLockPreFeatures?: string;
+
+    /**
+     * Namespace name of the Previous Generation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_gen_lock_pre_namespace_name" })
+    generateGenLockPreNamespaceName?: string;
+
+    /**
+     * Revision digest of the Previous Generation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_gen_lock_pre_revision_digest" })
+    generateGenLockPreRevisionDigest?: string;
 
     /**
      * Artifact version for the Previous Generation
@@ -272,6 +303,34 @@ export class CliEvent extends SpeakeasyBase {
     interactionType: InteractionType;
 
     /**
+     * The checksum of the lint report.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "lint_report_digest" })
+    lintReportDigest?: string;
+
+    /**
+     * The number of errors in the lint report.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "lint_report_error_count" })
+    lintReportErrorCount?: number;
+
+    /**
+     * The number of info messages in the lint report.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "lint_report_info_count" })
+    lintReportInfoCount?: number;
+
+    /**
+     * The number of warnings in the lint report.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "lint_report_warning_count" })
+    lintReportWarningCount?: number;
+
+    /**
      * Timestamp when the event completed, in local time.
      */
     @SpeakeasyMetadata()
@@ -300,6 +359,48 @@ export class CliEvent extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "management_doc_version" })
     managementDocVersion?: string;
+
+    /**
+     * The blob digest of the base source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "openapi_diff_base_source_blob_digest" })
+    openapiDiffBaseSourceBlobDigest?: string;
+
+    /**
+     * The namespace name of the base source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "openapi_diff_base_source_namespace_name" })
+    openapiDiffBaseSourceNamespaceName?: string;
+
+    /**
+     * The revision digest of the base source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "openapi_diff_base_source_revision_digest" })
+    openapiDiffBaseSourceRevisionDigest?: string;
+
+    /**
+     * The number of breaking changes in the openapi diff report.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "openapi_diff_breaking_changes_count" })
+    openapiDiffBreakingChangesCount?: number;
+
+    /**
+     * Bump type of the lock file (calculated semver delta, or a custom change (manual release))
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "openapi_diff_bump_type" })
+    openapiDiffBumpType?: OpenapiDiffBumpType;
+
+    /**
+     * The checksum of the openapi diff report.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "openapi_diff_report_digest" })
+    openapiDiffReportDigest?: string;
 
     /**
      * Name of the published package.
@@ -342,6 +443,27 @@ export class CliEvent extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "repo_label" })
     repoLabel?: string;
+
+    /**
+     * The blob digest of the source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "source_blob_digest" })
+    sourceBlobDigest?: string;
+
+    /**
+     * The namespace name of the source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "source_namespace_name" })
+    sourceNamespaceName?: string;
+
+    /**
+     * The revision digest of the source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "source_revision_digest" })
+    sourceRevisionDigest?: string;
 
     /**
      * Identifier of the Speakeasy API key.

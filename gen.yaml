@@ -10,7 +10,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
 typescript:
-  version: 3.2.5
+  version: 3.2.6
   author: Speakeasy
   clientServerStatusCodesAsErrors: false
   flattenGlobalSecurity: false

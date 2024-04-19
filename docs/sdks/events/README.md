@@ -107,7 +107,7 @@ Sends an array of events to be stored for a particular workspace.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { GenerateBumpType, InteractionType } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
+import { GenerateBumpType, InteractionType, OpenapiDiffBumpType } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
 
 async function run() {
   const sdk = new Speakeasy({

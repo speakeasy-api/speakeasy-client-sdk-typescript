@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 2b280a7f12ab57c144a654766cc34af2
+  docChecksum: 95815a9501527c69c4aab613380685a5
   docVersion: 0.4.0
-  speakeasyVersion: 1.257.1
-  generationVersion: 2.308.2
-  releaseVersion: 3.2.5
-  configChecksum: 5f977ae0b9fbd2ccda7a4153b63b3788
+  speakeasyVersion: 1.260.6
+  generationVersion: 2.311.1
+  releaseVersion: 3.2.6
+  configChecksum: 7652512edc027d79ab2414a91c0209e9
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -286,6 +286,7 @@ generatedFiles:
   - docs/sdk/models/shared/embedaccesstokenresponse.md
   - docs/sdk/models/shared/embedtoken.md
   - docs/sdk/models/shared/generatebumptype.md
+  - docs/sdk/models/shared/openapidiffbumptype.md
   - docs/sdk/models/shared/clievent.md
   - docs/sdk/models/shared/interactiontype.md
   - docs/sdk/models/shared/targetsdk.md

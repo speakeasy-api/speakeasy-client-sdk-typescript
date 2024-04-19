@@ -8,6 +8,8 @@
 export enum InteractionType {
     CiExec = "CI_EXEC",
     CliExec = "CLI_EXEC",
+    Lint = "LINT",
+    OpenapiDiff = "OPENAPI_DIFF",
     TargetGenerate = "TARGET_GENERATE",
     Tombstone = "TOMBSTONE",
     Authenticate = "AUTHENTICATE",
