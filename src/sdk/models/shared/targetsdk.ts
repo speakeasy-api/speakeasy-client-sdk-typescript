@@ -184,6 +184,27 @@ export class TargetSDK extends SpeakeasyBase {
     repoLabel?: string;
 
     /**
+     * The blob digest of the source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "source_blob_digest" })
+    sourceBlobDigest?: string;
+
+    /**
+     * The namespace name of the source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "source_namespace_name" })
+    sourceNamespaceName?: string;
+
+    /**
+     * The revision digest of the source.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "source_revision_digest" })
+    sourceRevisionDigest?: string;
+
+    /**
      * Indicates whether the event was successful.
      */
     @SpeakeasyMetadata()
