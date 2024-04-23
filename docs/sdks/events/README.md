@@ -8,6 +8,7 @@ REST APIs for capturing event data
 ### Available Operations
 
 * [getWorkspaceEvents](#getworkspaceevents) - Load recent events for a particular workspace
+* [getWorkspaceEventsBySourceRevisionDigest](#getworkspaceeventsbysourcerevisiondigest) - Load events for a particular workspace and source revision digest
 * [getWorkspaceTargets](#getworkspacetargets) - Load targets for a particular workspace
 * [postWorkspaceEvents](#postworkspaceevents) - Post events for a specific workspace
 
@@ -49,6 +50,52 @@ run();
 ### Response
 
 **Promise<[operations.GetWorkspaceEventsResponse](../../sdk/models/operations/getworkspaceeventsresponse.md)>**
+### Errors
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
+
+## getWorkspaceEventsBySourceRevisionDigest
+
+Load events for a particular workspace and source revision digest
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+async function run() {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "<YOUR_API_KEY_HERE>",
+    },
+    workspaceID: "<value>",
+  });
+
+  const res = await sdk.events.getWorkspaceEventsBySourceRevisionDigest({
+    sourceRevisionDigest: "<value>",
+  });
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                    | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                                    | [operations.GetWorkspaceEventsBySourceRevisionDigestRequest](../../sdk/models/operations/getworkspaceeventsbysourcerevisiondigestrequest.md) | :heavy_check_mark:                                                                                                                           | The request object to use for the request.                                                                                                   |
+| `config`                                                                                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                                                 | :heavy_minus_sign:                                                                                                                           | Available config options for making requests.                                                                                                |
+
+
+### Response
+
+**Promise<[operations.GetWorkspaceEventsBySourceRevisionDigestResponse](../../sdk/models/operations/getworkspaceeventsbysourcerevisiondigestresponse.md)>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

@@ -29,6 +29,14 @@ export class ApiKeyDetails extends SpeakeasyBase {
     generationAccessUnlimited?: boolean;
 
     @SpeakeasyMetadata()
+    @Expose({ name: "org_slug" })
+    orgSlug: string;
+
+    @SpeakeasyMetadata()
     @Expose({ name: "workspace_id" })
     workspaceId: string;
+
+    @SpeakeasyMetadata()
+    @Expose({ name: "workspace_slug" })
+    workspaceSlug: string;
 }

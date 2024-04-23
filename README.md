@@ -132,6 +132,7 @@ run();
 ### [events](docs/sdks/events/README.md)
 
 * [getWorkspaceEvents](docs/sdks/events/README.md#getworkspaceevents) - Load recent events for a particular workspace
+* [getWorkspaceEventsBySourceRevisionDigest](docs/sdks/events/README.md#getworkspaceeventsbysourcerevisiondigest) - Load events for a particular workspace and source revision digest
 * [getWorkspaceTargets](docs/sdks/events/README.md#getworkspacetargets) - Load targets for a particular workspace
 * [postWorkspaceEvents](docs/sdks/events/README.md#postworkspaceevents) - Post events for a specific workspace
 <!-- End Available Resources and Operations [operations] -->

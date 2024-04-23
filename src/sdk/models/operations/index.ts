@@ -39,6 +39,7 @@ export * from "./getvalidembedaccesstokens";
 export * from "./getversionmetadata";
 export * from "./getworkspaceaccess";
 export * from "./getworkspaceevents";
+export * from "./getworkspaceeventsbysourcerevisiondigest";
 export * from "./getworkspacetargets";
 export * from "./insertversionmetadata";
 export * from "./postworkspaceevents";

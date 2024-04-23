@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 141a9989778e09b7c6bb43e496b49905
-  docVersion: 0.4.0
-  speakeasyVersion: 1.267.0
-  generationVersion: 2.312.0
-  releaseVersion: 3.2.7
-  configChecksum: ebddc3a00f5ad18520bb7ef42f7f380c
+  docChecksum: 0df832386c1fcd5f74fb87fea6d0e2b7
+  docVersion: 0.4.0 .
+  speakeasyVersion: 1.269.1
+  generationVersion: 2.312.1
+  releaseVersion: 3.2.8
+  configChecksum: 8f2a87c16fd4e0b246915cf2aca1efd1
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -100,6 +100,7 @@ generatedFiles:
   - src/sdk/models/operations/getvalidembedaccesstokens.ts
   - src/sdk/models/operations/revokeembedaccesstoken.ts
   - src/sdk/models/operations/getworkspaceevents.ts
+  - src/sdk/models/operations/getworkspaceeventsbysourcerevisiondigest.ts
   - src/sdk/models/operations/getworkspacetargets.ts
   - src/sdk/models/operations/postworkspaceevents.ts
   - src/sdk/models/shared/error.ts
@@ -237,6 +238,8 @@ generatedFiles:
   - docs/sdk/models/operations/revokeembedaccesstokenresponse.md
   - docs/sdk/models/operations/getworkspaceeventsrequest.md
   - docs/sdk/models/operations/getworkspaceeventsresponse.md
+  - docs/sdk/models/operations/getworkspaceeventsbysourcerevisiondigestrequest.md
+  - docs/sdk/models/operations/getworkspaceeventsbysourcerevisiondigestresponse.md
   - docs/sdk/models/operations/getworkspacetargetsrequest.md
   - docs/sdk/models/operations/getworkspacetargetsresponse.md
   - docs/sdk/models/operations/postworkspaceeventsrequest.md
