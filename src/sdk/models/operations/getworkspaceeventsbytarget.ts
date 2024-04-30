@@ -6,7 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class GetWorkspaceEventsRequest extends SpeakeasyBase {
+export class GetWorkspaceEventsByTargetRequest extends SpeakeasyBase {
     /**
      * Filter to only return events created after this timestamp
      */
@@ -16,8 +16,8 @@ export class GetWorkspaceEventsRequest extends SpeakeasyBase {
     /**
      * Filter to only return events corresponding to a particular gen_lock_id (gen_lock_id uniquely identifies a target)
      */
-    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=generate_gen_lock_id" })
-    generateGenLockId?: string;
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=targetID" })
+    targetID: string;
 
     /**
      * Unique identifier of the workspace.
@@ -26,7 +26,7 @@ export class GetWorkspaceEventsRequest extends SpeakeasyBase {
     workspaceID?: string;
 }
 
-export class GetWorkspaceEventsResponse extends SpeakeasyBase {
+export class GetWorkspaceEventsByTargetResponse extends SpeakeasyBase {
     /**
      * Success
      */

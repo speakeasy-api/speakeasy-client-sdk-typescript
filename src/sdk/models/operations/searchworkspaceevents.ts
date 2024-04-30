@@ -6,12 +6,26 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class GetWorkspaceEventsBySourceRevisionDigestRequest extends SpeakeasyBase {
+export class SearchWorkspaceEventsRequest extends SpeakeasyBase {
+    /**
+     * Unique identifier of the lint report digest.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lint_report_digest" })
+    lintReportDigest?: string;
+
+    /**
+     * Unique identifier of the openapi diff report digest.
+     */
+    @SpeakeasyMetadata({
+        data: "queryParam, style=form;explode=true;name=openapi_diff_report_digest",
+    })
+    openapiDiffReportDigest?: string;
+
     /**
      * Unique identifier of the source revision digest.
      */
-    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=sourceRevisionDigest" })
-    sourceRevisionDigest: string;
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=source_revision_digest" })
+    sourceRevisionDigest?: string;
 
     /**
      * Unique identifier of the workspace.
@@ -20,7 +34,7 @@ export class GetWorkspaceEventsBySourceRevisionDigestRequest extends SpeakeasyBa
     workspaceID?: string;
 }
 
-export class GetWorkspaceEventsBySourceRevisionDigestResponse extends SpeakeasyBase {
+export class SearchWorkspaceEventsResponse extends SpeakeasyBase {
     /**
      * Success
      */

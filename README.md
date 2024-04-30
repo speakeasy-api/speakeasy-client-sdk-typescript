@@ -131,10 +131,10 @@ run();
 
 ### [events](docs/sdks/events/README.md)
 
-* [getWorkspaceEvents](docs/sdks/events/README.md#getworkspaceevents) - Load recent events for a particular workspace
-* [getWorkspaceEventsBySourceRevisionDigest](docs/sdks/events/README.md#getworkspaceeventsbysourcerevisiondigest) - Load events for a particular workspace and source revision digest
+* [getWorkspaceEventsByTarget](docs/sdks/events/README.md#getworkspaceeventsbytarget) - Load recent events for a particular workspace
 * [getWorkspaceTargets](docs/sdks/events/README.md#getworkspacetargets) - Load targets for a particular workspace
 * [postWorkspaceEvents](docs/sdks/events/README.md#postworkspaceevents) - Post events for a specific workspace
+* [searchWorkspaceEvents](docs/sdks/events/README.md#searchworkspaceevents) - Search events for a particular workspace by any field
 <!-- End Available Resources and Operations [operations] -->
 
 
@@ -327,7 +327,7 @@ run();
 
 A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
 
-For example, you can set `workspaceID` to `"<value>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getWorkspaceEvents`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+For example, you can set `workspaceID` to `"<value>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getWorkspaceEventsByTarget`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
 
 
 ### Available Globals
@@ -352,7 +352,9 @@ async function run() {
         workspaceID: "<value>",
     });
 
-    const res = await sdk.events.getWorkspaceEvents({});
+    const res = await sdk.events.getWorkspaceEventsByTarget({
+        targetID: "<value>",
+    });
 
     if (res.statusCode == 200) {
         // handle response

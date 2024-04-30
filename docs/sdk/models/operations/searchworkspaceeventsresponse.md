@@ -1,4 +1,4 @@
-# GetWorkspaceEventsBySourceRevisionDigestResponse
+# SearchWorkspaceEventsResponse
 
 
 ## Fields

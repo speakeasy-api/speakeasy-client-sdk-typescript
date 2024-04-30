@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 0df832386c1fcd5f74fb87fea6d0e2b7
+  docChecksum: e87f7661ef116d09df25c842b1032981
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.269.1
-  generationVersion: 2.312.1
-  releaseVersion: 3.2.8
-  configChecksum: 8f2a87c16fd4e0b246915cf2aca1efd1
+  speakeasyVersion: 1.277.0
+  generationVersion: 2.317.0
+  releaseVersion: 3.2.9
+  configChecksum: 9ddbd175460e245720d00fa873a01975
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -99,10 +99,10 @@ generatedFiles:
   - src/sdk/models/operations/getembedaccesstoken.ts
   - src/sdk/models/operations/getvalidembedaccesstokens.ts
   - src/sdk/models/operations/revokeembedaccesstoken.ts
-  - src/sdk/models/operations/getworkspaceevents.ts
-  - src/sdk/models/operations/getworkspaceeventsbysourcerevisiondigest.ts
+  - src/sdk/models/operations/getworkspaceeventsbytarget.ts
   - src/sdk/models/operations/getworkspacetargets.ts
   - src/sdk/models/operations/postworkspaceevents.ts
+  - src/sdk/models/operations/searchworkspaceevents.ts
   - src/sdk/models/shared/error.ts
   - src/sdk/models/shared/generateopenapispecdiff.ts
   - src/sdk/models/shared/api.ts
@@ -236,14 +236,14 @@ generatedFiles:
   - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
   - docs/sdk/models/operations/revokeembedaccesstokenrequest.md
   - docs/sdk/models/operations/revokeembedaccesstokenresponse.md
-  - docs/sdk/models/operations/getworkspaceeventsrequest.md
-  - docs/sdk/models/operations/getworkspaceeventsresponse.md
-  - docs/sdk/models/operations/getworkspaceeventsbysourcerevisiondigestrequest.md
-  - docs/sdk/models/operations/getworkspaceeventsbysourcerevisiondigestresponse.md
+  - docs/sdk/models/operations/getworkspaceeventsbytargetrequest.md
+  - docs/sdk/models/operations/getworkspaceeventsbytargetresponse.md
   - docs/sdk/models/operations/getworkspacetargetsrequest.md
   - docs/sdk/models/operations/getworkspacetargetsresponse.md
   - docs/sdk/models/operations/postworkspaceeventsrequest.md
   - docs/sdk/models/operations/postworkspaceeventsresponse.md
+  - docs/sdk/models/operations/searchworkspaceeventsrequest.md
+  - docs/sdk/models/operations/searchworkspaceeventsresponse.md
   - docs/sdk/models/shared/errort.md
   - docs/sdk/models/shared/generateopenapispecdiff.md
   - docs/sdk/models/shared/api.md
