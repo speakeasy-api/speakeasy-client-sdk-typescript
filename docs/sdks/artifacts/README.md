@@ -8,6 +8,7 @@
 * [getNamespaces](#getnamespaces) - Each namespace contains many revisions.
 * [getRevisions](#getrevisions)
 * [getTags](#gettags)
+* [postTags](#posttags) - Add tags to an existing revision
 * [preflight](#preflight) - Get access token for communicating with OCI distribution endpoints
 
 ## getBlob
@@ -233,6 +234,58 @@ run();
 ### Response
 
 **Promise<[operations.GetTagsResponse](../../sdk/models/operations/gettagsresponse.md)>**
+### Errors
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
+
+## postTags
+
+Add tags to an existing revision
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+async function run() {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "<YOUR_API_KEY_HERE>",
+    },
+    workspaceID: "<value>",
+  });
+
+  const res = await sdk.artifacts.postTags({
+    addTags: {
+      revisionDigest: "<value>",
+      tags: [
+        "<value>",
+      ],
+    },
+    namespaceName: "<value>",
+  });
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `request`                                                                    | [operations.PostTagsRequest](../../sdk/models/operations/posttagsrequest.md) | :heavy_check_mark:                                                           | The request object to use for the request.                                   |
+| `config`                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                 | :heavy_minus_sign:                                                           | Available config options for making requests.                                |
+
+
+### Response
+
+**Promise<[operations.PostTagsResponse](../../sdk/models/operations/posttagsresponse.md)>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

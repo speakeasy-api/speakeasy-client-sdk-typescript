@@ -41,6 +41,7 @@ export * from "./getworkspaceaccess";
 export * from "./getworkspaceeventsbytarget";
 export * from "./getworkspacetargets";
 export * from "./insertversionmetadata";
+export * from "./posttags";
 export * from "./postworkspaceevents";
 export * from "./preflight";
 export * from "./queryeventlog";

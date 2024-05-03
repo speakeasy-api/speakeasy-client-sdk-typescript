@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: e87f7661ef116d09df25c842b1032981
+  docChecksum: 1710218668d467d8f56c88d745bfdf80
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.277.0
-  generationVersion: 2.317.0
-  releaseVersion: 3.2.9
-  configChecksum: 9ddbd175460e245720d00fa873a01975
+  speakeasyVersion: 1.277.8
+  generationVersion: 2.319.10
+  releaseVersion: 3.2.10
+  configChecksum: 8ca05e7f81f384ade430f32c5449cd26
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -14,7 +14,7 @@ management:
 features:
   typescript:
     acceptHeaders: 2.81.1
-    core: 3.4.8
+    core: 3.4.9
     examples: 2.81.3
     globalSecurity: 2.82.5
     globalServerURLs: 2.82.2
@@ -84,6 +84,7 @@ generatedFiles:
   - src/sdk/models/operations/getnamespaces.ts
   - src/sdk/models/operations/getrevisions.ts
   - src/sdk/models/operations/gettags.ts
+  - src/sdk/models/operations/posttags.ts
   - src/sdk/models/operations/preflight.ts
   - src/sdk/models/operations/getaccesstoken.ts
   - src/sdk/models/operations/getuser.ts
@@ -122,6 +123,7 @@ generatedFiles:
   - src/sdk/models/shared/revision.ts
   - src/sdk/models/shared/gettagsresponse.ts
   - src/sdk/models/shared/tag.ts
+  - src/sdk/models/shared/addtags.ts
   - src/sdk/models/shared/preflighttoken.ts
   - src/sdk/models/shared/preflightrequest.ts
   - src/sdk/models/shared/accesstoken.ts
@@ -207,6 +209,8 @@ generatedFiles:
   - docs/sdk/models/operations/getrevisionsresponse.md
   - docs/sdk/models/operations/gettagsrequest.md
   - docs/sdk/models/operations/gettagsresponse.md
+  - docs/sdk/models/operations/posttagsrequest.md
+  - docs/sdk/models/operations/posttagsresponse.md
   - docs/sdk/models/operations/preflightresponse.md
   - docs/sdk/models/operations/getaccesstokenrequest.md
   - docs/sdk/models/operations/getaccesstokenresponse.md
@@ -264,6 +268,7 @@ generatedFiles:
   - docs/sdk/models/shared/revision.md
   - docs/sdk/models/shared/gettagsresponse.md
   - docs/sdk/models/shared/tag.md
+  - docs/sdk/models/shared/addtags.md
   - docs/sdk/models/shared/preflighttoken.md
   - docs/sdk/models/shared/preflightrequest.md
   - docs/sdk/models/shared/claims.md

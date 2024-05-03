@@ -4,6 +4,7 @@
 
 export * from "./accessdetails";
 export * from "./accesstoken";
+export * from "./addtags";
 export * from "./annotations";
 export * from "./api";
 export * from "./apiendpoint";
