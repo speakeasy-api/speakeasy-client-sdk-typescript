@@ -58,6 +58,13 @@ export class CliEvent extends SpeakeasyBase {
     durationMs?: number;
 
     /**
+     * Error message if the event was not successful.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "error" })
+    error?: string;
+
+    /**
      * Unique identifier for each execution of the CLI.
      */
     @SpeakeasyMetadata()
@@ -303,6 +310,13 @@ export class CliEvent extends SpeakeasyBase {
     interactionType: InteractionType;
 
     /**
+     * The last step of the event.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "last_step" })
+    lastStep?: string;
+
+    /**
      * The checksum of the lint report.
      */
     @SpeakeasyMetadata()
@@ -359,6 +373,13 @@ export class CliEvent extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "management_doc_version" })
     managementDocVersion?: string;
+
+    /**
+     * Mermaid diagram
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "mermaid_diagram" })
+    mermaidDiagram?: string;
 
     /**
      * The blob digest of the base source.
@@ -485,6 +506,34 @@ export class CliEvent extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "success" })
     success: boolean;
+
+    /**
+     * Workflow lock file (post execution)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "workflow_lock_post_raw" })
+    workflowLockPostRaw?: string;
+
+    /**
+     * Workflow lock file (prior to execution)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "workflow_lock_pre_raw" })
+    workflowLockPreRaw?: string;
+
+    /**
+     * Workflow file (post execution)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "workflow_post_raw" })
+    workflowPostRaw?: string;
+
+    /**
+     * Workflow file (prior to execution)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "workflow_pre_raw" })
+    workflowPreRaw?: string;
 
     /**
      * Identifier of the workspace.

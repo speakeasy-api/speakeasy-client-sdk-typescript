@@ -22,6 +22,13 @@ export class TargetSDK extends SpeakeasyBase {
     continuousIntegrationEnvironment?: string;
 
     /**
+     * Error message if the last event was not successful.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "error" })
+    error?: string;
+
+    /**
      * Version of the generated target (post generation)
      */
     @SpeakeasyMetadata()
