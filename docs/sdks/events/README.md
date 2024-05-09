@@ -26,7 +26,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.events.getWorkspaceEventsByTarget({
@@ -72,7 +71,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.events.getWorkspaceTargets({});
@@ -117,7 +115,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.events.postWorkspaceEvents({
@@ -176,7 +173,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.events.searchWorkspaceEvents({});

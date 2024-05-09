@@ -29,7 +29,6 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.getApis({
@@ -163,7 +162,6 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "<value>",
     });
 
     let res;
@@ -213,7 +211,6 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.deleteApi({
@@ -243,7 +240,6 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.deleteApi({
@@ -305,7 +301,6 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "<value>",
     });
 
     const res = await sdk.apis.deleteApi({
@@ -350,7 +345,6 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "<value>",
     });
 
     const res = await sdk.events.getWorkspaceEventsByTarget({
@@ -381,7 +375,6 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "<value>",
     });
 
     const res = await sdk.auth.getWorkspaceAccess(
@@ -426,7 +419,6 @@ async function run() {
         security: {
             apiKey: "<YOUR_API_KEY_HERE>",
         },
-        workspaceID: "<value>",
     });
 
     const res = await sdk.auth.getWorkspaceAccess({});

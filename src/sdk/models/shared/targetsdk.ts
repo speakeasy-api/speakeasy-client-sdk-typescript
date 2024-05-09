@@ -36,6 +36,13 @@ export class TargetSDK extends SpeakeasyBase {
     generateConfigPostVersion?: string;
 
     /**
+     * Eligible feature set during generation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_eligible_features" })
+    generateEligibleFeatures?: string;
+
+    /**
      * gen.lock ID (expected to be a uuid). The same as `id`. A unique identifier for the target.
      */
     @SpeakeasyMetadata()
@@ -55,6 +62,20 @@ export class TargetSDK extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "generate_gen_lock_pre_version" })
     generateGenLockPreVersion?: string;
+
+    /**
+     * The number of operations ignored in generation.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_number_of_operations_ignored" })
+    generateNumberOfOperationsIgnored?: number;
+
+    /**
+     * The number of operations used in generation.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_number_of_operations_used" })
+    generateNumberOfOperationsUsed?: number;
 
     /**
      * Indicates whether the target was considered published.
@@ -90,6 +111,13 @@ export class TargetSDK extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "gh_action_organization" })
     ghActionOrganization?: string;
+
+    /**
+     * GitHub Action ref value.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "gh_action_ref" })
+    ghActionRef?: string;
 
     /**
      * GitHub repository of the action.

@@ -25,7 +25,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.artifacts.getBlob({
@@ -74,7 +73,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.artifacts.getManifest({
@@ -123,7 +121,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.artifacts.getNamespaces();
@@ -164,7 +161,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.artifacts.getRevisions({
@@ -208,7 +204,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.artifacts.getTags({
@@ -254,7 +249,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.artifacts.postTags({
@@ -306,7 +300,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.artifacts.preflight({

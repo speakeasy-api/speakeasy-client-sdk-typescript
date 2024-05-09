@@ -26,7 +26,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.embeds.getEmbedAccessToken({
@@ -83,7 +82,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.embeds.getValidEmbedAccessTokens();
@@ -126,7 +124,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.embeds.revokeEmbedAccessToken({

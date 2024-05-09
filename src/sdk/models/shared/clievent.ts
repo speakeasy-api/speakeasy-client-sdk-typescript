@@ -121,6 +121,13 @@ export class CliEvent extends SpeakeasyBase {
     generateConfigPreVersion?: string;
 
     /**
+     * Eligible feature set during generation
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_eligible_features" })
+    generateEligibleFeatures?: string;
+
+    /**
      * gen.lock ID (expected to be a uuid).
      */
     @SpeakeasyMetadata()
@@ -184,6 +191,20 @@ export class CliEvent extends SpeakeasyBase {
     generateGenLockPreVersion?: string;
 
     /**
+     * The number of operations ignored in generation.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_number_of_operations_ignored" })
+    generateNumberOfOperationsIgnored?: number;
+
+    /**
+     * The number of operations used in generation.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_number_of_operations_used" })
+    generateNumberOfOperationsUsed?: number;
+
+    /**
      * Indicates whether tests were output.
      */
     @SpeakeasyMetadata()
@@ -231,6 +252,13 @@ export class CliEvent extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "gh_action_organization" })
     ghActionOrganization?: string;
+
+    /**
+     * GitHub Action ref value.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "gh_action_ref" })
+    ghActionRef?: string;
 
     /**
      * GitHub repository of the action.

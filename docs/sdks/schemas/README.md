@@ -30,7 +30,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.deleteSchema({
@@ -78,7 +77,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.downloadSchema({
@@ -125,7 +123,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.downloadSchemaRevision({
@@ -174,7 +171,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.getSchema({
@@ -221,7 +217,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.getSchemaDiff({
@@ -271,7 +266,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.getSchemaRevision({
@@ -320,7 +314,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.getSchemas({
@@ -368,7 +361,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.schemas.registerSchema({

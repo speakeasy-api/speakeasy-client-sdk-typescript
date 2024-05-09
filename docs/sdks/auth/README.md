@@ -22,9 +22,7 @@ Get or refresh an access token for the current workspace.
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 async function run() {
-  const sdk = new Speakeasy({
-    workspaceID: "<value>",
-  });
+  const sdk = new Speakeasy();
 
   const res = await sdk.auth.getAccessToken({
     workspaceId: "<value>",
@@ -69,7 +67,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.auth.getUser();
@@ -112,7 +109,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.auth.getWorkspaceAccess({});
@@ -157,7 +153,6 @@ async function run() {
     security: {
       apiKey: "<YOUR_API_KEY_HERE>",
     },
-    workspaceID: "<value>",
   });
 
   const res = await sdk.auth.validateApiKey();
