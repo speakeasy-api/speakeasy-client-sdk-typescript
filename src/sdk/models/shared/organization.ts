@@ -20,7 +20,7 @@ export class Organization extends SpeakeasyBase {
     accountType: OrganizationAccountType;
 
     @SpeakeasyMetadata()
-    @Expose({ name: "created)at" })
+    @Expose({ name: "created_at" })
     @Transform(({ value }) => new Date(value), { toClassOnly: true })
     createdAt?: Date;
 

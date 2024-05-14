@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 781d670121afeffb63b7a5292c609f7f
+  docChecksum: 7a88ff5ef4ad3289ab4aec22a110bb64
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.285.1
-  generationVersion: 2.326.3
-  releaseVersion: 3.2.12
-  configChecksum: 679c325658f56b2ce23772e2b011a2a1
+  speakeasyVersion: 1.286.3
+  generationVersion: 2.329.0
+  releaseVersion: 3.2.13
+  configChecksum: 76197fed64718f58c38a76d546390d46
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -280,7 +280,6 @@ generatedFiles:
   - docs/sdk/models/shared/level.md
   - docs/sdk/models/shared/accessdetails.md
   - docs/sdk/models/shared/accounttype.md
-  - docs/sdk/models/shared/featureflags.md
   - docs/sdk/models/shared/apikeydetails.md
   - docs/sdk/models/shared/unboundedrequest.md
   - docs/sdk/models/shared/boundedrequest.md
