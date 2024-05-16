@@ -16,6 +16,7 @@ export * from "./clievent";
 export * from "./embedaccesstokenresponse";
 export * from "./embedtoken";
 export * from "./error";
+export * from "./featureflag";
 export * from "./filter";
 export * from "./filters";
 export * from "./generateopenapispecdiff";

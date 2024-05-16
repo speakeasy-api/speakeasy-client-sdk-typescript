@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 7a88ff5ef4ad3289ab4aec22a110bb64
+  docChecksum: f3ee86ef6f2ca4b47599522e63754f76
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.286.3
-  generationVersion: 2.329.0
-  releaseVersion: 3.2.13
-  configChecksum: 76197fed64718f58c38a76d546390d46
+  speakeasyVersion: 1.291.0
+  generationVersion: 2.332.4
+  releaseVersion: 3.3.0
+  configChecksum: 5753dc64f3ae26c7d6f70dd0e25489cf
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -15,6 +15,7 @@ features:
   typescript:
     acceptHeaders: 2.81.1
     core: 3.4.9
+    deprecations: 2.81.1
     examples: 2.81.3
     globalSecurity: 2.82.5
     globalServerURLs: 2.82.2
@@ -127,6 +128,7 @@ generatedFiles:
   - src/sdk/models/shared/preflighttoken.ts
   - src/sdk/models/shared/preflightrequest.ts
   - src/sdk/models/shared/accesstoken.ts
+  - src/sdk/models/shared/featureflag.ts
   - src/sdk/models/shared/user.ts
   - src/sdk/models/shared/accessdetails.ts
   - src/sdk/models/shared/apikeydetails.ts
@@ -276,6 +278,7 @@ generatedFiles:
   - docs/sdk/models/shared/accesstokenaccounttype.md
   - docs/sdk/models/shared/workspaces.md
   - docs/sdk/models/shared/accesstoken.md
+  - docs/sdk/models/shared/featureflag.md
   - docs/sdk/models/shared/user.md
   - docs/sdk/models/shared/level.md
   - docs/sdk/models/shared/accessdetails.md

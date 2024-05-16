@@ -3,6 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
+import { FeatureFlag } from "./featureflag";
 import { Expose, Transform, Type } from "class-transformer";
 
 export class Claims extends SpeakeasyBase {}
@@ -71,6 +72,11 @@ export class AccessToken extends SpeakeasyBase {
     @Expose({ name: "claims" })
     @Type(() => Claims)
     claims: Claims;
+
+    @SpeakeasyMetadata({ elemType: FeatureFlag })
+    @Expose({ name: "feature_flags" })
+    @Type(() => FeatureFlag)
+    featureFlags?: FeatureFlag[];
 
     @SpeakeasyMetadata()
     @Expose({ name: "user" })
