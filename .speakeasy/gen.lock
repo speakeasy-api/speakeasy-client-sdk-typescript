@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: f3ee86ef6f2ca4b47599522e63754f76
+  docChecksum: 5dd84d4ef84bb4a4426881954f176d08
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.291.0
-  generationVersion: 2.332.4
-  releaseVersion: 3.3.0
-  configChecksum: 5753dc64f3ae26c7d6f70dd0e25489cf
+  speakeasyVersion: 1.293.1
+  generationVersion: 2.333.3
+  releaseVersion: 3.3.1
+  configChecksum: a7fa586f6b47a9c105da666f702812cb
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -31,6 +31,7 @@ generatedFiles:
   - src/sdk/artifacts.ts
   - src/sdk/auth.ts
   - src/sdk/requests.ts
+  - src/sdk/github.ts
   - src/sdk/organizations.ts
   - src/sdk/reports.ts
   - src/sdk/embeds.ts
@@ -94,6 +95,10 @@ generatedFiles:
   - src/sdk/models/operations/generaterequestpostmancollection.ts
   - src/sdk/models/operations/getrequestfromeventlog.ts
   - src/sdk/models/operations/queryeventlog.ts
+  - src/sdk/models/operations/githubcheckaccess.ts
+  - src/sdk/models/operations/githubconfiguretarget.ts
+  - src/sdk/models/operations/githubtriggeraction.ts
+  - src/sdk/models/operations/getorganizationusage.ts
   - src/sdk/models/operations/getorganizations.ts
   - src/sdk/models/operations/getchangesreportsignedurl.ts
   - src/sdk/models/operations/getlintingreportsignedurl.ts
@@ -137,6 +142,10 @@ generatedFiles:
   - src/sdk/models/shared/requestmetadata.ts
   - src/sdk/models/shared/filters.ts
   - src/sdk/models/shared/filter.ts
+  - src/sdk/models/shared/githubconfiguretargetrequest.ts
+  - src/sdk/models/shared/githubtriggeractionrequest.ts
+  - src/sdk/models/shared/organizationusageresponse.ts
+  - src/sdk/models/shared/organizationusage.ts
   - src/sdk/models/shared/organization.ts
   - src/sdk/models/shared/report.ts
   - src/sdk/models/shared/embedaccesstokenresponse.ts
@@ -226,6 +235,11 @@ generatedFiles:
   - docs/sdk/models/operations/getrequestfromeventlogresponse.md
   - docs/sdk/models/operations/queryeventlogrequest.md
   - docs/sdk/models/operations/queryeventlogresponse.md
+  - docs/sdk/models/operations/githubcheckaccessrequest.md
+  - docs/sdk/models/operations/githubcheckaccessresponse.md
+  - docs/sdk/models/operations/githubconfiguretargetresponse.md
+  - docs/sdk/models/operations/githubtriggeractionresponse.md
+  - docs/sdk/models/operations/getorganizationusageresponse.md
   - docs/sdk/models/operations/getorganizationsresponse.md
   - docs/sdk/models/operations/getchangesreportsignedurlrequest.md
   - docs/sdk/models/operations/getchangesreportsignedurlsignedaccess.md
@@ -289,6 +303,10 @@ generatedFiles:
   - docs/sdk/models/shared/requestmetadata.md
   - docs/sdk/models/shared/filters.md
   - docs/sdk/models/shared/filter.md
+  - docs/sdk/models/shared/githubconfiguretargetrequest.md
+  - docs/sdk/models/shared/githubtriggeractionrequest.md
+  - docs/sdk/models/shared/organizationusageresponse.md
+  - docs/sdk/models/shared/organizationusage.md
   - docs/sdk/models/shared/organizationaccounttype.md
   - docs/sdk/models/shared/organization.md
   - docs/sdk/models/shared/typet.md
@@ -310,6 +328,7 @@ generatedFiles:
   - docs/internal/utils/retryconfig.md
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
+  - docs/sdks/github/README.md
   - docs/sdks/organizations/README.md
   - docs/sdks/reports/README.md
   - docs/sdks/embeds/README.md

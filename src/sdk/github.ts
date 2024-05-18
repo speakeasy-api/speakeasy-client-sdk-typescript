@@ -9,27 +9,26 @@ import * as shared from "../sdk/models/shared";
 import { SDKConfiguration } from "./sdk";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from "axios";
 
-export class Organizations {
+export class Github {
     private sdkConfiguration: SDKConfiguration;
 
     constructor(sdkConfig: SDKConfiguration) {
         this.sdkConfiguration = sdkConfig;
     }
 
-    /**
-     * Get billing usage summary for a particular organization
-     *
-     * @remarks
-     * Returns a billing usage summary by target languages for a particular organization
-     */
-    async getOrganizationUsage(
+    async githubCheckAccess(
+        req: operations.GithubCheckAccessRequest,
         config?: AxiosRequestConfig
-    ): Promise<operations.GetOrganizationUsageResponse> {
+    ): Promise<operations.GithubCheckAccessResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.GithubCheckAccessRequest(req);
+        }
+
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/organization/usage";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/github/check_access";
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -40,13 +39,14 @@ export class Organizations {
         }
         const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = { ...config?.headers, ...properties.headers };
+        const queryParams: string = utils.serializeQueryParams(req, this.sdkConfiguration.globals);
         headers["Accept"] = "application/json";
 
         headers["user-agent"] = this.sdkConfiguration.userAgent;
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: operationUrl,
+            url: operationUrl + queryParams,
             method: "get",
             headers: headers,
             responseType: "arraybuffer",
@@ -59,28 +59,14 @@ export class Organizations {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.GetOrganizationUsageResponse =
-            new operations.GetOrganizationUsageResponse({
-                statusCode: httpRes.status,
-                contentType: responseContentType,
-                rawResponse: httpRes,
-            });
+        const res: operations.GithubCheckAccessResponse = new operations.GithubCheckAccessResponse({
+            statusCode: httpRes.status,
+            contentType: responseContentType,
+            rawResponse: httpRes,
+        });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
-                if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.organizationUsageResponse = utils.objectToClass(
-                        JSON.parse(decodedRes),
-                        shared.OrganizationUsageResponse
-                    );
-                } else {
-                    throw new errors.SDKError(
-                        "unknown content-type received: " + responseContentType,
-                        httpRes.status,
-                        decodedRes,
-                        httpRes
-                    );
-                }
                 break;
             default:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
@@ -99,20 +85,29 @@ export class Organizations {
         return res;
     }
 
-    /**
-     * Get organizations for a user
-     *
-     * @remarks
-     * Returns a list of organizations a user has access too
-     */
-    async getOrganizations(
+    async githubConfigureTarget(
+        req: shared.GithubConfigureTargetRequest,
         config?: AxiosRequestConfig
-    ): Promise<operations.GetOrganizationsResponse> {
+    ): Promise<operations.GithubConfigureTargetResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new shared.GithubConfigureTargetRequest(req);
+        }
+
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/organization";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/github/configure_target";
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "request", "json");
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;
         if (typeof globalSecurity === "function") {
@@ -122,7 +117,12 @@ export class Organizations {
             globalSecurity = new shared.Security(globalSecurity);
         }
         const properties = utils.parseSecurityProperties(globalSecurity);
-        const headers: RawAxiosRequestHeaders = { ...config?.headers, ...properties.headers };
+        const headers: RawAxiosRequestHeaders = {
+            ...reqBodyHeaders,
+            ...config?.headers,
+            ...properties.headers,
+        };
+        if (reqBody == null) throw new Error("request body is required");
         headers["Accept"] = "application/json";
 
         headers["user-agent"] = this.sdkConfiguration.userAgent;
@@ -130,9 +130,10 @@ export class Organizations {
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
             url: operationUrl,
-            method: "get",
+            method: "post",
             headers: headers,
             responseType: "arraybuffer",
+            data: reqBody,
             ...config,
         });
 
@@ -142,22 +143,19 @@ export class Organizations {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.GetOrganizationsResponse = new operations.GetOrganizationsResponse({
-            statusCode: httpRes.status,
-            contentType: responseContentType,
-            rawResponse: httpRes,
-        });
+        const res: operations.GithubConfigureTargetResponse =
+            new operations.GithubConfigureTargetResponse({
+                statusCode: httpRes.status,
+                contentType: responseContentType,
+                rawResponse: httpRes,
+            });
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
+                break;
+            default:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.organizations = [];
-                    const resFieldDepth: number = utils.getResFieldDepth(res);
-                    res.organizations = utils.objectToClass(
-                        JSON.parse(decodedRes),
-                        shared.Organization,
-                        resFieldDepth
-                    );
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
                 } else {
                     throw new errors.SDKError(
                         "unknown content-type received: " + responseContentType,
@@ -166,6 +164,79 @@ export class Organizations {
                         httpRes
                     );
                 }
+                break;
+        }
+
+        return res;
+    }
+
+    async githubTriggerAction(
+        req: shared.GithubTriggerActionRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.GithubTriggerActionResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new shared.GithubTriggerActionRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/github/trigger_action";
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "request", "json");
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
+        }
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
+        const headers: RawAxiosRequestHeaders = {
+            ...reqBodyHeaders,
+            ...config?.headers,
+            ...properties.headers,
+        };
+        if (reqBody == null) throw new Error("request body is required");
+        headers["Accept"] = "application/json";
+
+        headers["user-agent"] = this.sdkConfiguration.userAgent;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: operationUrl,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const responseContentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.GithubTriggerActionResponse =
+            new operations.GithubTriggerActionResponse({
+                statusCode: httpRes.status,
+                contentType: responseContentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
                 break;
             default:
                 if (utils.matchContentType(responseContentType, `application/json`)) {

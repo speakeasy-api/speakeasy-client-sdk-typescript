@@ -113,8 +113,15 @@ run();
 * [getRequestFromEventLog](docs/sdks/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
 * [queryEventLog](docs/sdks/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
 
+### [github](docs/sdks/github/README.md)
+
+* [githubCheckAccess](docs/sdks/github/README.md#githubcheckaccess)
+* [githubConfigureTarget](docs/sdks/github/README.md#githubconfiguretarget)
+* [githubTriggerAction](docs/sdks/github/README.md#githubtriggeraction)
+
 ### [organizations](docs/sdks/organizations/README.md)
 
+* [getOrganizationUsage](docs/sdks/organizations/README.md#getorganizationusage) - Get billing usage summary for a particular organization
 * [getOrganizations](docs/sdks/organizations/README.md#getorganizations) - Get organizations for a user
 
 ### [reports](docs/sdks/reports/README.md)

@@ -10,6 +10,7 @@ import { Artifacts } from "./artifacts";
 import { Auth } from "./auth";
 import { Embeds } from "./embeds";
 import { Events } from "./events";
+import { Github } from "./github";
 import { Metadata } from "./metadata";
 import { Organizations } from "./organizations";
 import { Reports } from "./reports";
@@ -67,10 +68,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.4.0 .";
-    sdkVersion = "3.3.0";
-    genVersion = "2.332.4";
+    sdkVersion = "3.3.1";
+    genVersion = "2.333.3";
     userAgent =
-        "speakeasy-sdk/typescript 3.3.0 2.332.4 0.4.0 . @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 3.3.1 2.333.3 0.4.0 . @speakeasy-api/speakeasy-client-sdk-typescript";
     globals: any;
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
@@ -109,6 +110,7 @@ export class Speakeasy {
      * REST APIs for retrieving request information
      */
     public requests: Requests;
+    public github: Github;
     public organizations: Organizations;
     /**
      * REST APIs for managing reports
@@ -156,6 +158,7 @@ export class Speakeasy {
         this.artifacts = new Artifacts(this.sdkConfiguration);
         this.auth = new Auth(this.sdkConfiguration);
         this.requests = new Requests(this.sdkConfiguration);
+        this.github = new Github(this.sdkConfiguration);
         this.organizations = new Organizations(this.sdkConfiguration);
         this.reports = new Reports(this.sdkConfiguration);
         this.embeds = new Embeds(this.sdkConfiguration);
