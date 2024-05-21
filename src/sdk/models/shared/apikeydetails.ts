@@ -3,8 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import { FeatureFlag } from "./featureflag";
-import { Expose, Type } from "class-transformer";
+import { Expose } from "class-transformer";
 
 export enum AccountType {
     Free = "free",
@@ -17,10 +16,9 @@ export class ApiKeyDetails extends SpeakeasyBase {
     @Expose({ name: "account_type" })
     accountType: AccountType;
 
-    @SpeakeasyMetadata({ elemType: FeatureFlag })
+    @SpeakeasyMetadata()
     @Expose({ name: "enabled_features" })
-    @Type(() => FeatureFlag)
-    enabledFeatures: FeatureFlag[];
+    enabledFeatures: string[];
 
     /**
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
