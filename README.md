@@ -121,6 +121,7 @@ run();
 
 ### [organizations](docs/sdks/organizations/README.md)
 
+* [createFreeTrial](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
 * [getOrganizationUsage](docs/sdks/organizations/README.md#getorganizationusage) - Get billing usage summary for a particular organization
 * [getOrganizations](docs/sdks/organizations/README.md#getorganizations) - Get organizations for a user
 

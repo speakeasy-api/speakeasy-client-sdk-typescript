@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: f85cf38fea71c78f79ca43b23b176863
+  docChecksum: c1d828d0e8ecf8fac6bec9e95f0ca086
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.294.0
-  generationVersion: 2.333.3
-  releaseVersion: 3.3.2
-  configChecksum: 20388f246d8d129879fb505fba89efc6
+  speakeasyVersion: 1.295.2
+  generationVersion: 2.335.5
+  releaseVersion: 3.3.3
+  configChecksum: cbbb7f5c89a3b545efe7057a5f101858
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -98,6 +98,7 @@ generatedFiles:
   - src/sdk/models/operations/githubcheckaccess.ts
   - src/sdk/models/operations/githubconfiguretarget.ts
   - src/sdk/models/operations/githubtriggeraction.ts
+  - src/sdk/models/operations/createfreetrial.ts
   - src/sdk/models/operations/getorganizationusage.ts
   - src/sdk/models/operations/getorganizations.ts
   - src/sdk/models/operations/getchangesreportsignedurl.ts
@@ -239,6 +240,7 @@ generatedFiles:
   - docs/sdk/models/operations/githubcheckaccessresponse.md
   - docs/sdk/models/operations/githubconfiguretargetresponse.md
   - docs/sdk/models/operations/githubtriggeractionresponse.md
+  - docs/sdk/models/operations/createfreetrialresponse.md
   - docs/sdk/models/operations/getorganizationusageresponse.md
   - docs/sdk/models/operations/getorganizationsresponse.md
   - docs/sdk/models/operations/getchangesreportsignedurlrequest.md
