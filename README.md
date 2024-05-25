@@ -131,6 +131,10 @@ run();
 * [getLintingReportSignedUrl](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
 * [uploadReport](docs/sdks/reports/README.md#uploadreport) - Upload a report.
 
+### [suggest](docs/sdks/suggest/README.md)
+
+* [suggestOperationIDs](docs/sdks/suggest/README.md#suggestoperationids) - Generate operation ID suggestions.
+
 ### [embeds](docs/sdks/embeds/README.md)
 
 * [getEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.

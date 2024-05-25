@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: c1d828d0e8ecf8fac6bec9e95f0ca086
+  docChecksum: 8a861fbcf601580459816dcab1973d85
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.295.2
-  generationVersion: 2.335.5
-  releaseVersion: 3.3.3
-  configChecksum: cbbb7f5c89a3b545efe7057a5f101858
+  speakeasyVersion: 1.296.1
+  generationVersion: 2.338.1
+  releaseVersion: 3.3.4
+  configChecksum: f9b752d021d3a6a8f21c9fe9beb11516
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -34,6 +34,7 @@ generatedFiles:
   - src/sdk/github.ts
   - src/sdk/organizations.ts
   - src/sdk/reports.ts
+  - src/sdk/suggest.ts
   - src/sdk/embeds.ts
   - src/sdk/events.ts
   - src/sdk/sdk.ts
@@ -104,6 +105,7 @@ generatedFiles:
   - src/sdk/models/operations/getchangesreportsignedurl.ts
   - src/sdk/models/operations/getlintingreportsignedurl.ts
   - src/sdk/models/operations/uploadreport.ts
+  - src/sdk/models/operations/suggestoperationids.ts
   - src/sdk/models/operations/getembedaccesstoken.ts
   - src/sdk/models/operations/getvalidembedaccesstokens.ts
   - src/sdk/models/operations/revokeembedaccesstoken.ts
@@ -253,6 +255,13 @@ generatedFiles:
   - docs/sdk/models/operations/uploadreportrequestbody.md
   - docs/sdk/models/operations/uploadreportuploadedreport.md
   - docs/sdk/models/operations/uploadreportresponse.md
+  - docs/sdk/models/operations/depthstyle.md
+  - docs/sdk/models/operations/style.md
+  - docs/sdk/models/operations/opts.md
+  - docs/sdk/models/operations/schema.md
+  - docs/sdk/models/operations/suggestoperationidsrequestbody.md
+  - docs/sdk/models/operations/suggestoperationidssuggestion.md
+  - docs/sdk/models/operations/suggestoperationidsresponse.md
   - docs/sdk/models/operations/getembedaccesstokenrequest.md
   - docs/sdk/models/operations/getembedaccesstokenresponse.md
   - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
@@ -333,6 +342,7 @@ generatedFiles:
   - docs/sdks/github/README.md
   - docs/sdks/organizations/README.md
   - docs/sdks/reports/README.md
+  - docs/sdks/suggest/README.md
   - docs/sdks/embeds/README.md
   - docs/sdks/events/README.md
   - USAGE.md

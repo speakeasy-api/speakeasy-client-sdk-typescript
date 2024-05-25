@@ -53,6 +53,7 @@ export * from "./queryeventlog";
 export * from "./registerschema";
 export * from "./revokeembedaccesstoken";
 export * from "./searchworkspaceevents";
+export * from "./suggestoperationids";
 export * from "./uploadreport";
 export * from "./upsertapi";
 export * from "./upsertapiendpoint";

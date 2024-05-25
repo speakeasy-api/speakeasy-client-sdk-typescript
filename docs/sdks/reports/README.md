@@ -122,7 +122,7 @@ async function run() {
     data: {},
     file: {
       content: new TextEncoder().encode("0xA329C0ad85"),
-      fileName: "sausages.m3a",
+      fileName: "your_file_here",
     },
   });
 

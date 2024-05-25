@@ -16,6 +16,7 @@ import { Organizations } from "./organizations";
 import { Reports } from "./reports";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
+import { Suggest } from "./suggest";
 import axios from "axios";
 import { AxiosInstance } from "axios";
 
@@ -68,10 +69,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.4.0 .";
-    sdkVersion = "3.3.3";
-    genVersion = "2.335.5";
+    sdkVersion = "3.3.4";
+    genVersion = "2.338.1";
     userAgent =
-        "speakeasy-sdk/typescript 3.3.3 2.335.5 0.4.0 . @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 3.3.4 2.338.1 0.4.0 . @speakeasy-api/speakeasy-client-sdk-typescript";
     globals: any;
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
@@ -117,6 +118,10 @@ export class Speakeasy {
      */
     public reports: Reports;
     /**
+     * REST APIs for managing LLM OAS suggestions
+     */
+    public suggest: Suggest;
+    /**
      * REST APIs for managing embeds
      */
     public embeds: Embeds;
@@ -161,6 +166,7 @@ export class Speakeasy {
         this.github = new Github(this.sdkConfiguration);
         this.organizations = new Organizations(this.sdkConfiguration);
         this.reports = new Reports(this.sdkConfiguration);
+        this.suggest = new Suggest(this.sdkConfiguration);
         this.embeds = new Embeds(this.sdkConfiguration);
         this.events = new Events(this.sdkConfiguration);
     }
