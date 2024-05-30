@@ -214,7 +214,7 @@ export class Auth {
             } else {
                 retryConfig = new utils.RetryConfig(
                     "backoff",
-                    new utils.BackoffStrategy(100, 2000, 1.5, 30000),
+                    new utils.BackoffStrategy(100, 2000, 1.5, 60000),
                     true
                 );
             }
