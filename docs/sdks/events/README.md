@@ -167,6 +167,7 @@ Search events for a particular workspace by any field
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import { InteractionType } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
 
 async function run() {
   const sdk = new Speakeasy({

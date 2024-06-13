@@ -37,6 +37,10 @@ export class Organization extends SpeakeasyBase {
     slug?: string;
 
     @SpeakeasyMetadata()
+    @Expose({ name: "telemetry_disabled" })
+    telemetryDisabled: boolean;
+
+    @SpeakeasyMetadata()
     @Expose({ name: "updated_at" })
     @Transform(({ value }) => new Date(value), { toClassOnly: true })
     updatedAt?: Date;

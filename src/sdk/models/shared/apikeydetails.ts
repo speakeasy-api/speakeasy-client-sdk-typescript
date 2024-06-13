@@ -36,6 +36,10 @@ export class ApiKeyDetails extends SpeakeasyBase {
     orgSlug: string;
 
     @SpeakeasyMetadata()
+    @Expose({ name: "telemetry_disabled" })
+    telemetryDisabled: boolean;
+
+    @SpeakeasyMetadata()
     @Expose({ name: "workspace_id" })
     workspaceId: string;
 

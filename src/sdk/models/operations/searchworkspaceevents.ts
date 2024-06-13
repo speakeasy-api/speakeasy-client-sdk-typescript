@@ -8,6 +8,18 @@ import { AxiosResponse } from "axios";
 
 export class SearchWorkspaceEventsRequest extends SpeakeasyBase {
     /**
+     * A specific gen lock ID for the events.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=generate_gen_lock_id" })
+    generateGenLockId?: string;
+
+    /**
+     * Specified interaction type for events.
+     */
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=interaction_type" })
+    interactionType?: shared.InteractionType;
+
+    /**
      * Unique identifier of the lint report digest.
      */
     @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=lint_report_digest" })
