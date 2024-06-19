@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 48caee63217cf42b334122c89dc04004
+  docChecksum: faf7375f0e20304e1fb56c4a4b633e29
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.306.0
-  generationVersion: 2.340.3
-  releaseVersion: 3.3.6
-  configChecksum: 224caf15d1d413a98c4d9a2d0ad1c7f2
+  speakeasyVersion: 1.308.2
+  generationVersion: 2.342.6
+  releaseVersion: 3.3.7
+  configChecksum: 122423fbf9ec58565868799645d93f1b
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -97,7 +97,9 @@ generatedFiles:
   - src/sdk/models/operations/getrequestfromeventlog.ts
   - src/sdk/models/operations/queryeventlog.ts
   - src/sdk/models/operations/githubcheckaccess.ts
+  - src/sdk/models/operations/githubcheckpublishingsecrets.ts
   - src/sdk/models/operations/githubconfiguretarget.ts
+  - src/sdk/models/operations/githubstorepublishingsecrets.ts
   - src/sdk/models/operations/githubtriggeraction.ts
   - src/sdk/models/operations/createfreetrial.ts
   - src/sdk/models/operations/getorganizationusage.ts
@@ -145,7 +147,9 @@ generatedFiles:
   - src/sdk/models/shared/requestmetadata.ts
   - src/sdk/models/shared/filters.ts
   - src/sdk/models/shared/filter.ts
+  - src/sdk/models/shared/githubmissingpublishingsecretsresponse.ts
   - src/sdk/models/shared/githubconfiguretargetrequest.ts
+  - src/sdk/models/shared/githubstorepublishingsecretsrequest.ts
   - src/sdk/models/shared/githubtriggeractionrequest.ts
   - src/sdk/models/shared/organizationusageresponse.ts
   - src/sdk/models/shared/organizationusage.ts
@@ -240,7 +244,10 @@ generatedFiles:
   - docs/sdk/models/operations/queryeventlogresponse.md
   - docs/sdk/models/operations/githubcheckaccessrequest.md
   - docs/sdk/models/operations/githubcheckaccessresponse.md
+  - docs/sdk/models/operations/githubcheckpublishingsecretsrequest.md
+  - docs/sdk/models/operations/githubcheckpublishingsecretsresponse.md
   - docs/sdk/models/operations/githubconfiguretargetresponse.md
+  - docs/sdk/models/operations/githubstorepublishingsecretsresponse.md
   - docs/sdk/models/operations/githubtriggeractionresponse.md
   - docs/sdk/models/operations/createfreetrialresponse.md
   - docs/sdk/models/operations/getorganizationusageresponse.md
@@ -314,7 +321,9 @@ generatedFiles:
   - docs/sdk/models/shared/requestmetadata.md
   - docs/sdk/models/shared/filters.md
   - docs/sdk/models/shared/filter.md
+  - docs/sdk/models/shared/githubmissingpublishingsecretsresponse.md
   - docs/sdk/models/shared/githubconfiguretargetrequest.md
+  - docs/sdk/models/shared/githubstorepublishingsecretsrequest.md
   - docs/sdk/models/shared/githubtriggeractionrequest.md
   - docs/sdk/models/shared/organizationusageresponse.md
   - docs/sdk/models/shared/organizationusage.md

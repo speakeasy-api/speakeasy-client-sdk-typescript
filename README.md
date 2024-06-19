@@ -116,7 +116,9 @@ run();
 ### [github](docs/sdks/github/README.md)
 
 * [githubCheckAccess](docs/sdks/github/README.md#githubcheckaccess)
+* [githubCheckPublishingSecrets](docs/sdks/github/README.md#githubcheckpublishingsecrets)
 * [githubConfigureTarget](docs/sdks/github/README.md#githubconfiguretarget)
+* [githubStorePublishingSecrets](docs/sdks/github/README.md#githubstorepublishingsecrets)
 * [githubTriggerAction](docs/sdks/github/README.md#githubtriggeraction)
 
 ### [organizations](docs/sdks/organizations/README.md)

@@ -24,6 +24,8 @@ export * from "./getnamespacesresponse";
 export * from "./getrevisionsresponse";
 export * from "./gettagsresponse";
 export * from "./githubconfiguretargetrequest";
+export * from "./githubmissingpublishingsecretsresponse";
+export * from "./githubstorepublishingsecretsrequest";
 export * from "./githubtriggeractionrequest";
 export * from "./interactiontype";
 export * from "./manifest";
