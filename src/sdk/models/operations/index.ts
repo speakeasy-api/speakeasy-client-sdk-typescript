@@ -9,6 +9,7 @@ export * from "./deleteschema";
 export * from "./deleteversionmetadata";
 export * from "./downloadschema";
 export * from "./downloadschemarevision";
+export * from "./fetchpublishingprs";
 export * from "./findapiendpoint";
 export * from "./generateopenapispec";
 export * from "./generateopenapispecforapiendpoint";

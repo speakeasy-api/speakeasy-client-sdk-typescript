@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: faf7375f0e20304e1fb56c4a4b633e29
+  docChecksum: eb530f662240663b5cb067995daf351c
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.308.2
-  generationVersion: 2.342.6
-  releaseVersion: 3.3.7
-  configChecksum: 122423fbf9ec58565868799645d93f1b
+  speakeasyVersion: 1.310.0
+  generationVersion: 2.347.4
+  releaseVersion: 3.3.8
+  configChecksum: 5697823af68aed5e9f371b9055d1f2da
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -96,6 +96,7 @@ generatedFiles:
   - src/sdk/models/operations/generaterequestpostmancollection.ts
   - src/sdk/models/operations/getrequestfromeventlog.ts
   - src/sdk/models/operations/queryeventlog.ts
+  - src/sdk/models/operations/fetchpublishingprs.ts
   - src/sdk/models/operations/githubcheckaccess.ts
   - src/sdk/models/operations/githubcheckpublishingsecrets.ts
   - src/sdk/models/operations/githubconfiguretarget.ts
@@ -147,6 +148,7 @@ generatedFiles:
   - src/sdk/models/shared/requestmetadata.ts
   - src/sdk/models/shared/filters.ts
   - src/sdk/models/shared/filter.ts
+  - src/sdk/models/shared/githubpublishingprresponse.ts
   - src/sdk/models/shared/githubmissingpublishingsecretsresponse.ts
   - src/sdk/models/shared/githubconfiguretargetrequest.ts
   - src/sdk/models/shared/githubstorepublishingsecretsrequest.ts
@@ -242,6 +244,8 @@ generatedFiles:
   - docs/sdk/models/operations/getrequestfromeventlogresponse.md
   - docs/sdk/models/operations/queryeventlogrequest.md
   - docs/sdk/models/operations/queryeventlogresponse.md
+  - docs/sdk/models/operations/fetchpublishingprsrequest.md
+  - docs/sdk/models/operations/fetchpublishingprsresponse.md
   - docs/sdk/models/operations/githubcheckaccessrequest.md
   - docs/sdk/models/operations/githubcheckaccessresponse.md
   - docs/sdk/models/operations/githubcheckpublishingsecretsrequest.md
@@ -321,6 +325,7 @@ generatedFiles:
   - docs/sdk/models/shared/requestmetadata.md
   - docs/sdk/models/shared/filters.md
   - docs/sdk/models/shared/filter.md
+  - docs/sdk/models/shared/githubpublishingprresponse.md
   - docs/sdk/models/shared/githubmissingpublishingsecretsresponse.md
   - docs/sdk/models/shared/githubconfiguretargetrequest.md
   - docs/sdk/models/shared/githubstorepublishingsecretsrequest.md
