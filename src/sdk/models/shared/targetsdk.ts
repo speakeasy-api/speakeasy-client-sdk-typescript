@@ -92,7 +92,7 @@ export class TargetSDK extends SpeakeasyBase {
     generateTarget: string;
 
     /**
-     * The name of the target as defined by the user.
+     * The workflow name of the target.
      */
     @SpeakeasyMetadata()
     @Expose({ name: "generate_target_name" })

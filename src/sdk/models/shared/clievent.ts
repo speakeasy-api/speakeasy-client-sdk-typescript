@@ -233,6 +233,13 @@ export class CliEvent extends SpeakeasyBase {
     generateTarget?: string;
 
     /**
+     * The workflow name of the target.
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "generate_target_name" })
+    generateTargetName?: string;
+
+    /**
      * The version of the target.
      */
     @SpeakeasyMetadata()
