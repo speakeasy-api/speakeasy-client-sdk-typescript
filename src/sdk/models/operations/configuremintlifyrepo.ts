@@ -6,7 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class GithubConfigureTargetResponse extends SpeakeasyBase {
+export class ConfigureMintlifyRepoResponse extends SpeakeasyBase {
     /**
      * HTTP response content type for this operation
      */

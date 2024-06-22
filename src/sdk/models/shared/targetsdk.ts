@@ -245,4 +245,18 @@ export class TargetSDK extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "success" })
     success?: boolean;
+
+    /**
+     * Workflow file (post execution)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "workflow_post_raw" })
+    workflowPostRaw?: string;
+
+    /**
+     * Workflow file (prior to execution)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "workflow_pre_raw" })
+    workflowPreRaw?: string;
 }

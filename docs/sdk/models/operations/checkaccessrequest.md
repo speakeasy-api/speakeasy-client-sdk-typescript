@@ -1,4 +1,4 @@
-# GithubCheckAccessRequest
+# CheckAccessRequest
 
 
 ## Fields

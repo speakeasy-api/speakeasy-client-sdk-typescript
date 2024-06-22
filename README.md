@@ -115,12 +115,14 @@ run();
 
 ### [github](docs/sdks/github/README.md)
 
+* [checkAccess](docs/sdks/github/README.md#checkaccess)
+* [configureCodeSamples](docs/sdks/github/README.md#configurecodesamples)
+* [configureMintlifyRepo](docs/sdks/github/README.md#configuremintlifyrepo)
+* [configureTarget](docs/sdks/github/README.md#configuretarget)
 * [fetchPublishingPRs](docs/sdks/github/README.md#fetchpublishingprs)
-* [githubCheckAccess](docs/sdks/github/README.md#githubcheckaccess)
 * [githubCheckPublishingSecrets](docs/sdks/github/README.md#githubcheckpublishingsecrets)
-* [githubConfigureTarget](docs/sdks/github/README.md#githubconfiguretarget)
 * [githubStorePublishingSecrets](docs/sdks/github/README.md#githubstorepublishingsecrets)
-* [githubTriggerAction](docs/sdks/github/README.md#githubtriggeraction)
+* [triggerAction](docs/sdks/github/README.md#triggeraction)
 
 ### [organizations](docs/sdks/organizations/README.md)
 

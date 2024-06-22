@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: dc49a07c3d8b79e5d6468202954aaafd
+  docChecksum: a1ee1e7896ec8cc5254723b812c845c6
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.313.0
-  generationVersion: 2.347.8
-  releaseVersion: 3.3.9
-  configChecksum: a1d691ec3e411a8cf639d6d2f194eb0c
+  speakeasyVersion: 1.314.2
+  generationVersion: 2.349.6
+  releaseVersion: 3.3.10
+  configChecksum: cf37d9792de350a21581cfdc6b698492
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -14,7 +14,7 @@ management:
 features:
   typescript:
     acceptHeaders: 2.81.1
-    core: 3.4.9
+    core: 3.4.10
     deprecations: 2.81.1
     examples: 2.81.3
     globalSecurity: 2.82.5
@@ -96,12 +96,14 @@ generatedFiles:
   - src/sdk/models/operations/generaterequestpostmancollection.ts
   - src/sdk/models/operations/getrequestfromeventlog.ts
   - src/sdk/models/operations/queryeventlog.ts
+  - src/sdk/models/operations/checkaccess.ts
+  - src/sdk/models/operations/configurecodesamples.ts
+  - src/sdk/models/operations/configuremintlifyrepo.ts
+  - src/sdk/models/operations/configuretarget.ts
   - src/sdk/models/operations/fetchpublishingprs.ts
-  - src/sdk/models/operations/githubcheckaccess.ts
   - src/sdk/models/operations/githubcheckpublishingsecrets.ts
-  - src/sdk/models/operations/githubconfiguretarget.ts
   - src/sdk/models/operations/githubstorepublishingsecrets.ts
-  - src/sdk/models/operations/githubtriggeraction.ts
+  - src/sdk/models/operations/triggeraction.ts
   - src/sdk/models/operations/createfreetrial.ts
   - src/sdk/models/operations/getorganizationusage.ts
   - src/sdk/models/operations/getorganizations.ts
@@ -148,9 +150,13 @@ generatedFiles:
   - src/sdk/models/shared/requestmetadata.ts
   - src/sdk/models/shared/filters.ts
   - src/sdk/models/shared/filter.ts
+  - src/sdk/models/shared/githubconfigurecodesamplesresponse.ts
+  - src/sdk/models/shared/workflowdocument.ts
+  - src/sdk/models/shared/githubconfigurecodesamplesrequest.ts
+  - src/sdk/models/shared/githubconfiguremintlifyreporequest.ts
+  - src/sdk/models/shared/githubconfiguretargetrequest.ts
   - src/sdk/models/shared/githubpublishingprresponse.ts
   - src/sdk/models/shared/githubmissingpublishingsecretsresponse.ts
-  - src/sdk/models/shared/githubconfiguretargetrequest.ts
   - src/sdk/models/shared/githubstorepublishingsecretsrequest.ts
   - src/sdk/models/shared/githubtriggeractionrequest.ts
   - src/sdk/models/shared/organizationusageresponse.ts
@@ -244,15 +250,17 @@ generatedFiles:
   - docs/sdk/models/operations/getrequestfromeventlogresponse.md
   - docs/sdk/models/operations/queryeventlogrequest.md
   - docs/sdk/models/operations/queryeventlogresponse.md
+  - docs/sdk/models/operations/checkaccessrequest.md
+  - docs/sdk/models/operations/checkaccessresponse.md
+  - docs/sdk/models/operations/configurecodesamplesresponse.md
+  - docs/sdk/models/operations/configuremintlifyreporesponse.md
+  - docs/sdk/models/operations/configuretargetresponse.md
   - docs/sdk/models/operations/fetchpublishingprsrequest.md
   - docs/sdk/models/operations/fetchpublishingprsresponse.md
-  - docs/sdk/models/operations/githubcheckaccessrequest.md
-  - docs/sdk/models/operations/githubcheckaccessresponse.md
   - docs/sdk/models/operations/githubcheckpublishingsecretsrequest.md
   - docs/sdk/models/operations/githubcheckpublishingsecretsresponse.md
-  - docs/sdk/models/operations/githubconfiguretargetresponse.md
   - docs/sdk/models/operations/githubstorepublishingsecretsresponse.md
-  - docs/sdk/models/operations/githubtriggeractionresponse.md
+  - docs/sdk/models/operations/triggeractionresponse.md
   - docs/sdk/models/operations/createfreetrialresponse.md
   - docs/sdk/models/operations/getorganizationusageresponse.md
   - docs/sdk/models/operations/getorganizationsresponse.md
@@ -325,9 +333,14 @@ generatedFiles:
   - docs/sdk/models/shared/requestmetadata.md
   - docs/sdk/models/shared/filters.md
   - docs/sdk/models/shared/filter.md
+  - docs/sdk/models/shared/githubconfigurecodesamplesresponse.md
+  - docs/sdk/models/shared/auth.md
+  - docs/sdk/models/shared/workflowdocument.md
+  - docs/sdk/models/shared/githubconfigurecodesamplesrequest.md
+  - docs/sdk/models/shared/githubconfiguremintlifyreporequest.md
+  - docs/sdk/models/shared/githubconfiguretargetrequest.md
   - docs/sdk/models/shared/githubpublishingprresponse.md
   - docs/sdk/models/shared/githubmissingpublishingsecretsresponse.md
-  - docs/sdk/models/shared/githubconfiguretargetrequest.md
   - docs/sdk/models/shared/githubstorepublishingsecretsrequest.md
   - docs/sdk/models/shared/githubtriggeractionrequest.md
   - docs/sdk/models/shared/organizationusageresponse.md

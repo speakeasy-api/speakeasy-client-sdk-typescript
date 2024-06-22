@@ -6,7 +6,15 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class GithubTriggerActionResponse extends SpeakeasyBase {
+export class CheckAccessRequest extends SpeakeasyBase {
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=org" })
+    org: string;
+
+    @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=repo" })
+    repo: string;
+}
+
+export class CheckAccessResponse extends SpeakeasyBase {
     /**
      * HTTP response content type for this operation
      */

@@ -1,4 +1,4 @@
-# GithubCheckAccessResponse
+# ConfigureMintlifyRepoResponse
 
 
 ## Fields

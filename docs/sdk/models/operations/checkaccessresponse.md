@@ -1,4 +1,4 @@
-# GithubConfigureTargetResponse
+# CheckAccessResponse
 
 
 ## Fields
