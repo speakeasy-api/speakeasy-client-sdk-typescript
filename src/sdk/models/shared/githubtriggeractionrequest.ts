@@ -31,6 +31,13 @@ export class GithubTriggerActionRequest extends SpeakeasyBase {
     repoName: string;
 
     /**
+     * A version to override the SDK too in workflow dispatch
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "set_version" })
+    setVersion?: string;
+
+    /**
      * The target name for the action
      */
     @SpeakeasyMetadata()

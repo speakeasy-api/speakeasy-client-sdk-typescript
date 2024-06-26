@@ -1,11 +1,16 @@
 # Artifacts
 (*artifacts*)
 
+## Overview
+
+REST APIs for working with Registry artifacts
+
 ### Available Operations
 
 * [getBlob](#getblob) - Get blob for a particular digest
 * [getManifest](#getmanifest) - Get manifest for a particular reference
 * [getNamespaces](#getnamespaces) - Each namespace contains many revisions.
+* [getOASSummary](#getoassummary)
 * [getRevisions](#getrevisions)
 * [getTags](#gettags)
 * [postTags](#posttags) - Add tags to an existing revision
@@ -143,6 +148,50 @@ run();
 ### Response
 
 **Promise<[operations.GetNamespacesResponse](../../sdk/models/operations/getnamespacesresponse.md)>**
+### Errors
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
+
+## getOASSummary
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+async function run() {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "<YOUR_API_KEY_HERE>",
+    },
+  });
+
+  const res = await sdk.artifacts.getOASSummary({
+    namespaceName: "<value>",
+    revisionReference: "<value>",
+  });
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `request`                                                                              | [operations.GetOASSummaryRequest](../../sdk/models/operations/getoassummaryrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `config`                                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                           | :heavy_minus_sign:                                                                     | Available config options for making requests.                                          |
+
+
+### Response
+
+**Promise<[operations.GetOASSummaryResponse](../../sdk/models/operations/getoassummaryresponse.md)>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

@@ -8,6 +8,7 @@
 * [configureMintlifyRepo](#configuremintlifyrepo)
 * [configureTarget](#configuretarget)
 * [fetchPublishingPRs](#fetchpublishingprs)
+* [getAction](#getaction)
 * [githubCheckPublishingSecrets](#githubcheckpublishingsecrets)
 * [githubStorePublishingSecrets](#githubstorepublishingsecrets)
 * [triggerAction](#triggeraction)
@@ -232,6 +233,50 @@ run();
 ### Response
 
 **Promise<[operations.FetchPublishingPRsResponse](../../sdk/models/operations/fetchpublishingprsresponse.md)>**
+### Errors
+
+| Error Object    | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4xx-5xx         | */*             |
+
+## getAction
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+async function run() {
+  const sdk = new Speakeasy({
+    security: {
+      apiKey: "<YOUR_API_KEY_HERE>",
+    },
+  });
+
+  const res = await sdk.github.getAction({
+    org: "<value>",
+    repo: "<value>",
+  });
+
+  if (res.statusCode == 200) {
+    // handle response
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `request`                                                                      | [operations.GetActionRequest](../../sdk/models/operations/getactionrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `config`                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                   | :heavy_minus_sign:                                                             | Available config options for making requests.                                  |
+
+
+### Response
+
+**Promise<[operations.GetActionResponse](../../sdk/models/operations/getactionresponse.md)>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

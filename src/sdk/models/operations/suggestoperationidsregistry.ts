@@ -6,31 +6,12 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
-export class Schema extends SpeakeasyBase {
-    @SpeakeasyMetadata({ data: "multipart_form, content=true" })
-    content: Uint8Array;
-
-    @SpeakeasyMetadata({ data: "multipart_form, name=schema" })
-    fileName: string;
-}
-
-/**
- * The schema file to upload provided as a multipart/form-data file segment.
- */
-export class SuggestOperationIDsRequestBody extends SpeakeasyBase {
-    @SpeakeasyMetadata({ data: "multipart_form, name=opts;json=true" })
-    opts?: shared.SuggestOperationIDsOpts;
-
-    @SpeakeasyMetadata({ data: "multipart_form, file=true" })
-    schema: Schema;
-}
-
-export class SuggestOperationIDsRequest extends SpeakeasyBase {
+export class SuggestOperationIDsRegistryRequest extends SpeakeasyBase {
     /**
      * The schema file to upload provided as a multipart/form-data file segment.
      */
-    @SpeakeasyMetadata({ data: "request, media_type=multipart/form-data" })
-    requestBody: SuggestOperationIDsRequestBody;
+    @SpeakeasyMetadata({ data: "request, media_type=application/json" })
+    suggestOperationIDsOpts?: shared.SuggestOperationIDsOpts;
 
     /**
      * Max number of suggestions to request
@@ -38,11 +19,20 @@ export class SuggestOperationIDsRequest extends SpeakeasyBase {
     @SpeakeasyMetadata({ data: "queryParam, style=form;explode=true;name=limit" })
     limit?: number;
 
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=namespace_name" })
+    namespaceName: string;
+
+    /**
+     * Tag or digest
+     */
+    @SpeakeasyMetadata({ data: "pathParam, style=simple;explode=false;name=revision_reference" })
+    revisionReference: string;
+
     @SpeakeasyMetadata({ data: "header, style=simple;explode=false;name=x-session-id" })
     xSessionId: string;
 }
 
-export class SuggestOperationIDsResponse extends SpeakeasyBase {
+export class SuggestOperationIDsRegistryResponse extends SpeakeasyBase {
     /**
      * HTTP response content type for this operation
      */

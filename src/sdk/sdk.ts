@@ -69,10 +69,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.4.0 .";
-    sdkVersion = "3.3.10";
-    genVersion = "2.349.6";
+    sdkVersion = "3.3.11";
+    genVersion = "2.352.0";
     userAgent =
-        "speakeasy-sdk/typescript 3.3.10 2.349.6 0.4.0 . @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 3.3.11 2.352.0 0.4.0 . @speakeasy-api/speakeasy-client-sdk-typescript";
     globals: any;
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
@@ -102,6 +102,9 @@ export class Speakeasy {
      * REST APIs for managing Schema entities
      */
     public schemas: Schemas;
+    /**
+     * REST APIs for working with Registry artifacts
+     */
     public artifacts: Artifacts;
     /**
      * REST APIs for managing Authentication

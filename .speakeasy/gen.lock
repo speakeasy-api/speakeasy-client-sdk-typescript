@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: a1ee1e7896ec8cc5254723b812c845c6
+  docChecksum: e4cb9ecada8b35163db080ecaaf60fe3
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.314.2
-  generationVersion: 2.349.6
-  releaseVersion: 3.3.10
-  configChecksum: cf37d9792de350a21581cfdc6b698492
+  speakeasyVersion: 1.318.0
+  generationVersion: 2.352.0
+  releaseVersion: 3.3.11
+  configChecksum: 47bb42a92e6eb1718bfa3d8ef1caab3e
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -85,6 +85,7 @@ generatedFiles:
   - src/sdk/models/operations/getblob.ts
   - src/sdk/models/operations/getmanifest.ts
   - src/sdk/models/operations/getnamespaces.ts
+  - src/sdk/models/operations/getoassummary.ts
   - src/sdk/models/operations/getrevisions.ts
   - src/sdk/models/operations/gettags.ts
   - src/sdk/models/operations/posttags.ts
@@ -101,6 +102,7 @@ generatedFiles:
   - src/sdk/models/operations/configuremintlifyrepo.ts
   - src/sdk/models/operations/configuretarget.ts
   - src/sdk/models/operations/fetchpublishingprs.ts
+  - src/sdk/models/operations/getaction.ts
   - src/sdk/models/operations/githubcheckpublishingsecrets.ts
   - src/sdk/models/operations/githubstorepublishingsecrets.ts
   - src/sdk/models/operations/triggeraction.ts
@@ -110,7 +112,9 @@ generatedFiles:
   - src/sdk/models/operations/getchangesreportsignedurl.ts
   - src/sdk/models/operations/getlintingreportsignedurl.ts
   - src/sdk/models/operations/uploadreport.ts
+  - src/sdk/models/operations/applyoperationids.ts
   - src/sdk/models/operations/suggestoperationids.ts
+  - src/sdk/models/operations/suggestoperationidsregistry.ts
   - src/sdk/models/operations/getembedaccesstoken.ts
   - src/sdk/models/operations/getvalidembedaccesstokens.ts
   - src/sdk/models/operations/revokeembedaccesstoken.ts
@@ -133,6 +137,9 @@ generatedFiles:
   - src/sdk/models/shared/annotations.ts
   - src/sdk/models/shared/getnamespacesresponse.ts
   - src/sdk/models/shared/namespace.ts
+  - src/sdk/models/shared/oassummary.ts
+  - src/sdk/models/shared/oasoperation.ts
+  - src/sdk/models/shared/oasinfo.ts
   - src/sdk/models/shared/getrevisionsresponse.ts
   - src/sdk/models/shared/revision.ts
   - src/sdk/models/shared/gettagsresponse.ts
@@ -156,6 +163,7 @@ generatedFiles:
   - src/sdk/models/shared/githubconfiguremintlifyreporequest.ts
   - src/sdk/models/shared/githubconfiguretargetrequest.ts
   - src/sdk/models/shared/githubpublishingprresponse.ts
+  - src/sdk/models/shared/githubgetactionresponse.ts
   - src/sdk/models/shared/githubmissingpublishingsecretsresponse.ts
   - src/sdk/models/shared/githubstorepublishingsecretsrequest.ts
   - src/sdk/models/shared/githubtriggeractionrequest.ts
@@ -163,6 +171,8 @@ generatedFiles:
   - src/sdk/models/shared/organizationusage.ts
   - src/sdk/models/shared/organization.ts
   - src/sdk/models/shared/report.ts
+  - src/sdk/models/shared/suggestedoperationids.ts
+  - src/sdk/models/shared/suggestoperationidsopts.ts
   - src/sdk/models/shared/embedaccesstokenresponse.ts
   - src/sdk/models/shared/embedtoken.ts
   - src/sdk/models/shared/clievent.ts
@@ -231,6 +241,8 @@ generatedFiles:
   - docs/sdk/models/operations/getmanifestrequest.md
   - docs/sdk/models/operations/getmanifestresponse.md
   - docs/sdk/models/operations/getnamespacesresponse.md
+  - docs/sdk/models/operations/getoassummaryrequest.md
+  - docs/sdk/models/operations/getoassummaryresponse.md
   - docs/sdk/models/operations/getrevisionsrequest.md
   - docs/sdk/models/operations/getrevisionsresponse.md
   - docs/sdk/models/operations/gettagsrequest.md
@@ -257,6 +269,8 @@ generatedFiles:
   - docs/sdk/models/operations/configuretargetresponse.md
   - docs/sdk/models/operations/fetchpublishingprsrequest.md
   - docs/sdk/models/operations/fetchpublishingprsresponse.md
+  - docs/sdk/models/operations/getactionrequest.md
+  - docs/sdk/models/operations/getactionresponse.md
   - docs/sdk/models/operations/githubcheckpublishingsecretsrequest.md
   - docs/sdk/models/operations/githubcheckpublishingsecretsresponse.md
   - docs/sdk/models/operations/githubstorepublishingsecretsresponse.md
@@ -274,13 +288,15 @@ generatedFiles:
   - docs/sdk/models/operations/uploadreportrequestbody.md
   - docs/sdk/models/operations/uploadreportuploadedreport.md
   - docs/sdk/models/operations/uploadreportresponse.md
-  - docs/sdk/models/operations/depthstyle.md
-  - docs/sdk/models/operations/style.md
-  - docs/sdk/models/operations/opts.md
+  - docs/sdk/models/operations/applyoperationidsrequestbody.md
+  - docs/sdk/models/operations/applyoperationidsrequest.md
+  - docs/sdk/models/operations/applyoperationidsresponse.md
   - docs/sdk/models/operations/schema.md
   - docs/sdk/models/operations/suggestoperationidsrequestbody.md
-  - docs/sdk/models/operations/suggestoperationidssuggestion.md
+  - docs/sdk/models/operations/suggestoperationidsrequest.md
   - docs/sdk/models/operations/suggestoperationidsresponse.md
+  - docs/sdk/models/operations/suggestoperationidsregistryrequest.md
+  - docs/sdk/models/operations/suggestoperationidsregistryresponse.md
   - docs/sdk/models/operations/getembedaccesstokenrequest.md
   - docs/sdk/models/operations/getembedaccesstokenresponse.md
   - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
@@ -310,6 +326,10 @@ generatedFiles:
   - docs/sdk/models/shared/annotations.md
   - docs/sdk/models/shared/getnamespacesresponse.md
   - docs/sdk/models/shared/namespace.md
+  - docs/sdk/models/shared/oassummary.md
+  - docs/sdk/models/shared/oasoperation.md
+  - docs/sdk/models/shared/license.md
+  - docs/sdk/models/shared/oasinfo.md
   - docs/sdk/models/shared/getrevisionsresponse.md
   - docs/sdk/models/shared/revision.md
   - docs/sdk/models/shared/gettagsresponse.md
@@ -340,6 +360,7 @@ generatedFiles:
   - docs/sdk/models/shared/githubconfiguremintlifyreporequest.md
   - docs/sdk/models/shared/githubconfiguretargetrequest.md
   - docs/sdk/models/shared/githubpublishingprresponse.md
+  - docs/sdk/models/shared/githubgetactionresponse.md
   - docs/sdk/models/shared/githubmissingpublishingsecretsresponse.md
   - docs/sdk/models/shared/githubstorepublishingsecretsrequest.md
   - docs/sdk/models/shared/githubtriggeractionrequest.md
@@ -349,6 +370,10 @@ generatedFiles:
   - docs/sdk/models/shared/organization.md
   - docs/sdk/models/shared/typet.md
   - docs/sdk/models/shared/report.md
+  - docs/sdk/models/shared/suggestedoperationids.md
+  - docs/sdk/models/shared/depthstyle.md
+  - docs/sdk/models/shared/style.md
+  - docs/sdk/models/shared/suggestoperationidsopts.md
   - docs/sdk/models/shared/embedaccesstokenresponse.md
   - docs/sdk/models/shared/embedtoken.md
   - docs/sdk/models/shared/generatebumptype.md

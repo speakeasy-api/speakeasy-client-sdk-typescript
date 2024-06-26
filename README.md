@@ -95,6 +95,7 @@ run();
 * [getBlob](docs/sdks/artifacts/README.md#getblob) - Get blob for a particular digest
 * [getManifest](docs/sdks/artifacts/README.md#getmanifest) - Get manifest for a particular reference
 * [getNamespaces](docs/sdks/artifacts/README.md#getnamespaces) - Each namespace contains many revisions.
+* [getOASSummary](docs/sdks/artifacts/README.md#getoassummary)
 * [getRevisions](docs/sdks/artifacts/README.md#getrevisions)
 * [getTags](docs/sdks/artifacts/README.md#gettags)
 * [postTags](docs/sdks/artifacts/README.md#posttags) - Add tags to an existing revision
@@ -120,6 +121,7 @@ run();
 * [configureMintlifyRepo](docs/sdks/github/README.md#configuremintlifyrepo)
 * [configureTarget](docs/sdks/github/README.md#configuretarget)
 * [fetchPublishingPRs](docs/sdks/github/README.md#fetchpublishingprs)
+* [getAction](docs/sdks/github/README.md#getaction)
 * [githubCheckPublishingSecrets](docs/sdks/github/README.md#githubcheckpublishingsecrets)
 * [githubStorePublishingSecrets](docs/sdks/github/README.md#githubstorepublishingsecrets)
 * [triggerAction](docs/sdks/github/README.md#triggeraction)
@@ -138,7 +140,9 @@ run();
 
 ### [suggest](docs/sdks/suggest/README.md)
 
+* [applyOperationIDs](docs/sdks/suggest/README.md#applyoperationids) - Apply operation ID suggestions and download result.
 * [suggestOperationIDs](docs/sdks/suggest/README.md#suggestoperationids) - Generate operation ID suggestions.
+* [suggestOperationIDsRegistry](docs/sdks/suggest/README.md#suggestoperationidsregistry) - Generate operation ID suggestions.
 
 ### [embeds](docs/sdks/embeds/README.md)
 

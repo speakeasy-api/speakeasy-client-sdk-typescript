@@ -12,6 +12,10 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeader
 /**
  * REST APIs for managing LLM OAS suggestions
  */
+export enum ApplyOperationIDsAcceptEnum {
+    applicationJson = "application/json",
+    applicationXYaml = "application/x-yaml",
+}
 
 export class Suggest {
     private sdkConfiguration: SDKConfiguration;
@@ -21,29 +25,27 @@ export class Suggest {
     }
 
     /**
-     * Generate operation ID suggestions.
-     *
-     * @remarks
-     * Get suggestions from an LLM model for improving the operationIDs in the provided schema.
+     * Apply operation ID suggestions and download result.
      */
-    async suggestOperationIDs(
-        req: operations.SuggestOperationIDsRequestBody,
-        config?: AxiosRequestConfig
-    ): Promise<operations.SuggestOperationIDsResponse> {
+    async applyOperationIDs(
+        req: operations.ApplyOperationIDsRequest,
+        config?: AxiosRequestConfig,
+        acceptHeaderOverride?: ApplyOperationIDsAcceptEnum
+    ): Promise<operations.ApplyOperationIDsResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.SuggestOperationIDsRequestBody(req);
+            req = new operations.ApplyOperationIDsRequest(req);
         }
 
         const baseURL: string = utils.templateUrl(
             this.sdkConfiguration.serverURL,
             this.sdkConfiguration.serverDefaults
         );
-        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/suggest/operation_ids";
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/suggest/operation_ids/apply";
 
         let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
 
         try {
-            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "request", "multipart");
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "requestBody", "json");
         } catch (e: unknown) {
             if (e instanceof Error) {
                 throw new Error(`Error serializing request body, cause: ${e.message}`);
@@ -59,10 +61,118 @@ export class Suggest {
         }
         const properties = utils.parseSecurityProperties(globalSecurity);
         const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
             ...reqBodyHeaders,
             ...config?.headers,
             ...properties.headers,
         };
+        if (acceptHeaderOverride !== undefined) {
+            headers["Accept"] = acceptHeaderOverride.toString();
+        } else {
+            headers["Accept"] = "application/json;q=1, application/x-yaml;q=0";
+        }
+
+        headers["user-agent"] = this.sdkConfiguration.userAgent;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: operationUrl,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const responseContentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.ApplyOperationIDsResponse = new operations.ApplyOperationIDsResponse({
+            statusCode: httpRes.status,
+            contentType: responseContentType,
+            rawResponse: httpRes,
+        });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(responseContentType, `application/json`)) {
+                    res.twoHundredApplicationJsonSchema = httpRes?.data;
+                } else if (utils.matchContentType(responseContentType, `application/x-yaml`)) {
+                    res.twoHundredApplicationXYamlSchema = httpRes?.data;
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + responseContentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+            default:
+                if (utils.matchContentType(responseContentType, `application/json`)) {
+                    res.error = utils.objectToClass(JSON.parse(decodedRes), shared.ErrorT);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + responseContentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Generate operation ID suggestions.
+     *
+     * @remarks
+     * Get suggestions from an LLM model for improving the operationIDs in the provided schema.
+     */
+    async suggestOperationIDs(
+        req: operations.SuggestOperationIDsRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.SuggestOperationIDsResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.SuggestOperationIDsRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const operationUrl: string = baseURL.replace(/\/$/, "") + "/v1/suggest/operation_ids";
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(req, "requestBody", "multipart");
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
+        }
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
+        const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
+            ...reqBodyHeaders,
+            ...config?.headers,
+            ...properties.headers,
+        };
+        const queryParams: string = utils.serializeQueryParams(req, this.sdkConfiguration.globals);
         if (reqBody == null) throw new Error("request body is required");
         headers["Accept"] = "application/json";
 
@@ -70,7 +180,7 @@ export class Suggest {
 
         const httpRes: AxiosResponse = await client.request({
             validateStatus: () => true,
-            url: operationUrl,
+            url: operationUrl + queryParams,
             method: "post",
             headers: headers,
             responseType: "arraybuffer",
@@ -94,9 +204,111 @@ export class Suggest {
         switch (true) {
             case httpRes?.status == 200:
                 if (utils.matchContentType(responseContentType, `application/json`)) {
-                    res.suggestion = utils.objectToClass(
+                    res.suggestedOperationIDs = utils.objectToClass(
                         JSON.parse(decodedRes),
-                        operations.SuggestOperationIDsSuggestion
+                        shared.SuggestedOperationIDs
+                    );
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + responseContentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
+                break;
+        }
+
+        return res;
+    }
+
+    /**
+     * Generate operation ID suggestions.
+     *
+     * @remarks
+     * Get suggestions from an LLM model for improving the operationIDs in the provided schema.
+     */
+    async suggestOperationIDsRegistry(
+        req: operations.SuggestOperationIDsRegistryRequest,
+        config?: AxiosRequestConfig
+    ): Promise<operations.SuggestOperationIDsRegistryResponse> {
+        if (!(req instanceof utils.SpeakeasyBase)) {
+            req = new operations.SuggestOperationIDsRegistryRequest(req);
+        }
+
+        const baseURL: string = utils.templateUrl(
+            this.sdkConfiguration.serverURL,
+            this.sdkConfiguration.serverDefaults
+        );
+        const operationUrl: string = utils.generateURL(
+            baseURL,
+            "/v1/suggest/operation_ids/{namespace_name}/{revision_reference}",
+            req,
+            this.sdkConfiguration.globals
+        );
+
+        let [reqBodyHeaders, reqBody]: [object, any] = [{}, null];
+
+        try {
+            [reqBodyHeaders, reqBody] = utils.serializeRequestBody(
+                req,
+                "suggestOperationIDsOpts",
+                "json"
+            );
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                throw new Error(`Error serializing request body, cause: ${e.message}`);
+            }
+        }
+        const client: AxiosInstance = this.sdkConfiguration.defaultClient;
+        let globalSecurity = this.sdkConfiguration.security;
+        if (typeof globalSecurity === "function") {
+            globalSecurity = await globalSecurity();
+        }
+        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
+            globalSecurity = new shared.Security(globalSecurity);
+        }
+        const properties = utils.parseSecurityProperties(globalSecurity);
+        const headers: RawAxiosRequestHeaders = {
+            ...utils.getHeadersFromRequest(req),
+            ...reqBodyHeaders,
+            ...config?.headers,
+            ...properties.headers,
+        };
+        const queryParams: string = utils.serializeQueryParams(req, this.sdkConfiguration.globals);
+        headers["Accept"] = "application/json";
+
+        headers["user-agent"] = this.sdkConfiguration.userAgent;
+
+        const httpRes: AxiosResponse = await client.request({
+            validateStatus: () => true,
+            url: operationUrl + queryParams,
+            method: "post",
+            headers: headers,
+            responseType: "arraybuffer",
+            data: reqBody,
+            ...config,
+        });
+
+        const responseContentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) {
+            throw new Error(`status code not found in response: ${httpRes}`);
+        }
+
+        const res: operations.SuggestOperationIDsRegistryResponse =
+            new operations.SuggestOperationIDsRegistryResponse({
+                statusCode: httpRes.status,
+                contentType: responseContentType,
+                rawResponse: httpRes,
+            });
+        const decodedRes = new TextDecoder().decode(httpRes?.data);
+        switch (true) {
+            case httpRes?.status == 200:
+                if (utils.matchContentType(responseContentType, `application/json`)) {
+                    res.suggestedOperationIDs = utils.objectToClass(
+                        JSON.parse(decodedRes),
+                        shared.SuggestedOperationIDs
                     );
                 } else {
                     throw new errors.SDKError(

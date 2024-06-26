@@ -1,0 +1,9 @@
+# ApplyOperationIDsRequest
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `requestBody`                                                                                             | [operations.ApplyOperationIDsRequestBody](../../../sdk/models/operations/applyoperationidsrequestbody.md) | :heavy_minus_sign:                                                                                        | Apply options                                                                                             |
+| `xSessionId`                                                                                              | *string*                                                                                                  | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
