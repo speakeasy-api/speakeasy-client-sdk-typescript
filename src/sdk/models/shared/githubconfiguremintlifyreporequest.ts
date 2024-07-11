@@ -36,4 +36,11 @@ export class GithubConfigureMintlifyRepoRequest extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "repo" })
     repo: string;
+
+    /**
+     * The subdirectory (location of mint.json)
+     */
+    @SpeakeasyMetadata()
+    @Expose({ name: "subdirectory" })
+    subdirectory?: string;
 }
