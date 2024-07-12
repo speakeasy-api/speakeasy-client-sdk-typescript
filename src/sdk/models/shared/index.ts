@@ -49,6 +49,7 @@ export * from "./revision";
 export * from "./schema";
 export * from "./schemadiff";
 export * from "./security";
+export * from "./shorturl";
 export * from "./suggestedoperationids";
 export * from "./suggestoperationidsopts";
 export * from "./tag";

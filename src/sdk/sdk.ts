@@ -16,6 +16,7 @@ import { Organizations } from "./organizations";
 import { Reports } from "./reports";
 import { Requests } from "./requests";
 import { Schemas } from "./schemas";
+import { ShortURLs } from "./shorturls";
 import { Suggest } from "./suggest";
 import axios from "axios";
 import { AxiosInstance } from "axios";
@@ -69,10 +70,10 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "0.4.0 .";
-    sdkVersion = "3.3.12";
-    genVersion = "2.365.0";
+    sdkVersion = "3.3.13";
+    genVersion = "2.366.1";
     userAgent =
-        "speakeasy-sdk/typescript 3.3.12 2.365.0 0.4.0 . @speakeasy-api/speakeasy-client-sdk-typescript";
+        "speakeasy-sdk/typescript 3.3.13 2.366.1 0.4.0 . @speakeasy-api/speakeasy-client-sdk-typescript";
     globals: any;
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
@@ -120,6 +121,10 @@ export class Speakeasy {
      * REST APIs for managing reports
      */
     public reports: Reports;
+    /**
+     * REST APIs for managing short URLs
+     */
+    public shortURLs: ShortURLs;
     /**
      * REST APIs for managing LLM OAS suggestions
      */
@@ -169,6 +174,7 @@ export class Speakeasy {
         this.github = new Github(this.sdkConfiguration);
         this.organizations = new Organizations(this.sdkConfiguration);
         this.reports = new Reports(this.sdkConfiguration);
+        this.shortURLs = new ShortURLs(this.sdkConfiguration);
         this.suggest = new Suggest(this.sdkConfiguration);
         this.embeds = new Embeds(this.sdkConfiguration);
         this.events = new Events(this.sdkConfiguration);

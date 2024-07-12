@@ -7,6 +7,7 @@ export * from "./checkaccess";
 export * from "./configurecodesamples";
 export * from "./configuremintlifyrepo";
 export * from "./configuretarget";
+export * from "./create";
 export * from "./createfreetrial";
 export * from "./deleteapi";
 export * from "./deleteapiendpoint";

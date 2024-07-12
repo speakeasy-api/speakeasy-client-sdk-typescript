@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: f5cf06d8d5f2ec68226ab161d7a73cba
+  docChecksum: 638dbecd668cc1d7818c3b5aefd2d3e1
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.331.0
-  generationVersion: 2.365.0
-  releaseVersion: 3.3.12
-  configChecksum: 199b7630db1994159978669e4420220e
+  speakeasyVersion: 1.332.1
+  generationVersion: 2.366.1
+  releaseVersion: 3.3.13
+  configChecksum: 16cc8531611b24455d1fef7f42778c46
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -34,6 +34,7 @@ generatedFiles:
   - src/sdk/github.ts
   - src/sdk/organizations.ts
   - src/sdk/reports.ts
+  - src/sdk/shorturls.ts
   - src/sdk/suggest.ts
   - src/sdk/embeds.ts
   - src/sdk/events.ts
@@ -112,6 +113,7 @@ generatedFiles:
   - src/sdk/models/operations/getchangesreportsignedurl.ts
   - src/sdk/models/operations/getlintingreportsignedurl.ts
   - src/sdk/models/operations/uploadreport.ts
+  - src/sdk/models/operations/create.ts
   - src/sdk/models/operations/applyoperationids.ts
   - src/sdk/models/operations/suggestoperationids.ts
   - src/sdk/models/operations/suggestoperationidsregistry.ts
@@ -171,6 +173,7 @@ generatedFiles:
   - src/sdk/models/shared/organizationusage.ts
   - src/sdk/models/shared/organization.ts
   - src/sdk/models/shared/report.ts
+  - src/sdk/models/shared/shorturl.ts
   - src/sdk/models/shared/suggestedoperationids.ts
   - src/sdk/models/shared/suggestoperationidsopts.ts
   - src/sdk/models/shared/embedaccesstokenresponse.ts
@@ -288,6 +291,8 @@ generatedFiles:
   - docs/sdk/models/operations/uploadreportrequestbody.md
   - docs/sdk/models/operations/uploadreportuploadedreport.md
   - docs/sdk/models/operations/uploadreportresponse.md
+  - docs/sdk/models/operations/createrequestbody.md
+  - docs/sdk/models/operations/createresponse.md
   - docs/sdk/models/operations/applyoperationidsrequestbody.md
   - docs/sdk/models/operations/applyoperationidsrequest.md
   - docs/sdk/models/operations/applyoperationidsresponse.md
@@ -370,6 +375,7 @@ generatedFiles:
   - docs/sdk/models/shared/organization.md
   - docs/sdk/models/shared/typet.md
   - docs/sdk/models/shared/report.md
+  - docs/sdk/models/shared/shorturl.md
   - docs/sdk/models/shared/suggestedoperationids.md
   - docs/sdk/models/shared/depthstyle.md
   - docs/sdk/models/shared/style.md
@@ -394,6 +400,7 @@ generatedFiles:
   - docs/sdks/github/README.md
   - docs/sdks/organizations/README.md
   - docs/sdks/reports/README.md
+  - docs/sdks/shorturls/README.md
   - docs/sdks/suggest/README.md
   - docs/sdks/embeds/README.md
   - docs/sdks/events/README.md
