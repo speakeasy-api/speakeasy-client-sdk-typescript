@@ -25,22 +25,21 @@ Delete an ApiEndpoint. This will also delete all associated Request Logs (if usi
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.apiEndpoints.deleteApiEndpoint({
-    apiEndpointID: "<value>",
+async function run() {
+  const result = await speakeasy.apiEndpoints.deleteApiEndpoint({
     apiID: "<value>",
     versionID: "<value>",
+    apiEndpointID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -48,15 +47,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `request`                                                                                      | [operations.DeleteApiEndpointRequest](../../sdk/models/operations/deleteapiendpointrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `config`                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                   | :heavy_minus_sign:                                                                             | Available config options for making requests.                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteApiEndpointRequest](../../sdk/models/operations/deleteapiendpointrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.DeleteApiEndpointResponse](../../sdk/models/operations/deleteapiendpointresponse.md)>**
+**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -73,22 +74,21 @@ This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiI
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
 async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
-
-  const res = await sdk.apiEndpoints.findApiEndpoint({
+  const result = await speakeasy.apiEndpoints.findApiEndpoint({
     apiID: "<value>",
-    displayName: "Don.Strosin",
     versionID: "<value>",
+    displayName: "Don.Strosin",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -96,15 +96,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `request`                                                                                  | [operations.FindApiEndpointRequest](../../sdk/models/operations/findapiendpointrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
-| `config`                                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                               | :heavy_minus_sign:                                                                         | Available config options for making requests.                                              |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.FindApiEndpointRequest](../../sdk/models/operations/findapiendpointrequest.md)                                                                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.FindApiEndpointResponse](../../sdk/models/operations/findapiendpointresponse.md)>**
+**Promise\<[operations.FindApiEndpointResponse](../../sdk/models/operations/findapiendpointresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -121,22 +123,21 @@ Returns the original document and the newly generated document allowing a diff t
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.apiEndpoints.generateOpenApiSpecForApiEndpoint({
-    apiEndpointID: "<value>",
+async function run() {
+  const result = await speakeasy.apiEndpoints.generateOpenApiSpecForApiEndpoint({
     apiID: "<value>",
     versionID: "<value>",
+    apiEndpointID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -144,15 +145,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                      | [operations.GenerateOpenApiSpecForApiEndpointRequest](../../sdk/models/operations/generateopenapispecforapiendpointrequest.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
-| `config`                                                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                                   | :heavy_minus_sign:                                                                                                             | Available config options for making requests.                                                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GenerateOpenApiSpecForApiEndpointRequest](../../sdk/models/operations/generateopenapispecforapiendpointrequest.md)                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GenerateOpenApiSpecForApiEndpointResponse](../../sdk/models/operations/generateopenapispecforapiendpointresponse.md)>**
+**Promise\<[operations.GenerateOpenApiSpecForApiEndpointResponse](../../sdk/models/operations/generateopenapispecforapiendpointresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -168,22 +171,21 @@ Generates a postman collection that allows the endpoint to be called from postma
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.apiEndpoints.generatePostmanCollectionForApiEndpoint({
-    apiEndpointID: "<value>",
+async function run() {
+  const result = await speakeasy.apiEndpoints.generatePostmanCollectionForApiEndpoint({
     apiID: "<value>",
     versionID: "<value>",
+    apiEndpointID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -191,15 +193,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                                                                  | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                                                  | [operations.GeneratePostmanCollectionForApiEndpointRequest](../../sdk/models/operations/generatepostmancollectionforapiendpointrequest.md) | :heavy_check_mark:                                                                                                                         | The request object to use for the request.                                                                                                 |
-| `config`                                                                                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                                               | :heavy_minus_sign:                                                                                                                         | Available config options for making requests.                                                                                              |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GeneratePostmanCollectionForApiEndpointRequest](../../sdk/models/operations/generatepostmancollectionforapiendpointrequest.md)                                     | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GeneratePostmanCollectionForApiEndpointResponse](../../sdk/models/operations/generatepostmancollectionforapiendpointresponse.md)>**
+**Promise\<[operations.GeneratePostmanCollectionForApiEndpointResponse](../../sdk/models/operations/generatepostmancollectionforapiendpointresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -215,20 +219,19 @@ Get all Api endpoints for a particular apiID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.apiEndpoints.getAllApiEndpoints({
+async function run() {
+  const result = await speakeasy.apiEndpoints.getAllApiEndpoints({
     apiID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -236,15 +239,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `request`                                                                                        | [operations.GetAllApiEndpointsRequest](../../sdk/models/operations/getallapiendpointsrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `config`                                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                     | :heavy_minus_sign:                                                                               | Available config options for making requests.                                                    |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetAllApiEndpointsRequest](../../sdk/models/operations/getallapiendpointsrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetAllApiEndpointsResponse](../../sdk/models/operations/getallapiendpointsresponse.md)>**
+**Promise\<[operations.GetAllApiEndpointsResponse](../../sdk/models/operations/getallapiendpointsresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -260,21 +265,20 @@ Get all ApiEndpoints for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.apiEndpoints.getAllForVersionApiEndpoints({
+async function run() {
+  const result = await speakeasy.apiEndpoints.getAllForVersionApiEndpoints({
     apiID: "<value>",
     versionID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -282,15 +286,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                            | [operations.GetAllForVersionApiEndpointsRequest](../../sdk/models/operations/getallforversionapiendpointsrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
-| `config`                                                                                                             | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                         | :heavy_minus_sign:                                                                                                   | Available config options for making requests.                                                                        |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetAllForVersionApiEndpointsRequest](../../sdk/models/operations/getallforversionapiendpointsrequest.md)                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetAllForVersionApiEndpointsResponse](../../sdk/models/operations/getallforversionapiendpointsresponse.md)>**
+**Promise\<[operations.GetAllForVersionApiEndpointsResponse](../../sdk/models/operations/getallforversionapiendpointsresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -306,22 +312,21 @@ Get an ApiEndpoint.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.apiEndpoints.getApiEndpoint({
-    apiEndpointID: "<value>",
+async function run() {
+  const result = await speakeasy.apiEndpoints.getApiEndpoint({
     apiID: "<value>",
     versionID: "<value>",
+    apiEndpointID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -329,15 +334,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `request`                                                                                | [operations.GetApiEndpointRequest](../../sdk/models/operations/getapiendpointrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
-| `config`                                                                                 | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                             | :heavy_minus_sign:                                                                       | Available config options for making requests.                                            |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetApiEndpointRequest](../../sdk/models/operations/getapiendpointrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetApiEndpointResponse](../../sdk/models/operations/getapiendpointresponse.md)>**
+**Promise\<[operations.GetApiEndpointResponse](../../sdk/models/operations/getapiendpointresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -353,14 +360,17 @@ Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, oth
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.apiEndpoints.upsertApiEndpoint({
+async function run() {
+  const result = await speakeasy.apiEndpoints.upsertApiEndpoint({
+    apiID: "<value>",
+    versionID: "<value>",
+    apiEndpointID: "<value>",
     apiEndpoint: {
       apiEndpointId: "<value>",
       description: "Public-key systematic attitude",
@@ -369,14 +379,10 @@ async function run() {
       path: "/Library",
       versionId: "<value>",
     },
-    apiEndpointID: "<value>",
-    apiID: "<value>",
-    versionID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -384,15 +390,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `request`                                                                                      | [operations.UpsertApiEndpointRequest](../../sdk/models/operations/upsertapiendpointrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `config`                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                   | :heavy_minus_sign:                                                                             | Available config options for making requests.                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UpsertApiEndpointRequest](../../sdk/models/operations/upsertapiendpointrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.UpsertApiEndpointResponse](../../sdk/models/operations/upsertapiendpointresponse.md)>**
+**Promise\<[operations.UpsertApiEndpointResponse](../../sdk/models/operations/upsertapiendpointresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

@@ -21,16 +21,15 @@ Get or refresh an access token for the current workspace.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy();
+const speakeasy = new Speakeasy();
 
-  const res = await sdk.auth.getAccessToken({
+async function run() {
+  const result = await speakeasy.auth.getAccessToken({
     workspaceId: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -38,15 +37,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `request`                                                                                | [operations.GetAccessTokenRequest](../../sdk/models/operations/getaccesstokenrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
-| `config`                                                                                 | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                             | :heavy_minus_sign:                                                                       | Available config options for making requests.                                            |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetAccessTokenRequest](../../sdk/models/operations/getaccesstokenrequest.md)                                                                                       | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetAccessTokenResponse](../../sdk/models/operations/getaccesstokenresponse.md)>**
+**Promise\<[operations.GetAccessTokenResponse](../../sdk/models/operations/getaccesstokenresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -62,18 +63,17 @@ Get information about the current user.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
 async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+  const result = await speakeasy.auth.getUser();
 
-  const res = await sdk.auth.getUser();
-
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -81,14 +81,16 @@ run();
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetUserResponse](../../sdk/models/operations/getuserresponse.md)>**
+**Promise\<[operations.GetUserResponse](../../sdk/models/operations/getuserresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -104,18 +106,17 @@ Checks if generation is permitted for a particular run of the CLI
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
 async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+  const result = await speakeasy.auth.getWorkspaceAccess({});
 
-  const res = await sdk.auth.getWorkspaceAccess({});
-
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -123,16 +124,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `request`                                                                                        | [operations.GetWorkspaceAccessRequest](../../sdk/models/operations/getworkspaceaccessrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `retries`                                                                                        | [utils.RetryConfig](../../internal/utils/retryconfig.md)                                         | :heavy_minus_sign:                                                                               | Configuration to override the default retry behavior of the client.                              |
-| `config`                                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                     | :heavy_minus_sign:                                                                               | Available config options for making requests.                                                    |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetWorkspaceAccessRequest](../../sdk/models/operations/getworkspaceaccessrequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetWorkspaceAccessResponse](../../sdk/models/operations/getworkspaceaccessresponse.md)>**
+**Promise\<[shared.AccessDetails](../../sdk/models/shared/accessdetails.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -148,18 +150,17 @@ Validate the current api key.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
 async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+  const result = await speakeasy.auth.validateApiKey();
 
-  const res = await sdk.auth.validateApiKey();
-
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -167,14 +168,16 @@ run();
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.ValidateApiKeyResponse](../../sdk/models/operations/validateapikeyresponse.md)>**
+**Promise\<[operations.ValidateApiKeyResponse](../../sdk/models/operations/validateapikeyresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

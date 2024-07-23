@@ -20,23 +20,22 @@ Delete metadata for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.metadata.deleteVersionMetadata({
+async function run() {
+  const result = await speakeasy.metadata.deleteVersionMetadata({
     apiID: "<value>",
+    versionID: "<value>",
     metaKey: "<value>",
     metaValue: "<value>",
-    versionID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -44,15 +43,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                              | [operations.DeleteVersionMetadataRequest](../../sdk/models/operations/deleteversionmetadatarequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
-| `config`                                                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                           | :heavy_minus_sign:                                                                                     | Available config options for making requests.                                                          |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.DeleteVersionMetadataRequest](../../sdk/models/operations/deleteversionmetadatarequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.DeleteVersionMetadataResponse](../../sdk/models/operations/deleteversionmetadataresponse.md)>**
+**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -68,21 +69,20 @@ Get all metadata for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.metadata.getVersionMetadata({
+async function run() {
+  const result = await speakeasy.metadata.getVersionMetadata({
     apiID: "<value>",
     versionID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -90,15 +90,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `request`                                                                                        | [operations.GetVersionMetadataRequest](../../sdk/models/operations/getversionmetadatarequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
-| `config`                                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                     | :heavy_minus_sign:                                                                               | Available config options for making requests.                                                    |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetVersionMetadataRequest](../../sdk/models/operations/getversionmetadatarequest.md)                                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetVersionMetadataResponse](../../sdk/models/operations/getversionmetadataresponse.md)>**
+**Promise\<[operations.GetVersionMetadataResponse](../../sdk/models/operations/getversionmetadataresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -114,25 +116,24 @@ Insert metadata for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.metadata.insertVersionMetadata({
+async function run() {
+  const result = await speakeasy.metadata.insertVersionMetadata({
+    apiID: "<value>",
+    versionID: "<value>",
     versionMetadata: {
       metaKey: "<value>",
       metaValue: "<value>",
     },
-    apiID: "<value>",
-    versionID: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -140,15 +141,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                              | [operations.InsertVersionMetadataRequest](../../sdk/models/operations/insertversionmetadatarequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
-| `config`                                                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                           | :heavy_minus_sign:                                                                                     | Available config options for making requests.                                                          |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.InsertVersionMetadataRequest](../../sdk/models/operations/insertversionmetadatarequest.md)                                                                         | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.InsertVersionMetadataResponse](../../sdk/models/operations/insertversionmetadataresponse.md)>**
+**Promise\<[operations.InsertVersionMetadataResponse](../../sdk/models/operations/insertversionmetadataresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

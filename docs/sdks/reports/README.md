@@ -20,20 +20,19 @@ Get the signed access url for the change reports for a particular document.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.reports.getChangesReportSignedUrl({
+async function run() {
+  const result = await speakeasy.reports.getChangesReportSignedUrl({
     documentChecksum: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -41,15 +40,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                      | [operations.GetChangesReportSignedUrlRequest](../../sdk/models/operations/getchangesreportsignedurlrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
-| `config`                                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                   | :heavy_minus_sign:                                                                                             | Available config options for making requests.                                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetChangesReportSignedUrlRequest](../../sdk/models/operations/getchangesreportsignedurlrequest.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetChangesReportSignedUrlResponse](../../sdk/models/operations/getchangesreportsignedurlresponse.md)>**
+**Promise\<[operations.GetChangesReportSignedUrlSignedAccess](../../sdk/models/operations/getchangesreportsignedurlsignedaccess.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -65,20 +66,19 @@ Get the signed access url for the linting reports for a particular document.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.reports.getLintingReportSignedUrl({
+async function run() {
+  const result = await speakeasy.reports.getLintingReportSignedUrl({
     documentChecksum: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -86,15 +86,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                      | [operations.GetLintingReportSignedUrlRequest](../../sdk/models/operations/getlintingreportsignedurlrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
-| `config`                                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                   | :heavy_minus_sign:                                                                                             | Available config options for making requests.                                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetLintingReportSignedUrlRequest](../../sdk/models/operations/getlintingreportsignedurlrequest.md)                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.GetLintingReportSignedUrlResponse](../../sdk/models/operations/getlintingreportsignedurlresponse.md)>**
+**Promise\<[operations.GetLintingReportSignedUrlSignedAccess](../../sdk/models/operations/getlintingreportsignedurlsignedaccess.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -109,26 +111,22 @@ Upload a report.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { TypeT } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
+import { openAsBlob } from "node:fs";
+
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
 async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
-
-  const res = await sdk.reports.uploadReport({
+  const result = await speakeasy.reports.uploadReport({
     data: {},
-    file: {
-      content: new TextEncoder().encode("0xA329C0ad85"),
-      fileName: "your_file_here",
-    },
+    file: await openAsBlob("./sample-file"),
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -136,15 +134,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `request`                                                                                    | [operations.UploadReportRequestBody](../../sdk/models/operations/uploadreportrequestbody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `config`                                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                 | :heavy_minus_sign:                                                                           | Available config options for making requests.                                                |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.UploadReportRequestBody](../../sdk/models/operations/uploadreportrequestbody.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.UploadReportResponse](../../sdk/models/operations/uploadreportresponse.md)>**
+**Promise\<[operations.UploadReportUploadedReport](../../sdk/models/operations/uploadreportuploadedreport.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

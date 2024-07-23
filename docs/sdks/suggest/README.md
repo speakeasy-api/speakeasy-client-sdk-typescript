@@ -20,21 +20,19 @@ Apply operation ID suggestions and download result.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
-  const res = await sdk.suggest.applyOperationIDs({
-    requestBody: {},
+async function run() {
+  const result = await speakeasy.suggest.applyOperationIDs({
     xSessionId: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -42,15 +40,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `request`                                                                                      | [operations.ApplyOperationIDsRequest](../../sdk/models/operations/applyoperationidsrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `config`                                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                   | :heavy_minus_sign:                                                                             | Available config options for making requests.                                                  |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.ApplyOperationIDsRequest](../../sdk/models/operations/applyoperationidsrequest.md)                                                                                 | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.ApplyOperationIDsResponse](../../sdk/models/operations/applyoperationidsresponse.md)>**
+**Promise\<[operations.ApplyOperationIDsResponse](../../sdk/models/operations/applyoperationidsresponse.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -65,29 +65,24 @@ Get suggestions from an LLM model for improving the operationIDs in the provided
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DepthStyle, Style } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
+import { openAsBlob } from "node:fs";
+
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
 async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
-
-  const res = await sdk.suggest.suggestOperationIDs({
-    requestBody: {
-      opts: {},
-      schema: {
-        content: new TextEncoder().encode("0xb2de88c98a"),
-        fileName: "your_file_here",
-      },
-    },
+  const result = await speakeasy.suggest.suggestOperationIDs({
     xSessionId: "<value>",
+    requestBody: {
+      schema: await openAsBlob("./sample-file"),
+    },
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -95,15 +90,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `request`                                                                                          | [operations.SuggestOperationIDsRequest](../../sdk/models/operations/suggestoperationidsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
-| `config`                                                                                           | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                       | :heavy_minus_sign:                                                                                 | Available config options for making requests.                                                      |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.SuggestOperationIDsRequest](../../sdk/models/operations/suggestoperationidsrequest.md)                                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.SuggestOperationIDsResponse](../../sdk/models/operations/suggestoperationidsresponse.md)>**
+**Promise\<[shared.SuggestedOperationIDs](../../sdk/models/shared/suggestedoperationids.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |
@@ -118,25 +115,22 @@ Get suggestions from an LLM model for improving the operationIDs in the provided
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { DepthStyle, Style } from "@speakeasy-api/speakeasy-client-sdk-typescript/dist/sdk/models/shared";
+
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
 
 async function run() {
-  const sdk = new Speakeasy({
-    security: {
-      apiKey: "<YOUR_API_KEY_HERE>",
-    },
-  });
-
-  const res = await sdk.suggest.suggestOperationIDsRegistry({
-    suggestOperationIDsOpts: {},
+  const result = await speakeasy.suggest.suggestOperationIDsRegistry({
+    xSessionId: "<value>",
     namespaceName: "<value>",
     revisionReference: "<value>",
-    xSessionId: "<value>",
   });
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
+  // Handle the result
+  console.log(result)
 }
 
 run();
@@ -144,15 +138,17 @@ run();
 
 ### Parameters
 
-| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `request`                                                                                                          | [operations.SuggestOperationIDsRegistryRequest](../../sdk/models/operations/suggestoperationidsregistryrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
-| `config`                                                                                                           | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                                       | :heavy_minus_sign:                                                                                                 | Available config options for making requests.                                                                      |
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.SuggestOperationIDsRegistryRequest](../../sdk/models/operations/suggestoperationidsregistryrequest.md)                                                             | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
 
 
 ### Response
 
-**Promise<[operations.SuggestOperationIDsRegistryResponse](../../sdk/models/operations/suggestoperationidsregistryresponse.md)>**
+**Promise\<[shared.SuggestedOperationIDs](../../sdk/models/shared/suggestedoperationids.md)\>**
 ### Errors
 
 | Error Object    | Status Code     | Content Type    |

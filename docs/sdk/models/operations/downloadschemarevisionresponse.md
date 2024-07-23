@@ -1,13 +1,23 @@
 # DownloadSchemaRevisionResponse
 
 
-## Fields
+## Supported Types
 
-| Field                                                   | Type                                                    | Required                                                | Description                                             |
-| ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------- |
-| `twoHundredApplicationJsonSchema`                       | *Uint8Array*                                            | :heavy_minus_sign:                                      | OK                                                      |
-| `twoHundredApplicationXYamlSchema`                      | *Uint8Array*                                            | :heavy_minus_sign:                                      | OK                                                      |
-| `contentType`                                           | *string*                                                | :heavy_check_mark:                                      | HTTP response content type for this operation           |
-| `error`                                                 | [shared.ErrorT](../../../sdk/models/shared/errort.md)   | :heavy_minus_sign:                                      | Default error response                                  |
-| `statusCode`                                            | *number*                                                | :heavy_check_mark:                                      | HTTP response status code for this operation            |
-| `rawResponse`                                           | [AxiosResponse](https://axios-http.com/docs/res_schema) | :heavy_check_mark:                                      | Raw HTTP response; suitable for custom response parsing |
+### `ReadableStream<Uint8Array>`
+
+```typescript
+const value: ReadableStream<Uint8Array> = /* values here */
+```
+
+### `ReadableStream<Uint8Array>`
+
+```typescript
+const value: ReadableStream<Uint8Array> = /* values here */
+```
+
+### `shared.ErrorT`
+
+```typescript
+const value: shared.ErrorT = /* values here */
+```
+
