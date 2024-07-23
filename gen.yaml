@@ -11,7 +11,15 @@ generation:
     oAuth2ClientCredentialsEnabled: false
 typescript:
   version: 4.0.0
+  additionalDependencies:
+    dependencies: {}
+    devDependencies: {}
+    peerDependencies: {}
+  additionalPackageJSON: {}
   author: Speakeasy
+  clientServerStatusCodesAsErrors: false
+  enumFormat: union
+  flattenGlobalSecurity: true
   imports:
     option: openapi
     paths:
@@ -22,6 +30,10 @@ typescript:
       webhooks: sdk/models/webhooks
   inputModelSuffix: input
   maxMethodParams: 0
+  methodArguments: require-security-and-request
+  moduleFormat: commonjs
   outputModelSuffix: output
   packageName: '@speakeasy-api/speakeasy-client-sdk-typescript'
+  responseFormat: flat
   templateVersion: v2
+  useIndexModules: true

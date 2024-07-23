@@ -2,25 +2,17 @@
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
+const speakeasy = new Speakeasy({
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
+});
+
 async function run() {
-    const sdk = new Speakeasy({
-        security: {
-            apiKey: "<YOUR_API_KEY_HERE>",
-        },
-    });
+    const result = await speakeasy.apis.getApis({});
 
-    const res = await sdk.apis.getApis({
-        metadata: {
-            key: ["<value>"],
-        },
-        op: {
-            and: false,
-        },
-    });
-
-    if (res.statusCode == 200) {
-        // handle response
-    }
+    // Handle the result
+    console.log(result);
 }
 
 run();

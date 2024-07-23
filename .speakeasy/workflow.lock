@@ -1,0 +1,32 @@
+speakeasyVersion: 1.345.3
+sources:
+    my-source:
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:8848109787e4f3fff8ce742b76a440e359126a64bfbf7d296e268c07b22f0688
+        sourceBlobDigest: sha256:df932434792c6cecedad99f00e5d48ef90cfc7410c41079062384a36eb76adf2
+        tags:
+            - latest
+            - main
+targets:
+    speakeasy-client-sdk-typescript:
+        source: my-source
+        sourceNamespace: my-source
+        sourceRevisionDigest: sha256:8848109787e4f3fff8ce742b76a440e359126a64bfbf7d296e268c07b22f0688
+        sourceBlobDigest: sha256:df932434792c6cecedad99f00e5d48ef90cfc7410c41079062384a36eb76adf2
+        outLocation: /github/workspace/repo
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        my-source:
+            inputs:
+                - location: https://speakeasy.com/openapi.yaml
+            registry:
+                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/my-source
+    targets:
+        speakeasy-client-sdk-typescript:
+            target: typescript
+            source: my-source
+            publish:
+                npm:
+                    token: $NPM_TOKEN

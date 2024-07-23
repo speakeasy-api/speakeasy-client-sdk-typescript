@@ -3,25 +3,33 @@ id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
   docChecksum: 5b362866a3e7a85c830c6cb1f1cf4896
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.344.1
-  generationVersion: 2.376.2
-  releaseVersion: 3.3.15
-  configChecksum: 38ce3a8a385315b13c0d76f2a658821e
+  speakeasyVersion: 1.345.3
+  generationVersion: 2.378.3
+  releaseVersion: 4.0.0
+  configChecksum: 4e0644a745eb53eb49cebe97a15c01de
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
   published: true
 features:
   typescript:
-    acceptHeaders: 2.81.1
-    core: 3.4.12
+    acceptHeaders: 2.81.2
+    additionalDependencies: 0.1.0
+    core: 3.11.9
+    defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
-    examples: 2.81.3
-    globalSecurity: 2.82.5
-    globalServerURLs: 2.82.2
+    downloadStreams: 0.1.1
+    examples: 2.81.4
+    globalSecurity: 2.82.9
+    globalSecurityCallbacks: 0.1.0
+    globalServerURLs: 2.82.4
     globals: 2.82.1
-    inputOutputModels: 2.83.0
-    retries: 2.82.1
+    inputOutputModels: 2.82.0
+    nullables: 0.1.0
+    responseFormat: 0.2.3
+    retries: 2.83.0
+    sdkHooks: 0.1.0
+    serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
 generatedFiles:
   - src/sdk/apis.ts
@@ -39,91 +47,32 @@ generatedFiles:
   - src/sdk/embeds.ts
   - src/sdk/events.ts
   - src/sdk/sdk.ts
-  - .eslintrc.yml
-  - jest.config.js
-  - package-lock.json
+  - .eslintrc.cjs
+  - .npmignore
+  - RUNTIMES.md
+  - jsr.json
   - package.json
   - src/index.ts
-  - src/internal/utils/contenttype.ts
-  - src/internal/utils/headers.ts
-  - src/internal/utils/index.ts
-  - src/internal/utils/pathparams.ts
-  - src/internal/utils/queryparams.ts
-  - src/internal/utils/requestbody.ts
-  - src/internal/utils/retries.ts
-  - src/internal/utils/security.ts
-  - src/internal/utils/utils.ts
+  - src/lib/base64.ts
+  - src/lib/config.ts
+  - src/lib/encodings.ts
+  - src/lib/http.ts
+  - src/lib/is-plain-object.ts
+  - src/lib/primitives.ts
+  - src/lib/retries.ts
+  - src/lib/schemas.ts
+  - src/lib/sdks.ts
+  - src/lib/security.ts
+  - src/lib/url.ts
   - src/sdk/index.ts
   - src/sdk/models/errors/sdkerror.ts
+  - src/sdk/models/errors/sdkvalidationerror.ts
+  - src/sdk/types/blobs.ts
+  - src/sdk/types/enums.ts
   - src/sdk/types/index.ts
+  - src/sdk/types/operations.ts
   - src/sdk/types/rfcdate.ts
   - tsconfig.json
-  - src/sdk/models/operations/deleteapi.ts
-  - src/sdk/models/operations/generateopenapispec.ts
-  - src/sdk/models/operations/generatepostmancollection.ts
-  - src/sdk/models/operations/getallapiversions.ts
-  - src/sdk/models/operations/getapis.ts
-  - src/sdk/models/operations/upsertapi.ts
-  - src/sdk/models/operations/deleteapiendpoint.ts
-  - src/sdk/models/operations/findapiendpoint.ts
-  - src/sdk/models/operations/generateopenapispecforapiendpoint.ts
-  - src/sdk/models/operations/generatepostmancollectionforapiendpoint.ts
-  - src/sdk/models/operations/getallapiendpoints.ts
-  - src/sdk/models/operations/getallforversionapiendpoints.ts
-  - src/sdk/models/operations/getapiendpoint.ts
-  - src/sdk/models/operations/upsertapiendpoint.ts
-  - src/sdk/models/operations/deleteversionmetadata.ts
-  - src/sdk/models/operations/getversionmetadata.ts
-  - src/sdk/models/operations/insertversionmetadata.ts
-  - src/sdk/models/operations/deleteschema.ts
-  - src/sdk/models/operations/downloadschema.ts
-  - src/sdk/models/operations/downloadschemarevision.ts
-  - src/sdk/models/operations/getschema.ts
-  - src/sdk/models/operations/getschemadiff.ts
-  - src/sdk/models/operations/getschemarevision.ts
-  - src/sdk/models/operations/getschemas.ts
-  - src/sdk/models/operations/registerschema.ts
-  - src/sdk/models/operations/getblob.ts
-  - src/sdk/models/operations/getmanifest.ts
-  - src/sdk/models/operations/getnamespaces.ts
-  - src/sdk/models/operations/getoassummary.ts
-  - src/sdk/models/operations/getrevisions.ts
-  - src/sdk/models/operations/gettags.ts
-  - src/sdk/models/operations/posttags.ts
-  - src/sdk/models/operations/preflight.ts
-  - src/sdk/models/operations/getaccesstoken.ts
-  - src/sdk/models/operations/getuser.ts
-  - src/sdk/models/operations/getworkspaceaccess.ts
-  - src/sdk/models/operations/validateapikey.ts
-  - src/sdk/models/operations/generaterequestpostmancollection.ts
-  - src/sdk/models/operations/getrequestfromeventlog.ts
-  - src/sdk/models/operations/queryeventlog.ts
-  - src/sdk/models/operations/checkaccess.ts
-  - src/sdk/models/operations/configurecodesamples.ts
-  - src/sdk/models/operations/configuremintlifyrepo.ts
-  - src/sdk/models/operations/configuretarget.ts
-  - src/sdk/models/operations/fetchpublishingprs.ts
-  - src/sdk/models/operations/getaction.ts
-  - src/sdk/models/operations/githubcheckpublishingsecrets.ts
-  - src/sdk/models/operations/githubstorepublishingsecrets.ts
-  - src/sdk/models/operations/triggeraction.ts
-  - src/sdk/models/operations/createfreetrial.ts
-  - src/sdk/models/operations/getorganizationusage.ts
-  - src/sdk/models/operations/getorganizations.ts
-  - src/sdk/models/operations/getchangesreportsignedurl.ts
-  - src/sdk/models/operations/getlintingreportsignedurl.ts
-  - src/sdk/models/operations/uploadreport.ts
-  - src/sdk/models/operations/create.ts
-  - src/sdk/models/operations/applyoperationids.ts
-  - src/sdk/models/operations/suggestoperationids.ts
-  - src/sdk/models/operations/suggestoperationidsregistry.ts
-  - src/sdk/models/operations/getembedaccesstoken.ts
-  - src/sdk/models/operations/getvalidembedaccesstokens.ts
-  - src/sdk/models/operations/revokeembedaccesstoken.ts
-  - src/sdk/models/operations/getworkspaceeventsbytarget.ts
-  - src/sdk/models/operations/getworkspacetargets.ts
-  - src/sdk/models/operations/postworkspaceevents.ts
-  - src/sdk/models/operations/searchworkspaceevents.ts
   - src/sdk/models/shared/error.ts
   - src/sdk/models/shared/generateopenapispecdiff.ts
   - src/sdk/models/shared/api.ts
@@ -182,139 +131,70 @@ generatedFiles:
   - src/sdk/models/shared/interactiontype.ts
   - src/sdk/models/shared/targetsdk.ts
   - src/sdk/models/shared/security.ts
+  - src/sdk/models/operations/deleteapi.ts
+  - src/sdk/models/operations/generateopenapispec.ts
+  - src/sdk/models/operations/generatepostmancollection.ts
+  - src/sdk/models/operations/getallapiversions.ts
+  - src/sdk/models/operations/getapis.ts
+  - src/sdk/models/operations/upsertapi.ts
+  - src/sdk/models/operations/deleteapiendpoint.ts
+  - src/sdk/models/operations/findapiendpoint.ts
+  - src/sdk/models/operations/generateopenapispecforapiendpoint.ts
+  - src/sdk/models/operations/generatepostmancollectionforapiendpoint.ts
+  - src/sdk/models/operations/getallapiendpoints.ts
+  - src/sdk/models/operations/getallforversionapiendpoints.ts
+  - src/sdk/models/operations/getapiendpoint.ts
+  - src/sdk/models/operations/upsertapiendpoint.ts
+  - src/sdk/models/operations/deleteversionmetadata.ts
+  - src/sdk/models/operations/getversionmetadata.ts
+  - src/sdk/models/operations/insertversionmetadata.ts
+  - src/sdk/models/operations/deleteschema.ts
+  - src/sdk/models/operations/downloadschema.ts
+  - src/sdk/models/operations/downloadschemarevision.ts
+  - src/sdk/models/operations/getschema.ts
+  - src/sdk/models/operations/getschemadiff.ts
+  - src/sdk/models/operations/getschemarevision.ts
+  - src/sdk/models/operations/getschemas.ts
+  - src/sdk/models/operations/registerschema.ts
+  - src/sdk/models/operations/getblob.ts
+  - src/sdk/models/operations/getmanifest.ts
+  - src/sdk/models/operations/getnamespaces.ts
+  - src/sdk/models/operations/getoassummary.ts
+  - src/sdk/models/operations/getrevisions.ts
+  - src/sdk/models/operations/gettags.ts
+  - src/sdk/models/operations/posttags.ts
+  - src/sdk/models/operations/preflight.ts
+  - src/sdk/models/operations/getaccesstoken.ts
+  - src/sdk/models/operations/getuser.ts
+  - src/sdk/models/operations/getworkspaceaccess.ts
+  - src/sdk/models/operations/validateapikey.ts
+  - src/sdk/models/operations/generaterequestpostmancollection.ts
+  - src/sdk/models/operations/getrequestfromeventlog.ts
+  - src/sdk/models/operations/queryeventlog.ts
+  - src/sdk/models/operations/checkaccess.ts
+  - src/sdk/models/operations/configurecodesamples.ts
+  - src/sdk/models/operations/fetchpublishingprs.ts
+  - src/sdk/models/operations/getaction.ts
+  - src/sdk/models/operations/githubcheckpublishingsecrets.ts
+  - src/sdk/models/operations/getorganizationusage.ts
+  - src/sdk/models/operations/getorganizations.ts
+  - src/sdk/models/operations/getchangesreportsignedurl.ts
+  - src/sdk/models/operations/getlintingreportsignedurl.ts
+  - src/sdk/models/operations/uploadreport.ts
+  - src/sdk/models/operations/create.ts
+  - src/sdk/models/operations/applyoperationids.ts
+  - src/sdk/models/operations/suggestoperationids.ts
+  - src/sdk/models/operations/suggestoperationidsregistry.ts
+  - src/sdk/models/operations/getembedaccesstoken.ts
+  - src/sdk/models/operations/getvalidembedaccesstokens.ts
+  - src/sdk/models/operations/revokeembedaccesstoken.ts
+  - src/sdk/models/operations/getworkspaceeventsbytarget.ts
+  - src/sdk/models/operations/getworkspacetargets.ts
+  - src/sdk/models/operations/postworkspaceevents.ts
+  - src/sdk/models/operations/searchworkspaceevents.ts
   - src/sdk/models/errors/index.ts
-  - src/sdk/models/operations/index.ts
   - src/sdk/models/shared/index.ts
-  - docs/sdk/models/operations/deleteapirequest.md
-  - docs/sdk/models/operations/deleteapiresponse.md
-  - docs/sdk/models/operations/generateopenapispecrequest.md
-  - docs/sdk/models/operations/generateopenapispecresponse.md
-  - docs/sdk/models/operations/generatepostmancollectionrequest.md
-  - docs/sdk/models/operations/generatepostmancollectionresponse.md
-  - docs/sdk/models/operations/op.md
-  - docs/sdk/models/operations/getallapiversionsrequest.md
-  - docs/sdk/models/operations/getallapiversionsresponse.md
-  - docs/sdk/models/operations/queryparamop.md
-  - docs/sdk/models/operations/getapisrequest.md
-  - docs/sdk/models/operations/getapisresponse.md
-  - docs/sdk/models/operations/upsertapirequest.md
-  - docs/sdk/models/operations/upsertapiresponse.md
-  - docs/sdk/models/operations/deleteapiendpointrequest.md
-  - docs/sdk/models/operations/deleteapiendpointresponse.md
-  - docs/sdk/models/operations/findapiendpointrequest.md
-  - docs/sdk/models/operations/findapiendpointresponse.md
-  - docs/sdk/models/operations/generateopenapispecforapiendpointrequest.md
-  - docs/sdk/models/operations/generateopenapispecforapiendpointresponse.md
-  - docs/sdk/models/operations/generatepostmancollectionforapiendpointrequest.md
-  - docs/sdk/models/operations/generatepostmancollectionforapiendpointresponse.md
-  - docs/sdk/models/operations/getallapiendpointsrequest.md
-  - docs/sdk/models/operations/getallapiendpointsresponse.md
-  - docs/sdk/models/operations/getallforversionapiendpointsrequest.md
-  - docs/sdk/models/operations/getallforversionapiendpointsresponse.md
-  - docs/sdk/models/operations/getapiendpointrequest.md
-  - docs/sdk/models/operations/getapiendpointresponse.md
-  - docs/sdk/models/operations/upsertapiendpointrequest.md
-  - docs/sdk/models/operations/upsertapiendpointresponse.md
-  - docs/sdk/models/operations/deleteversionmetadatarequest.md
-  - docs/sdk/models/operations/deleteversionmetadataresponse.md
-  - docs/sdk/models/operations/getversionmetadatarequest.md
-  - docs/sdk/models/operations/getversionmetadataresponse.md
-  - docs/sdk/models/operations/insertversionmetadatarequest.md
-  - docs/sdk/models/operations/insertversionmetadataresponse.md
-  - docs/sdk/models/operations/deleteschemarequest.md
-  - docs/sdk/models/operations/deleteschemaresponse.md
-  - docs/sdk/models/operations/downloadschemarequest.md
-  - docs/sdk/models/operations/downloadschemaresponse.md
-  - docs/sdk/models/operations/downloadschemarevisionrequest.md
-  - docs/sdk/models/operations/downloadschemarevisionresponse.md
-  - docs/sdk/models/operations/getschemarequest.md
-  - docs/sdk/models/operations/getschemaresponse.md
-  - docs/sdk/models/operations/getschemadiffrequest.md
-  - docs/sdk/models/operations/getschemadiffresponse.md
-  - docs/sdk/models/operations/getschemarevisionrequest.md
-  - docs/sdk/models/operations/getschemarevisionresponse.md
-  - docs/sdk/models/operations/getschemasrequest.md
-  - docs/sdk/models/operations/getschemasresponse.md
-  - docs/sdk/models/operations/registerschemafile.md
-  - docs/sdk/models/operations/registerschemarequestbody.md
-  - docs/sdk/models/operations/registerschemarequest.md
-  - docs/sdk/models/operations/registerschemaresponse.md
-  - docs/sdk/models/operations/getblobrequest.md
-  - docs/sdk/models/operations/getblobresponse.md
-  - docs/sdk/models/operations/getmanifestrequest.md
-  - docs/sdk/models/operations/getmanifestresponse.md
-  - docs/sdk/models/operations/getnamespacesresponse.md
-  - docs/sdk/models/operations/getoassummaryrequest.md
-  - docs/sdk/models/operations/getoassummaryresponse.md
-  - docs/sdk/models/operations/getrevisionsrequest.md
-  - docs/sdk/models/operations/getrevisionsresponse.md
-  - docs/sdk/models/operations/gettagsrequest.md
-  - docs/sdk/models/operations/gettagsresponse.md
-  - docs/sdk/models/operations/posttagsrequest.md
-  - docs/sdk/models/operations/posttagsresponse.md
-  - docs/sdk/models/operations/preflightresponse.md
-  - docs/sdk/models/operations/getaccesstokenrequest.md
-  - docs/sdk/models/operations/getaccesstokenresponse.md
-  - docs/sdk/models/operations/getuserresponse.md
-  - docs/sdk/models/operations/getworkspaceaccessrequest.md
-  - docs/sdk/models/operations/getworkspaceaccessresponse.md
-  - docs/sdk/models/operations/validateapikeyresponse.md
-  - docs/sdk/models/operations/generaterequestpostmancollectionrequest.md
-  - docs/sdk/models/operations/generaterequestpostmancollectionresponse.md
-  - docs/sdk/models/operations/getrequestfromeventlogrequest.md
-  - docs/sdk/models/operations/getrequestfromeventlogresponse.md
-  - docs/sdk/models/operations/queryeventlogrequest.md
-  - docs/sdk/models/operations/queryeventlogresponse.md
-  - docs/sdk/models/operations/checkaccessrequest.md
-  - docs/sdk/models/operations/checkaccessresponse.md
-  - docs/sdk/models/operations/configurecodesamplesresponse.md
-  - docs/sdk/models/operations/configuremintlifyreporesponse.md
-  - docs/sdk/models/operations/configuretargetresponse.md
-  - docs/sdk/models/operations/fetchpublishingprsrequest.md
-  - docs/sdk/models/operations/fetchpublishingprsresponse.md
-  - docs/sdk/models/operations/getactionrequest.md
-  - docs/sdk/models/operations/getactionresponse.md
-  - docs/sdk/models/operations/githubcheckpublishingsecretsrequest.md
-  - docs/sdk/models/operations/githubcheckpublishingsecretsresponse.md
-  - docs/sdk/models/operations/githubstorepublishingsecretsresponse.md
-  - docs/sdk/models/operations/triggeractionresponse.md
-  - docs/sdk/models/operations/createfreetrialresponse.md
-  - docs/sdk/models/operations/getorganizationusageresponse.md
-  - docs/sdk/models/operations/getorganizationsresponse.md
-  - docs/sdk/models/operations/getchangesreportsignedurlrequest.md
-  - docs/sdk/models/operations/getchangesreportsignedurlsignedaccess.md
-  - docs/sdk/models/operations/getchangesreportsignedurlresponse.md
-  - docs/sdk/models/operations/getlintingreportsignedurlrequest.md
-  - docs/sdk/models/operations/getlintingreportsignedurlsignedaccess.md
-  - docs/sdk/models/operations/getlintingreportsignedurlresponse.md
-  - docs/sdk/models/operations/file.md
-  - docs/sdk/models/operations/uploadreportrequestbody.md
-  - docs/sdk/models/operations/uploadreportuploadedreport.md
-  - docs/sdk/models/operations/uploadreportresponse.md
-  - docs/sdk/models/operations/createrequestbody.md
-  - docs/sdk/models/operations/createresponse.md
-  - docs/sdk/models/operations/applyoperationidsrequestbody.md
-  - docs/sdk/models/operations/applyoperationidsrequest.md
-  - docs/sdk/models/operations/applyoperationidsresponse.md
-  - docs/sdk/models/operations/schema.md
-  - docs/sdk/models/operations/suggestoperationidsrequestbody.md
-  - docs/sdk/models/operations/suggestoperationidsrequest.md
-  - docs/sdk/models/operations/suggestoperationidsresponse.md
-  - docs/sdk/models/operations/suggestoperationidsregistryrequest.md
-  - docs/sdk/models/operations/suggestoperationidsregistryresponse.md
-  - docs/sdk/models/operations/getembedaccesstokenrequest.md
-  - docs/sdk/models/operations/getembedaccesstokenresponse.md
-  - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
-  - docs/sdk/models/operations/revokeembedaccesstokenrequest.md
-  - docs/sdk/models/operations/revokeembedaccesstokenresponse.md
-  - docs/sdk/models/operations/getworkspaceeventsbytargetrequest.md
-  - docs/sdk/models/operations/getworkspaceeventsbytargetresponse.md
-  - docs/sdk/models/operations/getworkspacetargetsrequest.md
-  - docs/sdk/models/operations/getworkspacetargetsresponse.md
-  - docs/sdk/models/operations/postworkspaceeventsrequest.md
-  - docs/sdk/models/operations/postworkspaceeventsresponse.md
-  - docs/sdk/models/operations/searchworkspaceeventsrequest.md
-  - docs/sdk/models/operations/searchworkspaceeventsresponse.md
+  - src/sdk/models/operations/index.ts
   - docs/sdk/models/shared/errort.md
   - docs/sdk/models/shared/generateopenapispecdiff.md
   - docs/sdk/models/shared/api.md
@@ -373,7 +253,7 @@ generatedFiles:
   - docs/sdk/models/shared/organizationusage.md
   - docs/sdk/models/shared/organizationaccounttype.md
   - docs/sdk/models/shared/organization.md
-  - docs/sdk/models/shared/typet.md
+  - docs/sdk/models/shared/type.md
   - docs/sdk/models/shared/report.md
   - docs/sdk/models/shared/shorturl.md
   - docs/sdk/models/shared/suggestedoperationids.md
@@ -388,13 +268,126 @@ generatedFiles:
   - docs/sdk/models/shared/interactiontype.md
   - docs/sdk/models/shared/targetsdk.md
   - docs/sdk/models/shared/security.md
+  - docs/sdk/models/operations/deleteapirequest.md
+  - docs/sdk/models/operations/generateopenapispecrequest.md
+  - docs/sdk/models/operations/generateopenapispecresponse.md
+  - docs/sdk/models/operations/generatepostmancollectionrequest.md
+  - docs/sdk/models/operations/generatepostmancollectionresponse.md
+  - docs/sdk/models/operations/op.md
+  - docs/sdk/models/operations/getallapiversionsrequest.md
+  - docs/sdk/models/operations/getallapiversionsresponse.md
+  - docs/sdk/models/operations/queryparamop.md
+  - docs/sdk/models/operations/getapisrequest.md
+  - docs/sdk/models/operations/getapisresponse.md
+  - docs/sdk/models/operations/upsertapirequest.md
+  - docs/sdk/models/operations/upsertapiresponse.md
+  - docs/sdk/models/operations/deleteapiendpointrequest.md
+  - docs/sdk/models/operations/findapiendpointrequest.md
+  - docs/sdk/models/operations/findapiendpointresponse.md
+  - docs/sdk/models/operations/generateopenapispecforapiendpointrequest.md
+  - docs/sdk/models/operations/generateopenapispecforapiendpointresponse.md
+  - docs/sdk/models/operations/generatepostmancollectionforapiendpointrequest.md
+  - docs/sdk/models/operations/generatepostmancollectionforapiendpointresponse.md
+  - docs/sdk/models/operations/getallapiendpointsrequest.md
+  - docs/sdk/models/operations/getallapiendpointsresponse.md
+  - docs/sdk/models/operations/getallforversionapiendpointsrequest.md
+  - docs/sdk/models/operations/getallforversionapiendpointsresponse.md
+  - docs/sdk/models/operations/getapiendpointrequest.md
+  - docs/sdk/models/operations/getapiendpointresponse.md
+  - docs/sdk/models/operations/upsertapiendpointrequest.md
+  - docs/sdk/models/operations/upsertapiendpointresponse.md
+  - docs/sdk/models/operations/deleteversionmetadatarequest.md
+  - docs/sdk/models/operations/getversionmetadatarequest.md
+  - docs/sdk/models/operations/getversionmetadataresponse.md
+  - docs/sdk/models/operations/insertversionmetadatarequest.md
+  - docs/sdk/models/operations/insertversionmetadataresponse.md
+  - docs/sdk/models/operations/deleteschemarequest.md
+  - docs/sdk/models/operations/downloadschemarequest.md
+  - docs/sdk/models/operations/downloadschemaresponse.md
+  - docs/sdk/models/operations/downloadschemarevisionrequest.md
+  - docs/sdk/models/operations/downloadschemarevisionresponse.md
+  - docs/sdk/models/operations/getschemarequest.md
+  - docs/sdk/models/operations/getschemaresponse.md
+  - docs/sdk/models/operations/getschemadiffrequest.md
+  - docs/sdk/models/operations/getschemadiffresponse.md
+  - docs/sdk/models/operations/getschemarevisionrequest.md
+  - docs/sdk/models/operations/getschemarevisionresponse.md
+  - docs/sdk/models/operations/getschemasrequest.md
+  - docs/sdk/models/operations/getschemasresponse.md
+  - docs/sdk/models/operations/registerschemafile.md
+  - docs/sdk/models/operations/registerschemarequestbody.md
+  - docs/sdk/models/operations/registerschemarequest.md
+  - docs/sdk/models/operations/getblobrequest.md
+  - docs/sdk/models/operations/getblobresponse.md
+  - docs/sdk/models/operations/getmanifestrequest.md
+  - docs/sdk/models/operations/getmanifestresponse.md
+  - docs/sdk/models/operations/getnamespacesresponse.md
+  - docs/sdk/models/operations/getoassummaryrequest.md
+  - docs/sdk/models/operations/getoassummaryresponse.md
+  - docs/sdk/models/operations/getrevisionsrequest.md
+  - docs/sdk/models/operations/getrevisionsresponse.md
+  - docs/sdk/models/operations/gettagsrequest.md
+  - docs/sdk/models/operations/gettagsresponse.md
+  - docs/sdk/models/operations/posttagsrequest.md
+  - docs/sdk/models/operations/preflightresponse.md
+  - docs/sdk/models/operations/getaccesstokenrequest.md
+  - docs/sdk/models/operations/getaccesstokenresponse.md
+  - docs/sdk/models/operations/getuserresponse.md
+  - docs/sdk/models/operations/getworkspaceaccessrequest.md
+  - docs/sdk/models/operations/validateapikeyresponse.md
+  - docs/sdk/models/operations/generaterequestpostmancollectionrequest.md
+  - docs/sdk/models/operations/generaterequestpostmancollectionresponse.md
+  - docs/sdk/models/operations/getrequestfromeventlogrequest.md
+  - docs/sdk/models/operations/getrequestfromeventlogresponse.md
+  - docs/sdk/models/operations/queryeventlogrequest.md
+  - docs/sdk/models/operations/queryeventlogresponse.md
+  - docs/sdk/models/operations/checkaccessrequest.md
+  - docs/sdk/models/operations/configurecodesamplesresponse.md
+  - docs/sdk/models/operations/fetchpublishingprsrequest.md
+  - docs/sdk/models/operations/fetchpublishingprsresponse.md
+  - docs/sdk/models/operations/getactionrequest.md
+  - docs/sdk/models/operations/getactionresponse.md
+  - docs/sdk/models/operations/githubcheckpublishingsecretsrequest.md
+  - docs/sdk/models/operations/githubcheckpublishingsecretsresponse.md
+  - docs/sdk/models/operations/getorganizationusageresponse.md
+  - docs/sdk/models/operations/getorganizationsresponse.md
+  - docs/sdk/models/operations/getchangesreportsignedurlrequest.md
+  - docs/sdk/models/operations/getchangesreportsignedurlsignedaccess.md
+  - docs/sdk/models/operations/getlintingreportsignedurlrequest.md
+  - docs/sdk/models/operations/getlintingreportsignedurlsignedaccess.md
+  - docs/sdk/models/operations/filet.md
+  - docs/sdk/models/operations/uploadreportrequestbody.md
+  - docs/sdk/models/operations/uploadreportuploadedreport.md
+  - docs/sdk/models/operations/createrequestbody.md
+  - docs/sdk/models/operations/applyoperationidsrequestbody.md
+  - docs/sdk/models/operations/applyoperationidsrequest.md
+  - docs/sdk/models/operations/applyoperationidsresponse.md
+  - docs/sdk/models/operations/schema.md
+  - docs/sdk/models/operations/suggestoperationidsrequestbody.md
+  - docs/sdk/models/operations/suggestoperationidsrequest.md
+  - docs/sdk/models/operations/suggestoperationidsregistryrequest.md
+  - docs/sdk/models/operations/getembedaccesstokenrequest.md
+  - docs/sdk/models/operations/getembedaccesstokenresponse.md
+  - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
+  - docs/sdk/models/operations/revokeembedaccesstokenrequest.md
+  - docs/sdk/models/operations/getworkspaceeventsbytargetglobals.md
+  - docs/sdk/models/operations/getworkspaceeventsbytargetrequest.md
+  - docs/sdk/models/operations/getworkspaceeventsbytargetresponse.md
+  - docs/sdk/models/operations/getworkspacetargetsglobals.md
+  - docs/sdk/models/operations/getworkspacetargetsrequest.md
+  - docs/sdk/models/operations/getworkspacetargetsresponse.md
+  - docs/sdk/models/operations/postworkspaceeventsglobals.md
+  - docs/sdk/models/operations/postworkspaceeventsrequest.md
+  - docs/sdk/models/operations/searchworkspaceeventsglobals.md
+  - docs/sdk/models/operations/searchworkspaceeventsrequest.md
+  - docs/sdk/models/operations/searchworkspaceeventsresponse.md
   - docs/sdks/speakeasy/README.md
+  - docs/lib/utils/retryconfig.md
   - docs/sdks/apis/README.md
   - docs/sdks/apiendpoints/README.md
   - docs/sdks/metadata/README.md
   - docs/sdks/schemas/README.md
   - docs/sdks/artifacts/README.md
-  - docs/internal/utils/retryconfig.md
   - docs/sdks/auth/README.md
   - docs/sdks/requests/README.md
   - docs/sdks/github/README.md
@@ -406,3 +399,7 @@ generatedFiles:
   - docs/sdks/events/README.md
   - USAGE.md
   - .gitattributes
+  - src/hooks/hooks.ts
+  - src/hooks/types.ts
+  - src/hooks/index.ts
+  - CONTRIBUTING.md
