@@ -1,0 +1,12 @@
+workflowVersion: 1.0.0
+sources:
+    my-source:
+        inputs:
+            - location: https://speakeasy.com/openapi.yaml
+targets:
+    speakeasy-client-sdk-typescript:
+        target: typescript
+        source: my-source
+        publish:
+            npm:
+                token: $NPM_TOKEN
