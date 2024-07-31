@@ -25,11 +25,7 @@ Delete an ApiEndpoint. This will also delete all associated Request Logs (if usi
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apiEndpoints.deleteApiEndpoint({
@@ -74,11 +70,7 @@ This is useful for finding the ID of an ApiEndpoint to use in the /v1/apis/{apiI
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apiEndpoints.findApiEndpoint({
@@ -123,11 +115,7 @@ Returns the original document and the newly generated document allowing a diff t
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apiEndpoints.generateOpenApiSpecForApiEndpoint({
@@ -171,11 +159,7 @@ Generates a postman collection that allows the endpoint to be called from postma
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apiEndpoints.generatePostmanCollectionForApiEndpoint({
@@ -219,11 +203,7 @@ Get all Api endpoints for a particular apiID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apiEndpoints.getAllApiEndpoints({
@@ -265,11 +245,7 @@ Get all ApiEndpoints for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apiEndpoints.getAllForVersionApiEndpoints({
@@ -312,11 +288,7 @@ Get an ApiEndpoint.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apiEndpoints.getApiEndpoint({
@@ -360,11 +332,7 @@ Upsert an ApiEndpoint. If the ApiEndpoint does not exist it will be created, oth
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apiEndpoints.upsertApiEndpoint({

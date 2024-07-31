@@ -20,11 +20,7 @@ Delete metadata for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.metadata.deleteVersionMetadata({
@@ -69,11 +65,7 @@ Get all metadata for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.metadata.getVersionMetadata({
@@ -116,11 +108,7 @@ Insert metadata for a particular apiID and versionID.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.metadata.insertVersionMetadata({

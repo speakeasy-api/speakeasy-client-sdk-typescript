@@ -23,11 +23,7 @@ Delete a particular version of an Api. The will also delete all associated ApiEn
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apis.deleteApi({
@@ -71,11 +67,7 @@ Returns the original document and the newly generated document allowing a diff t
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apis.generateOpenApiSpec({
@@ -118,11 +110,7 @@ Generates a postman collection containing all endpoints for a particular API. In
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apis.generatePostmanCollection({
@@ -166,11 +154,7 @@ Supports filtering the versions based on metadata attributes.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apis.getAllApiVersions({
@@ -213,11 +197,7 @@ Supports filtering the APIs based on metadata attributes.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apis.getApis({});
@@ -258,11 +238,7 @@ If the Api exists, it will be updated.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.apis.upsertApi({

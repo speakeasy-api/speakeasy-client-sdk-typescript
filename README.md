@@ -39,11 +39,7 @@ yarn add @speakeasy-api/speakeasy-client-sdk-typescript zod
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
     const result = await speakeasy.apis.getApis({});
@@ -136,6 +132,7 @@ run();
 ### [organizations](docs/sdks/organizations/README.md)
 
 * [createFreeTrial](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
+* [getOrganization](docs/sdks/organizations/README.md#getorganization) - Get organization
 * [getOrganizationUsage](docs/sdks/organizations/README.md#getorganizationusage) - Get billing usage summary for a particular organization
 * [getOrganizations](docs/sdks/organizations/README.md#getorganizations) - Get organizations for a user
 
@@ -160,6 +157,10 @@ run();
 * [getEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
 * [getValidEmbedAccessTokens](docs/sdks/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
 * [revokeEmbedAccessToken](docs/sdks/embeds/README.md#revokeembedaccesstoken) - Revoke an embed access EmbedToken.
+
+### [workspaces](docs/sdks/workspaces/README.md)
+
+* [getWorkspace](docs/sdks/workspaces/README.md#getworkspace) - Get workspace
 
 ### [events](docs/sdks/events/README.md)
 
@@ -191,11 +192,7 @@ Validation errors can also occur when either method arguments or data returned f
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { SDKValidationError } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors";
 
-const speakeasy = new Speakeasy({
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
     let result;
@@ -246,9 +243,6 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
     server: "prod",
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
 });
 
 async function run() {
@@ -275,9 +269,6 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
     serverURL: "https://api.prod.speakeasyapi.dev",
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
 });
 
 async function run() {
@@ -364,11 +355,7 @@ You can set the security parameters through the `security` optional parameter wh
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
     const result = await speakeasy.apis.deleteApi({
@@ -390,7 +377,7 @@ run();
 
 A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
 
-For example, you can set `workspaceID` to `"<value>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getWorkspaceEventsByTarget`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+For example, you can set `workspaceID` to `"<value>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getWorkspace`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
 
 
 ### Available Globals
@@ -407,16 +394,10 @@ The following global parameter is available.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
-    const result = await speakeasy.events.getWorkspaceEventsByTarget({
-        targetID: "<value>",
-    });
+    const result = await speakeasy.workspaces.getWorkspace({});
 
     // Handle the result
     console.log(result);
@@ -436,11 +417,7 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
     const result = await speakeasy.apis.deleteApi(
@@ -485,9 +462,6 @@ const speakeasy = new Speakeasy({
         },
         retryConnectionErrors: false,
     },
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
 });
 
 async function run() {
@@ -529,11 +503,7 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { openAsBlob } from "node:fs";
 
-const speakeasy = new Speakeasy({
-    security: {
-        apiKey: "<YOUR_API_KEY_HERE>",
-    },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
     const result = await speakeasy.schemas.registerSchema({
