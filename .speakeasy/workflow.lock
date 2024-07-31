@@ -2,8 +2,8 @@ speakeasyVersion: 1.349.0
 sources:
     my-source:
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:417c12e58371aea5d13d8371f6701239551b2867851855d500610693a68c7c0d
-        sourceBlobDigest: sha256:67a2d40a2a3e329e03a5c9a9270f0996f9727863eb3083a9e38ccdc796844031
+        sourceRevisionDigest: sha256:0f5cf37c60fe0f25ab0e764940ed35c09c7857a8375b8c940b3873d737762c9c
+        sourceBlobDigest: sha256:8be4bce7afdc48ae85f301a6099e942c523f598caf4e844eac7250f19b8dacdd
         tags:
             - latest
             - main
@@ -11,8 +11,8 @@ targets:
     speakeasy-client-sdk-typescript:
         source: my-source
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:417c12e58371aea5d13d8371f6701239551b2867851855d500610693a68c7c0d
-        sourceBlobDigest: sha256:67a2d40a2a3e329e03a5c9a9270f0996f9727863eb3083a9e38ccdc796844031
+        sourceRevisionDigest: sha256:0f5cf37c60fe0f25ab0e764940ed35c09c7857a8375b8c940b3873d737762c9c
+        sourceBlobDigest: sha256:8be4bce7afdc48ae85f301a6099e942c523f598caf4e844eac7250f19b8dacdd
         outLocation: /github/workspace/repo
 workflow:
     workflowVersion: 1.0.0
@@ -29,4 +29,4 @@ workflow:
             source: my-source
             publish:
                 npm:
-                    token: $NPM_TOKEN
+                    token: $npm_token
