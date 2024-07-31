@@ -20,11 +20,7 @@ Apply operation ID suggestions and download result.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.suggest.applyOperationIDs({
@@ -67,11 +63,7 @@ Get suggestions from an LLM model for improving the operationIDs in the provided
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { openAsBlob } from "node:fs";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.suggest.suggestOperationIDs({
@@ -116,11 +108,7 @@ Get suggestions from an LLM model for improving the operationIDs in the provided
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.suggest.suggestOperationIDsRegistry({

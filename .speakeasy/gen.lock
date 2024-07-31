@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 5b362866a3e7a85c830c6cb1f1cf4896
+  docChecksum: 312822a7ccdbf7c77dbbfeef49fb2053
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.345.3
-  generationVersion: 2.378.3
-  releaseVersion: 4.0.0
-  configChecksum: 4e0644a745eb53eb49cebe97a15c01de
+  speakeasyVersion: 1.349.0
+  generationVersion: 2.382.0
+  releaseVersion: 4.1.0-rc.1
+  configChecksum: 8f67fa7cdfd65cf01e3085996f428885
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -15,10 +15,11 @@ features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    core: 3.11.9
+    core: 3.11.11
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     downloadStreams: 0.1.1
+    envVarSecurityUsage: 0.1.0
     examples: 2.81.4
     globalSecurity: 2.82.9
     globalSecurityCallbacks: 0.1.0
@@ -45,6 +46,7 @@ generatedFiles:
   - src/sdk/shorturls.ts
   - src/sdk/suggest.ts
   - src/sdk/embeds.ts
+  - src/sdk/workspaces.ts
   - src/sdk/events.ts
   - src/sdk/sdk.ts
   - .eslintrc.cjs
@@ -55,6 +57,7 @@ generatedFiles:
   - src/index.ts
   - src/lib/base64.ts
   - src/lib/config.ts
+  - src/lib/dlv.ts
   - src/lib/encodings.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
@@ -118,15 +121,16 @@ generatedFiles:
   - src/sdk/models/shared/githubmissingpublishingsecretsresponse.ts
   - src/sdk/models/shared/githubstorepublishingsecretsrequest.ts
   - src/sdk/models/shared/githubtriggeractionrequest.ts
+  - src/sdk/models/shared/organization.ts
   - src/sdk/models/shared/organizationusageresponse.ts
   - src/sdk/models/shared/organizationusage.ts
-  - src/sdk/models/shared/organization.ts
   - src/sdk/models/shared/report.ts
   - src/sdk/models/shared/shorturl.ts
   - src/sdk/models/shared/suggestedoperationids.ts
   - src/sdk/models/shared/suggestoperationidsopts.ts
   - src/sdk/models/shared/embedaccesstokenresponse.ts
   - src/sdk/models/shared/embedtoken.ts
+  - src/sdk/models/shared/workspace.ts
   - src/sdk/models/shared/clievent.ts
   - src/sdk/models/shared/interactiontype.ts
   - src/sdk/models/shared/targetsdk.ts
@@ -176,6 +180,7 @@ generatedFiles:
   - src/sdk/models/operations/fetchpublishingprs.ts
   - src/sdk/models/operations/getaction.ts
   - src/sdk/models/operations/githubcheckpublishingsecrets.ts
+  - src/sdk/models/operations/getorganization.ts
   - src/sdk/models/operations/getorganizationusage.ts
   - src/sdk/models/operations/getorganizations.ts
   - src/sdk/models/operations/getchangesreportsignedurl.ts
@@ -188,6 +193,7 @@ generatedFiles:
   - src/sdk/models/operations/getembedaccesstoken.ts
   - src/sdk/models/operations/getvalidembedaccesstokens.ts
   - src/sdk/models/operations/revokeembedaccesstoken.ts
+  - src/sdk/models/operations/getworkspace.ts
   - src/sdk/models/operations/getworkspaceeventsbytarget.ts
   - src/sdk/models/operations/getworkspacetargets.ts
   - src/sdk/models/operations/postworkspaceevents.ts
@@ -249,10 +255,10 @@ generatedFiles:
   - docs/sdk/models/shared/githubmissingpublishingsecretsresponse.md
   - docs/sdk/models/shared/githubstorepublishingsecretsrequest.md
   - docs/sdk/models/shared/githubtriggeractionrequest.md
-  - docs/sdk/models/shared/organizationusageresponse.md
-  - docs/sdk/models/shared/organizationusage.md
   - docs/sdk/models/shared/organizationaccounttype.md
   - docs/sdk/models/shared/organization.md
+  - docs/sdk/models/shared/organizationusageresponse.md
+  - docs/sdk/models/shared/organizationusage.md
   - docs/sdk/models/shared/type.md
   - docs/sdk/models/shared/report.md
   - docs/sdk/models/shared/shorturl.md
@@ -262,6 +268,7 @@ generatedFiles:
   - docs/sdk/models/shared/suggestoperationidsopts.md
   - docs/sdk/models/shared/embedaccesstokenresponse.md
   - docs/sdk/models/shared/embedtoken.md
+  - docs/sdk/models/shared/workspace.md
   - docs/sdk/models/shared/generatebumptype.md
   - docs/sdk/models/shared/openapidiffbumptype.md
   - docs/sdk/models/shared/clievent.md
@@ -349,6 +356,8 @@ generatedFiles:
   - docs/sdk/models/operations/getactionresponse.md
   - docs/sdk/models/operations/githubcheckpublishingsecretsrequest.md
   - docs/sdk/models/operations/githubcheckpublishingsecretsresponse.md
+  - docs/sdk/models/operations/getorganizationrequest.md
+  - docs/sdk/models/operations/getorganizationresponse.md
   - docs/sdk/models/operations/getorganizationusageresponse.md
   - docs/sdk/models/operations/getorganizationsresponse.md
   - docs/sdk/models/operations/getchangesreportsignedurlrequest.md
@@ -370,6 +379,9 @@ generatedFiles:
   - docs/sdk/models/operations/getembedaccesstokenresponse.md
   - docs/sdk/models/operations/getvalidembedaccesstokensresponse.md
   - docs/sdk/models/operations/revokeembedaccesstokenrequest.md
+  - docs/sdk/models/operations/getworkspaceglobals.md
+  - docs/sdk/models/operations/getworkspacerequest.md
+  - docs/sdk/models/operations/getworkspaceresponse.md
   - docs/sdk/models/operations/getworkspaceeventsbytargetglobals.md
   - docs/sdk/models/operations/getworkspaceeventsbytargetrequest.md
   - docs/sdk/models/operations/getworkspaceeventsbytargetresponse.md
@@ -396,6 +408,7 @@ generatedFiles:
   - docs/sdks/shorturls/README.md
   - docs/sdks/suggest/README.md
   - docs/sdks/embeds/README.md
+  - docs/sdks/workspaces/README.md
   - docs/sdks/events/README.md
   - USAGE.md
   - .gitattributes

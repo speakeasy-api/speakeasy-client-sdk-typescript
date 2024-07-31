@@ -20,11 +20,7 @@ Get the signed access url for the change reports for a particular document.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.reports.getChangesReportSignedUrl({
@@ -66,11 +62,7 @@ Get the signed access url for the linting reports for a particular document.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.reports.getLintingReportSignedUrl({
@@ -113,11 +105,7 @@ Upload a report.
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { openAsBlob } from "node:fs";
 
-const speakeasy = new Speakeasy({
-  security: {
-    apiKey: "<YOUR_API_KEY_HERE>",
-  },
-});
+const speakeasy = new Speakeasy();
 
 async function run() {
   const result = await speakeasy.reports.uploadReport({
