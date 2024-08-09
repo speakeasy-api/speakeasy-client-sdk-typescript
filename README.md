@@ -39,7 +39,11 @@ yarn add @speakeasy-api/speakeasy-client-sdk-typescript zod
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy();
+const speakeasy = new Speakeasy({
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
+});
 
 async function run() {
     const result = await speakeasy.apis.getApis({});
@@ -192,7 +196,11 @@ Validation errors can also occur when either method arguments or data returned f
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { SDKValidationError } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors";
 
-const speakeasy = new Speakeasy();
+const speakeasy = new Speakeasy({
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
+});
 
 async function run() {
     let result;
@@ -243,6 +251,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
     server: "prod",
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
 });
 
 async function run() {
@@ -269,6 +280,9 @@ import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
     serverURL: "https://api.prod.speakeasyapi.dev",
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
 });
 
 async function run() {
@@ -355,7 +369,11 @@ You can set the security parameters through the `security` optional parameter wh
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy();
+const speakeasy = new Speakeasy({
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
+});
 
 async function run() {
     const result = await speakeasy.apis.deleteApi({
@@ -394,7 +412,11 @@ The following global parameter is available.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy();
+const speakeasy = new Speakeasy({
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
+});
 
 async function run() {
     const result = await speakeasy.workspaces.getWorkspace({});
@@ -417,7 +439,11 @@ To change the default retry strategy for a single API call, simply provide a ret
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy();
+const speakeasy = new Speakeasy({
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
+});
 
 async function run() {
     const result = await speakeasy.apis.deleteApi(
@@ -462,6 +488,9 @@ const speakeasy = new Speakeasy({
         },
         retryConnectionErrors: false,
     },
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
 });
 
 async function run() {
@@ -503,7 +532,11 @@ Certain SDK methods accept files as part of a multi-part request. It is possible
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { openAsBlob } from "node:fs";
 
-const speakeasy = new Speakeasy();
+const speakeasy = new Speakeasy({
+    security: {
+        apiKey: "<YOUR_API_KEY_HERE>",
+    },
+});
 
 async function run() {
     const result = await speakeasy.schemas.registerSchema({

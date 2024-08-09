@@ -3,21 +3,18 @@
  */
 
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
+import {
+    AccountType,
+    AccountType$inboundSchema,
+    AccountType$outboundSchema,
+} from "./accounttype.js";
 import * as z from "zod";
-
-export const OrganizationAccountType = {
-    Free: "free",
-    ScaleUp: "scale-up",
-    Enterprise: "enterprise",
-} as const;
-export type OrganizationAccountType = ClosedEnum<typeof OrganizationAccountType>;
 
 /**
  * A speakeasy organization
  */
 export type Organization = {
-    accountType: OrganizationAccountType;
+    accountType: AccountType;
     createdAt?: Date | undefined;
     freeTrialExpiry?: Date | undefined;
     id: string;
@@ -28,30 +25,9 @@ export type Organization = {
 };
 
 /** @internal */
-export const OrganizationAccountType$inboundSchema: z.ZodNativeEnum<
-    typeof OrganizationAccountType
-> = z.nativeEnum(OrganizationAccountType);
-
-/** @internal */
-export const OrganizationAccountType$outboundSchema: z.ZodNativeEnum<
-    typeof OrganizationAccountType
-> = OrganizationAccountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace OrganizationAccountType$ {
-    /** @deprecated use `OrganizationAccountType$inboundSchema` instead. */
-    export const inboundSchema = OrganizationAccountType$inboundSchema;
-    /** @deprecated use `OrganizationAccountType$outboundSchema` instead. */
-    export const outboundSchema = OrganizationAccountType$outboundSchema;
-}
-
-/** @internal */
 export const Organization$inboundSchema: z.ZodType<Organization, z.ZodTypeDef, unknown> = z
     .object({
-        account_type: OrganizationAccountType$inboundSchema,
+        account_type: AccountType$inboundSchema,
         created_at: z
             .string()
             .datetime({ offset: true })
@@ -101,7 +77,7 @@ export const Organization$outboundSchema: z.ZodType<
     Organization
 > = z
     .object({
-        accountType: OrganizationAccountType$outboundSchema,
+        accountType: AccountType$outboundSchema,
         createdAt: z
             .date()
             .transform((v) => v.toISOString())

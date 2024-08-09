@@ -3,18 +3,15 @@
  */
 
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
+import {
+    AccountType,
+    AccountType$inboundSchema,
+    AccountType$outboundSchema,
+} from "./accounttype.js";
 import * as z from "zod";
 
-export const AccountType = {
-    Free: "free",
-    ScaleUp: "scale-up",
-    Enterprise: "enterprise",
-} as const;
-export type AccountType = ClosedEnum<typeof AccountType>;
-
 export type ApiKeyDetails = {
-    accountType: AccountType;
+    accountTypeV2: AccountType;
     enabledFeatures: Array<string>;
     /**
      * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -28,28 +25,9 @@ export type ApiKeyDetails = {
 };
 
 /** @internal */
-export const AccountType$inboundSchema: z.ZodNativeEnum<typeof AccountType> =
-    z.nativeEnum(AccountType);
-
-/** @internal */
-export const AccountType$outboundSchema: z.ZodNativeEnum<typeof AccountType> =
-    AccountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccountType$ {
-    /** @deprecated use `AccountType$inboundSchema` instead. */
-    export const inboundSchema = AccountType$inboundSchema;
-    /** @deprecated use `AccountType$outboundSchema` instead. */
-    export const outboundSchema = AccountType$outboundSchema;
-}
-
-/** @internal */
 export const ApiKeyDetails$inboundSchema: z.ZodType<ApiKeyDetails, z.ZodTypeDef, unknown> = z
     .object({
-        account_type: AccountType$inboundSchema,
+        account_type_v2: AccountType$inboundSchema,
         enabled_features: z.array(z.string()),
         feature_flags: z.array(z.string()).optional(),
         generation_access_unlimited: z.boolean().optional(),
@@ -60,7 +38,7 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<ApiKeyDetails, z.ZodTypeDef,
     })
     .transform((v) => {
         return remap$(v, {
-            account_type: "accountType",
+            account_type_v2: "accountTypeV2",
             enabled_features: "enabledFeatures",
             feature_flags: "featureFlags",
             generation_access_unlimited: "generationAccessUnlimited",
@@ -73,7 +51,7 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<ApiKeyDetails, z.ZodTypeDef,
 
 /** @internal */
 export type ApiKeyDetails$Outbound = {
-    account_type: string;
+    account_type_v2: string;
     enabled_features: Array<string>;
     feature_flags?: Array<string> | undefined;
     generation_access_unlimited?: boolean | undefined;
@@ -90,7 +68,7 @@ export const ApiKeyDetails$outboundSchema: z.ZodType<
     ApiKeyDetails
 > = z
     .object({
-        accountType: AccountType$outboundSchema,
+        accountTypeV2: AccountType$outboundSchema,
         enabledFeatures: z.array(z.string()),
         featureFlags: z.array(z.string()).optional(),
         generationAccessUnlimited: z.boolean().optional(),
@@ -101,7 +79,7 @@ export const ApiKeyDetails$outboundSchema: z.ZodType<
     })
     .transform((v) => {
         return remap$(v, {
-            accountType: "account_type",
+            accountTypeV2: "account_type_v2",
             enabledFeatures: "enabled_features",
             featureFlags: "feature_flags",
             generationAccessUnlimited: "generation_access_unlimited",

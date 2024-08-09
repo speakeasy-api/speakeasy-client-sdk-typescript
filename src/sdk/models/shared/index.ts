@@ -4,6 +4,7 @@
 
 export * from "./accessdetails.js";
 export * from "./accesstoken.js";
+export * from "./accounttype.js";
 export * from "./addtags.js";
 export * from "./annotations.js";
 export * from "./api.js";

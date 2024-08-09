@@ -3,7 +3,11 @@
  */
 
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { ClosedEnum } from "../../types/enums.js";
+import {
+    AccountType,
+    AccountType$inboundSchema,
+    AccountType$outboundSchema,
+} from "./accounttype.js";
 import {
     FeatureFlag,
     FeatureFlag$inboundSchema,
@@ -23,15 +27,8 @@ export type AccessTokenUser = {
     id?: string | undefined;
 };
 
-export const AccessTokenAccountType = {
-    Free: "free",
-    ScaleUp: "scale-up",
-    Enterprise: "enterprise",
-} as const;
-export type AccessTokenAccountType = ClosedEnum<typeof AccessTokenAccountType>;
-
 export type Workspaces = {
-    accountType?: AccessTokenAccountType | undefined;
+    accountType?: AccountType | undefined;
     id?: string | undefined;
     name?: string | undefined;
     updatedAt?: Date | undefined;
@@ -141,28 +138,9 @@ export namespace AccessTokenUser$ {
 }
 
 /** @internal */
-export const AccessTokenAccountType$inboundSchema: z.ZodNativeEnum<typeof AccessTokenAccountType> =
-    z.nativeEnum(AccessTokenAccountType);
-
-/** @internal */
-export const AccessTokenAccountType$outboundSchema: z.ZodNativeEnum<typeof AccessTokenAccountType> =
-    AccessTokenAccountType$inboundSchema;
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace AccessTokenAccountType$ {
-    /** @deprecated use `AccessTokenAccountType$inboundSchema` instead. */
-    export const inboundSchema = AccessTokenAccountType$inboundSchema;
-    /** @deprecated use `AccessTokenAccountType$outboundSchema` instead. */
-    export const outboundSchema = AccessTokenAccountType$outboundSchema;
-}
-
-/** @internal */
 export const Workspaces$inboundSchema: z.ZodType<Workspaces, z.ZodTypeDef, unknown> = z
     .object({
-        account_type: AccessTokenAccountType$inboundSchema.optional(),
+        account_type: AccountType$inboundSchema.optional(),
         id: z.string().optional(),
         name: z.string().optional(),
         updated_at: z
@@ -189,7 +167,7 @@ export type Workspaces$Outbound = {
 /** @internal */
 export const Workspaces$outboundSchema: z.ZodType<Workspaces$Outbound, z.ZodTypeDef, Workspaces> = z
     .object({
-        accountType: AccessTokenAccountType$outboundSchema.optional(),
+        accountType: AccountType$outboundSchema.optional(),
         id: z.string().optional(),
         name: z.string().optional(),
         updatedAt: z
