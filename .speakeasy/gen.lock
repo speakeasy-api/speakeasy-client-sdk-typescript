@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 312822a7ccdbf7c77dbbfeef49fb2053
+  docChecksum: 7e5374ccd8317cf07089c151d486221b
   docVersion: 0.4.0 .
-  speakeasyVersion: 1.349.0
-  generationVersion: 2.382.0
-  releaseVersion: 4.0.0-rc.1
-  configChecksum: 6fd7f25e68e43867b2be94ae28fcb8cc
+  speakeasyVersion: 1.358.0
+  generationVersion: 2.390.6
+  releaseVersion: 4.0.0-rc.2
+  configChecksum: 8251b5b4e0576ccdf5ab124e48d466d4
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -15,24 +15,93 @@ features:
   typescript:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    core: 3.11.11
+    core: 3.12.3
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
     downloadStreams: 0.1.1
-    envVarSecurityUsage: 0.1.0
+    envVarSecurityUsage: 0.1.1
     examples: 2.81.4
-    globalSecurity: 2.82.9
+    globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.4
     globals: 2.82.1
     inputOutputModels: 2.82.0
     nullables: 0.1.0
+    openEnums: 0.1.1
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.1.0
     serverEventsSentinels: 0.1.0
     serverIDs: 2.81.2
 generatedFiles:
+  - src/funcs/apisDeleteApi.ts
+  - src/funcs/apisGenerateOpenApiSpec.ts
+  - src/funcs/apisGeneratePostmanCollection.ts
+  - src/funcs/apisGetAllApiVersions.ts
+  - src/funcs/apisGetApis.ts
+  - src/funcs/apisUpsertApi.ts
+  - src/funcs/apiEndpointsDeleteApiEndpoint.ts
+  - src/funcs/apiEndpointsFindApiEndpoint.ts
+  - src/funcs/apiEndpointsGenerateOpenApiSpecForApiEndpoint.ts
+  - src/funcs/apiEndpointsGeneratePostmanCollectionForApiEndpoint.ts
+  - src/funcs/apiEndpointsGetAllApiEndpoints.ts
+  - src/funcs/apiEndpointsGetAllForVersionApiEndpoints.ts
+  - src/funcs/apiEndpointsGetApiEndpoint.ts
+  - src/funcs/apiEndpointsUpsertApiEndpoint.ts
+  - src/funcs/metadataDeleteVersionMetadata.ts
+  - src/funcs/metadataGetVersionMetadata.ts
+  - src/funcs/metadataInsertVersionMetadata.ts
+  - src/funcs/schemasDeleteSchema.ts
+  - src/funcs/schemasDownloadSchema.ts
+  - src/funcs/schemasDownloadSchemaRevision.ts
+  - src/funcs/schemasGetSchema.ts
+  - src/funcs/schemasGetSchemaDiff.ts
+  - src/funcs/schemasGetSchemaRevision.ts
+  - src/funcs/schemasGetSchemas.ts
+  - src/funcs/schemasRegisterSchema.ts
+  - src/funcs/artifactsGetBlob.ts
+  - src/funcs/artifactsGetManifest.ts
+  - src/funcs/artifactsGetNamespaces.ts
+  - src/funcs/artifactsGetOASSummary.ts
+  - src/funcs/artifactsGetRevisions.ts
+  - src/funcs/artifactsGetTags.ts
+  - src/funcs/artifactsPostTags.ts
+  - src/funcs/artifactsPreflight.ts
+  - src/funcs/authGetAccessToken.ts
+  - src/funcs/authGetUser.ts
+  - src/funcs/authGetWorkspaceAccess.ts
+  - src/funcs/authValidateApiKey.ts
+  - src/funcs/requestsGenerateRequestPostmanCollection.ts
+  - src/funcs/requestsGetRequestFromEventLog.ts
+  - src/funcs/requestsQueryEventLog.ts
+  - src/funcs/githubCheckAccess.ts
+  - src/funcs/githubConfigureCodeSamples.ts
+  - src/funcs/githubConfigureMintlifyRepo.ts
+  - src/funcs/githubConfigureTarget.ts
+  - src/funcs/githubFetchPublishingPRs.ts
+  - src/funcs/githubGetAction.ts
+  - src/funcs/githubGithubCheckPublishingSecrets.ts
+  - src/funcs/githubGithubStorePublishingSecrets.ts
+  - src/funcs/githubTriggerAction.ts
+  - src/funcs/organizationsCreateFreeTrial.ts
+  - src/funcs/organizationsGetOrganization.ts
+  - src/funcs/organizationsGetOrganizationUsage.ts
+  - src/funcs/organizationsGetOrganizations.ts
+  - src/funcs/reportsGetChangesReportSignedUrl.ts
+  - src/funcs/reportsGetLintingReportSignedUrl.ts
+  - src/funcs/reportsUploadReport.ts
+  - src/funcs/shortURLsCreate.ts
+  - src/funcs/suggestApplyOperationIDs.ts
+  - src/funcs/suggestSuggestOperationIDs.ts
+  - src/funcs/suggestSuggestOperationIDsRegistry.ts
+  - src/funcs/embedsGetEmbedAccessToken.ts
+  - src/funcs/embedsGetValidEmbedAccessTokens.ts
+  - src/funcs/embedsRevokeEmbedAccessToken.ts
+  - src/funcs/workspacesGetWorkspace.ts
+  - src/funcs/eventsGetWorkspaceEventsByTarget.ts
+  - src/funcs/eventsGetWorkspaceTargets.ts
+  - src/funcs/eventsPostWorkspaceEvents.ts
+  - src/funcs/eventsSearchWorkspaceEvents.ts
   - src/sdk/apis.ts
   - src/sdk/apiendpoints.ts
   - src/sdk/metadata.ts
@@ -54,6 +123,7 @@ generatedFiles:
   - RUNTIMES.md
   - jsr.json
   - package.json
+  - src/core.ts
   - src/index.ts
   - src/lib/base64.ts
   - src/lib/config.ts
@@ -61,6 +131,7 @@ generatedFiles:
   - src/lib/encodings.ts
   - src/lib/http.ts
   - src/lib/is-plain-object.ts
+  - src/lib/matchers.ts
   - src/lib/primitives.ts
   - src/lib/retries.ts
   - src/lib/schemas.ts
@@ -68,10 +139,12 @@ generatedFiles:
   - src/lib/security.ts
   - src/lib/url.ts
   - src/sdk/index.ts
+  - src/sdk/models/errors/httpclienterrors.ts
   - src/sdk/models/errors/sdkerror.ts
   - src/sdk/models/errors/sdkvalidationerror.ts
   - src/sdk/types/blobs.ts
   - src/sdk/types/enums.ts
+  - src/sdk/types/fp.ts
   - src/sdk/types/index.ts
   - src/sdk/types/operations.ts
   - src/sdk/types/rfcdate.ts
@@ -102,6 +175,7 @@ generatedFiles:
   - src/sdk/models/shared/preflighttoken.ts
   - src/sdk/models/shared/preflightrequest.ts
   - src/sdk/models/shared/accesstoken.ts
+  - src/sdk/models/shared/accounttype.ts
   - src/sdk/models/shared/featureflag.ts
   - src/sdk/models/shared/user.ts
   - src/sdk/models/shared/accessdetails.ts
@@ -230,14 +304,13 @@ generatedFiles:
   - docs/sdk/models/shared/preflightrequest.md
   - docs/sdk/models/shared/claims.md
   - docs/sdk/models/shared/accesstokenuser.md
-  - docs/sdk/models/shared/accesstokenaccounttype.md
   - docs/sdk/models/shared/workspaces.md
   - docs/sdk/models/shared/accesstoken.md
+  - docs/sdk/models/shared/accounttype.md
   - docs/sdk/models/shared/featureflag.md
   - docs/sdk/models/shared/user.md
   - docs/sdk/models/shared/level.md
   - docs/sdk/models/shared/accessdetails.md
-  - docs/sdk/models/shared/accounttype.md
   - docs/sdk/models/shared/apikeydetails.md
   - docs/sdk/models/shared/unboundedrequest.md
   - docs/sdk/models/shared/boundedrequest.md
@@ -255,7 +328,6 @@ generatedFiles:
   - docs/sdk/models/shared/githubmissingpublishingsecretsresponse.md
   - docs/sdk/models/shared/githubstorepublishingsecretsrequest.md
   - docs/sdk/models/shared/githubtriggeractionrequest.md
-  - docs/sdk/models/shared/organizationaccounttype.md
   - docs/sdk/models/shared/organization.md
   - docs/sdk/models/shared/organizationusageresponse.md
   - docs/sdk/models/shared/organizationusage.md
