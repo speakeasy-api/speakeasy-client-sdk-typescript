@@ -5,70 +5,75 @@
 import * as z from "zod";
 
 export type Auth = {
-    header: string;
-    secret: string;
+  header: string;
+  secret: string;
 };
 
 /**
  * A document referenced by a workflow
  */
 export type WorkflowDocument = {
-    auth?: Auth | undefined;
-    location: string;
+  auth?: Auth | undefined;
+  location: string;
 };
 
 /** @internal */
-export const Auth$inboundSchema: z.ZodType<Auth, z.ZodTypeDef, unknown> = z.object({
+export const Auth$inboundSchema: z.ZodType<Auth, z.ZodTypeDef, unknown> = z
+  .object({
     header: z.string(),
     secret: z.string(),
-});
+  });
 
 /** @internal */
 export type Auth$Outbound = {
-    header: string;
-    secret: string;
+  header: string;
+  secret: string;
 };
 
 /** @internal */
-export const Auth$outboundSchema: z.ZodType<Auth$Outbound, z.ZodTypeDef, Auth> = z.object({
+export const Auth$outboundSchema: z.ZodType<Auth$Outbound, z.ZodTypeDef, Auth> =
+  z.object({
     header: z.string(),
     secret: z.string(),
-});
+  });
 
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace Auth$ {
-    /** @deprecated use `Auth$inboundSchema` instead. */
-    export const inboundSchema = Auth$inboundSchema;
-    /** @deprecated use `Auth$outboundSchema` instead. */
-    export const outboundSchema = Auth$outboundSchema;
-    /** @deprecated use `Auth$Outbound` instead. */
-    export type Outbound = Auth$Outbound;
+  /** @deprecated use `Auth$inboundSchema` instead. */
+  export const inboundSchema = Auth$inboundSchema;
+  /** @deprecated use `Auth$outboundSchema` instead. */
+  export const outboundSchema = Auth$outboundSchema;
+  /** @deprecated use `Auth$Outbound` instead. */
+  export type Outbound = Auth$Outbound;
 }
 
 /** @internal */
-export const WorkflowDocument$inboundSchema: z.ZodType<WorkflowDocument, z.ZodTypeDef, unknown> =
-    z.object({
-        auth: z.lazy(() => Auth$inboundSchema).optional(),
-        location: z.string(),
-    });
+export const WorkflowDocument$inboundSchema: z.ZodType<
+  WorkflowDocument,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  auth: z.lazy(() => Auth$inboundSchema).optional(),
+  location: z.string(),
+});
 
 /** @internal */
 export type WorkflowDocument$Outbound = {
-    auth?: Auth$Outbound | undefined;
-    location: string;
+  auth?: Auth$Outbound | undefined;
+  location: string;
 };
 
 /** @internal */
 export const WorkflowDocument$outboundSchema: z.ZodType<
-    WorkflowDocument$Outbound,
-    z.ZodTypeDef,
-    WorkflowDocument
+  WorkflowDocument$Outbound,
+  z.ZodTypeDef,
+  WorkflowDocument
 > = z.object({
-    auth: z.lazy(() => Auth$outboundSchema).optional(),
-    location: z.string(),
+  auth: z.lazy(() => Auth$outboundSchema).optional(),
+  location: z.string(),
 });
 
 /**
@@ -76,10 +81,10 @@ export const WorkflowDocument$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace WorkflowDocument$ {
-    /** @deprecated use `WorkflowDocument$inboundSchema` instead. */
-    export const inboundSchema = WorkflowDocument$inboundSchema;
-    /** @deprecated use `WorkflowDocument$outboundSchema` instead. */
-    export const outboundSchema = WorkflowDocument$outboundSchema;
-    /** @deprecated use `WorkflowDocument$Outbound` instead. */
-    export type Outbound = WorkflowDocument$Outbound;
+  /** @deprecated use `WorkflowDocument$inboundSchema` instead. */
+  export const inboundSchema = WorkflowDocument$inboundSchema;
+  /** @deprecated use `WorkflowDocument$outboundSchema` instead. */
+  export const outboundSchema = WorkflowDocument$outboundSchema;
+  /** @deprecated use `WorkflowDocument$Outbound` instead. */
+  export type Outbound = WorkflowDocument$Outbound;
 }

@@ -1,5 +1,16 @@
 # GeneratePostmanCollectionForApiEndpointRequest
 
+## Example Usage
+
+```typescript
+import { GeneratePostmanCollectionForApiEndpointRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GeneratePostmanCollectionForApiEndpointRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+  apiEndpointID: "<id>",
+};
+```
 
 ## Fields
 

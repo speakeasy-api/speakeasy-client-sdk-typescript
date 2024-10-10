@@ -2,6 +2,17 @@
 
 An AccessToken is a token that can be used to authenticate with the Speakeasy API.
 
+## Example Usage
+
+```typescript
+import { AccessToken } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: AccessToken = {
+  accessToken: "<value>",
+  claims: {},
+  user: {},
+};
+```
 
 ## Fields
 

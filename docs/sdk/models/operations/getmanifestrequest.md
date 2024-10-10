@@ -1,5 +1,17 @@
 # GetManifestRequest
 
+## Example Usage
+
+```typescript
+import { GetManifestRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetManifestRequest = {
+  organizationSlug: "<value>",
+  workspaceSlug: "<value>",
+  namespaceName: "<value>",
+  revisionReference: "<value>",
+};
+```
 
 ## Fields
 

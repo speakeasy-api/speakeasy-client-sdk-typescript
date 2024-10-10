@@ -1,5 +1,14 @@
 # GetLintingReportSignedUrlRequest
 
+## Example Usage
+
+```typescript
+import { GetLintingReportSignedUrlRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetLintingReportSignedUrlRequest = {
+  documentChecksum: "<value>",
+};
+```
 
 ## Fields
 

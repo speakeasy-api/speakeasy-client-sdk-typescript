@@ -1,5 +1,14 @@
 # GetRequestFromEventLogRequest
 
+## Example Usage
+
+```typescript
+import { GetRequestFromEventLogRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetRequestFromEventLogRequest = {
+  requestID: "<id>",
+};
+```
 
 ## Fields
 

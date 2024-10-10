@@ -1,11 +1,20 @@
 # SearchWorkspaceEventsRequest
 
+## Example Usage
+
+```typescript
+import { SearchWorkspaceEventsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: SearchWorkspaceEventsRequest = {
+  workspaceId: "<id>",
+};
+```
 
 ## Fields
 
 | Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `workspaceID`                                                           | *string*                                                                | :heavy_minus_sign:                                                      | Unique identifier of the workspace.                                     |
+| `workspaceId`                                                           | *string*                                                                | :heavy_check_mark:                                                      | Unique identifier of the workspace.                                     |
 | `sourceRevisionDigest`                                                  | *string*                                                                | :heavy_minus_sign:                                                      | Unique identifier of the source revision digest.                        |
 | `lintReportDigest`                                                      | *string*                                                                | :heavy_minus_sign:                                                      | Unique identifier of the lint report digest.                            |
 | `openapiDiffReportDigest`                                               | *string*                                                                | :heavy_minus_sign:                                                      | Unique identifier of the openapi diff report digest.                    |

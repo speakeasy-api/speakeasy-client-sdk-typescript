@@ -1,5 +1,12 @@
 # GetApisRequest
 
+## Example Usage
+
+```typescript
+import { GetApisRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetApisRequest = {};
+```
 
 ## Fields
 

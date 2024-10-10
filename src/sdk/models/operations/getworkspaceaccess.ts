@@ -5,47 +5,47 @@
 import * as z from "zod";
 
 export type GetWorkspaceAccessRequest = {
-    /**
-     * Unique identifier of the generation target.
-     */
-    genLockId?: string | undefined;
-    /**
-     * The type of the generated target.
-     */
-    targetType?: string | undefined;
-    /**
-     * Skip side-effects like incrementing metrics.
-     */
-    passive?: boolean | undefined;
+  /**
+   * Unique identifier of the generation target.
+   */
+  genLockId?: string | undefined;
+  /**
+   * The type of the generated target.
+   */
+  targetType?: string | undefined;
+  /**
+   * Skip side-effects like incrementing metrics.
+   */
+  passive?: boolean | undefined;
 };
 
 /** @internal */
 export const GetWorkspaceAccessRequest$inboundSchema: z.ZodType<
-    GetWorkspaceAccessRequest,
-    z.ZodTypeDef,
-    unknown
+  GetWorkspaceAccessRequest,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
-    genLockId: z.string().optional(),
-    targetType: z.string().optional(),
-    passive: z.boolean().optional(),
+  genLockId: z.string().optional(),
+  targetType: z.string().optional(),
+  passive: z.boolean().optional(),
 });
 
 /** @internal */
 export type GetWorkspaceAccessRequest$Outbound = {
-    genLockId?: string | undefined;
-    targetType?: string | undefined;
-    passive?: boolean | undefined;
+  genLockId?: string | undefined;
+  targetType?: string | undefined;
+  passive?: boolean | undefined;
 };
 
 /** @internal */
 export const GetWorkspaceAccessRequest$outboundSchema: z.ZodType<
-    GetWorkspaceAccessRequest$Outbound,
-    z.ZodTypeDef,
-    GetWorkspaceAccessRequest
+  GetWorkspaceAccessRequest$Outbound,
+  z.ZodTypeDef,
+  GetWorkspaceAccessRequest
 > = z.object({
-    genLockId: z.string().optional(),
-    targetType: z.string().optional(),
-    passive: z.boolean().optional(),
+  genLockId: z.string().optional(),
+  targetType: z.string().optional(),
+  passive: z.boolean().optional(),
 });
 
 /**
@@ -53,10 +53,10 @@ export const GetWorkspaceAccessRequest$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace GetWorkspaceAccessRequest$ {
-    /** @deprecated use `GetWorkspaceAccessRequest$inboundSchema` instead. */
-    export const inboundSchema = GetWorkspaceAccessRequest$inboundSchema;
-    /** @deprecated use `GetWorkspaceAccessRequest$outboundSchema` instead. */
-    export const outboundSchema = GetWorkspaceAccessRequest$outboundSchema;
-    /** @deprecated use `GetWorkspaceAccessRequest$Outbound` instead. */
-    export type Outbound = GetWorkspaceAccessRequest$Outbound;
+  /** @deprecated use `GetWorkspaceAccessRequest$inboundSchema` instead. */
+  export const inboundSchema = GetWorkspaceAccessRequest$inboundSchema;
+  /** @deprecated use `GetWorkspaceAccessRequest$outboundSchema` instead. */
+  export const outboundSchema = GetWorkspaceAccessRequest$outboundSchema;
+  /** @deprecated use `GetWorkspaceAccessRequest$Outbound` instead. */
+  export type Outbound = GetWorkspaceAccessRequest$Outbound;
 }

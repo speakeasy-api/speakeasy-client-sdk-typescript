@@ -2,6 +2,13 @@
 
 response to a getting the latest action run on a GitHub request
 
+## Example Usage
+
+```typescript
+import { GithubGetActionResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: GithubGetActionResponse = {};
+```
 
 ## Fields
 

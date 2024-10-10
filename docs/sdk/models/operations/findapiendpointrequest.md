@@ -1,5 +1,16 @@
 # FindApiEndpointRequest
 
+## Example Usage
+
+```typescript
+import { FindApiEndpointRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: FindApiEndpointRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+  displayName: "Myriam_Powlowski71",
+};
+```
 
 ## Fields
 

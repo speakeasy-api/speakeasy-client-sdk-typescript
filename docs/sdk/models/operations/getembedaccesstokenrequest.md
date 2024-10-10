@@ -1,5 +1,12 @@
 # GetEmbedAccessTokenRequest
 
+## Example Usage
+
+```typescript
+import { GetEmbedAccessTokenRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetEmbedAccessTokenRequest = {};
+```
 
 ## Fields
 

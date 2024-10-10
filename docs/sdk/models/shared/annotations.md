@@ -2,6 +2,13 @@
 
 Annotations
 
+## Example Usage
+
+```typescript
+import { Annotations } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: Annotations = {};
+```
 
 ## Fields
 

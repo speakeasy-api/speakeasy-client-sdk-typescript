@@ -1,5 +1,14 @@
 # GenerateRequestPostmanCollectionRequest
 
+## Example Usage
+
+```typescript
+import { GenerateRequestPostmanCollectionRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GenerateRequestPostmanCollectionRequest = {
+  requestID: "<id>",
+};
+```
 
 ## Fields
 

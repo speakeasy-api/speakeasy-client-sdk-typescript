@@ -2,6 +2,16 @@
 
 The `Status` type defines a logical error model
 
+## Example Usage
+
+```typescript
+import { ErrorT } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: ErrorT = {
+  message: "<value>",
+  statusCode: 306,
+};
+```
 
 ## Fields
 

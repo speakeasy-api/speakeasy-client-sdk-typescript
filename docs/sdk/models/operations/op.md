@@ -2,6 +2,15 @@
 
 Configuration for filter operations
 
+## Example Usage
+
+```typescript
+import { Op } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: Op = {
+  and: false,
+};
+```
 
 ## Fields
 

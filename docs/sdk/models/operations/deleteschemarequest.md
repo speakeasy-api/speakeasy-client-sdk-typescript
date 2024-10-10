@@ -1,5 +1,16 @@
 # DeleteSchemaRequest
 
+## Example Usage
+
+```typescript
+import { DeleteSchemaRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: DeleteSchemaRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+  revisionID: "<id>",
+};
+```
 
 ## Fields
 

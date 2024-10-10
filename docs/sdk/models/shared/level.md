@@ -1,10 +1,15 @@
 # Level
 
+## Example Usage
+
+```typescript
+import { Level } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: Level = "allowed";
+```
 
 ## Values
 
-| Name      | Value     |
-| --------- | --------- |
-| `Allowed` | allowed   |
-| `Warning` | warning   |
-| `Blocked` | blocked   |
+```typescript
+"allowed" | "warning" | "blocked"
+```

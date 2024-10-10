@@ -1,5 +1,12 @@
 # QueryEventLogRequest
 
+## Example Usage
+
+```typescript
+import { QueryEventLogRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: QueryEventLogRequest = {};
+```
 
 ## Fields
 

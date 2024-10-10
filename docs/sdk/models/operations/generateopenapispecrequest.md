@@ -1,5 +1,15 @@
 # GenerateOpenApiSpecRequest
 
+## Example Usage
+
+```typescript
+import { GenerateOpenApiSpecRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GenerateOpenApiSpecRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+};
+```
 
 ## Fields
 

@@ -2,6 +2,13 @@
 
 A valid response containing MISSING publishing secret keys for a github target
 
+## Example Usage
+
+```typescript
+import { GithubMissingPublishingSecretsResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: GithubMissingPublishingSecretsResponse = {};
+```
 
 ## Fields
 

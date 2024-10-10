@@ -1,5 +1,15 @@
 # GenerateOpenApiSpecDiff
 
+## Example Usage
+
+```typescript
+import { GenerateOpenApiSpecDiff } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: GenerateOpenApiSpecDiff = {
+  currentSchema: "<value>",
+  newSchema: "<value>",
+};
+```
 
 ## Fields
 

@@ -2,6 +2,16 @@
 
 A request to configure a GitHub target
 
+## Example Usage
+
+```typescript
+import { GithubConfigureTargetRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: GithubConfigureTargetRequest = {
+  org: "<value>",
+  repoName: "<value>",
+};
+```
 
 ## Fields
 

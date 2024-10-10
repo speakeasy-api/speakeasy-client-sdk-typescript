@@ -2,6 +2,27 @@
 
 A BoundedRequest is a request that has been logged by the Speakeasy without the contents of the request.
 
+## Example Usage
+
+```typescript
+import { BoundedRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: BoundedRequest = {
+  apiEndpointId: "<id>",
+  apiId: "<id>",
+  createdAt: new Date("2022-11-18T03:36:20.029Z"),
+  customerId: "<id>",
+  latency: 848944,
+  method: "<value>",
+  path: "/System",
+  requestFinishTime: new Date("2022-01-15T12:10:56.303Z"),
+  requestId: "<id>",
+  requestStartTime: new Date("2023-01-16T13:37:49.640Z"),
+  status: 148141,
+  versionId: "<id>",
+  workspaceId: "<id>",
+};
+```
 
 ## Fields
 

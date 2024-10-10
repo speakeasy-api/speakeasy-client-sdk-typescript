@@ -1,5 +1,14 @@
 # RevokeEmbedAccessTokenRequest
 
+## Example Usage
+
+```typescript
+import { RevokeEmbedAccessTokenRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: RevokeEmbedAccessTokenRequest = {
+  tokenID: "<id>",
+};
+```
 
 ## Fields
 

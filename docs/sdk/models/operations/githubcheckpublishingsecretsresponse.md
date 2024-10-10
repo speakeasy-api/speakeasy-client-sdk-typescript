@@ -6,12 +6,15 @@
 ### `shared.ErrorT`
 
 ```typescript
-const value: shared.ErrorT = /* values here */
+const value: shared.ErrorT = {
+  message: "<value>",
+  statusCode: 101,
+};
 ```
 
 ### `shared.GithubMissingPublishingSecretsResponse`
 
 ```typescript
-const value: shared.GithubMissingPublishingSecretsResponse = /* values here */
+const value: shared.GithubMissingPublishingSecretsResponse = {};
 ```
 

@@ -2,6 +2,15 @@
 
 A document referenced by a workflow
 
+## Example Usage
+
+```typescript
+import { WorkflowDocument } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: WorkflowDocument = {
+  location: "<value>",
+};
+```
 
 ## Fields
 

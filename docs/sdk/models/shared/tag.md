@@ -1,5 +1,17 @@
 # Tag
 
+## Example Usage
+
+```typescript
+import { Tag } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: Tag = {
+  id: "<id>",
+  name: "<value>",
+  namespaceName: "<value>",
+  revisionDigest: "<value>",
+};
+```
 
 ## Fields
 

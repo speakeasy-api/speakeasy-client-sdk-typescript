@@ -1,5 +1,15 @@
 # GetAllForVersionApiEndpointsRequest
 
+## Example Usage
+
+```typescript
+import { GetAllForVersionApiEndpointsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetAllForVersionApiEndpointsRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+};
+```
 
 ## Fields
 

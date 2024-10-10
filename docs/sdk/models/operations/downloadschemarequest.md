@@ -1,5 +1,15 @@
 # DownloadSchemaRequest
 
+## Example Usage
+
+```typescript
+import { DownloadSchemaRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: DownloadSchemaRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+};
+```
 
 ## Fields
 

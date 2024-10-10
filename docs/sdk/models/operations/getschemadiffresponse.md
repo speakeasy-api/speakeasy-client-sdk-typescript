@@ -6,12 +6,28 @@
 ### `shared.ErrorT`
 
 ```typescript
-const value: shared.ErrorT = /* values here */
+const value: shared.ErrorT = {
+  message: "<value>",
+  statusCode: 506,
+};
 ```
 
 ### `shared.SchemaDiff`
 
 ```typescript
-const value: shared.SchemaDiff = /* values here */
+const value: shared.SchemaDiff = {
+  additions: [
+    "<value>",
+  ],
+  deletions: [
+    "<value>",
+  ],
+  modifications: {
+    "key": {
+      from: "<value>",
+      to: "<value>",
+    },
+  },
+};
 ```
 

@@ -1,5 +1,15 @@
 # ValueChange
 
+## Example Usage
+
+```typescript
+import { ValueChange } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: ValueChange = {
+  from: "<value>",
+  to: "<value>",
+};
+```
 
 ## Fields
 

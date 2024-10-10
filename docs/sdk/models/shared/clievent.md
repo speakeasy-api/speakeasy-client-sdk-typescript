@@ -1,5 +1,22 @@
 # CliEvent
 
+## Example Usage
+
+```typescript
+import { CliEvent } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: CliEvent = {
+  createdAt: new Date("2023-03-19T13:21:51.302Z"),
+  executionId: "<id>",
+  id: "<id>",
+  interactionType: "TARGET_GENERATE",
+  localStartedAt: new Date("2024-01-06T20:04:15.683Z"),
+  speakeasyApiKeyName: "<value>",
+  speakeasyVersion: "<value>",
+  success: false,
+  workspaceId: "<id>",
+};
+```
 
 ## Fields
 
@@ -42,6 +59,7 @@
 | `ghActionRepository`                                                                                         | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | GitHub repository of the action.                                                                             |
 | `ghActionRunLink`                                                                                            | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | Link to the GitHub action run.                                                                               |
 | `ghActionVersion`                                                                                            | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | Version of the GitHub action.                                                                                |
+| `ghPullRequest`                                                                                              | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | The reference to a created pull request.                                                                     |
 | `gitRelativeCwd`                                                                                             | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | Current working directory relative to the git root.                                                          |
 | `gitRemoteDefaultOwner`                                                                                      | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | Default owner for git remote.                                                                                |
 | `gitRemoteDefaultRepo`                                                                                       | *string*                                                                                                     | :heavy_minus_sign:                                                                                           | Default repository name for git remote.                                                                      |
