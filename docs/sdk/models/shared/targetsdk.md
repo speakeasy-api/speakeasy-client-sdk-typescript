@@ -1,5 +1,19 @@
 # TargetSDK
 
+## Example Usage
+
+```typescript
+import { TargetSDK } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: TargetSDK = {
+  generateGenLockId: "<id>",
+  generateTarget: "<value>",
+  id: "<id>",
+  lastEventCreatedAt: new Date("2024-02-22T06:55:25.344Z"),
+  lastEventId: "<id>",
+  lastEventInteractionType: "QUICKSTART",
+};
+```
 
 ## Fields
 
@@ -34,6 +48,10 @@
 | `lastEventCreatedAt`                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | Timestamp when the event was created in the database.                                         |
 | `lastEventId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | Unique identifier of the last event for the target                                            |
 | `lastEventInteractionType`                                                                    | [shared.InteractionType](../../../sdk/models/shared/interactiontype.md)                       | :heavy_check_mark:                                                                            | Type of interaction.                                                                          |
+| `publishPackageName`                                                                          | *string*                                                                                      | :heavy_minus_sign:                                                                            | Name of the published package.                                                                |
+| `publishPackageRegistryName`                                                                  | *string*                                                                                      | :heavy_minus_sign:                                                                            | Name of the registry where the package was published.                                         |
+| `publishPackageUrl`                                                                           | *string*                                                                                      | :heavy_minus_sign:                                                                            | URL of the published package.                                                                 |
+| `publishPackageVersion`                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | Version of the published package.                                                             |
 | `repoLabel`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | Label of the git repository.                                                                  |
 | `sourceBlobDigest`                                                                            | *string*                                                                                      | :heavy_minus_sign:                                                                            | The blob digest of the source.                                                                |
 | `sourceNamespaceName`                                                                         | *string*                                                                                      | :heavy_minus_sign:                                                                            | The namespace name of the source.                                                             |

@@ -2,6 +2,18 @@
 
 Request body of tags to add to a revision
 
+## Example Usage
+
+```typescript
+import { AddTags } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: AddTags = {
+  revisionDigest: "<value>",
+  tags: [
+    "<value>",
+  ],
+};
+```
 
 ## Fields
 

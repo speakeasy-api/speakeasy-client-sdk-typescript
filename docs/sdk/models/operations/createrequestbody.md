@@ -1,5 +1,14 @@
 # CreateRequestBody
 
+## Example Usage
+
+```typescript
+import { CreateRequestBody } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: CreateRequestBody = {
+  url: "https://fruitful-masterpiece.org",
+};
+```
 
 ## Fields
 

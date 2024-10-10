@@ -1,5 +1,19 @@
 # UpsertApiRequest
 
+## Example Usage
+
+```typescript
+import { UpsertApiRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: UpsertApiRequest = {
+  apiID: "<id>",
+  api: {
+    apiId: "<id>",
+    description: "ultimately boo ham gift harmful",
+    versionId: "<id>",
+  },
+};
+```
 
 ## Fields
 

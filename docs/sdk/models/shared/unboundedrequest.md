@@ -2,6 +2,19 @@
 
 An UnboundedRequest represents the HAR content capture by Speakeasy when logging a request.
 
+## Example Usage
+
+```typescript
+import { UnboundedRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: UnboundedRequest = {
+  createdAt: new Date("2023-11-22T23:18:09.113Z"),
+  har: "<value>",
+  harSizeBytes: 874288,
+  requestId: "<id>",
+  workspaceId: "<id>",
+};
+```
 
 ## Fields
 

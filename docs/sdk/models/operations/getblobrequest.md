@@ -1,5 +1,17 @@
 # GetBlobRequest
 
+## Example Usage
+
+```typescript
+import { GetBlobRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetBlobRequest = {
+  organizationSlug: "<value>",
+  workspaceSlug: "<value>",
+  namespaceName: "<value>",
+  digest: "<value>",
+};
+```
 
 ## Fields
 

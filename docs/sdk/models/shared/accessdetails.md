@@ -1,5 +1,15 @@
 # AccessDetails
 
+## Example Usage
+
+```typescript
+import { AccessDetails } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: AccessDetails = {
+  generationAllowed: false,
+  message: "<value>",
+};
+```
 
 ## Fields
 

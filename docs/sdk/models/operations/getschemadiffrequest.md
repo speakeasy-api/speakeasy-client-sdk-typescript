@@ -1,5 +1,17 @@
 # GetSchemaDiffRequest
 
+## Example Usage
+
+```typescript
+import { GetSchemaDiffRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetSchemaDiffRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+  baseRevisionID: "<id>",
+  targetRevisionID: "<id>",
+};
+```
 
 ## Fields
 

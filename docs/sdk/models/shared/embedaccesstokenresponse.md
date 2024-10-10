@@ -2,6 +2,15 @@
 
 An EmbedAccessTokenResponse contains a token that can be used to embed a Speakeasy dashboard.
 
+## Example Usage
+
+```typescript
+import { EmbedAccessTokenResponse } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: EmbedAccessTokenResponse = {
+  accessToken: "<value>",
+};
+```
 
 ## Fields
 

@@ -2,6 +2,26 @@
 
 A SchemaDiff represents a diff of two Schemas.
 
+## Example Usage
+
+```typescript
+import { SchemaDiff } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: SchemaDiff = {
+  additions: [
+    "<value>",
+  ],
+  deletions: [
+    "<value>",
+  ],
+  modifications: {
+    "key": {
+      from: "<value>",
+      to: "<value>",
+    },
+  },
+};
+```
 
 ## Fields
 

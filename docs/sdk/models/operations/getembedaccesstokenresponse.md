@@ -6,12 +6,17 @@
 ### `shared.EmbedAccessTokenResponse`
 
 ```typescript
-const value: shared.EmbedAccessTokenResponse = /* values here */
+const value: shared.EmbedAccessTokenResponse = {
+  accessToken: "<value>",
+};
 ```
 
 ### `shared.ErrorT`
 
 ```typescript
-const value: shared.ErrorT = /* values here */
+const value: shared.ErrorT = {
+  message: "<value>",
+  statusCode: 100,
+};
 ```
 

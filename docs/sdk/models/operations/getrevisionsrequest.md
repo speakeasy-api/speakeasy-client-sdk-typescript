@@ -1,5 +1,14 @@
 # GetRevisionsRequest
 
+## Example Usage
+
+```typescript
+import { GetRevisionsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetRevisionsRequest = {
+  namespaceName: "<value>",
+};
+```
 
 ## Fields
 

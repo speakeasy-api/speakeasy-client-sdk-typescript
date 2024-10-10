@@ -2,6 +2,15 @@
 
 A request to store publishing secrets for a github target
 
+## Example Usage
+
+```typescript
+import { GithubStorePublishingSecretsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: GithubStorePublishingSecretsRequest = {
+  generateGenLockId: "<id>",
+};
+```
 
 ## Fields
 

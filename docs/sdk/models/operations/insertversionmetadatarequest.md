@@ -1,5 +1,19 @@
 # InsertVersionMetadataRequest
 
+## Example Usage
+
+```typescript
+import { InsertVersionMetadataRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: InsertVersionMetadataRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+  versionMetadata: {
+    metaKey: "<value>",
+    metaValue: "<value>",
+  },
+};
+```
 
 ## Fields
 

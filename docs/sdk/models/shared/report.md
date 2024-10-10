@@ -1,5 +1,12 @@
 # Report
 
+## Example Usage
+
+```typescript
+import { Report } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: Report = {};
+```
 
 ## Fields
 

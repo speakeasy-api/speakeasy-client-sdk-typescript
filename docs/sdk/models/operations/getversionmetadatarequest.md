@@ -1,5 +1,15 @@
 # GetVersionMetadataRequest
 
+## Example Usage
+
+```typescript
+import { GetVersionMetadataRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetVersionMetadataRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+};
+```
 
 ## Fields
 

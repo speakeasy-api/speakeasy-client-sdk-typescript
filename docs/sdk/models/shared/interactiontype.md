@@ -2,19 +2,16 @@
 
 Type of interaction.
 
+## Example Usage
+
+```typescript
+import { InteractionType } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: InteractionType = "OPENAPI_DIFF";
+```
 
 ## Values
 
-| Name             | Value            |
-| ---------------- | ---------------- |
-| `CiExec`         | CI_EXEC          |
-| `CliExec`        | CLI_EXEC         |
-| `Lint`           | LINT             |
-| `OpenapiDiff`    | OPENAPI_DIFF     |
-| `TargetGenerate` | TARGET_GENERATE  |
-| `Tombstone`      | TOMBSTONE        |
-| `Authenticate`   | AUTHENTICATE     |
-| `Quickstart`     | QUICKSTART       |
-| `Run`            | RUN              |
-| `Configure`      | CONFIGURE        |
-| `Publish`        | PUBLISH          |
+```typescript
+"CI_EXEC" | "CLI_EXEC" | "LINT" | "OPENAPI_DIFF" | "TARGET_GENERATE" | "TOMBSTONE" | "AUTHENTICATE" | "QUICKSTART" | "RUN" | "CONFIGURE" | "PUBLISH"
+```

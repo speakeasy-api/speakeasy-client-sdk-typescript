@@ -1,5 +1,14 @@
 # PostTagsRequest
 
+## Example Usage
+
+```typescript
+import { PostTagsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: PostTagsRequest = {
+  namespaceName: "<value>",
+};
+```
 
 ## Fields
 

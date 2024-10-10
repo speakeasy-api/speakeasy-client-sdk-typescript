@@ -2,6 +2,20 @@
 
 A request to configure a GitHub repository for mintlify
 
+## Example Usage
+
+```typescript
+import { GithubConfigureMintlifyRepoRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: GithubConfigureMintlifyRepoRequest = {
+  input: "<value>",
+  org: "<value>",
+  overlays: [
+    "<value>",
+  ],
+  repo: "<value>",
+};
+```
 
 ## Fields
 

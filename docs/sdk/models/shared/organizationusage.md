@@ -1,5 +1,28 @@
 # OrganizationUsage
 
+## Example Usage
+
+```typescript
+import { OrganizationUsage } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: OrganizationUsage = {
+  accessible: false,
+  accessibleFeatures: [
+    "<value>",
+  ],
+  genLockIds: [
+    "<value>",
+  ],
+  language: "<value>",
+  numberOfOperations: 862192,
+  usedFeatures: [
+    "<value>",
+  ],
+  workspaces: [
+    "<value>",
+  ],
+};
+```
 
 ## Fields
 

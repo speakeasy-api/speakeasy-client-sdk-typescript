@@ -6,12 +6,19 @@
 ### `shared.AccessToken`
 
 ```typescript
-const value: shared.AccessToken = /* values here */
+const value: shared.AccessToken = {
+  accessToken: "<value>",
+  claims: {},
+  user: {},
+};
 ```
 
 ### `shared.ErrorT`
 
 ```typescript
-const value: shared.ErrorT = /* values here */
+const value: shared.ErrorT = {
+  message: "<value>",
+  statusCode: 416,
+};
 ```
 

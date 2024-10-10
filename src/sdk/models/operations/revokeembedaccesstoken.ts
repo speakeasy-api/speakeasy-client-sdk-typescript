@@ -5,33 +5,33 @@
 import * as z from "zod";
 
 export type RevokeEmbedAccessTokenRequest = {
-    /**
-     * The ID of the EmbedToken to revoke.
-     */
-    tokenID: string;
+  /**
+   * The ID of the EmbedToken to revoke.
+   */
+  tokenID: string;
 };
 
 /** @internal */
 export const RevokeEmbedAccessTokenRequest$inboundSchema: z.ZodType<
-    RevokeEmbedAccessTokenRequest,
-    z.ZodTypeDef,
-    unknown
+  RevokeEmbedAccessTokenRequest,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
-    tokenID: z.string(),
+  tokenID: z.string(),
 });
 
 /** @internal */
 export type RevokeEmbedAccessTokenRequest$Outbound = {
-    tokenID: string;
+  tokenID: string;
 };
 
 /** @internal */
 export const RevokeEmbedAccessTokenRequest$outboundSchema: z.ZodType<
-    RevokeEmbedAccessTokenRequest$Outbound,
-    z.ZodTypeDef,
-    RevokeEmbedAccessTokenRequest
+  RevokeEmbedAccessTokenRequest$Outbound,
+  z.ZodTypeDef,
+  RevokeEmbedAccessTokenRequest
 > = z.object({
-    tokenID: z.string(),
+  tokenID: z.string(),
 });
 
 /**
@@ -39,10 +39,10 @@ export const RevokeEmbedAccessTokenRequest$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace RevokeEmbedAccessTokenRequest$ {
-    /** @deprecated use `RevokeEmbedAccessTokenRequest$inboundSchema` instead. */
-    export const inboundSchema = RevokeEmbedAccessTokenRequest$inboundSchema;
-    /** @deprecated use `RevokeEmbedAccessTokenRequest$outboundSchema` instead. */
-    export const outboundSchema = RevokeEmbedAccessTokenRequest$outboundSchema;
-    /** @deprecated use `RevokeEmbedAccessTokenRequest$Outbound` instead. */
-    export type Outbound = RevokeEmbedAccessTokenRequest$Outbound;
+  /** @deprecated use `RevokeEmbedAccessTokenRequest$inboundSchema` instead. */
+  export const inboundSchema = RevokeEmbedAccessTokenRequest$inboundSchema;
+  /** @deprecated use `RevokeEmbedAccessTokenRequest$outboundSchema` instead. */
+  export const outboundSchema = RevokeEmbedAccessTokenRequest$outboundSchema;
+  /** @deprecated use `RevokeEmbedAccessTokenRequest$Outbound` instead. */
+  export type Outbound = RevokeEmbedAccessTokenRequest$Outbound;
 }

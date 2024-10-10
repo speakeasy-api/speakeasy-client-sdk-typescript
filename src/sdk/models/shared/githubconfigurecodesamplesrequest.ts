@@ -8,47 +8,47 @@ import * as z from "zod";
  * A request to configure GitHub code samples
  */
 export type GithubConfigureCodeSamplesRequest = {
-    /**
-     * The GitHub organization name
-     */
-    org: string;
-    /**
-     * The GitHub repository name
-     */
-    repo: string;
-    /**
-     * The target name for the code samples
-     */
-    targetName: string;
+  /**
+   * The GitHub organization name
+   */
+  org: string;
+  /**
+   * The GitHub repository name
+   */
+  repo: string;
+  /**
+   * The target name for the code samples
+   */
+  targetName: string;
 };
 
 /** @internal */
 export const GithubConfigureCodeSamplesRequest$inboundSchema: z.ZodType<
-    GithubConfigureCodeSamplesRequest,
-    z.ZodTypeDef,
-    unknown
+  GithubConfigureCodeSamplesRequest,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
-    org: z.string(),
-    repo: z.string(),
-    targetName: z.string(),
+  org: z.string(),
+  repo: z.string(),
+  targetName: z.string(),
 });
 
 /** @internal */
 export type GithubConfigureCodeSamplesRequest$Outbound = {
-    org: string;
-    repo: string;
-    targetName: string;
+  org: string;
+  repo: string;
+  targetName: string;
 };
 
 /** @internal */
 export const GithubConfigureCodeSamplesRequest$outboundSchema: z.ZodType<
-    GithubConfigureCodeSamplesRequest$Outbound,
-    z.ZodTypeDef,
-    GithubConfigureCodeSamplesRequest
+  GithubConfigureCodeSamplesRequest$Outbound,
+  z.ZodTypeDef,
+  GithubConfigureCodeSamplesRequest
 > = z.object({
-    org: z.string(),
-    repo: z.string(),
-    targetName: z.string(),
+  org: z.string(),
+  repo: z.string(),
+  targetName: z.string(),
 });
 
 /**
@@ -56,10 +56,11 @@ export const GithubConfigureCodeSamplesRequest$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace GithubConfigureCodeSamplesRequest$ {
-    /** @deprecated use `GithubConfigureCodeSamplesRequest$inboundSchema` instead. */
-    export const inboundSchema = GithubConfigureCodeSamplesRequest$inboundSchema;
-    /** @deprecated use `GithubConfigureCodeSamplesRequest$outboundSchema` instead. */
-    export const outboundSchema = GithubConfigureCodeSamplesRequest$outboundSchema;
-    /** @deprecated use `GithubConfigureCodeSamplesRequest$Outbound` instead. */
-    export type Outbound = GithubConfigureCodeSamplesRequest$Outbound;
+  /** @deprecated use `GithubConfigureCodeSamplesRequest$inboundSchema` instead. */
+  export const inboundSchema = GithubConfigureCodeSamplesRequest$inboundSchema;
+  /** @deprecated use `GithubConfigureCodeSamplesRequest$outboundSchema` instead. */
+  export const outboundSchema =
+    GithubConfigureCodeSamplesRequest$outboundSchema;
+  /** @deprecated use `GithubConfigureCodeSamplesRequest$Outbound` instead. */
+  export type Outbound = GithubConfigureCodeSamplesRequest$Outbound;
 }

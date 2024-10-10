@@ -2,6 +2,15 @@
 
 A feature flag is a key-value pair that can be used to enable or disable features.
 
+## Example Usage
+
+```typescript
+import { FeatureFlag } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: FeatureFlag = {
+  featureFlag: "<value>",
+};
+```
 
 ## Fields
 

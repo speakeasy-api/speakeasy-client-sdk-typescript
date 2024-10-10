@@ -2,6 +2,20 @@
 
 A Schema represents an API schema for a particular Api and Version.
 
+## Example Usage
+
+```typescript
+import { Schema } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: Schema = {
+  apiId: "<id>",
+  createdAt: new Date("2024-11-01T00:46:16.847Z"),
+  description: "unless lest reward firsthand mmm concerning ceramics instantly",
+  revisionId: "<id>",
+  versionId: "<id>",
+  workspaceId: "<id>",
+};
+```
 
 ## Fields
 

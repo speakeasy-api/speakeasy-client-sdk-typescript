@@ -1,5 +1,12 @@
 # GetWorkspaceAccessRequest
 
+## Example Usage
+
+```typescript
+import { GetWorkspaceAccessRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: GetWorkspaceAccessRequest = {};
+```
 
 ## Fields
 

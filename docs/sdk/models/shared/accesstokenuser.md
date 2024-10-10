@@ -1,5 +1,12 @@
 # AccessTokenUser
 
+## Example Usage
+
+```typescript
+import { AccessTokenUser } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: AccessTokenUser = {};
+```
 
 ## Fields
 

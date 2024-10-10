@@ -5,47 +5,47 @@
 import * as z from "zod";
 
 export type DeleteSchemaRequest = {
-    /**
-     * The ID of the Api to delete schemas for.
-     */
-    apiID: string;
-    /**
-     * The version ID of the Api to delete metadata for.
-     */
-    versionID: string;
-    /**
-     * The revision ID of the schema to delete.
-     */
-    revisionID: string;
+  /**
+   * The ID of the Api to delete schemas for.
+   */
+  apiID: string;
+  /**
+   * The version ID of the Api to delete metadata for.
+   */
+  versionID: string;
+  /**
+   * The revision ID of the schema to delete.
+   */
+  revisionID: string;
 };
 
 /** @internal */
 export const DeleteSchemaRequest$inboundSchema: z.ZodType<
-    DeleteSchemaRequest,
-    z.ZodTypeDef,
-    unknown
+  DeleteSchemaRequest,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
-    apiID: z.string(),
-    versionID: z.string(),
-    revisionID: z.string(),
+  apiID: z.string(),
+  versionID: z.string(),
+  revisionID: z.string(),
 });
 
 /** @internal */
 export type DeleteSchemaRequest$Outbound = {
-    apiID: string;
-    versionID: string;
-    revisionID: string;
+  apiID: string;
+  versionID: string;
+  revisionID: string;
 };
 
 /** @internal */
 export const DeleteSchemaRequest$outboundSchema: z.ZodType<
-    DeleteSchemaRequest$Outbound,
-    z.ZodTypeDef,
-    DeleteSchemaRequest
+  DeleteSchemaRequest$Outbound,
+  z.ZodTypeDef,
+  DeleteSchemaRequest
 > = z.object({
-    apiID: z.string(),
-    versionID: z.string(),
-    revisionID: z.string(),
+  apiID: z.string(),
+  versionID: z.string(),
+  revisionID: z.string(),
 });
 
 /**
@@ -53,10 +53,10 @@ export const DeleteSchemaRequest$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace DeleteSchemaRequest$ {
-    /** @deprecated use `DeleteSchemaRequest$inboundSchema` instead. */
-    export const inboundSchema = DeleteSchemaRequest$inboundSchema;
-    /** @deprecated use `DeleteSchemaRequest$outboundSchema` instead. */
-    export const outboundSchema = DeleteSchemaRequest$outboundSchema;
-    /** @deprecated use `DeleteSchemaRequest$Outbound` instead. */
-    export type Outbound = DeleteSchemaRequest$Outbound;
+  /** @deprecated use `DeleteSchemaRequest$inboundSchema` instead. */
+  export const inboundSchema = DeleteSchemaRequest$inboundSchema;
+  /** @deprecated use `DeleteSchemaRequest$outboundSchema` instead. */
+  export const outboundSchema = DeleteSchemaRequest$outboundSchema;
+  /** @deprecated use `DeleteSchemaRequest$Outbound` instead. */
+  export type Outbound = DeleteSchemaRequest$Outbound;
 }

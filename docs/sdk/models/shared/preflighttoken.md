@@ -2,6 +2,13 @@
 
 A PreflightToken is a token that allows access to the OCI distribution endpoints.
 
+## Example Usage
+
+```typescript
+import { PreflightToken } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: PreflightToken = {};
+```
 
 ## Fields
 

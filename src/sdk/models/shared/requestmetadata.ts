@@ -8,31 +8,34 @@ import * as z from "zod";
  * Key-Value pairs associated with a request
  */
 export type RequestMetadata = {
-    key?: string | undefined;
-    value?: string | undefined;
+  key?: string | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
-export const RequestMetadata$inboundSchema: z.ZodType<RequestMetadata, z.ZodTypeDef, unknown> =
-    z.object({
-        key: z.string().optional(),
-        value: z.string().optional(),
-    });
+export const RequestMetadata$inboundSchema: z.ZodType<
+  RequestMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  key: z.string().optional(),
+  value: z.string().optional(),
+});
 
 /** @internal */
 export type RequestMetadata$Outbound = {
-    key?: string | undefined;
-    value?: string | undefined;
+  key?: string | undefined;
+  value?: string | undefined;
 };
 
 /** @internal */
 export const RequestMetadata$outboundSchema: z.ZodType<
-    RequestMetadata$Outbound,
-    z.ZodTypeDef,
-    RequestMetadata
+  RequestMetadata$Outbound,
+  z.ZodTypeDef,
+  RequestMetadata
 > = z.object({
-    key: z.string().optional(),
-    value: z.string().optional(),
+  key: z.string().optional(),
+  value: z.string().optional(),
 });
 
 /**
@@ -40,10 +43,10 @@ export const RequestMetadata$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace RequestMetadata$ {
-    /** @deprecated use `RequestMetadata$inboundSchema` instead. */
-    export const inboundSchema = RequestMetadata$inboundSchema;
-    /** @deprecated use `RequestMetadata$outboundSchema` instead. */
-    export const outboundSchema = RequestMetadata$outboundSchema;
-    /** @deprecated use `RequestMetadata$Outbound` instead. */
-    export type Outbound = RequestMetadata$Outbound;
+  /** @deprecated use `RequestMetadata$inboundSchema` instead. */
+  export const inboundSchema = RequestMetadata$inboundSchema;
+  /** @deprecated use `RequestMetadata$outboundSchema` instead. */
+  export const outboundSchema = RequestMetadata$outboundSchema;
+  /** @deprecated use `RequestMetadata$Outbound` instead. */
+  export type Outbound = RequestMetadata$Outbound;
 }

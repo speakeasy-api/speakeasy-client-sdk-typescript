@@ -5,30 +5,33 @@
 import * as z from "zod";
 
 export type CreateRequestBody = {
-    /**
-     * URL to shorten
-     */
-    url: string;
+  /**
+   * URL to shorten
+   */
+  url: string;
 };
 
 /** @internal */
-export const CreateRequestBody$inboundSchema: z.ZodType<CreateRequestBody, z.ZodTypeDef, unknown> =
-    z.object({
-        url: z.string(),
-    });
+export const CreateRequestBody$inboundSchema: z.ZodType<
+  CreateRequestBody,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  url: z.string(),
+});
 
 /** @internal */
 export type CreateRequestBody$Outbound = {
-    url: string;
+  url: string;
 };
 
 /** @internal */
 export const CreateRequestBody$outboundSchema: z.ZodType<
-    CreateRequestBody$Outbound,
-    z.ZodTypeDef,
-    CreateRequestBody
+  CreateRequestBody$Outbound,
+  z.ZodTypeDef,
+  CreateRequestBody
 > = z.object({
-    url: z.string(),
+  url: z.string(),
 });
 
 /**
@@ -36,10 +39,10 @@ export const CreateRequestBody$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace CreateRequestBody$ {
-    /** @deprecated use `CreateRequestBody$inboundSchema` instead. */
-    export const inboundSchema = CreateRequestBody$inboundSchema;
-    /** @deprecated use `CreateRequestBody$outboundSchema` instead. */
-    export const outboundSchema = CreateRequestBody$outboundSchema;
-    /** @deprecated use `CreateRequestBody$Outbound` instead. */
-    export type Outbound = CreateRequestBody$Outbound;
+  /** @deprecated use `CreateRequestBody$inboundSchema` instead. */
+  export const inboundSchema = CreateRequestBody$inboundSchema;
+  /** @deprecated use `CreateRequestBody$outboundSchema` instead. */
+  export const outboundSchema = CreateRequestBody$outboundSchema;
+  /** @deprecated use `CreateRequestBody$Outbound` instead. */
+  export type Outbound = CreateRequestBody$Outbound;
 }

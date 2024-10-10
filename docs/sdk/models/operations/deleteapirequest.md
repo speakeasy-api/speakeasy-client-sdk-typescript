@@ -1,5 +1,15 @@
 # DeleteApiRequest
 
+## Example Usage
+
+```typescript
+import { DeleteApiRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
+
+let value: DeleteApiRequest = {
+  apiID: "<id>",
+  versionID: "<id>",
+};
+```
 
 ## Fields
 

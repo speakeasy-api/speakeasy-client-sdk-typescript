@@ -2,6 +2,17 @@
 
 A request to configure GitHub code samples
 
+## Example Usage
+
+```typescript
+import { GithubConfigureCodeSamplesRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: GithubConfigureCodeSamplesRequest = {
+  org: "<value>",
+  repo: "<value>",
+  targetName: "<value>",
+};
+```
 
 ## Fields
 

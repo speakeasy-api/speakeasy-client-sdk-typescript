@@ -2,6 +2,13 @@
 
 V2 descriptor
 
+## Example Usage
+
+```typescript
+import { V2Descriptor } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
+
+let value: V2Descriptor = {};
+```
 
 ## Fields
 

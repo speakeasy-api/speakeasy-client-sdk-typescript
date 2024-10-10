@@ -5,40 +5,40 @@
 import * as z from "zod";
 
 export type GetChangesReportSignedUrlRequest = {
-    /**
-     * The checksum of the document to retrieve the signed access url for.
-     */
-    documentChecksum: string;
+  /**
+   * The checksum of the document to retrieve the signed access url for.
+   */
+  documentChecksum: string;
 };
 
 /**
  * OK
  */
 export type GetChangesReportSignedUrlSignedAccess = {
-    url: string;
+  url: string;
 };
 
 /** @internal */
 export const GetChangesReportSignedUrlRequest$inboundSchema: z.ZodType<
-    GetChangesReportSignedUrlRequest,
-    z.ZodTypeDef,
-    unknown
+  GetChangesReportSignedUrlRequest,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
-    documentChecksum: z.string(),
+  documentChecksum: z.string(),
 });
 
 /** @internal */
 export type GetChangesReportSignedUrlRequest$Outbound = {
-    documentChecksum: string;
+  documentChecksum: string;
 };
 
 /** @internal */
 export const GetChangesReportSignedUrlRequest$outboundSchema: z.ZodType<
-    GetChangesReportSignedUrlRequest$Outbound,
-    z.ZodTypeDef,
-    GetChangesReportSignedUrlRequest
+  GetChangesReportSignedUrlRequest$Outbound,
+  z.ZodTypeDef,
+  GetChangesReportSignedUrlRequest
 > = z.object({
-    documentChecksum: z.string(),
+  documentChecksum: z.string(),
 });
 
 /**
@@ -46,35 +46,35 @@ export const GetChangesReportSignedUrlRequest$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace GetChangesReportSignedUrlRequest$ {
-    /** @deprecated use `GetChangesReportSignedUrlRequest$inboundSchema` instead. */
-    export const inboundSchema = GetChangesReportSignedUrlRequest$inboundSchema;
-    /** @deprecated use `GetChangesReportSignedUrlRequest$outboundSchema` instead. */
-    export const outboundSchema = GetChangesReportSignedUrlRequest$outboundSchema;
-    /** @deprecated use `GetChangesReportSignedUrlRequest$Outbound` instead. */
-    export type Outbound = GetChangesReportSignedUrlRequest$Outbound;
+  /** @deprecated use `GetChangesReportSignedUrlRequest$inboundSchema` instead. */
+  export const inboundSchema = GetChangesReportSignedUrlRequest$inboundSchema;
+  /** @deprecated use `GetChangesReportSignedUrlRequest$outboundSchema` instead. */
+  export const outboundSchema = GetChangesReportSignedUrlRequest$outboundSchema;
+  /** @deprecated use `GetChangesReportSignedUrlRequest$Outbound` instead. */
+  export type Outbound = GetChangesReportSignedUrlRequest$Outbound;
 }
 
 /** @internal */
 export const GetChangesReportSignedUrlSignedAccess$inboundSchema: z.ZodType<
-    GetChangesReportSignedUrlSignedAccess,
-    z.ZodTypeDef,
-    unknown
+  GetChangesReportSignedUrlSignedAccess,
+  z.ZodTypeDef,
+  unknown
 > = z.object({
-    url: z.string(),
+  url: z.string(),
 });
 
 /** @internal */
 export type GetChangesReportSignedUrlSignedAccess$Outbound = {
-    url: string;
+  url: string;
 };
 
 /** @internal */
 export const GetChangesReportSignedUrlSignedAccess$outboundSchema: z.ZodType<
-    GetChangesReportSignedUrlSignedAccess$Outbound,
-    z.ZodTypeDef,
-    GetChangesReportSignedUrlSignedAccess
+  GetChangesReportSignedUrlSignedAccess$Outbound,
+  z.ZodTypeDef,
+  GetChangesReportSignedUrlSignedAccess
 > = z.object({
-    url: z.string(),
+  url: z.string(),
 });
 
 /**
@@ -82,10 +82,12 @@ export const GetChangesReportSignedUrlSignedAccess$outboundSchema: z.ZodType<
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
  */
 export namespace GetChangesReportSignedUrlSignedAccess$ {
-    /** @deprecated use `GetChangesReportSignedUrlSignedAccess$inboundSchema` instead. */
-    export const inboundSchema = GetChangesReportSignedUrlSignedAccess$inboundSchema;
-    /** @deprecated use `GetChangesReportSignedUrlSignedAccess$outboundSchema` instead. */
-    export const outboundSchema = GetChangesReportSignedUrlSignedAccess$outboundSchema;
-    /** @deprecated use `GetChangesReportSignedUrlSignedAccess$Outbound` instead. */
-    export type Outbound = GetChangesReportSignedUrlSignedAccess$Outbound;
+  /** @deprecated use `GetChangesReportSignedUrlSignedAccess$inboundSchema` instead. */
+  export const inboundSchema =
+    GetChangesReportSignedUrlSignedAccess$inboundSchema;
+  /** @deprecated use `GetChangesReportSignedUrlSignedAccess$outboundSchema` instead. */
+  export const outboundSchema =
+    GetChangesReportSignedUrlSignedAccess$outboundSchema;
+  /** @deprecated use `GetChangesReportSignedUrlSignedAccess$Outbound` instead. */
+  export type Outbound = GetChangesReportSignedUrlSignedAccess$Outbound;
 }
