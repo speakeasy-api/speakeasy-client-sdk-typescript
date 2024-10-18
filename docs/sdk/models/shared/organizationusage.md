@@ -14,7 +14,7 @@ let value: OrganizationUsage = {
     "<value>",
   ],
   language: "<value>",
-  numberOfOperations: 862192,
+  numberOfOperations: 972920,
   usedFeatures: [
     "<value>",
   ],

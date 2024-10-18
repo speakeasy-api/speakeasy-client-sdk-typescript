@@ -8,7 +8,7 @@ import { FindApiEndpointRequest } from "@speakeasy-api/speakeasy-client-sdk-type
 let value: FindApiEndpointRequest = {
   apiID: "<id>",
   versionID: "<id>",
-  displayName: "Myriam_Powlowski71",
+  displayName: "Easter_Miller14",
 };
 ```
 

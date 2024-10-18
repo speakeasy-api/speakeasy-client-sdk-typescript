@@ -10,14 +10,14 @@ import { remap as remap$ } from "../../../lib/primitives.js";
  */
 export type WorkspaceToken = {
   alg: string;
-  createdAt: string;
+  createdAt: Date;
   createdBy?: string | null | undefined;
   email?: string | null | undefined;
   id: string;
   key: string;
   lastUsed?: string | null | undefined;
   name: string;
-  workspaceId?: string | undefined;
+  workspaceId: string;
 };
 
 /** @internal */
@@ -27,14 +27,14 @@ export const WorkspaceToken$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   alg: z.string(),
-  created_at: z.string(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   created_by: z.nullable(z.string()).optional(),
   email: z.nullable(z.string()).optional(),
   id: z.string(),
   key: z.string(),
   last_used: z.nullable(z.string()).optional(),
   name: z.string(),
-  workspace_id: z.string().optional(),
+  workspace_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
@@ -54,7 +54,7 @@ export type WorkspaceToken$Outbound = {
   key: string;
   last_used?: string | null | undefined;
   name: string;
-  workspace_id?: string | undefined;
+  workspace_id: string;
 };
 
 /** @internal */
@@ -64,14 +64,14 @@ export const WorkspaceToken$outboundSchema: z.ZodType<
   WorkspaceToken
 > = z.object({
   alg: z.string(),
-  createdAt: z.string(),
+  createdAt: z.date().transform(v => v.toISOString()),
   createdBy: z.nullable(z.string()).optional(),
   email: z.nullable(z.string()).optional(),
   id: z.string(),
   key: z.string(),
   lastUsed: z.nullable(z.string()).optional(),
   name: z.string(),
-  workspaceId: z.string().optional(),
+  workspaceId: z.string(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",

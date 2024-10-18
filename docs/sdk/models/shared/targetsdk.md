@@ -9,9 +9,9 @@ let value: TargetSDK = {
   generateGenLockId: "<id>",
   generateTarget: "<value>",
   id: "<id>",
-  lastEventCreatedAt: new Date("2024-02-22T06:55:25.344Z"),
+  lastEventCreatedAt: new Date("2022-02-01T23:49:11.774Z"),
   lastEventId: "<id>",
-  lastEventInteractionType: "QUICKSTART",
+  lastEventInteractionType: "TOMBSTONE",
 };
 ```
 

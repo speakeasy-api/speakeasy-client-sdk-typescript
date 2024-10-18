@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 507,
+  statusCode: 307,
 };
 ```
 
@@ -18,7 +18,7 @@ const value: shared.ErrorT = {
 const value: shared.VersionMetadata[] = [
   {
     apiId: "<id>",
-    createdAt: new Date("2023-07-25T15:54:31.058Z"),
+    createdAt: new Date("2022-04-19T01:50:49.700Z"),
     metaKey: "<value>",
     metaValue: "<value>",
     versionId: "<id>",

@@ -20,7 +20,7 @@ const value: ReadableStream<Uint8Array> = await openAsBlob("example.file");
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 401,
+  statusCode: 414,
 };
 ```
 

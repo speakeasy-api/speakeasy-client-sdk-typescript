@@ -6,7 +6,7 @@
 import { SuggestOptsOld } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: SuggestOptsOld = {
-  suggestionType: "method-names",
+  suggestionType: "diagnostics-only",
 };
 ```
 

@@ -134,10 +134,11 @@ async function run() {
     workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
-      createdAt: "<value>",
+      createdAt: new Date("<value>"),
       id: "<id>",
       key: "<key>",
       name: "<value>",
+      workspaceId: "<id>",
     },
   });
 
@@ -169,10 +170,11 @@ async function run() {
     workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
-      createdAt: "<value>",
+      createdAt: new Date("<value>"),
       id: "<id>",
       key: "<key>",
       name: "<value>",
+      workspaceId: "<id>",
     },
   });
 
@@ -1123,6 +1125,9 @@ async function run() {
   const result = await speakeasy.workspaces.updateSettings({
     workspaceId: "<id>",
     workspaceSettings: {
+      createdAt: new Date("2022-07-05T11:43:28.305Z"),
+      updatedAt: new Date("2023-05-15T05:39:21.874Z"),
+      webhookUrl: "https://grown-pharmacopoeia.net",
       workspaceId: "<id>",
     },
   });
@@ -1154,6 +1159,9 @@ async function run() {
   const res = await workspacesUpdateSettings(speakeasy, {
     workspaceId: "<id>",
     workspaceSettings: {
+      createdAt: new Date("2022-07-05T11:43:28.305Z"),
+      updatedAt: new Date("2023-05-15T05:39:21.874Z"),
+      webhookUrl: "https://grown-pharmacopoeia.net",
       workspaceId: "<id>",
     },
   });

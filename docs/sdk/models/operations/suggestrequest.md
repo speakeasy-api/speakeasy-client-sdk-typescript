@@ -12,15 +12,14 @@ let value: SuggestRequest = {
       {
         message: "<value>",
         path: [
-          "/opt/lib",
+          "/Users",
         ],
         type: "<value>",
       },
     ],
     oasSummary: {
       info: {
-        description:
-          "obediently kissingly blue enfold though because intermarry colonialism",
+        description: "faithfully steel promptly pull optimistically",
         license: {},
         summary: "<value>",
         title: "<value>",
@@ -28,10 +27,10 @@ let value: SuggestRequest = {
       },
       operations: [
         {
-          description: "unhappy zowie bah over ouch beneath lumpy",
+          description: "separately content to as needily near",
           method: "<value>",
           operationId: "<id>",
-          path: "/etc/mail",
+          path: "/usr/include",
           tags: [
             "<value>",
           ],

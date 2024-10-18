@@ -9,11 +9,11 @@ let value: PostWorkspaceEventsRequest = {
   workspaceId: "<id>",
   requestBody: [
     {
-      createdAt: new Date("2023-06-12T05:20:25.998Z"),
+      createdAt: new Date("2024-07-20T06:14:33.034Z"),
       executionId: "<id>",
       id: "<id>",
-      interactionType: "OPENAPI_DIFF",
-      localStartedAt: new Date("2024-08-03T08:45:30.623Z"),
+      interactionType: "CI_EXEC",
+      localStartedAt: new Date("2022-12-06T23:22:56.589Z"),
       speakeasyApiKeyName: "<value>",
       speakeasyVersion: "<value>",
       success: false,

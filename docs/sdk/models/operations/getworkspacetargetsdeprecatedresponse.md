@@ -20,9 +20,9 @@ const value: shared.TargetSDK[] = [
     generateGenLockId: "<id>",
     generateTarget: "<value>",
     id: "<id>",
-    lastEventCreatedAt: new Date("2022-06-01T17:26:33.631Z"),
+    lastEventCreatedAt: new Date("2024-09-14T03:21:41.334Z"),
     lastEventId: "<id>",
-    lastEventInteractionType: "LINT",
+    lastEventInteractionType: "RUN",
   },
 ];
 ```
