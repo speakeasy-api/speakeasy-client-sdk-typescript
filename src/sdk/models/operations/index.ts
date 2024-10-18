@@ -5,6 +5,7 @@
 export * from "./checkgithubaccess.js";
 export * from "./create.js";
 export * from "./createorganization.js";
+export * from "./createsubscription.js";
 export * from "./createworkspace.js";
 export * from "./createworkspacetoken.js";
 export * from "./deleteapi.js";
@@ -62,6 +63,7 @@ export * from "./githubcheckpublishingsecrets.js";
 export * from "./githubconfigurecodesamples.js";
 export * from "./grantuseraccesstoworkspace.js";
 export * from "./insertversionmetadata.js";
+export * from "./listsubscriptions.js";
 export * from "./posttags.js";
 export * from "./postworkspaceevents.js";
 export * from "./preflight.js";

@@ -8,13 +8,12 @@ import { UpdateWorkspaceDetailsRequest } from "@speakeasy-api/speakeasy-client-s
 let value: UpdateWorkspaceDetailsRequest = {
   workspaceId: "<id>",
   workspace: {
-    createdAt: new Date("2024-12-13T16:03:43.381Z"),
+    createdAt: new Date("2022-02-16T20:50:29.690Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    telemetryDisabled: false,
-    updatedAt: new Date("2022-02-03T08:20:20.613Z"),
+    updatedAt: new Date("2022-01-01T09:39:45.396Z"),
     verified: false,
   },
 };

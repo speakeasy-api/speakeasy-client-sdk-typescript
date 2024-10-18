@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 408,
+  statusCode: 200,
 };
 ```
 
@@ -16,13 +16,12 @@ const value: shared.ErrorT = {
 
 ```typescript
 const value: shared.Workspace = {
-  createdAt: new Date("2022-04-24T23:18:08.610Z"),
+  createdAt: new Date("2022-02-14T19:10:20.351Z"),
   id: "<id>",
   name: "<value>",
   organizationId: "<id>",
   slug: "<value>",
-  telemetryDisabled: false,
-  updatedAt: new Date("2024-09-22T01:21:39.695Z"),
+  updatedAt: new Date("2022-10-10T13:44:30.649Z"),
   verified: false,
 };
 ```

@@ -18,6 +18,7 @@ export type Organization = {
   createdAt: Date;
   freeTrialExpiry?: Date | null | undefined;
   id: string;
+  internal?: boolean | undefined;
   name: string;
   slug: string;
   telemetryDisabled: boolean;
@@ -36,6 +37,7 @@ export const Organization$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   id: z.string(),
+  internal: z.boolean().optional(),
   name: z.string(),
   slug: z.string(),
   telemetry_disabled: z.boolean(),
@@ -56,6 +58,7 @@ export type Organization$Outbound = {
   created_at: string;
   free_trial_expiry?: string | null | undefined;
   id: string;
+  internal?: boolean | undefined;
   name: string;
   slug: string;
   telemetry_disabled: boolean;
@@ -73,6 +76,7 @@ export const Organization$outboundSchema: z.ZodType<
   freeTrialExpiry: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   id: z.string(),
+  internal: z.boolean().optional(),
   name: z.string(),
   slug: z.string(),
   telemetryDisabled: z.boolean(),

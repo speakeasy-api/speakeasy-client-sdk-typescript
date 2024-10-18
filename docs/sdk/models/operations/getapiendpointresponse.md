@@ -9,12 +9,12 @@
 const value: shared.ApiEndpoint = {
   apiEndpointId: "<id>",
   apiId: "<id>",
-  createdAt: new Date("2024-12-31T18:57:53.420Z"),
-  description: "separate stealthily lawmaker per",
-  displayName: "Alva22",
+  createdAt: new Date("2024-01-13T03:31:14.357Z"),
+  description: "alliance airbrush oil yet following off wisely",
+  displayName: "Dina.Kub82",
   method: "<value>",
-  path: "/selinux",
-  updatedAt: new Date("2022-04-28T18:57:30.321Z"),
+  path: "/mnt",
+  updatedAt: new Date("2024-05-17T04:26:46.844Z"),
   versionId: "<id>",
   workspaceId: "<id>",
 };
@@ -25,7 +25,7 @@ const value: shared.ApiEndpoint = {
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 204,
+  statusCode: 416,
 };
 ```
 

@@ -9,7 +9,8 @@ let value: UpsertApiRequest = {
   apiID: "<id>",
   api: {
     apiId: "<id>",
-    description: "ultimately boo ham gift harmful",
+    description:
+      "exactly tepid gratefully whoa antelope hairy whoa yuck shinny invite",
     versionId: "<id>",
   },
 };

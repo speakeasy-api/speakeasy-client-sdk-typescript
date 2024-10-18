@@ -3,7 +3,7 @@
 <!-- Start Summary [summary] -->
 ## Summary
 
-Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
+Speakeasy API: The Subscriptions API manages subscriptions for CLI and registry events
 
 For more information about the API: [The Speakeasy Platform Documentation](/docs)
 <!-- End Summary [summary] -->
@@ -195,9 +195,15 @@ run();
 * [create](docs/sdks/shorturls/README.md#create) - Shorten a URL.
 
 
+### [subscriptions](docs/sdks/subscriptions/README.md)
+
+* [createSubscription](docs/sdks/subscriptions/README.md#createsubscription) - Create Subscription
+* [listSubscriptions](docs/sdks/subscriptions/README.md#listsubscriptions) - List Subscriptions
+
 ### [suggest](docs/sdks/suggest/README.md)
 
 * [suggest](docs/sdks/suggest/README.md#suggest) - Generate suggestions for improving an OpenAPI document.
+* [suggestItems](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 * [suggestOpenAPI](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 * [suggestOpenAPIRegistry](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
 
@@ -610,7 +616,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`schemasGetSchemas`](docs/sdks/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
 - [`schemasRegisterSchema`](docs/sdks/schemas/README.md#registerschema) - Register a schema.
 - [`shortURLsCreate`](docs/sdks/shorturls/README.md#create) - Shorten a URL.
+- [`subscriptionsCreateSubscription`](docs/sdks/subscriptions/README.md#createsubscription) - Create Subscription
+- [`subscriptionsListSubscriptions`](docs/sdks/subscriptions/README.md#listsubscriptions) - List Subscriptions
 - [`suggestSuggest`](docs/sdks/suggest/README.md#suggest) - Generate suggestions for improving an OpenAPI document.
+- [`suggestSuggestItems`](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 - [`suggestSuggestOpenAPI`](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 - [`suggestSuggestOpenAPIRegistry`](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
 - [`workspacesCreate`](docs/sdks/workspaces/README.md#create) - Create a workspace

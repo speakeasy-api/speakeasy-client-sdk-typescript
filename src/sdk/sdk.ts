@@ -16,6 +16,7 @@ import { Reports } from "./reports.js";
 import { Requests } from "./requests.js";
 import { Schemas } from "./schemas.js";
 import { ShortURLs } from "./shorturls.js";
+import { Subscriptions } from "./subscriptions.js";
 import { Suggest } from "./suggest.js";
 import { Workspaces } from "./workspaces.js";
 
@@ -93,5 +94,10 @@ export class Speakeasy extends ClientSDK {
   private _events?: Events;
   get events(): Events {
     return (this._events ??= new Events(this._options));
+  }
+
+  private _subscriptions?: Subscriptions;
+  get subscriptions(): Subscriptions {
+    return (this._subscriptions ??= new Subscriptions(this._options));
   }
 }

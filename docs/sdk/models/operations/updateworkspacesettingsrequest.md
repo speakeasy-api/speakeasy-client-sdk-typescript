@@ -8,6 +8,9 @@ import { UpdateWorkspaceSettingsRequest } from "@speakeasy-api/speakeasy-client-
 let value: UpdateWorkspaceSettingsRequest = {
   workspaceId: "<id>",
   workspaceSettings: {
+    createdAt: new Date("2022-10-28T00:15:47.100Z"),
+    updatedAt: new Date("2023-05-22T11:00:48.310Z"),
+    webhookUrl: "https://candid-pine.net",
     workspaceId: "<id>",
   },
 };

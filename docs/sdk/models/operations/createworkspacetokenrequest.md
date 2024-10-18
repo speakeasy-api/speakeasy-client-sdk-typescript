@@ -9,10 +9,11 @@ let value: CreateWorkspaceTokenRequest = {
   workspaceId: "<id>",
   workspaceToken: {
     alg: "<value>",
-    createdAt: "<value>",
+    createdAt: new Date("2024-03-22T07:24:15.908Z"),
     id: "<id>",
     key: "<key>",
     name: "<value>",
+    workspaceId: "<id>",
   },
 };
 ```

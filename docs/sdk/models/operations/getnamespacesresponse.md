@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 100,
+  statusCode: 417,
 };
 ```
 
@@ -18,10 +18,10 @@ const value: shared.ErrorT = {
 const value: shared.GetNamespacesResponse = {
   items: [
     {
-      createdAt: new Date("2022-11-01T19:34:36.306Z"),
+      createdAt: new Date("2024-12-15T23:23:51.945Z"),
       id: "<id>",
       name: "<value>",
-      updatedAt: new Date("2022-07-05T13:36:03.643Z"),
+      updatedAt: new Date("2024-08-30T11:05:45.637Z"),
     },
   ],
 };

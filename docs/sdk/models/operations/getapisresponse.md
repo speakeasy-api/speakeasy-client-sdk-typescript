@@ -9,9 +9,9 @@
 const value: shared.Api[] = [
   {
     apiId: "<id>",
-    createdAt: new Date("2024-01-18T04:29:15.055Z"),
-    description: "doubtfully beneath abscond which exhausted",
-    updatedAt: new Date("2022-08-26T05:41:30.450Z"),
+    createdAt: new Date("2022-06-25T04:34:13.531Z"),
+    description: "mmm feline following",
+    updatedAt: new Date("2023-05-03T06:25:26.467Z"),
     versionId: "<id>",
     workspaceId: "<id>",
   },
@@ -23,7 +23,7 @@ const value: shared.Api[] = [
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 103,
+  statusCode: 208,
 };
 ```
 
