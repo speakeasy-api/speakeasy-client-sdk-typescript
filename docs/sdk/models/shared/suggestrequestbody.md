@@ -10,14 +10,15 @@ let value: SuggestRequestBody = {
     {
       message: "<value>",
       path: [
-        "/usr/include",
+        "/usr/share",
       ],
       type: "<value>",
     },
   ],
   oasSummary: {
     info: {
-      description: "knottily ethyl covenant",
+      description:
+        "tomorrow optimistically everlasting specific fray rebuke well-to-do antique reel foot",
       license: {},
       summary: "<value>",
       title: "<value>",
@@ -25,18 +26,17 @@ let value: SuggestRequestBody = {
     },
     operations: [
       {
-        description:
-          "politely after horst vanadyl mmm ownership toward curly about",
+        description: "political equally provided",
         method: "<value>",
         operationId: "<id>",
-        path: "/var/spool",
+        path: "/home/user",
         tags: [
           "<value>",
         ],
       },
     ],
   },
-  suggestionType: "method-names",
+  suggestionType: "diagnostics-only",
 };
 ```
 

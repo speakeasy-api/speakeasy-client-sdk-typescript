@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GeneratePostmanCollectionRequest = {
@@ -59,6 +62,26 @@ export namespace GeneratePostmanCollectionRequest$ {
   export type Outbound = GeneratePostmanCollectionRequest$Outbound;
 }
 
+export function generatePostmanCollectionRequestToJSON(
+  generatePostmanCollectionRequest: GeneratePostmanCollectionRequest,
+): string {
+  return JSON.stringify(
+    GeneratePostmanCollectionRequest$outboundSchema.parse(
+      generatePostmanCollectionRequest,
+    ),
+  );
+}
+
+export function generatePostmanCollectionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GeneratePostmanCollectionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GeneratePostmanCollectionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GeneratePostmanCollectionRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GeneratePostmanCollectionResponse$inboundSchema: z.ZodType<
   GeneratePostmanCollectionResponse,
@@ -96,4 +119,24 @@ export namespace GeneratePostmanCollectionResponse$ {
     GeneratePostmanCollectionResponse$outboundSchema;
   /** @deprecated use `GeneratePostmanCollectionResponse$Outbound` instead. */
   export type Outbound = GeneratePostmanCollectionResponse$Outbound;
+}
+
+export function generatePostmanCollectionResponseToJSON(
+  generatePostmanCollectionResponse: GeneratePostmanCollectionResponse,
+): string {
+  return JSON.stringify(
+    GeneratePostmanCollectionResponse$outboundSchema.parse(
+      generatePostmanCollectionResponse,
+    ),
+  );
+}
+
+export function generatePostmanCollectionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GeneratePostmanCollectionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GeneratePostmanCollectionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GeneratePostmanCollectionResponse' from JSON`,
+  );
 }

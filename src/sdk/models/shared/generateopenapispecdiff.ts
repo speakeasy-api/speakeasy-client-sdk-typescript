@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GenerateOpenApiSpecDiff = {
   currentSchema: string;
@@ -57,4 +60,22 @@ export namespace GenerateOpenApiSpecDiff$ {
   export const outboundSchema = GenerateOpenApiSpecDiff$outboundSchema;
   /** @deprecated use `GenerateOpenApiSpecDiff$Outbound` instead. */
   export type Outbound = GenerateOpenApiSpecDiff$Outbound;
+}
+
+export function generateOpenApiSpecDiffToJSON(
+  generateOpenApiSpecDiff: GenerateOpenApiSpecDiff,
+): string {
+  return JSON.stringify(
+    GenerateOpenApiSpecDiff$outboundSchema.parse(generateOpenApiSpecDiff),
+  );
+}
+
+export function generateOpenApiSpecDiffFromJSON(
+  jsonString: string,
+): SafeParseResult<GenerateOpenApiSpecDiff, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GenerateOpenApiSpecDiff$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GenerateOpenApiSpecDiff' from JSON`,
+  );
 }

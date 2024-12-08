@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 /**
@@ -64,6 +67,20 @@ export namespace QueryParamOp$ {
   export type Outbound = QueryParamOp$Outbound;
 }
 
+export function queryParamOpToJSON(queryParamOp: QueryParamOp): string {
+  return JSON.stringify(QueryParamOp$outboundSchema.parse(queryParamOp));
+}
+
+export function queryParamOpFromJSON(
+  jsonString: string,
+): SafeParseResult<QueryParamOp, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => QueryParamOp$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'QueryParamOp' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetApisRequest$inboundSchema: z.ZodType<
   GetApisRequest,
@@ -103,6 +120,20 @@ export namespace GetApisRequest$ {
   export type Outbound = GetApisRequest$Outbound;
 }
 
+export function getApisRequestToJSON(getApisRequest: GetApisRequest): string {
+  return JSON.stringify(GetApisRequest$outboundSchema.parse(getApisRequest));
+}
+
+export function getApisRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetApisRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetApisRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetApisRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetApisResponse$inboundSchema: z.ZodType<
   GetApisResponse,
@@ -133,4 +164,20 @@ export namespace GetApisResponse$ {
   export const outboundSchema = GetApisResponse$outboundSchema;
   /** @deprecated use `GetApisResponse$Outbound` instead. */
   export type Outbound = GetApisResponse$Outbound;
+}
+
+export function getApisResponseToJSON(
+  getApisResponse: GetApisResponse,
+): string {
+  return JSON.stringify(GetApisResponse$outboundSchema.parse(getApisResponse));
+}
+
+export function getApisResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetApisResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetApisResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetApisResponse' from JSON`,
+  );
 }

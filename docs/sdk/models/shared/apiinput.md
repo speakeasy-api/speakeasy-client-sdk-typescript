@@ -9,7 +9,8 @@ import { ApiInput } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/mod
 
 let value: ApiInput = {
   apiId: "<id>",
-  description: "amid gosh arraign barracks",
+  description:
+    "fabricate forenenst furthermore absentmindedly an divine with forgery",
   versionId: "<id>",
 };
 ```

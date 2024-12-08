@@ -14,26 +14,28 @@
 <!-- Start Summary [summary] -->
 ## Summary
 
-Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
+Speakeasy API: The Subscriptions API manages subscriptions for CLI and registry events
 
 For more information about the API: [The Speakeasy Platform Documentation](/docs)
 <!-- End Summary [summary] -->
 
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
+<!-- $toc-max-depth=2 -->
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Authentication](#authentication)
+  * [Retries](#retries)
+  * [Requirements](#requirements)
+  * [Standalone functions](#standalone-functions)
+  * [Global Parameters](#global-parameters)
+  * [File uploads](#file-uploads)
+  * [Debugging](#debugging)
 
-* [SDK Installation](#sdk-installation)
-* [Requirements](#requirements)
-* [SDK Example Usage](#sdk-example-usage)
-* [Available Resources and Operations](#available-resources-and-operations)
-* [Standalone functions](#standalone-functions)
-* [File uploads](#file-uploads)
-* [Retries](#retries)
-* [Error Handling](#error-handling)
-* [Server Selection](#server-selection)
-* [Custom HTTP Client](#custom-http-client)
-* [Authentication](#authentication)
-* [Debugging](#debugging)
 <!-- End Table of Contents [toc] -->
 
 <!-- Start SDK Installation [installation] -->
@@ -123,13 +125,16 @@ run();
 
 ### [artifacts](docs/sdks/artifacts/README.md)
 
+* [createRemoteSource](docs/sdks/artifacts/README.md#createremotesource) - Configure a new remote source
 * [getBlob](docs/sdks/artifacts/README.md#getblob) - Get blob for a particular digest
 * [getManifest](docs/sdks/artifacts/README.md#getmanifest) - Get manifest for a particular reference
 * [getNamespaces](docs/sdks/artifacts/README.md#getnamespaces) - Each namespace contains many revisions.
 * [getRevisions](docs/sdks/artifacts/README.md#getrevisions)
 * [getTags](docs/sdks/artifacts/README.md#gettags)
+* [listRemoteSources](docs/sdks/artifacts/README.md#listremotesources) - Get remote sources attached to a particular namespace
 * [postTags](docs/sdks/artifacts/README.md#posttags) - Add tags to an existing revision
 * [preflight](docs/sdks/artifacts/README.md#preflight) - Get access token for communicating with OCI distribution endpoints
+* [setVisibility](docs/sdks/artifacts/README.md#setvisibility) - Set visibility of a namespace with an existing metadata entry
 
 ### [auth](docs/sdks/auth/README.md)
 
@@ -161,6 +166,8 @@ run();
 * [configureMintlifyRepo](docs/sdks/github/README.md#configuremintlifyrepo)
 * [configureTarget](docs/sdks/github/README.md#configuretarget)
 * [getAction](docs/sdks/github/README.md#getaction)
+* [getSetup](docs/sdks/github/README.md#getsetup)
+* [linkGithub](docs/sdks/github/README.md#linkgithub)
 * [storePublishingSecrets](docs/sdks/github/README.md#storepublishingsecrets)
 * [triggerAction](docs/sdks/github/README.md#triggeraction)
 
@@ -205,10 +212,21 @@ run();
 
 * [create](docs/sdks/shorturls/README.md#create) - Shorten a URL.
 
+### [Speakeasy SDK](docs/sdks/speakeasy/README.md)
+
+* [generateCodeSamplePreview](docs/sdks/speakeasy/README.md#generatecodesamplepreview) - Generate Code Sample previews from a file and configuration parameters.
+* [generateCodeSamplePreviewAsync](docs/sdks/speakeasy/README.md#generatecodesamplepreviewasync) - Initiate asynchronous Code Sample preview generation from a file and configuration parameters, receiving an async JobID response for polling.
+* [getCodeSamplePreviewAsync](docs/sdks/speakeasy/README.md#getcodesamplepreviewasync) - Poll for the result of an asynchronous Code Sample preview generation.
+
+### [subscriptions](docs/sdks/subscriptions/README.md)
+
+* [createSubscription](docs/sdks/subscriptions/README.md#createsubscription) - Create Subscription
+* [listRegistrySubscriptions](docs/sdks/subscriptions/README.md#listregistrysubscriptions) - List Subscriptions
 
 ### [suggest](docs/sdks/suggest/README.md)
 
 * [suggest](docs/sdks/suggest/README.md#suggest) - Generate suggestions for improving an OpenAPI document.
+* [suggestItems](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 * [suggestOpenAPI](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 * [suggestOpenAPIRegistry](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
 
@@ -253,15 +271,16 @@ If a HTTP request fails, an operation my also throw an error from the `sdk/model
 | InvalidRequestError                                  | Any input used to create a request is invalid        |
 | UnexpectedClientError                                | Unrecognised or unexpected error                     |
 
-In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `deleteApi` method may throw the following errors:
+In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `generateCodeSamplePreview` method may throw the following errors:
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type      | Status Code | Content Type |
+| --------------- | ----------- | ------------ |
+| errors.SDKError | 4XX, 5XX    | \*/\*        |
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { SDKValidationError } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors";
+import { openAsBlob } from "node:fs";
 
 const speakeasy = new Speakeasy({
   security: {
@@ -272,9 +291,12 @@ const speakeasy = new Speakeasy({
 async function run() {
   let result;
   try {
-    result = await speakeasy.apis.deleteApi({
-      apiID: "<id>",
-      versionID: "<id>",
+    result = await speakeasy.generateCodeSamplePreview({
+      languages: [
+        "<value>",
+        "<value>",
+      ],
+      schemaFile: await openAsBlob("example.file"),
     });
 
     // Handle the result
@@ -309,14 +331,17 @@ Validation errors can also occur when either method arguments or data returned f
 
 ### Select Server by Name
 
-You can override the default server globally by passing a server name to the `server` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name | Server | Variables |
-| ----- | ------ | --------- |
-| `prod` | `https://api.prod.speakeasyapi.dev` | None |
+| Name   | Server                              |
+| ------ | ----------------------------------- |
+| `prod` | `https://api.prod.speakeasyapi.dev` |
+
+#### Example
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import { openAsBlob } from "node:fs";
 
 const speakeasy = new Speakeasy({
   server: "prod",
@@ -326,9 +351,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
+  const result = await speakeasy.generateCodeSamplePreview({
+    languages: [
+      "<value>",
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
   });
 
   // Handle the result
@@ -339,13 +367,12 @@ run();
 
 ```
 
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `serverURL` optional parameter when initializing the SDK client instance. For example:
-
+The default server can also be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import { openAsBlob } from "node:fs";
 
 const speakeasy = new Speakeasy({
   serverURL: "https://api.prod.speakeasyapi.dev",
@@ -355,9 +382,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
+  const result = await speakeasy.generateCodeSamplePreview({
+    languages: [
+      "<value>",
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
   });
 
   // Handle the result
@@ -429,15 +459,16 @@ const sdk = new Speakeasy({ httpClient });
 
 This SDK supports the following security schemes globally:
 
-| Name                  | Type                  | Scheme                |
-| --------------------- | --------------------- | --------------------- |
-| `apiKey`              | apiKey                | API key               |
-| `bearer`              | http                  | HTTP Bearer           |
-| `workspaceIdentifier` | apiKey                | API key               |
+| Name                  | Type   | Scheme      |
+| --------------------- | ------ | ----------- |
+| `apiKey`              | apiKey | API key     |
+| `bearer`              | http   | HTTP Bearer |
+| `workspaceIdentifier` | apiKey | API key     |
 
 You can set the security parameters through the `security` optional parameter when initializing the SDK client instance. The selected scheme will be used by default to authenticate with the API for all operations that support it. For example:
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import { openAsBlob } from "node:fs";
 
 const speakeasy = new Speakeasy({
   security: {
@@ -446,9 +477,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
+  const result = await speakeasy.generateCodeSamplePreview({
+    languages: [
+      "<value>",
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
   });
 
   // Handle the result
@@ -468,6 +502,7 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import { openAsBlob } from "node:fs";
 
 const speakeasy = new Speakeasy({
   security: {
@@ -476,9 +511,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
+  const result = await speakeasy.generateCodeSamplePreview({
+    languages: [
+      "<value>",
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
   }, {
     retries: {
       strategy: "backoff",
@@ -503,6 +541,7 @@ run();
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+import { openAsBlob } from "node:fs";
 
 const speakeasy = new Speakeasy({
   retryConfig: {
@@ -521,9 +560,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
+  const result = await speakeasy.generateCodeSamplePreview({
+    languages: [
+      "<value>",
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
   });
 
   // Handle the result
@@ -570,13 +612,16 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`apisGetAllApiVersions`](docs/sdks/apis/README.md#getallapiversions) - Get all Api versions for a particular ApiEndpoint.
 - [`apisGetApis`](docs/sdks/apis/README.md#getapis) - Get a list of Apis for a given workspace
 - [`apisUpsertApi`](docs/sdks/apis/README.md#upsertapi) - Upsert an Api
+- [`artifactsCreateRemoteSource`](docs/sdks/artifacts/README.md#createremotesource) - Configure a new remote source
 - [`artifactsGetBlob`](docs/sdks/artifacts/README.md#getblob) - Get blob for a particular digest
 - [`artifactsGetManifest`](docs/sdks/artifacts/README.md#getmanifest) - Get manifest for a particular reference
 - [`artifactsGetNamespaces`](docs/sdks/artifacts/README.md#getnamespaces) - Each namespace contains many revisions.
 - [`artifactsGetRevisions`](docs/sdks/artifacts/README.md#getrevisions)
 - [`artifactsGetTags`](docs/sdks/artifacts/README.md#gettags)
+- [`artifactsListRemoteSources`](docs/sdks/artifacts/README.md#listremotesources) - Get remote sources attached to a particular namespace
 - [`artifactsPostTags`](docs/sdks/artifacts/README.md#posttags) - Add tags to an existing revision
 - [`artifactsPreflight`](docs/sdks/artifacts/README.md#preflight) - Get access token for communicating with OCI distribution endpoints
+- [`artifactsSetVisibility`](docs/sdks/artifacts/README.md#setvisibility) - Set visibility of a namespace with an existing metadata entry
 - [`authGetAccess`](docs/sdks/auth/README.md#getaccess) - Get access allowances for a particular workspace
 - [`authGetAccessToken`](docs/sdks/auth/README.md#getaccesstoken) - Get or refresh an access token for the current workspace.
 - [`authGetUser`](docs/sdks/auth/README.md#getuser) - Get information about the current user.
@@ -589,6 +634,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`eventsGetTargetsDeprecated`](docs/sdks/events/README.md#gettargetsdeprecated) - Load targets for a particular workspace
 - [`eventsPost`](docs/sdks/events/README.md#post) - Post events for a specific workspace
 - [`eventsSearch`](docs/sdks/events/README.md#search) - Search events for a particular workspace by any field
+- [`generateCodeSamplePreview`](docs/sdks/speakeasy/README.md#generatecodesamplepreview) - Generate Code Sample previews from a file and configuration parameters.
+- [`generateCodeSamplePreviewAsync`](docs/sdks/speakeasy/README.md#generatecodesamplepreviewasync) - Initiate asynchronous Code Sample preview generation from a file and configuration parameters, receiving an async JobID response for polling.
+- [`getCodeSamplePreviewAsync`](docs/sdks/speakeasy/README.md#getcodesamplepreviewasync) - Poll for the result of an asynchronous Code Sample preview generation.
 - [`githubCheckAccess`](docs/sdks/github/README.md#checkaccess)
 - [`githubCheckPublishingPRs`](docs/sdks/github/README.md#checkpublishingprs)
 - [`githubCheckPublishingSecrets`](docs/sdks/github/README.md#checkpublishingsecrets)
@@ -596,6 +644,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`githubConfigureMintlifyRepo`](docs/sdks/github/README.md#configuremintlifyrepo)
 - [`githubConfigureTarget`](docs/sdks/github/README.md#configuretarget)
 - [`githubGetAction`](docs/sdks/github/README.md#getaction)
+- [`githubGetSetup`](docs/sdks/github/README.md#getsetup)
+- [`githubLinkGithub`](docs/sdks/github/README.md#linkgithub)
 - [`githubStorePublishingSecrets`](docs/sdks/github/README.md#storepublishingsecrets)
 - [`githubTriggerAction`](docs/sdks/github/README.md#triggeraction)
 - [`metadataDeleteVersionMetadata`](docs/sdks/metadata/README.md#deleteversionmetadata) - Delete metadata for a particular apiID and versionID.
@@ -621,7 +671,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`schemasGetSchemas`](docs/sdks/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
 - [`schemasRegisterSchema`](docs/sdks/schemas/README.md#registerschema) - Register a schema.
 - [`shortURLsCreate`](docs/sdks/shorturls/README.md#create) - Shorten a URL.
+- [`subscriptionsCreateSubscription`](docs/sdks/subscriptions/README.md#createsubscription) - Create Subscription
+- [`subscriptionsListRegistrySubscriptions`](docs/sdks/subscriptions/README.md#listregistrysubscriptions) - List Subscriptions
 - [`suggestSuggest`](docs/sdks/suggest/README.md#suggest) - Generate suggestions for improving an OpenAPI document.
+- [`suggestSuggestItems`](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 - [`suggestSuggestOpenAPI`](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 - [`suggestSuggestOpenAPIRegistry`](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
 - [`workspacesCreate`](docs/sdks/workspaces/README.md#create) - Create a workspace
@@ -641,6 +694,43 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
+
+<!-- Start Global Parameters [global-parameters] -->
+## Global Parameters
+
+A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
+
+For example, you can set `workspace_id` to `"<id>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getAccessToken`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+
+
+### Available Globals
+
+The following global parameter is available.
+
+| Name        | Type   | Description                |
+| ----------- | ------ | -------------------------- |
+| workspaceId | string | The workspaceId parameter. |
+
+### Example
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+const speakeasy = new Speakeasy();
+
+async function run() {
+  const result = await speakeasy.auth.getAccessToken({
+    workspaceId: "<id>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End Global Parameters [global-parameters] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -667,12 +757,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.schemas.registerSchema({
-    apiID: "<id>",
-    versionID: "<id>",
-    requestBody: {
-      file: await openAsBlob("example.file"),
-    },
+  const result = await speakeasy.generateCodeSamplePreview({
+    languages: [
+      "<value>",
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
   });
 
   // Handle the result

@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 102,
+  statusCode: 506,
 };
 ```
 
@@ -17,8 +17,9 @@ const value: shared.ErrorT = {
 ```typescript
 const value: shared.Schema = {
   apiId: "<id>",
-  createdAt: new Date("2022-01-03T06:18:29.426Z"),
-  description: "graceful grouper at bah",
+  createdAt: new Date("2022-05-27T06:34:13.913Z"),
+  description:
+    "wiggly huzzah after what gah eek flight grouper uniform industrialize",
   revisionId: "<id>",
   versionId: "<id>",
   workspaceId: "<id>",

@@ -33,6 +33,7 @@ async function run() {
     id: "<id>",
     name: "<value>",
     slug: "<value>",
+    ssoActivated: true,
     telemetryDisabled: true,
     updatedAt: new Date("2022-05-28T06:20:22.766Z"),
   });
@@ -67,6 +68,7 @@ async function run() {
     id: "<id>",
     name: "<value>",
     slug: "<value>",
+    ssoActivated: true,
     telemetryDisabled: true,
     updatedAt: new Date("2022-05-28T06:20:22.766Z"),
   });

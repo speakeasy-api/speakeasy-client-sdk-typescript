@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 423,
+  statusCode: 501,
 };
 ```
 
@@ -16,9 +16,9 @@ const value: shared.ErrorT = {
 
 ```typescript
 const value: shared.UnboundedRequest = {
-  createdAt: new Date("2024-05-19T17:59:45.777Z"),
+  createdAt: new Date("2023-09-06T09:53:09.610Z"),
   har: "<value>",
-  harSizeBytes: 300651,
+  harSizeBytes: 773456,
   requestId: "<id>",
   workspaceId: "<id>",
 };

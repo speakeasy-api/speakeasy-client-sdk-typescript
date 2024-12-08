@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 404,
+  statusCode: 306,
 };
 ```
 
@@ -18,9 +18,8 @@ const value: shared.ErrorT = {
 const value: shared.Schema[] = [
   {
     apiId: "<id>",
-    createdAt: new Date("2023-04-12T21:34:00.499Z"),
-    description:
-      "beneath frankly for unwelcome aftermath grown whereas merit loosely fumigate",
+    createdAt: new Date("2024-11-16T18:43:16.465Z"),
+    description: "heighten mortally amid",
     revisionId: "<id>",
     versionId: "<id>",
     workspaceId: "<id>",

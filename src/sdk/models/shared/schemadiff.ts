@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ValueChange = {
   /**
@@ -83,6 +86,20 @@ export namespace ValueChange$ {
   export type Outbound = ValueChange$Outbound;
 }
 
+export function valueChangeToJSON(valueChange: ValueChange): string {
+  return JSON.stringify(ValueChange$outboundSchema.parse(valueChange));
+}
+
+export function valueChangeFromJSON(
+  jsonString: string,
+): SafeParseResult<ValueChange, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ValueChange$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ValueChange' from JSON`,
+  );
+}
+
 /** @internal */
 export const SchemaDiff$inboundSchema: z.ZodType<
   SchemaDiff,
@@ -123,4 +140,18 @@ export namespace SchemaDiff$ {
   export const outboundSchema = SchemaDiff$outboundSchema;
   /** @deprecated use `SchemaDiff$Outbound` instead. */
   export type Outbound = SchemaDiff$Outbound;
+}
+
+export function schemaDiffToJSON(schemaDiff: SchemaDiff): string {
+  return JSON.stringify(SchemaDiff$outboundSchema.parse(schemaDiff));
+}
+
+export function schemaDiffFromJSON(
+  jsonString: string,
+): SafeParseResult<SchemaDiff, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SchemaDiff$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SchemaDiff' from JSON`,
+  );
 }

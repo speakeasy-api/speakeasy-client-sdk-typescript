@@ -9,8 +9,8 @@ import { Schema } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/model
 
 let value: Schema = {
   apiId: "<id>",
-  createdAt: new Date("2024-11-01T00:46:16.847Z"),
-  description: "unless lest reward firsthand mmm concerning ceramics instantly",
+  createdAt: new Date("2023-02-21T08:43:45.283Z"),
+  description: "while sermon huzzah close convection aha shark",
   revisionId: "<id>",
   versionId: "<id>",
   workspaceId: "<id>",

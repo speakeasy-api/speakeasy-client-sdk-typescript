@@ -16,7 +16,7 @@ const value: shared.EmbedAccessTokenResponse = {
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 100,
+  statusCode: 406,
 };
 ```
 

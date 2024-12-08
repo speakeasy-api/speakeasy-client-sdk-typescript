@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * An Api is representation of a API (a collection of API Endpoints) within the Speakeasy Platform.
@@ -82,4 +85,18 @@ export namespace ApiInput$ {
   export const outboundSchema = ApiInput$outboundSchema;
   /** @deprecated use `ApiInput$Outbound` instead. */
   export type Outbound = ApiInput$Outbound;
+}
+
+export function apiInputToJSON(apiInput: ApiInput): string {
+  return JSON.stringify(ApiInput$outboundSchema.parse(apiInput));
+}
+
+export function apiInputFromJSON(
+  jsonString: string,
+): SafeParseResult<ApiInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApiInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApiInput' from JSON`,
+  );
 }

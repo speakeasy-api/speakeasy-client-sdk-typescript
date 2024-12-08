@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * An EmbedAccessTokenResponse contains a token that can be used to embed a Speakeasy dashboard.
@@ -54,4 +57,22 @@ export namespace EmbedAccessTokenResponse$ {
   export const outboundSchema = EmbedAccessTokenResponse$outboundSchema;
   /** @deprecated use `EmbedAccessTokenResponse$Outbound` instead. */
   export type Outbound = EmbedAccessTokenResponse$Outbound;
+}
+
+export function embedAccessTokenResponseToJSON(
+  embedAccessTokenResponse: EmbedAccessTokenResponse,
+): string {
+  return JSON.stringify(
+    EmbedAccessTokenResponse$outboundSchema.parse(embedAccessTokenResponse),
+  );
+}
+
+export function embedAccessTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<EmbedAccessTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EmbedAccessTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmbedAccessTokenResponse' from JSON`,
+  );
 }

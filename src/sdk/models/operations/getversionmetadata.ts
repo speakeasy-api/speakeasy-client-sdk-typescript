@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetVersionMetadataRequest = {
@@ -59,6 +62,24 @@ export namespace GetVersionMetadataRequest$ {
   export type Outbound = GetVersionMetadataRequest$Outbound;
 }
 
+export function getVersionMetadataRequestToJSON(
+  getVersionMetadataRequest: GetVersionMetadataRequest,
+): string {
+  return JSON.stringify(
+    GetVersionMetadataRequest$outboundSchema.parse(getVersionMetadataRequest),
+  );
+}
+
+export function getVersionMetadataRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetVersionMetadataRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetVersionMetadataRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetVersionMetadataRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetVersionMetadataResponse$inboundSchema: z.ZodType<
   GetVersionMetadataResponse,
@@ -95,4 +116,22 @@ export namespace GetVersionMetadataResponse$ {
   export const outboundSchema = GetVersionMetadataResponse$outboundSchema;
   /** @deprecated use `GetVersionMetadataResponse$Outbound` instead. */
   export type Outbound = GetVersionMetadataResponse$Outbound;
+}
+
+export function getVersionMetadataResponseToJSON(
+  getVersionMetadataResponse: GetVersionMetadataResponse,
+): string {
+  return JSON.stringify(
+    GetVersionMetadataResponse$outboundSchema.parse(getVersionMetadataResponse),
+  );
+}
+
+export function getVersionMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetVersionMetadataResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetVersionMetadataResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetVersionMetadataResponse' from JSON`,
+  );
 }

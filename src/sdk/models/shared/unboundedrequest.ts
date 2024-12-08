@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * An UnboundedRequest represents the HAR content capture by Speakeasy when logging a request.
@@ -91,4 +94,22 @@ export namespace UnboundedRequest$ {
   export const outboundSchema = UnboundedRequest$outboundSchema;
   /** @deprecated use `UnboundedRequest$Outbound` instead. */
   export type Outbound = UnboundedRequest$Outbound;
+}
+
+export function unboundedRequestToJSON(
+  unboundedRequest: UnboundedRequest,
+): string {
+  return JSON.stringify(
+    UnboundedRequest$outboundSchema.parse(unboundedRequest),
+  );
+}
+
+export function unboundedRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UnboundedRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UnboundedRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UnboundedRequest' from JSON`,
+  );
 }

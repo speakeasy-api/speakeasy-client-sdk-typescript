@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type SuggestRequest = {
@@ -61,4 +64,18 @@ export namespace SuggestRequest$ {
   export const outboundSchema = SuggestRequest$outboundSchema;
   /** @deprecated use `SuggestRequest$Outbound` instead. */
   export type Outbound = SuggestRequest$Outbound;
+}
+
+export function suggestRequestToJSON(suggestRequest: SuggestRequest): string {
+  return JSON.stringify(SuggestRequest$outboundSchema.parse(suggestRequest));
+}
+
+export function suggestRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<SuggestRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SuggestRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SuggestRequest' from JSON`,
+  );
 }

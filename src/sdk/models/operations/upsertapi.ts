@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type UpsertApiRequest = {
@@ -66,6 +69,24 @@ export namespace UpsertApiRequest$ {
   export type Outbound = UpsertApiRequest$Outbound;
 }
 
+export function upsertApiRequestToJSON(
+  upsertApiRequest: UpsertApiRequest,
+): string {
+  return JSON.stringify(
+    UpsertApiRequest$outboundSchema.parse(upsertApiRequest),
+  );
+}
+
+export function upsertApiRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpsertApiRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpsertApiRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpsertApiRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpsertApiResponse$inboundSchema: z.ZodType<
   UpsertApiResponse,
@@ -96,4 +117,22 @@ export namespace UpsertApiResponse$ {
   export const outboundSchema = UpsertApiResponse$outboundSchema;
   /** @deprecated use `UpsertApiResponse$Outbound` instead. */
   export type Outbound = UpsertApiResponse$Outbound;
+}
+
+export function upsertApiResponseToJSON(
+  upsertApiResponse: UpsertApiResponse,
+): string {
+  return JSON.stringify(
+    UpsertApiResponse$outboundSchema.parse(upsertApiResponse),
+  );
+}
+
+export function upsertApiResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpsertApiResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpsertApiResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpsertApiResponse' from JSON`,
+  );
 }

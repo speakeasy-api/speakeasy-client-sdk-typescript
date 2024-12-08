@@ -131,13 +131,13 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.createToken({
-    workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
-      createdAt: "<value>",
+      createdAt: new Date("<value>"),
       id: "<id>",
       key: "<key>",
       name: "<value>",
+      workspaceId: "<id>",
     },
   });
 
@@ -166,13 +166,13 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesCreateToken(speakeasy, {
-    workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
-      createdAt: "<value>",
+      createdAt: new Date("<value>"),
       id: "<id>",
       key: "<key>",
       name: "<value>",
+      workspaceId: "<id>",
     },
   });
 
@@ -225,7 +225,6 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.deleteToken({
-    workspaceId: "<id>",
     tokenID: "<id>",
   });
 
@@ -254,7 +253,6 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesDeleteToken(speakeasy, {
-    workspaceId: "<id>",
     tokenID: "<id>",
   });
 
@@ -456,9 +454,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getByID({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getByID({});
 
   // Handle the result
   console.log(result);
@@ -484,9 +480,7 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await workspacesGetByID(speakeasy, {
-    workspaceId: "<id>",
-  });
+  const res = await workspacesGetByID(speakeasy, {});
 
   if (!res.ok) {
     throw res.error;
@@ -536,9 +530,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getFeatureFlags({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getFeatureFlags({});
 
   // Handle the result
   console.log(result);
@@ -564,9 +556,7 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await workspacesGetFeatureFlags(speakeasy, {
-    workspaceId: "<id>",
-  });
+  const res = await workspacesGetFeatureFlags(speakeasy, {});
 
   if (!res.ok) {
     throw res.error;
@@ -616,9 +606,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getSettings({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getSettings({});
 
   // Handle the result
   console.log(result);
@@ -644,9 +632,7 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await workspacesGetSettings(speakeasy, {
-    workspaceId: "<id>",
-  });
+  const res = await workspacesGetSettings(speakeasy, {});
 
   if (!res.ok) {
     throw res.error;
@@ -696,9 +682,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getTeam({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getTeam({});
 
   // Handle the result
   console.log(result);
@@ -724,9 +708,7 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await workspacesGetTeam(speakeasy, {
-    workspaceId: "<id>",
-  });
+  const res = await workspacesGetTeam(speakeasy, {});
 
   if (!res.ok) {
     throw res.error;
@@ -776,9 +758,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getTokens({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getTokens({});
 
   // Handle the result
   console.log(result);
@@ -804,9 +784,7 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await workspacesGetTokens(speakeasy, {
-    workspaceId: "<id>",
-  });
+  const res = await workspacesGetTokens(speakeasy, {});
 
   if (!res.ok) {
     throw res.error;
@@ -857,7 +835,6 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.grantAccess({
-    workspaceId: "<id>",
     email: "Lucinda.Batz8@hotmail.com",
   });
 
@@ -886,7 +863,6 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesGrantAccess(speakeasy, {
-    workspaceId: "<id>",
     email: "Lucinda.Batz8@hotmail.com",
   });
 
@@ -939,7 +915,6 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.revokeAccess({
-    workspaceId: "<id>",
     userId: "<id>",
   });
 
@@ -968,7 +943,6 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesRevokeAccess(speakeasy, {
-    workspaceId: "<id>",
     userId: "<id>",
   });
 
@@ -1021,7 +995,6 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.update({
-    workspaceId: "<id>",
     workspace: {
       createdAt: new Date("2024-07-28T19:04:48.565Z"),
       id: "<id>",
@@ -1059,7 +1032,6 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesUpdate(speakeasy, {
-    workspaceId: "<id>",
     workspace: {
       createdAt: new Date("2024-07-28T19:04:48.565Z"),
       id: "<id>",
@@ -1121,8 +1093,10 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.updateSettings({
-    workspaceId: "<id>",
     workspaceSettings: {
+      createdAt: new Date("2022-07-05T11:43:28.305Z"),
+      updatedAt: new Date("2023-05-15T05:39:21.874Z"),
+      webhookUrl: "https://grown-pharmacopoeia.net",
       workspaceId: "<id>",
     },
   });
@@ -1152,8 +1126,10 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesUpdateSettings(speakeasy, {
-    workspaceId: "<id>",
     workspaceSettings: {
+      createdAt: new Date("2022-07-05T11:43:28.305Z"),
+      updatedAt: new Date("2023-05-15T05:39:21.874Z"),
+      webhookUrl: "https://grown-pharmacopoeia.net",
       workspaceId: "<id>",
     },
   });

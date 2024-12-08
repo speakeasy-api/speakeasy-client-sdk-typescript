@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 /**
@@ -61,6 +64,20 @@ export namespace Op$ {
   export type Outbound = Op$Outbound;
 }
 
+export function opToJSON(op: Op): string {
+  return JSON.stringify(Op$outboundSchema.parse(op));
+}
+
+export function opFromJSON(
+  jsonString: string,
+): SafeParseResult<Op, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Op$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Op' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetAllApiVersionsRequest$inboundSchema: z.ZodType<
   GetAllApiVersionsRequest,
@@ -103,6 +120,24 @@ export namespace GetAllApiVersionsRequest$ {
   export type Outbound = GetAllApiVersionsRequest$Outbound;
 }
 
+export function getAllApiVersionsRequestToJSON(
+  getAllApiVersionsRequest: GetAllApiVersionsRequest,
+): string {
+  return JSON.stringify(
+    GetAllApiVersionsRequest$outboundSchema.parse(getAllApiVersionsRequest),
+  );
+}
+
+export function getAllApiVersionsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllApiVersionsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllApiVersionsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllApiVersionsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetAllApiVersionsResponse$inboundSchema: z.ZodType<
   GetAllApiVersionsResponse,
@@ -133,4 +168,22 @@ export namespace GetAllApiVersionsResponse$ {
   export const outboundSchema = GetAllApiVersionsResponse$outboundSchema;
   /** @deprecated use `GetAllApiVersionsResponse$Outbound` instead. */
   export type Outbound = GetAllApiVersionsResponse$Outbound;
+}
+
+export function getAllApiVersionsResponseToJSON(
+  getAllApiVersionsResponse: GetAllApiVersionsResponse,
+): string {
+  return JSON.stringify(
+    GetAllApiVersionsResponse$outboundSchema.parse(getAllApiVersionsResponse),
+  );
+}
+
+export function getAllApiVersionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllApiVersionsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllApiVersionsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllApiVersionsResponse' from JSON`,
+  );
 }

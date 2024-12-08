@@ -5,7 +5,7 @@
 ```typescript
 import { SuggestRequestBodySuggestionType } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
-let value: SuggestRequestBodySuggestionType = "method-names";
+let value: SuggestRequestBodySuggestionType = "diagnostics-only";
 ```
 
 ## Values

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GenerateRequestPostmanCollectionRequest = {
@@ -54,6 +57,33 @@ export namespace GenerateRequestPostmanCollectionRequest$ {
   export type Outbound = GenerateRequestPostmanCollectionRequest$Outbound;
 }
 
+export function generateRequestPostmanCollectionRequestToJSON(
+  generateRequestPostmanCollectionRequest:
+    GenerateRequestPostmanCollectionRequest,
+): string {
+  return JSON.stringify(
+    GenerateRequestPostmanCollectionRequest$outboundSchema.parse(
+      generateRequestPostmanCollectionRequest,
+    ),
+  );
+}
+
+export function generateRequestPostmanCollectionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GenerateRequestPostmanCollectionRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GenerateRequestPostmanCollectionRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GenerateRequestPostmanCollectionRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GenerateRequestPostmanCollectionResponse$inboundSchema: z.ZodType<
   GenerateRequestPostmanCollectionResponse,
@@ -92,4 +122,31 @@ export namespace GenerateRequestPostmanCollectionResponse$ {
     GenerateRequestPostmanCollectionResponse$outboundSchema;
   /** @deprecated use `GenerateRequestPostmanCollectionResponse$Outbound` instead. */
   export type Outbound = GenerateRequestPostmanCollectionResponse$Outbound;
+}
+
+export function generateRequestPostmanCollectionResponseToJSON(
+  generateRequestPostmanCollectionResponse:
+    GenerateRequestPostmanCollectionResponse,
+): string {
+  return JSON.stringify(
+    GenerateRequestPostmanCollectionResponse$outboundSchema.parse(
+      generateRequestPostmanCollectionResponse,
+    ),
+  );
+}
+
+export function generateRequestPostmanCollectionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GenerateRequestPostmanCollectionResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GenerateRequestPostmanCollectionResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GenerateRequestPostmanCollectionResponse' from JSON`,
+  );
 }

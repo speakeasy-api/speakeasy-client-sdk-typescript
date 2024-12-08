@@ -10,15 +10,15 @@ const value: shared.BoundedRequest[] = [
   {
     apiEndpointId: "<id>",
     apiId: "<id>",
-    createdAt: new Date("2024-05-27T16:12:22.860Z"),
+    createdAt: new Date("2023-05-16T05:23:49.944Z"),
     customerId: "<id>",
-    latency: 548846,
+    latency: 153369,
     method: "<value>",
-    path: "/private/tmp",
-    requestFinishTime: new Date("2024-01-10T22:30:43.334Z"),
+    path: "/home",
+    requestFinishTime: new Date("2023-04-20T13:12:59.623Z"),
     requestId: "<id>",
-    requestStartTime: new Date("2022-01-24T09:49:07.665Z"),
-    status: 102316,
+    requestStartTime: new Date("2023-08-02T22:40:10.134Z"),
+    status: 349440,
     versionId: "<id>",
     workspaceId: "<id>",
   },
@@ -30,7 +30,7 @@ const value: shared.BoundedRequest[] = [
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 226,
+  statusCode: 423,
 };
 ```
 

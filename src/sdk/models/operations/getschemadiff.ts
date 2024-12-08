@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetSchemaDiffRequest = {
@@ -71,6 +74,24 @@ export namespace GetSchemaDiffRequest$ {
   export type Outbound = GetSchemaDiffRequest$Outbound;
 }
 
+export function getSchemaDiffRequestToJSON(
+  getSchemaDiffRequest: GetSchemaDiffRequest,
+): string {
+  return JSON.stringify(
+    GetSchemaDiffRequest$outboundSchema.parse(getSchemaDiffRequest),
+  );
+}
+
+export function getSchemaDiffRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetSchemaDiffRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetSchemaDiffRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetSchemaDiffRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetSchemaDiffResponse$inboundSchema: z.ZodType<
   GetSchemaDiffResponse,
@@ -101,4 +122,22 @@ export namespace GetSchemaDiffResponse$ {
   export const outboundSchema = GetSchemaDiffResponse$outboundSchema;
   /** @deprecated use `GetSchemaDiffResponse$Outbound` instead. */
   export type Outbound = GetSchemaDiffResponse$Outbound;
+}
+
+export function getSchemaDiffResponseToJSON(
+  getSchemaDiffResponse: GetSchemaDiffResponse,
+): string {
+  return JSON.stringify(
+    GetSchemaDiffResponse$outboundSchema.parse(getSchemaDiffResponse),
+  );
+}
+
+export function getSchemaDiffResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetSchemaDiffResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetSchemaDiffResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetSchemaDiffResponse' from JSON`,
+  );
 }

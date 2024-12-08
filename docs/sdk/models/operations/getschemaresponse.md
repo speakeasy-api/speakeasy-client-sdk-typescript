@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 429,
+  statusCode: 428,
 };
 ```
 
@@ -17,8 +17,8 @@ const value: shared.ErrorT = {
 ```typescript
 const value: shared.Schema = {
   apiId: "<id>",
-  createdAt: new Date("2023-07-29T22:28:30.659Z"),
-  description: "wisely yet likewise testing yet",
+  createdAt: new Date("2023-08-19T20:54:27.100Z"),
+  description: "against captain supposing fidget faithfully",
   revisionId: "<id>",
   versionId: "<id>",
   workspaceId: "<id>",

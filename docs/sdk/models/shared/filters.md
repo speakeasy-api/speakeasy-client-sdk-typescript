@@ -15,8 +15,8 @@ let value: Filters = {
       value: "<value>",
     },
   ],
-  limit: 981830,
-  offset: 478370,
+  limit: 845154,
+  offset: 382764,
   operator: "<value>",
 };
 ```

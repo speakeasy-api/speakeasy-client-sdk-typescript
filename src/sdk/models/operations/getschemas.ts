@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetSchemasRequest = {
@@ -57,6 +60,24 @@ export namespace GetSchemasRequest$ {
   export type Outbound = GetSchemasRequest$Outbound;
 }
 
+export function getSchemasRequestToJSON(
+  getSchemasRequest: GetSchemasRequest,
+): string {
+  return JSON.stringify(
+    GetSchemasRequest$outboundSchema.parse(getSchemasRequest),
+  );
+}
+
+export function getSchemasRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetSchemasRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetSchemasRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetSchemasRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetSchemasResponse$inboundSchema: z.ZodType<
   GetSchemasResponse,
@@ -93,4 +114,22 @@ export namespace GetSchemasResponse$ {
   export const outboundSchema = GetSchemasResponse$outboundSchema;
   /** @deprecated use `GetSchemasResponse$Outbound` instead. */
   export type Outbound = GetSchemasResponse$Outbound;
+}
+
+export function getSchemasResponseToJSON(
+  getSchemasResponse: GetSchemasResponse,
+): string {
+  return JSON.stringify(
+    GetSchemasResponse$outboundSchema.parse(getSchemasResponse),
+  );
+}
+
+export function getSchemasResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetSchemasResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetSchemasResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetSchemasResponse' from JSON`,
+  );
 }

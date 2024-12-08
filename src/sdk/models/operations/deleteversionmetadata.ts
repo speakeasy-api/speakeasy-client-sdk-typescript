@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type DeleteVersionMetadataRequest = {
   /**
@@ -66,4 +69,24 @@ export namespace DeleteVersionMetadataRequest$ {
   export const outboundSchema = DeleteVersionMetadataRequest$outboundSchema;
   /** @deprecated use `DeleteVersionMetadataRequest$Outbound` instead. */
   export type Outbound = DeleteVersionMetadataRequest$Outbound;
+}
+
+export function deleteVersionMetadataRequestToJSON(
+  deleteVersionMetadataRequest: DeleteVersionMetadataRequest,
+): string {
+  return JSON.stringify(
+    DeleteVersionMetadataRequest$outboundSchema.parse(
+      deleteVersionMetadataRequest,
+    ),
+  );
+}
+
+export function deleteVersionMetadataRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteVersionMetadataRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteVersionMetadataRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteVersionMetadataRequest' from JSON`,
+  );
 }

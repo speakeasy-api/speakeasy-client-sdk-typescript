@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A representation of an embed token granted for working with Speakeasy components.
@@ -134,4 +137,18 @@ export namespace EmbedToken$ {
   export const outboundSchema = EmbedToken$outboundSchema;
   /** @deprecated use `EmbedToken$Outbound` instead. */
   export type Outbound = EmbedToken$Outbound;
+}
+
+export function embedTokenToJSON(embedToken: EmbedToken): string {
+  return JSON.stringify(EmbedToken$outboundSchema.parse(embedToken));
+}
+
+export function embedTokenFromJSON(
+  jsonString: string,
+): SafeParseResult<EmbedToken, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EmbedToken$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EmbedToken' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A set of keys and associated values, attached to a particular version of an Api.
@@ -66,4 +69,22 @@ export namespace VersionMetadataInput$ {
   export const outboundSchema = VersionMetadataInput$outboundSchema;
   /** @deprecated use `VersionMetadataInput$Outbound` instead. */
   export type Outbound = VersionMetadataInput$Outbound;
+}
+
+export function versionMetadataInputToJSON(
+  versionMetadataInput: VersionMetadataInput,
+): string {
+  return JSON.stringify(
+    VersionMetadataInput$outboundSchema.parse(versionMetadataInput),
+  );
+}
+
+export function versionMetadataInputFromJSON(
+  jsonString: string,
+): SafeParseResult<VersionMetadataInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => VersionMetadataInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'VersionMetadataInput' from JSON`,
+  );
 }

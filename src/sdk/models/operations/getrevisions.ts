@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetRevisionsRequest = {
@@ -65,6 +68,24 @@ export namespace GetRevisionsRequest$ {
   export type Outbound = GetRevisionsRequest$Outbound;
 }
 
+export function getRevisionsRequestToJSON(
+  getRevisionsRequest: GetRevisionsRequest,
+): string {
+  return JSON.stringify(
+    GetRevisionsRequest$outboundSchema.parse(getRevisionsRequest),
+  );
+}
+
+export function getRevisionsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetRevisionsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetRevisionsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetRevisionsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetRevisionsResponse$inboundSchema: z.ZodType<
   GetRevisionsResponse,
@@ -101,4 +122,22 @@ export namespace GetRevisionsResponse$ {
   export const outboundSchema = GetRevisionsResponse$outboundSchema;
   /** @deprecated use `GetRevisionsResponse$Outbound` instead. */
   export type Outbound = GetRevisionsResponse$Outbound;
+}
+
+export function getRevisionsResponseToJSON(
+  getRevisionsResponse: GetRevisionsResponse,
+): string {
+  return JSON.stringify(
+    GetRevisionsResponse$outboundSchema.parse(getRevisionsResponse),
+  );
+}
+
+export function getRevisionsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetRevisionsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetRevisionsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetRevisionsResponse' from JSON`,
+  );
 }

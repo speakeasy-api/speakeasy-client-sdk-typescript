@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetAllForVersionApiEndpointsRequest = {
@@ -61,6 +64,27 @@ export namespace GetAllForVersionApiEndpointsRequest$ {
   export type Outbound = GetAllForVersionApiEndpointsRequest$Outbound;
 }
 
+export function getAllForVersionApiEndpointsRequestToJSON(
+  getAllForVersionApiEndpointsRequest: GetAllForVersionApiEndpointsRequest,
+): string {
+  return JSON.stringify(
+    GetAllForVersionApiEndpointsRequest$outboundSchema.parse(
+      getAllForVersionApiEndpointsRequest,
+    ),
+  );
+}
+
+export function getAllForVersionApiEndpointsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllForVersionApiEndpointsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllForVersionApiEndpointsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllForVersionApiEndpointsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetAllForVersionApiEndpointsResponse$inboundSchema: z.ZodType<
   GetAllForVersionApiEndpointsResponse,
@@ -99,4 +123,25 @@ export namespace GetAllForVersionApiEndpointsResponse$ {
     GetAllForVersionApiEndpointsResponse$outboundSchema;
   /** @deprecated use `GetAllForVersionApiEndpointsResponse$Outbound` instead. */
   export type Outbound = GetAllForVersionApiEndpointsResponse$Outbound;
+}
+
+export function getAllForVersionApiEndpointsResponseToJSON(
+  getAllForVersionApiEndpointsResponse: GetAllForVersionApiEndpointsResponse,
+): string {
+  return JSON.stringify(
+    GetAllForVersionApiEndpointsResponse$outboundSchema.parse(
+      getAllForVersionApiEndpointsResponse,
+    ),
+  );
+}
+
+export function getAllForVersionApiEndpointsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllForVersionApiEndpointsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetAllForVersionApiEndpointsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllForVersionApiEndpointsResponse' from JSON`,
+  );
 }

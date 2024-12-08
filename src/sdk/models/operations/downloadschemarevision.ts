@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type DownloadSchemaRevisionRequest = {
@@ -67,6 +70,26 @@ export namespace DownloadSchemaRevisionRequest$ {
   export type Outbound = DownloadSchemaRevisionRequest$Outbound;
 }
 
+export function downloadSchemaRevisionRequestToJSON(
+  downloadSchemaRevisionRequest: DownloadSchemaRevisionRequest,
+): string {
+  return JSON.stringify(
+    DownloadSchemaRevisionRequest$outboundSchema.parse(
+      downloadSchemaRevisionRequest,
+    ),
+  );
+}
+
+export function downloadSchemaRevisionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DownloadSchemaRevisionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DownloadSchemaRevisionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DownloadSchemaRevisionRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const DownloadSchemaRevisionResponse$inboundSchema: z.ZodType<
   DownloadSchemaRevisionResponse,
@@ -106,4 +129,24 @@ export namespace DownloadSchemaRevisionResponse$ {
   export const outboundSchema = DownloadSchemaRevisionResponse$outboundSchema;
   /** @deprecated use `DownloadSchemaRevisionResponse$Outbound` instead. */
   export type Outbound = DownloadSchemaRevisionResponse$Outbound;
+}
+
+export function downloadSchemaRevisionResponseToJSON(
+  downloadSchemaRevisionResponse: DownloadSchemaRevisionResponse,
+): string {
+  return JSON.stringify(
+    DownloadSchemaRevisionResponse$outboundSchema.parse(
+      downloadSchemaRevisionResponse,
+    ),
+  );
+}
+
+export function downloadSchemaRevisionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DownloadSchemaRevisionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DownloadSchemaRevisionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DownloadSchemaRevisionResponse' from JSON`,
+  );
 }
