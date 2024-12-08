@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Filter,
   Filter$inboundSchema,
@@ -72,4 +75,18 @@ export namespace Filters$ {
   export const outboundSchema = Filters$outboundSchema;
   /** @deprecated use `Filters$Outbound` instead. */
   export type Outbound = Filters$Outbound;
+}
+
+export function filtersToJSON(filters: Filters): string {
+  return JSON.stringify(Filters$outboundSchema.parse(filters));
+}
+
+export function filtersFromJSON(
+  jsonString: string,
+): SafeParseResult<Filters, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Filters$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Filters' from JSON`,
+  );
 }

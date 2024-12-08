@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetAllApiEndpointsRequest = {
@@ -52,6 +55,24 @@ export namespace GetAllApiEndpointsRequest$ {
   export type Outbound = GetAllApiEndpointsRequest$Outbound;
 }
 
+export function getAllApiEndpointsRequestToJSON(
+  getAllApiEndpointsRequest: GetAllApiEndpointsRequest,
+): string {
+  return JSON.stringify(
+    GetAllApiEndpointsRequest$outboundSchema.parse(getAllApiEndpointsRequest),
+  );
+}
+
+export function getAllApiEndpointsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllApiEndpointsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllApiEndpointsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllApiEndpointsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetAllApiEndpointsResponse$inboundSchema: z.ZodType<
   GetAllApiEndpointsResponse,
@@ -88,4 +109,22 @@ export namespace GetAllApiEndpointsResponse$ {
   export const outboundSchema = GetAllApiEndpointsResponse$outboundSchema;
   /** @deprecated use `GetAllApiEndpointsResponse$Outbound` instead. */
   export type Outbound = GetAllApiEndpointsResponse$Outbound;
+}
+
+export function getAllApiEndpointsResponseToJSON(
+  getAllApiEndpointsResponse: GetAllApiEndpointsResponse,
+): string {
+  return JSON.stringify(
+    GetAllApiEndpointsResponse$outboundSchema.parse(getAllApiEndpointsResponse),
+  );
+}
+
+export function getAllApiEndpointsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAllApiEndpointsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAllApiEndpointsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAllApiEndpointsResponse' from JSON`,
+  );
 }

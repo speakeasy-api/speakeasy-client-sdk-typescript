@@ -9,7 +9,7 @@ import { VersionMetadata } from "@speakeasy-api/speakeasy-client-sdk-typescript/
 
 let value: VersionMetadata = {
   apiId: "<id>",
-  createdAt: new Date("2022-07-24T01:37:14.976Z"),
+  createdAt: new Date("2023-02-09T23:56:49.919Z"),
   metaKey: "<value>",
   metaValue: "<value>",
   versionId: "<id>",

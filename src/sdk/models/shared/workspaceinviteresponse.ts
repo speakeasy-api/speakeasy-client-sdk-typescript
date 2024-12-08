@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Relationship = {
   userId: string;
@@ -67,6 +70,20 @@ export namespace Relationship$ {
   export type Outbound = Relationship$Outbound;
 }
 
+export function relationshipToJSON(relationship: Relationship): string {
+  return JSON.stringify(Relationship$outboundSchema.parse(relationship));
+}
+
+export function relationshipFromJSON(
+  jsonString: string,
+): SafeParseResult<Relationship, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Relationship$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Relationship' from JSON`,
+  );
+}
+
 /** @internal */
 export const WorkspaceInviteResponse$inboundSchema: z.ZodType<
   WorkspaceInviteResponse,
@@ -112,4 +129,22 @@ export namespace WorkspaceInviteResponse$ {
   export const outboundSchema = WorkspaceInviteResponse$outboundSchema;
   /** @deprecated use `WorkspaceInviteResponse$Outbound` instead. */
   export type Outbound = WorkspaceInviteResponse$Outbound;
+}
+
+export function workspaceInviteResponseToJSON(
+  workspaceInviteResponse: WorkspaceInviteResponse,
+): string {
+  return JSON.stringify(
+    WorkspaceInviteResponse$outboundSchema.parse(workspaceInviteResponse),
+  );
+}
+
+export function workspaceInviteResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkspaceInviteResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WorkspaceInviteResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkspaceInviteResponse' from JSON`,
+  );
 }

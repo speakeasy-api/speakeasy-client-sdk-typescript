@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type InsertVersionMetadataRequest = {
@@ -75,6 +78,26 @@ export namespace InsertVersionMetadataRequest$ {
   export type Outbound = InsertVersionMetadataRequest$Outbound;
 }
 
+export function insertVersionMetadataRequestToJSON(
+  insertVersionMetadataRequest: InsertVersionMetadataRequest,
+): string {
+  return JSON.stringify(
+    InsertVersionMetadataRequest$outboundSchema.parse(
+      insertVersionMetadataRequest,
+    ),
+  );
+}
+
+export function insertVersionMetadataRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<InsertVersionMetadataRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InsertVersionMetadataRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InsertVersionMetadataRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const InsertVersionMetadataResponse$inboundSchema: z.ZodType<
   InsertVersionMetadataResponse,
@@ -111,4 +134,24 @@ export namespace InsertVersionMetadataResponse$ {
   export const outboundSchema = InsertVersionMetadataResponse$outboundSchema;
   /** @deprecated use `InsertVersionMetadataResponse$Outbound` instead. */
   export type Outbound = InsertVersionMetadataResponse$Outbound;
+}
+
+export function insertVersionMetadataResponseToJSON(
+  insertVersionMetadataResponse: InsertVersionMetadataResponse,
+): string {
+  return JSON.stringify(
+    InsertVersionMetadataResponse$outboundSchema.parse(
+      insertVersionMetadataResponse,
+    ),
+  );
+}
+
+export function insertVersionMetadataResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<InsertVersionMetadataResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => InsertVersionMetadataResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'InsertVersionMetadataResponse' from JSON`,
+  );
 }

@@ -10,12 +10,13 @@ import { ApiEndpoint } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/
 let value: ApiEndpoint = {
   apiEndpointId: "<id>",
   apiId: "<id>",
-  createdAt: new Date("2024-01-29T22:47:11.861Z"),
-  description: "rally wherever minus runny rough agreeable beneath",
-  displayName: "Kevon_Marvin",
+  createdAt: new Date("2022-05-12T19:46:31.016Z"),
+  description:
+    "marketplace minty coin neglect newsprint quizzically grandson incidentally whose",
+  displayName: "Emil_Braun75",
   method: "<value>",
-  path: "/usr/src",
-  updatedAt: new Date("2023-02-07T20:20:50.747Z"),
+  path: "/opt/sbin",
+  updatedAt: new Date("2024-09-05T09:46:09.295Z"),
   versionId: "<id>",
   workspaceId: "<id>",
 };

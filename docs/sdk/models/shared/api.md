@@ -9,9 +9,9 @@ import { Api } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/s
 
 let value: Api = {
   apiId: "<id>",
-  createdAt: new Date("2023-10-23T15:05:16.239Z"),
-  description: "sweetly triumphantly close phew typewriter gadzooks yet",
-  updatedAt: new Date("2022-04-22T20:11:12.127Z"),
+  createdAt: new Date("2024-03-04T10:33:16.366Z"),
+  description: "abaft ick phooey alongside near thick whose",
+  updatedAt: new Date("2024-11-23T13:23:08.319Z"),
   versionId: "<id>",
   workspaceId: "<id>",
 };

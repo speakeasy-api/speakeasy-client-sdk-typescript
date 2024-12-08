@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GenerateOpenApiSpecRequest = {
@@ -59,6 +62,24 @@ export namespace GenerateOpenApiSpecRequest$ {
   export type Outbound = GenerateOpenApiSpecRequest$Outbound;
 }
 
+export function generateOpenApiSpecRequestToJSON(
+  generateOpenApiSpecRequest: GenerateOpenApiSpecRequest,
+): string {
+  return JSON.stringify(
+    GenerateOpenApiSpecRequest$outboundSchema.parse(generateOpenApiSpecRequest),
+  );
+}
+
+export function generateOpenApiSpecRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GenerateOpenApiSpecRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GenerateOpenApiSpecRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GenerateOpenApiSpecRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GenerateOpenApiSpecResponse$inboundSchema: z.ZodType<
   GenerateOpenApiSpecResponse,
@@ -95,4 +116,24 @@ export namespace GenerateOpenApiSpecResponse$ {
   export const outboundSchema = GenerateOpenApiSpecResponse$outboundSchema;
   /** @deprecated use `GenerateOpenApiSpecResponse$Outbound` instead. */
   export type Outbound = GenerateOpenApiSpecResponse$Outbound;
+}
+
+export function generateOpenApiSpecResponseToJSON(
+  generateOpenApiSpecResponse: GenerateOpenApiSpecResponse,
+): string {
+  return JSON.stringify(
+    GenerateOpenApiSpecResponse$outboundSchema.parse(
+      generateOpenApiSpecResponse,
+    ),
+  );
+}
+
+export function generateOpenApiSpecResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GenerateOpenApiSpecResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GenerateOpenApiSpecResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GenerateOpenApiSpecResponse' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   RequestMetadata,
   RequestMetadata$inboundSchema,
@@ -174,4 +177,18 @@ export namespace BoundedRequest$ {
   export const outboundSchema = BoundedRequest$outboundSchema;
   /** @deprecated use `BoundedRequest$Outbound` instead. */
   export type Outbound = BoundedRequest$Outbound;
+}
+
+export function boundedRequestToJSON(boundedRequest: BoundedRequest): string {
+  return JSON.stringify(BoundedRequest$outboundSchema.parse(boundedRequest));
+}
+
+export function boundedRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BoundedRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BoundedRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BoundedRequest' from JSON`,
+  );
 }

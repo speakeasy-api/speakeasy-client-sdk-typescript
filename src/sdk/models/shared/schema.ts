@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A Schema represents an API schema for a particular Api and Version.
@@ -99,4 +102,18 @@ export namespace Schema$ {
   export const outboundSchema = Schema$outboundSchema;
   /** @deprecated use `Schema$Outbound` instead. */
   export type Outbound = Schema$Outbound;
+}
+
+export function schemaToJSON(schema: Schema): string {
+  return JSON.stringify(Schema$outboundSchema.parse(schema));
+}
+
+export function schemaFromJSON(
+  jsonString: string,
+): SafeParseResult<Schema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Schema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Schema' from JSON`,
+  );
 }

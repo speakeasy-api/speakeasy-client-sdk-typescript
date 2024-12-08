@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Key-Value pairs associated with a request
@@ -49,4 +52,20 @@ export namespace RequestMetadata$ {
   export const outboundSchema = RequestMetadata$outboundSchema;
   /** @deprecated use `RequestMetadata$Outbound` instead. */
   export type Outbound = RequestMetadata$Outbound;
+}
+
+export function requestMetadataToJSON(
+  requestMetadata: RequestMetadata,
+): string {
+  return JSON.stringify(RequestMetadata$outboundSchema.parse(requestMetadata));
+}
+
+export function requestMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<RequestMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RequestMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RequestMetadata' from JSON`,
+  );
 }

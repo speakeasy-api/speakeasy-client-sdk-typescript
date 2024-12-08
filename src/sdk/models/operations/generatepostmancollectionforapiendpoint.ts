@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GeneratePostmanCollectionForApiEndpointRequest = {
@@ -71,6 +74,33 @@ export namespace GeneratePostmanCollectionForApiEndpointRequest$ {
     GeneratePostmanCollectionForApiEndpointRequest$Outbound;
 }
 
+export function generatePostmanCollectionForApiEndpointRequestToJSON(
+  generatePostmanCollectionForApiEndpointRequest:
+    GeneratePostmanCollectionForApiEndpointRequest,
+): string {
+  return JSON.stringify(
+    GeneratePostmanCollectionForApiEndpointRequest$outboundSchema.parse(
+      generatePostmanCollectionForApiEndpointRequest,
+    ),
+  );
+}
+
+export function generatePostmanCollectionForApiEndpointRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GeneratePostmanCollectionForApiEndpointRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GeneratePostmanCollectionForApiEndpointRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GeneratePostmanCollectionForApiEndpointRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GeneratePostmanCollectionForApiEndpointResponse$inboundSchema:
   z.ZodType<
@@ -112,4 +142,31 @@ export namespace GeneratePostmanCollectionForApiEndpointResponse$ {
   /** @deprecated use `GeneratePostmanCollectionForApiEndpointResponse$Outbound` instead. */
   export type Outbound =
     GeneratePostmanCollectionForApiEndpointResponse$Outbound;
+}
+
+export function generatePostmanCollectionForApiEndpointResponseToJSON(
+  generatePostmanCollectionForApiEndpointResponse:
+    GeneratePostmanCollectionForApiEndpointResponse,
+): string {
+  return JSON.stringify(
+    GeneratePostmanCollectionForApiEndpointResponse$outboundSchema.parse(
+      generatePostmanCollectionForApiEndpointResponse,
+    ),
+  );
+}
+
+export function generatePostmanCollectionForApiEndpointResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GeneratePostmanCollectionForApiEndpointResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GeneratePostmanCollectionForApiEndpointResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GeneratePostmanCollectionForApiEndpointResponse' from JSON`,
+  );
 }

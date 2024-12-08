@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetEmbedAccessTokenRequest = {
@@ -66,6 +69,24 @@ export namespace GetEmbedAccessTokenRequest$ {
   export type Outbound = GetEmbedAccessTokenRequest$Outbound;
 }
 
+export function getEmbedAccessTokenRequestToJSON(
+  getEmbedAccessTokenRequest: GetEmbedAccessTokenRequest,
+): string {
+  return JSON.stringify(
+    GetEmbedAccessTokenRequest$outboundSchema.parse(getEmbedAccessTokenRequest),
+  );
+}
+
+export function getEmbedAccessTokenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEmbedAccessTokenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEmbedAccessTokenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEmbedAccessTokenRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetEmbedAccessTokenResponse$inboundSchema: z.ZodType<
   GetEmbedAccessTokenResponse,
@@ -102,4 +123,24 @@ export namespace GetEmbedAccessTokenResponse$ {
   export const outboundSchema = GetEmbedAccessTokenResponse$outboundSchema;
   /** @deprecated use `GetEmbedAccessTokenResponse$Outbound` instead. */
   export type Outbound = GetEmbedAccessTokenResponse$Outbound;
+}
+
+export function getEmbedAccessTokenResponseToJSON(
+  getEmbedAccessTokenResponse: GetEmbedAccessTokenResponse,
+): string {
+  return JSON.stringify(
+    GetEmbedAccessTokenResponse$outboundSchema.parse(
+      getEmbedAccessTokenResponse,
+    ),
+  );
+}
+
+export function getEmbedAccessTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetEmbedAccessTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetEmbedAccessTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetEmbedAccessTokenResponse' from JSON`,
+  );
 }

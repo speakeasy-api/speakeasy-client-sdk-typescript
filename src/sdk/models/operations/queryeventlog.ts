@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type QueryEventLogRequest = {
@@ -52,6 +55,24 @@ export namespace QueryEventLogRequest$ {
   export type Outbound = QueryEventLogRequest$Outbound;
 }
 
+export function queryEventLogRequestToJSON(
+  queryEventLogRequest: QueryEventLogRequest,
+): string {
+  return JSON.stringify(
+    QueryEventLogRequest$outboundSchema.parse(queryEventLogRequest),
+  );
+}
+
+export function queryEventLogRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<QueryEventLogRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => QueryEventLogRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'QueryEventLogRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const QueryEventLogResponse$inboundSchema: z.ZodType<
   QueryEventLogResponse,
@@ -88,4 +109,22 @@ export namespace QueryEventLogResponse$ {
   export const outboundSchema = QueryEventLogResponse$outboundSchema;
   /** @deprecated use `QueryEventLogResponse$Outbound` instead. */
   export type Outbound = QueryEventLogResponse$Outbound;
+}
+
+export function queryEventLogResponseToJSON(
+  queryEventLogResponse: QueryEventLogResponse,
+): string {
+  return JSON.stringify(
+    QueryEventLogResponse$outboundSchema.parse(queryEventLogResponse),
+  );
+}
+
+export function queryEventLogResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<QueryEventLogResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => QueryEventLogResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'QueryEventLogResponse' from JSON`,
+  );
 }

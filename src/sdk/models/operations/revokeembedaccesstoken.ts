@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RevokeEmbedAccessTokenRequest = {
   /**
@@ -45,4 +48,24 @@ export namespace RevokeEmbedAccessTokenRequest$ {
   export const outboundSchema = RevokeEmbedAccessTokenRequest$outboundSchema;
   /** @deprecated use `RevokeEmbedAccessTokenRequest$Outbound` instead. */
   export type Outbound = RevokeEmbedAccessTokenRequest$Outbound;
+}
+
+export function revokeEmbedAccessTokenRequestToJSON(
+  revokeEmbedAccessTokenRequest: RevokeEmbedAccessTokenRequest,
+): string {
+  return JSON.stringify(
+    RevokeEmbedAccessTokenRequest$outboundSchema.parse(
+      revokeEmbedAccessTokenRequest,
+    ),
+  );
+}
+
+export function revokeEmbedAccessTokenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RevokeEmbedAccessTokenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RevokeEmbedAccessTokenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RevokeEmbedAccessTokenRequest' from JSON`,
+  );
 }

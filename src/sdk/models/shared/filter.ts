@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A filter is a key-value pair that can be used to filter a list of requests.
@@ -59,4 +62,18 @@ export namespace Filter$ {
   export const outboundSchema = Filter$outboundSchema;
   /** @deprecated use `Filter$Outbound` instead. */
   export type Outbound = Filter$Outbound;
+}
+
+export function filterToJSON(filter: Filter): string {
+  return JSON.stringify(Filter$outboundSchema.parse(filter));
+}
+
+export function filterFromJSON(
+  jsonString: string,
+): SafeParseResult<Filter, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Filter$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Filter' from JSON`,
+  );
 }

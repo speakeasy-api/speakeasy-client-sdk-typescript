@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type DownloadSchemaRequest = {
@@ -60,6 +63,24 @@ export namespace DownloadSchemaRequest$ {
   export type Outbound = DownloadSchemaRequest$Outbound;
 }
 
+export function downloadSchemaRequestToJSON(
+  downloadSchemaRequest: DownloadSchemaRequest,
+): string {
+  return JSON.stringify(
+    DownloadSchemaRequest$outboundSchema.parse(downloadSchemaRequest),
+  );
+}
+
+export function downloadSchemaRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DownloadSchemaRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DownloadSchemaRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DownloadSchemaRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const DownloadSchemaResponse$inboundSchema: z.ZodType<
   DownloadSchemaResponse,
@@ -99,4 +120,22 @@ export namespace DownloadSchemaResponse$ {
   export const outboundSchema = DownloadSchemaResponse$outboundSchema;
   /** @deprecated use `DownloadSchemaResponse$Outbound` instead. */
   export type Outbound = DownloadSchemaResponse$Outbound;
+}
+
+export function downloadSchemaResponseToJSON(
+  downloadSchemaResponse: DownloadSchemaResponse,
+): string {
+  return JSON.stringify(
+    DownloadSchemaResponse$outboundSchema.parse(downloadSchemaResponse),
+  );
+}
+
+export function downloadSchemaResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<DownloadSchemaResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DownloadSchemaResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DownloadSchemaResponse' from JSON`,
+  );
 }

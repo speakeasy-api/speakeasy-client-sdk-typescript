@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RegisterSchemaFile = {
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
@@ -82,6 +85,24 @@ export namespace RegisterSchemaFile$ {
   export type Outbound = RegisterSchemaFile$Outbound;
 }
 
+export function registerSchemaFileToJSON(
+  registerSchemaFile: RegisterSchemaFile,
+): string {
+  return JSON.stringify(
+    RegisterSchemaFile$outboundSchema.parse(registerSchemaFile),
+  );
+}
+
+export function registerSchemaFileFromJSON(
+  jsonString: string,
+): SafeParseResult<RegisterSchemaFile, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RegisterSchemaFile$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RegisterSchemaFile' from JSON`,
+  );
+}
+
 /** @internal */
 export const RegisterSchemaRequestBody$inboundSchema: z.ZodType<
   RegisterSchemaRequestBody,
@@ -116,6 +137,24 @@ export namespace RegisterSchemaRequestBody$ {
   export const outboundSchema = RegisterSchemaRequestBody$outboundSchema;
   /** @deprecated use `RegisterSchemaRequestBody$Outbound` instead. */
   export type Outbound = RegisterSchemaRequestBody$Outbound;
+}
+
+export function registerSchemaRequestBodyToJSON(
+  registerSchemaRequestBody: RegisterSchemaRequestBody,
+): string {
+  return JSON.stringify(
+    RegisterSchemaRequestBody$outboundSchema.parse(registerSchemaRequestBody),
+  );
+}
+
+export function registerSchemaRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<RegisterSchemaRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RegisterSchemaRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RegisterSchemaRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -166,4 +205,22 @@ export namespace RegisterSchemaRequest$ {
   export const outboundSchema = RegisterSchemaRequest$outboundSchema;
   /** @deprecated use `RegisterSchemaRequest$Outbound` instead. */
   export type Outbound = RegisterSchemaRequest$Outbound;
+}
+
+export function registerSchemaRequestToJSON(
+  registerSchemaRequest: RegisterSchemaRequest,
+): string {
+  return JSON.stringify(
+    RegisterSchemaRequest$outboundSchema.parse(registerSchemaRequest),
+  );
+}
+
+export function registerSchemaRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RegisterSchemaRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RegisterSchemaRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RegisterSchemaRequest' from JSON`,
+  );
 }

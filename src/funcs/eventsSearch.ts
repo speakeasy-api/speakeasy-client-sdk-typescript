@@ -53,15 +53,17 @@ export async function eventsSearch(
   const body = null;
 
   const pathParams = {
-    workspace_id: encodeSimple("workspace_id", payload.workspace_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
+    workspace_id: encodeSimple(
+      "workspace_id",
+      payload.workspace_id ?? client._options.workspaceId,
+      { explode: false, charEncoding: "percent" },
+    ),
   };
 
   const path = pathToFunc("/v1/workspace/{workspace_id}/events")(pathParams);
 
   const query = encodeFormQuery({
+    "execution_id": payload.execution_id,
     "generate_gen_lock_id": payload.generate_gen_lock_id,
     "interaction_type": payload.interaction_type,
     "lint_report_digest": payload.lint_report_digest,
@@ -74,12 +76,20 @@ export async function eventsSearch(
   });
 
   const securityInput = await extractSecurity(client._options.security);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
+
   const context = {
     operationID: "searchWorkspaceEvents",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.security,
+    retryConfig: options?.retries
+      || client._options.retryConfig
+      || { strategy: "none" },
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
@@ -98,9 +108,8 @@ export async function eventsSearch(
   const doResult = await client._do(req, {
     context,
     errorCodes: [],
-    retryConfig: options?.retries
-      || client._options.retryConfig,
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
     return doResult;

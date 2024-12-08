@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * An ApiEndpoint is a description of an Endpoint for an API.
@@ -96,4 +99,22 @@ export namespace ApiEndpointInput$ {
   export const outboundSchema = ApiEndpointInput$outboundSchema;
   /** @deprecated use `ApiEndpointInput$Outbound` instead. */
   export type Outbound = ApiEndpointInput$Outbound;
+}
+
+export function apiEndpointInputToJSON(
+  apiEndpointInput: ApiEndpointInput,
+): string {
+  return JSON.stringify(
+    ApiEndpointInput$outboundSchema.parse(apiEndpointInput),
+  );
+}
+
+export function apiEndpointInputFromJSON(
+  jsonString: string,
+): SafeParseResult<ApiEndpointInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApiEndpointInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApiEndpointInput' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GenerateOpenApiSpecForApiEndpointRequest = {
@@ -68,6 +71,33 @@ export namespace GenerateOpenApiSpecForApiEndpointRequest$ {
   export type Outbound = GenerateOpenApiSpecForApiEndpointRequest$Outbound;
 }
 
+export function generateOpenApiSpecForApiEndpointRequestToJSON(
+  generateOpenApiSpecForApiEndpointRequest:
+    GenerateOpenApiSpecForApiEndpointRequest,
+): string {
+  return JSON.stringify(
+    GenerateOpenApiSpecForApiEndpointRequest$outboundSchema.parse(
+      generateOpenApiSpecForApiEndpointRequest,
+    ),
+  );
+}
+
+export function generateOpenApiSpecForApiEndpointRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GenerateOpenApiSpecForApiEndpointRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GenerateOpenApiSpecForApiEndpointRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GenerateOpenApiSpecForApiEndpointRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GenerateOpenApiSpecForApiEndpointResponse$inboundSchema: z.ZodType<
   GenerateOpenApiSpecForApiEndpointResponse,
@@ -107,4 +137,31 @@ export namespace GenerateOpenApiSpecForApiEndpointResponse$ {
     GenerateOpenApiSpecForApiEndpointResponse$outboundSchema;
   /** @deprecated use `GenerateOpenApiSpecForApiEndpointResponse$Outbound` instead. */
   export type Outbound = GenerateOpenApiSpecForApiEndpointResponse$Outbound;
+}
+
+export function generateOpenApiSpecForApiEndpointResponseToJSON(
+  generateOpenApiSpecForApiEndpointResponse:
+    GenerateOpenApiSpecForApiEndpointResponse,
+): string {
+  return JSON.stringify(
+    GenerateOpenApiSpecForApiEndpointResponse$outboundSchema.parse(
+      generateOpenApiSpecForApiEndpointResponse,
+    ),
+  );
+}
+
+export function generateOpenApiSpecForApiEndpointResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GenerateOpenApiSpecForApiEndpointResponse,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GenerateOpenApiSpecForApiEndpointResponse$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GenerateOpenApiSpecForApiEndpointResponse' from JSON`,
+  );
 }

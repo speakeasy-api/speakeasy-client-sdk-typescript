@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type UpsertApiEndpointRequest = {
@@ -80,6 +83,24 @@ export namespace UpsertApiEndpointRequest$ {
   export type Outbound = UpsertApiEndpointRequest$Outbound;
 }
 
+export function upsertApiEndpointRequestToJSON(
+  upsertApiEndpointRequest: UpsertApiEndpointRequest,
+): string {
+  return JSON.stringify(
+    UpsertApiEndpointRequest$outboundSchema.parse(upsertApiEndpointRequest),
+  );
+}
+
+export function upsertApiEndpointRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UpsertApiEndpointRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpsertApiEndpointRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpsertApiEndpointRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const UpsertApiEndpointResponse$inboundSchema: z.ZodType<
   UpsertApiEndpointResponse,
@@ -110,4 +131,22 @@ export namespace UpsertApiEndpointResponse$ {
   export const outboundSchema = UpsertApiEndpointResponse$outboundSchema;
   /** @deprecated use `UpsertApiEndpointResponse$Outbound` instead. */
   export type Outbound = UpsertApiEndpointResponse$Outbound;
+}
+
+export function upsertApiEndpointResponseToJSON(
+  upsertApiEndpointResponse: UpsertApiEndpointResponse,
+): string {
+  return JSON.stringify(
+    UpsertApiEndpointResponse$outboundSchema.parse(upsertApiEndpointResponse),
+  );
+}
+
+export function upsertApiEndpointResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<UpsertApiEndpointResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UpsertApiEndpointResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpsertApiEndpointResponse' from JSON`,
+  );
 }

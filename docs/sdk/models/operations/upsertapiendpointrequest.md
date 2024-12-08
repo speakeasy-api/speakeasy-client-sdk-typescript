@@ -11,10 +11,11 @@ let value: UpsertApiEndpointRequest = {
   apiEndpointID: "<id>",
   apiEndpoint: {
     apiEndpointId: "<id>",
-    description: "oil yet following",
-    displayName: "Deonte_Champlin14",
+    description:
+      "lest by ick abaft adrenalin that reluctantly printer innocently hence",
+    displayName: "Benjamin73",
     method: "<value>",
-    path: "/System",
+    path: "/lost+found",
     versionId: "<id>",
   },
 };

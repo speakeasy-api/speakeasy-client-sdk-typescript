@@ -17,7 +17,7 @@ const value: shared.ErrorT = {
 ```typescript
 const value: shared.VersionMetadata = {
   apiId: "<id>",
-  createdAt: new Date("2022-06-04T11:44:43.665Z"),
+  createdAt: new Date("2024-01-16T20:15:10.483Z"),
   metaKey: "<value>",
   metaValue: "<value>",
   versionId: "<id>",

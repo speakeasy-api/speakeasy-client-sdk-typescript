@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetRequestFromEventLogRequest = {
@@ -52,6 +55,26 @@ export namespace GetRequestFromEventLogRequest$ {
   export type Outbound = GetRequestFromEventLogRequest$Outbound;
 }
 
+export function getRequestFromEventLogRequestToJSON(
+  getRequestFromEventLogRequest: GetRequestFromEventLogRequest,
+): string {
+  return JSON.stringify(
+    GetRequestFromEventLogRequest$outboundSchema.parse(
+      getRequestFromEventLogRequest,
+    ),
+  );
+}
+
+export function getRequestFromEventLogRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetRequestFromEventLogRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetRequestFromEventLogRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetRequestFromEventLogRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetRequestFromEventLogResponse$inboundSchema: z.ZodType<
   GetRequestFromEventLogResponse,
@@ -88,4 +111,24 @@ export namespace GetRequestFromEventLogResponse$ {
   export const outboundSchema = GetRequestFromEventLogResponse$outboundSchema;
   /** @deprecated use `GetRequestFromEventLogResponse$Outbound` instead. */
   export type Outbound = GetRequestFromEventLogResponse$Outbound;
+}
+
+export function getRequestFromEventLogResponseToJSON(
+  getRequestFromEventLogResponse: GetRequestFromEventLogResponse,
+): string {
+  return JSON.stringify(
+    GetRequestFromEventLogResponse$outboundSchema.parse(
+      getRequestFromEventLogResponse,
+    ),
+  );
+}
+
+export function getRequestFromEventLogResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetRequestFromEventLogResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetRequestFromEventLogResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetRequestFromEventLogResponse' from JSON`,
+  );
 }

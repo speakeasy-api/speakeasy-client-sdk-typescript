@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 429,
+  statusCode: 403,
 };
 ```
 
@@ -20,7 +20,7 @@ const value: shared.TargetSDK[] = [
     generateGenLockId: "<id>",
     generateTarget: "<value>",
     id: "<id>",
-    lastEventCreatedAt: new Date("2024-05-26T15:39:37.504Z"),
+    lastEventCreatedAt: new Date("2023-05-19T00:44:35.528Z"),
     lastEventId: "<id>",
     lastEventInteractionType: "OPENAPI_DIFF",
   },

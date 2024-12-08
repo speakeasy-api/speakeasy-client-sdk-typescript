@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ShortURL = {
   fullUrl: string;
@@ -57,4 +60,18 @@ export namespace ShortURL$ {
   export const outboundSchema = ShortURL$outboundSchema;
   /** @deprecated use `ShortURL$Outbound` instead. */
   export type Outbound = ShortURL$Outbound;
+}
+
+export function shortURLToJSON(shortURL: ShortURL): string {
+  return JSON.stringify(ShortURL$outboundSchema.parse(shortURL));
+}
+
+export function shortURLFromJSON(
+  jsonString: string,
+): SafeParseResult<ShortURL, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ShortURL$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ShortURL' from JSON`,
+  );
 }

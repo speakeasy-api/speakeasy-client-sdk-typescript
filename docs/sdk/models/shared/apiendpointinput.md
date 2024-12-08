@@ -9,10 +9,10 @@ import { ApiEndpointInput } from "@speakeasy-api/speakeasy-client-sdk-typescript
 
 let value: ApiEndpointInput = {
   apiEndpointId: "<id>",
-  description: "worth uh-huh substitution psst upon er",
-  displayName: "Lessie_McLaughlin",
+  description: "joyously versus hm",
+  displayName: "Melany81",
   method: "<value>",
-  path: "/home/user",
+  path: "/lost+found",
   versionId: "<id>",
 };
 ```
