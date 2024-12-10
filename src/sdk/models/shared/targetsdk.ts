@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   InteractionType,
   InteractionType$inboundSchema,
@@ -51,6 +54,10 @@ export type TargetSDK = {
    * The number of operations used in generation.
    */
   generateNumberOfOperationsUsed?: number | undefined;
+  /**
+   * The number of terraform resources used in generation.
+   */
+  generateNumberOfTerraformResources?: number | undefined;
   /**
    * Indicates whether the target was considered published.
    */
@@ -164,6 +171,14 @@ export type TargetSDK = {
    */
   success?: boolean | undefined;
   /**
+   * Workflow lock file (post execution)
+   */
+  workflowLockPostRaw?: string | undefined;
+  /**
+   * Workflow lock file (prior to execution)
+   */
+  workflowLockPreRaw?: string | undefined;
+  /**
    * Workflow file (post execution)
    */
   workflowPostRaw?: string | undefined;
@@ -189,6 +204,7 @@ export const TargetSDK$inboundSchema: z.ZodType<
   generate_gen_lock_pre_version: z.string().optional(),
   generate_number_of_operations_ignored: z.number().int().optional(),
   generate_number_of_operations_used: z.number().int().optional(),
+  generate_number_of_terraform_resources: z.number().int().optional(),
   generate_published: z.boolean().optional(),
   generate_target: z.string(),
   generate_target_name: z.string().optional(),
@@ -219,6 +235,8 @@ export const TargetSDK$inboundSchema: z.ZodType<
   source_namespace_name: z.string().optional(),
   source_revision_digest: z.string().optional(),
   success: z.boolean().optional(),
+  workflow_lock_post_raw: z.string().optional(),
+  workflow_lock_pre_raw: z.string().optional(),
   workflow_post_raw: z.string().optional(),
   workflow_pre_raw: z.string().optional(),
 }).transform((v) => {
@@ -233,6 +251,8 @@ export const TargetSDK$inboundSchema: z.ZodType<
     "generate_number_of_operations_ignored":
       "generateNumberOfOperationsIgnored",
     "generate_number_of_operations_used": "generateNumberOfOperationsUsed",
+    "generate_number_of_terraform_resources":
+      "generateNumberOfTerraformResources",
     "generate_published": "generatePublished",
     "generate_target": "generateTarget",
     "generate_target_name": "generateTargetName",
@@ -258,6 +278,8 @@ export const TargetSDK$inboundSchema: z.ZodType<
     "source_blob_digest": "sourceBlobDigest",
     "source_namespace_name": "sourceNamespaceName",
     "source_revision_digest": "sourceRevisionDigest",
+    "workflow_lock_post_raw": "workflowLockPostRaw",
+    "workflow_lock_pre_raw": "workflowLockPreRaw",
     "workflow_post_raw": "workflowPostRaw",
     "workflow_pre_raw": "workflowPreRaw",
   });
@@ -275,6 +297,7 @@ export type TargetSDK$Outbound = {
   generate_gen_lock_pre_version?: string | undefined;
   generate_number_of_operations_ignored?: number | undefined;
   generate_number_of_operations_used?: number | undefined;
+  generate_number_of_terraform_resources?: number | undefined;
   generate_published?: boolean | undefined;
   generate_target: string;
   generate_target_name?: string | undefined;
@@ -303,6 +326,8 @@ export type TargetSDK$Outbound = {
   source_namespace_name?: string | undefined;
   source_revision_digest?: string | undefined;
   success?: boolean | undefined;
+  workflow_lock_post_raw?: string | undefined;
+  workflow_lock_pre_raw?: string | undefined;
   workflow_post_raw?: string | undefined;
   workflow_pre_raw?: string | undefined;
 };
@@ -323,6 +348,7 @@ export const TargetSDK$outboundSchema: z.ZodType<
   generateGenLockPreVersion: z.string().optional(),
   generateNumberOfOperationsIgnored: z.number().int().optional(),
   generateNumberOfOperationsUsed: z.number().int().optional(),
+  generateNumberOfTerraformResources: z.number().int().optional(),
   generatePublished: z.boolean().optional(),
   generateTarget: z.string(),
   generateTargetName: z.string().optional(),
@@ -351,6 +377,8 @@ export const TargetSDK$outboundSchema: z.ZodType<
   sourceNamespaceName: z.string().optional(),
   sourceRevisionDigest: z.string().optional(),
   success: z.boolean().optional(),
+  workflowLockPostRaw: z.string().optional(),
+  workflowLockPreRaw: z.string().optional(),
   workflowPostRaw: z.string().optional(),
   workflowPreRaw: z.string().optional(),
 }).transform((v) => {
@@ -364,6 +392,8 @@ export const TargetSDK$outboundSchema: z.ZodType<
     generateGenLockPreVersion: "generate_gen_lock_pre_version",
     generateNumberOfOperationsIgnored: "generate_number_of_operations_ignored",
     generateNumberOfOperationsUsed: "generate_number_of_operations_used",
+    generateNumberOfTerraformResources:
+      "generate_number_of_terraform_resources",
     generatePublished: "generate_published",
     generateTarget: "generate_target",
     generateTargetName: "generate_target_name",
@@ -389,6 +419,8 @@ export const TargetSDK$outboundSchema: z.ZodType<
     sourceBlobDigest: "source_blob_digest",
     sourceNamespaceName: "source_namespace_name",
     sourceRevisionDigest: "source_revision_digest",
+    workflowLockPostRaw: "workflow_lock_post_raw",
+    workflowLockPreRaw: "workflow_lock_pre_raw",
     workflowPostRaw: "workflow_post_raw",
     workflowPreRaw: "workflow_pre_raw",
   });
@@ -405,4 +437,18 @@ export namespace TargetSDK$ {
   export const outboundSchema = TargetSDK$outboundSchema;
   /** @deprecated use `TargetSDK$Outbound` instead. */
   export type Outbound = TargetSDK$Outbound;
+}
+
+export function targetSDKToJSON(targetSDK: TargetSDK): string {
+  return JSON.stringify(TargetSDK$outboundSchema.parse(targetSDK));
+}
+
+export function targetSDKFromJSON(
+  jsonString: string,
+): SafeParseResult<TargetSDK, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TargetSDK$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TargetSDK' from JSON`,
+  );
 }

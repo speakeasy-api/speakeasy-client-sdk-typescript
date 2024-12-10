@@ -4,15 +4,86 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type CreateWorkspaceTokenGlobals = {
+  workspaceId?: string | undefined;
+};
 
 export type CreateWorkspaceTokenRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   workspaceToken: shared.WorkspaceToken;
 };
+
+/** @internal */
+export const CreateWorkspaceTokenGlobals$inboundSchema: z.ZodType<
+  CreateWorkspaceTokenGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type CreateWorkspaceTokenGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const CreateWorkspaceTokenGlobals$outboundSchema: z.ZodType<
+  CreateWorkspaceTokenGlobals$Outbound,
+  z.ZodTypeDef,
+  CreateWorkspaceTokenGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CreateWorkspaceTokenGlobals$ {
+  /** @deprecated use `CreateWorkspaceTokenGlobals$inboundSchema` instead. */
+  export const inboundSchema = CreateWorkspaceTokenGlobals$inboundSchema;
+  /** @deprecated use `CreateWorkspaceTokenGlobals$outboundSchema` instead. */
+  export const outboundSchema = CreateWorkspaceTokenGlobals$outboundSchema;
+  /** @deprecated use `CreateWorkspaceTokenGlobals$Outbound` instead. */
+  export type Outbound = CreateWorkspaceTokenGlobals$Outbound;
+}
+
+export function createWorkspaceTokenGlobalsToJSON(
+  createWorkspaceTokenGlobals: CreateWorkspaceTokenGlobals,
+): string {
+  return JSON.stringify(
+    CreateWorkspaceTokenGlobals$outboundSchema.parse(
+      createWorkspaceTokenGlobals,
+    ),
+  );
+}
+
+export function createWorkspaceTokenGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateWorkspaceTokenGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateWorkspaceTokenGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateWorkspaceTokenGlobals' from JSON`,
+  );
+}
 
 /** @internal */
 export const CreateWorkspaceTokenRequest$inboundSchema: z.ZodType<
@@ -20,7 +91,7 @@ export const CreateWorkspaceTokenRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   WorkspaceToken: shared.WorkspaceToken$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -31,7 +102,7 @@ export const CreateWorkspaceTokenRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type CreateWorkspaceTokenRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   WorkspaceToken: shared.WorkspaceToken$Outbound;
 };
 
@@ -41,7 +112,7 @@ export const CreateWorkspaceTokenRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   CreateWorkspaceTokenRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   workspaceToken: shared.WorkspaceToken$outboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -61,4 +132,24 @@ export namespace CreateWorkspaceTokenRequest$ {
   export const outboundSchema = CreateWorkspaceTokenRequest$outboundSchema;
   /** @deprecated use `CreateWorkspaceTokenRequest$Outbound` instead. */
   export type Outbound = CreateWorkspaceTokenRequest$Outbound;
+}
+
+export function createWorkspaceTokenRequestToJSON(
+  createWorkspaceTokenRequest: CreateWorkspaceTokenRequest,
+): string {
+  return JSON.stringify(
+    CreateWorkspaceTokenRequest$outboundSchema.parse(
+      createWorkspaceTokenRequest,
+    ),
+  );
+}
+
+export function createWorkspaceTokenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateWorkspaceTokenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateWorkspaceTokenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateWorkspaceTokenRequest' from JSON`,
+  );
 }

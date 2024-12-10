@@ -8,7 +8,7 @@ import { Diagnostic } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/m
 let value: Diagnostic = {
   message: "<value>",
   path: [
-    "/usr",
+    "/etc/mail",
   ],
   type: "<value>",
 };

@@ -6,7 +6,8 @@
 import { OASInfo } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: OASInfo = {
-  description: "fidget faithfully under usable synergy redact zowie",
+  description:
+    "diligently thigh arraign into defenseless geez burgeon pupil great vice",
   license: {},
   summary: "<value>",
   title: "<value>",

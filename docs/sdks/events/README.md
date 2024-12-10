@@ -3,7 +3,7 @@
 
 ## Overview
 
-REST APIs for capturing event data
+REST APIs for managing events captured by a speakeasy binary (CLI, GitHub Action etc)
 
 ### Available Operations
 
@@ -30,7 +30,6 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.events.getEventsByTarget({
-    workspaceId: "<id>",
     targetId: "<id>",
   });
 
@@ -59,7 +58,6 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await eventsGetEventsByTarget(speakeasy, {
-    workspaceId: "<id>",
     targetId: "<id>",
   });
 
@@ -187,9 +185,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.events.getTargetsDeprecated({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.events.getTargetsDeprecated({});
 
   // Handle the result
   console.log(result);
@@ -215,9 +211,7 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await eventsGetTargetsDeprecated(speakeasy, {
-    workspaceId: "<id>",
-  });
+  const res = await eventsGetTargetsDeprecated(speakeasy, {});
 
   if (!res.ok) {
     throw res.error;
@@ -268,7 +262,6 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.events.post({
-    workspaceId: "<id>",
     requestBody: [
       {
         createdAt: new Date("2024-03-02T10:07:28.113Z"),
@@ -309,7 +302,6 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await eventsPost(speakeasy, {
-    workspaceId: "<id>",
     requestBody: [
       {
         createdAt: new Date("2024-03-02T10:07:28.113Z"),
@@ -373,9 +365,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.events.search({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.events.search({});
 
   // Handle the result
   console.log(result);
@@ -401,9 +391,7 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await eventsSearch(speakeasy, {
-    workspaceId: "<id>",
-  });
+  const res = await eventsSearch(speakeasy, {});
 
   if (!res.ok) {
     throw res.error;

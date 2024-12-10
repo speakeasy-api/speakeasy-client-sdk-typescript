@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A feature flag is a key-value pair that can be used to enable or disable features.
@@ -62,4 +65,18 @@ export namespace FeatureFlag$ {
   export const outboundSchema = FeatureFlag$outboundSchema;
   /** @deprecated use `FeatureFlag$Outbound` instead. */
   export type Outbound = FeatureFlag$Outbound;
+}
+
+export function featureFlagToJSON(featureFlag: FeatureFlag): string {
+  return JSON.stringify(FeatureFlag$outboundSchema.parse(featureFlag));
+}
+
+export function featureFlagFromJSON(
+  jsonString: string,
+): SafeParseResult<FeatureFlag, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FeatureFlag$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FeatureFlag' from JSON`,
+  );
 }
