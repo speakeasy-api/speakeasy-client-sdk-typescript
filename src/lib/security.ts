@@ -4,6 +4,14 @@
 
 import * as shared from "../sdk/models/shared/index.js";
 
+type OAuth2PasswordFlow = {
+  username: string;
+  password?: string | undefined;
+  clientID: string;
+  clientSecret?: string | undefined;
+  tokenURL: string;
+};
+
 export enum SecurityErrorCode {
   Incomplete = "incomplete",
   UnrecognisedSecurityType = "unrecognized_security_type",
@@ -37,6 +45,7 @@ export type SecurityState = {
   headers: Record<string, string>;
   queryParams: Record<string, string>;
   cookies: Record<string, string>;
+  oauth2: ({ type: "password" } & OAuth2PasswordFlow) | { type: "none" };
 };
 
 type SecurityInputBasic = {
@@ -79,6 +88,15 @@ type SecurityInputOAuth2ClientCredentials = {
     | undefined;
 };
 
+type SecurityInputOAuth2PasswordCredentials = {
+  type: "oauth2:password";
+  value:
+    | string
+    | null
+    | undefined;
+  fieldName: string;
+};
+
 type SecurityInputCustom = {
   type: "http:custom";
   value: any | null | undefined;
@@ -91,6 +109,7 @@ export type SecurityInput =
   | SecurityInputAPIKey
   | SecurityInputOAuth2
   | SecurityInputOAuth2ClientCredentials
+  | SecurityInputOAuth2PasswordCredentials
   | SecurityInputOIDC
   | SecurityInputCustom;
 
@@ -102,6 +121,7 @@ export function resolveSecurity(
     headers: {},
     queryParams: {},
     cookies: {},
+    oauth2: { type: "none" },
   };
 
   const option = options.find((opts) => {
@@ -112,6 +132,10 @@ export function resolveSecurity(
         return o.value.username != null || o.value.password != null;
       } else if (o.type === "http:custom") {
         return null;
+      } else if (o.type === "oauth2:password") {
+        return (
+          typeof o.value === "string" && !!o.value
+        );
       } else if (o.type === "oauth2:client_credentials") {
         return o.value.clientID != null || o.value.clientSecret != null;
       } else if (typeof o.value === "string") {
@@ -156,6 +180,9 @@ export function resolveSecurity(
       case "oauth2":
         applyBearer(state, spec);
         break;
+      case "oauth2:password":
+        applyBearer(state, spec);
+        break;
       case "oauth2:client_credentials":
         break;
       case "openIdConnect":
@@ -183,9 +210,13 @@ function applyBasic(
 
 function applyBearer(
   state: SecurityState,
-  spec: SecurityInputBearer | SecurityInputOAuth2 | SecurityInputOIDC,
+  spec:
+    | SecurityInputBearer
+    | SecurityInputOAuth2
+    | SecurityInputOIDC
+    | SecurityInputOAuth2PasswordCredentials,
 ) {
-  if (spec.value == null) {
+  if (typeof spec.value !== "string" || !spec.value) {
     return;
   }
 
@@ -196,6 +227,7 @@ function applyBearer(
 
   state.headers[spec.fieldName] = value;
 }
+
 export function resolveGlobalSecurity(
   security: Partial<shared.Security> | null | undefined,
 ): SecurityState | null {

@@ -8,11 +8,11 @@
 ```typescript
 const value: shared.CliEvent[] = [
   {
-    createdAt: new Date("2023-10-05T13:26:19.195Z"),
+    createdAt: new Date("2023-06-30T03:22:56.921Z"),
     executionId: "<id>",
     id: "<id>",
-    interactionType: "OPENAPI_DIFF",
-    localStartedAt: new Date("2024-07-19T07:42:14.060Z"),
+    interactionType: "QUICKSTART",
+    localStartedAt: new Date("2023-02-08T23:14:58.127Z"),
     speakeasyApiKeyName: "<value>",
     speakeasyVersion: "<value>",
     success: false,
@@ -26,7 +26,7 @@ const value: shared.CliEvent[] = [
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 511,
+  statusCode: 103,
 };
 ```
 

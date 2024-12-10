@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type User = {
   /**
@@ -43,6 +46,10 @@ export type User = {
    */
   id: string;
   /**
+   * Indicates whether the user is internal.
+   */
+  internal?: boolean | undefined;
+  /**
    * Timestamp of the last login.
    */
   lastLoginAt?: Date | null | undefined;
@@ -74,6 +81,7 @@ export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
     email_verified: z.boolean(),
     github_handle: z.nullable(z.string()).optional(),
     id: z.string(),
+    internal: z.boolean().optional(),
     last_login_at: z.nullable(
       z.string().datetime({ offset: true }).transform(v => new Date(v)),
     ).optional(),
@@ -106,6 +114,7 @@ export type User$Outbound = {
   email_verified: boolean;
   github_handle?: string | null | undefined;
   id: string;
+  internal?: boolean | undefined;
   last_login_at?: string | null | undefined;
   photo_url?: string | null | undefined;
   updated_at: string;
@@ -124,6 +133,7 @@ export const User$outboundSchema: z.ZodType<User$Outbound, z.ZodTypeDef, User> =
     emailVerified: z.boolean(),
     githubHandle: z.nullable(z.string()).optional(),
     id: z.string(),
+    internal: z.boolean().optional(),
     lastLoginAt: z.nullable(z.date().transform(v => v.toISOString()))
       .optional(),
     photoUrl: z.nullable(z.string()).optional(),
@@ -153,4 +163,18 @@ export namespace User$ {
   export const outboundSchema = User$outboundSchema;
   /** @deprecated use `User$Outbound` instead. */
   export type Outbound = User$Outbound;
+}
+
+export function userToJSON(user: User): string {
+  return JSON.stringify(User$outboundSchema.parse(user));
+}
+
+export function userFromJSON(
+  jsonString: string,
+): SafeParseResult<User, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => User$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'User' from JSON`,
+  );
 }

@@ -7,7 +7,7 @@ import { OASSummary } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/m
 
 let value: OASSummary = {
   info: {
-    description: "summer horde whoa once hence",
+    description: "till with furthermore jaggedly hence runny knavishly",
     license: {},
     summary: "<value>",
     title: "<value>",
@@ -15,10 +15,10 @@ let value: OASSummary = {
   },
   operations: [
     {
-      description: "fuss um unit grade soap sizzling huzzah like",
+      description: "near digestive traffic ouch",
       method: "<value>",
       operationId: "<id>",
-      path: "/lost+found",
+      path: "/usr",
       tags: [
         "<value>",
       ],

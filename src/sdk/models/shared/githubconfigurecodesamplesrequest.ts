@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A request to configure GitHub code samples
@@ -63,4 +66,24 @@ export namespace GithubConfigureCodeSamplesRequest$ {
     GithubConfigureCodeSamplesRequest$outboundSchema;
   /** @deprecated use `GithubConfigureCodeSamplesRequest$Outbound` instead. */
   export type Outbound = GithubConfigureCodeSamplesRequest$Outbound;
+}
+
+export function githubConfigureCodeSamplesRequestToJSON(
+  githubConfigureCodeSamplesRequest: GithubConfigureCodeSamplesRequest,
+): string {
+  return JSON.stringify(
+    GithubConfigureCodeSamplesRequest$outboundSchema.parse(
+      githubConfigureCodeSamplesRequest,
+    ),
+  );
+}
+
+export function githubConfigureCodeSamplesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubConfigureCodeSamplesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubConfigureCodeSamplesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubConfigureCodeSamplesRequest' from JSON`,
+  );
 }
