@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Annotations
@@ -155,4 +158,18 @@ export namespace Annotations$ {
   export const outboundSchema = Annotations$outboundSchema;
   /** @deprecated use `Annotations$Outbound` instead. */
   export type Outbound = Annotations$Outbound;
+}
+
+export function annotationsToJSON(annotations: Annotations): string {
+  return JSON.stringify(Annotations$outboundSchema.parse(annotations));
+}
+
+export function annotationsFromJSON(
+  jsonString: string,
+): SafeParseResult<Annotations, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Annotations$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Annotations' from JSON`,
+  );
 }

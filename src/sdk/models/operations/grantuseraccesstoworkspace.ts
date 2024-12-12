@@ -4,13 +4,20 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type GrantUserAccessToWorkspaceGlobals = {
+  workspaceId?: string | undefined;
+};
 
 export type GrantUserAccessToWorkspaceRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * Email of the user to grant access to.
    */
@@ -22,12 +29,77 @@ export type GrantUserAccessToWorkspaceResponse =
   | shared.WorkspaceInviteResponse;
 
 /** @internal */
+export const GrantUserAccessToWorkspaceGlobals$inboundSchema: z.ZodType<
+  GrantUserAccessToWorkspaceGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type GrantUserAccessToWorkspaceGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const GrantUserAccessToWorkspaceGlobals$outboundSchema: z.ZodType<
+  GrantUserAccessToWorkspaceGlobals$Outbound,
+  z.ZodTypeDef,
+  GrantUserAccessToWorkspaceGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GrantUserAccessToWorkspaceGlobals$ {
+  /** @deprecated use `GrantUserAccessToWorkspaceGlobals$inboundSchema` instead. */
+  export const inboundSchema = GrantUserAccessToWorkspaceGlobals$inboundSchema;
+  /** @deprecated use `GrantUserAccessToWorkspaceGlobals$outboundSchema` instead. */
+  export const outboundSchema =
+    GrantUserAccessToWorkspaceGlobals$outboundSchema;
+  /** @deprecated use `GrantUserAccessToWorkspaceGlobals$Outbound` instead. */
+  export type Outbound = GrantUserAccessToWorkspaceGlobals$Outbound;
+}
+
+export function grantUserAccessToWorkspaceGlobalsToJSON(
+  grantUserAccessToWorkspaceGlobals: GrantUserAccessToWorkspaceGlobals,
+): string {
+  return JSON.stringify(
+    GrantUserAccessToWorkspaceGlobals$outboundSchema.parse(
+      grantUserAccessToWorkspaceGlobals,
+    ),
+  );
+}
+
+export function grantUserAccessToWorkspaceGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<GrantUserAccessToWorkspaceGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GrantUserAccessToWorkspaceGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GrantUserAccessToWorkspaceGlobals' from JSON`,
+  );
+}
+
+/** @internal */
 export const GrantUserAccessToWorkspaceRequest$inboundSchema: z.ZodType<
   GrantUserAccessToWorkspaceRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   email: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -37,7 +109,7 @@ export const GrantUserAccessToWorkspaceRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GrantUserAccessToWorkspaceRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   email: string;
 };
 
@@ -47,7 +119,7 @@ export const GrantUserAccessToWorkspaceRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GrantUserAccessToWorkspaceRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   email: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -67,6 +139,26 @@ export namespace GrantUserAccessToWorkspaceRequest$ {
     GrantUserAccessToWorkspaceRequest$outboundSchema;
   /** @deprecated use `GrantUserAccessToWorkspaceRequest$Outbound` instead. */
   export type Outbound = GrantUserAccessToWorkspaceRequest$Outbound;
+}
+
+export function grantUserAccessToWorkspaceRequestToJSON(
+  grantUserAccessToWorkspaceRequest: GrantUserAccessToWorkspaceRequest,
+): string {
+  return JSON.stringify(
+    GrantUserAccessToWorkspaceRequest$outboundSchema.parse(
+      grantUserAccessToWorkspaceRequest,
+    ),
+  );
+}
+
+export function grantUserAccessToWorkspaceRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GrantUserAccessToWorkspaceRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GrantUserAccessToWorkspaceRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GrantUserAccessToWorkspaceRequest' from JSON`,
+  );
 }
 
 /** @internal */
@@ -106,4 +198,25 @@ export namespace GrantUserAccessToWorkspaceResponse$ {
     GrantUserAccessToWorkspaceResponse$outboundSchema;
   /** @deprecated use `GrantUserAccessToWorkspaceResponse$Outbound` instead. */
   export type Outbound = GrantUserAccessToWorkspaceResponse$Outbound;
+}
+
+export function grantUserAccessToWorkspaceResponseToJSON(
+  grantUserAccessToWorkspaceResponse: GrantUserAccessToWorkspaceResponse,
+): string {
+  return JSON.stringify(
+    GrantUserAccessToWorkspaceResponse$outboundSchema.parse(
+      grantUserAccessToWorkspaceResponse,
+    ),
+  );
+}
+
+export function grantUserAccessToWorkspaceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GrantUserAccessToWorkspaceResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GrantUserAccessToWorkspaceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GrantUserAccessToWorkspaceResponse' from JSON`,
+  );
 }

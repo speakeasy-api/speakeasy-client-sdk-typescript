@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Tag = {
   /**
@@ -65,4 +68,18 @@ export namespace Tag$ {
   export const outboundSchema = Tag$outboundSchema;
   /** @deprecated use `Tag$Outbound` instead. */
   export type Outbound = Tag$Outbound;
+}
+
+export function tagToJSON(tag: Tag): string {
+  return JSON.stringify(Tag$outboundSchema.parse(tag));
+}
+
+export function tagFromJSON(
+  jsonString: string,
+): SafeParseResult<Tag, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Tag$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Tag' from JSON`,
+  );
 }

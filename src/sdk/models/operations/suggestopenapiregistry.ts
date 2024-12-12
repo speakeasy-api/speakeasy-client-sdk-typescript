@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type SuggestOpenAPIRegistryRequest = {
@@ -76,4 +79,24 @@ export namespace SuggestOpenAPIRegistryRequest$ {
   export const outboundSchema = SuggestOpenAPIRegistryRequest$outboundSchema;
   /** @deprecated use `SuggestOpenAPIRegistryRequest$Outbound` instead. */
   export type Outbound = SuggestOpenAPIRegistryRequest$Outbound;
+}
+
+export function suggestOpenAPIRegistryRequestToJSON(
+  suggestOpenAPIRegistryRequest: SuggestOpenAPIRegistryRequest,
+): string {
+  return JSON.stringify(
+    SuggestOpenAPIRegistryRequest$outboundSchema.parse(
+      suggestOpenAPIRegistryRequest,
+    ),
+  );
+}
+
+export function suggestOpenAPIRegistryRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<SuggestOpenAPIRegistryRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SuggestOpenAPIRegistryRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SuggestOpenAPIRegistryRequest' from JSON`,
+  );
 }
