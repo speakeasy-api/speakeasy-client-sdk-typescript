@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetWorkspaceTargetsRequest = {
@@ -63,6 +66,24 @@ export namespace GetWorkspaceTargetsRequest$ {
   export type Outbound = GetWorkspaceTargetsRequest$Outbound;
 }
 
+export function getWorkspaceTargetsRequestToJSON(
+  getWorkspaceTargetsRequest: GetWorkspaceTargetsRequest,
+): string {
+  return JSON.stringify(
+    GetWorkspaceTargetsRequest$outboundSchema.parse(getWorkspaceTargetsRequest),
+  );
+}
+
+export function getWorkspaceTargetsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceTargetsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceTargetsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceTargetsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetWorkspaceTargetsResponse$inboundSchema: z.ZodType<
   GetWorkspaceTargetsResponse,
@@ -99,4 +120,24 @@ export namespace GetWorkspaceTargetsResponse$ {
   export const outboundSchema = GetWorkspaceTargetsResponse$outboundSchema;
   /** @deprecated use `GetWorkspaceTargetsResponse$Outbound` instead. */
   export type Outbound = GetWorkspaceTargetsResponse$Outbound;
+}
+
+export function getWorkspaceTargetsResponseToJSON(
+  getWorkspaceTargetsResponse: GetWorkspaceTargetsResponse,
+): string {
+  return JSON.stringify(
+    GetWorkspaceTargetsResponse$outboundSchema.parse(
+      getWorkspaceTargetsResponse,
+    ),
+  );
+}
+
+export function getWorkspaceTargetsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceTargetsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceTargetsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceTargetsResponse' from JSON`,
+  );
 }

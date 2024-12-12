@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Open generation PRs pending publishing
@@ -60,4 +63,22 @@ export namespace GithubPublishingPRResponse$ {
   export const outboundSchema = GithubPublishingPRResponse$outboundSchema;
   /** @deprecated use `GithubPublishingPRResponse$Outbound` instead. */
   export type Outbound = GithubPublishingPRResponse$Outbound;
+}
+
+export function githubPublishingPRResponseToJSON(
+  githubPublishingPRResponse: GithubPublishingPRResponse,
+): string {
+  return JSON.stringify(
+    GithubPublishingPRResponse$outboundSchema.parse(githubPublishingPRResponse),
+  );
+}
+
+export function githubPublishingPRResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubPublishingPRResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubPublishingPRResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubPublishingPRResponse' from JSON`,
+  );
 }

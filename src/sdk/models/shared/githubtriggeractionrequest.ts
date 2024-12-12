@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A request to trigger an action on a GitHub target
@@ -98,4 +101,22 @@ export namespace GithubTriggerActionRequest$ {
   export const outboundSchema = GithubTriggerActionRequest$outboundSchema;
   /** @deprecated use `GithubTriggerActionRequest$Outbound` instead. */
   export type Outbound = GithubTriggerActionRequest$Outbound;
+}
+
+export function githubTriggerActionRequestToJSON(
+  githubTriggerActionRequest: GithubTriggerActionRequest,
+): string {
+  return JSON.stringify(
+    GithubTriggerActionRequest$outboundSchema.parse(githubTriggerActionRequest),
+  );
+}
+
+export function githubTriggerActionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubTriggerActionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubTriggerActionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubTriggerActionRequest' from JSON`,
+  );
 }

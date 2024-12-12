@@ -20,8 +20,9 @@ specific category of applications.
 
 ```typescript
 import { SpeakeasyCore } from "@speakeasy-api/speakeasy-client-sdk-typescript/core.js";
-import { apisGetApis } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs/apisGetApis.js";
+import { generateCodeSamplePreview } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs/generateCodeSamplePreview.js";
 import { SDKValidationError } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors/sdkvalidationerror.js";
+import { openAsBlob } from "node:fs";
 
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -32,7 +33,13 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await apisGetApis(speakeasy, {});
+  const res = await generateCodeSamplePreview(speakeasy, {
+    languages: [
+      "<value>",
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
+  });
 
   switch (true) {
     case res.ok:

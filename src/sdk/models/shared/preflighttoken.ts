@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A PreflightToken is a token that allows access to the OCI distribution endpoints.
@@ -54,4 +57,18 @@ export namespace PreflightToken$ {
   export const outboundSchema = PreflightToken$outboundSchema;
   /** @deprecated use `PreflightToken$Outbound` instead. */
   export type Outbound = PreflightToken$Outbound;
+}
+
+export function preflightTokenToJSON(preflightToken: PreflightToken): string {
+  return JSON.stringify(PreflightToken$outboundSchema.parse(preflightToken));
+}
+
+export function preflightTokenFromJSON(
+  jsonString: string,
+): SafeParseResult<PreflightToken, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PreflightToken$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PreflightToken' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GithubCheckPublishingPRsRequest = {
@@ -66,6 +69,26 @@ export namespace GithubCheckPublishingPRsRequest$ {
   export type Outbound = GithubCheckPublishingPRsRequest$Outbound;
 }
 
+export function githubCheckPublishingPRsRequestToJSON(
+  githubCheckPublishingPRsRequest: GithubCheckPublishingPRsRequest,
+): string {
+  return JSON.stringify(
+    GithubCheckPublishingPRsRequest$outboundSchema.parse(
+      githubCheckPublishingPRsRequest,
+    ),
+  );
+}
+
+export function githubCheckPublishingPRsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubCheckPublishingPRsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubCheckPublishingPRsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubCheckPublishingPRsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GithubCheckPublishingPRsResponse$inboundSchema: z.ZodType<
   GithubCheckPublishingPRsResponse,
@@ -102,4 +125,24 @@ export namespace GithubCheckPublishingPRsResponse$ {
   export const outboundSchema = GithubCheckPublishingPRsResponse$outboundSchema;
   /** @deprecated use `GithubCheckPublishingPRsResponse$Outbound` instead. */
   export type Outbound = GithubCheckPublishingPRsResponse$Outbound;
+}
+
+export function githubCheckPublishingPRsResponseToJSON(
+  githubCheckPublishingPRsResponse: GithubCheckPublishingPRsResponse,
+): string {
+  return JSON.stringify(
+    GithubCheckPublishingPRsResponse$outboundSchema.parse(
+      githubCheckPublishingPRsResponse,
+    ),
+  );
+}
+
+export function githubCheckPublishingPRsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubCheckPublishingPRsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubCheckPublishingPRsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubCheckPublishingPRsResponse' from JSON`,
+  );
 }
