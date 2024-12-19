@@ -18,10 +18,10 @@ const value: shared.ErrorT = {
 const value: shared.GetNamespacesResponse = {
   items: [
     {
-      createdAt: new Date("2022-11-01T19:34:36.306Z"),
+      createdAt: new Date("2022-01-23T03:49:29.014Z"),
       id: "<id>",
       name: "<value>",
-      updatedAt: new Date("2022-07-05T13:36:03.643Z"),
+      updatedAt: new Date("2024-07-01T13:13:56.703Z"),
     },
   ],
 };
