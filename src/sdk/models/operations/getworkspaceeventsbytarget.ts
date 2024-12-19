@@ -4,13 +4,20 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type GetWorkspaceEventsByTargetGlobals = {
+  workspaceId?: string | undefined;
+};
 
 export type GetWorkspaceEventsByTargetRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * Filter to only return events corresponding to a particular gen_lock_id (gen_lock_id uniquely identifies a target)
    */
@@ -26,12 +33,77 @@ export type GetWorkspaceEventsByTargetResponse =
   | Array<shared.CliEvent>;
 
 /** @internal */
+export const GetWorkspaceEventsByTargetGlobals$inboundSchema: z.ZodType<
+  GetWorkspaceEventsByTargetGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type GetWorkspaceEventsByTargetGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const GetWorkspaceEventsByTargetGlobals$outboundSchema: z.ZodType<
+  GetWorkspaceEventsByTargetGlobals$Outbound,
+  z.ZodTypeDef,
+  GetWorkspaceEventsByTargetGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetWorkspaceEventsByTargetGlobals$ {
+  /** @deprecated use `GetWorkspaceEventsByTargetGlobals$inboundSchema` instead. */
+  export const inboundSchema = GetWorkspaceEventsByTargetGlobals$inboundSchema;
+  /** @deprecated use `GetWorkspaceEventsByTargetGlobals$outboundSchema` instead. */
+  export const outboundSchema =
+    GetWorkspaceEventsByTargetGlobals$outboundSchema;
+  /** @deprecated use `GetWorkspaceEventsByTargetGlobals$Outbound` instead. */
+  export type Outbound = GetWorkspaceEventsByTargetGlobals$Outbound;
+}
+
+export function getWorkspaceEventsByTargetGlobalsToJSON(
+  getWorkspaceEventsByTargetGlobals: GetWorkspaceEventsByTargetGlobals,
+): string {
+  return JSON.stringify(
+    GetWorkspaceEventsByTargetGlobals$outboundSchema.parse(
+      getWorkspaceEventsByTargetGlobals,
+    ),
+  );
+}
+
+export function getWorkspaceEventsByTargetGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceEventsByTargetGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceEventsByTargetGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceEventsByTargetGlobals' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetWorkspaceEventsByTargetRequest$inboundSchema: z.ZodType<
   GetWorkspaceEventsByTargetRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   target_id: z.string(),
   after_created_at: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
@@ -46,7 +118,7 @@ export const GetWorkspaceEventsByTargetRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetWorkspaceEventsByTargetRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   target_id: string;
   after_created_at?: string | undefined;
 };
@@ -57,7 +129,7 @@ export const GetWorkspaceEventsByTargetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetWorkspaceEventsByTargetRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   targetId: z.string(),
   afterCreatedAt: z.date().transform(v => v.toISOString()).optional(),
 }).transform((v) => {
@@ -80,6 +152,26 @@ export namespace GetWorkspaceEventsByTargetRequest$ {
     GetWorkspaceEventsByTargetRequest$outboundSchema;
   /** @deprecated use `GetWorkspaceEventsByTargetRequest$Outbound` instead. */
   export type Outbound = GetWorkspaceEventsByTargetRequest$Outbound;
+}
+
+export function getWorkspaceEventsByTargetRequestToJSON(
+  getWorkspaceEventsByTargetRequest: GetWorkspaceEventsByTargetRequest,
+): string {
+  return JSON.stringify(
+    GetWorkspaceEventsByTargetRequest$outboundSchema.parse(
+      getWorkspaceEventsByTargetRequest,
+    ),
+  );
+}
+
+export function getWorkspaceEventsByTargetRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceEventsByTargetRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceEventsByTargetRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceEventsByTargetRequest' from JSON`,
+  );
 }
 
 /** @internal */
@@ -119,4 +211,25 @@ export namespace GetWorkspaceEventsByTargetResponse$ {
     GetWorkspaceEventsByTargetResponse$outboundSchema;
   /** @deprecated use `GetWorkspaceEventsByTargetResponse$Outbound` instead. */
   export type Outbound = GetWorkspaceEventsByTargetResponse$Outbound;
+}
+
+export function getWorkspaceEventsByTargetResponseToJSON(
+  getWorkspaceEventsByTargetResponse: GetWorkspaceEventsByTargetResponse,
+): string {
+  return JSON.stringify(
+    GetWorkspaceEventsByTargetResponse$outboundSchema.parse(
+      getWorkspaceEventsByTargetResponse,
+    ),
+  );
+}
+
+export function getWorkspaceEventsByTargetResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceEventsByTargetResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetWorkspaceEventsByTargetResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceEventsByTargetResponse' from JSON`,
+  );
 }

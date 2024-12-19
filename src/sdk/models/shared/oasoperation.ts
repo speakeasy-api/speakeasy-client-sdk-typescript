@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type OASOperation = {
   description: string;
@@ -79,4 +82,18 @@ export namespace OASOperation$ {
   export const outboundSchema = OASOperation$outboundSchema;
   /** @deprecated use `OASOperation$Outbound` instead. */
   export type Outbound = OASOperation$Outbound;
+}
+
+export function oasOperationToJSON(oasOperation: OASOperation): string {
+  return JSON.stringify(OASOperation$outboundSchema.parse(oasOperation));
+}
+
+export function oasOperationFromJSON(
+  jsonString: string,
+): SafeParseResult<OASOperation, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OASOperation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OASOperation' from JSON`,
+  );
 }

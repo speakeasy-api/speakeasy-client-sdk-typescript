@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type ValidateApiKeyResponse = shared.ErrorT | shared.ApiKeyDetails;
@@ -40,4 +43,22 @@ export namespace ValidateApiKeyResponse$ {
   export const outboundSchema = ValidateApiKeyResponse$outboundSchema;
   /** @deprecated use `ValidateApiKeyResponse$Outbound` instead. */
   export type Outbound = ValidateApiKeyResponse$Outbound;
+}
+
+export function validateApiKeyResponseToJSON(
+  validateApiKeyResponse: ValidateApiKeyResponse,
+): string {
+  return JSON.stringify(
+    ValidateApiKeyResponse$outboundSchema.parse(validateApiKeyResponse),
+  );
+}
+
+export function validateApiKeyResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<ValidateApiKeyResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ValidateApiKeyResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ValidateApiKeyResponse' from JSON`,
+  );
 }

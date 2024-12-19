@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Annotations,
   Annotations$inboundSchema,
@@ -88,4 +91,18 @@ export namespace Manifest$ {
   export const outboundSchema = Manifest$outboundSchema;
   /** @deprecated use `Manifest$Outbound` instead. */
   export type Outbound = Manifest$Outbound;
+}
+
+export function manifestToJSON(manifest: Manifest): string {
+  return JSON.stringify(Manifest$outboundSchema.parse(manifest));
+}
+
+export function manifestFromJSON(
+  jsonString: string,
+): SafeParseResult<Manifest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Manifest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Manifest' from JSON`,
+  );
 }

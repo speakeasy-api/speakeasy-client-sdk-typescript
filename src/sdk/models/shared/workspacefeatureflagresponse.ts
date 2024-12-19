@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   FeatureFlag,
   FeatureFlag$inboundSchema,
@@ -60,4 +63,24 @@ export namespace WorkspaceFeatureFlagResponse$ {
   export const outboundSchema = WorkspaceFeatureFlagResponse$outboundSchema;
   /** @deprecated use `WorkspaceFeatureFlagResponse$Outbound` instead. */
   export type Outbound = WorkspaceFeatureFlagResponse$Outbound;
+}
+
+export function workspaceFeatureFlagResponseToJSON(
+  workspaceFeatureFlagResponse: WorkspaceFeatureFlagResponse,
+): string {
+  return JSON.stringify(
+    WorkspaceFeatureFlagResponse$outboundSchema.parse(
+      workspaceFeatureFlagResponse,
+    ),
+  );
+}
+
+export function workspaceFeatureFlagResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkspaceFeatureFlagResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WorkspaceFeatureFlagResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkspaceFeatureFlagResponse' from JSON`,
+  );
 }

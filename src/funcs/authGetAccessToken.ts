@@ -63,11 +63,19 @@ export async function authGetAccessToken(
   const context = {
     operationID: "getAccessToken",
     oAuth2Scopes: [],
+
+    resolvedSecurity: null,
+
     securitySource: null,
+    retryConfig: options?.retries
+      || client._options.retryConfig
+      || { strategy: "none" },
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
 
   const requestRes = client._createRequest(context, {
     method: "GET",
+    baseURL: options?.serverURL,
     path: path,
     headers: headers,
     query: query,
@@ -82,9 +90,8 @@ export async function authGetAccessToken(
   const doResult = await client._do(req, {
     context,
     errorCodes: [],
-    retryConfig: options?.retries
-      || client._options.retryConfig,
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
     return doResult;

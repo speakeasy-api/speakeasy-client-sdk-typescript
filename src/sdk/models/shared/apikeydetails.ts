@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountType,
   AccountType$inboundSchema,
@@ -20,6 +23,10 @@ export type ApiKeyDetails = {
   generationAccessUnlimited?: boolean | undefined;
   orgSlug: string;
   telemetryDisabled: boolean;
+  /**
+   * Workspace creation timestamp.
+   */
+  workspaceCreatedAt: Date;
   workspaceId: string;
   workspaceSlug: string;
 };
@@ -36,6 +43,9 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<
   generation_access_unlimited: z.boolean().optional(),
   org_slug: z.string(),
   telemetry_disabled: z.boolean(),
+  workspace_created_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ),
   workspace_id: z.string(),
   workspace_slug: z.string(),
 }).transform((v) => {
@@ -46,6 +56,7 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<
     "generation_access_unlimited": "generationAccessUnlimited",
     "org_slug": "orgSlug",
     "telemetry_disabled": "telemetryDisabled",
+    "workspace_created_at": "workspaceCreatedAt",
     "workspace_id": "workspaceId",
     "workspace_slug": "workspaceSlug",
   });
@@ -59,6 +70,7 @@ export type ApiKeyDetails$Outbound = {
   generation_access_unlimited?: boolean | undefined;
   org_slug: string;
   telemetry_disabled: boolean;
+  workspace_created_at: string;
   workspace_id: string;
   workspace_slug: string;
 };
@@ -75,6 +87,7 @@ export const ApiKeyDetails$outboundSchema: z.ZodType<
   generationAccessUnlimited: z.boolean().optional(),
   orgSlug: z.string(),
   telemetryDisabled: z.boolean(),
+  workspaceCreatedAt: z.date().transform(v => v.toISOString()),
   workspaceId: z.string(),
   workspaceSlug: z.string(),
 }).transform((v) => {
@@ -85,6 +98,7 @@ export const ApiKeyDetails$outboundSchema: z.ZodType<
     generationAccessUnlimited: "generation_access_unlimited",
     orgSlug: "org_slug",
     telemetryDisabled: "telemetry_disabled",
+    workspaceCreatedAt: "workspace_created_at",
     workspaceId: "workspace_id",
     workspaceSlug: "workspace_slug",
   });
@@ -101,4 +115,18 @@ export namespace ApiKeyDetails$ {
   export const outboundSchema = ApiKeyDetails$outboundSchema;
   /** @deprecated use `ApiKeyDetails$Outbound` instead. */
   export type Outbound = ApiKeyDetails$Outbound;
+}
+
+export function apiKeyDetailsToJSON(apiKeyDetails: ApiKeyDetails): string {
+  return JSON.stringify(ApiKeyDetails$outboundSchema.parse(apiKeyDetails));
+}
+
+export function apiKeyDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<ApiKeyDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApiKeyDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApiKeyDetails' from JSON`,
+  );
 }

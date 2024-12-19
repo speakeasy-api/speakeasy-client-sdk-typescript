@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const Type = {
   Linting: "linting",
@@ -66,4 +69,18 @@ export namespace Report$ {
   export const outboundSchema = Report$outboundSchema;
   /** @deprecated use `Report$Outbound` instead. */
   export type Outbound = Report$Outbound;
+}
+
+export function reportToJSON(report: Report): string {
+  return JSON.stringify(Report$outboundSchema.parse(report));
+}
+
+export function reportFromJSON(
+  jsonString: string,
+): SafeParseResult<Report, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Report$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Report' from JSON`,
+  );
 }

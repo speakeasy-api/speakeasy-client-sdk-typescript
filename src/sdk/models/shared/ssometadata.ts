@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * SSO metadata for a workspace
@@ -60,4 +63,18 @@ export namespace SSOMetadata$ {
   export const outboundSchema = SSOMetadata$outboundSchema;
   /** @deprecated use `SSOMetadata$Outbound` instead. */
   export type Outbound = SSOMetadata$Outbound;
+}
+
+export function ssoMetadataToJSON(ssoMetadata: SSOMetadata): string {
+  return JSON.stringify(SSOMetadata$outboundSchema.parse(ssoMetadata));
+}
+
+export function ssoMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<SSOMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SSOMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SSOMetadata' from JSON`,
+  );
 }
