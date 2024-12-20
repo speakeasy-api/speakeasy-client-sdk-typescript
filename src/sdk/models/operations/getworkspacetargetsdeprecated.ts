@@ -4,13 +4,20 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type GetWorkspaceTargetsDeprecatedGlobals = {
+  workspaceId?: string | undefined;
+};
 
 export type GetWorkspaceTargetsDeprecatedRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * Filter to only return targets with events created after this timestamp
    */
@@ -22,12 +29,79 @@ export type GetWorkspaceTargetsDeprecatedResponse =
   | Array<shared.TargetSDK>;
 
 /** @internal */
+export const GetWorkspaceTargetsDeprecatedGlobals$inboundSchema: z.ZodType<
+  GetWorkspaceTargetsDeprecatedGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type GetWorkspaceTargetsDeprecatedGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const GetWorkspaceTargetsDeprecatedGlobals$outboundSchema: z.ZodType<
+  GetWorkspaceTargetsDeprecatedGlobals$Outbound,
+  z.ZodTypeDef,
+  GetWorkspaceTargetsDeprecatedGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetWorkspaceTargetsDeprecatedGlobals$ {
+  /** @deprecated use `GetWorkspaceTargetsDeprecatedGlobals$inboundSchema` instead. */
+  export const inboundSchema =
+    GetWorkspaceTargetsDeprecatedGlobals$inboundSchema;
+  /** @deprecated use `GetWorkspaceTargetsDeprecatedGlobals$outboundSchema` instead. */
+  export const outboundSchema =
+    GetWorkspaceTargetsDeprecatedGlobals$outboundSchema;
+  /** @deprecated use `GetWorkspaceTargetsDeprecatedGlobals$Outbound` instead. */
+  export type Outbound = GetWorkspaceTargetsDeprecatedGlobals$Outbound;
+}
+
+export function getWorkspaceTargetsDeprecatedGlobalsToJSON(
+  getWorkspaceTargetsDeprecatedGlobals: GetWorkspaceTargetsDeprecatedGlobals,
+): string {
+  return JSON.stringify(
+    GetWorkspaceTargetsDeprecatedGlobals$outboundSchema.parse(
+      getWorkspaceTargetsDeprecatedGlobals,
+    ),
+  );
+}
+
+export function getWorkspaceTargetsDeprecatedGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceTargetsDeprecatedGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetWorkspaceTargetsDeprecatedGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceTargetsDeprecatedGlobals' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetWorkspaceTargetsDeprecatedRequest$inboundSchema: z.ZodType<
   GetWorkspaceTargetsDeprecatedRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   after_last_event_created_at: z.string().datetime({ offset: true }).transform(
     v => new Date(v)
   ).optional(),
@@ -40,7 +114,7 @@ export const GetWorkspaceTargetsDeprecatedRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetWorkspaceTargetsDeprecatedRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   after_last_event_created_at?: string | undefined;
 };
 
@@ -50,7 +124,7 @@ export const GetWorkspaceTargetsDeprecatedRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetWorkspaceTargetsDeprecatedRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   afterLastEventCreatedAt: z.date().transform(v => v.toISOString()).optional(),
 }).transform((v) => {
   return remap$(v, {
@@ -72,6 +146,27 @@ export namespace GetWorkspaceTargetsDeprecatedRequest$ {
     GetWorkspaceTargetsDeprecatedRequest$outboundSchema;
   /** @deprecated use `GetWorkspaceTargetsDeprecatedRequest$Outbound` instead. */
   export type Outbound = GetWorkspaceTargetsDeprecatedRequest$Outbound;
+}
+
+export function getWorkspaceTargetsDeprecatedRequestToJSON(
+  getWorkspaceTargetsDeprecatedRequest: GetWorkspaceTargetsDeprecatedRequest,
+): string {
+  return JSON.stringify(
+    GetWorkspaceTargetsDeprecatedRequest$outboundSchema.parse(
+      getWorkspaceTargetsDeprecatedRequest,
+    ),
+  );
+}
+
+export function getWorkspaceTargetsDeprecatedRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceTargetsDeprecatedRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetWorkspaceTargetsDeprecatedRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceTargetsDeprecatedRequest' from JSON`,
+  );
 }
 
 /** @internal */
@@ -112,4 +207,25 @@ export namespace GetWorkspaceTargetsDeprecatedResponse$ {
     GetWorkspaceTargetsDeprecatedResponse$outboundSchema;
   /** @deprecated use `GetWorkspaceTargetsDeprecatedResponse$Outbound` instead. */
   export type Outbound = GetWorkspaceTargetsDeprecatedResponse$Outbound;
+}
+
+export function getWorkspaceTargetsDeprecatedResponseToJSON(
+  getWorkspaceTargetsDeprecatedResponse: GetWorkspaceTargetsDeprecatedResponse,
+): string {
+  return JSON.stringify(
+    GetWorkspaceTargetsDeprecatedResponse$outboundSchema.parse(
+      getWorkspaceTargetsDeprecatedResponse,
+    ),
+  );
+}
+
+export function getWorkspaceTargetsDeprecatedResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceTargetsDeprecatedResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetWorkspaceTargetsDeprecatedResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceTargetsDeprecatedResponse' from JSON`,
+  );
 }

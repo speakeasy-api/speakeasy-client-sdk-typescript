@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type PreflightResponse = shared.PreflightToken | shared.ErrorT;
@@ -40,4 +43,22 @@ export namespace PreflightResponse$ {
   export const outboundSchema = PreflightResponse$outboundSchema;
   /** @deprecated use `PreflightResponse$Outbound` instead. */
   export type Outbound = PreflightResponse$Outbound;
+}
+
+export function preflightResponseToJSON(
+  preflightResponse: PreflightResponse,
+): string {
+  return JSON.stringify(
+    PreflightResponse$outboundSchema.parse(preflightResponse),
+  );
+}
+
+export function preflightResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<PreflightResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PreflightResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PreflightResponse' from JSON`,
+  );
 }

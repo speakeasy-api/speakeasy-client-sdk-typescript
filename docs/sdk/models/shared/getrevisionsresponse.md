@@ -8,7 +8,7 @@ import { GetRevisionsResponse } from "@speakeasy-api/speakeasy-client-sdk-typesc
 let value: GetRevisionsResponse = {
   items: [
     {
-      createdAt: new Date("2022-04-02T10:20:37.470Z"),
+      createdAt: new Date("2022-03-29T03:44:55.897Z"),
       digest:
         "sha256:6d1ef012b5674ad8a127ecfa9b5e6f5178d171b90ee462846974177fd9bdd39f",
       id: "<id>",
@@ -16,7 +16,7 @@ let value: GetRevisionsResponse = {
       tags: [
         "<value>",
       ],
-      updatedAt: new Date("2023-08-29T04:52:14.624Z"),
+      updatedAt: new Date("2022-04-09T04:55:05.565Z"),
     },
   ],
   nextPageToken: "<value>",

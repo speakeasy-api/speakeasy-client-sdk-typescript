@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   SSOMetadata,
   SSOMetadata$inboundSchema,
@@ -73,4 +76,22 @@ export namespace WorkspaceTeamResponse$ {
   export const outboundSchema = WorkspaceTeamResponse$outboundSchema;
   /** @deprecated use `WorkspaceTeamResponse$Outbound` instead. */
   export type Outbound = WorkspaceTeamResponse$Outbound;
+}
+
+export function workspaceTeamResponseToJSON(
+  workspaceTeamResponse: WorkspaceTeamResponse,
+): string {
+  return JSON.stringify(
+    WorkspaceTeamResponse$outboundSchema.parse(workspaceTeamResponse),
+  );
+}
+
+export function workspaceTeamResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkspaceTeamResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WorkspaceTeamResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkspaceTeamResponse' from JSON`,
+  );
 }
