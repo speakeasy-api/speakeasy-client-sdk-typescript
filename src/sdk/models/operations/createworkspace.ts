@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type CreateWorkspaceResponse = shared.ErrorT | shared.Workspace;
@@ -37,4 +40,22 @@ export namespace CreateWorkspaceResponse$ {
   export const outboundSchema = CreateWorkspaceResponse$outboundSchema;
   /** @deprecated use `CreateWorkspaceResponse$Outbound` instead. */
   export type Outbound = CreateWorkspaceResponse$Outbound;
+}
+
+export function createWorkspaceResponseToJSON(
+  createWorkspaceResponse: CreateWorkspaceResponse,
+): string {
+  return JSON.stringify(
+    CreateWorkspaceResponse$outboundSchema.parse(createWorkspaceResponse),
+  );
+}
+
+export function createWorkspaceResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateWorkspaceResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateWorkspaceResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateWorkspaceResponse' from JSON`,
+  );
 }

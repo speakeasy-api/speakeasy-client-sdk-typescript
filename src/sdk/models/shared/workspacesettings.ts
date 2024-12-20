@@ -4,9 +4,14 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WorkspaceSettings = {
-  webhookUrl?: string | undefined;
+  createdAt: Date;
+  updatedAt: Date;
+  webhookUrl: string;
   workspaceId: string;
 };
 
@@ -16,10 +21,14 @@ export const WorkspaceSettings$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  webhook_url: z.string().optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  webhook_url: z.string(),
   workspace_id: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "created_at": "createdAt",
+    "updated_at": "updatedAt",
     "webhook_url": "webhookUrl",
     "workspace_id": "workspaceId",
   });
@@ -27,7 +36,9 @@ export const WorkspaceSettings$inboundSchema: z.ZodType<
 
 /** @internal */
 export type WorkspaceSettings$Outbound = {
-  webhook_url?: string | undefined;
+  created_at: string;
+  updated_at: string;
+  webhook_url: string;
   workspace_id: string;
 };
 
@@ -37,10 +48,14 @@ export const WorkspaceSettings$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   WorkspaceSettings
 > = z.object({
-  webhookUrl: z.string().optional(),
+  createdAt: z.date().transform(v => v.toISOString()),
+  updatedAt: z.date().transform(v => v.toISOString()),
+  webhookUrl: z.string(),
   workspaceId: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    createdAt: "created_at",
+    updatedAt: "updated_at",
     webhookUrl: "webhook_url",
     workspaceId: "workspace_id",
   });
@@ -57,4 +72,22 @@ export namespace WorkspaceSettings$ {
   export const outboundSchema = WorkspaceSettings$outboundSchema;
   /** @deprecated use `WorkspaceSettings$Outbound` instead. */
   export type Outbound = WorkspaceSettings$Outbound;
+}
+
+export function workspaceSettingsToJSON(
+  workspaceSettings: WorkspaceSettings,
+): string {
+  return JSON.stringify(
+    WorkspaceSettings$outboundSchema.parse(workspaceSettings),
+  );
+}
+
+export function workspaceSettingsFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkspaceSettings, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WorkspaceSettings$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkspaceSettings' from JSON`,
+  );
 }
