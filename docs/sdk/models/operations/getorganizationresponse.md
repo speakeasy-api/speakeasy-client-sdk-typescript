@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 421,
+  statusCode: 201,
 };
 ```
 
@@ -16,13 +16,14 @@ const value: shared.ErrorT = {
 
 ```typescript
 const value: shared.Organization = {
-  accountType: "enterprise",
-  createdAt: new Date("2023-11-12T18:28:30.435Z"),
+  accountType: "scale-up",
+  createdAt: new Date("2023-03-31T00:46:25.708Z"),
   id: "<id>",
   name: "<value>",
   slug: "<value>",
+  ssoActivated: false,
   telemetryDisabled: false,
-  updatedAt: new Date("2022-04-18T04:47:54.555Z"),
+  updatedAt: new Date("2022-03-12T07:20:08.678Z"),
 };
 ```
 

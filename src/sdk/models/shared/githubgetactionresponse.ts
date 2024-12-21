@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * response to a getting the latest action run on a GitHub request
@@ -66,4 +69,22 @@ export namespace GithubGetActionResponse$ {
   export const outboundSchema = GithubGetActionResponse$outboundSchema;
   /** @deprecated use `GithubGetActionResponse$Outbound` instead. */
   export type Outbound = GithubGetActionResponse$Outbound;
+}
+
+export function githubGetActionResponseToJSON(
+  githubGetActionResponse: GithubGetActionResponse,
+): string {
+  return JSON.stringify(
+    GithubGetActionResponse$outboundSchema.parse(githubGetActionResponse),
+  );
+}
+
+export function githubGetActionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubGetActionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubGetActionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubGetActionResponse' from JSON`,
+  );
 }

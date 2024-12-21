@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type Schema = {
@@ -74,6 +77,20 @@ export namespace Schema$ {
   export type Outbound = Schema$Outbound;
 }
 
+export function schemaToJSON(schema: Schema): string {
+  return JSON.stringify(Schema$outboundSchema.parse(schema));
+}
+
+export function schemaFromJSON(
+  jsonString: string,
+): SafeParseResult<Schema, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Schema$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Schema' from JSON`,
+  );
+}
+
 /** @internal */
 export const SuggestOpenAPIRequestBody$inboundSchema: z.ZodType<
   SuggestOpenAPIRequestBody,
@@ -111,6 +128,24 @@ export namespace SuggestOpenAPIRequestBody$ {
   export const outboundSchema = SuggestOpenAPIRequestBody$outboundSchema;
   /** @deprecated use `SuggestOpenAPIRequestBody$Outbound` instead. */
   export type Outbound = SuggestOpenAPIRequestBody$Outbound;
+}
+
+export function suggestOpenAPIRequestBodyToJSON(
+  suggestOpenAPIRequestBody: SuggestOpenAPIRequestBody,
+): string {
+  return JSON.stringify(
+    SuggestOpenAPIRequestBody$outboundSchema.parse(suggestOpenAPIRequestBody),
+  );
+}
+
+export function suggestOpenAPIRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SuggestOpenAPIRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SuggestOpenAPIRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SuggestOpenAPIRequestBody' from JSON`,
+  );
 }
 
 /** @internal */
@@ -160,4 +195,22 @@ export namespace SuggestOpenAPIRequest$ {
   export const outboundSchema = SuggestOpenAPIRequest$outboundSchema;
   /** @deprecated use `SuggestOpenAPIRequest$Outbound` instead. */
   export type Outbound = SuggestOpenAPIRequest$Outbound;
+}
+
+export function suggestOpenAPIRequestToJSON(
+  suggestOpenAPIRequest: SuggestOpenAPIRequest,
+): string {
+  return JSON.stringify(
+    SuggestOpenAPIRequest$outboundSchema.parse(suggestOpenAPIRequest),
+  );
+}
+
+export function suggestOpenAPIRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<SuggestOpenAPIRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SuggestOpenAPIRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SuggestOpenAPIRequest' from JSON`,
+  );
 }

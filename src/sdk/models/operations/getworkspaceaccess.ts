@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetWorkspaceAccessRequest = {
   /**
@@ -59,4 +62,22 @@ export namespace GetWorkspaceAccessRequest$ {
   export const outboundSchema = GetWorkspaceAccessRequest$outboundSchema;
   /** @deprecated use `GetWorkspaceAccessRequest$Outbound` instead. */
   export type Outbound = GetWorkspaceAccessRequest$Outbound;
+}
+
+export function getWorkspaceAccessRequestToJSON(
+  getWorkspaceAccessRequest: GetWorkspaceAccessRequest,
+): string {
+  return JSON.stringify(
+    GetWorkspaceAccessRequest$outboundSchema.parse(getWorkspaceAccessRequest),
+  );
+}
+
+export function getWorkspaceAccessRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceAccessRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceAccessRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceAccessRequest' from JSON`,
+  );
 }
