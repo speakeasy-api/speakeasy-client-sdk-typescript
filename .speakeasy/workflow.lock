@@ -1,18 +1,21 @@
-speakeasyVersion: 1.414.1
+speakeasyVersion: 1.459.2
 sources:
     my-source:
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:1028a5681cdb95a67b15df8dbdc317bb263a1a3777b8f0a01adfa4cf681d5ac4
-        sourceBlobDigest: sha256:09998bda13d2cfb8f8b4358ed65c6a132bd8a5f7fc1825bf153dec19b1c89744
+        sourceRevisionDigest: sha256:197f4441947a90581809f6b723666baae60f4d563691513e0e6034f46b75a933
+        sourceBlobDigest: sha256:2b1030ee3c1d82bb205f4230146d4632dcd59cc07c2eb266d5f294390b1188c3
         tags:
             - latest
-            - main
+            - speakeasy-sdk-regen-1728605883
+            - 0.4.0
 targets:
     speakeasy-client-sdk-typescript:
         source: my-source
         sourceNamespace: my-source
-        sourceRevisionDigest: sha256:1028a5681cdb95a67b15df8dbdc317bb263a1a3777b8f0a01adfa4cf681d5ac4
-        sourceBlobDigest: sha256:09998bda13d2cfb8f8b4358ed65c6a132bd8a5f7fc1825bf153dec19b1c89744
+        sourceRevisionDigest: sha256:197f4441947a90581809f6b723666baae60f4d563691513e0e6034f46b75a933
+        sourceBlobDigest: sha256:2b1030ee3c1d82bb205f4230146d4632dcd59cc07c2eb266d5f294390b1188c3
+        codeSamplesNamespace: my-source-typescript-code-samples
+        codeSamplesRevisionDigest: sha256:336310478e1e8c4e87de51cab6141595f4c35cbdf0ed22c48011174e8fc1a852
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -29,3 +32,7 @@ workflow:
             publish:
                 npm:
                     token: $npm_token
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/my-source-typescript-code-samples
+                blocking: false

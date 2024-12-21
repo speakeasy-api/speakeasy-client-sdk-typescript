@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CreateRequestBody = {
   /**
@@ -45,4 +48,22 @@ export namespace CreateRequestBody$ {
   export const outboundSchema = CreateRequestBody$outboundSchema;
   /** @deprecated use `CreateRequestBody$Outbound` instead. */
   export type Outbound = CreateRequestBody$Outbound;
+}
+
+export function createRequestBodyToJSON(
+  createRequestBody: CreateRequestBody,
+): string {
+  return JSON.stringify(
+    CreateRequestBody$outboundSchema.parse(createRequestBody),
+  );
+}
+
+export function createRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateRequestBody' from JSON`,
+  );
 }

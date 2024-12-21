@@ -3,10 +3,12 @@
  */
 
 import { suggestSuggest } from "../funcs/suggestSuggest.js";
+import { suggestSuggestItems } from "../funcs/suggestSuggestItems.js";
 import { suggestSuggestOpenAPI } from "../funcs/suggestSuggestOpenAPI.js";
 import { suggestSuggestOpenAPIRegistry } from "../funcs/suggestSuggestOpenAPIRegistry.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
+import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class Suggest extends ClientSDK {
@@ -21,6 +23,20 @@ export class Suggest extends ClientSDK {
     options?: RequestOptions,
   ): Promise<ReadableStream<Uint8Array>> {
     return unwrapAsync(suggestSuggest(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Generate generic suggestions for a list of items.
+   */
+  async suggestItems(
+    request: shared.SuggestItemsRequestBody,
+    options?: RequestOptions,
+  ): Promise<Array<string>> {
+    return unwrapAsync(suggestSuggestItems(
       this,
       request,
       options,

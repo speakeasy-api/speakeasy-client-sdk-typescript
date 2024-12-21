@@ -6,10 +6,10 @@
 import { OASOperation } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: OASOperation = {
-  description: "digestive traffic ouch substantiate into ew a",
+  description: "ah hunt until freckle across following gadzooks wobbly athwart",
   method: "<value>",
   operationId: "<id>",
-  path: "/tmp",
+  path: "/opt/sbin",
   tags: [
     "<value>",
   ],

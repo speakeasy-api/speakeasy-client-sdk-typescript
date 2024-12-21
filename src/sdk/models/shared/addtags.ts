@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Request body of tags to add to a revision
@@ -61,4 +64,18 @@ export namespace AddTags$ {
   export const outboundSchema = AddTags$outboundSchema;
   /** @deprecated use `AddTags$Outbound` instead. */
   export type Outbound = AddTags$Outbound;
+}
+
+export function addTagsToJSON(addTags: AddTags): string {
+  return JSON.stringify(AddTags$outboundSchema.parse(addTags));
+}
+
+export function addTagsFromJSON(
+  jsonString: string,
+): SafeParseResult<AddTags, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AddTags$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AddTags' from JSON`,
+  );
 }
