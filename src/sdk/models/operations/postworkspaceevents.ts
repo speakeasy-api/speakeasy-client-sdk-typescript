@@ -6,13 +6,61 @@ import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import * as shared from "../shared/index.js";
 
+export type PostWorkspaceEventsGlobals = {
+  workspaceId?: string | undefined;
+};
+
 export type PostWorkspaceEventsRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   requestBody: Array<shared.CliEvent>;
 };
+
+/** @internal */
+export const PostWorkspaceEventsGlobals$inboundSchema: z.ZodType<
+  PostWorkspaceEventsGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type PostWorkspaceEventsGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const PostWorkspaceEventsGlobals$outboundSchema: z.ZodType<
+  PostWorkspaceEventsGlobals$Outbound,
+  z.ZodTypeDef,
+  PostWorkspaceEventsGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PostWorkspaceEventsGlobals$ {
+  /** @deprecated use `PostWorkspaceEventsGlobals$inboundSchema` instead. */
+  export const inboundSchema = PostWorkspaceEventsGlobals$inboundSchema;
+  /** @deprecated use `PostWorkspaceEventsGlobals$outboundSchema` instead. */
+  export const outboundSchema = PostWorkspaceEventsGlobals$outboundSchema;
+  /** @deprecated use `PostWorkspaceEventsGlobals$Outbound` instead. */
+  export type Outbound = PostWorkspaceEventsGlobals$Outbound;
+}
 
 /** @internal */
 export const PostWorkspaceEventsRequest$inboundSchema: z.ZodType<
@@ -20,7 +68,7 @@ export const PostWorkspaceEventsRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   RequestBody: z.array(shared.CliEvent$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
@@ -31,7 +79,7 @@ export const PostWorkspaceEventsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type PostWorkspaceEventsRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   RequestBody: Array<shared.CliEvent$Outbound>;
 };
 
@@ -41,7 +89,7 @@ export const PostWorkspaceEventsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   PostWorkspaceEventsRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   requestBody: z.array(shared.CliEvent$outboundSchema),
 }).transform((v) => {
   return remap$(v, {

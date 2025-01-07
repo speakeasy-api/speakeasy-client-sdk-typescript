@@ -20,7 +20,7 @@
 <!-- Start Summary [summary] -->
 ## Summary
 
-Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
+Speakeasy API: The Subscriptions API manages subscriptions for CLI and registry events
 
 For more information about the API: [The Speakeasy Platform Documentation](/docs)
 <!-- End Summary [summary] -->
@@ -33,6 +33,7 @@ For more information about the API: [The Speakeasy Platform Documentation](/docs
 * [SDK Example Usage](#sdk-example-usage)
 * [Available Resources and Operations](#available-resources-and-operations)
 * [Standalone functions](#standalone-functions)
+* [Global Parameters](#global-parameters)
 * [File uploads](#file-uploads)
 * [Retries](#retries)
 * [Error Handling](#error-handling)
@@ -90,7 +91,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.getApis({});
+  const result = await speakeasy.artifacts.createRemoteSource();
 
   // Handle the result
   console.log(result);
@@ -107,35 +108,18 @@ run();
 <details open>
 <summary>Available methods</summary>
 
-### [apiEndpoints](docs/sdks/apiendpoints/README.md)
-
-* [deleteApiEndpoint](docs/sdks/apiendpoints/README.md#deleteapiendpoint) - Delete an ApiEndpoint.
-* [findApiEndpoint](docs/sdks/apiendpoints/README.md#findapiendpoint) - Find an ApiEndpoint via its displayName.
-* [generateOpenApiSpecForApiEndpoint](docs/sdks/apiendpoints/README.md#generateopenapispecforapiendpoint) - Generate an OpenAPI specification for a particular ApiEndpoint.
-* [generatePostmanCollectionForApiEndpoint](docs/sdks/apiendpoints/README.md#generatepostmancollectionforapiendpoint) - Generate a Postman collection for a particular ApiEndpoint.
-* [getAllApiEndpoints](docs/sdks/apiendpoints/README.md#getallapiendpoints) - Get all Api endpoints for a particular apiID.
-* [getAllForVersionApiEndpoints](docs/sdks/apiendpoints/README.md#getallforversionapiendpoints) - Get all ApiEndpoints for a particular apiID and versionID.
-* [getApiEndpoint](docs/sdks/apiendpoints/README.md#getapiendpoint) - Get an ApiEndpoint.
-* [upsertApiEndpoint](docs/sdks/apiendpoints/README.md#upsertapiendpoint) - Upsert an ApiEndpoint.
-
-### [apis](docs/sdks/apis/README.md)
-
-* [deleteApi](docs/sdks/apis/README.md#deleteapi) - Delete an Api.
-* [generateOpenApiSpec](docs/sdks/apis/README.md#generateopenapispec) - Generate an OpenAPI specification for a particular Api.
-* [generatePostmanCollection](docs/sdks/apis/README.md#generatepostmancollection) - Generate a Postman collection for a particular Api.
-* [getAllApiVersions](docs/sdks/apis/README.md#getallapiversions) - Get all Api versions for a particular ApiEndpoint.
-* [getApis](docs/sdks/apis/README.md#getapis) - Get a list of Apis for a given workspace
-* [upsertApi](docs/sdks/apis/README.md#upsertapi) - Upsert an Api
-
 ### [artifacts](docs/sdks/artifacts/README.md)
 
+* [createRemoteSource](docs/sdks/artifacts/README.md#createremotesource) - Configure a new remote source
 * [getBlob](docs/sdks/artifacts/README.md#getblob) - Get blob for a particular digest
 * [getManifest](docs/sdks/artifacts/README.md#getmanifest) - Get manifest for a particular reference
 * [getNamespaces](docs/sdks/artifacts/README.md#getnamespaces) - Each namespace contains many revisions.
 * [getRevisions](docs/sdks/artifacts/README.md#getrevisions)
 * [getTags](docs/sdks/artifacts/README.md#gettags)
+* [listRemoteSources](docs/sdks/artifacts/README.md#listremotesources) - Get remote sources attached to a particular namespace
 * [postTags](docs/sdks/artifacts/README.md#posttags) - Add tags to an existing revision
 * [preflight](docs/sdks/artifacts/README.md#preflight) - Get access token for communicating with OCI distribution endpoints
+* [setVisibility](docs/sdks/artifacts/README.md#setvisibility) - Set visibility of a namespace with an existing metadata entry
 
 ### [auth](docs/sdks/auth/README.md)
 
@@ -144,11 +128,12 @@ run();
 * [getUser](docs/sdks/auth/README.md#getuser) - Get information about the current user.
 * [validateApiKey](docs/sdks/auth/README.md#validateapikey) - Validate the current api key.
 
-### [embeds](docs/sdks/embeds/README.md)
+### [codeSamples](docs/sdks/codesamples/README.md)
 
-* [getEmbedAccessToken](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
-* [getValidEmbedAccessTokens](docs/sdks/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
-* [revokeEmbedAccessToken](docs/sdks/embeds/README.md#revokeembedaccesstoken) - Revoke an embed access EmbedToken.
+* [generateCodeSamplePreview](docs/sdks/codesamples/README.md#generatecodesamplepreview) - Generate Code Sample previews from a file and configuration parameters.
+* [generateCodeSamplePreviewAsync](docs/sdks/codesamples/README.md#generatecodesamplepreviewasync) - Initiate asynchronous Code Sample preview generation from a file and configuration parameters, receiving an async JobID response for polling.
+* [get](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets from document stored in the registry
+* [getCodeSamplePreviewAsync](docs/sdks/codesamples/README.md#getcodesamplepreviewasync) - Poll for the result of an asynchronous Code Sample preview generation.
 
 ### [events](docs/sdks/events/README.md)
 
@@ -167,14 +152,10 @@ run();
 * [configureMintlifyRepo](docs/sdks/github/README.md#configuremintlifyrepo)
 * [configureTarget](docs/sdks/github/README.md#configuretarget)
 * [getAction](docs/sdks/github/README.md#getaction)
+* [getSetup](docs/sdks/github/README.md#getsetup)
+* [linkGithub](docs/sdks/github/README.md#linkgithub)
 * [storePublishingSecrets](docs/sdks/github/README.md#storepublishingsecrets)
 * [triggerAction](docs/sdks/github/README.md#triggeraction)
-
-### [metadata](docs/sdks/metadata/README.md)
-
-* [deleteVersionMetadata](docs/sdks/metadata/README.md#deleteversionmetadata) - Delete metadata for a particular apiID and versionID.
-* [getVersionMetadata](docs/sdks/metadata/README.md#getversionmetadata) - Get all metadata for a particular apiID and versionID.
-* [insertVersionMetadata](docs/sdks/metadata/README.md#insertversionmetadata) - Insert metadata for a particular apiID and versionID.
 
 ### [organizations](docs/sdks/organizations/README.md)
 
@@ -190,31 +171,20 @@ run();
 * [getLintingReportSignedUrl](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
 * [uploadReport](docs/sdks/reports/README.md#uploadreport) - Upload a report.
 
-### [requests](docs/sdks/requests/README.md)
-
-* [generateRequestPostmanCollection](docs/sdks/requests/README.md#generaterequestpostmancollection) - Generate a Postman collection for a particular request.
-* [getRequestFromEventLog](docs/sdks/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
-* [queryEventLog](docs/sdks/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
-
-### [schemas](docs/sdks/schemas/README.md)
-
-* [deleteSchema](docs/sdks/schemas/README.md#deleteschema) - Delete a particular schema revision for an Api.
-* [downloadSchema](docs/sdks/schemas/README.md#downloadschema) - Download the latest schema for a particular apiID.
-* [downloadSchemaRevision](docs/sdks/schemas/README.md#downloadschemarevision) - Download a particular schema revision for an Api.
-* [getSchema](docs/sdks/schemas/README.md#getschema) - Get information about the latest schema.
-* [getSchemaDiff](docs/sdks/schemas/README.md#getschemadiff) - Get a diff of two schema revisions for an Api.
-* [getSchemaRevision](docs/sdks/schemas/README.md#getschemarevision) - Get information about a particular schema revision for an Api.
-* [getSchemas](docs/sdks/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
-* [registerSchema](docs/sdks/schemas/README.md#registerschema) - Register a schema.
-
 ### [shortURLs](docs/sdks/shorturls/README.md)
 
 * [create](docs/sdks/shorturls/README.md#create) - Shorten a URL.
 
 
+### [subscriptions](docs/sdks/subscriptions/README.md)
+
+* [activateSubscriptionNamespace](docs/sdks/subscriptions/README.md#activatesubscriptionnamespace) - Activate an ignored namespace for a subscription
+* [ignoreSubscriptionNamespace](docs/sdks/subscriptions/README.md#ignoresubscriptionnamespace) - Ignored a namespace for a subscription
+
 ### [suggest](docs/sdks/suggest/README.md)
 
 * [suggest](docs/sdks/suggest/README.md#suggest) - Generate suggestions for improving an OpenAPI document.
+* [suggestItems](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 * [suggestOpenAPI](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 * [suggestOpenAPIRegistry](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
 
@@ -259,7 +229,7 @@ If a HTTP request fails, an operation my also throw an error from the `sdk/model
 | InvalidRequestError                                  | Any input used to create a request is invalid        |
 | UnexpectedClientError                                | Unrecognised or unexpected error                     |
 
-In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `deleteApi` method may throw the following errors:
+In addition, when custom error responses are specified for an operation, the SDK may throw their associated Error type. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation. For example, the `createRemoteSource` method may throw the following errors:
 
 | Error Type      | Status Code     | Content Type    |
 | --------------- | --------------- | --------------- |
@@ -278,10 +248,7 @@ const speakeasy = new Speakeasy({
 async function run() {
   let result;
   try {
-    result = await speakeasy.apis.deleteApi({
-      apiID: "<id>",
-      versionID: "<id>",
-    });
+    result = await speakeasy.artifacts.createRemoteSource();
 
     // Handle the result
     console.log(result);
@@ -332,10 +299,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
-  });
+  const result = await speakeasy.artifacts.createRemoteSource();
 
   // Handle the result
   console.log(result);
@@ -361,10 +325,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
-  });
+  const result = await speakeasy.artifacts.createRemoteSource();
 
   // Handle the result
   console.log(result);
@@ -452,10 +413,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
-  });
+  const result = await speakeasy.artifacts.createRemoteSource();
 
   // Handle the result
   console.log(result);
@@ -482,10 +440,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
-  }, {
+  const result = await speakeasy.artifacts.createRemoteSource({
     retries: {
       strategy: "backoff",
       backoff: {
@@ -527,10 +482,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.apis.deleteApi({
-    apiID: "<id>",
-    versionID: "<id>",
-  });
+  const result = await speakeasy.artifacts.createRemoteSource();
 
   // Handle the result
   console.log(result);
@@ -562,34 +514,24 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`apiEndpointsDeleteApiEndpoint`](docs/sdks/apiendpoints/README.md#deleteapiendpoint) - Delete an ApiEndpoint.
-- [`apiEndpointsFindApiEndpoint`](docs/sdks/apiendpoints/README.md#findapiendpoint) - Find an ApiEndpoint via its displayName.
-- [`apiEndpointsGenerateOpenApiSpecForApiEndpoint`](docs/sdks/apiendpoints/README.md#generateopenapispecforapiendpoint) - Generate an OpenAPI specification for a particular ApiEndpoint.
-- [`apiEndpointsGeneratePostmanCollectionForApiEndpoint`](docs/sdks/apiendpoints/README.md#generatepostmancollectionforapiendpoint) - Generate a Postman collection for a particular ApiEndpoint.
-- [`apiEndpointsGetAllApiEndpoints`](docs/sdks/apiendpoints/README.md#getallapiendpoints) - Get all Api endpoints for a particular apiID.
-- [`apiEndpointsGetAllForVersionApiEndpoints`](docs/sdks/apiendpoints/README.md#getallforversionapiendpoints) - Get all ApiEndpoints for a particular apiID and versionID.
-- [`apiEndpointsGetApiEndpoint`](docs/sdks/apiendpoints/README.md#getapiendpoint) - Get an ApiEndpoint.
-- [`apiEndpointsUpsertApiEndpoint`](docs/sdks/apiendpoints/README.md#upsertapiendpoint) - Upsert an ApiEndpoint.
-- [`apisDeleteApi`](docs/sdks/apis/README.md#deleteapi) - Delete an Api.
-- [`apisGenerateOpenApiSpec`](docs/sdks/apis/README.md#generateopenapispec) - Generate an OpenAPI specification for a particular Api.
-- [`apisGeneratePostmanCollection`](docs/sdks/apis/README.md#generatepostmancollection) - Generate a Postman collection for a particular Api.
-- [`apisGetAllApiVersions`](docs/sdks/apis/README.md#getallapiversions) - Get all Api versions for a particular ApiEndpoint.
-- [`apisGetApis`](docs/sdks/apis/README.md#getapis) - Get a list of Apis for a given workspace
-- [`apisUpsertApi`](docs/sdks/apis/README.md#upsertapi) - Upsert an Api
+- [`artifactsCreateRemoteSource`](docs/sdks/artifacts/README.md#createremotesource) - Configure a new remote source
 - [`artifactsGetBlob`](docs/sdks/artifacts/README.md#getblob) - Get blob for a particular digest
 - [`artifactsGetManifest`](docs/sdks/artifacts/README.md#getmanifest) - Get manifest for a particular reference
 - [`artifactsGetNamespaces`](docs/sdks/artifacts/README.md#getnamespaces) - Each namespace contains many revisions.
 - [`artifactsGetRevisions`](docs/sdks/artifacts/README.md#getrevisions)
 - [`artifactsGetTags`](docs/sdks/artifacts/README.md#gettags)
+- [`artifactsListRemoteSources`](docs/sdks/artifacts/README.md#listremotesources) - Get remote sources attached to a particular namespace
 - [`artifactsPostTags`](docs/sdks/artifacts/README.md#posttags) - Add tags to an existing revision
 - [`artifactsPreflight`](docs/sdks/artifacts/README.md#preflight) - Get access token for communicating with OCI distribution endpoints
+- [`artifactsSetVisibility`](docs/sdks/artifacts/README.md#setvisibility) - Set visibility of a namespace with an existing metadata entry
 - [`authGetAccess`](docs/sdks/auth/README.md#getaccess) - Get access allowances for a particular workspace
 - [`authGetAccessToken`](docs/sdks/auth/README.md#getaccesstoken) - Get or refresh an access token for the current workspace.
 - [`authGetUser`](docs/sdks/auth/README.md#getuser) - Get information about the current user.
 - [`authValidateApiKey`](docs/sdks/auth/README.md#validateapikey) - Validate the current api key.
-- [`embedsGetEmbedAccessToken`](docs/sdks/embeds/README.md#getembedaccesstoken) - Get an embed access token for the current workspace.
-- [`embedsGetValidEmbedAccessTokens`](docs/sdks/embeds/README.md#getvalidembedaccesstokens) - Get all valid embed access tokens for the current workspace.
-- [`embedsRevokeEmbedAccessToken`](docs/sdks/embeds/README.md#revokeembedaccesstoken) - Revoke an embed access EmbedToken.
+- [`codeSamplesGenerateCodeSamplePreview`](docs/sdks/codesamples/README.md#generatecodesamplepreview) - Generate Code Sample previews from a file and configuration parameters.
+- [`codeSamplesGenerateCodeSamplePreviewAsync`](docs/sdks/codesamples/README.md#generatecodesamplepreviewasync) - Initiate asynchronous Code Sample preview generation from a file and configuration parameters, receiving an async JobID response for polling.
+- [`codeSamplesGet`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets from document stored in the registry
+- [`codeSamplesGetCodeSamplePreviewAsync`](docs/sdks/codesamples/README.md#getcodesamplepreviewasync) - Poll for the result of an asynchronous Code Sample preview generation.
 - [`eventsGetEventsByTarget`](docs/sdks/events/README.md#geteventsbytarget) - Load recent events for a particular workspace
 - [`eventsGetTargets`](docs/sdks/events/README.md#gettargets) - Load targets for a particular workspace
 - [`eventsGetTargetsDeprecated`](docs/sdks/events/README.md#gettargetsdeprecated) - Load targets for a particular workspace
@@ -602,11 +544,10 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`githubConfigureMintlifyRepo`](docs/sdks/github/README.md#configuremintlifyrepo)
 - [`githubConfigureTarget`](docs/sdks/github/README.md#configuretarget)
 - [`githubGetAction`](docs/sdks/github/README.md#getaction)
+- [`githubGetSetup`](docs/sdks/github/README.md#getsetup)
+- [`githubLinkGithub`](docs/sdks/github/README.md#linkgithub)
 - [`githubStorePublishingSecrets`](docs/sdks/github/README.md#storepublishingsecrets)
 - [`githubTriggerAction`](docs/sdks/github/README.md#triggeraction)
-- [`metadataDeleteVersionMetadata`](docs/sdks/metadata/README.md#deleteversionmetadata) - Delete metadata for a particular apiID and versionID.
-- [`metadataGetVersionMetadata`](docs/sdks/metadata/README.md#getversionmetadata) - Get all metadata for a particular apiID and versionID.
-- [`metadataInsertVersionMetadata`](docs/sdks/metadata/README.md#insertversionmetadata) - Insert metadata for a particular apiID and versionID.
 - [`organizationsCreate`](docs/sdks/organizations/README.md#create) - Create an organization
 - [`organizationsCreateFreeTrial`](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
 - [`organizationsGet`](docs/sdks/organizations/README.md#get) - Get organization
@@ -615,19 +556,11 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`reportsGetChangesReportSignedUrl`](docs/sdks/reports/README.md#getchangesreportsignedurl) - Get the signed access url for the change reports for a particular document.
 - [`reportsGetLintingReportSignedUrl`](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
 - [`reportsUploadReport`](docs/sdks/reports/README.md#uploadreport) - Upload a report.
-- [`requestsGenerateRequestPostmanCollection`](docs/sdks/requests/README.md#generaterequestpostmancollection) - Generate a Postman collection for a particular request.
-- [`requestsGetRequestFromEventLog`](docs/sdks/requests/README.md#getrequestfromeventlog) - Get information about a particular request.
-- [`requestsQueryEventLog`](docs/sdks/requests/README.md#queryeventlog) - Query the event log to retrieve a list of requests.
-- [`schemasDeleteSchema`](docs/sdks/schemas/README.md#deleteschema) - Delete a particular schema revision for an Api.
-- [`schemasDownloadSchema`](docs/sdks/schemas/README.md#downloadschema) - Download the latest schema for a particular apiID.
-- [`schemasDownloadSchemaRevision`](docs/sdks/schemas/README.md#downloadschemarevision) - Download a particular schema revision for an Api.
-- [`schemasGetSchema`](docs/sdks/schemas/README.md#getschema) - Get information about the latest schema.
-- [`schemasGetSchemaDiff`](docs/sdks/schemas/README.md#getschemadiff) - Get a diff of two schema revisions for an Api.
-- [`schemasGetSchemaRevision`](docs/sdks/schemas/README.md#getschemarevision) - Get information about a particular schema revision for an Api.
-- [`schemasGetSchemas`](docs/sdks/schemas/README.md#getschemas) - Get information about all schemas associated with a particular apiID.
-- [`schemasRegisterSchema`](docs/sdks/schemas/README.md#registerschema) - Register a schema.
 - [`shortURLsCreate`](docs/sdks/shorturls/README.md#create) - Shorten a URL.
+- [`subscriptionsActivateSubscriptionNamespace`](docs/sdks/subscriptions/README.md#activatesubscriptionnamespace) - Activate an ignored namespace for a subscription
+- [`subscriptionsIgnoreSubscriptionNamespace`](docs/sdks/subscriptions/README.md#ignoresubscriptionnamespace) - Ignored a namespace for a subscription
 - [`suggestSuggest`](docs/sdks/suggest/README.md#suggest) - Generate suggestions for improving an OpenAPI document.
+- [`suggestSuggestItems`](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 - [`suggestSuggestOpenAPI`](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 - [`suggestSuggestOpenAPIRegistry`](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
 - [`workspacesCreate`](docs/sdks/workspaces/README.md#create) - Create a workspace
@@ -647,6 +580,44 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
+
+<!-- Start Global Parameters [global-parameters] -->
+## Global Parameters
+
+A parameter is configured globally. This parameter may be set on the SDK client instance itself during initialization. When configured as an option during SDK initialization, This global value will be used as the default on the operations that use it. When such operations are called, there is a place in each to override the global value, if needed.
+
+For example, you can set `workspace_id` to `"<id>"` at SDK initialization and then you do not have to pass the same value on calls to operations like `getAccessToken`. But if you want to do so you may, which will locally override the global setting. See the example code below for a demonstration.
+
+
+### Available Globals
+
+The following global parameter is available.
+
+| Name | Type | Required | Description |
+| ---- | ---- |:--------:| ----------- |
+| workspaceId | string |  | The workspaceId parameter. |
+
+
+### Example
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+const speakeasy = new Speakeasy();
+
+async function run() {
+  const result = await speakeasy.auth.getAccessToken({
+    workspaceId: "<id>",
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+
+```
+<!-- End Global Parameters [global-parameters] -->
 
 <!-- Start File uploads [file-upload] -->
 ## File uploads
@@ -673,12 +644,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.schemas.registerSchema({
-    apiID: "<id>",
-    versionID: "<id>",
-    requestBody: {
-      file: await openAsBlob("example.file"),
-    },
+  const result = await speakeasy.codeSamples.generateCodeSamplePreview({
+    languages: [
+      "<value>",
+      "<value>",
+    ],
+    schemaFile: await openAsBlob("example.file"),
   });
 
   // Handle the result

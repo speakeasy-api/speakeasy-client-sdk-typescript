@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 201,
+  statusCode: 506,
 };
 ```
 
@@ -20,12 +20,12 @@ const value: shared.WorkspaceTeamResponse = {
     {
       admin: false,
       confirmed: false,
-      createdAt: new Date("2024-01-06T23:51:52.329Z"),
-      displayName: "Rosa.Nolan89",
-      email: "Jordi_Ratke5@yahoo.com",
+      createdAt: new Date("2023-05-27T06:34:13.913Z"),
+      displayName: "Will54",
+      email: "Vivianne38@hotmail.com",
       emailVerified: false,
       id: "<id>",
-      updatedAt: new Date("2022-02-11T16:43:38.291Z"),
+      updatedAt: new Date("2023-11-25T19:57:38.512Z"),
       whitelisted: false,
     },
   ],

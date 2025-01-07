@@ -6,11 +6,15 @@ import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import * as shared from "../shared/index.js";
 
+export type UpdateWorkspaceDetailsGlobals = {
+  workspaceId?: string | undefined;
+};
+
 export type UpdateWorkspaceDetailsRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * The workspace details to update.
    */
@@ -18,12 +22,56 @@ export type UpdateWorkspaceDetailsRequest = {
 };
 
 /** @internal */
+export const UpdateWorkspaceDetailsGlobals$inboundSchema: z.ZodType<
+  UpdateWorkspaceDetailsGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type UpdateWorkspaceDetailsGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const UpdateWorkspaceDetailsGlobals$outboundSchema: z.ZodType<
+  UpdateWorkspaceDetailsGlobals$Outbound,
+  z.ZodTypeDef,
+  UpdateWorkspaceDetailsGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpdateWorkspaceDetailsGlobals$ {
+  /** @deprecated use `UpdateWorkspaceDetailsGlobals$inboundSchema` instead. */
+  export const inboundSchema = UpdateWorkspaceDetailsGlobals$inboundSchema;
+  /** @deprecated use `UpdateWorkspaceDetailsGlobals$outboundSchema` instead. */
+  export const outboundSchema = UpdateWorkspaceDetailsGlobals$outboundSchema;
+  /** @deprecated use `UpdateWorkspaceDetailsGlobals$Outbound` instead. */
+  export type Outbound = UpdateWorkspaceDetailsGlobals$Outbound;
+}
+
+/** @internal */
 export const UpdateWorkspaceDetailsRequest$inboundSchema: z.ZodType<
   UpdateWorkspaceDetailsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   Workspace: shared.Workspace$inboundSchema,
 }).transform((v) => {
   return remap$(v, {
@@ -34,7 +82,7 @@ export const UpdateWorkspaceDetailsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type UpdateWorkspaceDetailsRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   Workspace: shared.Workspace$Outbound;
 };
 
@@ -44,7 +92,7 @@ export const UpdateWorkspaceDetailsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   UpdateWorkspaceDetailsRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   workspace: shared.Workspace$outboundSchema,
 }).transform((v) => {
   return remap$(v, {

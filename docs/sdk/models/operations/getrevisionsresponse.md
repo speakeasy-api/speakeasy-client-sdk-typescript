@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 501,
+  statusCode: 306,
 };
 ```
 
@@ -18,7 +18,7 @@ const value: shared.ErrorT = {
 const value: shared.GetRevisionsResponse = {
   items: [
     {
-      createdAt: new Date("2024-06-01T18:53:02.233Z"),
+      createdAt: new Date("2023-11-01T05:53:15.917Z"),
       digest:
         "sha256:6d1ef012b5674ad8a127ecfa9b5e6f5178d171b90ee462846974177fd9bdd39f",
       id: "<id>",
@@ -26,7 +26,7 @@ const value: shared.GetRevisionsResponse = {
       tags: [
         "<value>",
       ],
-      updatedAt: new Date("2023-10-05T08:58:59.878Z"),
+      updatedAt: new Date("2023-05-22T05:32:53.930Z"),
     },
   ],
   nextPageToken: "<value>",

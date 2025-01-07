@@ -6,7 +6,7 @@
 import { Revision } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: Revision = {
-  createdAt: new Date("2023-10-03T14:03:30.664Z"),
+  createdAt: new Date("2025-12-08T13:34:36.747Z"),
   digest:
     "sha256:6d1ef012b5674ad8a127ecfa9b5e6f5178d171b90ee462846974177fd9bdd39f",
   id: "<id>",
@@ -14,7 +14,7 @@ let value: Revision = {
   tags: [
     "<value>",
   ],
-  updatedAt: new Date("2024-11-20T06:46:28.205Z"),
+  updatedAt: new Date("2025-05-25T21:04:00.744Z"),
 };
 ```
 

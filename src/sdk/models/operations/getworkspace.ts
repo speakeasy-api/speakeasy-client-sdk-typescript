@@ -6,14 +6,62 @@ import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import * as shared from "../shared/index.js";
 
+export type GetWorkspaceGlobals = {
+  workspaceId?: string | undefined;
+};
+
 export type GetWorkspaceRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
 };
 
 export type GetWorkspaceResponse = shared.ErrorT | shared.Workspace;
+
+/** @internal */
+export const GetWorkspaceGlobals$inboundSchema: z.ZodType<
+  GetWorkspaceGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type GetWorkspaceGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const GetWorkspaceGlobals$outboundSchema: z.ZodType<
+  GetWorkspaceGlobals$Outbound,
+  z.ZodTypeDef,
+  GetWorkspaceGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetWorkspaceGlobals$ {
+  /** @deprecated use `GetWorkspaceGlobals$inboundSchema` instead. */
+  export const inboundSchema = GetWorkspaceGlobals$inboundSchema;
+  /** @deprecated use `GetWorkspaceGlobals$outboundSchema` instead. */
+  export const outboundSchema = GetWorkspaceGlobals$outboundSchema;
+  /** @deprecated use `GetWorkspaceGlobals$Outbound` instead. */
+  export type Outbound = GetWorkspaceGlobals$Outbound;
+}
 
 /** @internal */
 export const GetWorkspaceRequest$inboundSchema: z.ZodType<
@@ -21,7 +69,7 @@ export const GetWorkspaceRequest$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "workspace_id": "workspaceId",
@@ -30,7 +78,7 @@ export const GetWorkspaceRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetWorkspaceRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
 };
 
 /** @internal */
@@ -39,7 +87,7 @@ export const GetWorkspaceRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetWorkspaceRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     workspaceId: "workspace_id",

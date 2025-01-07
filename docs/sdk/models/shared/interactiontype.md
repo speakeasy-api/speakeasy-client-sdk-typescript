@@ -7,7 +7,7 @@ Type of interaction.
 ```typescript
 import { InteractionType } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
-let value: InteractionType = "OPENAPI_DIFF";
+let value: InteractionType = "CI_EXEC";
 ```
 
 ## Values

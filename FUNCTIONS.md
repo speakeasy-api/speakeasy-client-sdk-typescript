@@ -20,7 +20,7 @@ specific category of applications.
 
 ```typescript
 import { SpeakeasyCore } from "@speakeasy-api/speakeasy-client-sdk-typescript/core.js";
-import { apisGetApis } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs/apisGetApis.js";
+import { artifactsCreateRemoteSource } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs/artifactsCreateRemoteSource.js";
 import { SDKValidationError } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors/sdkvalidationerror.js";
 
 // Use `SpeakeasyCore` for best tree-shaking performance.
@@ -32,7 +32,7 @@ const speakeasy = new SpeakeasyCore({
 });
 
 async function run() {
-  const res = await apisGetApis(speakeasy, {});
+  const res = await artifactsCreateRemoteSource(speakeasy);
 
   switch (true) {
     case res.ok:

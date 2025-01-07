@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 226,
+  statusCode: 201,
 };
 ```
 
@@ -16,7 +16,7 @@ const value: shared.ErrorT = {
 
 ```typescript
 const value: shared.GithubConfigureCodeSamplesResponse = {
-  codeSampleOverlayRegistryURL: "https://icy-airmail.net",
+  codeSampleOverlayRegistryURL: "https://clean-octave.org/",
   source: {
     location: "<value>",
   },

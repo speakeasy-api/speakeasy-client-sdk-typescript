@@ -5,11 +5,15 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
 
+export type DeleteWorkspaceTokenGlobals = {
+  workspaceId?: string | undefined;
+};
+
 export type DeleteWorkspaceTokenRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * Unique identifier of the token.
    */
@@ -17,12 +21,56 @@ export type DeleteWorkspaceTokenRequest = {
 };
 
 /** @internal */
+export const DeleteWorkspaceTokenGlobals$inboundSchema: z.ZodType<
+  DeleteWorkspaceTokenGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type DeleteWorkspaceTokenGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const DeleteWorkspaceTokenGlobals$outboundSchema: z.ZodType<
+  DeleteWorkspaceTokenGlobals$Outbound,
+  z.ZodTypeDef,
+  DeleteWorkspaceTokenGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteWorkspaceTokenGlobals$ {
+  /** @deprecated use `DeleteWorkspaceTokenGlobals$inboundSchema` instead. */
+  export const inboundSchema = DeleteWorkspaceTokenGlobals$inboundSchema;
+  /** @deprecated use `DeleteWorkspaceTokenGlobals$outboundSchema` instead. */
+  export const outboundSchema = DeleteWorkspaceTokenGlobals$outboundSchema;
+  /** @deprecated use `DeleteWorkspaceTokenGlobals$Outbound` instead. */
+  export type Outbound = DeleteWorkspaceTokenGlobals$Outbound;
+}
+
+/** @internal */
 export const DeleteWorkspaceTokenRequest$inboundSchema: z.ZodType<
   DeleteWorkspaceTokenRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   tokenID: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -32,7 +80,7 @@ export const DeleteWorkspaceTokenRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type DeleteWorkspaceTokenRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   tokenID: string;
 };
 
@@ -42,7 +90,7 @@ export const DeleteWorkspaceTokenRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteWorkspaceTokenRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   tokenID: z.string(),
 }).transform((v) => {
   return remap$(v, {

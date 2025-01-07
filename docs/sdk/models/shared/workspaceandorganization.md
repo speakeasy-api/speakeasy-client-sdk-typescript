@@ -9,22 +9,22 @@ import { WorkspaceAndOrganization } from "@speakeasy-api/speakeasy-client-sdk-ty
 
 let value: WorkspaceAndOrganization = {
   organization: {
-    accountType: "scale-up",
-    createdAt: new Date("2023-02-19T13:21:39.892Z"),
+    accountType: "free",
+    createdAt: new Date("2023-04-09T04:55:05.565Z"),
     id: "<id>",
     name: "<value>",
     slug: "<value>",
+    ssoActivated: false,
     telemetryDisabled: false,
-    updatedAt: new Date("2024-12-09T13:28:34.858Z"),
+    updatedAt: new Date("2025-01-06T13:32:43.889Z"),
   },
   workspace: {
-    createdAt: new Date("2022-07-11T10:12:51.010Z"),
+    createdAt: new Date("2023-09-26T22:08:20.716Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    telemetryDisabled: false,
-    updatedAt: new Date("2022-12-26T11:23:46.953Z"),
+    updatedAt: new Date("2024-04-05T21:52:12.474Z"),
     verified: false,
   },
 };

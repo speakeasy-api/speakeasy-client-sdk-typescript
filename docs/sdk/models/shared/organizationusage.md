@@ -14,7 +14,8 @@ let value: OrganizationUsage = {
     "<value>",
   ],
   language: "<value>",
-  numberOfOperations: 862192,
+  maxOperations: 988374,
+  numberOfOperations: 102044,
   usedFeatures: [
     "<value>",
   ],
@@ -26,12 +27,13 @@ let value: OrganizationUsage = {
 
 ## Fields
 
-| Field                                    | Type                                     | Required                                 | Description                              |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| `accessible`                             | *boolean*                                | :heavy_check_mark:                       | Indicates if the features are accessible |
-| `accessibleFeatures`                     | *string*[]                               | :heavy_check_mark:                       | Features that are accessible             |
-| `genLockIds`                             | *string*[]                               | :heavy_check_mark:                       | List of generation lock IDs              |
-| `language`                               | *string*                                 | :heavy_check_mark:                       | The programming language used            |
-| `numberOfOperations`                     | *number*                                 | :heavy_check_mark:                       | Number of operations performed           |
-| `usedFeatures`                           | *string*[]                               | :heavy_check_mark:                       | Features that have been used             |
-| `workspaces`                             | *string*[]                               | :heavy_check_mark:                       | List of workspace IDs                    |
+| Field                                                     | Type                                                      | Required                                                  | Description                                               |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `accessible`                                              | *boolean*                                                 | :heavy_check_mark:                                        | Indicates if the features are accessible                  |
+| `accessibleFeatures`                                      | *string*[]                                                | :heavy_check_mark:                                        | Features that are accessible                              |
+| `genLockIds`                                              | *string*[]                                                | :heavy_check_mark:                                        | List of generation lock IDs                               |
+| `language`                                                | *string*                                                  | :heavy_check_mark:                                        | The programming language used                             |
+| `maxOperations`                                           | *number*                                                  | :heavy_check_mark:                                        | Maximum Number of operations per SDK specific in contract |
+| `numberOfOperations`                                      | *number*                                                  | :heavy_check_mark:                                        | Number of operations performed                            |
+| `usedFeatures`                                            | *string*[]                                                | :heavy_check_mark:                                        | Features that have been used                              |
+| `workspaces`                                              | *string*[]                                                | :heavy_check_mark:                                        | List of workspace IDs                                     |

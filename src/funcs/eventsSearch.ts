@@ -53,20 +53,24 @@ export async function eventsSearch(
   const body = null;
 
   const pathParams = {
-    workspace_id: encodeSimple("workspace_id", payload.workspace_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
+    workspace_id: encodeSimple(
+      "workspace_id",
+      payload.workspace_id ?? client._options.workspaceId,
+      { explode: false, charEncoding: "percent" },
+    ),
   };
 
   const path = pathToFunc("/v1/workspace/{workspace_id}/events")(pathParams);
 
   const query = encodeFormQuery({
+    "execution_id": payload.execution_id,
     "generate_gen_lock_id": payload.generate_gen_lock_id,
     "interaction_type": payload.interaction_type,
+    "limit": payload.limit,
     "lint_report_digest": payload.lint_report_digest,
     "openapi_diff_report_digest": payload.openapi_diff_report_digest,
     "source_revision_digest": payload.source_revision_digest,
+    "success": payload.success,
   });
 
   const headers = new Headers({

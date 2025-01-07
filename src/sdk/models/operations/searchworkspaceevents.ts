@@ -6,11 +6,15 @@ import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import * as shared from "../shared/index.js";
 
+export type SearchWorkspaceEventsGlobals = {
+  workspaceId?: string | undefined;
+};
+
 export type SearchWorkspaceEventsRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * Unique identifier of the source revision digest.
    */
@@ -31,6 +35,18 @@ export type SearchWorkspaceEventsRequest = {
    * A specific gen lock ID for the events.
    */
   generateGenLockId?: string | undefined;
+  /**
+   * Shared execution ID for cli events across a single action.
+   */
+  executionId?: string | undefined;
+  /**
+   * Whether the event was successful or not.
+   */
+  success?: boolean | undefined;
+  /**
+   * Number of results to return.
+   */
+  limit?: number | undefined;
 };
 
 export type SearchWorkspaceEventsResponse =
@@ -38,17 +54,64 @@ export type SearchWorkspaceEventsResponse =
   | Array<shared.CliEvent>;
 
 /** @internal */
+export const SearchWorkspaceEventsGlobals$inboundSchema: z.ZodType<
+  SearchWorkspaceEventsGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type SearchWorkspaceEventsGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const SearchWorkspaceEventsGlobals$outboundSchema: z.ZodType<
+  SearchWorkspaceEventsGlobals$Outbound,
+  z.ZodTypeDef,
+  SearchWorkspaceEventsGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchWorkspaceEventsGlobals$ {
+  /** @deprecated use `SearchWorkspaceEventsGlobals$inboundSchema` instead. */
+  export const inboundSchema = SearchWorkspaceEventsGlobals$inboundSchema;
+  /** @deprecated use `SearchWorkspaceEventsGlobals$outboundSchema` instead. */
+  export const outboundSchema = SearchWorkspaceEventsGlobals$outboundSchema;
+  /** @deprecated use `SearchWorkspaceEventsGlobals$Outbound` instead. */
+  export type Outbound = SearchWorkspaceEventsGlobals$Outbound;
+}
+
+/** @internal */
 export const SearchWorkspaceEventsRequest$inboundSchema: z.ZodType<
   SearchWorkspaceEventsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   source_revision_digest: z.string().optional(),
   lint_report_digest: z.string().optional(),
   openapi_diff_report_digest: z.string().optional(),
   interaction_type: shared.InteractionType$inboundSchema.optional(),
   generate_gen_lock_id: z.string().optional(),
+  execution_id: z.string().optional(),
+  success: z.boolean().optional(),
+  limit: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     "workspace_id": "workspaceId",
@@ -57,17 +120,21 @@ export const SearchWorkspaceEventsRequest$inboundSchema: z.ZodType<
     "openapi_diff_report_digest": "openapiDiffReportDigest",
     "interaction_type": "interactionType",
     "generate_gen_lock_id": "generateGenLockId",
+    "execution_id": "executionId",
   });
 });
 
 /** @internal */
 export type SearchWorkspaceEventsRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   source_revision_digest?: string | undefined;
   lint_report_digest?: string | undefined;
   openapi_diff_report_digest?: string | undefined;
   interaction_type?: string | undefined;
   generate_gen_lock_id?: string | undefined;
+  execution_id?: string | undefined;
+  success?: boolean | undefined;
+  limit?: number | undefined;
 };
 
 /** @internal */
@@ -76,12 +143,15 @@ export const SearchWorkspaceEventsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   SearchWorkspaceEventsRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   sourceRevisionDigest: z.string().optional(),
   lintReportDigest: z.string().optional(),
   openapiDiffReportDigest: z.string().optional(),
   interactionType: shared.InteractionType$outboundSchema.optional(),
   generateGenLockId: z.string().optional(),
+  executionId: z.string().optional(),
+  success: z.boolean().optional(),
+  limit: z.number().int().optional(),
 }).transform((v) => {
   return remap$(v, {
     workspaceId: "workspace_id",
@@ -90,6 +160,7 @@ export const SearchWorkspaceEventsRequest$outboundSchema: z.ZodType<
     openapiDiffReportDigest: "openapi_diff_report_digest",
     interactionType: "interaction_type",
     generateGenLockId: "generate_gen_lock_id",
+    executionId: "execution_id",
   });
 });
 

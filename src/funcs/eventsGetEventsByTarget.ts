@@ -57,10 +57,11 @@ export async function eventsGetEventsByTarget(
       explode: false,
       charEncoding: "percent",
     }),
-    workspace_id: encodeSimple("workspace_id", payload.workspace_id, {
-      explode: false,
-      charEncoding: "percent",
-    }),
+    workspace_id: encodeSimple(
+      "workspace_id",
+      payload.workspace_id ?? client._options.workspaceId,
+      { explode: false, charEncoding: "percent" },
+    ),
   };
 
   const path = pathToFunc(

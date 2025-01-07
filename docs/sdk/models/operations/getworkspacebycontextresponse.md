@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 417,
+  statusCode: 201,
 };
 ```
 
@@ -17,22 +17,22 @@ const value: shared.ErrorT = {
 ```typescript
 const value: shared.WorkspaceAndOrganization = {
   organization: {
-    accountType: "enterprise",
-    createdAt: new Date("2024-07-04T20:50:00.142Z"),
+    accountType: "business",
+    createdAt: new Date("2025-02-01T00:22:56.047Z"),
     id: "<id>",
     name: "<value>",
     slug: "<value>",
+    ssoActivated: false,
     telemetryDisabled: false,
-    updatedAt: new Date("2023-06-14T20:54:19.756Z"),
+    updatedAt: new Date("2025-01-06T11:09:38.255Z"),
   },
   workspace: {
-    createdAt: new Date("2024-08-23T18:46:32.755Z"),
+    createdAt: new Date("2025-11-05T22:50:25.041Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    telemetryDisabled: false,
-    updatedAt: new Date("2024-10-01T09:29:08.367Z"),
+    updatedAt: new Date("2023-01-03T23:06:19.217Z"),
     verified: false,
   },
 };

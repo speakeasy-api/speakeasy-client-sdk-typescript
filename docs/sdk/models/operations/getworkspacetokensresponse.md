@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 507,
+  statusCode: 103,
 };
 ```
 
@@ -18,10 +18,11 @@ const value: shared.ErrorT = {
 const value: shared.WorkspaceToken[] = [
   {
     alg: "<value>",
-    createdAt: "<value>",
+    createdAt: new Date("2024-05-04T05:57:31.337Z"),
     id: "<id>",
     key: "<key>",
     name: "<value>",
+    workspaceId: "<id>",
   },
 ];
 ```

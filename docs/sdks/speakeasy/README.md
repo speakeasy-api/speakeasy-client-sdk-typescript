@@ -2,7 +2,7 @@
 
 ## Overview
 
-Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
+Speakeasy API: The Subscriptions API manages subscriptions for CLI and registry events
 
 The Speakeasy Platform Documentation
 </docs>

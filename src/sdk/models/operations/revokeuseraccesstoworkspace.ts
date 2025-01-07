@@ -5,11 +5,15 @@
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
 
+export type RevokeUserAccessToWorkspaceGlobals = {
+  workspaceId?: string | undefined;
+};
+
 export type RevokeUserAccessToWorkspaceRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * Unique identifier of the user.
    */
@@ -17,12 +21,57 @@ export type RevokeUserAccessToWorkspaceRequest = {
 };
 
 /** @internal */
+export const RevokeUserAccessToWorkspaceGlobals$inboundSchema: z.ZodType<
+  RevokeUserAccessToWorkspaceGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type RevokeUserAccessToWorkspaceGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const RevokeUserAccessToWorkspaceGlobals$outboundSchema: z.ZodType<
+  RevokeUserAccessToWorkspaceGlobals$Outbound,
+  z.ZodTypeDef,
+  RevokeUserAccessToWorkspaceGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RevokeUserAccessToWorkspaceGlobals$ {
+  /** @deprecated use `RevokeUserAccessToWorkspaceGlobals$inboundSchema` instead. */
+  export const inboundSchema = RevokeUserAccessToWorkspaceGlobals$inboundSchema;
+  /** @deprecated use `RevokeUserAccessToWorkspaceGlobals$outboundSchema` instead. */
+  export const outboundSchema =
+    RevokeUserAccessToWorkspaceGlobals$outboundSchema;
+  /** @deprecated use `RevokeUserAccessToWorkspaceGlobals$Outbound` instead. */
+  export type Outbound = RevokeUserAccessToWorkspaceGlobals$Outbound;
+}
+
+/** @internal */
 export const RevokeUserAccessToWorkspaceRequest$inboundSchema: z.ZodType<
   RevokeUserAccessToWorkspaceRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   userId: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -32,7 +81,7 @@ export const RevokeUserAccessToWorkspaceRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type RevokeUserAccessToWorkspaceRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   userId: string;
 };
 
@@ -42,7 +91,7 @@ export const RevokeUserAccessToWorkspaceRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   RevokeUserAccessToWorkspaceRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   userId: z.string(),
 }).transform((v) => {
   return remap$(v, {

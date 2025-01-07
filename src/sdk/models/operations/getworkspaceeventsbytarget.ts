@@ -6,11 +6,15 @@ import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import * as shared from "../shared/index.js";
 
+export type GetWorkspaceEventsByTargetGlobals = {
+  workspaceId?: string | undefined;
+};
+
 export type GetWorkspaceEventsByTargetRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * Filter to only return events corresponding to a particular gen_lock_id (gen_lock_id uniquely identifies a target)
    */
@@ -26,12 +30,57 @@ export type GetWorkspaceEventsByTargetResponse =
   | Array<shared.CliEvent>;
 
 /** @internal */
+export const GetWorkspaceEventsByTargetGlobals$inboundSchema: z.ZodType<
+  GetWorkspaceEventsByTargetGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type GetWorkspaceEventsByTargetGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const GetWorkspaceEventsByTargetGlobals$outboundSchema: z.ZodType<
+  GetWorkspaceEventsByTargetGlobals$Outbound,
+  z.ZodTypeDef,
+  GetWorkspaceEventsByTargetGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetWorkspaceEventsByTargetGlobals$ {
+  /** @deprecated use `GetWorkspaceEventsByTargetGlobals$inboundSchema` instead. */
+  export const inboundSchema = GetWorkspaceEventsByTargetGlobals$inboundSchema;
+  /** @deprecated use `GetWorkspaceEventsByTargetGlobals$outboundSchema` instead. */
+  export const outboundSchema =
+    GetWorkspaceEventsByTargetGlobals$outboundSchema;
+  /** @deprecated use `GetWorkspaceEventsByTargetGlobals$Outbound` instead. */
+  export type Outbound = GetWorkspaceEventsByTargetGlobals$Outbound;
+}
+
+/** @internal */
 export const GetWorkspaceEventsByTargetRequest$inboundSchema: z.ZodType<
   GetWorkspaceEventsByTargetRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   target_id: z.string(),
   after_created_at: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
@@ -46,7 +95,7 @@ export const GetWorkspaceEventsByTargetRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetWorkspaceEventsByTargetRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   target_id: string;
   after_created_at?: string | undefined;
 };
@@ -57,7 +106,7 @@ export const GetWorkspaceEventsByTargetRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetWorkspaceEventsByTargetRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   targetId: z.string(),
   afterCreatedAt: z.date().transform(v => v.toISOString()).optional(),
 }).transform((v) => {

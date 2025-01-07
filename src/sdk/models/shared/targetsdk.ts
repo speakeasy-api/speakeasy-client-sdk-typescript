@@ -52,6 +52,10 @@ export type TargetSDK = {
    */
   generateNumberOfOperationsUsed?: number | undefined;
   /**
+   * The number of terraform resources used in generation.
+   */
+  generateNumberOfTerraformResources?: number | undefined;
+  /**
    * Indicates whether the target was considered published.
    */
   generatePublished?: boolean | undefined;
@@ -128,6 +132,14 @@ export type TargetSDK = {
    */
   lastEventInteractionType: InteractionType;
   /**
+   * Timestamp when the last publishing event was created.
+   */
+  lastPublishCreatedAt?: Date | undefined;
+  /**
+   * Link to the GitHub action run for the last publishing event.
+   */
+  lastPublishGhActionRunLink?: string | undefined;
+  /**
    * Name of the published package.
    */
   publishPackageName?: string | undefined;
@@ -164,6 +176,14 @@ export type TargetSDK = {
    */
   success?: boolean | undefined;
   /**
+   * Workflow lock file (post execution)
+   */
+  workflowLockPostRaw?: string | undefined;
+  /**
+   * Workflow lock file (prior to execution)
+   */
+  workflowLockPreRaw?: string | undefined;
+  /**
    * Workflow file (post execution)
    */
   workflowPostRaw?: string | undefined;
@@ -189,6 +209,7 @@ export const TargetSDK$inboundSchema: z.ZodType<
   generate_gen_lock_pre_version: z.string().optional(),
   generate_number_of_operations_ignored: z.number().int().optional(),
   generate_number_of_operations_used: z.number().int().optional(),
+  generate_number_of_terraform_resources: z.number().int().optional(),
   generate_published: z.boolean().optional(),
   generate_target: z.string(),
   generate_target_name: z.string().optional(),
@@ -210,6 +231,10 @@ export const TargetSDK$inboundSchema: z.ZodType<
   ),
   last_event_id: z.string(),
   last_event_interaction_type: InteractionType$inboundSchema,
+  last_publish_created_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  last_publish_gh_action_run_link: z.string().optional(),
   publish_package_name: z.string().optional(),
   publish_package_registry_name: z.string().optional(),
   publish_package_url: z.string().optional(),
@@ -219,6 +244,8 @@ export const TargetSDK$inboundSchema: z.ZodType<
   source_namespace_name: z.string().optional(),
   source_revision_digest: z.string().optional(),
   success: z.boolean().optional(),
+  workflow_lock_post_raw: z.string().optional(),
+  workflow_lock_pre_raw: z.string().optional(),
   workflow_post_raw: z.string().optional(),
   workflow_pre_raw: z.string().optional(),
 }).transform((v) => {
@@ -233,6 +260,8 @@ export const TargetSDK$inboundSchema: z.ZodType<
     "generate_number_of_operations_ignored":
       "generateNumberOfOperationsIgnored",
     "generate_number_of_operations_used": "generateNumberOfOperationsUsed",
+    "generate_number_of_terraform_resources":
+      "generateNumberOfTerraformResources",
     "generate_published": "generatePublished",
     "generate_target": "generateTarget",
     "generate_target_name": "generateTargetName",
@@ -250,6 +279,8 @@ export const TargetSDK$inboundSchema: z.ZodType<
     "last_event_created_at": "lastEventCreatedAt",
     "last_event_id": "lastEventId",
     "last_event_interaction_type": "lastEventInteractionType",
+    "last_publish_created_at": "lastPublishCreatedAt",
+    "last_publish_gh_action_run_link": "lastPublishGhActionRunLink",
     "publish_package_name": "publishPackageName",
     "publish_package_registry_name": "publishPackageRegistryName",
     "publish_package_url": "publishPackageUrl",
@@ -258,6 +289,8 @@ export const TargetSDK$inboundSchema: z.ZodType<
     "source_blob_digest": "sourceBlobDigest",
     "source_namespace_name": "sourceNamespaceName",
     "source_revision_digest": "sourceRevisionDigest",
+    "workflow_lock_post_raw": "workflowLockPostRaw",
+    "workflow_lock_pre_raw": "workflowLockPreRaw",
     "workflow_post_raw": "workflowPostRaw",
     "workflow_pre_raw": "workflowPreRaw",
   });
@@ -275,6 +308,7 @@ export type TargetSDK$Outbound = {
   generate_gen_lock_pre_version?: string | undefined;
   generate_number_of_operations_ignored?: number | undefined;
   generate_number_of_operations_used?: number | undefined;
+  generate_number_of_terraform_resources?: number | undefined;
   generate_published?: boolean | undefined;
   generate_target: string;
   generate_target_name?: string | undefined;
@@ -294,6 +328,8 @@ export type TargetSDK$Outbound = {
   last_event_created_at: string;
   last_event_id: string;
   last_event_interaction_type: string;
+  last_publish_created_at?: string | undefined;
+  last_publish_gh_action_run_link?: string | undefined;
   publish_package_name?: string | undefined;
   publish_package_registry_name?: string | undefined;
   publish_package_url?: string | undefined;
@@ -303,6 +339,8 @@ export type TargetSDK$Outbound = {
   source_namespace_name?: string | undefined;
   source_revision_digest?: string | undefined;
   success?: boolean | undefined;
+  workflow_lock_post_raw?: string | undefined;
+  workflow_lock_pre_raw?: string | undefined;
   workflow_post_raw?: string | undefined;
   workflow_pre_raw?: string | undefined;
 };
@@ -323,6 +361,7 @@ export const TargetSDK$outboundSchema: z.ZodType<
   generateGenLockPreVersion: z.string().optional(),
   generateNumberOfOperationsIgnored: z.number().int().optional(),
   generateNumberOfOperationsUsed: z.number().int().optional(),
+  generateNumberOfTerraformResources: z.number().int().optional(),
   generatePublished: z.boolean().optional(),
   generateTarget: z.string(),
   generateTargetName: z.string().optional(),
@@ -342,6 +381,8 @@ export const TargetSDK$outboundSchema: z.ZodType<
   lastEventCreatedAt: z.date().transform(v => v.toISOString()),
   lastEventId: z.string(),
   lastEventInteractionType: InteractionType$outboundSchema,
+  lastPublishCreatedAt: z.date().transform(v => v.toISOString()).optional(),
+  lastPublishGhActionRunLink: z.string().optional(),
   publishPackageName: z.string().optional(),
   publishPackageRegistryName: z.string().optional(),
   publishPackageUrl: z.string().optional(),
@@ -351,6 +392,8 @@ export const TargetSDK$outboundSchema: z.ZodType<
   sourceNamespaceName: z.string().optional(),
   sourceRevisionDigest: z.string().optional(),
   success: z.boolean().optional(),
+  workflowLockPostRaw: z.string().optional(),
+  workflowLockPreRaw: z.string().optional(),
   workflowPostRaw: z.string().optional(),
   workflowPreRaw: z.string().optional(),
 }).transform((v) => {
@@ -364,6 +407,8 @@ export const TargetSDK$outboundSchema: z.ZodType<
     generateGenLockPreVersion: "generate_gen_lock_pre_version",
     generateNumberOfOperationsIgnored: "generate_number_of_operations_ignored",
     generateNumberOfOperationsUsed: "generate_number_of_operations_used",
+    generateNumberOfTerraformResources:
+      "generate_number_of_terraform_resources",
     generatePublished: "generate_published",
     generateTarget: "generate_target",
     generateTargetName: "generate_target_name",
@@ -381,6 +426,8 @@ export const TargetSDK$outboundSchema: z.ZodType<
     lastEventCreatedAt: "last_event_created_at",
     lastEventId: "last_event_id",
     lastEventInteractionType: "last_event_interaction_type",
+    lastPublishCreatedAt: "last_publish_created_at",
+    lastPublishGhActionRunLink: "last_publish_gh_action_run_link",
     publishPackageName: "publish_package_name",
     publishPackageRegistryName: "publish_package_registry_name",
     publishPackageUrl: "publish_package_url",
@@ -389,6 +436,8 @@ export const TargetSDK$outboundSchema: z.ZodType<
     sourceBlobDigest: "source_blob_digest",
     sourceNamespaceName: "source_namespace_name",
     sourceRevisionDigest: "source_revision_digest",
+    workflowLockPostRaw: "workflow_lock_post_raw",
+    workflowLockPreRaw: "workflow_lock_pre_raw",
     workflowPostRaw: "workflow_post_raw",
     workflowPreRaw: "workflow_pre_raw",
   });
