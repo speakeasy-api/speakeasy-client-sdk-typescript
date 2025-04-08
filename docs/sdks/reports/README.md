@@ -3,7 +3,7 @@
 
 ## Overview
 
-REST APIs for managing reports
+REST APIs for managing reports (lint reports, change reports, etc)
 
 ### Available Operations
 

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetOrganizationRequest = {
@@ -50,6 +53,24 @@ export namespace GetOrganizationRequest$ {
   export type Outbound = GetOrganizationRequest$Outbound;
 }
 
+export function getOrganizationRequestToJSON(
+  getOrganizationRequest: GetOrganizationRequest,
+): string {
+  return JSON.stringify(
+    GetOrganizationRequest$outboundSchema.parse(getOrganizationRequest),
+  );
+}
+
+export function getOrganizationRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOrganizationRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOrganizationRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOrganizationRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetOrganizationResponse$inboundSchema: z.ZodType<
   GetOrganizationResponse,
@@ -80,4 +101,22 @@ export namespace GetOrganizationResponse$ {
   export const outboundSchema = GetOrganizationResponse$outboundSchema;
   /** @deprecated use `GetOrganizationResponse$Outbound` instead. */
   export type Outbound = GetOrganizationResponse$Outbound;
+}
+
+export function getOrganizationResponseToJSON(
+  getOrganizationResponse: GetOrganizationResponse,
+): string {
+  return JSON.stringify(
+    GetOrganizationResponse$outboundSchema.parse(getOrganizationResponse),
+  );
+}
+
+export function getOrganizationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOrganizationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOrganizationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOrganizationResponse' from JSON`,
+  );
 }

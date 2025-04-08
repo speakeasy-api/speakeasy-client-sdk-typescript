@@ -5,6 +5,7 @@
 import { SpeakeasyCore } from "../core.js";
 import { encodeFormQuery } from "../lib/encodings.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -20,6 +21,7 @@ import { SDKError } from "../sdk/models/errors/sdkerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import * as shared from "../sdk/models/shared/index.js";
+import { APICall, APIPromise } from "../sdk/types/async.js";
 import { Result } from "../sdk/types/fp.js";
 
 /**
@@ -28,11 +30,11 @@ import { Result } from "../sdk/types/fp.js";
  * @remarks
  * Checks if generation is permitted for a particular run of the CLI
  */
-export async function authGetAccess(
+export function authGetAccess(
   client: SpeakeasyCore,
   request: operations.GetWorkspaceAccessRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     shared.AccessDetails,
     | SDKError
@@ -44,13 +46,39 @@ export async function authGetAccess(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SpeakeasyCore,
+  request: operations.GetWorkspaceAccessRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      shared.AccessDetails,
+      | SDKError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.GetWorkspaceAccessRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = null;
@@ -63,35 +91,21 @@ export async function authGetAccess(
     "targetType": payload.targetType,
   });
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
-  });
+  }));
 
   const securityInput = await extractSecurity(client._options.security);
-  const context = {
-    operationID: "getWorkspaceAccess",
-    oAuth2Scopes: [],
-    securitySource: client._options.security,
-  };
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
-  const requestRes = client._createRequest(context, {
-    security: requestSecurity,
-    method: "GET",
-    path: path,
-    headers: headers,
-    query: query,
-    body: body,
-    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
-  }, options);
-  if (!requestRes.ok) {
-    return requestRes;
-  }
-  const req = requestRes.value;
+  const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
+    operationID: "getWorkspaceAccess",
+    oAuth2Scopes: [],
 
-  const doResult = await client._do(req, {
-    context,
-    errorCodes: [],
+    resolvedSecurity: requestSecurity,
+
+    securitySource: client._options.security,
     retryConfig: options?.retries
       || client._options.retryConfig
       || {
@@ -103,11 +117,34 @@ export async function authGetAccess(
           maxElapsedTime: 60000,
         },
         retryConnectionErrors: true,
-      },
+      }
+      || { strategy: "none" },
     retryCodes: options?.retryCodes || ["408", "500", "502", "503"],
+  };
+
+  const requestRes = client._createRequest(context, {
+    security: requestSecurity,
+    method: "GET",
+    baseURL: options?.serverURL,
+    path: path,
+    headers: headers,
+    query: query,
+    body: body,
+    timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
+  }, options);
+  if (!requestRes.ok) {
+    return [requestRes, { status: "invalid" }];
+  }
+  const req = requestRes.value;
+
+  const doResult = await client._do(req, {
+    context,
+    errorCodes: [],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -124,8 +161,8 @@ export async function authGetAccess(
     M.json("2XX", shared.AccessDetails$inboundSchema),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

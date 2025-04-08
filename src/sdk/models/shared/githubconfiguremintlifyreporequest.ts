@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A request to configure a GitHub repository for mintlify
@@ -77,4 +80,25 @@ export namespace GithubConfigureMintlifyRepoRequest$ {
     GithubConfigureMintlifyRepoRequest$outboundSchema;
   /** @deprecated use `GithubConfigureMintlifyRepoRequest$Outbound` instead. */
   export type Outbound = GithubConfigureMintlifyRepoRequest$Outbound;
+}
+
+export function githubConfigureMintlifyRepoRequestToJSON(
+  githubConfigureMintlifyRepoRequest: GithubConfigureMintlifyRepoRequest,
+): string {
+  return JSON.stringify(
+    GithubConfigureMintlifyRepoRequest$outboundSchema.parse(
+      githubConfigureMintlifyRepoRequest,
+    ),
+  );
+}
+
+export function githubConfigureMintlifyRepoRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubConfigureMintlifyRepoRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GithubConfigureMintlifyRepoRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubConfigureMintlifyRepoRequest' from JSON`,
+  );
 }

@@ -4,8 +4,18 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  RevisionContentsMetadata,
+  RevisionContentsMetadata$inboundSchema,
+  RevisionContentsMetadata$Outbound,
+  RevisionContentsMetadata$outboundSchema,
+} from "./revisioncontentsmetadata.js";
 
 export type Revision = {
+  contentsMetadata?: RevisionContentsMetadata | undefined;
   createdAt: Date;
   digest: string;
   /**
@@ -23,6 +33,7 @@ export const Revision$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  contents_metadata: RevisionContentsMetadata$inboundSchema.optional(),
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   digest: z.string(),
   id: z.string(),
@@ -31,6 +42,7 @@ export const Revision$inboundSchema: z.ZodType<
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
   return remap$(v, {
+    "contents_metadata": "contentsMetadata",
     "created_at": "createdAt",
     "namespace_name": "namespaceName",
     "updated_at": "updatedAt",
@@ -39,6 +51,7 @@ export const Revision$inboundSchema: z.ZodType<
 
 /** @internal */
 export type Revision$Outbound = {
+  contents_metadata?: RevisionContentsMetadata$Outbound | undefined;
   created_at: string;
   digest: string;
   id: string;
@@ -53,6 +66,7 @@ export const Revision$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   Revision
 > = z.object({
+  contentsMetadata: RevisionContentsMetadata$outboundSchema.optional(),
   createdAt: z.date().transform(v => v.toISOString()),
   digest: z.string(),
   id: z.string(),
@@ -61,6 +75,7 @@ export const Revision$outboundSchema: z.ZodType<
   updatedAt: z.date().transform(v => v.toISOString()),
 }).transform((v) => {
   return remap$(v, {
+    contentsMetadata: "contents_metadata",
     createdAt: "created_at",
     namespaceName: "namespace_name",
     updatedAt: "updated_at",
@@ -78,4 +93,18 @@ export namespace Revision$ {
   export const outboundSchema = Revision$outboundSchema;
   /** @deprecated use `Revision$Outbound` instead. */
   export type Outbound = Revision$Outbound;
+}
+
+export function revisionToJSON(revision: Revision): string {
+  return JSON.stringify(Revision$outboundSchema.parse(revision));
+}
+
+export function revisionFromJSON(
+  jsonString: string,
+): SafeParseResult<Revision, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Revision$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Revision' from JSON`,
+  );
 }

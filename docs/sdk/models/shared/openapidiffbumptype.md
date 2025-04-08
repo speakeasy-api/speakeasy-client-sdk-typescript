@@ -7,7 +7,7 @@ Bump type of the lock file (calculated semver delta, or a custom change (manual 
 ```typescript
 import { OpenapiDiffBumpType } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
-let value: OpenapiDiffBumpType = "minor";
+let value: OpenapiDiffBumpType = "major";
 ```
 
 ## Values

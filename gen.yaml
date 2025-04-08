@@ -5,12 +5,15 @@ generation:
     optionalPropertyRendering: withExample
   fixes:
     nameResolutionDec2023: true
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
+    securityFeb2025: false
   auth:
     oAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
 typescript:
-  version: 4.0.0-rc.2
+  version: 4.0.0-rc.3
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
@@ -18,6 +21,10 @@ typescript:
   additionalPackageJSON: {}
   author: Speakeasy
   clientServerStatusCodesAsErrors: false
+  defaultErrorName: SDKError
+  enableCustomCodeRegions: false
+  enableMCPServer: true
+  enableReactQuery: false
   enumFormat: union
   flattenGlobalSecurity: true
   flatteningOrder: body-first
@@ -30,6 +37,7 @@ typescript:
       shared: sdk/models/shared
       webhooks: sdk/models/webhooks
   inputModelSuffix: input
+  jsonpath: legacy
   maxMethodParams: 0
   methodArguments: require-security-and-request
   moduleFormat: commonjs

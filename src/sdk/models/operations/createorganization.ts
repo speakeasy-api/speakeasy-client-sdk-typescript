@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type CreateOrganizationResponse = shared.ErrorT | shared.Organization;
@@ -37,4 +40,22 @@ export namespace CreateOrganizationResponse$ {
   export const outboundSchema = CreateOrganizationResponse$outboundSchema;
   /** @deprecated use `CreateOrganizationResponse$Outbound` instead. */
   export type Outbound = CreateOrganizationResponse$Outbound;
+}
+
+export function createOrganizationResponseToJSON(
+  createOrganizationResponse: CreateOrganizationResponse,
+): string {
+  return JSON.stringify(
+    CreateOrganizationResponse$outboundSchema.parse(createOrganizationResponse),
+  );
+}
+
+export function createOrganizationResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<CreateOrganizationResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CreateOrganizationResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CreateOrganizationResponse' from JSON`,
+  );
 }

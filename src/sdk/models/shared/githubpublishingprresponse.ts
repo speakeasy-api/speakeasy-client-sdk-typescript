@@ -4,14 +4,140 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * This can only be populated when the github app is installed for a repo
+ */
+export type PullRequestMetadata = {
+  baseBranch?: string | undefined;
+  canMerge?: boolean | undefined;
+  createdAt?: Date | undefined;
+  /**
+   * truncated to first 1000 characters
+   */
+  description?: string | undefined;
+  headBranch?: string | undefined;
+  /**
+   * List of github labels
+   */
+  labels?: Array<string> | undefined;
+  /**
+   * List of github handles
+   */
+  requestedReviewers?: Array<string> | undefined;
+  status?: string | undefined;
+  title?: string | undefined;
+};
 
 /**
  * Open generation PRs pending publishing
  */
 export type GithubPublishingPRResponse = {
-  generationPullRequest?: string | undefined;
   pendingVersion?: string | undefined;
+  pullRequest?: string | undefined;
+  /**
+   * This can only be populated when the github app is installed for a repo
+   */
+  pullRequestMetadata?: PullRequestMetadata | undefined;
 };
+
+/** @internal */
+export const PullRequestMetadata$inboundSchema: z.ZodType<
+  PullRequestMetadata,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  base_branch: z.string().optional(),
+  can_merge: z.boolean().optional(),
+  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+    .optional(),
+  description: z.string().optional(),
+  head_branch: z.string().optional(),
+  labels: z.array(z.string()).optional(),
+  requested_reviewers: z.array(z.string()).optional(),
+  status: z.string().optional(),
+  title: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "base_branch": "baseBranch",
+    "can_merge": "canMerge",
+    "created_at": "createdAt",
+    "head_branch": "headBranch",
+    "requested_reviewers": "requestedReviewers",
+  });
+});
+
+/** @internal */
+export type PullRequestMetadata$Outbound = {
+  base_branch?: string | undefined;
+  can_merge?: boolean | undefined;
+  created_at?: string | undefined;
+  description?: string | undefined;
+  head_branch?: string | undefined;
+  labels?: Array<string> | undefined;
+  requested_reviewers?: Array<string> | undefined;
+  status?: string | undefined;
+  title?: string | undefined;
+};
+
+/** @internal */
+export const PullRequestMetadata$outboundSchema: z.ZodType<
+  PullRequestMetadata$Outbound,
+  z.ZodTypeDef,
+  PullRequestMetadata
+> = z.object({
+  baseBranch: z.string().optional(),
+  canMerge: z.boolean().optional(),
+  createdAt: z.date().transform(v => v.toISOString()).optional(),
+  description: z.string().optional(),
+  headBranch: z.string().optional(),
+  labels: z.array(z.string()).optional(),
+  requestedReviewers: z.array(z.string()).optional(),
+  status: z.string().optional(),
+  title: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    baseBranch: "base_branch",
+    canMerge: "can_merge",
+    createdAt: "created_at",
+    headBranch: "head_branch",
+    requestedReviewers: "requested_reviewers",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace PullRequestMetadata$ {
+  /** @deprecated use `PullRequestMetadata$inboundSchema` instead. */
+  export const inboundSchema = PullRequestMetadata$inboundSchema;
+  /** @deprecated use `PullRequestMetadata$outboundSchema` instead. */
+  export const outboundSchema = PullRequestMetadata$outboundSchema;
+  /** @deprecated use `PullRequestMetadata$Outbound` instead. */
+  export type Outbound = PullRequestMetadata$Outbound;
+}
+
+export function pullRequestMetadataToJSON(
+  pullRequestMetadata: PullRequestMetadata,
+): string {
+  return JSON.stringify(
+    PullRequestMetadata$outboundSchema.parse(pullRequestMetadata),
+  );
+}
+
+export function pullRequestMetadataFromJSON(
+  jsonString: string,
+): SafeParseResult<PullRequestMetadata, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PullRequestMetadata$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PullRequestMetadata' from JSON`,
+  );
+}
 
 /** @internal */
 export const GithubPublishingPRResponse$inboundSchema: z.ZodType<
@@ -19,19 +145,23 @@ export const GithubPublishingPRResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  generation_pull_request: z.string().optional(),
   pending_version: z.string().optional(),
+  pull_request: z.string().optional(),
+  pull_request_metadata: z.lazy(() => PullRequestMetadata$inboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
-    "generation_pull_request": "generationPullRequest",
     "pending_version": "pendingVersion",
+    "pull_request": "pullRequest",
+    "pull_request_metadata": "pullRequestMetadata",
   });
 });
 
 /** @internal */
 export type GithubPublishingPRResponse$Outbound = {
-  generation_pull_request?: string | undefined;
   pending_version?: string | undefined;
+  pull_request?: string | undefined;
+  pull_request_metadata?: PullRequestMetadata$Outbound | undefined;
 };
 
 /** @internal */
@@ -40,12 +170,15 @@ export const GithubPublishingPRResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GithubPublishingPRResponse
 > = z.object({
-  generationPullRequest: z.string().optional(),
   pendingVersion: z.string().optional(),
+  pullRequest: z.string().optional(),
+  pullRequestMetadata: z.lazy(() => PullRequestMetadata$outboundSchema)
+    .optional(),
 }).transform((v) => {
   return remap$(v, {
-    generationPullRequest: "generation_pull_request",
     pendingVersion: "pending_version",
+    pullRequest: "pull_request",
+    pullRequestMetadata: "pull_request_metadata",
   });
 });
 
@@ -60,4 +193,22 @@ export namespace GithubPublishingPRResponse$ {
   export const outboundSchema = GithubPublishingPRResponse$outboundSchema;
   /** @deprecated use `GithubPublishingPRResponse$Outbound` instead. */
   export type Outbound = GithubPublishingPRResponse$Outbound;
+}
+
+export function githubPublishingPRResponseToJSON(
+  githubPublishingPRResponse: GithubPublishingPRResponse,
+): string {
+  return JSON.stringify(
+    GithubPublishingPRResponse$outboundSchema.parse(githubPublishingPRResponse),
+  );
+}
+
+export function githubPublishingPRResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubPublishingPRResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GithubPublishingPRResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubPublishingPRResponse' from JSON`,
+  );
 }

@@ -7,11 +7,11 @@ Type of interaction.
 ```typescript
 import { InteractionType } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
-let value: InteractionType = "OPENAPI_DIFF";
+let value: InteractionType = "TARGET_GENERATE";
 ```
 
 ## Values
 
 ```typescript
-"CI_EXEC" | "CLI_EXEC" | "LINT" | "OPENAPI_DIFF" | "TARGET_GENERATE" | "TOMBSTONE" | "AUTHENTICATE" | "QUICKSTART" | "RUN" | "CONFIGURE" | "PUBLISH"
+"CI_EXEC" | "CLI_EXEC" | "LINT" | "OPENAPI_DIFF" | "TARGET_GENERATE" | "TOMBSTONE" | "AUTHENTICATE" | "QUICKSTART" | "RUN" | "CONFIGURE" | "PUBLISH" | "TEST"
 ```

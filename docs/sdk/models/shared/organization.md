@@ -9,12 +9,13 @@ import { Organization } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk
 
 let value: Organization = {
   accountType: "enterprise",
-  createdAt: new Date("2022-07-28T01:45:34.109Z"),
+  createdAt: new Date("2023-06-29T18:21:41.585Z"),
   id: "<id>",
   name: "<value>",
   slug: "<value>",
+  ssoActivated: false,
   telemetryDisabled: false,
-  updatedAt: new Date("2023-07-15T09:44:04.261Z"),
+  updatedAt: new Date("2024-09-21T03:00:08.692Z"),
 };
 ```
 
@@ -26,7 +27,10 @@ let value: Organization = {
 | `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `freeTrialExpiry`                                                                             | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `internal`                                                                                    | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `slug`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `ssoActivated`                                                                                | *boolean*                                                                                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `ssoConnectionId`                                                                             | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
 | `telemetryDisabled`                                                                           | *boolean*                                                                                     | :heavy_check_mark:                                                                            | N/A                                                                                           |
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |

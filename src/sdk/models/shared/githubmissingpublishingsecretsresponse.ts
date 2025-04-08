@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A valid response containing MISSING publishing secret keys for a github target
@@ -56,4 +59,26 @@ export namespace GithubMissingPublishingSecretsResponse$ {
     GithubMissingPublishingSecretsResponse$outboundSchema;
   /** @deprecated use `GithubMissingPublishingSecretsResponse$Outbound` instead. */
   export type Outbound = GithubMissingPublishingSecretsResponse$Outbound;
+}
+
+export function githubMissingPublishingSecretsResponseToJSON(
+  githubMissingPublishingSecretsResponse:
+    GithubMissingPublishingSecretsResponse,
+): string {
+  return JSON.stringify(
+    GithubMissingPublishingSecretsResponse$outboundSchema.parse(
+      githubMissingPublishingSecretsResponse,
+    ),
+  );
+}
+
+export function githubMissingPublishingSecretsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubMissingPublishingSecretsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GithubMissingPublishingSecretsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubMissingPublishingSecretsResponse' from JSON`,
+  );
 }

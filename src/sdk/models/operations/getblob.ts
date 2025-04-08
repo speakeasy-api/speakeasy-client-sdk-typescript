@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetBlobRequest = {
@@ -72,6 +75,20 @@ export namespace GetBlobRequest$ {
   export type Outbound = GetBlobRequest$Outbound;
 }
 
+export function getBlobRequestToJSON(getBlobRequest: GetBlobRequest): string {
+  return JSON.stringify(GetBlobRequest$outboundSchema.parse(getBlobRequest));
+}
+
+export function getBlobRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetBlobRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetBlobRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetBlobRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetBlobResponse$inboundSchema: z.ZodType<
   GetBlobResponse,
@@ -108,4 +125,20 @@ export namespace GetBlobResponse$ {
   export const outboundSchema = GetBlobResponse$outboundSchema;
   /** @deprecated use `GetBlobResponse$Outbound` instead. */
   export type Outbound = GetBlobResponse$Outbound;
+}
+
+export function getBlobResponseToJSON(
+  getBlobResponse: GetBlobResponse,
+): string {
+  return JSON.stringify(GetBlobResponse$outboundSchema.parse(getBlobResponse));
+}
+
+export function getBlobResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetBlobResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetBlobResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetBlobResponse' from JSON`,
+  );
 }

@@ -5,7 +5,7 @@
 ```typescript
 import { Type } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
-let value: Type = "changes";
+let value: Type = "linting";
 ```
 
 ## Values

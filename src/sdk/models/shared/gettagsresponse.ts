@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Tag,
   Tag$inboundSchema,
@@ -48,4 +51,20 @@ export namespace GetTagsResponse$ {
   export const outboundSchema = GetTagsResponse$outboundSchema;
   /** @deprecated use `GetTagsResponse$Outbound` instead. */
   export type Outbound = GetTagsResponse$Outbound;
+}
+
+export function getTagsResponseToJSON(
+  getTagsResponse: GetTagsResponse,
+): string {
+  return JSON.stringify(GetTagsResponse$outboundSchema.parse(getTagsResponse));
+}
+
+export function getTagsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTagsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTagsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTagsResponse' from JSON`,
+  );
 }

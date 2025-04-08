@@ -8,13 +8,12 @@ import { UpdateWorkspaceDetailsRequest } from "@speakeasy-api/speakeasy-client-s
 let value: UpdateWorkspaceDetailsRequest = {
   workspaceId: "<id>",
   workspace: {
-    createdAt: new Date("2024-12-13T16:03:43.381Z"),
+    createdAt: new Date("2023-11-16T00:00:08.537Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    telemetryDisabled: false,
-    updatedAt: new Date("2022-02-03T08:20:20.613Z"),
+    updatedAt: new Date("2024-06-14T01:29:49.528Z"),
     verified: false,
   },
 };
@@ -24,5 +23,5 @@ let value: UpdateWorkspaceDetailsRequest = {
 
 | Field                                                       | Type                                                        | Required                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `workspaceId`                                               | *string*                                                    | :heavy_check_mark:                                          | Unique identifier of the workspace.                         |
+| `workspaceId`                                               | *string*                                                    | :heavy_minus_sign:                                          | Unique identifier of the workspace.                         |
 | `workspace`                                                 | [shared.Workspace](../../../sdk/models/shared/workspace.md) | :heavy_check_mark:                                          | The workspace details to update.                            |

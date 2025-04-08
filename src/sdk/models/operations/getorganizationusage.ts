@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetOrganizationUsageResponse =
@@ -45,4 +48,24 @@ export namespace GetOrganizationUsageResponse$ {
   export const outboundSchema = GetOrganizationUsageResponse$outboundSchema;
   /** @deprecated use `GetOrganizationUsageResponse$Outbound` instead. */
   export type Outbound = GetOrganizationUsageResponse$Outbound;
+}
+
+export function getOrganizationUsageResponseToJSON(
+  getOrganizationUsageResponse: GetOrganizationUsageResponse,
+): string {
+  return JSON.stringify(
+    GetOrganizationUsageResponse$outboundSchema.parse(
+      getOrganizationUsageResponse,
+    ),
+  );
+}
+
+export function getOrganizationUsageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetOrganizationUsageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetOrganizationUsageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetOrganizationUsageResponse' from JSON`,
+  );
 }

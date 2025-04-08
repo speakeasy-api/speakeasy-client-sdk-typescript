@@ -3,7 +3,7 @@
 
 ## Overview
 
-REST APIs for capturing event data
+REST APIs for managing events captured by a speakeasy binary (CLI, GitHub Action etc)
 
 ### Available Operations
 
@@ -271,11 +271,11 @@ async function run() {
     workspaceId: "<id>",
     requestBody: [
       {
-        createdAt: new Date("2024-03-02T10:07:28.113Z"),
+        createdAt: new Date("2025-03-02T10:07:28.113Z"),
         executionId: "<id>",
         id: "<id>",
         interactionType: "AUTHENTICATE",
-        localStartedAt: new Date("2024-08-12T17:54:17.538Z"),
+        localStartedAt: new Date("2025-08-12T17:54:17.538Z"),
         speakeasyApiKeyName: "<value>",
         speakeasyVersion: "<value>",
         success: true,
@@ -312,11 +312,11 @@ async function run() {
     workspaceId: "<id>",
     requestBody: [
       {
-        createdAt: new Date("2024-03-02T10:07:28.113Z"),
+        createdAt: new Date("2025-03-02T10:07:28.113Z"),
         executionId: "<id>",
         id: "<id>",
         interactionType: "AUTHENTICATE",
-        localStartedAt: new Date("2024-08-12T17:54:17.538Z"),
+        localStartedAt: new Date("2025-08-12T17:54:17.538Z"),
         speakeasyApiKeyName: "<value>",
         speakeasyVersion: "<value>",
         success: true,

@@ -3,9 +3,10 @@
  */
 
 import { SpeakeasyCore } from "../core.js";
-import { encodeJSON } from "../lib/encodings.js";
+import { appendForm, encodeJSON } from "../lib/encodings.js";
 import { readableStreamToArrayBuffer } from "../lib/files.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -20,6 +21,7 @@ import {
 import { SDKError } from "../sdk/models/errors/sdkerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
 import * as operations from "../sdk/models/operations/index.js";
+import { APICall, APIPromise } from "../sdk/types/async.js";
 import { isBlobLike } from "../sdk/types/blobs.js";
 import { Result } from "../sdk/types/fp.js";
 import { isReadableStream } from "../sdk/types/streams.js";
@@ -27,11 +29,11 @@ import { isReadableStream } from "../sdk/types/streams.js";
 /**
  * Upload a report.
  */
-export async function reportsUploadReport(
+export function reportsUploadReport(
   client: SpeakeasyCore,
   request: operations.UploadReportRequestBody,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     operations.UploadReportUploadedReport,
     | SDKError
@@ -43,26 +45,53 @@ export async function reportsUploadReport(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SpeakeasyCore,
+  request: operations.UploadReportRequestBody,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      operations.UploadReportUploadedReport,
+      | SDKError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.UploadReportRequestBody$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = new FormData();
 
-  body.append("data", encodeJSON("data", payload.data, { explode: true }));
+  appendForm(body, "data", encodeJSON("data", payload.data, { explode: true }));
   if (isBlobLike(payload.file)) {
-    body.append("file", payload.file);
+    appendForm(body, "file", payload.file);
   } else if (isReadableStream(payload.file.content)) {
     const buffer = await readableStreamToArrayBuffer(payload.file.content);
     const blob = new Blob([buffer], { type: "application/octet-stream" });
-    body.append("file", blob);
+    appendForm(body, "file", blob);
   } else {
-    body.append(
+    appendForm(
+      body,
       "file",
       new Blob([payload.file.content], { type: "application/octet-stream" }),
       payload.file.fileName,
@@ -71,40 +100,49 @@ export async function reportsUploadReport(
 
   const path = pathToFunc("/v1/reports")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
-  });
+  }));
 
   const securityInput = await extractSecurity(client._options.security);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
+
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "uploadReport",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.security,
+    retryConfig: options?.retries
+      || client._options.retryConfig
+      || { strategy: "none" },
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
     method: "POST",
+    baseURL: options?.serverURL,
     path: path,
     headers: headers,
     body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
   const doResult = await client._do(req, {
     context,
     errorCodes: [],
-    retryConfig: options?.retries
-      || client._options.retryConfig,
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -121,8 +159,8 @@ export async function reportsUploadReport(
     M.json("2XX", operations.UploadReportUploadedReport$inboundSchema),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

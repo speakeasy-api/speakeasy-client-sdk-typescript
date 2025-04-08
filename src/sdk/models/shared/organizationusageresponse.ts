@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OrganizationUsage,
   OrganizationUsage$inboundSchema,
@@ -87,4 +90,22 @@ export namespace OrganizationUsageResponse$ {
   export const outboundSchema = OrganizationUsageResponse$outboundSchema;
   /** @deprecated use `OrganizationUsageResponse$Outbound` instead. */
   export type Outbound = OrganizationUsageResponse$Outbound;
+}
+
+export function organizationUsageResponseToJSON(
+  organizationUsageResponse: OrganizationUsageResponse,
+): string {
+  return JSON.stringify(
+    OrganizationUsageResponse$outboundSchema.parse(organizationUsageResponse),
+  );
+}
+
+export function organizationUsageResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<OrganizationUsageResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OrganizationUsageResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OrganizationUsageResponse' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CheckGithubAccessRequest = {
   org: string;
@@ -46,4 +49,22 @@ export namespace CheckGithubAccessRequest$ {
   export const outboundSchema = CheckGithubAccessRequest$outboundSchema;
   /** @deprecated use `CheckGithubAccessRequest$Outbound` instead. */
   export type Outbound = CheckGithubAccessRequest$Outbound;
+}
+
+export function checkGithubAccessRequestToJSON(
+  checkGithubAccessRequest: CheckGithubAccessRequest,
+): string {
+  return JSON.stringify(
+    CheckGithubAccessRequest$outboundSchema.parse(checkGithubAccessRequest),
+  );
+}
+
+export function checkGithubAccessRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CheckGithubAccessRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CheckGithubAccessRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CheckGithubAccessRequest' from JSON`,
+  );
 }

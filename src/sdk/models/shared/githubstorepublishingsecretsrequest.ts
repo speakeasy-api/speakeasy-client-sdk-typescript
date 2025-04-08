@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A request to store publishing secrets for a github target
@@ -66,4 +69,25 @@ export namespace GithubStorePublishingSecretsRequest$ {
     GithubStorePublishingSecretsRequest$outboundSchema;
   /** @deprecated use `GithubStorePublishingSecretsRequest$Outbound` instead. */
   export type Outbound = GithubStorePublishingSecretsRequest$Outbound;
+}
+
+export function githubStorePublishingSecretsRequestToJSON(
+  githubStorePublishingSecretsRequest: GithubStorePublishingSecretsRequest,
+): string {
+  return JSON.stringify(
+    GithubStorePublishingSecretsRequest$outboundSchema.parse(
+      githubStorePublishingSecretsRequest,
+    ),
+  );
+}
+
+export function githubStorePublishingSecretsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GithubStorePublishingSecretsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GithubStorePublishingSecretsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GithubStorePublishingSecretsRequest' from JSON`,
+  );
 }

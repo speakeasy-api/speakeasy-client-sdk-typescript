@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type PreflightRequest = {
   namespaceName: string;
@@ -51,4 +54,22 @@ export namespace PreflightRequest$ {
   export const outboundSchema = PreflightRequest$outboundSchema;
   /** @deprecated use `PreflightRequest$Outbound` instead. */
   export type Outbound = PreflightRequest$Outbound;
+}
+
+export function preflightRequestToJSON(
+  preflightRequest: PreflightRequest,
+): string {
+  return JSON.stringify(
+    PreflightRequest$outboundSchema.parse(preflightRequest),
+  );
+}
+
+export function preflightRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<PreflightRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PreflightRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PreflightRequest' from JSON`,
+  );
 }

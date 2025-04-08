@@ -12,7 +12,8 @@ let value: GithubPublishingPRResponse = {};
 
 ## Fields
 
-| Field                   | Type                    | Required                | Description             |
-| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `generationPullRequest` | *string*                | :heavy_minus_sign:      | N/A                     |
-| `pendingVersion`        | *string*                | :heavy_minus_sign:      | N/A                     |
+| Field                                                                           | Type                                                                            | Required                                                                        | Description                                                                     |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `pendingVersion`                                                                | *string*                                                                        | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `pullRequest`                                                                   | *string*                                                                        | :heavy_minus_sign:                                                              | N/A                                                                             |
+| `pullRequestMetadata`                                                           | [shared.PullRequestMetadata](../../../sdk/models/shared/pullrequestmetadata.md) | :heavy_minus_sign:                                                              | This can only be populated when the github app is installed for a repo          |

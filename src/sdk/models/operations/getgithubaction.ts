@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetGitHubActionRequest = {
@@ -60,6 +63,24 @@ export namespace GetGitHubActionRequest$ {
   export type Outbound = GetGitHubActionRequest$Outbound;
 }
 
+export function getGitHubActionRequestToJSON(
+  getGitHubActionRequest: GetGitHubActionRequest,
+): string {
+  return JSON.stringify(
+    GetGitHubActionRequest$outboundSchema.parse(getGitHubActionRequest),
+  );
+}
+
+export function getGitHubActionRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGitHubActionRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGitHubActionRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGitHubActionRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetGitHubActionResponse$inboundSchema: z.ZodType<
   GetGitHubActionResponse,
@@ -96,4 +117,22 @@ export namespace GetGitHubActionResponse$ {
   export const outboundSchema = GetGitHubActionResponse$outboundSchema;
   /** @deprecated use `GetGitHubActionResponse$Outbound` instead. */
   export type Outbound = GetGitHubActionResponse$Outbound;
+}
+
+export function getGitHubActionResponseToJSON(
+  getGitHubActionResponse: GetGitHubActionResponse,
+): string {
+  return JSON.stringify(
+    GetGitHubActionResponse$outboundSchema.parse(getGitHubActionResponse),
+  );
+}
+
+export function getGitHubActionResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetGitHubActionResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetGitHubActionResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetGitHubActionResponse' from JSON`,
+  );
 }

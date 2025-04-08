@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * A speakeasy workspace
@@ -11,12 +14,16 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 export type Workspace = {
   createdAt: Date;
   id: string;
+  inactive?: boolean | undefined;
   name: string;
-  ociRepo?: string | null | undefined;
-  ociRepoCreatedAt?: Date | null | undefined;
   organizationId: string;
   slug: string;
-  telemetryDisabled: boolean;
+  /**
+   * Deprecated. Use organization.telemetry_disabled instead.
+   *
+   * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+   */
+  telemetryDisabled?: boolean | undefined;
   updatedAt: Date;
   verified: boolean;
 };
@@ -29,21 +36,16 @@ export const Workspace$inboundSchema: z.ZodType<
 > = z.object({
   created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   id: z.string(),
+  inactive: z.boolean().optional(),
   name: z.string(),
-  oci_repo: z.nullable(z.string()).optional(),
-  oci_repo_created_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
   organization_id: z.string(),
   slug: z.string(),
-  telemetry_disabled: z.boolean(),
+  telemetry_disabled: z.boolean().optional(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
   verified: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     "created_at": "createdAt",
-    "oci_repo": "ociRepo",
-    "oci_repo_created_at": "ociRepoCreatedAt",
     "organization_id": "organizationId",
     "telemetry_disabled": "telemetryDisabled",
     "updated_at": "updatedAt",
@@ -54,12 +56,11 @@ export const Workspace$inboundSchema: z.ZodType<
 export type Workspace$Outbound = {
   created_at: string;
   id: string;
+  inactive?: boolean | undefined;
   name: string;
-  oci_repo?: string | null | undefined;
-  oci_repo_created_at?: string | null | undefined;
   organization_id: string;
   slug: string;
-  telemetry_disabled: boolean;
+  telemetry_disabled?: boolean | undefined;
   updated_at: string;
   verified: boolean;
 };
@@ -72,20 +73,16 @@ export const Workspace$outboundSchema: z.ZodType<
 > = z.object({
   createdAt: z.date().transform(v => v.toISOString()),
   id: z.string(),
+  inactive: z.boolean().optional(),
   name: z.string(),
-  ociRepo: z.nullable(z.string()).optional(),
-  ociRepoCreatedAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
   organizationId: z.string(),
   slug: z.string(),
-  telemetryDisabled: z.boolean(),
+  telemetryDisabled: z.boolean().optional(),
   updatedAt: z.date().transform(v => v.toISOString()),
   verified: z.boolean(),
 }).transform((v) => {
   return remap$(v, {
     createdAt: "created_at",
-    ociRepo: "oci_repo",
-    ociRepoCreatedAt: "oci_repo_created_at",
     organizationId: "organization_id",
     telemetryDisabled: "telemetry_disabled",
     updatedAt: "updated_at",
@@ -103,4 +100,18 @@ export namespace Workspace$ {
   export const outboundSchema = Workspace$outboundSchema;
   /** @deprecated use `Workspace$Outbound` instead. */
   export type Outbound = Workspace$Outbound;
+}
+
+export function workspaceToJSON(workspace: Workspace): string {
+  return JSON.stringify(Workspace$outboundSchema.parse(workspace));
+}
+
+export function workspaceFromJSON(
+  jsonString: string,
+): SafeParseResult<Workspace, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Workspace$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Workspace' from JSON`,
+  );
 }

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetLintingReportSignedUrlRequest = {
   /**
@@ -54,6 +57,26 @@ export namespace GetLintingReportSignedUrlRequest$ {
   export type Outbound = GetLintingReportSignedUrlRequest$Outbound;
 }
 
+export function getLintingReportSignedUrlRequestToJSON(
+  getLintingReportSignedUrlRequest: GetLintingReportSignedUrlRequest,
+): string {
+  return JSON.stringify(
+    GetLintingReportSignedUrlRequest$outboundSchema.parse(
+      getLintingReportSignedUrlRequest,
+    ),
+  );
+}
+
+export function getLintingReportSignedUrlRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetLintingReportSignedUrlRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetLintingReportSignedUrlRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetLintingReportSignedUrlRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetLintingReportSignedUrlSignedAccess$inboundSchema: z.ZodType<
   GetLintingReportSignedUrlSignedAccess,
@@ -90,4 +113,25 @@ export namespace GetLintingReportSignedUrlSignedAccess$ {
     GetLintingReportSignedUrlSignedAccess$outboundSchema;
   /** @deprecated use `GetLintingReportSignedUrlSignedAccess$Outbound` instead. */
   export type Outbound = GetLintingReportSignedUrlSignedAccess$Outbound;
+}
+
+export function getLintingReportSignedUrlSignedAccessToJSON(
+  getLintingReportSignedUrlSignedAccess: GetLintingReportSignedUrlSignedAccess,
+): string {
+  return JSON.stringify(
+    GetLintingReportSignedUrlSignedAccess$outboundSchema.parse(
+      getLintingReportSignedUrlSignedAccess,
+    ),
+  );
+}
+
+export function getLintingReportSignedUrlSignedAccessFromJSON(
+  jsonString: string,
+): SafeParseResult<GetLintingReportSignedUrlSignedAccess, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetLintingReportSignedUrlSignedAccess$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetLintingReportSignedUrlSignedAccess' from JSON`,
+  );
 }

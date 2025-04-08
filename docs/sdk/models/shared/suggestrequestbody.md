@@ -10,14 +10,15 @@ let value: SuggestRequestBody = {
     {
       message: "<value>",
       path: [
-        "/usr/include",
+        "/srv",
       ],
       type: "<value>",
     },
   ],
   oasSummary: {
     info: {
-      description: "knottily ethyl covenant",
+      description:
+        "opposite dowse strategy peppery lest incidentally shiny although",
       license: {},
       summary: "<value>",
       title: "<value>",
@@ -25,11 +26,10 @@ let value: SuggestRequestBody = {
     },
     operations: [
       {
-        description:
-          "politely after horst vanadyl mmm ownership toward curly about",
+        description: "whose flashy lazy along how punctually strictly ha",
         method: "<value>",
         operationId: "<id>",
-        path: "/var/spool",
+        path: "/private/var",
         tags: [
           "<value>",
         ],

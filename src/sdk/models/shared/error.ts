@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The `Status` type defines a logical error model
@@ -61,4 +64,18 @@ export namespace ErrorT$ {
   export const outboundSchema = ErrorT$outboundSchema;
   /** @deprecated use `ErrorT$Outbound` instead. */
   export type Outbound = ErrorT$Outbound;
+}
+
+export function errorToJSON(errorT: ErrorT): string {
+  return JSON.stringify(ErrorT$outboundSchema.parse(errorT));
+}
+
+export function errorFromJSON(
+  jsonString: string,
+): SafeParseResult<ErrorT, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ErrorT$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ErrorT' from JSON`,
+  );
 }

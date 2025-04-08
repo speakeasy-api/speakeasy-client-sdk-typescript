@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Diagnostic = {
   /**
@@ -66,4 +69,18 @@ export namespace Diagnostic$ {
   export const outboundSchema = Diagnostic$outboundSchema;
   /** @deprecated use `Diagnostic$Outbound` instead. */
   export type Outbound = Diagnostic$Outbound;
+}
+
+export function diagnosticToJSON(diagnostic: Diagnostic): string {
+  return JSON.stringify(Diagnostic$outboundSchema.parse(diagnostic));
+}
+
+export function diagnosticFromJSON(
+  jsonString: string,
+): SafeParseResult<Diagnostic, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Diagnostic$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Diagnostic' from JSON`,
+  );
 }

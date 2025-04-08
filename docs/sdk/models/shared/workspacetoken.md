@@ -9,23 +9,26 @@ import { WorkspaceToken } from "@speakeasy-api/speakeasy-client-sdk-typescript/s
 
 let value: WorkspaceToken = {
   alg: "<value>",
-  createdAt: "<value>",
+  createdAt: new Date("2024-04-19T04:59:33.478Z"),
   id: "<id>",
   key: "<key>",
   name: "<value>",
+  workspaceId: "<id>",
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `alg`              | *string*           | :heavy_check_mark: | N/A                |
-| `createdAt`        | *string*           | :heavy_check_mark: | N/A                |
-| `createdBy`        | *string*           | :heavy_minus_sign: | N/A                |
-| `email`            | *string*           | :heavy_minus_sign: | N/A                |
-| `id`               | *string*           | :heavy_check_mark: | N/A                |
-| `key`              | *string*           | :heavy_check_mark: | N/A                |
-| `lastUsed`         | *string*           | :heavy_minus_sign: | N/A                |
-| `name`             | *string*           | :heavy_check_mark: | N/A                |
-| `workspaceId`      | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `alg`                                                                                         | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `createdAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `createdBy`                                                                                   | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `createdByName`                                                                               | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `createdByPhotoUrl`                                                                           | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `email`                                                                                       | *string*                                                                                      | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `key`                                                                                         | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `lastUsed`                                                                                    | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `workspaceId`                                                                                 | *string*                                                                                      | :heavy_check_mark:                                                                            | N/A                                                                                           |

@@ -20,6 +20,7 @@ export const InteractionType = {
   Run: "RUN",
   Configure: "CONFIGURE",
   Publish: "PUBLISH",
+  Test: "TEST",
 } as const;
 /**
  * Type of interaction.

@@ -8,12 +8,12 @@ import { User } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/
 let value: User = {
   admin: false,
   confirmed: false,
-  createdAt: new Date("2022-04-20T22:07:54.686Z"),
-  displayName: "Agnes_Ortiz",
-  email: "Jeanette23@gmail.com",
+  createdAt: new Date("2024-07-05T21:57:00.508Z"),
+  displayName: "Carissa_Lehner",
+  email: "Eusebio.Fritsch17@hotmail.com",
   emailVerified: false,
   id: "<id>",
-  updatedAt: new Date("2024-10-28T17:59:56.921Z"),
+  updatedAt: new Date("2023-05-05T07:56:21.227Z"),
   whitelisted: false,
 };
 ```
@@ -30,8 +30,11 @@ let value: User = {
 | `email`                                                                                       | *string*                                                                                      | :heavy_check_mark:                                                                            | Email address of the user.                                                                    |
 | `emailVerified`                                                                               | *boolean*                                                                                     | :heavy_check_mark:                                                                            | Indicates whether the email address has been verified.                                        |
 | `githubHandle`                                                                                | *string*                                                                                      | :heavy_minus_sign:                                                                            | GitHub handle of the user.                                                                    |
+| `hasCreatedApiKey`                                                                            | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | Indicates whether the user has created an API key. Not always populated                       |
 | `id`                                                                                          | *string*                                                                                      | :heavy_check_mark:                                                                            | Unique identifier for the user.                                                               |
+| `internal`                                                                                    | *boolean*                                                                                     | :heavy_minus_sign:                                                                            | Indicates whether the user is internal.                                                       |
 | `lastLoginAt`                                                                                 | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_minus_sign:                                                                            | Timestamp of the last login.                                                                  |
 | `photoUrl`                                                                                    | *string*                                                                                      | :heavy_minus_sign:                                                                            | URL of the user's photo.                                                                      |
+| `pylonIdentityHash`                                                                           | *string*                                                                                      | :heavy_minus_sign:                                                                            | Hash used for pylon identity verification returned on v1/user.                                |
 | `updatedAt`                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) | :heavy_check_mark:                                                                            | Timestamp of the user's last update.                                                          |
 | `whitelisted`                                                                                 | *boolean*                                                                                     | :heavy_check_mark:                                                                            | Indicates whether the user has been whitelisted.                                              |

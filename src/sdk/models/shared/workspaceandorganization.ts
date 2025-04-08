@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Organization,
   Organization$inboundSchema,
@@ -67,4 +70,22 @@ export namespace WorkspaceAndOrganization$ {
   export const outboundSchema = WorkspaceAndOrganization$outboundSchema;
   /** @deprecated use `WorkspaceAndOrganization$Outbound` instead. */
   export type Outbound = WorkspaceAndOrganization$Outbound;
+}
+
+export function workspaceAndOrganizationToJSON(
+  workspaceAndOrganization: WorkspaceAndOrganization,
+): string {
+  return JSON.stringify(
+    WorkspaceAndOrganization$outboundSchema.parse(workspaceAndOrganization),
+  );
+}
+
+export function workspaceAndOrganizationFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkspaceAndOrganization, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WorkspaceAndOrganization$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkspaceAndOrganization' from JSON`,
+  );
 }

@@ -4,14 +4,23 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountType,
   AccountType$inboundSchema,
   AccountType$outboundSchema,
 } from "./accounttype.js";
+import {
+  BillingAddOn,
+  BillingAddOn$inboundSchema,
+  BillingAddOn$outboundSchema,
+} from "./billingaddon.js";
 
 export type ApiKeyDetails = {
   accountTypeV2: AccountType;
+  billingAddOns: Array<BillingAddOn>;
   enabledFeatures: Array<string>;
   /**
    * @deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -20,6 +29,10 @@ export type ApiKeyDetails = {
   generationAccessUnlimited?: boolean | undefined;
   orgSlug: string;
   telemetryDisabled: boolean;
+  /**
+   * Workspace creation timestamp.
+   */
+  workspaceCreatedAt: Date;
   workspaceId: string;
   workspaceSlug: string;
 };
@@ -31,21 +44,27 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<
   unknown
 > = z.object({
   account_type_v2: AccountType$inboundSchema,
+  billing_add_ons: z.array(BillingAddOn$inboundSchema),
   enabled_features: z.array(z.string()),
   feature_flags: z.array(z.string()).optional(),
   generation_access_unlimited: z.boolean().optional(),
   org_slug: z.string(),
   telemetry_disabled: z.boolean(),
+  workspace_created_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ),
   workspace_id: z.string(),
   workspace_slug: z.string(),
 }).transform((v) => {
   return remap$(v, {
     "account_type_v2": "accountTypeV2",
+    "billing_add_ons": "billingAddOns",
     "enabled_features": "enabledFeatures",
     "feature_flags": "featureFlags",
     "generation_access_unlimited": "generationAccessUnlimited",
     "org_slug": "orgSlug",
     "telemetry_disabled": "telemetryDisabled",
+    "workspace_created_at": "workspaceCreatedAt",
     "workspace_id": "workspaceId",
     "workspace_slug": "workspaceSlug",
   });
@@ -54,11 +73,13 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<
 /** @internal */
 export type ApiKeyDetails$Outbound = {
   account_type_v2: string;
+  billing_add_ons: Array<string>;
   enabled_features: Array<string>;
   feature_flags?: Array<string> | undefined;
   generation_access_unlimited?: boolean | undefined;
   org_slug: string;
   telemetry_disabled: boolean;
+  workspace_created_at: string;
   workspace_id: string;
   workspace_slug: string;
 };
@@ -70,21 +91,25 @@ export const ApiKeyDetails$outboundSchema: z.ZodType<
   ApiKeyDetails
 > = z.object({
   accountTypeV2: AccountType$outboundSchema,
+  billingAddOns: z.array(BillingAddOn$outboundSchema),
   enabledFeatures: z.array(z.string()),
   featureFlags: z.array(z.string()).optional(),
   generationAccessUnlimited: z.boolean().optional(),
   orgSlug: z.string(),
   telemetryDisabled: z.boolean(),
+  workspaceCreatedAt: z.date().transform(v => v.toISOString()),
   workspaceId: z.string(),
   workspaceSlug: z.string(),
 }).transform((v) => {
   return remap$(v, {
     accountTypeV2: "account_type_v2",
+    billingAddOns: "billing_add_ons",
     enabledFeatures: "enabled_features",
     featureFlags: "feature_flags",
     generationAccessUnlimited: "generation_access_unlimited",
     orgSlug: "org_slug",
     telemetryDisabled: "telemetry_disabled",
+    workspaceCreatedAt: "workspace_created_at",
     workspaceId: "workspace_id",
     workspaceSlug: "workspace_slug",
   });
@@ -101,4 +126,18 @@ export namespace ApiKeyDetails$ {
   export const outboundSchema = ApiKeyDetails$outboundSchema;
   /** @deprecated use `ApiKeyDetails$Outbound` instead. */
   export type Outbound = ApiKeyDetails$Outbound;
+}
+
+export function apiKeyDetailsToJSON(apiKeyDetails: ApiKeyDetails): string {
+  return JSON.stringify(ApiKeyDetails$outboundSchema.parse(apiKeyDetails));
+}
+
+export function apiKeyDetailsFromJSON(
+  jsonString: string,
+): SafeParseResult<ApiKeyDetails, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ApiKeyDetails$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ApiKeyDetails' from JSON`,
+  );
 }

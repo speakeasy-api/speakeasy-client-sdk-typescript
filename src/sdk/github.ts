@@ -9,6 +9,8 @@ import { githubConfigureCodeSamples } from "../funcs/githubConfigureCodeSamples.
 import { githubConfigureMintlifyRepo } from "../funcs/githubConfigureMintlifyRepo.js";
 import { githubConfigureTarget } from "../funcs/githubConfigureTarget.js";
 import { githubGetAction } from "../funcs/githubGetAction.js";
+import { githubGetSetup } from "../funcs/githubGetSetup.js";
+import { githubLinkGithub } from "../funcs/githubLinkGithub.js";
 import { githubStorePublishingSecrets } from "../funcs/githubStorePublishingSecrets.js";
 import { githubTriggerAction } from "../funcs/githubTriggerAction.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -88,6 +90,28 @@ export class Github extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetGitHubActionResponse> {
     return unwrapAsync(githubGetAction(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  async getSetup(
+    request: operations.GetGithubSetupStateRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetGithubSetupStateResponse> {
+    return unwrapAsync(githubGetSetup(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  async linkGithub(
+    request: operations.LinkGithubAccessRequest,
+    options?: RequestOptions,
+  ): Promise<shared.ErrorT | undefined> {
+    return unwrapAsync(githubLinkGithub(
       this,
       request,
       options,

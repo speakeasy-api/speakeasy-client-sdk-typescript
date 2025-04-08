@@ -4,9 +4,10 @@
 
 import * as z from "zod";
 import { SpeakeasyCore } from "../core.js";
-import { encodeJSON, encodeSimple } from "../lib/encodings.js";
+import { appendForm, encodeJSON, encodeSimple } from "../lib/encodings.js";
 import { readableStreamToArrayBuffer } from "../lib/files.js";
 import * as M from "../lib/matchers.js";
+import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
@@ -21,6 +22,7 @@ import {
 import { SDKError } from "../sdk/models/errors/sdkerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
 import * as operations from "../sdk/models/operations/index.js";
+import { APICall, APIPromise } from "../sdk/types/async.js";
 import { isBlobLike } from "../sdk/types/blobs.js";
 import { Result } from "../sdk/types/fp.js";
 import { isReadableStream } from "../sdk/types/streams.js";
@@ -31,11 +33,11 @@ import { isReadableStream } from "../sdk/types/streams.js";
  * @remarks
  * Get suggestions from an LLM model for improving an OpenAPI document.
  */
-export async function suggestSuggestOpenAPI(
+export function suggestSuggestOpenAPI(
   client: SpeakeasyCore,
   request: operations.SuggestOpenAPIRequest,
   options?: RequestOptions,
-): Promise<
+): APIPromise<
   Result<
     ReadableStream<Uint8Array>,
     | SDKError
@@ -47,27 +49,54 @@ export async function suggestSuggestOpenAPI(
     | ConnectionError
   >
 > {
+  return new APIPromise($do(
+    client,
+    request,
+    options,
+  ));
+}
+
+async function $do(
+  client: SpeakeasyCore,
+  request: operations.SuggestOpenAPIRequest,
+  options?: RequestOptions,
+): Promise<
+  [
+    Result<
+      ReadableStream<Uint8Array>,
+      | SDKError
+      | SDKValidationError
+      | UnexpectedClientError
+      | InvalidRequestError
+      | RequestAbortedError
+      | RequestTimeoutError
+      | ConnectionError
+    >,
+    APICall,
+  ]
+> {
   const parsed = safeParse(
     request,
     (value) => operations.SuggestOpenAPIRequest$outboundSchema.parse(value),
     "Input validation failed",
   );
   if (!parsed.ok) {
-    return parsed;
+    return [parsed, { status: "invalid" }];
   }
   const payload = parsed.value;
   const body = new FormData();
 
   if (isBlobLike(payload.RequestBody.schema)) {
-    body.append("schema", payload.RequestBody.schema);
+    appendForm(body, "schema", payload.RequestBody.schema);
   } else if (isReadableStream(payload.RequestBody.schema.content)) {
     const buffer = await readableStreamToArrayBuffer(
       payload.RequestBody.schema.content,
     );
     const blob = new Blob([buffer], { type: "application/octet-stream" });
-    body.append("schema", blob);
+    appendForm(body, "schema", blob);
   } else {
-    body.append(
+    appendForm(
+      body,
       "schema",
       new Blob([payload.RequestBody.schema.content], {
         type: "application/octet-stream",
@@ -76,7 +105,8 @@ export async function suggestSuggestOpenAPI(
     );
   }
   if (payload.RequestBody.opts !== undefined) {
-    body.append(
+    appendForm(
+      body,
       "opts",
       encodeJSON("opts", payload.RequestBody.opts, { explode: true }),
     );
@@ -84,44 +114,53 @@ export async function suggestSuggestOpenAPI(
 
   const path = pathToFunc("/v1/suggest/openapi")();
 
-  const headers = new Headers({
+  const headers = new Headers(compactMap({
     Accept: "application/json",
     "x-session-id": encodeSimple("x-session-id", payload["x-session-id"], {
       explode: false,
       charEncoding: "none",
     }),
-  });
+  }));
 
   const securityInput = await extractSecurity(client._options.security);
+  const requestSecurity = resolveGlobalSecurity(securityInput);
+
   const context = {
+    baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "suggestOpenAPI",
     oAuth2Scopes: [],
+
+    resolvedSecurity: requestSecurity,
+
     securitySource: client._options.security,
+    retryConfig: options?.retries
+      || client._options.retryConfig
+      || { strategy: "none" },
+    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
   };
-  const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const requestRes = client._createRequest(context, {
     security: requestSecurity,
     method: "POST",
+    baseURL: options?.serverURL,
     path: path,
     headers: headers,
     body: body,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
-    return requestRes;
+    return [requestRes, { status: "invalid" }];
   }
   const req = requestRes.value;
 
   const doResult = await client._do(req, {
     context,
     errorCodes: [],
-    retryConfig: options?.retries
-      || client._options.retryConfig,
-    retryCodes: options?.retryCodes || ["429", "500", "502", "503", "504"],
+    retryConfig: context.retryConfig,
+    retryCodes: context.retryCodes,
   });
   if (!doResult.ok) {
-    return doResult;
+    return [doResult, { status: "request-error", request: req }];
   }
   const response = doResult.value;
 
@@ -140,8 +179,8 @@ export async function suggestSuggestOpenAPI(
     }),
   )(response);
   if (!result.ok) {
-    return result;
+    return [result, { status: "complete", request: req, response }];
   }
 
-  return result;
+  return [result, { status: "complete", request: req, response }];
 }

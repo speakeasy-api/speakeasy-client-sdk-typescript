@@ -3,9 +3,12 @@
  */
 
 import { organizationsCreate } from "../funcs/organizationsCreate.js";
+import { organizationsCreateBillingAddOns } from "../funcs/organizationsCreateBillingAddOns.js";
 import { organizationsCreateFreeTrial } from "../funcs/organizationsCreateFreeTrial.js";
+import { organizationsDeleteBillingAddOn } from "../funcs/organizationsDeleteBillingAddOn.js";
 import { organizationsGet } from "../funcs/organizationsGet.js";
 import { organizationsGetAll } from "../funcs/organizationsGetAll.js";
+import { organizationsGetBillingAddOns } from "../funcs/organizationsGetBillingAddOns.js";
 import { organizationsGetUsage } from "../funcs/organizationsGetUsage.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
@@ -31,6 +34,20 @@ export class Organizations extends ClientSDK {
   }
 
   /**
+   * Create billing add ons
+   */
+  async createBillingAddOns(
+    request: shared.OrganizationBillingAddOnRequest,
+    options?: RequestOptions,
+  ): Promise<operations.CreateBillingAddOnsResponse> {
+    return unwrapAsync(organizationsCreateBillingAddOns(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
    * Create a free trial for an organization
    *
    * @remarks
@@ -41,6 +58,20 @@ export class Organizations extends ClientSDK {
   ): Promise<shared.ErrorT | undefined> {
     return unwrapAsync(organizationsCreateFreeTrial(
       this,
+      options,
+    ));
+  }
+
+  /**
+   * Delete billing add ons
+   */
+  async deleteBillingAddOn(
+    request: operations.DeleteBillingAddOnRequest,
+    options?: RequestOptions,
+  ): Promise<shared.ErrorT | undefined> {
+    return unwrapAsync(organizationsDeleteBillingAddOn(
+      this,
+      request,
       options,
     ));
   }
@@ -72,6 +103,18 @@ export class Organizations extends ClientSDK {
     options?: RequestOptions,
   ): Promise<operations.GetOrganizationsResponse> {
     return unwrapAsync(organizationsGetAll(
+      this,
+      options,
+    ));
+  }
+
+  /**
+   * Get billing add ons
+   */
+  async getBillingAddOns(
+    options?: RequestOptions,
+  ): Promise<operations.GetBillingAddOnsResponse> {
+    return unwrapAsync(organizationsGetBillingAddOns(
       this,
       options,
     ));

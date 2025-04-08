@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   InteractionType,
   InteractionType$inboundSchema,
@@ -144,6 +147,10 @@ export type CliEvent = {
    */
   generateNumberOfOperationsUsed?: number | undefined;
   /**
+   * The number of terraform resources used in generation.
+   */
+  generateNumberOfTerraformResources?: number | undefined;
+  /**
    * Indicates whether tests were output.
    */
   generateOutputTests?: boolean | undefined;
@@ -192,7 +199,11 @@ export type CliEvent = {
    */
   ghActionVersion?: string | undefined;
   /**
-   * The reference to a created pull request.
+   * Whether or not changes were committed from generation in the Github Action.
+   */
+  ghChangesCommitted?: boolean | undefined;
+  /**
+   * The reference to a created pull request URL.
    */
   ghPullRequest?: string | undefined;
   /**
@@ -340,6 +351,10 @@ export type CliEvent = {
    */
   success: boolean;
   /**
+   * The raw test report xml
+   */
+  testReportRaw?: string | undefined;
+  /**
    * Workflow lock file (post execution)
    */
   workflowLockPostRaw?: string | undefined;
@@ -434,6 +449,7 @@ export const CliEvent$inboundSchema: z.ZodType<
   generate_gen_lock_pre_version: z.string().optional(),
   generate_number_of_operations_ignored: z.number().int().optional(),
   generate_number_of_operations_used: z.number().int().optional(),
+  generate_number_of_terraform_resources: z.number().int().optional(),
   generate_output_tests: z.boolean().optional(),
   generate_published: z.boolean().optional(),
   generate_repo_url: z.string().optional(),
@@ -446,6 +462,7 @@ export const CliEvent$inboundSchema: z.ZodType<
   gh_action_repository: z.string().optional(),
   gh_action_run_link: z.string().optional(),
   gh_action_version: z.string().optional(),
+  gh_changes_committed: z.boolean().optional(),
   gh_pull_request: z.string().optional(),
   git_relative_cwd: z.string().optional(),
   git_remote_default_owner: z.string().optional(),
@@ -487,6 +504,7 @@ export const CliEvent$inboundSchema: z.ZodType<
   speakeasy_api_key_name: z.string(),
   speakeasy_version: z.string(),
   success: z.boolean(),
+  test_report_raw: z.string().optional(),
   workflow_lock_post_raw: z.string().optional(),
   workflow_lock_pre_raw: z.string().optional(),
   workflow_post_raw: z.string().optional(),
@@ -519,6 +537,8 @@ export const CliEvent$inboundSchema: z.ZodType<
     "generate_number_of_operations_ignored":
       "generateNumberOfOperationsIgnored",
     "generate_number_of_operations_used": "generateNumberOfOperationsUsed",
+    "generate_number_of_terraform_resources":
+      "generateNumberOfTerraformResources",
     "generate_output_tests": "generateOutputTests",
     "generate_published": "generatePublished",
     "generate_repo_url": "generateRepoUrl",
@@ -531,6 +551,7 @@ export const CliEvent$inboundSchema: z.ZodType<
     "gh_action_repository": "ghActionRepository",
     "gh_action_run_link": "ghActionRunLink",
     "gh_action_version": "ghActionVersion",
+    "gh_changes_committed": "ghChangesCommitted",
     "gh_pull_request": "ghPullRequest",
     "git_relative_cwd": "gitRelativeCwd",
     "git_remote_default_owner": "gitRemoteDefaultOwner",
@@ -567,6 +588,7 @@ export const CliEvent$inboundSchema: z.ZodType<
     "source_revision_digest": "sourceRevisionDigest",
     "speakeasy_api_key_name": "speakeasyApiKeyName",
     "speakeasy_version": "speakeasyVersion",
+    "test_report_raw": "testReportRaw",
     "workflow_lock_post_raw": "workflowLockPostRaw",
     "workflow_lock_pre_raw": "workflowLockPreRaw",
     "workflow_post_raw": "workflowPostRaw",
@@ -602,6 +624,7 @@ export type CliEvent$Outbound = {
   generate_gen_lock_pre_version?: string | undefined;
   generate_number_of_operations_ignored?: number | undefined;
   generate_number_of_operations_used?: number | undefined;
+  generate_number_of_terraform_resources?: number | undefined;
   generate_output_tests?: boolean | undefined;
   generate_published?: boolean | undefined;
   generate_repo_url?: string | undefined;
@@ -614,6 +637,7 @@ export type CliEvent$Outbound = {
   gh_action_repository?: string | undefined;
   gh_action_run_link?: string | undefined;
   gh_action_version?: string | undefined;
+  gh_changes_committed?: boolean | undefined;
   gh_pull_request?: string | undefined;
   git_relative_cwd?: string | undefined;
   git_remote_default_owner?: string | undefined;
@@ -651,6 +675,7 @@ export type CliEvent$Outbound = {
   speakeasy_api_key_name: string;
   speakeasy_version: string;
   success: boolean;
+  test_report_raw?: string | undefined;
   workflow_lock_post_raw?: string | undefined;
   workflow_lock_pre_raw?: string | undefined;
   workflow_post_raw?: string | undefined;
@@ -689,6 +714,7 @@ export const CliEvent$outboundSchema: z.ZodType<
   generateGenLockPreVersion: z.string().optional(),
   generateNumberOfOperationsIgnored: z.number().int().optional(),
   generateNumberOfOperationsUsed: z.number().int().optional(),
+  generateNumberOfTerraformResources: z.number().int().optional(),
   generateOutputTests: z.boolean().optional(),
   generatePublished: z.boolean().optional(),
   generateRepoUrl: z.string().optional(),
@@ -701,6 +727,7 @@ export const CliEvent$outboundSchema: z.ZodType<
   ghActionRepository: z.string().optional(),
   ghActionRunLink: z.string().optional(),
   ghActionVersion: z.string().optional(),
+  ghChangesCommitted: z.boolean().optional(),
   ghPullRequest: z.string().optional(),
   gitRelativeCwd: z.string().optional(),
   gitRemoteDefaultOwner: z.string().optional(),
@@ -738,6 +765,7 @@ export const CliEvent$outboundSchema: z.ZodType<
   speakeasyApiKeyName: z.string(),
   speakeasyVersion: z.string(),
   success: z.boolean(),
+  testReportRaw: z.string().optional(),
   workflowLockPostRaw: z.string().optional(),
   workflowLockPreRaw: z.string().optional(),
   workflowPostRaw: z.string().optional(),
@@ -769,6 +797,8 @@ export const CliEvent$outboundSchema: z.ZodType<
     generateGenLockPreVersion: "generate_gen_lock_pre_version",
     generateNumberOfOperationsIgnored: "generate_number_of_operations_ignored",
     generateNumberOfOperationsUsed: "generate_number_of_operations_used",
+    generateNumberOfTerraformResources:
+      "generate_number_of_terraform_resources",
     generateOutputTests: "generate_output_tests",
     generatePublished: "generate_published",
     generateRepoUrl: "generate_repo_url",
@@ -781,6 +811,7 @@ export const CliEvent$outboundSchema: z.ZodType<
     ghActionRepository: "gh_action_repository",
     ghActionRunLink: "gh_action_run_link",
     ghActionVersion: "gh_action_version",
+    ghChangesCommitted: "gh_changes_committed",
     ghPullRequest: "gh_pull_request",
     gitRelativeCwd: "git_relative_cwd",
     gitRemoteDefaultOwner: "git_remote_default_owner",
@@ -817,6 +848,7 @@ export const CliEvent$outboundSchema: z.ZodType<
     sourceRevisionDigest: "source_revision_digest",
     speakeasyApiKeyName: "speakeasy_api_key_name",
     speakeasyVersion: "speakeasy_version",
+    testReportRaw: "test_report_raw",
     workflowLockPostRaw: "workflow_lock_post_raw",
     workflowLockPreRaw: "workflow_lock_pre_raw",
     workflowPostRaw: "workflow_post_raw",
@@ -836,4 +868,18 @@ export namespace CliEvent$ {
   export const outboundSchema = CliEvent$outboundSchema;
   /** @deprecated use `CliEvent$Outbound` instead. */
   export type Outbound = CliEvent$Outbound;
+}
+
+export function cliEventToJSON(cliEvent: CliEvent): string {
+  return JSON.stringify(CliEvent$outboundSchema.parse(cliEvent));
+}
+
+export function cliEventFromJSON(
+  jsonString: string,
+): SafeParseResult<CliEvent, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CliEvent$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CliEvent' from JSON`,
+  );
 }
