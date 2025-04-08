@@ -9,11 +9,11 @@ let value: PostWorkspaceEventsRequest = {
   workspaceId: "<id>",
   requestBody: [
     {
-      createdAt: new Date("2023-06-12T05:20:25.998Z"),
+      createdAt: new Date("2025-11-05T20:35:28.386Z"),
       executionId: "<id>",
       id: "<id>",
-      interactionType: "OPENAPI_DIFF",
-      localStartedAt: new Date("2024-08-03T08:45:30.623Z"),
+      interactionType: "TOMBSTONE",
+      localStartedAt: new Date("2024-04-20T05:34:53.347Z"),
       speakeasyApiKeyName: "<value>",
       speakeasyVersion: "<value>",
       success: false,
@@ -27,5 +27,5 @@ let value: PostWorkspaceEventsRequest = {
 
 | Field                                                       | Type                                                        | Required                                                    | Description                                                 |
 | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| `workspaceId`                                               | *string*                                                    | :heavy_check_mark:                                          | Unique identifier of the workspace.                         |
+| `workspaceId`                                               | *string*                                                    | :heavy_minus_sign:                                          | Unique identifier of the workspace.                         |
 | `requestBody`                                               | [shared.CliEvent](../../../sdk/models/shared/clievent.md)[] | :heavy_check_mark:                                          | N/A                                                         |

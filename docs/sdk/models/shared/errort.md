@@ -9,7 +9,7 @@ import { ErrorT } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/model
 
 let value: ErrorT = {
   message: "<value>",
-  statusCode: 306,
+  statusCode: 103,
 };
 ```
 

@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GetChangesReportSignedUrlRequest = {
   /**
@@ -54,6 +57,26 @@ export namespace GetChangesReportSignedUrlRequest$ {
   export type Outbound = GetChangesReportSignedUrlRequest$Outbound;
 }
 
+export function getChangesReportSignedUrlRequestToJSON(
+  getChangesReportSignedUrlRequest: GetChangesReportSignedUrlRequest,
+): string {
+  return JSON.stringify(
+    GetChangesReportSignedUrlRequest$outboundSchema.parse(
+      getChangesReportSignedUrlRequest,
+    ),
+  );
+}
+
+export function getChangesReportSignedUrlRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetChangesReportSignedUrlRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetChangesReportSignedUrlRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetChangesReportSignedUrlRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetChangesReportSignedUrlSignedAccess$inboundSchema: z.ZodType<
   GetChangesReportSignedUrlSignedAccess,
@@ -90,4 +113,25 @@ export namespace GetChangesReportSignedUrlSignedAccess$ {
     GetChangesReportSignedUrlSignedAccess$outboundSchema;
   /** @deprecated use `GetChangesReportSignedUrlSignedAccess$Outbound` instead. */
   export type Outbound = GetChangesReportSignedUrlSignedAccess$Outbound;
+}
+
+export function getChangesReportSignedUrlSignedAccessToJSON(
+  getChangesReportSignedUrlSignedAccess: GetChangesReportSignedUrlSignedAccess,
+): string {
+  return JSON.stringify(
+    GetChangesReportSignedUrlSignedAccess$outboundSchema.parse(
+      getChangesReportSignedUrlSignedAccess,
+    ),
+  );
+}
+
+export function getChangesReportSignedUrlSignedAccessFromJSON(
+  jsonString: string,
+): SafeParseResult<GetChangesReportSignedUrlSignedAccess, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetChangesReportSignedUrlSignedAccess$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetChangesReportSignedUrlSignedAccess' from JSON`,
+  );
 }

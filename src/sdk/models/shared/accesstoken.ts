@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountType,
   AccountType$inboundSchema,
@@ -72,6 +75,20 @@ export namespace Claims$ {
   export type Outbound = Claims$Outbound;
 }
 
+export function claimsToJSON(claims: Claims): string {
+  return JSON.stringify(Claims$outboundSchema.parse(claims));
+}
+
+export function claimsFromJSON(
+  jsonString: string,
+): SafeParseResult<Claims, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Claims$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Claims' from JSON`,
+  );
+}
+
 /** @internal */
 export const AccessTokenUser$inboundSchema: z.ZodType<
   AccessTokenUser,
@@ -136,6 +153,22 @@ export namespace AccessTokenUser$ {
   export type Outbound = AccessTokenUser$Outbound;
 }
 
+export function accessTokenUserToJSON(
+  accessTokenUser: AccessTokenUser,
+): string {
+  return JSON.stringify(AccessTokenUser$outboundSchema.parse(accessTokenUser));
+}
+
+export function accessTokenUserFromJSON(
+  jsonString: string,
+): SafeParseResult<AccessTokenUser, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccessTokenUser$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccessTokenUser' from JSON`,
+  );
+}
+
 /** @internal */
 export const Workspaces$inboundSchema: z.ZodType<
   Workspaces,
@@ -190,6 +223,20 @@ export namespace Workspaces$ {
   export const outboundSchema = Workspaces$outboundSchema;
   /** @deprecated use `Workspaces$Outbound` instead. */
   export type Outbound = Workspaces$Outbound;
+}
+
+export function workspacesToJSON(workspaces: Workspaces): string {
+  return JSON.stringify(Workspaces$outboundSchema.parse(workspaces));
+}
+
+export function workspacesFromJSON(
+  jsonString: string,
+): SafeParseResult<Workspaces, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Workspaces$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Workspaces' from JSON`,
+  );
 }
 
 /** @internal */
@@ -248,4 +295,18 @@ export namespace AccessToken$ {
   export const outboundSchema = AccessToken$outboundSchema;
   /** @deprecated use `AccessToken$Outbound` instead. */
   export type Outbound = AccessToken$Outbound;
+}
+
+export function accessTokenToJSON(accessToken: AccessToken): string {
+  return JSON.stringify(AccessToken$outboundSchema.parse(accessToken));
+}
+
+export function accessTokenFromJSON(
+  jsonString: string,
+): SafeParseResult<AccessToken, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => AccessToken$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'AccessToken' from JSON`,
+  );
 }

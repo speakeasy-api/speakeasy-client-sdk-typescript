@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetAccessTokenRequest = {
@@ -59,6 +62,24 @@ export namespace GetAccessTokenRequest$ {
   export type Outbound = GetAccessTokenRequest$Outbound;
 }
 
+export function getAccessTokenRequestToJSON(
+  getAccessTokenRequest: GetAccessTokenRequest,
+): string {
+  return JSON.stringify(
+    GetAccessTokenRequest$outboundSchema.parse(getAccessTokenRequest),
+  );
+}
+
+export function getAccessTokenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAccessTokenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAccessTokenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAccessTokenRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetAccessTokenResponse$inboundSchema: z.ZodType<
   GetAccessTokenResponse,
@@ -89,4 +110,22 @@ export namespace GetAccessTokenResponse$ {
   export const outboundSchema = GetAccessTokenResponse$outboundSchema;
   /** @deprecated use `GetAccessTokenResponse$Outbound` instead. */
   export type Outbound = GetAccessTokenResponse$Outbound;
+}
+
+export function getAccessTokenResponseToJSON(
+  getAccessTokenResponse: GetAccessTokenResponse,
+): string {
+  return JSON.stringify(
+    GetAccessTokenResponse$outboundSchema.parse(getAccessTokenResponse),
+  );
+}
+
+export function getAccessTokenResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetAccessTokenResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetAccessTokenResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetAccessTokenResponse' from JSON`,
+  );
 }

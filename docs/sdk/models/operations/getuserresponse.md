@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 226,
+  statusCode: 101,
 };
 ```
 
@@ -18,12 +18,12 @@ const value: shared.ErrorT = {
 const value: shared.User = {
   admin: false,
   confirmed: false,
-  createdAt: new Date("2023-10-18T18:06:11.730Z"),
-  displayName: "Blair_Sauer91",
-  email: "Jaida_Wilkinson@hotmail.com",
+  createdAt: new Date("2023-10-31T21:24:40.077Z"),
+  displayName: "Ari_Quitzon13",
+  email: "Maddison.Johnson@hotmail.com",
   emailVerified: false,
   id: "<id>",
-  updatedAt: new Date("2024-08-30T22:04:58.019Z"),
+  updatedAt: new Date("2023-05-08T00:50:53.195Z"),
   whitelisted: false,
 };
 ```

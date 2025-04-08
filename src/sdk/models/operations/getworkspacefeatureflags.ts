@@ -4,13 +4,20 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
+
+export type GetWorkspaceFeatureFlagsGlobals = {
+  workspaceId?: string | undefined;
+};
 
 export type GetWorkspaceFeatureFlagsRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
 };
 
 export type GetWorkspaceFeatureFlagsResponse =
@@ -18,12 +25,76 @@ export type GetWorkspaceFeatureFlagsResponse =
   | shared.ErrorT;
 
 /** @internal */
+export const GetWorkspaceFeatureFlagsGlobals$inboundSchema: z.ZodType<
+  GetWorkspaceFeatureFlagsGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type GetWorkspaceFeatureFlagsGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const GetWorkspaceFeatureFlagsGlobals$outboundSchema: z.ZodType<
+  GetWorkspaceFeatureFlagsGlobals$Outbound,
+  z.ZodTypeDef,
+  GetWorkspaceFeatureFlagsGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GetWorkspaceFeatureFlagsGlobals$ {
+  /** @deprecated use `GetWorkspaceFeatureFlagsGlobals$inboundSchema` instead. */
+  export const inboundSchema = GetWorkspaceFeatureFlagsGlobals$inboundSchema;
+  /** @deprecated use `GetWorkspaceFeatureFlagsGlobals$outboundSchema` instead. */
+  export const outboundSchema = GetWorkspaceFeatureFlagsGlobals$outboundSchema;
+  /** @deprecated use `GetWorkspaceFeatureFlagsGlobals$Outbound` instead. */
+  export type Outbound = GetWorkspaceFeatureFlagsGlobals$Outbound;
+}
+
+export function getWorkspaceFeatureFlagsGlobalsToJSON(
+  getWorkspaceFeatureFlagsGlobals: GetWorkspaceFeatureFlagsGlobals,
+): string {
+  return JSON.stringify(
+    GetWorkspaceFeatureFlagsGlobals$outboundSchema.parse(
+      getWorkspaceFeatureFlagsGlobals,
+    ),
+  );
+}
+
+export function getWorkspaceFeatureFlagsGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceFeatureFlagsGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceFeatureFlagsGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceFeatureFlagsGlobals' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetWorkspaceFeatureFlagsRequest$inboundSchema: z.ZodType<
   GetWorkspaceFeatureFlagsRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "workspace_id": "workspaceId",
@@ -32,7 +103,7 @@ export const GetWorkspaceFeatureFlagsRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type GetWorkspaceFeatureFlagsRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
 };
 
 /** @internal */
@@ -41,7 +112,7 @@ export const GetWorkspaceFeatureFlagsRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   GetWorkspaceFeatureFlagsRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     workspaceId: "workspace_id",
@@ -59,6 +130,26 @@ export namespace GetWorkspaceFeatureFlagsRequest$ {
   export const outboundSchema = GetWorkspaceFeatureFlagsRequest$outboundSchema;
   /** @deprecated use `GetWorkspaceFeatureFlagsRequest$Outbound` instead. */
   export type Outbound = GetWorkspaceFeatureFlagsRequest$Outbound;
+}
+
+export function getWorkspaceFeatureFlagsRequestToJSON(
+  getWorkspaceFeatureFlagsRequest: GetWorkspaceFeatureFlagsRequest,
+): string {
+  return JSON.stringify(
+    GetWorkspaceFeatureFlagsRequest$outboundSchema.parse(
+      getWorkspaceFeatureFlagsRequest,
+    ),
+  );
+}
+
+export function getWorkspaceFeatureFlagsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceFeatureFlagsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceFeatureFlagsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceFeatureFlagsRequest' from JSON`,
+  );
 }
 
 /** @internal */
@@ -97,4 +188,24 @@ export namespace GetWorkspaceFeatureFlagsResponse$ {
   export const outboundSchema = GetWorkspaceFeatureFlagsResponse$outboundSchema;
   /** @deprecated use `GetWorkspaceFeatureFlagsResponse$Outbound` instead. */
   export type Outbound = GetWorkspaceFeatureFlagsResponse$Outbound;
+}
+
+export function getWorkspaceFeatureFlagsResponseToJSON(
+  getWorkspaceFeatureFlagsResponse: GetWorkspaceFeatureFlagsResponse,
+): string {
+  return JSON.stringify(
+    GetWorkspaceFeatureFlagsResponse$outboundSchema.parse(
+      getWorkspaceFeatureFlagsResponse,
+    ),
+  );
+}
+
+export function getWorkspaceFeatureFlagsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceFeatureFlagsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceFeatureFlagsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceFeatureFlagsResponse' from JSON`,
+  );
 }

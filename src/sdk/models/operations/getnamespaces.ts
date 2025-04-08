@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetNamespacesResponse =
@@ -45,4 +48,22 @@ export namespace GetNamespacesResponse$ {
   export const outboundSchema = GetNamespacesResponse$outboundSchema;
   /** @deprecated use `GetNamespacesResponse$Outbound` instead. */
   export type Outbound = GetNamespacesResponse$Outbound;
+}
+
+export function getNamespacesResponseToJSON(
+  getNamespacesResponse: GetNamespacesResponse,
+): string {
+  return JSON.stringify(
+    GetNamespacesResponse$outboundSchema.parse(getNamespacesResponse),
+  );
+}
+
+export function getNamespacesResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetNamespacesResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetNamespacesResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetNamespacesResponse' from JSON`,
+  );
 }

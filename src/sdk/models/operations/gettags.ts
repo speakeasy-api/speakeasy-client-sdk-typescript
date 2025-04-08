@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetTagsRequest = {
@@ -56,6 +59,20 @@ export namespace GetTagsRequest$ {
   export type Outbound = GetTagsRequest$Outbound;
 }
 
+export function getTagsRequestToJSON(getTagsRequest: GetTagsRequest): string {
+  return JSON.stringify(GetTagsRequest$outboundSchema.parse(getTagsRequest));
+}
+
+export function getTagsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTagsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTagsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTagsRequest' from JSON`,
+  );
+}
+
 /** @internal */
 export const GetTagsResponse$inboundSchema: z.ZodType<
   GetTagsResponse,
@@ -92,4 +109,20 @@ export namespace GetTagsResponse$ {
   export const outboundSchema = GetTagsResponse$outboundSchema;
   /** @deprecated use `GetTagsResponse$Outbound` instead. */
   export type Outbound = GetTagsResponse$Outbound;
+}
+
+export function getTagsResponseToJSON(
+  getTagsResponse: GetTagsResponse,
+): string {
+  return JSON.stringify(GetTagsResponse$outboundSchema.parse(getTagsResponse));
+}
+
+export function getTagsResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetTagsResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetTagsResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetTagsResponse' from JSON`,
+  );
 }

@@ -7,7 +7,7 @@ import { GrantUserAccessToWorkspaceRequest } from "@speakeasy-api/speakeasy-clie
 
 let value: GrantUserAccessToWorkspaceRequest = {
   workspaceId: "<id>",
-  email: "Justyn.Hirthe@hotmail.com",
+  email: "Sebastian.Paucek6@yahoo.com",
 };
 ```
 
@@ -15,5 +15,5 @@ let value: GrantUserAccessToWorkspaceRequest = {
 
 | Field                                 | Type                                  | Required                              | Description                           |
 | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `workspaceId`                         | *string*                              | :heavy_check_mark:                    | Unique identifier of the workspace.   |
+| `workspaceId`                         | *string*                              | :heavy_minus_sign:                    | Unique identifier of the workspace.   |
 | `email`                               | *string*                              | :heavy_check_mark:                    | Email of the user to grant access to. |

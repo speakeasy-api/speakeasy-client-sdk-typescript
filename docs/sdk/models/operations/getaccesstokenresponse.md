@@ -18,7 +18,7 @@ const value: shared.AccessToken = {
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 416,
+  statusCode: 101,
 };
 ```
 

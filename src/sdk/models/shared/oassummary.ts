@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   OASInfo,
   OASInfo$inboundSchema,
@@ -58,4 +61,18 @@ export namespace OASSummary$ {
   export const outboundSchema = OASSummary$outboundSchema;
   /** @deprecated use `OASSummary$Outbound` instead. */
   export type Outbound = OASSummary$Outbound;
+}
+
+export function oasSummaryToJSON(oasSummary: OASSummary): string {
+  return JSON.stringify(OASSummary$outboundSchema.parse(oasSummary));
+}
+
+export function oasSummaryFromJSON(
+  jsonString: string,
+): SafeParseResult<OASSummary, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OASSummary$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OASSummary' from JSON`,
+  );
 }

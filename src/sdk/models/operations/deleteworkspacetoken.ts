@@ -4,12 +4,19 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+export type DeleteWorkspaceTokenGlobals = {
+  workspaceId?: string | undefined;
+};
 
 export type DeleteWorkspaceTokenRequest = {
   /**
    * Unique identifier of the workspace.
    */
-  workspaceId: string;
+  workspaceId?: string | undefined;
   /**
    * Unique identifier of the token.
    */
@@ -17,12 +24,76 @@ export type DeleteWorkspaceTokenRequest = {
 };
 
 /** @internal */
+export const DeleteWorkspaceTokenGlobals$inboundSchema: z.ZodType<
+  DeleteWorkspaceTokenGlobals,
+  z.ZodTypeDef,
+  unknown
+> = z.object({
+  workspace_id: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    "workspace_id": "workspaceId",
+  });
+});
+
+/** @internal */
+export type DeleteWorkspaceTokenGlobals$Outbound = {
+  workspace_id?: string | undefined;
+};
+
+/** @internal */
+export const DeleteWorkspaceTokenGlobals$outboundSchema: z.ZodType<
+  DeleteWorkspaceTokenGlobals$Outbound,
+  z.ZodTypeDef,
+  DeleteWorkspaceTokenGlobals
+> = z.object({
+  workspaceId: z.string().optional(),
+}).transform((v) => {
+  return remap$(v, {
+    workspaceId: "workspace_id",
+  });
+});
+
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DeleteWorkspaceTokenGlobals$ {
+  /** @deprecated use `DeleteWorkspaceTokenGlobals$inboundSchema` instead. */
+  export const inboundSchema = DeleteWorkspaceTokenGlobals$inboundSchema;
+  /** @deprecated use `DeleteWorkspaceTokenGlobals$outboundSchema` instead. */
+  export const outboundSchema = DeleteWorkspaceTokenGlobals$outboundSchema;
+  /** @deprecated use `DeleteWorkspaceTokenGlobals$Outbound` instead. */
+  export type Outbound = DeleteWorkspaceTokenGlobals$Outbound;
+}
+
+export function deleteWorkspaceTokenGlobalsToJSON(
+  deleteWorkspaceTokenGlobals: DeleteWorkspaceTokenGlobals,
+): string {
+  return JSON.stringify(
+    DeleteWorkspaceTokenGlobals$outboundSchema.parse(
+      deleteWorkspaceTokenGlobals,
+    ),
+  );
+}
+
+export function deleteWorkspaceTokenGlobalsFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteWorkspaceTokenGlobals, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteWorkspaceTokenGlobals$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteWorkspaceTokenGlobals' from JSON`,
+  );
+}
+
+/** @internal */
 export const DeleteWorkspaceTokenRequest$inboundSchema: z.ZodType<
   DeleteWorkspaceTokenRequest,
   z.ZodTypeDef,
   unknown
 > = z.object({
-  workspace_id: z.string(),
+  workspace_id: z.string().optional(),
   tokenID: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -32,7 +103,7 @@ export const DeleteWorkspaceTokenRequest$inboundSchema: z.ZodType<
 
 /** @internal */
 export type DeleteWorkspaceTokenRequest$Outbound = {
-  workspace_id: string;
+  workspace_id?: string | undefined;
   tokenID: string;
 };
 
@@ -42,7 +113,7 @@ export const DeleteWorkspaceTokenRequest$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   DeleteWorkspaceTokenRequest
 > = z.object({
-  workspaceId: z.string(),
+  workspaceId: z.string().optional(),
   tokenID: z.string(),
 }).transform((v) => {
   return remap$(v, {
@@ -61,4 +132,24 @@ export namespace DeleteWorkspaceTokenRequest$ {
   export const outboundSchema = DeleteWorkspaceTokenRequest$outboundSchema;
   /** @deprecated use `DeleteWorkspaceTokenRequest$Outbound` instead. */
   export type Outbound = DeleteWorkspaceTokenRequest$Outbound;
+}
+
+export function deleteWorkspaceTokenRequestToJSON(
+  deleteWorkspaceTokenRequest: DeleteWorkspaceTokenRequest,
+): string {
+  return JSON.stringify(
+    DeleteWorkspaceTokenRequest$outboundSchema.parse(
+      deleteWorkspaceTokenRequest,
+    ),
+  );
+}
+
+export function deleteWorkspaceTokenRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<DeleteWorkspaceTokenRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => DeleteWorkspaceTokenRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'DeleteWorkspaceTokenRequest' from JSON`,
+  );
 }

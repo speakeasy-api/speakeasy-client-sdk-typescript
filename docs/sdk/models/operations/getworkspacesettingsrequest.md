@@ -14,4 +14,4 @@ let value: GetWorkspaceSettingsRequest = {
 
 | Field                               | Type                                | Required                            | Description                         |
 | ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| `workspaceId`                       | *string*                            | :heavy_check_mark:                  | Unique identifier of the workspace. |
+| `workspaceId`                       | *string*                            | :heavy_minus_sign:                  | Unique identifier of the workspace. |

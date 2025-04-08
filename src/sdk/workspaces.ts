@@ -14,6 +14,7 @@ import { workspacesGetTeam } from "../funcs/workspacesGetTeam.js";
 import { workspacesGetTokens } from "../funcs/workspacesGetTokens.js";
 import { workspacesGrantAccess } from "../funcs/workspacesGrantAccess.js";
 import { workspacesRevokeAccess } from "../funcs/workspacesRevokeAccess.js";
+import { workspacesSetFeatureFlags } from "../funcs/workspacesSetFeatureFlags.js";
 import { workspacesUpdate } from "../funcs/workspacesUpdate.js";
 import { workspacesUpdateSettings } from "../funcs/workspacesUpdateSettings.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
@@ -195,6 +196,20 @@ export class Workspaces extends ClientSDK {
     options?: RequestOptions,
   ): Promise<shared.ErrorT | undefined> {
     return unwrapAsync(workspacesRevokeAccess(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Set workspace feature flags
+   */
+  async setFeatureFlags(
+    request: shared.WorkspaceFeatureFlagRequest,
+    options?: RequestOptions,
+  ): Promise<operations.SetWorkspaceFeatureFlagsResponse> {
+    return unwrapAsync(workspacesSetFeatureFlags(
       this,
       request,
       options,

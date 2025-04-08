@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Annotations,
   Annotations$inboundSchema,
@@ -75,4 +78,18 @@ export namespace V2Descriptor$ {
   export const outboundSchema = V2Descriptor$outboundSchema;
   /** @deprecated use `V2Descriptor$Outbound` instead. */
   export type Outbound = V2Descriptor$Outbound;
+}
+
+export function v2DescriptorToJSON(v2Descriptor: V2Descriptor): string {
+  return JSON.stringify(V2Descriptor$outboundSchema.parse(v2Descriptor));
+}
+
+export function v2DescriptorFromJSON(
+  jsonString: string,
+): SafeParseResult<V2Descriptor, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => V2Descriptor$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'V2Descriptor' from JSON`,
+  );
 }

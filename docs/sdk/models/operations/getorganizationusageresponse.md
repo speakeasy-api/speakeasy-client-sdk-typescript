@@ -8,7 +8,7 @@
 ```typescript
 const value: shared.ErrorT = {
   message: "<value>",
-  statusCode: 103,
+  statusCode: 101,
 };
 ```
 
@@ -19,7 +19,7 @@ const value: shared.OrganizationUsageResponse = {
   allowedLanguages: [
     "<value>",
   ],
-  totalAllowedLanguages: 700529,
+  totalAllowedLanguages: 799125,
   usage: [
     {
       accessible: false,
@@ -30,7 +30,8 @@ const value: shared.OrganizationUsageResponse = {
         "<value>",
       ],
       language: "<value>",
-      numberOfOperations: 883078,
+      maxOperations: 399888,
+      numberOfOperations: 167967,
       usedFeatures: [
         "<value>",
       ],

@@ -9,10 +9,11 @@ let value: CreateWorkspaceTokenRequest = {
   workspaceId: "<id>",
   workspaceToken: {
     alg: "<value>",
-    createdAt: "<value>",
+    createdAt: new Date("2023-10-18T04:12:26.286Z"),
     id: "<id>",
     key: "<key>",
     name: "<value>",
+    workspaceId: "<id>",
   },
 };
 ```
@@ -21,5 +22,5 @@ let value: CreateWorkspaceTokenRequest = {
 
 | Field                                                                 | Type                                                                  | Required                                                              | Description                                                           |
 | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `workspaceId`                                                         | *string*                                                              | :heavy_check_mark:                                                    | Unique identifier of the workspace.                                   |
+| `workspaceId`                                                         | *string*                                                              | :heavy_minus_sign:                                                    | Unique identifier of the workspace.                                   |
 | `workspaceToken`                                                      | [shared.WorkspaceToken](../../../sdk/models/shared/workspacetoken.md) | :heavy_check_mark:                                                    | N/A                                                                   |

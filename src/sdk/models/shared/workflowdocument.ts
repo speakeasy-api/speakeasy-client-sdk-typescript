@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type Auth = {
   header: string;
@@ -50,6 +53,20 @@ export namespace Auth$ {
   export type Outbound = Auth$Outbound;
 }
 
+export function authToJSON(auth: Auth): string {
+  return JSON.stringify(Auth$outboundSchema.parse(auth));
+}
+
+export function authFromJSON(
+  jsonString: string,
+): SafeParseResult<Auth, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Auth$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Auth' from JSON`,
+  );
+}
+
 /** @internal */
 export const WorkflowDocument$inboundSchema: z.ZodType<
   WorkflowDocument,
@@ -87,4 +104,22 @@ export namespace WorkflowDocument$ {
   export const outboundSchema = WorkflowDocument$outboundSchema;
   /** @deprecated use `WorkflowDocument$Outbound` instead. */
   export type Outbound = WorkflowDocument$Outbound;
+}
+
+export function workflowDocumentToJSON(
+  workflowDocument: WorkflowDocument,
+): string {
+  return JSON.stringify(
+    WorkflowDocument$outboundSchema.parse(workflowDocument),
+  );
+}
+
+export function workflowDocumentFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkflowDocument, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WorkflowDocument$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkflowDocument' from JSON`,
+  );
 }

@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type OrganizationUsage = {
   /**
@@ -22,6 +25,10 @@ export type OrganizationUsage = {
    * The programming language used
    */
   language: string;
+  /**
+   * Maximum Number of operations per SDK specific in contract
+   */
+  maxOperations: number;
   /**
    * Number of operations performed
    */
@@ -46,6 +53,7 @@ export const OrganizationUsage$inboundSchema: z.ZodType<
   accessible_features: z.array(z.string()),
   gen_lock_ids: z.array(z.string()),
   language: z.string(),
+  max_operations: z.number().int(),
   number_of_operations: z.number().int(),
   used_features: z.array(z.string()),
   workspaces: z.array(z.string()),
@@ -53,6 +61,7 @@ export const OrganizationUsage$inboundSchema: z.ZodType<
   return remap$(v, {
     "accessible_features": "accessibleFeatures",
     "gen_lock_ids": "genLockIds",
+    "max_operations": "maxOperations",
     "number_of_operations": "numberOfOperations",
     "used_features": "usedFeatures",
   });
@@ -64,6 +73,7 @@ export type OrganizationUsage$Outbound = {
   accessible_features: Array<string>;
   gen_lock_ids: Array<string>;
   language: string;
+  max_operations: number;
   number_of_operations: number;
   used_features: Array<string>;
   workspaces: Array<string>;
@@ -79,6 +89,7 @@ export const OrganizationUsage$outboundSchema: z.ZodType<
   accessibleFeatures: z.array(z.string()),
   genLockIds: z.array(z.string()),
   language: z.string(),
+  maxOperations: z.number().int(),
   numberOfOperations: z.number().int(),
   usedFeatures: z.array(z.string()),
   workspaces: z.array(z.string()),
@@ -86,6 +97,7 @@ export const OrganizationUsage$outboundSchema: z.ZodType<
   return remap$(v, {
     accessibleFeatures: "accessible_features",
     genLockIds: "gen_lock_ids",
+    maxOperations: "max_operations",
     numberOfOperations: "number_of_operations",
     usedFeatures: "used_features",
   });
@@ -102,4 +114,22 @@ export namespace OrganizationUsage$ {
   export const outboundSchema = OrganizationUsage$outboundSchema;
   /** @deprecated use `OrganizationUsage$Outbound` instead. */
   export type Outbound = OrganizationUsage$Outbound;
+}
+
+export function organizationUsageToJSON(
+  organizationUsage: OrganizationUsage,
+): string {
+  return JSON.stringify(
+    OrganizationUsage$outboundSchema.parse(organizationUsage),
+  );
+}
+
+export function organizationUsageFromJSON(
+  jsonString: string,
+): SafeParseResult<OrganizationUsage, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => OrganizationUsage$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'OrganizationUsage' from JSON`,
+  );
 }

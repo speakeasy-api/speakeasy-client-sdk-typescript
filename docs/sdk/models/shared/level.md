@@ -5,7 +5,7 @@
 ```typescript
 import { Level } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
-let value: Level = "allowed";
+let value: Level = "warning";
 ```
 
 ## Values

@@ -3,43 +3,20 @@
  */
 
 import { ClientSDK } from "../lib/sdks.js";
-import { ApiEndpoints } from "./apiendpoints.js";
-import { Apis } from "./apis.js";
 import { Artifacts } from "./artifacts.js";
 import { Auth } from "./auth.js";
-import { Embeds } from "./embeds.js";
+import { CodeSamples } from "./codesamples.js";
 import { Events } from "./events.js";
 import { Github } from "./github.js";
-import { Metadata } from "./metadata.js";
 import { Organizations } from "./organizations.js";
 import { Reports } from "./reports.js";
-import { Requests } from "./requests.js";
-import { Schemas } from "./schemas.js";
+import { SchemaStore } from "./schemastore.js";
 import { ShortURLs } from "./shorturls.js";
+import { Subscriptions } from "./subscriptions.js";
 import { Suggest } from "./suggest.js";
 import { Workspaces } from "./workspaces.js";
 
 export class Speakeasy extends ClientSDK {
-  private _apis?: Apis;
-  get apis(): Apis {
-    return (this._apis ??= new Apis(this._options));
-  }
-
-  private _apiEndpoints?: ApiEndpoints;
-  get apiEndpoints(): ApiEndpoints {
-    return (this._apiEndpoints ??= new ApiEndpoints(this._options));
-  }
-
-  private _metadata?: Metadata;
-  get metadata(): Metadata {
-    return (this._metadata ??= new Metadata(this._options));
-  }
-
-  private _schemas?: Schemas;
-  get schemas(): Schemas {
-    return (this._schemas ??= new Schemas(this._options));
-  }
-
   private _artifacts?: Artifacts;
   get artifacts(): Artifacts {
     return (this._artifacts ??= new Artifacts(this._options));
@@ -50,9 +27,9 @@ export class Speakeasy extends ClientSDK {
     return (this._auth ??= new Auth(this._options));
   }
 
-  private _requests?: Requests;
-  get requests(): Requests {
-    return (this._requests ??= new Requests(this._options));
+  private _codeSamples?: CodeSamples;
+  get codeSamples(): CodeSamples {
+    return (this._codeSamples ??= new CodeSamples(this._options));
   }
 
   private _github?: Github;
@@ -70,9 +47,19 @@ export class Speakeasy extends ClientSDK {
     return (this._reports ??= new Reports(this._options));
   }
 
+  private _schemaStore?: SchemaStore;
+  get schemaStore(): SchemaStore {
+    return (this._schemaStore ??= new SchemaStore(this._options));
+  }
+
   private _shortURLs?: ShortURLs;
   get shortURLs(): ShortURLs {
     return (this._shortURLs ??= new ShortURLs(this._options));
+  }
+
+  private _subscriptions?: Subscriptions;
+  get subscriptions(): Subscriptions {
+    return (this._subscriptions ??= new Subscriptions(this._options));
   }
 
   private _suggest?: Suggest;
@@ -83,11 +70,6 @@ export class Speakeasy extends ClientSDK {
   private _workspaces?: Workspaces;
   get workspaces(): Workspaces {
     return (this._workspaces ??= new Workspaces(this._options));
-  }
-
-  private _embeds?: Embeds;
-  get embeds(): Embeds {
-    return (this._embeds ??= new Embeds(this._options));
   }
 
   private _events?: Events;

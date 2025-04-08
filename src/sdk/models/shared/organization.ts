@@ -4,6 +4,9 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   AccountType,
   AccountType$inboundSchema,
@@ -18,8 +21,11 @@ export type Organization = {
   createdAt: Date;
   freeTrialExpiry?: Date | null | undefined;
   id: string;
+  internal?: boolean | undefined;
   name: string;
   slug: string;
+  ssoActivated: boolean;
+  ssoConnectionId?: string | null | undefined;
   telemetryDisabled: boolean;
   updatedAt: Date;
 };
@@ -36,8 +42,11 @@ export const Organization$inboundSchema: z.ZodType<
     z.string().datetime({ offset: true }).transform(v => new Date(v)),
   ).optional(),
   id: z.string(),
+  internal: z.boolean().optional(),
   name: z.string(),
   slug: z.string(),
+  sso_activated: z.boolean(),
+  sso_connection_id: z.nullable(z.string()).optional(),
   telemetry_disabled: z.boolean(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
 }).transform((v) => {
@@ -45,6 +54,8 @@ export const Organization$inboundSchema: z.ZodType<
     "account_type": "accountType",
     "created_at": "createdAt",
     "free_trial_expiry": "freeTrialExpiry",
+    "sso_activated": "ssoActivated",
+    "sso_connection_id": "ssoConnectionId",
     "telemetry_disabled": "telemetryDisabled",
     "updated_at": "updatedAt",
   });
@@ -56,8 +67,11 @@ export type Organization$Outbound = {
   created_at: string;
   free_trial_expiry?: string | null | undefined;
   id: string;
+  internal?: boolean | undefined;
   name: string;
   slug: string;
+  sso_activated: boolean;
+  sso_connection_id?: string | null | undefined;
   telemetry_disabled: boolean;
   updated_at: string;
 };
@@ -73,8 +87,11 @@ export const Organization$outboundSchema: z.ZodType<
   freeTrialExpiry: z.nullable(z.date().transform(v => v.toISOString()))
     .optional(),
   id: z.string(),
+  internal: z.boolean().optional(),
   name: z.string(),
   slug: z.string(),
+  ssoActivated: z.boolean(),
+  ssoConnectionId: z.nullable(z.string()).optional(),
   telemetryDisabled: z.boolean(),
   updatedAt: z.date().transform(v => v.toISOString()),
 }).transform((v) => {
@@ -82,6 +99,8 @@ export const Organization$outboundSchema: z.ZodType<
     accountType: "account_type",
     createdAt: "created_at",
     freeTrialExpiry: "free_trial_expiry",
+    ssoActivated: "sso_activated",
+    ssoConnectionId: "sso_connection_id",
     telemetryDisabled: "telemetry_disabled",
     updatedAt: "updated_at",
   });
@@ -98,4 +117,18 @@ export namespace Organization$ {
   export const outboundSchema = Organization$outboundSchema;
   /** @deprecated use `Organization$Outbound` instead. */
   export type Outbound = Organization$Outbound;
+}
+
+export function organizationToJSON(organization: Organization): string {
+  return JSON.stringify(Organization$outboundSchema.parse(organization));
+}
+
+export function organizationFromJSON(
+  jsonString: string,
+): SafeParseResult<Organization, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Organization$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Organization' from JSON`,
+  );
 }

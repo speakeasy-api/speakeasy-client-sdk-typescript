@@ -12,15 +12,14 @@ let value: SuggestRequest = {
       {
         message: "<value>",
         path: [
-          "/opt/lib",
+          "/var/mail",
         ],
         type: "<value>",
       },
     ],
     oasSummary: {
       info: {
-        description:
-          "obediently kissingly blue enfold though because intermarry colonialism",
+        description: "circa excepting upon",
         license: {},
         summary: "<value>",
         title: "<value>",
@@ -28,17 +27,18 @@ let value: SuggestRequest = {
       },
       operations: [
         {
-          description: "unhappy zowie bah over ouch beneath lumpy",
+          description:
+            "even oddly overconfidently spanish wherever strait knowledgeably hopeful huzzah",
           method: "<value>",
           operationId: "<id>",
-          path: "/etc/mail",
+          path: "/home/user/dir",
           tags: [
             "<value>",
           ],
         },
       ],
     },
-    suggestionType: "method-names",
+    suggestionType: "diagnostics-only",
   },
 };
 ```

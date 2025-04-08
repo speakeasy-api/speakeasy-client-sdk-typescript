@@ -3,6 +3,9 @@
  */
 
 import * as z from "zod";
+import { safeParse } from "../../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
 
 export type GetWorkspaceByContextResponse =
@@ -45,4 +48,24 @@ export namespace GetWorkspaceByContextResponse$ {
   export const outboundSchema = GetWorkspaceByContextResponse$outboundSchema;
   /** @deprecated use `GetWorkspaceByContextResponse$Outbound` instead. */
   export type Outbound = GetWorkspaceByContextResponse$Outbound;
+}
+
+export function getWorkspaceByContextResponseToJSON(
+  getWorkspaceByContextResponse: GetWorkspaceByContextResponse,
+): string {
+  return JSON.stringify(
+    GetWorkspaceByContextResponse$outboundSchema.parse(
+      getWorkspaceByContextResponse,
+    ),
+  );
+}
+
+export function getWorkspaceByContextResponseFromJSON(
+  jsonString: string,
+): SafeParseResult<GetWorkspaceByContextResponse, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetWorkspaceByContextResponse$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetWorkspaceByContextResponse' from JSON`,
+  );
 }

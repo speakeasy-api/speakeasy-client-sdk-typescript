@@ -3,6 +3,8 @@
 
 ## Overview
 
+REST APIs for managing Workspaces (speakeasy tenancy)
+
 ### Available Operations
 
 * [create](#create) - Create a workspace
@@ -17,6 +19,7 @@
 * [getTokens](#gettokens) - Get tokens for a particular workspace
 * [grantAccess](#grantaccess) - Grant a user access to a particular workspace
 * [revokeAccess](#revokeaccess) - Revoke a user's access to a particular workspace
+* [setFeatureFlags](#setfeatureflags) - Set workspace feature flags
 * [update](#update) - Update workspace details
 * [updateSettings](#updatesettings) - Update workspace settings
 
@@ -37,13 +40,12 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.create({
-    createdAt: new Date("2023-06-18T07:14:55.338Z"),
+    createdAt: new Date("2024-06-17T07:14:55.338Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    telemetryDisabled: false,
-    updatedAt: new Date("2023-04-03T12:48:32.253Z"),
+    updatedAt: new Date("2024-11-30T17:06:07.804Z"),
     verified: true,
   });
 
@@ -72,13 +74,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesCreate(speakeasy, {
-    createdAt: new Date("2023-06-18T07:14:55.338Z"),
+    createdAt: new Date("2024-06-17T07:14:55.338Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    telemetryDisabled: false,
-    updatedAt: new Date("2023-04-03T12:48:32.253Z"),
+    updatedAt: new Date("2024-11-30T17:06:07.804Z"),
     verified: true,
   });
 
@@ -134,10 +135,11 @@ async function run() {
     workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
-      createdAt: "<value>",
+      createdAt: new Date("2023-08-16T02:33:00.784Z"),
       id: "<id>",
       key: "<key>",
       name: "<value>",
+      workspaceId: "<id>",
     },
   });
 
@@ -169,10 +171,11 @@ async function run() {
     workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
-      createdAt: "<value>",
+      createdAt: new Date("2023-08-16T02:33:00.784Z"),
       id: "<id>",
       key: "<key>",
       name: "<value>",
+      workspaceId: "<id>",
     },
   });
 
@@ -1004,6 +1007,92 @@ run();
 | --------------- | --------------- | --------------- |
 | errors.SDKError | 4XX, 5XX        | \*/\*           |
 
+## setFeatureFlags
+
+Set workspace feature flags
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const result = await speakeasy.workspaces.setFeatureFlags({
+    featureFlags: [
+      "skip_schema_registry",
+      "webhooks",
+    ],
+  });
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { SpeakeasyCore } from "@speakeasy-api/speakeasy-client-sdk-typescript/core.js";
+import { workspacesSetFeatureFlags } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs/workspacesSetFeatureFlags.js";
+
+// Use `SpeakeasyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const speakeasy = new SpeakeasyCore({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const res = await workspacesSetFeatureFlags(speakeasy, {
+    featureFlags: [
+      "skip_schema_registry",
+      "webhooks",
+    ],
+  });
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [shared.WorkspaceFeatureFlagRequest](../../sdk/models/shared/workspacefeatureflagrequest.md)                                                                                   | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.SetWorkspaceFeatureFlagsResponse](../../sdk/models/operations/setworkspacefeatureflagsresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
 ## update
 
 Update information about a particular workspace.
@@ -1023,14 +1112,13 @@ async function run() {
   const result = await speakeasy.workspaces.update({
     workspaceId: "<id>",
     workspace: {
-      createdAt: new Date("2024-07-28T19:04:48.565Z"),
+      createdAt: new Date("2025-07-28T19:04:48.565Z"),
       id: "<id>",
       name: "<value>",
       organizationId: "<id>",
       slug: "<value>",
-      telemetryDisabled: false,
-      updatedAt: new Date("2023-01-13T16:52:57.274Z"),
-      verified: false,
+      updatedAt: new Date("2024-10-16T10:52:42.015Z"),
+      verified: true,
     },
   });
 
@@ -1061,14 +1149,13 @@ async function run() {
   const res = await workspacesUpdate(speakeasy, {
     workspaceId: "<id>",
     workspace: {
-      createdAt: new Date("2024-07-28T19:04:48.565Z"),
+      createdAt: new Date("2025-07-28T19:04:48.565Z"),
       id: "<id>",
       name: "<value>",
       organizationId: "<id>",
       slug: "<value>",
-      telemetryDisabled: false,
-      updatedAt: new Date("2023-01-13T16:52:57.274Z"),
-      verified: false,
+      updatedAt: new Date("2024-10-16T10:52:42.015Z"),
+      verified: true,
     },
   });
 
@@ -1123,6 +1210,9 @@ async function run() {
   const result = await speakeasy.workspaces.updateSettings({
     workspaceId: "<id>",
     workspaceSettings: {
+      createdAt: new Date("2023-07-05T11:43:28.305Z"),
+      updatedAt: new Date("2024-05-14T05:39:21.874Z"),
+      webhookUrl: "https://grown-pharmacopoeia.net",
       workspaceId: "<id>",
     },
   });
@@ -1154,6 +1244,9 @@ async function run() {
   const res = await workspacesUpdateSettings(speakeasy, {
     workspaceId: "<id>",
     workspaceSettings: {
+      createdAt: new Date("2023-07-05T11:43:28.305Z"),
+      updatedAt: new Date("2024-05-14T05:39:21.874Z"),
+      webhookUrl: "https://grown-pharmacopoeia.net",
       workspaceId: "<id>",
     },
   });

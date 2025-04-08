@@ -4,7 +4,10 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
   Diagnostic,
   Diagnostic$inboundSchema,
@@ -103,4 +106,22 @@ export namespace SuggestRequestBody$ {
   export const outboundSchema = SuggestRequestBody$outboundSchema;
   /** @deprecated use `SuggestRequestBody$Outbound` instead. */
   export type Outbound = SuggestRequestBody$Outbound;
+}
+
+export function suggestRequestBodyToJSON(
+  suggestRequestBody: SuggestRequestBody,
+): string {
+  return JSON.stringify(
+    SuggestRequestBody$outboundSchema.parse(suggestRequestBody),
+  );
+}
+
+export function suggestRequestBodyFromJSON(
+  jsonString: string,
+): SafeParseResult<SuggestRequestBody, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SuggestRequestBody$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SuggestRequestBody' from JSON`,
+  );
 }
