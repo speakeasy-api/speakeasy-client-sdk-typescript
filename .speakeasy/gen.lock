@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 9bac3df452724b208c1bfd26a9444437
+  docChecksum: d016f94831e6f41b132f11faa6b72e10
   docVersion: 0.4.0
-  speakeasyVersion: 1.531.0
-  generationVersion: 2.568.2
-  releaseVersion: 4.0.0-rc.3
-  configChecksum: 9043554d3a36057e40f8f81ba0daa91c
+  speakeasyVersion: 1.531.3
+  generationVersion: 2.570.3
+  releaseVersion: 4.0.0-rc.4
+  configChecksum: 573a2b1fd1cd16eefd8119988cf82862
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -16,7 +16,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
-    core: 3.21.5
+    core: 3.21.6
     deepObjectParams: 0.1.0
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
@@ -49,6 +49,7 @@ generatedFiles:
   - docs/sdk/models/operations/checkgithubaccessrequest.md
   - docs/sdk/models/operations/createbillingaddonsresponse.md
   - docs/sdk/models/operations/createorganizationresponse.md
+  - docs/sdk/models/operations/createpublishingtokenresponse.md
   - docs/sdk/models/operations/createrequestbody.md
   - docs/sdk/models/operations/createschemastoreitemrequestbody.md
   - docs/sdk/models/operations/createschemastoreitemresponse.md
@@ -56,6 +57,7 @@ generatedFiles:
   - docs/sdk/models/operations/createworkspacetokenglobals.md
   - docs/sdk/models/operations/createworkspacetokenrequest.md
   - docs/sdk/models/operations/deletebillingaddonrequest.md
+  - docs/sdk/models/operations/deletepublishingtokenrequest.md
   - docs/sdk/models/operations/deleteworkspacetokenglobals.md
   - docs/sdk/models/operations/deleteworkspacetokenrequest.md
   - docs/sdk/models/operations/filet.md
@@ -88,6 +90,12 @@ generatedFiles:
   - docs/sdk/models/operations/getorganizationresponse.md
   - docs/sdk/models/operations/getorganizationsresponse.md
   - docs/sdk/models/operations/getorganizationusageresponse.md
+  - docs/sdk/models/operations/getpublishingtokenbyidrequest.md
+  - docs/sdk/models/operations/getpublishingtokenbyidresponse.md
+  - docs/sdk/models/operations/getpublishingtokenresponse.md
+  - docs/sdk/models/operations/getpublishingtokentargetbyidrequest.md
+  - docs/sdk/models/operations/getpublishingtokentargetbyidresponse.md
+  - docs/sdk/models/operations/getpublishingtokentargetbyidresponsebody.md
   - docs/sdk/models/operations/getrevisionsrequest.md
   - docs/sdk/models/operations/getrevisionsresponse.md
   - docs/sdk/models/operations/gettagsrequest.md
@@ -149,6 +157,8 @@ generatedFiles:
   - docs/sdk/models/operations/suggestopenapirequest.md
   - docs/sdk/models/operations/suggestopenapirequestbody.md
   - docs/sdk/models/operations/suggestrequest.md
+  - docs/sdk/models/operations/updatepublishingtokenexpirationrequest.md
+  - docs/sdk/models/operations/updatepublishingtokenexpirationrequestbody.md
   - docs/sdk/models/operations/updateworkspacedetailsglobals.md
   - docs/sdk/models/operations/updateworkspacedetailsrequest.md
   - docs/sdk/models/operations/updateworkspacesettingsglobals.md
@@ -206,6 +216,7 @@ generatedFiles:
   - docs/sdk/models/shared/organizationusageresponse.md
   - docs/sdk/models/shared/preflightrequest.md
   - docs/sdk/models/shared/preflighttoken.md
+  - docs/sdk/models/shared/publishingtoken.md
   - docs/sdk/models/shared/pullrequestmetadata.md
   - docs/sdk/models/shared/relationship.md
   - docs/sdk/models/shared/remotedocument.md
@@ -280,11 +291,15 @@ generatedFiles:
   - src/funcs/codeSamplesGenerateCodeSamplePreviewAsync.ts
   - src/funcs/codeSamplesGet.ts
   - src/funcs/codeSamplesGetCodeSamplePreviewAsync.ts
+  - src/funcs/createPublishingToken.ts
+  - src/funcs/deletePublishingToken.ts
   - src/funcs/eventsGetEventsByTarget.ts
   - src/funcs/eventsGetTargets.ts
   - src/funcs/eventsGetTargetsDeprecated.ts
   - src/funcs/eventsPost.ts
   - src/funcs/eventsSearch.ts
+  - src/funcs/getPublishingTokenByID.ts
+  - src/funcs/getPublishingTokenTargetByID.ts
   - src/funcs/githubCheckAccess.ts
   - src/funcs/githubCheckPublishingPRs.ts
   - src/funcs/githubCheckPublishingSecrets.ts
@@ -315,6 +330,7 @@ generatedFiles:
   - src/funcs/suggestSuggestItems.ts
   - src/funcs/suggestSuggestOpenAPI.ts
   - src/funcs/suggestSuggestOpenAPIRegistry.ts
+  - src/funcs/updatePublishingTokenExpiration.ts
   - src/funcs/workspacesCreate.ts
   - src/funcs/workspacesCreateToken.ts
   - src/funcs/workspacesDeleteToken.ts
@@ -322,6 +338,7 @@ generatedFiles:
   - src/funcs/workspacesGetAll.ts
   - src/funcs/workspacesGetByID.ts
   - src/funcs/workspacesGetFeatureFlags.ts
+  - src/funcs/workspacesGetPublishingToken.ts
   - src/funcs/workspacesGetSettings.ts
   - src/funcs/workspacesGetTeam.ts
   - src/funcs/workspacesGetTokens.ts
@@ -381,11 +398,15 @@ generatedFiles:
   - src/mcp-server/tools/codeSamplesGenerateCodeSamplePreviewAsync.ts
   - src/mcp-server/tools/codeSamplesGet.ts
   - src/mcp-server/tools/codeSamplesGetCodeSamplePreviewAsync.ts
+  - src/mcp-server/tools/createPublishingToken.ts
+  - src/mcp-server/tools/deletePublishingToken.ts
   - src/mcp-server/tools/eventsGetEventsByTarget.ts
   - src/mcp-server/tools/eventsGetTargets.ts
   - src/mcp-server/tools/eventsGetTargetsDeprecated.ts
   - src/mcp-server/tools/eventsPost.ts
   - src/mcp-server/tools/eventsSearch.ts
+  - src/mcp-server/tools/getPublishingTokenByID.ts
+  - src/mcp-server/tools/getPublishingTokenTargetByID.ts
   - src/mcp-server/tools/githubCheckAccess.ts
   - src/mcp-server/tools/githubCheckPublishingPRs.ts
   - src/mcp-server/tools/githubCheckPublishingSecrets.ts
@@ -416,6 +437,7 @@ generatedFiles:
   - src/mcp-server/tools/suggestSuggestItems.ts
   - src/mcp-server/tools/suggestSuggestOpenAPI.ts
   - src/mcp-server/tools/suggestSuggestOpenAPIRegistry.ts
+  - src/mcp-server/tools/updatePublishingTokenExpiration.ts
   - src/mcp-server/tools/workspacesCreate.ts
   - src/mcp-server/tools/workspacesCreateToken.ts
   - src/mcp-server/tools/workspacesDeleteToken.ts
@@ -423,6 +445,7 @@ generatedFiles:
   - src/mcp-server/tools/workspacesGetAll.ts
   - src/mcp-server/tools/workspacesGetByID.ts
   - src/mcp-server/tools/workspacesGetFeatureFlags.ts
+  - src/mcp-server/tools/workspacesGetPublishingToken.ts
   - src/mcp-server/tools/workspacesGetSettings.ts
   - src/mcp-server/tools/workspacesGetTeam.ts
   - src/mcp-server/tools/workspacesGetTokens.ts
@@ -447,10 +470,12 @@ generatedFiles:
   - src/sdk/models/operations/create.ts
   - src/sdk/models/operations/createbillingaddons.ts
   - src/sdk/models/operations/createorganization.ts
+  - src/sdk/models/operations/createpublishingtoken.ts
   - src/sdk/models/operations/createschemastoreitem.ts
   - src/sdk/models/operations/createworkspace.ts
   - src/sdk/models/operations/createworkspacetoken.ts
   - src/sdk/models/operations/deletebillingaddon.ts
+  - src/sdk/models/operations/deletepublishingtoken.ts
   - src/sdk/models/operations/deleteworkspacetoken.ts
   - src/sdk/models/operations/generatecodesamplepreview.ts
   - src/sdk/models/operations/generatecodesamplepreviewasync.ts
@@ -468,6 +493,9 @@ generatedFiles:
   - src/sdk/models/operations/getorganization.ts
   - src/sdk/models/operations/getorganizations.ts
   - src/sdk/models/operations/getorganizationusage.ts
+  - src/sdk/models/operations/getpublishingtoken.ts
+  - src/sdk/models/operations/getpublishingtokenbyid.ts
+  - src/sdk/models/operations/getpublishingtokentargetbyid.ts
   - src/sdk/models/operations/getrevisions.ts
   - src/sdk/models/operations/gettags.ts
   - src/sdk/models/operations/getuser.ts
@@ -500,6 +528,7 @@ generatedFiles:
   - src/sdk/models/operations/suggest.ts
   - src/sdk/models/operations/suggestopenapi.ts
   - src/sdk/models/operations/suggestopenapiregistry.ts
+  - src/sdk/models/operations/updatepublishingtokenexpiration.ts
   - src/sdk/models/operations/updateworkspacedetails.ts
   - src/sdk/models/operations/updateworkspacesettings.ts
   - src/sdk/models/operations/uploadreport.ts
@@ -545,6 +574,7 @@ generatedFiles:
   - src/sdk/models/shared/organizationusageresponse.ts
   - src/sdk/models/shared/preflightrequest.ts
   - src/sdk/models/shared/preflighttoken.ts
+  - src/sdk/models/shared/publishingtoken.ts
   - src/sdk/models/shared/remotedocument.ts
   - src/sdk/models/shared/remotesource.ts
   - src/sdk/models/shared/remotesourcesubscriptionsettings.ts
@@ -1216,5 +1246,57 @@ examples:
           application/json: [{"created_at": "2024-01-24T23:49:11.608Z", "execution_id": "<id>", "id": "<id>", "interaction_type": "LINT", "local_started_at": "2023-03-09T07:00:10.489Z", "speakeasy_api_key_name": "<value>", "speakeasy_version": "<value>", "success": true, "workspace_id": "<id>"}]
         5XX:
           application/json: {"message": "<value>", "status_code": 238575}
+  createPublishingToken:
+    speakeasy-default-create-publishing-token:
+      requestBody:
+        application/json: {"created_at": "2025-10-25T02:17:15.413Z", "id": "<id>", "target_id": "<id>", "target_resource": "<value>", "token": "<value>"}
+      responses:
+        "200":
+          application/json: {"created_at": "2023-12-11T20:09:47.767Z", "id": "<id>", "target_id": "<id>", "target_resource": "<value>", "token": "<value>"}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 447867}
+  deletePublishingToken:
+    speakeasy-default-delete-publishing-token:
+      parameters:
+        path:
+          tokenID: "<id>"
+      responses:
+        4XX:
+          application/json: {"message": "<value>", "status_code": 227169}
+  getPublishingTokenByID:
+    speakeasy-default-get-publishing-token-by-ID:
+      parameters:
+        path:
+          tokenID: "<id>"
+      responses:
+        "200":
+          application/json: {"created_at": "2025-10-20T08:51:57.553Z", "id": "<id>", "target_id": "<id>", "target_resource": "<value>", "token": "<value>"}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 82666}
+  getPublishingTokenTargetByID:
+    speakeasy-default-get-publishing-token-target-by-ID:
+      parameters:
+        path:
+          tokenID: "<id>"
+      responses:
+        "200":
+          application/json: {}
+        4XX:
+          application/json: {"message": "<value>", "status_code": 297644}
+  updatePublishingTokenExpiration:
+    speakeasy-default-update-publishing-token-expiration:
+      parameters:
+        path:
+          tokenID: "<id>"
+      responses:
+        4XX:
+          application/json: {"message": "<value>", "status_code": 784694}
+  getPublishingToken:
+    speakeasy-default-get-publishing-token:
+      responses:
+        "200":
+          application/json: [{"created_at": "2023-01-18T23:26:03.849Z", "id": "<id>", "target_id": "<id>", "target_resource": "<value>", "token": "<value>"}, {"created_at": "2023-08-07T04:00:26.830Z", "id": "<id>", "target_id": "<id>", "target_resource": "<value>", "token": "<value>"}, {"created_at": "2024-01-27T14:50:38.288Z", "id": "<id>", "target_id": "<id>", "target_resource": "<value>", "token": "<value>"}]
+        4XX:
+          application/json: {"message": "<value>", "status_code": 136532}
 examplesVersion: 1.0.1
 generatedTests: {}

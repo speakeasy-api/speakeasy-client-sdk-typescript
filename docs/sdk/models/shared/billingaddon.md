@@ -5,7 +5,7 @@
 ```typescript
 import { BillingAddOn } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
-let value: BillingAddOn = "sdk_testing";
+let value: BillingAddOn = "custom_code_regions";
 ```
 
 ## Values
@@ -13,5 +13,5 @@ let value: BillingAddOn = "sdk_testing";
 This is an open enum. Unrecognized values will be captured as the `Unrecognized<string>` branded type.
 
 ```typescript
-"webhooks" | "sdk_testing" | "custom_code_regions" | Unrecognized<string>
+"webhooks" | "sdk_testing" | "custom_code_regions" | "snippet_ai" | Unrecognized<string>
 ```

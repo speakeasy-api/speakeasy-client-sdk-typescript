@@ -183,7 +183,13 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
+  const result = await speakeasy.createPublishingToken({
+    createdAt: new Date("2025-10-25T02:17:15.413Z"),
+    id: "<id>",
+    targetId: "<id>",
+    targetResource: "<value>",
+    token: "<value>",
+  });
 
   // Handle the result
   console.log(result);
@@ -275,6 +281,13 @@ run();
 
 * [create](docs/sdks/shorturls/README.md#create) - Shorten a URL.
 
+### [Speakeasy SDK](docs/sdks/speakeasy/README.md)
+
+* [createPublishingToken](docs/sdks/speakeasy/README.md#createpublishingtoken) - Create a publishing token for a workspace
+* [deletePublishingToken](docs/sdks/speakeasy/README.md#deletepublishingtoken) - Delete a specific publishing token
+* [getPublishingTokenByID](docs/sdks/speakeasy/README.md#getpublishingtokenbyid) - Get a specific publishing token
+* [getPublishingTokenTargetByID](docs/sdks/speakeasy/README.md#getpublishingtokentargetbyid) - Get a specific publishing token target
+* [updatePublishingTokenExpiration](docs/sdks/speakeasy/README.md#updatepublishingtokenexpiration) - Updates the validitity period of a publishing token
 
 ### [subscriptions](docs/sdks/subscriptions/README.md)
 
@@ -297,6 +310,7 @@ run();
 * [getAll](docs/sdks/workspaces/README.md#getall) - Get workspaces for a user
 * [getByID](docs/sdks/workspaces/README.md#getbyid) - Get workspace
 * [getFeatureFlags](docs/sdks/workspaces/README.md#getfeatureflags) - Get workspace feature flags
+* [getPublishingToken](docs/sdks/workspaces/README.md#getpublishingtoken) - Get publishing tokens for a workspace
 * [getSettings](docs/sdks/workspaces/README.md#getsettings) - Get workspace settings
 * [getTeam](docs/sdks/workspaces/README.md#getteam) - Get team members for a particular workspace
 * [getTokens](docs/sdks/workspaces/README.md#gettokens) - Get tokens for a particular workspace
@@ -337,7 +351,13 @@ const speakeasy = new Speakeasy({
 async function run() {
   let result;
   try {
-    result = await speakeasy.artifacts.createRemoteSource();
+    result = await speakeasy.createPublishingToken({
+      createdAt: new Date("2025-10-25T02:17:15.413Z"),
+      id: "<id>",
+      targetId: "<id>",
+      targetResource: "<value>",
+      token: "<value>",
+    });
 
     // Handle the result
     console.log(result);
@@ -410,7 +430,13 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
+  const result = await speakeasy.createPublishingToken({
+    createdAt: new Date("2025-10-25T02:17:15.413Z"),
+    id: "<id>",
+    targetId: "<id>",
+    targetResource: "<value>",
+    token: "<value>",
+  });
 
   // Handle the result
   console.log(result);
@@ -434,7 +460,13 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
+  const result = await speakeasy.createPublishingToken({
+    createdAt: new Date("2025-10-25T02:17:15.413Z"),
+    id: "<id>",
+    targetId: "<id>",
+    targetResource: "<value>",
+    token: "<value>",
+  });
 
   // Handle the result
   console.log(result);
@@ -522,7 +554,13 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
+  const result = await speakeasy.createPublishingToken({
+    createdAt: new Date("2025-10-25T02:17:15.413Z"),
+    id: "<id>",
+    targetId: "<id>",
+    targetResource: "<value>",
+    token: "<value>",
+  });
 
   // Handle the result
   console.log(result);
@@ -549,7 +587,13 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource({
+  const result = await speakeasy.createPublishingToken({
+    createdAt: new Date("2025-10-25T02:17:15.413Z"),
+    id: "<id>",
+    targetId: "<id>",
+    targetResource: "<value>",
+    token: "<value>",
+  }, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -591,7 +635,13 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
+  const result = await speakeasy.createPublishingToken({
+    createdAt: new Date("2025-10-25T02:17:15.413Z"),
+    id: "<id>",
+    targetId: "<id>",
+    targetResource: "<value>",
+    token: "<value>",
+  });
 
   // Handle the result
   console.log(result);
@@ -642,11 +692,15 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`codeSamplesGenerateCodeSamplePreviewAsync`](docs/sdks/codesamples/README.md#generatecodesamplepreviewasync) - Initiate asynchronous Code Sample preview generation from a file and configuration parameters, receiving an async JobID response for polling.
 - [`codeSamplesGet`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
 - [`codeSamplesGetCodeSamplePreviewAsync`](docs/sdks/codesamples/README.md#getcodesamplepreviewasync) - Poll for the result of an asynchronous Code Sample preview generation.
+- [`createPublishingToken`](docs/sdks/speakeasy/README.md#createpublishingtoken) - Create a publishing token for a workspace
+- [`deletePublishingToken`](docs/sdks/speakeasy/README.md#deletepublishingtoken) - Delete a specific publishing token
 - [`eventsGetEventsByTarget`](docs/sdks/events/README.md#geteventsbytarget) - Load recent events for a particular workspace
 - [`eventsGetTargets`](docs/sdks/events/README.md#gettargets) - Load targets for a particular workspace
 - [`eventsGetTargetsDeprecated`](docs/sdks/events/README.md#gettargetsdeprecated) - Load targets for a particular workspace
 - [`eventsPost`](docs/sdks/events/README.md#post) - Post events for a specific workspace
 - [`eventsSearch`](docs/sdks/events/README.md#search) - Search events for a particular workspace by any field
+- [`getPublishingTokenByID`](docs/sdks/speakeasy/README.md#getpublishingtokenbyid) - Get a specific publishing token
+- [`getPublishingTokenTargetByID`](docs/sdks/speakeasy/README.md#getpublishingtokentargetbyid) - Get a specific publishing token target
 - [`githubCheckAccess`](docs/sdks/github/README.md#checkaccess)
 - [`githubCheckPublishingPRs`](docs/sdks/github/README.md#checkpublishingprs)
 - [`githubCheckPublishingSecrets`](docs/sdks/github/README.md#checkpublishingsecrets)
@@ -677,6 +731,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`suggestSuggestItems`](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 - [`suggestSuggestOpenAPI`](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 - [`suggestSuggestOpenAPIRegistry`](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
+- [`updatePublishingTokenExpiration`](docs/sdks/speakeasy/README.md#updatepublishingtokenexpiration) - Updates the validitity period of a publishing token
 - [`workspacesCreate`](docs/sdks/workspaces/README.md#create) - Create a workspace
 - [`workspacesCreateToken`](docs/sdks/workspaces/README.md#createtoken) - Create a token for a particular workspace
 - [`workspacesDeleteToken`](docs/sdks/workspaces/README.md#deletetoken) - Delete a token for a particular workspace
@@ -684,6 +739,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`workspacesGetAll`](docs/sdks/workspaces/README.md#getall) - Get workspaces for a user
 - [`workspacesGetByID`](docs/sdks/workspaces/README.md#getbyid) - Get workspace
 - [`workspacesGetFeatureFlags`](docs/sdks/workspaces/README.md#getfeatureflags) - Get workspace feature flags
+- [`workspacesGetPublishingToken`](docs/sdks/workspaces/README.md#getpublishingtoken) - Get publishing tokens for a workspace
 - [`workspacesGetSettings`](docs/sdks/workspaces/README.md#getsettings) - Get workspace settings
 - [`workspacesGetTeam`](docs/sdks/workspaces/README.md#getteam) - Get team members for a particular workspace
 - [`workspacesGetTokens`](docs/sdks/workspaces/README.md#gettokens) - Get tokens for a particular workspace

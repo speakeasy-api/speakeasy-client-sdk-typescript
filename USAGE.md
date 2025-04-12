@@ -9,7 +9,13 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
+  const result = await speakeasy.createPublishingToken({
+    createdAt: new Date("2025-10-25T02:17:15.413Z"),
+    id: "<id>",
+    targetId: "<id>",
+    targetResource: "<value>",
+    token: "<value>",
+  });
 
   // Handle the result
   console.log(result);

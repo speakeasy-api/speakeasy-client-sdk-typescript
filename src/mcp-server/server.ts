@@ -32,11 +32,15 @@ import { tool$codeSamplesGenerateCodeSamplePreview } from "./tools/codeSamplesGe
 import { tool$codeSamplesGenerateCodeSamplePreviewAsync } from "./tools/codeSamplesGenerateCodeSamplePreviewAsync.js";
 import { tool$codeSamplesGet } from "./tools/codeSamplesGet.js";
 import { tool$codeSamplesGetCodeSamplePreviewAsync } from "./tools/codeSamplesGetCodeSamplePreviewAsync.js";
+import { tool$createPublishingToken } from "./tools/createPublishingToken.js";
+import { tool$deletePublishingToken } from "./tools/deletePublishingToken.js";
 import { tool$eventsGetEventsByTarget } from "./tools/eventsGetEventsByTarget.js";
 import { tool$eventsGetTargets } from "./tools/eventsGetTargets.js";
 import { tool$eventsGetTargetsDeprecated } from "./tools/eventsGetTargetsDeprecated.js";
 import { tool$eventsPost } from "./tools/eventsPost.js";
 import { tool$eventsSearch } from "./tools/eventsSearch.js";
+import { tool$getPublishingTokenByID } from "./tools/getPublishingTokenByID.js";
+import { tool$getPublishingTokenTargetByID } from "./tools/getPublishingTokenTargetByID.js";
 import { tool$githubCheckAccess } from "./tools/githubCheckAccess.js";
 import { tool$githubCheckPublishingPRs } from "./tools/githubCheckPublishingPRs.js";
 import { tool$githubCheckPublishingSecrets } from "./tools/githubCheckPublishingSecrets.js";
@@ -67,6 +71,7 @@ import { tool$suggestSuggest } from "./tools/suggestSuggest.js";
 import { tool$suggestSuggestItems } from "./tools/suggestSuggestItems.js";
 import { tool$suggestSuggestOpenAPI } from "./tools/suggestSuggestOpenAPI.js";
 import { tool$suggestSuggestOpenAPIRegistry } from "./tools/suggestSuggestOpenAPIRegistry.js";
+import { tool$updatePublishingTokenExpiration } from "./tools/updatePublishingTokenExpiration.js";
 import { tool$workspacesCreate } from "./tools/workspacesCreate.js";
 import { tool$workspacesCreateToken } from "./tools/workspacesCreateToken.js";
 import { tool$workspacesDeleteToken } from "./tools/workspacesDeleteToken.js";
@@ -74,6 +79,7 @@ import { tool$workspacesGet } from "./tools/workspacesGet.js";
 import { tool$workspacesGetAll } from "./tools/workspacesGetAll.js";
 import { tool$workspacesGetByID } from "./tools/workspacesGetByID.js";
 import { tool$workspacesGetFeatureFlags } from "./tools/workspacesGetFeatureFlags.js";
+import { tool$workspacesGetPublishingToken } from "./tools/workspacesGetPublishingToken.js";
 import { tool$workspacesGetSettings } from "./tools/workspacesGetSettings.js";
 import { tool$workspacesGetTeam } from "./tools/workspacesGetTeam.js";
 import { tool$workspacesGetTokens } from "./tools/workspacesGetTokens.js";
@@ -94,7 +100,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Speakeasy",
-    version: "4.0.0-rc.3",
+    version: "4.0.0-rc.4",
   });
 
   const client = new SpeakeasyCore({
@@ -125,6 +131,11 @@ export function createMCPServer(deps: {
   const register = { tool, resource, resourceTemplate, prompt };
   void register; // suppress unused warnings
 
+  tool(tool$createPublishingToken);
+  tool(tool$deletePublishingToken);
+  tool(tool$getPublishingTokenByID);
+  tool(tool$getPublishingTokenTargetByID);
+  tool(tool$updatePublishingTokenExpiration);
   tool(tool$artifactsCreateRemoteSource);
   tool(tool$artifactsGetBlob);
   tool(tool$artifactsGetManifest);
@@ -163,6 +174,22 @@ export function createMCPServer(deps: {
   tool(tool$organizationsGetAll);
   tool(tool$organizationsGetBillingAddOns);
   tool(tool$organizationsGetUsage);
+  tool(tool$workspacesCreate);
+  tool(tool$workspacesCreateToken);
+  tool(tool$workspacesDeleteToken);
+  tool(tool$workspacesGet);
+  tool(tool$workspacesGetAll);
+  tool(tool$workspacesGetByID);
+  tool(tool$workspacesGetFeatureFlags);
+  tool(tool$workspacesGetPublishingToken);
+  tool(tool$workspacesGetSettings);
+  tool(tool$workspacesGetTeam);
+  tool(tool$workspacesGetTokens);
+  tool(tool$workspacesGrantAccess);
+  tool(tool$workspacesRevokeAccess);
+  tool(tool$workspacesSetFeatureFlags);
+  tool(tool$workspacesUpdate);
+  tool(tool$workspacesUpdateSettings);
   tool(tool$reportsGetChangesReportSignedUrl);
   tool(tool$reportsGetLintingReportSignedUrl);
   tool(tool$reportsUploadReport);
@@ -174,21 +201,6 @@ export function createMCPServer(deps: {
   tool(tool$suggestSuggestItems);
   tool(tool$suggestSuggestOpenAPI);
   tool(tool$suggestSuggestOpenAPIRegistry);
-  tool(tool$workspacesCreate);
-  tool(tool$workspacesCreateToken);
-  tool(tool$workspacesDeleteToken);
-  tool(tool$workspacesGet);
-  tool(tool$workspacesGetAll);
-  tool(tool$workspacesGetByID);
-  tool(tool$workspacesGetFeatureFlags);
-  tool(tool$workspacesGetSettings);
-  tool(tool$workspacesGetTeam);
-  tool(tool$workspacesGetTokens);
-  tool(tool$workspacesGrantAccess);
-  tool(tool$workspacesRevokeAccess);
-  tool(tool$workspacesSetFeatureFlags);
-  tool(tool$workspacesUpdate);
-  tool(tool$workspacesUpdateSettings);
   tool(tool$eventsGetEventsByTarget);
   tool(tool$eventsGetTargets);
   tool(tool$eventsGetTargetsDeprecated);
