@@ -14,6 +14,7 @@ REST APIs for managing Workspaces (speakeasy tenancy)
 * [getAll](#getall) - Get workspaces for a user
 * [getByID](#getbyid) - Get workspace
 * [getFeatureFlags](#getfeatureflags) - Get workspace feature flags
+* [getPublishingToken](#getpublishingtoken) - Get publishing tokens for a workspace
 * [getSettings](#getsettings) - Get workspace settings
 * [getTeam](#getteam) - Get team members for a particular workspace
 * [getTokens](#gettokens) - Get tokens for a particular workspace
@@ -596,6 +597,81 @@ run();
 ### Response
 
 **Promise\<[operations.GetWorkspaceFeatureFlagsResponse](../../sdk/models/operations/getworkspacefeatureflagsresponse.md)\>**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| errors.SDKError | 4XX, 5XX        | \*/\*           |
+
+## getPublishingToken
+
+Returns a publishing token for the current workspace
+
+### Example Usage
+
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const result = await speakeasy.workspaces.getPublishingToken();
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { SpeakeasyCore } from "@speakeasy-api/speakeasy-client-sdk-typescript/core.js";
+import { workspacesGetPublishingToken } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs/workspacesGetPublishingToken.js";
+
+// Use `SpeakeasyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const speakeasy = new SpeakeasyCore({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const res = await workspacesGetPublishingToken(speakeasy);
+
+  if (!res.ok) {
+    throw res.error;
+  }
+
+  const { value: result } = res;
+
+  // Handle the result
+  console.log(result);
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetPublishingTokenResponse](../../sdk/models/operations/getpublishingtokenresponse.md)\>**
 
 ### Errors
 

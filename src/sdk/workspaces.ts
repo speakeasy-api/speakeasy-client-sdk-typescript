@@ -9,6 +9,7 @@ import { workspacesGet } from "../funcs/workspacesGet.js";
 import { workspacesGetAll } from "../funcs/workspacesGetAll.js";
 import { workspacesGetByID } from "../funcs/workspacesGetByID.js";
 import { workspacesGetFeatureFlags } from "../funcs/workspacesGetFeatureFlags.js";
+import { workspacesGetPublishingToken } from "../funcs/workspacesGetPublishingToken.js";
 import { workspacesGetSettings } from "../funcs/workspacesGetSettings.js";
 import { workspacesGetTeam } from "../funcs/workspacesGetTeam.js";
 import { workspacesGetTokens } from "../funcs/workspacesGetTokens.js";
@@ -125,6 +126,21 @@ export class Workspaces extends ClientSDK {
     return unwrapAsync(workspacesGetFeatureFlags(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Get publishing tokens for a workspace
+   *
+   * @remarks
+   * Returns a publishing token for the current workspace
+   */
+  async getPublishingToken(
+    options?: RequestOptions,
+  ): Promise<operations.GetPublishingTokenResponse> {
+    return unwrapAsync(workspacesGetPublishingToken(
+      this,
       options,
     ));
   }

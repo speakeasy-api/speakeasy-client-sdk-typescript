@@ -8,7 +8,7 @@ import { ApiKeyDetails } from "@speakeasy-api/speakeasy-client-sdk-typescript/sd
 let value: ApiKeyDetails = {
   accountTypeV2: "enterprise",
   billingAddOns: [
-    "sdk_testing",
+    "custom_code_regions",
   ],
   enabledFeatures: [
     "<value>",
