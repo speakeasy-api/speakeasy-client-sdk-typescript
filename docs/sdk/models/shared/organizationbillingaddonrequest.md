@@ -9,7 +9,7 @@ import { OrganizationBillingAddOnRequest } from "@speakeasy-api/speakeasy-client
 
 let value: OrganizationBillingAddOnRequest = {
   addOns: [
-    "custom_code_regions",
+    "snippet_ai",
   ],
 };
 ```

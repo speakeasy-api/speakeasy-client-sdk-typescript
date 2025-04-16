@@ -261,6 +261,16 @@ run();
 * [getBillingAddOns](docs/sdks/organizations/README.md#getbillingaddons) - Get billing add ons
 * [getUsage](docs/sdks/organizations/README.md#getusage) - Get billing usage summary for a particular organization
 
+### [publishingTokens](docs/sdks/publishingtokens/README.md)
+
+* [create](docs/sdks/publishingtokens/README.md#create) - Create a publishing token for a workspace
+* [delete](docs/sdks/publishingtokens/README.md#delete) - Delete a specific publishing token
+* [get](docs/sdks/publishingtokens/README.md#get) - Get a specific publishing token
+* [list](docs/sdks/publishingtokens/README.md#list) - Get publishing tokens for a workspace
+* [resolveMetadata](docs/sdks/publishingtokens/README.md#resolvemetadata) - Get metadata about the token
+* [resolveTarget](docs/sdks/publishingtokens/README.md#resolvetarget) - Get a specific publishing token target
+* [update](docs/sdks/publishingtokens/README.md#update) - Updates the validitity period of a publishing token
+
 ### [reports](docs/sdks/reports/README.md)
 
 * [getChangesReportSignedUrl](docs/sdks/reports/README.md#getchangesreportsignedurl) - Get the signed access url for the change reports for a particular document.
@@ -666,6 +676,13 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`organizationsGetAll`](docs/sdks/organizations/README.md#getall) - Get organizations for a user
 - [`organizationsGetBillingAddOns`](docs/sdks/organizations/README.md#getbillingaddons) - Get billing add ons
 - [`organizationsGetUsage`](docs/sdks/organizations/README.md#getusage) - Get billing usage summary for a particular organization
+- [`publishingTokensCreate`](docs/sdks/publishingtokens/README.md#create) - Create a publishing token for a workspace
+- [`publishingTokensDelete`](docs/sdks/publishingtokens/README.md#delete) - Delete a specific publishing token
+- [`publishingTokensGet`](docs/sdks/publishingtokens/README.md#get) - Get a specific publishing token
+- [`publishingTokensList`](docs/sdks/publishingtokens/README.md#list) - Get publishing tokens for a workspace
+- [`publishingTokensResolveMetadata`](docs/sdks/publishingtokens/README.md#resolvemetadata) - Get metadata about the token
+- [`publishingTokensResolveTarget`](docs/sdks/publishingtokens/README.md#resolvetarget) - Get a specific publishing token target
+- [`publishingTokensUpdate`](docs/sdks/publishingtokens/README.md#update) - Updates the validitity period of a publishing token
 - [`reportsGetChangesReportSignedUrl`](docs/sdks/reports/README.md#getchangesreportsignedurl) - Get the signed access url for the change reports for a particular document.
 - [`reportsGetLintingReportSignedUrl`](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
 - [`reportsUploadReport`](docs/sdks/reports/README.md#uploadreport) - Upload a report.
