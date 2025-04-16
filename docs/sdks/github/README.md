@@ -33,13 +33,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.github.checkAccess({
+  await speakeasy.github.checkAccess({
     org: "<value>",
     repo: "<value>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -73,11 +72,38 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useGithubCheckAccess,
+  useGithubCheckAccessSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchGithubCheckAccess,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateGithubCheckAccess,
+  invalidateAllGithubCheckAccess,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubCheckAccess.js";
 ```
 
 ### Parameters
@@ -91,13 +117,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## checkPublishingPRs
 
@@ -162,6 +189,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useGithubCheckPublishingPRs,
+  useGithubCheckPublishingPRsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchGithubCheckPublishingPRs,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateGithubCheckPublishingPRs,
+  invalidateAllGithubCheckPublishingPRs,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubCheckPublishingPRs.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -173,13 +228,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GithubCheckPublishingPRsResponse](../../sdk/models/operations/githubcheckpublishingprsresponse.md)\>**
+**Promise\<[shared.GithubPublishingPRResponse](../../sdk/models/shared/githubpublishingprresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## checkPublishingSecrets
 
@@ -240,6 +296,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useGithubCheckPublishingSecrets,
+  useGithubCheckPublishingSecretsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchGithubCheckPublishingSecrets,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateGithubCheckPublishingSecrets,
+  invalidateAllGithubCheckPublishingSecrets,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubCheckPublishingSecrets.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -251,13 +335,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GithubCheckPublishingSecretsResponse](../../sdk/models/operations/githubcheckpublishingsecretsresponse.md)\>**
+**Promise\<[shared.GithubMissingPublishingSecretsResponse](../../sdk/models/shared/githubmissingpublishingsecretsresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## configureCodeSamples
 
@@ -322,6 +407,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useGithubConfigureCodeSamplesMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubConfigureCodeSamples.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -333,13 +435,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GithubConfigureCodeSamplesResponse](../../sdk/models/operations/githubconfigurecodesamplesresponse.md)\>**
+**Promise\<[shared.GithubConfigureCodeSamplesResponse](../../sdk/models/shared/githubconfigurecodesamplesresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## configureMintlifyRepo
 
@@ -355,7 +458,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.github.configureMintlifyRepo({
+  await speakeasy.github.configureMintlifyRepo({
     input: "<value>",
     org: "<value>",
     overlays: [
@@ -364,8 +467,7 @@ async function run() {
     repo: "<value>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -403,11 +505,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useGithubConfigureMintlifyRepoMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubConfigureMintlifyRepo.js";
 ```
 
 ### Parameters
@@ -421,13 +539,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## configureTarget
 
@@ -443,13 +562,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.github.configureTarget({
+  await speakeasy.github.configureTarget({
     org: "<value>",
     repoName: "<value>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -483,11 +601,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useGithubConfigureTargetMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubConfigureTarget.js";
 ```
 
 ### Parameters
@@ -501,13 +635,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getAction
 
@@ -570,6 +705,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useGithubGetAction,
+  useGithubGetActionSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchGithubGetAction,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateGithubGetAction,
+  invalidateAllGithubGetAction,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubGetAction.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -581,13 +744,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetGitHubActionResponse](../../sdk/models/operations/getgithubactionresponse.md)\>**
+**Promise\<[shared.GithubGetActionResponse](../../sdk/models/shared/githubgetactionresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getSetup
 
@@ -652,6 +816,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useGithubGetSetup,
+  useGithubGetSetupSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchGithubGetSetup,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateGithubGetSetup,
+  invalidateAllGithubGetSetup,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubGetSetup.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -663,13 +855,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetGithubSetupStateResponse](../../sdk/models/operations/getgithubsetupstateresponse.md)\>**
+**Promise\<[shared.GithubSetupStateResponse](../../sdk/models/shared/githubsetupstateresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## linkGithub
 
@@ -685,10 +878,9 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.github.linkGithub({});
+  await speakeasy.github.linkGithub({});
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -719,11 +911,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useGithubLinkGithubMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubLinkGithub.js";
 ```
 
 ### Parameters
@@ -737,13 +945,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## storePublishingSecrets
 
@@ -759,12 +968,11 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.github.storePublishingSecrets({
+  await speakeasy.github.storePublishingSecrets({
     generateGenLockId: "<id>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -797,11 +1005,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useGithubStorePublishingSecretsMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubStorePublishingSecrets.js";
 ```
 
 ### Parameters
@@ -815,13 +1039,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## triggerAction
 
@@ -837,14 +1062,13 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.github.triggerAction({
+  await speakeasy.github.triggerAction({
     genLockId: "<id>",
     org: "<value>",
     repoName: "<value>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -879,11 +1103,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useGithubTriggerActionMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/githubTriggerAction.js";
 ```
 
 ### Parameters
@@ -897,10 +1137,11 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |

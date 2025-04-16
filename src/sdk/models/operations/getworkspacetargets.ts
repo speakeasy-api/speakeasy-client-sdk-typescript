@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetWorkspaceTargetsRequest = {
   /**
@@ -15,10 +14,6 @@ export type GetWorkspaceTargetsRequest = {
    */
   afterLastEventCreatedAt?: Date | undefined;
 };
-
-export type GetWorkspaceTargetsResponse =
-  | shared.ErrorT
-  | Array<shared.TargetSDK>;
 
 /** @internal */
 export const GetWorkspaceTargetsRequest$inboundSchema: z.ZodType<
@@ -81,63 +76,5 @@ export function getWorkspaceTargetsRequestFromJSON(
     jsonString,
     (x) => GetWorkspaceTargetsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetWorkspaceTargetsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetWorkspaceTargetsResponse$inboundSchema: z.ZodType<
-  GetWorkspaceTargetsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  z.array(shared.TargetSDK$inboundSchema),
-]);
-
-/** @internal */
-export type GetWorkspaceTargetsResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | Array<shared.TargetSDK$Outbound>;
-
-/** @internal */
-export const GetWorkspaceTargetsResponse$outboundSchema: z.ZodType<
-  GetWorkspaceTargetsResponse$Outbound,
-  z.ZodTypeDef,
-  GetWorkspaceTargetsResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  z.array(shared.TargetSDK$outboundSchema),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetWorkspaceTargetsResponse$ {
-  /** @deprecated use `GetWorkspaceTargetsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetWorkspaceTargetsResponse$inboundSchema;
-  /** @deprecated use `GetWorkspaceTargetsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetWorkspaceTargetsResponse$outboundSchema;
-  /** @deprecated use `GetWorkspaceTargetsResponse$Outbound` instead. */
-  export type Outbound = GetWorkspaceTargetsResponse$Outbound;
-}
-
-export function getWorkspaceTargetsResponseToJSON(
-  getWorkspaceTargetsResponse: GetWorkspaceTargetsResponse,
-): string {
-  return JSON.stringify(
-    GetWorkspaceTargetsResponse$outboundSchema.parse(
-      getWorkspaceTargetsResponse,
-    ),
-  );
-}
-
-export function getWorkspaceTargetsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetWorkspaceTargetsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetWorkspaceTargetsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetWorkspaceTargetsResponse' from JSON`,
   );
 }

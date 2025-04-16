@@ -9,10 +9,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
-
-  // Handle the result
-  console.log(result);
+  await speakeasy.artifacts.createRemoteSource();
 }
 
 run();

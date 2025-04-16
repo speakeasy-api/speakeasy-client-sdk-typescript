@@ -70,6 +70,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePublishingTokensCreateMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/publishingTokensCreate.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -81,13 +98,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreatePublishingTokenResponse](../../sdk/models/operations/createpublishingtokenresponse.md)\>**
+**Promise\<[shared.PublishingToken](../../sdk/models/shared/publishingtoken.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## delete
 
@@ -105,12 +123,11 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.publishingTokens.delete({
+  await speakeasy.publishingTokens.delete({
     tokenID: "<id>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -143,11 +160,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePublishingTokensDeleteMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/publishingTokensDelete.js";
 ```
 
 ### Parameters
@@ -161,13 +194,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## get
 
@@ -230,6 +264,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePublishingTokensGet,
+  usePublishingTokensGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPublishingTokensGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePublishingTokensGet,
+  invalidateAllPublishingTokensGet,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/publishingTokensGet.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -241,13 +303,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetPublishingTokenByIDResponse](../../sdk/models/operations/getpublishingtokenbyidresponse.md)\>**
+**Promise\<[shared.PublishingToken](../../sdk/models/shared/publishingtoken.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## list
 
@@ -306,6 +369,33 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePublishingTokensList,
+  usePublishingTokensListSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPublishingTokensList,
+  
+  // Utility to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAllPublishingTokensList,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/publishingTokensList.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -316,13 +406,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetPublishingTokenResponse](../../sdk/models/operations/getpublishingtokenresponse.md)\>**
+**Promise\<[shared.PublishingToken[]](../../models/.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## resolveMetadata
 
@@ -385,6 +476,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePublishingTokensResolveMetadata,
+  usePublishingTokensResolveMetadataSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPublishingTokensResolveMetadata,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePublishingTokensResolveMetadata,
+  invalidateAllPublishingTokensResolveMetadata,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/publishingTokensResolveMetadata.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -396,13 +515,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetPublishingTokenPublicMetadataResponse](../../sdk/models/operations/getpublishingtokenpublicmetadataresponse.md)\>**
+**Promise\<[operations.GetPublishingTokenPublicMetadataResponseBody](../../sdk/models/operations/getpublishingtokenpublicmetadataresponsebody.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## resolveTarget
 
@@ -465,6 +585,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  usePublishingTokensResolveTarget,
+  usePublishingTokensResolveTargetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchPublishingTokensResolveTarget,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidatePublishingTokensResolveTarget,
+  invalidateAllPublishingTokensResolveTarget,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/publishingTokensResolveTarget.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -476,13 +624,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetPublishingTokenTargetByIDResponse](../../sdk/models/operations/getpublishingtokentargetbyidresponse.md)\>**
+**Promise\<[operations.GetPublishingTokenTargetByIDResponseBody](../../sdk/models/operations/getpublishingtokentargetbyidresponsebody.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## update
 
@@ -500,12 +649,11 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.publishingTokens.update({
+  await speakeasy.publishingTokens.update({
     tokenID: "<id>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -538,11 +686,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  usePublishingTokensUpdateMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/publishingTokensUpdate.js";
 ```
 
 ### Parameters
@@ -556,10 +720,11 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |

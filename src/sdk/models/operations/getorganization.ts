@@ -6,7 +6,6 @@ import * as z from "zod";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetOrganizationRequest = {
   /**
@@ -14,8 +13,6 @@ export type GetOrganizationRequest = {
    */
   organizationID: string;
 };
-
-export type GetOrganizationResponse = shared.ErrorT | shared.Organization;
 
 /** @internal */
 export const GetOrganizationRequest$inboundSchema: z.ZodType<
@@ -68,55 +65,5 @@ export function getOrganizationRequestFromJSON(
     jsonString,
     (x) => GetOrganizationRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetOrganizationRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetOrganizationResponse$inboundSchema: z.ZodType<
-  GetOrganizationResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([shared.ErrorT$inboundSchema, shared.Organization$inboundSchema]);
-
-/** @internal */
-export type GetOrganizationResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.Organization$Outbound;
-
-/** @internal */
-export const GetOrganizationResponse$outboundSchema: z.ZodType<
-  GetOrganizationResponse$Outbound,
-  z.ZodTypeDef,
-  GetOrganizationResponse
-> = z.union([shared.ErrorT$outboundSchema, shared.Organization$outboundSchema]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetOrganizationResponse$ {
-  /** @deprecated use `GetOrganizationResponse$inboundSchema` instead. */
-  export const inboundSchema = GetOrganizationResponse$inboundSchema;
-  /** @deprecated use `GetOrganizationResponse$outboundSchema` instead. */
-  export const outboundSchema = GetOrganizationResponse$outboundSchema;
-  /** @deprecated use `GetOrganizationResponse$Outbound` instead. */
-  export type Outbound = GetOrganizationResponse$Outbound;
-}
-
-export function getOrganizationResponseToJSON(
-  getOrganizationResponse: GetOrganizationResponse,
-): string {
-  return JSON.stringify(
-    GetOrganizationResponse$outboundSchema.parse(getOrganizationResponse),
-  );
-}
-
-export function getOrganizationResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetOrganizationResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetOrganizationResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetOrganizationResponse' from JSON`,
   );
 }

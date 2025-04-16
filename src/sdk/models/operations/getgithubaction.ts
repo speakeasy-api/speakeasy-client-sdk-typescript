@@ -6,7 +6,6 @@ import * as z from "zod";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetGitHubActionRequest = {
   /**
@@ -16,10 +15,6 @@ export type GetGitHubActionRequest = {
   org: string;
   repo: string;
 };
-
-export type GetGitHubActionResponse =
-  | shared.ErrorT
-  | shared.GithubGetActionResponse;
 
 /** @internal */
 export const GetGitHubActionRequest$inboundSchema: z.ZodType<
@@ -78,61 +73,5 @@ export function getGitHubActionRequestFromJSON(
     jsonString,
     (x) => GetGitHubActionRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGitHubActionRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetGitHubActionResponse$inboundSchema: z.ZodType<
-  GetGitHubActionResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  shared.GithubGetActionResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetGitHubActionResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.GithubGetActionResponse$Outbound;
-
-/** @internal */
-export const GetGitHubActionResponse$outboundSchema: z.ZodType<
-  GetGitHubActionResponse$Outbound,
-  z.ZodTypeDef,
-  GetGitHubActionResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  shared.GithubGetActionResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetGitHubActionResponse$ {
-  /** @deprecated use `GetGitHubActionResponse$inboundSchema` instead. */
-  export const inboundSchema = GetGitHubActionResponse$inboundSchema;
-  /** @deprecated use `GetGitHubActionResponse$outboundSchema` instead. */
-  export const outboundSchema = GetGitHubActionResponse$outboundSchema;
-  /** @deprecated use `GetGitHubActionResponse$Outbound` instead. */
-  export type Outbound = GetGitHubActionResponse$Outbound;
-}
-
-export function getGitHubActionResponseToJSON(
-  getGitHubActionResponse: GetGitHubActionResponse,
-): string {
-  return JSON.stringify(
-    GetGitHubActionResponse$outboundSchema.parse(getGitHubActionResponse),
-  );
-}
-
-export function getGitHubActionResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetGitHubActionResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetGitHubActionResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetGitHubActionResponse' from JSON`,
   );
 }

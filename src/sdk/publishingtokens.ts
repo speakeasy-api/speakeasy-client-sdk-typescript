@@ -24,7 +24,7 @@ export class PublishingTokens extends ClientSDK {
   async create(
     request?: operations.CreatePublishingTokenRequestBody | undefined,
     options?: RequestOptions,
-  ): Promise<operations.CreatePublishingTokenResponse> {
+  ): Promise<shared.PublishingToken> {
     return unwrapAsync(publishingTokensCreate(
       this,
       request,
@@ -41,7 +41,7 @@ export class PublishingTokens extends ClientSDK {
   async delete(
     request: operations.DeletePublishingTokenRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(publishingTokensDelete(
       this,
       request,
@@ -58,7 +58,7 @@ export class PublishingTokens extends ClientSDK {
   async get(
     request: operations.GetPublishingTokenByIDRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPublishingTokenByIDResponse> {
+  ): Promise<shared.PublishingToken> {
     return unwrapAsync(publishingTokensGet(
       this,
       request,
@@ -74,7 +74,7 @@ export class PublishingTokens extends ClientSDK {
    */
   async list(
     options?: RequestOptions,
-  ): Promise<operations.GetPublishingTokenResponse> {
+  ): Promise<Array<shared.PublishingToken>> {
     return unwrapAsync(publishingTokensList(
       this,
       options,
@@ -90,7 +90,7 @@ export class PublishingTokens extends ClientSDK {
   async resolveMetadata(
     request: operations.GetPublishingTokenPublicMetadataRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPublishingTokenPublicMetadataResponse> {
+  ): Promise<operations.GetPublishingTokenPublicMetadataResponseBody> {
     return unwrapAsync(publishingTokensResolveMetadata(
       this,
       request,
@@ -107,7 +107,7 @@ export class PublishingTokens extends ClientSDK {
   async resolveTarget(
     request: operations.GetPublishingTokenTargetByIDRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPublishingTokenTargetByIDResponse> {
+  ): Promise<operations.GetPublishingTokenTargetByIDResponseBody> {
     return unwrapAsync(publishingTokensResolveTarget(
       this,
       request,
@@ -124,7 +124,7 @@ export class PublishingTokens extends ClientSDK {
   async update(
     request: operations.UpdatePublishingTokenExpirationRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(publishingTokensUpdate(
       this,
       request,

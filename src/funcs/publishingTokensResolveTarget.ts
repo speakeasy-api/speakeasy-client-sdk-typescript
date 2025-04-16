@@ -17,6 +17,7 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
 import { SDKError } from "../sdk/models/errors/sdkerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
 import * as operations from "../sdk/models/operations/index.js";
@@ -35,7 +36,8 @@ export function publishingTokensResolveTarget(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetPublishingTokenTargetByIDResponse,
+    operations.GetPublishingTokenTargetByIDResponseBody,
+    | errors.ErrorT
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -59,7 +61,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.GetPublishingTokenTargetByIDResponse,
+      operations.GetPublishingTokenTargetByIDResponseBody,
+      | errors.ErrorT
       | SDKError
       | SDKValidationError
       | UnexpectedClientError
@@ -131,7 +134,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    errorCodes: ["4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -140,8 +143,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
-    operations.GetPublishingTokenTargetByIDResponse,
+    operations.GetPublishingTokenTargetByIDResponseBody,
+    | errors.ErrorT
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -150,12 +158,13 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.GetPublishingTokenTargetByIDResponse$inboundSchema),
     M.json(
-      "4XX",
-      operations.GetPublishingTokenTargetByIDResponse$inboundSchema,
+      200,
+      operations.GetPublishingTokenTargetByIDResponseBody$inboundSchema,
     ),
-  )(response);
+    M.jsonErr("4XX", errors.ErrorT$inboundSchema),
+    M.fail("5XX"),
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

@@ -27,8 +27,7 @@ export type GetCodeSamplePreviewAsyncResponseBody = {
 
 export type GetCodeSamplePreviewAsyncResponse =
   | shared.UsageSnippets
-  | GetCodeSamplePreviewAsyncResponseBody
-  | shared.ErrorT;
+  | GetCodeSamplePreviewAsyncResponseBody;
 
 /** @internal */
 export const GetCodeSamplePreviewAsyncRequest$inboundSchema: z.ZodType<
@@ -153,14 +152,12 @@ export const GetCodeSamplePreviewAsyncResponse$inboundSchema: z.ZodType<
 > = z.union([
   shared.UsageSnippets$inboundSchema,
   z.lazy(() => GetCodeSamplePreviewAsyncResponseBody$inboundSchema),
-  shared.ErrorT$inboundSchema,
 ]);
 
 /** @internal */
 export type GetCodeSamplePreviewAsyncResponse$Outbound =
   | shared.UsageSnippets$Outbound
-  | GetCodeSamplePreviewAsyncResponseBody$Outbound
-  | shared.ErrorT$Outbound;
+  | GetCodeSamplePreviewAsyncResponseBody$Outbound;
 
 /** @internal */
 export const GetCodeSamplePreviewAsyncResponse$outboundSchema: z.ZodType<
@@ -170,7 +167,6 @@ export const GetCodeSamplePreviewAsyncResponse$outboundSchema: z.ZodType<
 > = z.union([
   shared.UsageSnippets$outboundSchema,
   z.lazy(() => GetCodeSamplePreviewAsyncResponseBody$outboundSchema),
-  shared.ErrorT$outboundSchema,
 ]);
 
 /**

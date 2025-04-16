@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 /**
  * The publishing token to create
@@ -18,10 +17,6 @@ export type CreatePublishingTokenRequestBody = {
   tokenName: string;
   validUntil: Date;
 };
-
-export type CreatePublishingTokenResponse =
-  | shared.ErrorT
-  | shared.PublishingToken;
 
 /** @internal */
 export const CreatePublishingTokenRequestBody$inboundSchema: z.ZodType<
@@ -101,63 +96,5 @@ export function createPublishingTokenRequestBodyFromJSON(
     jsonString,
     (x) => CreatePublishingTokenRequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreatePublishingTokenRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreatePublishingTokenResponse$inboundSchema: z.ZodType<
-  CreatePublishingTokenResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  shared.PublishingToken$inboundSchema,
-]);
-
-/** @internal */
-export type CreatePublishingTokenResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.PublishingToken$Outbound;
-
-/** @internal */
-export const CreatePublishingTokenResponse$outboundSchema: z.ZodType<
-  CreatePublishingTokenResponse$Outbound,
-  z.ZodTypeDef,
-  CreatePublishingTokenResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  shared.PublishingToken$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreatePublishingTokenResponse$ {
-  /** @deprecated use `CreatePublishingTokenResponse$inboundSchema` instead. */
-  export const inboundSchema = CreatePublishingTokenResponse$inboundSchema;
-  /** @deprecated use `CreatePublishingTokenResponse$outboundSchema` instead. */
-  export const outboundSchema = CreatePublishingTokenResponse$outboundSchema;
-  /** @deprecated use `CreatePublishingTokenResponse$Outbound` instead. */
-  export type Outbound = CreatePublishingTokenResponse$Outbound;
-}
-
-export function createPublishingTokenResponseToJSON(
-  createPublishingTokenResponse: CreatePublishingTokenResponse,
-): string {
-  return JSON.stringify(
-    CreatePublishingTokenResponse$outboundSchema.parse(
-      createPublishingTokenResponse,
-    ),
-  );
-}
-
-export function createPublishingTokenResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<CreatePublishingTokenResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreatePublishingTokenResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreatePublishingTokenResponse' from JSON`,
   );
 }

@@ -5,15 +5,14 @@ management:
   docVersion: 0.4.0
   speakeasyVersion: 1.533.0
   generationVersion: 2.578.0
-  releaseVersion: 4.0.0-rc.4
-  configChecksum: 573a2b1fd1cd16eefd8119988cf82862
+  releaseVersion: 4.0.0-rc.6
+  configChecksum: 8aab34a64fcf04089345ef332bd47460
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
   published: true
 features:
   typescript:
-    acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.11
     core: 3.21.6
@@ -31,6 +30,7 @@ features:
     nameOverrides: 2.81.2
     nullables: 0.1.1
     openEnums: 0.1.1
+    reactQueryHooks: 0.2.3
     responseFormat: 0.2.3
     retries: 2.83.0
     sdkHooks: 0.2.0
@@ -40,21 +40,18 @@ generatedFiles:
   - .gitattributes
   - .npmignore
   - FUNCTIONS.md
+  - REACT_QUERY.md
   - RUNTIMES.md
   - USAGE.md
   - docs/lib/utils/retryconfig.md
+  - docs/sdk/models/errors/errort.md
   - docs/sdk/models/operations/activatesubscriptionnamespacerequest.md
   - docs/sdk/models/operations/archivenamespacerequest.md
   - docs/sdk/models/operations/archivenamespacerequestbody.md
   - docs/sdk/models/operations/checkgithubaccessrequest.md
-  - docs/sdk/models/operations/createbillingaddonsresponse.md
-  - docs/sdk/models/operations/createorganizationresponse.md
   - docs/sdk/models/operations/createpublishingtokenrequestbody.md
-  - docs/sdk/models/operations/createpublishingtokenresponse.md
   - docs/sdk/models/operations/createrequestbody.md
   - docs/sdk/models/operations/createschemastoreitemrequestbody.md
-  - docs/sdk/models/operations/createschemastoreitemresponse.md
-  - docs/sdk/models/operations/createworkspaceresponse.md
   - docs/sdk/models/operations/createworkspacetokenglobals.md
   - docs/sdk/models/operations/createworkspacetokenrequest.md
   - docs/sdk/models/operations/deletebillingaddonrequest.md
@@ -63,100 +60,62 @@ generatedFiles:
   - docs/sdk/models/operations/deleteworkspacetokenrequest.md
   - docs/sdk/models/operations/filet.md
   - docs/sdk/models/operations/format.md
-  - docs/sdk/models/operations/generatecodesamplepreviewasyncresponse.md
   - docs/sdk/models/operations/generatecodesamplepreviewasyncresponsebody.md
-  - docs/sdk/models/operations/generatecodesamplepreviewresponse.md
   - docs/sdk/models/operations/getaccesstokenrequest.md
-  - docs/sdk/models/operations/getaccesstokenresponse.md
-  - docs/sdk/models/operations/getbillingaddonsresponse.md
   - docs/sdk/models/operations/getblobrequest.md
-  - docs/sdk/models/operations/getblobresponse.md
   - docs/sdk/models/operations/getchangesreportsignedurlrequest.md
   - docs/sdk/models/operations/getchangesreportsignedurlsignedaccess.md
   - docs/sdk/models/operations/getcodesamplepreviewasyncrequest.md
   - docs/sdk/models/operations/getcodesamplepreviewasyncresponse.md
   - docs/sdk/models/operations/getcodesamplepreviewasyncresponsebody.md
   - docs/sdk/models/operations/getcodesamplesrequest.md
-  - docs/sdk/models/operations/getcodesamplesresponse.md
   - docs/sdk/models/operations/getgithubactionrequest.md
-  - docs/sdk/models/operations/getgithubactionresponse.md
   - docs/sdk/models/operations/getgithubsetupstaterequest.md
-  - docs/sdk/models/operations/getgithubsetupstateresponse.md
   - docs/sdk/models/operations/getlintingreportsignedurlrequest.md
   - docs/sdk/models/operations/getlintingreportsignedurlsignedaccess.md
   - docs/sdk/models/operations/getmanifestrequest.md
-  - docs/sdk/models/operations/getmanifestresponse.md
-  - docs/sdk/models/operations/getnamespacesresponse.md
   - docs/sdk/models/operations/getorganizationrequest.md
-  - docs/sdk/models/operations/getorganizationresponse.md
-  - docs/sdk/models/operations/getorganizationsresponse.md
-  - docs/sdk/models/operations/getorganizationusageresponse.md
   - docs/sdk/models/operations/getpublishingtokenbyidrequest.md
-  - docs/sdk/models/operations/getpublishingtokenbyidresponse.md
   - docs/sdk/models/operations/getpublishingtokenpublicmetadatarequest.md
-  - docs/sdk/models/operations/getpublishingtokenpublicmetadataresponse.md
   - docs/sdk/models/operations/getpublishingtokenpublicmetadataresponsebody.md
-  - docs/sdk/models/operations/getpublishingtokenresponse.md
   - docs/sdk/models/operations/getpublishingtokentargetbyidrequest.md
-  - docs/sdk/models/operations/getpublishingtokentargetbyidresponse.md
   - docs/sdk/models/operations/getpublishingtokentargetbyidresponsebody.md
   - docs/sdk/models/operations/getrevisionsrequest.md
-  - docs/sdk/models/operations/getrevisionsresponse.md
   - docs/sdk/models/operations/gettagsrequest.md
-  - docs/sdk/models/operations/gettagsresponse.md
-  - docs/sdk/models/operations/getuserresponse.md
   - docs/sdk/models/operations/getworkspaceaccessrequest.md
-  - docs/sdk/models/operations/getworkspacebycontextresponse.md
   - docs/sdk/models/operations/getworkspaceeventsbytargetglobals.md
   - docs/sdk/models/operations/getworkspaceeventsbytargetrequest.md
-  - docs/sdk/models/operations/getworkspaceeventsbytargetresponse.md
   - docs/sdk/models/operations/getworkspacefeatureflagsglobals.md
   - docs/sdk/models/operations/getworkspacefeatureflagsrequest.md
-  - docs/sdk/models/operations/getworkspacefeatureflagsresponse.md
   - docs/sdk/models/operations/getworkspaceglobals.md
   - docs/sdk/models/operations/getworkspacerequest.md
-  - docs/sdk/models/operations/getworkspaceresponse.md
   - docs/sdk/models/operations/getworkspacesettingsglobals.md
   - docs/sdk/models/operations/getworkspacesettingsrequest.md
-  - docs/sdk/models/operations/getworkspacesettingsresponse.md
-  - docs/sdk/models/operations/getworkspacesresponse.md
   - docs/sdk/models/operations/getworkspacetargetsdeprecatedglobals.md
   - docs/sdk/models/operations/getworkspacetargetsdeprecatedrequest.md
-  - docs/sdk/models/operations/getworkspacetargetsdeprecatedresponse.md
   - docs/sdk/models/operations/getworkspacetargetsrequest.md
-  - docs/sdk/models/operations/getworkspacetargetsresponse.md
   - docs/sdk/models/operations/getworkspaceteamglobals.md
   - docs/sdk/models/operations/getworkspaceteamrequest.md
-  - docs/sdk/models/operations/getworkspaceteamresponse.md
   - docs/sdk/models/operations/getworkspacetokensglobals.md
   - docs/sdk/models/operations/getworkspacetokensrequest.md
-  - docs/sdk/models/operations/getworkspacetokensresponse.md
   - docs/sdk/models/operations/githubcheckpublishingprsrequest.md
-  - docs/sdk/models/operations/githubcheckpublishingprsresponse.md
   - docs/sdk/models/operations/githubcheckpublishingsecretsrequest.md
-  - docs/sdk/models/operations/githubcheckpublishingsecretsresponse.md
-  - docs/sdk/models/operations/githubconfigurecodesamplesresponse.md
   - docs/sdk/models/operations/grantuseraccesstoworkspaceglobals.md
   - docs/sdk/models/operations/grantuseraccesstoworkspacerequest.md
-  - docs/sdk/models/operations/grantuseraccesstoworkspaceresponse.md
   - docs/sdk/models/operations/ignoresubscriptionnamespacerequest.md
   - docs/sdk/models/operations/linkgithubaccessrequest.md
   - docs/sdk/models/operations/listremotesourcesrequest.md
-  - docs/sdk/models/operations/listremotesourcesresponse.md
   - docs/sdk/models/operations/methodpaths.md
   - docs/sdk/models/operations/posttagsrequest.md
   - docs/sdk/models/operations/postworkspaceeventsglobals.md
   - docs/sdk/models/operations/postworkspaceeventsrequest.md
-  - docs/sdk/models/operations/preflightresponse.md
   - docs/sdk/models/operations/revokeuseraccesstoworkspaceglobals.md
   - docs/sdk/models/operations/revokeuseraccesstoworkspacerequest.md
   - docs/sdk/models/operations/schema.md
   - docs/sdk/models/operations/searchworkspaceeventsglobals.md
   - docs/sdk/models/operations/searchworkspaceeventsrequest.md
-  - docs/sdk/models/operations/searchworkspaceeventsresponse.md
   - docs/sdk/models/operations/setvisibilityrequest.md
   - docs/sdk/models/operations/setvisibilityrequestbody.md
-  - docs/sdk/models/operations/setworkspacefeatureflagsresponse.md
   - docs/sdk/models/operations/suggestopenapiregistryrequest.md
   - docs/sdk/models/operations/suggestopenapirequest.md
   - docs/sdk/models/operations/suggestopenapirequestbody.md
@@ -169,7 +128,6 @@ generatedFiles:
   - docs/sdk/models/operations/updateworkspacesettingsrequest.md
   - docs/sdk/models/operations/uploadreportrequestbody.md
   - docs/sdk/models/operations/uploadreportuploadedreport.md
-  - docs/sdk/models/operations/validateapikeyresponse.md
   - docs/sdk/models/shared/accessdetails.md
   - docs/sdk/models/shared/accesstoken.md
   - docs/sdk/models/shared/accesstokenuser.md
@@ -186,7 +144,6 @@ generatedFiles:
   - docs/sdk/models/shared/codesamplesjobstatus.md
   - docs/sdk/models/shared/compositespecmetadata.md
   - docs/sdk/models/shared/diagnostic.md
-  - docs/sdk/models/shared/errort.md
   - docs/sdk/models/shared/featureflag.md
   - docs/sdk/models/shared/format.md
   - docs/sdk/models/shared/generatebumptype.md
@@ -462,12 +419,92 @@ generatedFiles:
   - src/mcp-server/tools/workspacesSetFeatureFlags.ts
   - src/mcp-server/tools/workspacesUpdate.ts
   - src/mcp-server/tools/workspacesUpdateSettings.ts
+  - src/react-query/_context.tsx
+  - src/react-query/_types.ts
+  - src/react-query/artifactsCreateRemoteSource.ts
+  - src/react-query/artifactsGetBlob.ts
+  - src/react-query/artifactsGetManifest.ts
+  - src/react-query/artifactsGetNamespaces.ts
+  - src/react-query/artifactsGetRevisions.ts
+  - src/react-query/artifactsGetTags.ts
+  - src/react-query/artifactsListRemoteSources.ts
+  - src/react-query/artifactsPostTags.ts
+  - src/react-query/artifactsPreflight.ts
+  - src/react-query/artifactsSetArchived.ts
+  - src/react-query/artifactsSetVisibility.ts
+  - src/react-query/authGetAccess.ts
+  - src/react-query/authGetAccessToken.ts
+  - src/react-query/authGetUser.ts
+  - src/react-query/authValidateApiKey.ts
+  - src/react-query/codeSamplesGenerateCodeSamplePreview.ts
+  - src/react-query/codeSamplesGenerateCodeSamplePreviewAsync.ts
+  - src/react-query/codeSamplesGet.ts
+  - src/react-query/codeSamplesGetCodeSamplePreviewAsync.ts
+  - src/react-query/eventsGetEventsByTarget.ts
+  - src/react-query/eventsGetTargets.ts
+  - src/react-query/eventsGetTargetsDeprecated.ts
+  - src/react-query/eventsPost.ts
+  - src/react-query/eventsSearch.ts
+  - src/react-query/githubCheckAccess.ts
+  - src/react-query/githubCheckPublishingPRs.ts
+  - src/react-query/githubCheckPublishingSecrets.ts
+  - src/react-query/githubConfigureCodeSamples.ts
+  - src/react-query/githubConfigureMintlifyRepo.ts
+  - src/react-query/githubConfigureTarget.ts
+  - src/react-query/githubGetAction.ts
+  - src/react-query/githubGetSetup.ts
+  - src/react-query/githubLinkGithub.ts
+  - src/react-query/githubStorePublishingSecrets.ts
+  - src/react-query/githubTriggerAction.ts
+  - src/react-query/index.ts
+  - src/react-query/organizationsCreate.ts
+  - src/react-query/organizationsCreateBillingAddOns.ts
+  - src/react-query/organizationsCreateFreeTrial.ts
+  - src/react-query/organizationsDeleteBillingAddOn.ts
+  - src/react-query/organizationsGet.ts
+  - src/react-query/organizationsGetAll.ts
+  - src/react-query/organizationsGetBillingAddOns.ts
+  - src/react-query/organizationsGetUsage.ts
+  - src/react-query/publishingTokensCreate.ts
+  - src/react-query/publishingTokensDelete.ts
+  - src/react-query/publishingTokensGet.ts
+  - src/react-query/publishingTokensList.ts
+  - src/react-query/publishingTokensResolveMetadata.ts
+  - src/react-query/publishingTokensResolveTarget.ts
+  - src/react-query/publishingTokensUpdate.ts
+  - src/react-query/reportsGetChangesReportSignedUrl.ts
+  - src/react-query/reportsGetLintingReportSignedUrl.ts
+  - src/react-query/reportsUploadReport.ts
+  - src/react-query/schemaStoreCreateSchemaStoreItem.ts
+  - src/react-query/shortURLsCreate.ts
+  - src/react-query/subscriptionsActivateSubscriptionNamespace.ts
+  - src/react-query/subscriptionsIgnoreSubscriptionNamespace.ts
+  - src/react-query/suggestSuggest.ts
+  - src/react-query/suggestSuggestItems.ts
+  - src/react-query/suggestSuggestOpenAPI.ts
+  - src/react-query/suggestSuggestOpenAPIRegistry.ts
+  - src/react-query/workspacesCreate.ts
+  - src/react-query/workspacesCreateToken.ts
+  - src/react-query/workspacesDeleteToken.ts
+  - src/react-query/workspacesGet.ts
+  - src/react-query/workspacesGetAll.ts
+  - src/react-query/workspacesGetByID.ts
+  - src/react-query/workspacesGetFeatureFlags.ts
+  - src/react-query/workspacesGetSettings.ts
+  - src/react-query/workspacesGetTeam.ts
+  - src/react-query/workspacesGetTokens.ts
+  - src/react-query/workspacesGrantAccess.ts
+  - src/react-query/workspacesRevokeAccess.ts
+  - src/react-query/workspacesSetFeatureFlags.ts
+  - src/react-query/workspacesUpdate.ts
+  - src/react-query/workspacesUpdateSettings.ts
   - src/sdk/artifacts.ts
   - src/sdk/auth.ts
   - src/sdk/codesamples.ts
   - src/sdk/events.ts
   - src/sdk/github.ts
   - src/sdk/index.ts
+  - src/sdk/models/errors/error.ts
   - src/sdk/models/errors/httpclienterrors.ts
   - src/sdk/models/errors/index.ts
   - src/sdk/models/errors/sdkerror.ts
@@ -476,19 +513,14 @@ generatedFiles:
   - src/sdk/models/operations/archivenamespace.ts
   - src/sdk/models/operations/checkgithubaccess.ts
   - src/sdk/models/operations/create.ts
-  - src/sdk/models/operations/createbillingaddons.ts
-  - src/sdk/models/operations/createorganization.ts
   - src/sdk/models/operations/createpublishingtoken.ts
   - src/sdk/models/operations/createschemastoreitem.ts
-  - src/sdk/models/operations/createworkspace.ts
   - src/sdk/models/operations/createworkspacetoken.ts
   - src/sdk/models/operations/deletebillingaddon.ts
   - src/sdk/models/operations/deletepublishingtoken.ts
   - src/sdk/models/operations/deleteworkspacetoken.ts
-  - src/sdk/models/operations/generatecodesamplepreview.ts
   - src/sdk/models/operations/generatecodesamplepreviewasync.ts
   - src/sdk/models/operations/getaccesstoken.ts
-  - src/sdk/models/operations/getbillingaddons.ts
   - src/sdk/models/operations/getblob.ts
   - src/sdk/models/operations/getchangesreportsignedurl.ts
   - src/sdk/models/operations/getcodesamplepreviewasync.ts
@@ -497,23 +529,16 @@ generatedFiles:
   - src/sdk/models/operations/getgithubsetupstate.ts
   - src/sdk/models/operations/getlintingreportsignedurl.ts
   - src/sdk/models/operations/getmanifest.ts
-  - src/sdk/models/operations/getnamespaces.ts
   - src/sdk/models/operations/getorganization.ts
-  - src/sdk/models/operations/getorganizations.ts
-  - src/sdk/models/operations/getorganizationusage.ts
-  - src/sdk/models/operations/getpublishingtoken.ts
   - src/sdk/models/operations/getpublishingtokenbyid.ts
   - src/sdk/models/operations/getpublishingtokenpublicmetadata.ts
   - src/sdk/models/operations/getpublishingtokentargetbyid.ts
   - src/sdk/models/operations/getrevisions.ts
   - src/sdk/models/operations/gettags.ts
-  - src/sdk/models/operations/getuser.ts
   - src/sdk/models/operations/getworkspace.ts
   - src/sdk/models/operations/getworkspaceaccess.ts
-  - src/sdk/models/operations/getworkspacebycontext.ts
   - src/sdk/models/operations/getworkspaceeventsbytarget.ts
   - src/sdk/models/operations/getworkspacefeatureflags.ts
-  - src/sdk/models/operations/getworkspaces.ts
   - src/sdk/models/operations/getworkspacesettings.ts
   - src/sdk/models/operations/getworkspacetargets.ts
   - src/sdk/models/operations/getworkspacetargetsdeprecated.ts
@@ -521,7 +546,6 @@ generatedFiles:
   - src/sdk/models/operations/getworkspacetokens.ts
   - src/sdk/models/operations/githubcheckpublishingprs.ts
   - src/sdk/models/operations/githubcheckpublishingsecrets.ts
-  - src/sdk/models/operations/githubconfigurecodesamples.ts
   - src/sdk/models/operations/grantuseraccesstoworkspace.ts
   - src/sdk/models/operations/ignoresubscriptionnamespace.ts
   - src/sdk/models/operations/index.ts
@@ -529,11 +553,9 @@ generatedFiles:
   - src/sdk/models/operations/listremotesources.ts
   - src/sdk/models/operations/posttags.ts
   - src/sdk/models/operations/postworkspaceevents.ts
-  - src/sdk/models/operations/preflight.ts
   - src/sdk/models/operations/revokeuseraccesstoworkspace.ts
   - src/sdk/models/operations/searchworkspaceevents.ts
   - src/sdk/models/operations/setvisibility.ts
-  - src/sdk/models/operations/setworkspacefeatureflags.ts
   - src/sdk/models/operations/suggest.ts
   - src/sdk/models/operations/suggestopenapi.ts
   - src/sdk/models/operations/suggestopenapiregistry.ts
@@ -541,7 +563,6 @@ generatedFiles:
   - src/sdk/models/operations/updateworkspacedetails.ts
   - src/sdk/models/operations/updateworkspacesettings.ts
   - src/sdk/models/operations/uploadreport.ts
-  - src/sdk/models/operations/validateapikey.ts
   - src/sdk/models/shared/accessdetails.ts
   - src/sdk/models/shared/accesstoken.ts
   - src/sdk/models/shared/accounttype.ts
@@ -553,7 +574,6 @@ generatedFiles:
   - src/sdk/models/shared/codesampleschemainput.ts
   - src/sdk/models/shared/codesamplesjobstatus.ts
   - src/sdk/models/shared/diagnostic.ts
-  - src/sdk/models/shared/error.ts
   - src/sdk/models/shared/featureflag.ts
   - src/sdk/models/shared/getnamespacesresponse.ts
   - src/sdk/models/shared/getrevisionsresponse.ts

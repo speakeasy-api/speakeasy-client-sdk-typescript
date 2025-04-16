@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetManifestRequest = {
   organizationSlug: string;
@@ -18,8 +17,6 @@ export type GetManifestRequest = {
    */
   revisionReference: string;
 };
-
-export type GetManifestResponse = shared.ErrorT | shared.Manifest;
 
 /** @internal */
 export const GetManifestRequest$inboundSchema: z.ZodType<
@@ -95,55 +92,5 @@ export function getManifestRequestFromJSON(
     jsonString,
     (x) => GetManifestRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetManifestRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetManifestResponse$inboundSchema: z.ZodType<
-  GetManifestResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([shared.ErrorT$inboundSchema, shared.Manifest$inboundSchema]);
-
-/** @internal */
-export type GetManifestResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.Manifest$Outbound;
-
-/** @internal */
-export const GetManifestResponse$outboundSchema: z.ZodType<
-  GetManifestResponse$Outbound,
-  z.ZodTypeDef,
-  GetManifestResponse
-> = z.union([shared.ErrorT$outboundSchema, shared.Manifest$outboundSchema]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetManifestResponse$ {
-  /** @deprecated use `GetManifestResponse$inboundSchema` instead. */
-  export const inboundSchema = GetManifestResponse$inboundSchema;
-  /** @deprecated use `GetManifestResponse$outboundSchema` instead. */
-  export const outboundSchema = GetManifestResponse$outboundSchema;
-  /** @deprecated use `GetManifestResponse$Outbound` instead. */
-  export type Outbound = GetManifestResponse$Outbound;
-}
-
-export function getManifestResponseToJSON(
-  getManifestResponse: GetManifestResponse,
-): string {
-  return JSON.stringify(
-    GetManifestResponse$outboundSchema.parse(getManifestResponse),
-  );
-}
-
-export function getManifestResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetManifestResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetManifestResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetManifestResponse' from JSON`,
   );
 }

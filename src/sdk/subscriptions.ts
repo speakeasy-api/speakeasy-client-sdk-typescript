@@ -6,7 +6,6 @@ import { subscriptionsActivateSubscriptionNamespace } from "../funcs/subscriptio
 import { subscriptionsIgnoreSubscriptionNamespace } from "../funcs/subscriptionsIgnoreSubscriptionNamespace.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
-import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class Subscriptions extends ClientSDK {
@@ -16,7 +15,7 @@ export class Subscriptions extends ClientSDK {
   async activateSubscriptionNamespace(
     request: operations.ActivateSubscriptionNamespaceRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(subscriptionsActivateSubscriptionNamespace(
       this,
       request,
@@ -30,7 +29,7 @@ export class Subscriptions extends ClientSDK {
   async ignoreSubscriptionNamespace(
     request: operations.IgnoreSubscriptionNamespaceRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(subscriptionsIgnoreSubscriptionNamespace(
       this,
       request,

@@ -17,9 +17,9 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
 import { SDKError } from "../sdk/models/errors/sdkerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
-import * as operations from "../sdk/models/operations/index.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { APICall, APIPromise } from "../sdk/types/async.js";
 import { Result } from "../sdk/types/fp.js";
@@ -33,7 +33,8 @@ export function organizationsCreateBillingAddOns(
   options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.CreateBillingAddOnsResponse,
+    shared.OrganizationBillingAddOnResponse,
+    | errors.ErrorT
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -57,7 +58,8 @@ async function $do(
 ): Promise<
   [
     Result<
-      operations.CreateBillingAddOnsResponse,
+      shared.OrganizationBillingAddOnResponse,
+      | errors.ErrorT
       | SDKError
       | SDKValidationError
       | UnexpectedClientError
@@ -121,7 +123,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    errorCodes: ["4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -130,8 +132,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
-    operations.CreateBillingAddOnsResponse,
+    shared.OrganizationBillingAddOnResponse,
+    | errors.ErrorT
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -140,9 +147,10 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json(200, operations.CreateBillingAddOnsResponse$inboundSchema),
-    M.json("5XX", operations.CreateBillingAddOnsResponse$inboundSchema),
-  )(response);
+    M.json(200, shared.OrganizationBillingAddOnResponse$inboundSchema),
+    M.fail("4XX"),
+    M.jsonErr("5XX", errors.ErrorT$inboundSchema),
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

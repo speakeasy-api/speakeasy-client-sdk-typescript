@@ -25,7 +25,7 @@ export class Organizations extends ClientSDK {
   async create(
     request: shared.Organization,
     options?: RequestOptions,
-  ): Promise<operations.CreateOrganizationResponse> {
+  ): Promise<shared.Organization> {
     return unwrapAsync(organizationsCreate(
       this,
       request,
@@ -39,7 +39,7 @@ export class Organizations extends ClientSDK {
   async createBillingAddOns(
     request: shared.OrganizationBillingAddOnRequest,
     options?: RequestOptions,
-  ): Promise<operations.CreateBillingAddOnsResponse> {
+  ): Promise<shared.OrganizationBillingAddOnResponse> {
     return unwrapAsync(organizationsCreateBillingAddOns(
       this,
       request,
@@ -55,7 +55,7 @@ export class Organizations extends ClientSDK {
    */
   async createFreeTrial(
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(organizationsCreateFreeTrial(
       this,
       options,
@@ -68,7 +68,7 @@ export class Organizations extends ClientSDK {
   async deleteBillingAddOn(
     request: operations.DeleteBillingAddOnRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(organizationsDeleteBillingAddOn(
       this,
       request,
@@ -85,7 +85,7 @@ export class Organizations extends ClientSDK {
   async get(
     request: operations.GetOrganizationRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetOrganizationResponse> {
+  ): Promise<shared.Organization> {
     return unwrapAsync(organizationsGet(
       this,
       request,
@@ -101,7 +101,7 @@ export class Organizations extends ClientSDK {
    */
   async getAll(
     options?: RequestOptions,
-  ): Promise<operations.GetOrganizationsResponse> {
+  ): Promise<Array<shared.Organization>> {
     return unwrapAsync(organizationsGetAll(
       this,
       options,
@@ -113,7 +113,7 @@ export class Organizations extends ClientSDK {
    */
   async getBillingAddOns(
     options?: RequestOptions,
-  ): Promise<operations.GetBillingAddOnsResponse> {
+  ): Promise<shared.OrganizationBillingAddOnResponse> {
     return unwrapAsync(organizationsGetBillingAddOns(
       this,
       options,
@@ -128,7 +128,7 @@ export class Organizations extends ClientSDK {
    */
   async getUsage(
     options?: RequestOptions,
-  ): Promise<operations.GetOrganizationUsageResponse> {
+  ): Promise<shared.OrganizationUsageResponse> {
     return unwrapAsync(organizationsGetUsage(
       this,
       options,

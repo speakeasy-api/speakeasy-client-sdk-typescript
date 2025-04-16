@@ -22,7 +22,7 @@ export class Github extends ClientSDK {
   async checkAccess(
     request: operations.CheckGithubAccessRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(githubCheckAccess(
       this,
       request,
@@ -33,7 +33,7 @@ export class Github extends ClientSDK {
   async checkPublishingPRs(
     request: operations.GithubCheckPublishingPRsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GithubCheckPublishingPRsResponse> {
+  ): Promise<shared.GithubPublishingPRResponse> {
     return unwrapAsync(githubCheckPublishingPRs(
       this,
       request,
@@ -44,7 +44,7 @@ export class Github extends ClientSDK {
   async checkPublishingSecrets(
     request: operations.GithubCheckPublishingSecretsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GithubCheckPublishingSecretsResponse> {
+  ): Promise<shared.GithubMissingPublishingSecretsResponse> {
     return unwrapAsync(githubCheckPublishingSecrets(
       this,
       request,
@@ -55,7 +55,7 @@ export class Github extends ClientSDK {
   async configureCodeSamples(
     request: shared.GithubConfigureCodeSamplesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GithubConfigureCodeSamplesResponse> {
+  ): Promise<shared.GithubConfigureCodeSamplesResponse> {
     return unwrapAsync(githubConfigureCodeSamples(
       this,
       request,
@@ -66,7 +66,7 @@ export class Github extends ClientSDK {
   async configureMintlifyRepo(
     request: shared.GithubConfigureMintlifyRepoRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(githubConfigureMintlifyRepo(
       this,
       request,
@@ -77,7 +77,7 @@ export class Github extends ClientSDK {
   async configureTarget(
     request: shared.GithubConfigureTargetRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(githubConfigureTarget(
       this,
       request,
@@ -88,7 +88,7 @@ export class Github extends ClientSDK {
   async getAction(
     request: operations.GetGitHubActionRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetGitHubActionResponse> {
+  ): Promise<shared.GithubGetActionResponse> {
     return unwrapAsync(githubGetAction(
       this,
       request,
@@ -99,7 +99,7 @@ export class Github extends ClientSDK {
   async getSetup(
     request: operations.GetGithubSetupStateRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetGithubSetupStateResponse> {
+  ): Promise<shared.GithubSetupStateResponse> {
     return unwrapAsync(githubGetSetup(
       this,
       request,
@@ -110,7 +110,7 @@ export class Github extends ClientSDK {
   async linkGithub(
     request: operations.LinkGithubAccessRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(githubLinkGithub(
       this,
       request,
@@ -121,7 +121,7 @@ export class Github extends ClientSDK {
   async storePublishingSecrets(
     request: shared.GithubStorePublishingSecretsRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(githubStorePublishingSecrets(
       this,
       request,
@@ -132,7 +132,7 @@ export class Github extends ClientSDK {
   async triggerAction(
     request: shared.GithubTriggerActionRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(githubTriggerAction(
       this,
       request,

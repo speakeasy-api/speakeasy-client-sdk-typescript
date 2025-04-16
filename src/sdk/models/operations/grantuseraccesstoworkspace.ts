@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GrantUserAccessToWorkspaceGlobals = {
   workspaceId?: string | undefined;
@@ -23,10 +22,6 @@ export type GrantUserAccessToWorkspaceRequest = {
    */
   email: string;
 };
-
-export type GrantUserAccessToWorkspaceResponse =
-  | shared.ErrorT
-  | shared.WorkspaceInviteResponse;
 
 /** @internal */
 export const GrantUserAccessToWorkspaceGlobals$inboundSchema: z.ZodType<
@@ -158,65 +153,5 @@ export function grantUserAccessToWorkspaceRequestFromJSON(
     jsonString,
     (x) => GrantUserAccessToWorkspaceRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GrantUserAccessToWorkspaceRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GrantUserAccessToWorkspaceResponse$inboundSchema: z.ZodType<
-  GrantUserAccessToWorkspaceResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  shared.WorkspaceInviteResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GrantUserAccessToWorkspaceResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.WorkspaceInviteResponse$Outbound;
-
-/** @internal */
-export const GrantUserAccessToWorkspaceResponse$outboundSchema: z.ZodType<
-  GrantUserAccessToWorkspaceResponse$Outbound,
-  z.ZodTypeDef,
-  GrantUserAccessToWorkspaceResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  shared.WorkspaceInviteResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GrantUserAccessToWorkspaceResponse$ {
-  /** @deprecated use `GrantUserAccessToWorkspaceResponse$inboundSchema` instead. */
-  export const inboundSchema = GrantUserAccessToWorkspaceResponse$inboundSchema;
-  /** @deprecated use `GrantUserAccessToWorkspaceResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GrantUserAccessToWorkspaceResponse$outboundSchema;
-  /** @deprecated use `GrantUserAccessToWorkspaceResponse$Outbound` instead. */
-  export type Outbound = GrantUserAccessToWorkspaceResponse$Outbound;
-}
-
-export function grantUserAccessToWorkspaceResponseToJSON(
-  grantUserAccessToWorkspaceResponse: GrantUserAccessToWorkspaceResponse,
-): string {
-  return JSON.stringify(
-    GrantUserAccessToWorkspaceResponse$outboundSchema.parse(
-      grantUserAccessToWorkspaceResponse,
-    ),
-  );
-}
-
-export function grantUserAccessToWorkspaceResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GrantUserAccessToWorkspaceResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GrantUserAccessToWorkspaceResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GrantUserAccessToWorkspaceResponse' from JSON`,
   );
 }

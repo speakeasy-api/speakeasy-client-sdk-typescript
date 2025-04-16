@@ -69,6 +69,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useAuthGetAccess,
+  useAuthGetAccessSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchAuthGetAccess,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAuthGetAccess,
+  invalidateAllAuthGetAccess,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/authGetAccess.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -141,6 +169,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useAuthGetAccessToken,
+  useAuthGetAccessTokenSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchAuthGetAccessToken,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAuthGetAccessToken,
+  invalidateAllAuthGetAccessToken,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/authGetAccessToken.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -152,13 +208,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetAccessTokenResponse](../../sdk/models/operations/getaccesstokenresponse.md)\>**
+**Promise\<[shared.AccessToken](../../sdk/models/shared/accesstoken.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getUser
 
@@ -217,6 +274,33 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useAuthGetUser,
+  useAuthGetUserSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchAuthGetUser,
+  
+  // Utility to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAllAuthGetUser,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/authGetUser.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -227,13 +311,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetUserResponse](../../sdk/models/operations/getuserresponse.md)\>**
+**Promise\<[shared.User](../../sdk/models/shared/user.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## validateApiKey
 
@@ -292,6 +377,33 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useAuthValidateApiKey,
+  useAuthValidateApiKeySuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchAuthValidateApiKey,
+  
+  // Utility to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAllAuthValidateApiKey,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/authValidateApiKey.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -302,10 +414,11 @@ run();
 
 ### Response
 
-**Promise\<[operations.ValidateApiKeyResponse](../../sdk/models/operations/validateapikeyresponse.md)\>**
+**Promise\<[shared.ApiKeyDetails](../../sdk/models/shared/apikeydetails.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |

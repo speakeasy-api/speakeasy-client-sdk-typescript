@@ -3,14 +3,8 @@
  */
 
 import { artifactsCreateRemoteSource } from "../funcs/artifactsCreateRemoteSource.js";
-import {
-  artifactsGetBlob,
-  GetBlobAcceptEnum,
-} from "../funcs/artifactsGetBlob.js";
-import {
-  artifactsGetManifest,
-  GetManifestAcceptEnum,
-} from "../funcs/artifactsGetManifest.js";
+import { artifactsGetBlob } from "../funcs/artifactsGetBlob.js";
+import { artifactsGetManifest } from "../funcs/artifactsGetManifest.js";
 import { artifactsGetNamespaces } from "../funcs/artifactsGetNamespaces.js";
 import { artifactsGetRevisions } from "../funcs/artifactsGetRevisions.js";
 import { artifactsGetTags } from "../funcs/artifactsGetTags.js";
@@ -24,10 +18,6 @@ import * as operations from "./models/operations/index.js";
 import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
-export { GetBlobAcceptEnum } from "../funcs/artifactsGetBlob.js";
-
-export { GetManifestAcceptEnum } from "../funcs/artifactsGetManifest.js";
-
 export class Artifacts extends ClientSDK {
   /**
    * Configure a new remote source
@@ -35,7 +25,7 @@ export class Artifacts extends ClientSDK {
   async createRemoteSource(
     request?: shared.RemoteSource | undefined,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(artifactsCreateRemoteSource(
       this,
       request,
@@ -48,8 +38,8 @@ export class Artifacts extends ClientSDK {
    */
   async getBlob(
     request: operations.GetBlobRequest,
-    options?: RequestOptions & { acceptHeaderOverride?: GetBlobAcceptEnum },
-  ): Promise<operations.GetBlobResponse> {
+    options?: RequestOptions,
+  ): Promise<ReadableStream<Uint8Array>> {
     return unwrapAsync(artifactsGetBlob(
       this,
       request,
@@ -62,8 +52,8 @@ export class Artifacts extends ClientSDK {
    */
   async getManifest(
     request: operations.GetManifestRequest,
-    options?: RequestOptions & { acceptHeaderOverride?: GetManifestAcceptEnum },
-  ): Promise<operations.GetManifestResponse> {
+    options?: RequestOptions,
+  ): Promise<shared.Manifest> {
     return unwrapAsync(artifactsGetManifest(
       this,
       request,
@@ -76,7 +66,7 @@ export class Artifacts extends ClientSDK {
    */
   async getNamespaces(
     options?: RequestOptions,
-  ): Promise<operations.GetNamespacesResponse> {
+  ): Promise<shared.GetNamespacesResponse> {
     return unwrapAsync(artifactsGetNamespaces(
       this,
       options,
@@ -86,7 +76,7 @@ export class Artifacts extends ClientSDK {
   async getRevisions(
     request: operations.GetRevisionsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetRevisionsResponse> {
+  ): Promise<shared.GetRevisionsResponse> {
     return unwrapAsync(artifactsGetRevisions(
       this,
       request,
@@ -97,7 +87,7 @@ export class Artifacts extends ClientSDK {
   async getTags(
     request: operations.GetTagsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetTagsResponse> {
+  ): Promise<shared.GetTagsResponse> {
     return unwrapAsync(artifactsGetTags(
       this,
       request,
@@ -111,7 +101,7 @@ export class Artifacts extends ClientSDK {
   async listRemoteSources(
     request: operations.ListRemoteSourcesRequest,
     options?: RequestOptions,
-  ): Promise<operations.ListRemoteSourcesResponse> {
+  ): Promise<shared.RemoteSource> {
     return unwrapAsync(artifactsListRemoteSources(
       this,
       request,
@@ -125,7 +115,7 @@ export class Artifacts extends ClientSDK {
   async postTags(
     request: operations.PostTagsRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(artifactsPostTags(
       this,
       request,
@@ -139,7 +129,7 @@ export class Artifacts extends ClientSDK {
   async preflight(
     request?: shared.PreflightRequest | undefined,
     options?: RequestOptions,
-  ): Promise<operations.PreflightResponse> {
+  ): Promise<shared.PreflightToken> {
     return unwrapAsync(artifactsPreflight(
       this,
       request,
@@ -153,7 +143,7 @@ export class Artifacts extends ClientSDK {
   async setArchived(
     request: operations.ArchiveNamespaceRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(artifactsSetArchived(
       this,
       request,
@@ -167,7 +157,7 @@ export class Artifacts extends ClientSDK {
   async setVisibility(
     request: operations.SetVisibilityRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(artifactsSetVisibility(
       this,
       request,

@@ -7,13 +7,10 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetTagsRequest = {
   namespaceName: string;
 };
-
-export type GetTagsResponse = shared.GetTagsResponse | shared.ErrorT;
 
 /** @internal */
 export const GetTagsRequest$inboundSchema: z.ZodType<
@@ -70,59 +67,5 @@ export function getTagsRequestFromJSON(
     jsonString,
     (x) => GetTagsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetTagsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetTagsResponse$inboundSchema: z.ZodType<
-  GetTagsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.GetTagsResponse$inboundSchema,
-  shared.ErrorT$inboundSchema,
-]);
-
-/** @internal */
-export type GetTagsResponse$Outbound =
-  | shared.GetTagsResponse$Outbound
-  | shared.ErrorT$Outbound;
-
-/** @internal */
-export const GetTagsResponse$outboundSchema: z.ZodType<
-  GetTagsResponse$Outbound,
-  z.ZodTypeDef,
-  GetTagsResponse
-> = z.union([
-  shared.GetTagsResponse$outboundSchema,
-  shared.ErrorT$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetTagsResponse$ {
-  /** @deprecated use `GetTagsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetTagsResponse$inboundSchema;
-  /** @deprecated use `GetTagsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetTagsResponse$outboundSchema;
-  /** @deprecated use `GetTagsResponse$Outbound` instead. */
-  export type Outbound = GetTagsResponse$Outbound;
-}
-
-export function getTagsResponseToJSON(
-  getTagsResponse: GetTagsResponse,
-): string {
-  return JSON.stringify(GetTagsResponse$outboundSchema.parse(getTagsResponse));
-}
-
-export function getTagsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetTagsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetTagsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetTagsResponse' from JSON`,
   );
 }
