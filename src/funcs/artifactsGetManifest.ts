@@ -17,17 +17,13 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
 import { SDKError } from "../sdk/models/errors/sdkerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
 import * as operations from "../sdk/models/operations/index.js";
+import * as shared from "../sdk/models/shared/index.js";
 import { APICall, APIPromise } from "../sdk/types/async.js";
 import { Result } from "../sdk/types/fp.js";
-
-export enum GetManifestAcceptEnum {
-  applicationJson = "application/json",
-  applicationVndOciImageManifestV1PlusJson =
-    "application/vnd.oci.image.manifest.v1+json",
-}
 
 /**
  * Get manifest for a particular reference
@@ -35,10 +31,11 @@ export enum GetManifestAcceptEnum {
 export function artifactsGetManifest(
   client: SpeakeasyCore,
   request: operations.GetManifestRequest,
-  options?: RequestOptions & { acceptHeaderOverride?: GetManifestAcceptEnum },
+  options?: RequestOptions,
 ): APIPromise<
   Result<
-    operations.GetManifestResponse,
+    shared.Manifest,
+    | errors.ErrorT
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -58,11 +55,12 @@ export function artifactsGetManifest(
 async function $do(
   client: SpeakeasyCore,
   request: operations.GetManifestRequest,
-  options?: RequestOptions & { acceptHeaderOverride?: GetManifestAcceptEnum },
+  options?: RequestOptions,
 ): Promise<
   [
     Result<
-      operations.GetManifestResponse,
+      shared.Manifest,
+      | errors.ErrorT
       | SDKError
       | SDKValidationError
       | UnexpectedClientError
@@ -111,8 +109,7 @@ async function $do(
   )(pathParams);
 
   const headers = new Headers(compactMap({
-    Accept: options?.acceptHeaderOverride
-      || "application/json;q=1, application/vnd.oci.image.manifest.v1+json;q=0",
+    Accept: "application/vnd.oci.image.manifest.v1+json",
   }));
 
   const securityInput = await extractSecurity(client._options.security);
@@ -148,7 +145,7 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: [],
+    errorCodes: ["4XX", "5XX"],
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
@@ -157,8 +154,13 @@ async function $do(
   }
   const response = doResult.value;
 
+  const responseFields = {
+    HttpMeta: { Response: response, Request: req },
+  };
+
   const [result] = await M.match<
-    operations.GetManifestResponse,
+    shared.Manifest,
+    | errors.ErrorT
     | SDKError
     | SDKValidationError
     | UnexpectedClientError
@@ -167,11 +169,12 @@ async function $do(
     | RequestTimeoutError
     | ConnectionError
   >(
-    M.json("2XX", operations.GetManifestResponse$inboundSchema, {
+    M.json("2XX", shared.Manifest$inboundSchema, {
       ctype: "application/vnd.oci.image.manifest.v1+json",
     }),
-    M.json("4XX", operations.GetManifestResponse$inboundSchema),
-  )(response);
+    M.jsonErr("4XX", errors.ErrorT$inboundSchema),
+    M.fail("5XX"),
+  )(response, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

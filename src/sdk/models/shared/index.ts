@@ -13,7 +13,6 @@ export * from "./clievent.js";
 export * from "./codesampleschemainput.js";
 export * from "./codesamplesjobstatus.js";
 export * from "./diagnostic.js";
-export * from "./error.js";
 export * from "./featureflag.js";
 export * from "./getnamespacesresponse.js";
 export * from "./getrevisionsresponse.js";

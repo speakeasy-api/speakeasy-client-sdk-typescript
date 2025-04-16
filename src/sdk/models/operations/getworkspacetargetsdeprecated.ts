@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetWorkspaceTargetsDeprecatedGlobals = {
   workspaceId?: string | undefined;
@@ -23,10 +22,6 @@ export type GetWorkspaceTargetsDeprecatedRequest = {
    */
   afterLastEventCreatedAt?: Date | undefined;
 };
-
-export type GetWorkspaceTargetsDeprecatedResponse =
-  | shared.ErrorT
-  | Array<shared.TargetSDK>;
 
 /** @internal */
 export const GetWorkspaceTargetsDeprecatedGlobals$inboundSchema: z.ZodType<
@@ -166,66 +161,5 @@ export function getWorkspaceTargetsDeprecatedRequestFromJSON(
     (x) =>
       GetWorkspaceTargetsDeprecatedRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetWorkspaceTargetsDeprecatedRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetWorkspaceTargetsDeprecatedResponse$inboundSchema: z.ZodType<
-  GetWorkspaceTargetsDeprecatedResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  z.array(shared.TargetSDK$inboundSchema),
-]);
-
-/** @internal */
-export type GetWorkspaceTargetsDeprecatedResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | Array<shared.TargetSDK$Outbound>;
-
-/** @internal */
-export const GetWorkspaceTargetsDeprecatedResponse$outboundSchema: z.ZodType<
-  GetWorkspaceTargetsDeprecatedResponse$Outbound,
-  z.ZodTypeDef,
-  GetWorkspaceTargetsDeprecatedResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  z.array(shared.TargetSDK$outboundSchema),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetWorkspaceTargetsDeprecatedResponse$ {
-  /** @deprecated use `GetWorkspaceTargetsDeprecatedResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetWorkspaceTargetsDeprecatedResponse$inboundSchema;
-  /** @deprecated use `GetWorkspaceTargetsDeprecatedResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetWorkspaceTargetsDeprecatedResponse$outboundSchema;
-  /** @deprecated use `GetWorkspaceTargetsDeprecatedResponse$Outbound` instead. */
-  export type Outbound = GetWorkspaceTargetsDeprecatedResponse$Outbound;
-}
-
-export function getWorkspaceTargetsDeprecatedResponseToJSON(
-  getWorkspaceTargetsDeprecatedResponse: GetWorkspaceTargetsDeprecatedResponse,
-): string {
-  return JSON.stringify(
-    GetWorkspaceTargetsDeprecatedResponse$outboundSchema.parse(
-      getWorkspaceTargetsDeprecatedResponse,
-    ),
-  );
-}
-
-export function getWorkspaceTargetsDeprecatedResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetWorkspaceTargetsDeprecatedResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetWorkspaceTargetsDeprecatedResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetWorkspaceTargetsDeprecatedResponse' from JSON`,
   );
 }

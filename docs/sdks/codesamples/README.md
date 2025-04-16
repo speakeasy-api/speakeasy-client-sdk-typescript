@@ -77,6 +77,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCodeSamplesGenerateCodeSamplePreviewMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/codeSamplesGenerateCodeSamplePreview.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -88,13 +105,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GenerateCodeSamplePreviewResponse](../../sdk/models/operations/generatecodesamplepreviewresponse.md)\>**
+**Promise\<[shared.UsageSnippets](../../sdk/models/shared/usagesnippets.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.ErrorT    | 5XX              | application/json |
 
 ## generateCodeSamplePreviewAsync
 
@@ -161,6 +179,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useCodeSamplesGenerateCodeSamplePreviewAsyncMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/codeSamplesGenerateCodeSamplePreviewAsync.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -172,13 +207,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GenerateCodeSamplePreviewAsyncResponse](../../sdk/models/operations/generatecodesamplepreviewasyncresponse.md)\>**
+**Promise\<[operations.GenerateCodeSamplePreviewAsyncResponseBody](../../sdk/models/operations/generatecodesamplepreviewasyncresponsebody.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.ErrorT    | 5XX              | application/json |
 
 ## get
 
@@ -267,6 +303,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useCodeSamplesGet,
+  useCodeSamplesGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchCodeSamplesGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateCodeSamplesGet,
+  invalidateAllCodeSamplesGet,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/codeSamplesGet.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -278,13 +342,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetCodeSamplesResponse](../../sdk/models/operations/getcodesamplesresponse.md)\>**
+**Promise\<[shared.UsageSnippets](../../sdk/models/shared/usagesnippets.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getCodeSamplePreviewAsync
 
@@ -347,6 +412,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useCodeSamplesGetCodeSamplePreviewAsync,
+  useCodeSamplesGetCodeSamplePreviewAsyncSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchCodeSamplesGetCodeSamplePreviewAsync,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateCodeSamplesGetCodeSamplePreviewAsync,
+  invalidateAllCodeSamplesGetCodeSamplePreviewAsync,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/codeSamplesGetCodeSamplePreviewAsync.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -362,6 +455,7 @@ run();
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.ErrorT    | 5XX              | application/json |

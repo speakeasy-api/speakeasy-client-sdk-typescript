@@ -7,7 +7,6 @@ import { safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 /**
  * The format of the OpenAPI specification.
@@ -39,10 +38,6 @@ export type CreateSchemaStoreItemRequestBody = {
    */
   spec: string;
 };
-
-export type CreateSchemaStoreItemResponse =
-  | shared.ErrorT
-  | shared.SchemaStoreItem;
 
 /** @internal */
 export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
@@ -125,63 +120,5 @@ export function createSchemaStoreItemRequestBodyFromJSON(
     jsonString,
     (x) => CreateSchemaStoreItemRequestBody$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'CreateSchemaStoreItemRequestBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const CreateSchemaStoreItemResponse$inboundSchema: z.ZodType<
-  CreateSchemaStoreItemResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  shared.SchemaStoreItem$inboundSchema,
-]);
-
-/** @internal */
-export type CreateSchemaStoreItemResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.SchemaStoreItem$Outbound;
-
-/** @internal */
-export const CreateSchemaStoreItemResponse$outboundSchema: z.ZodType<
-  CreateSchemaStoreItemResponse$Outbound,
-  z.ZodTypeDef,
-  CreateSchemaStoreItemResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  shared.SchemaStoreItem$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace CreateSchemaStoreItemResponse$ {
-  /** @deprecated use `CreateSchemaStoreItemResponse$inboundSchema` instead. */
-  export const inboundSchema = CreateSchemaStoreItemResponse$inboundSchema;
-  /** @deprecated use `CreateSchemaStoreItemResponse$outboundSchema` instead. */
-  export const outboundSchema = CreateSchemaStoreItemResponse$outboundSchema;
-  /** @deprecated use `CreateSchemaStoreItemResponse$Outbound` instead. */
-  export type Outbound = CreateSchemaStoreItemResponse$Outbound;
-}
-
-export function createSchemaStoreItemResponseToJSON(
-  createSchemaStoreItemResponse: CreateSchemaStoreItemResponse,
-): string {
-  return JSON.stringify(
-    CreateSchemaStoreItemResponse$outboundSchema.parse(
-      createSchemaStoreItemResponse,
-    ),
-  );
-}
-
-export function createSchemaStoreItemResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<CreateSchemaStoreItemResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => CreateSchemaStoreItemResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'CreateSchemaStoreItemResponse' from JSON`,
   );
 }

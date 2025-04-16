@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetBlobRequest = {
   organizationSlug: string;
@@ -15,8 +14,6 @@ export type GetBlobRequest = {
   namespaceName: string;
   digest: string;
 };
-
-export type GetBlobResponse = shared.ErrorT | ReadableStream<Uint8Array>;
 
 /** @internal */
 export const GetBlobRequest$inboundSchema: z.ZodType<
@@ -86,59 +83,5 @@ export function getBlobRequestFromJSON(
     jsonString,
     (x) => GetBlobRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetBlobRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetBlobResponse$inboundSchema: z.ZodType<
-  GetBlobResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  z.instanceof(ReadableStream<Uint8Array>),
-]);
-
-/** @internal */
-export type GetBlobResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | ReadableStream<Uint8Array>;
-
-/** @internal */
-export const GetBlobResponse$outboundSchema: z.ZodType<
-  GetBlobResponse$Outbound,
-  z.ZodTypeDef,
-  GetBlobResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  z.instanceof(ReadableStream<Uint8Array>),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetBlobResponse$ {
-  /** @deprecated use `GetBlobResponse$inboundSchema` instead. */
-  export const inboundSchema = GetBlobResponse$inboundSchema;
-  /** @deprecated use `GetBlobResponse$outboundSchema` instead. */
-  export const outboundSchema = GetBlobResponse$outboundSchema;
-  /** @deprecated use `GetBlobResponse$Outbound` instead. */
-  export type Outbound = GetBlobResponse$Outbound;
-}
-
-export function getBlobResponseToJSON(
-  getBlobResponse: GetBlobResponse,
-): string {
-  return JSON.stringify(GetBlobResponse$outboundSchema.parse(getBlobResponse));
-}
-
-export function getBlobResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetBlobResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetBlobResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetBlobResponse' from JSON`,
   );
 }

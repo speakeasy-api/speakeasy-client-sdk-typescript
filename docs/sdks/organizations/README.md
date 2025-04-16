@@ -91,6 +91,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useOrganizationsCreateMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsCreate.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -102,13 +119,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateOrganizationResponse](../../sdk/models/operations/createorganizationresponse.md)\>**
+**Promise\<[shared.Organization](../../sdk/models/shared/organization.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## createBillingAddOns
 
@@ -179,6 +197,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useOrganizationsCreateBillingAddOnsMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsCreateBillingAddOns.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -190,13 +225,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateBillingAddOnsResponse](../../sdk/models/operations/createbillingaddonsresponse.md)\>**
+**Promise\<[shared.OrganizationBillingAddOnResponse](../../sdk/models/shared/organizationbillingaddonresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 5XX              | application/json |
+| errors.SDKError  | 4XX              | \*/\*            |
 
 ## createFreeTrial
 
@@ -214,10 +250,9 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.organizations.createFreeTrial();
+  await speakeasy.organizations.createFreeTrial();
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -248,11 +283,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useOrganizationsCreateFreeTrialMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsCreateFreeTrial.js";
 ```
 
 ### Parameters
@@ -265,13 +316,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## deleteBillingAddOn
 
@@ -289,12 +341,11 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.organizations.deleteBillingAddOn({
+  await speakeasy.organizations.deleteBillingAddOn({
     addOn: "custom_code_regions",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -327,11 +378,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useOrganizationsDeleteBillingAddOnMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsDeleteBillingAddOn.js";
 ```
 
 ### Parameters
@@ -345,13 +412,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 5XX              | application/json |
+| errors.SDKError  | 4XX              | \*/\*            |
 
 ## get
 
@@ -414,6 +482,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useOrganizationsGet,
+  useOrganizationsGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchOrganizationsGet,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateOrganizationsGet,
+  invalidateAllOrganizationsGet,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsGet.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -425,13 +521,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetOrganizationResponse](../../sdk/models/operations/getorganizationresponse.md)\>**
+**Promise\<[shared.Organization](../../sdk/models/shared/organization.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getAll
 
@@ -490,6 +587,33 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useOrganizationsGetAll,
+  useOrganizationsGetAllSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchOrganizationsGetAll,
+  
+  // Utility to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAllOrganizationsGetAll,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsGetAll.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -500,13 +624,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetOrganizationsResponse](../../sdk/models/operations/getorganizationsresponse.md)\>**
+**Promise\<[shared.Organization[]](../../models/.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getBillingAddOns
 
@@ -565,6 +690,33 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useOrganizationsGetBillingAddOns,
+  useOrganizationsGetBillingAddOnsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchOrganizationsGetBillingAddOns,
+  
+  // Utility to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAllOrganizationsGetBillingAddOns,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsGetBillingAddOns.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -575,13 +727,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetBillingAddOnsResponse](../../sdk/models/operations/getbillingaddonsresponse.md)\>**
+**Promise\<[shared.OrganizationBillingAddOnResponse](../../sdk/models/shared/organizationbillingaddonresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 5XX              | application/json |
+| errors.SDKError  | 4XX              | \*/\*            |
 
 ## getUsage
 
@@ -640,6 +793,33 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useOrganizationsGetUsage,
+  useOrganizationsGetUsageSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchOrganizationsGetUsage,
+  
+  // Utility to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAllOrganizationsGetUsage,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsGetUsage.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -650,10 +830,11 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetOrganizationUsageResponse](../../sdk/models/operations/getorganizationusageresponse.md)\>**
+**Promise\<[shared.OrganizationUsageResponse](../../sdk/models/shared/organizationusageresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |

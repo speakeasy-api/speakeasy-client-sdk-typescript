@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetWorkspaceFeatureFlagsGlobals = {
   workspaceId?: string | undefined;
@@ -19,10 +18,6 @@ export type GetWorkspaceFeatureFlagsRequest = {
    */
   workspaceId?: string | undefined;
 };
-
-export type GetWorkspaceFeatureFlagsResponse =
-  | shared.WorkspaceFeatureFlagResponse
-  | shared.ErrorT;
 
 /** @internal */
 export const GetWorkspaceFeatureFlagsGlobals$inboundSchema: z.ZodType<
@@ -149,63 +144,5 @@ export function getWorkspaceFeatureFlagsRequestFromJSON(
     jsonString,
     (x) => GetWorkspaceFeatureFlagsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetWorkspaceFeatureFlagsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetWorkspaceFeatureFlagsResponse$inboundSchema: z.ZodType<
-  GetWorkspaceFeatureFlagsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.WorkspaceFeatureFlagResponse$inboundSchema,
-  shared.ErrorT$inboundSchema,
-]);
-
-/** @internal */
-export type GetWorkspaceFeatureFlagsResponse$Outbound =
-  | shared.WorkspaceFeatureFlagResponse$Outbound
-  | shared.ErrorT$Outbound;
-
-/** @internal */
-export const GetWorkspaceFeatureFlagsResponse$outboundSchema: z.ZodType<
-  GetWorkspaceFeatureFlagsResponse$Outbound,
-  z.ZodTypeDef,
-  GetWorkspaceFeatureFlagsResponse
-> = z.union([
-  shared.WorkspaceFeatureFlagResponse$outboundSchema,
-  shared.ErrorT$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetWorkspaceFeatureFlagsResponse$ {
-  /** @deprecated use `GetWorkspaceFeatureFlagsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetWorkspaceFeatureFlagsResponse$inboundSchema;
-  /** @deprecated use `GetWorkspaceFeatureFlagsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetWorkspaceFeatureFlagsResponse$outboundSchema;
-  /** @deprecated use `GetWorkspaceFeatureFlagsResponse$Outbound` instead. */
-  export type Outbound = GetWorkspaceFeatureFlagsResponse$Outbound;
-}
-
-export function getWorkspaceFeatureFlagsResponseToJSON(
-  getWorkspaceFeatureFlagsResponse: GetWorkspaceFeatureFlagsResponse,
-): string {
-  return JSON.stringify(
-    GetWorkspaceFeatureFlagsResponse$outboundSchema.parse(
-      getWorkspaceFeatureFlagsResponse,
-    ),
-  );
-}
-
-export function getWorkspaceFeatureFlagsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetWorkspaceFeatureFlagsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetWorkspaceFeatureFlagsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetWorkspaceFeatureFlagsResponse' from JSON`,
   );
 }

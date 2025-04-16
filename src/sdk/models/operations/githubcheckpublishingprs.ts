@@ -7,17 +7,12 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GithubCheckPublishingPRsRequest = {
   generateGenLockId: string;
   org: string;
   repo: string;
 };
-
-export type GithubCheckPublishingPRsResponse =
-  | shared.ErrorT
-  | shared.GithubPublishingPRResponse;
 
 /** @internal */
 export const GithubCheckPublishingPRsRequest$inboundSchema: z.ZodType<
@@ -86,63 +81,5 @@ export function githubCheckPublishingPRsRequestFromJSON(
     jsonString,
     (x) => GithubCheckPublishingPRsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GithubCheckPublishingPRsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GithubCheckPublishingPRsResponse$inboundSchema: z.ZodType<
-  GithubCheckPublishingPRsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  shared.GithubPublishingPRResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GithubCheckPublishingPRsResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.GithubPublishingPRResponse$Outbound;
-
-/** @internal */
-export const GithubCheckPublishingPRsResponse$outboundSchema: z.ZodType<
-  GithubCheckPublishingPRsResponse$Outbound,
-  z.ZodTypeDef,
-  GithubCheckPublishingPRsResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  shared.GithubPublishingPRResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GithubCheckPublishingPRsResponse$ {
-  /** @deprecated use `GithubCheckPublishingPRsResponse$inboundSchema` instead. */
-  export const inboundSchema = GithubCheckPublishingPRsResponse$inboundSchema;
-  /** @deprecated use `GithubCheckPublishingPRsResponse$outboundSchema` instead. */
-  export const outboundSchema = GithubCheckPublishingPRsResponse$outboundSchema;
-  /** @deprecated use `GithubCheckPublishingPRsResponse$Outbound` instead. */
-  export type Outbound = GithubCheckPublishingPRsResponse$Outbound;
-}
-
-export function githubCheckPublishingPRsResponseToJSON(
-  githubCheckPublishingPRsResponse: GithubCheckPublishingPRsResponse,
-): string {
-  return JSON.stringify(
-    GithubCheckPublishingPRsResponse$outboundSchema.parse(
-      githubCheckPublishingPRsResponse,
-    ),
-  );
-}
-
-export function githubCheckPublishingPRsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GithubCheckPublishingPRsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GithubCheckPublishingPRsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GithubCheckPublishingPRsResponse' from JSON`,
   );
 }

@@ -5,6 +5,7 @@
 import { schemaStoreCreateSchemaStoreItem } from "../funcs/schemaStoreCreateSchemaStoreItem.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
+import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
 
 export class SchemaStore extends ClientSDK {
@@ -14,7 +15,7 @@ export class SchemaStore extends ClientSDK {
   async createSchemaStoreItem(
     request: operations.CreateSchemaStoreItemRequestBody,
     options?: RequestOptions,
-  ): Promise<operations.CreateSchemaStoreItemResponse> {
+  ): Promise<shared.SchemaStoreItem> {
     return unwrapAsync(schemaStoreCreateSchemaStoreItem(
       this,
       request,

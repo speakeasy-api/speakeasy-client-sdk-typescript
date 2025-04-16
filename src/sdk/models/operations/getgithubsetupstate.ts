@@ -7,17 +7,12 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetGithubSetupStateRequest = {
   org: string;
   repo: string;
   generateGenLockId: string;
 };
-
-export type GetGithubSetupStateResponse =
-  | shared.ErrorT
-  | shared.GithubSetupStateResponse;
 
 /** @internal */
 export const GetGithubSetupStateRequest$inboundSchema: z.ZodType<
@@ -84,63 +79,5 @@ export function getGithubSetupStateRequestFromJSON(
     jsonString,
     (x) => GetGithubSetupStateRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetGithubSetupStateRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetGithubSetupStateResponse$inboundSchema: z.ZodType<
-  GetGithubSetupStateResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  shared.GithubSetupStateResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetGithubSetupStateResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.GithubSetupStateResponse$Outbound;
-
-/** @internal */
-export const GetGithubSetupStateResponse$outboundSchema: z.ZodType<
-  GetGithubSetupStateResponse$Outbound,
-  z.ZodTypeDef,
-  GetGithubSetupStateResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  shared.GithubSetupStateResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetGithubSetupStateResponse$ {
-  /** @deprecated use `GetGithubSetupStateResponse$inboundSchema` instead. */
-  export const inboundSchema = GetGithubSetupStateResponse$inboundSchema;
-  /** @deprecated use `GetGithubSetupStateResponse$outboundSchema` instead. */
-  export const outboundSchema = GetGithubSetupStateResponse$outboundSchema;
-  /** @deprecated use `GetGithubSetupStateResponse$Outbound` instead. */
-  export type Outbound = GetGithubSetupStateResponse$Outbound;
-}
-
-export function getGithubSetupStateResponseToJSON(
-  getGithubSetupStateResponse: GetGithubSetupStateResponse,
-): string {
-  return JSON.stringify(
-    GetGithubSetupStateResponse$outboundSchema.parse(
-      getGithubSetupStateResponse,
-    ),
-  );
-}
-
-export function getGithubSetupStateResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetGithubSetupStateResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetGithubSetupStateResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetGithubSetupStateResponse' from JSON`,
   );
 }

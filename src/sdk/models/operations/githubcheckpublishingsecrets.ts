@@ -7,15 +7,10 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GithubCheckPublishingSecretsRequest = {
   generateGenLockId: string;
 };
-
-export type GithubCheckPublishingSecretsResponse =
-  | shared.GithubMissingPublishingSecretsResponse
-  | shared.ErrorT;
 
 /** @internal */
 export const GithubCheckPublishingSecretsRequest$inboundSchema: z.ZodType<
@@ -81,66 +76,5 @@ export function githubCheckPublishingSecretsRequestFromJSON(
     (x) =>
       GithubCheckPublishingSecretsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GithubCheckPublishingSecretsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GithubCheckPublishingSecretsResponse$inboundSchema: z.ZodType<
-  GithubCheckPublishingSecretsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.GithubMissingPublishingSecretsResponse$inboundSchema,
-  shared.ErrorT$inboundSchema,
-]);
-
-/** @internal */
-export type GithubCheckPublishingSecretsResponse$Outbound =
-  | shared.GithubMissingPublishingSecretsResponse$Outbound
-  | shared.ErrorT$Outbound;
-
-/** @internal */
-export const GithubCheckPublishingSecretsResponse$outboundSchema: z.ZodType<
-  GithubCheckPublishingSecretsResponse$Outbound,
-  z.ZodTypeDef,
-  GithubCheckPublishingSecretsResponse
-> = z.union([
-  shared.GithubMissingPublishingSecretsResponse$outboundSchema,
-  shared.ErrorT$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GithubCheckPublishingSecretsResponse$ {
-  /** @deprecated use `GithubCheckPublishingSecretsResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GithubCheckPublishingSecretsResponse$inboundSchema;
-  /** @deprecated use `GithubCheckPublishingSecretsResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GithubCheckPublishingSecretsResponse$outboundSchema;
-  /** @deprecated use `GithubCheckPublishingSecretsResponse$Outbound` instead. */
-  export type Outbound = GithubCheckPublishingSecretsResponse$Outbound;
-}
-
-export function githubCheckPublishingSecretsResponseToJSON(
-  githubCheckPublishingSecretsResponse: GithubCheckPublishingSecretsResponse,
-): string {
-  return JSON.stringify(
-    GithubCheckPublishingSecretsResponse$outboundSchema.parse(
-      githubCheckPublishingSecretsResponse,
-    ),
-  );
-}
-
-export function githubCheckPublishingSecretsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GithubCheckPublishingSecretsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GithubCheckPublishingSecretsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GithubCheckPublishingSecretsResponse' from JSON`,
   );
 }

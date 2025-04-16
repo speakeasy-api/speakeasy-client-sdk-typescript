@@ -26,13 +26,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.subscriptions.activateSubscriptionNamespace({
+  await speakeasy.subscriptions.activateSubscriptionNamespace({
     subscriptionID: "<id>",
     namespaceName: "<value>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -66,11 +65,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useSubscriptionsActivateSubscriptionNamespaceMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/subscriptionsActivateSubscriptionNamespace.js";
 ```
 
 ### Parameters
@@ -84,13 +99,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## ignoreSubscriptionNamespace
 
@@ -108,13 +124,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.subscriptions.ignoreSubscriptionNamespace({
+  await speakeasy.subscriptions.ignoreSubscriptionNamespace({
     subscriptionID: "<id>",
     namespaceName: "<value>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -148,11 +163,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useSubscriptionsIgnoreSubscriptionNamespaceMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/subscriptionsIgnoreSubscriptionNamespace.js";
 ```
 
 ### Parameters
@@ -166,10 +197,11 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |

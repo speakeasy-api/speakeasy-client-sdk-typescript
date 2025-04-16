@@ -33,8 +33,6 @@ export type GetCodeSamplesRequest = {
   languages?: Array<string> | undefined;
 };
 
-export type GetCodeSamplesResponse = shared.UsageSnippets | shared.ErrorT;
-
 /** @internal */
 export const MethodPaths$inboundSchema: z.ZodType<
   MethodPaths,
@@ -160,58 +158,5 @@ export function getCodeSamplesRequestFromJSON(
     jsonString,
     (x) => GetCodeSamplesRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetCodeSamplesRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetCodeSamplesResponse$inboundSchema: z.ZodType<
-  GetCodeSamplesResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([shared.UsageSnippets$inboundSchema, shared.ErrorT$inboundSchema]);
-
-/** @internal */
-export type GetCodeSamplesResponse$Outbound =
-  | shared.UsageSnippets$Outbound
-  | shared.ErrorT$Outbound;
-
-/** @internal */
-export const GetCodeSamplesResponse$outboundSchema: z.ZodType<
-  GetCodeSamplesResponse$Outbound,
-  z.ZodTypeDef,
-  GetCodeSamplesResponse
-> = z.union([
-  shared.UsageSnippets$outboundSchema,
-  shared.ErrorT$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetCodeSamplesResponse$ {
-  /** @deprecated use `GetCodeSamplesResponse$inboundSchema` instead. */
-  export const inboundSchema = GetCodeSamplesResponse$inboundSchema;
-  /** @deprecated use `GetCodeSamplesResponse$outboundSchema` instead. */
-  export const outboundSchema = GetCodeSamplesResponse$outboundSchema;
-  /** @deprecated use `GetCodeSamplesResponse$Outbound` instead. */
-  export type Outbound = GetCodeSamplesResponse$Outbound;
-}
-
-export function getCodeSamplesResponseToJSON(
-  getCodeSamplesResponse: GetCodeSamplesResponse,
-): string {
-  return JSON.stringify(
-    GetCodeSamplesResponse$outboundSchema.parse(getCodeSamplesResponse),
-  );
-}
-
-export function getCodeSamplesResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetCodeSamplesResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetCodeSamplesResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetCodeSamplesResponse' from JSON`,
   );
 }

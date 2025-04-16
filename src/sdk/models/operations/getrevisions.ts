@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetRevisionsRequest = {
   namespaceName: string;
@@ -16,8 +15,6 @@ export type GetRevisionsRequest = {
    */
   nextPageToken?: string | undefined;
 };
-
-export type GetRevisionsResponse = shared.ErrorT | shared.GetRevisionsResponse;
 
 /** @internal */
 export const GetRevisionsRequest$inboundSchema: z.ZodType<
@@ -83,61 +80,5 @@ export function getRevisionsRequestFromJSON(
     jsonString,
     (x) => GetRevisionsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetRevisionsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetRevisionsResponse$inboundSchema: z.ZodType<
-  GetRevisionsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  shared.GetRevisionsResponse$inboundSchema,
-]);
-
-/** @internal */
-export type GetRevisionsResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.GetRevisionsResponse$Outbound;
-
-/** @internal */
-export const GetRevisionsResponse$outboundSchema: z.ZodType<
-  GetRevisionsResponse$Outbound,
-  z.ZodTypeDef,
-  GetRevisionsResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  shared.GetRevisionsResponse$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetRevisionsResponse$ {
-  /** @deprecated use `GetRevisionsResponse$inboundSchema` instead. */
-  export const inboundSchema = GetRevisionsResponse$inboundSchema;
-  /** @deprecated use `GetRevisionsResponse$outboundSchema` instead. */
-  export const outboundSchema = GetRevisionsResponse$outboundSchema;
-  /** @deprecated use `GetRevisionsResponse$Outbound` instead. */
-  export type Outbound = GetRevisionsResponse$Outbound;
-}
-
-export function getRevisionsResponseToJSON(
-  getRevisionsResponse: GetRevisionsResponse,
-): string {
-  return JSON.stringify(
-    GetRevisionsResponse$outboundSchema.parse(getRevisionsResponse),
-  );
-}
-
-export function getRevisionsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetRevisionsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetRevisionsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetRevisionsResponse' from JSON`,
   );
 }

@@ -38,6 +38,7 @@ For more information about the API: [The Speakeasy Platform Documentation](/docs
   * [Retries](#retries)
   * [Requirements](#requirements)
   * [Standalone functions](#standalone-functions)
+  * [React hooks with TanStack Query](#react-hooks-with-tanstack-query)
   * [Global Parameters](#global-parameters)
   * [File uploads](#file-uploads)
   * [Debugging](#debugging)
@@ -53,24 +54,32 @@ The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https
 
 ```bash
 npm add @speakeasy-api/speakeasy-client-sdk-typescript
+# Install optional peer dependencies if you plan to use React hooks
+npm add @tanstack/react-query react react-dom
 ```
 
 ### PNPM
 
 ```bash
 pnpm add @speakeasy-api/speakeasy-client-sdk-typescript
+# Install optional peer dependencies if you plan to use React hooks
+pnpm add @tanstack/react-query react react-dom
 ```
 
 ### Bun
 
 ```bash
 bun add @speakeasy-api/speakeasy-client-sdk-typescript
+# Install optional peer dependencies if you plan to use React hooks
+bun add @tanstack/react-query react react-dom
 ```
 
 ### Yarn
 
 ```bash
 yarn add @speakeasy-api/speakeasy-client-sdk-typescript zod
+# Install optional peer dependencies if you plan to use React hooks
+yarn add @tanstack/react-query react react-dom
 
 # Note that Yarn does not install peer dependencies automatically. You will need
 # to install zod as shown above.
@@ -183,10 +192,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
-
-  // Handle the result
-  console.log(result);
+  await speakeasy.artifacts.createRemoteSource();
 }
 
 run();
@@ -328,15 +334,21 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-If the request fails due to, for example 4XX or 5XX status codes, it will throw a `SDKError`.
+Some methods specify known errors which can be thrown. All the known errors are enumerated in the `sdk/models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `createRemoteSource` method may throw the following errors:
 
-| Error Type      | Status Code | Content Type |
-| --------------- | ----------- | ------------ |
-| errors.SDKError | 4XX, 5XX    | \*/\*        |
+| Error Type      | Status Code | Content Type     |
+| --------------- | ----------- | ---------------- |
+| errors.ErrorT   | 4XX         | application/json |
+| errors.SDKError | 5XX         | \*/\*            |
+
+If the method throws an error and it is not captured by the known errors, it will default to throwing a `SDKError`.
 
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import { SDKValidationError } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors";
+import {
+  ErrorT,
+  SDKValidationError,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors";
 
 const speakeasy = new Speakeasy({
   security: {
@@ -345,28 +357,21 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  let result;
   try {
-    result = await speakeasy.artifacts.createRemoteSource();
-
-    // Handle the result
-    console.log(result);
+    await speakeasy.artifacts.createRemoteSource();
   } catch (err) {
     switch (true) {
       // The server response does not match the expected SDK schema
-      case (err instanceof SDKValidationError):
-        {
-          // Pretty-print will provide a human-readable multi-line error message
-          console.error(err.pretty());
-          // Raw value may also be inspected
-          console.error(err.rawValue);
-          return;
-        }
-        sdkerror.js;
-      // Server returned an error status code or an unknown content type
-      case (err instanceof SDKError): {
-        console.error(err.statusCode);
-        console.error(err.rawResponse.body);
+      case (err instanceof SDKValidationError): {
+        // Pretty-print will provide a human-readable multi-line error message
+        console.error(err.pretty());
+        // Raw value may also be inspected
+        console.error(err.rawValue);
+        return;
+      }
+      case (err instanceof ErrorT): {
+        // Handle err.data$: ErrorTData
+        console.error(err);
         return;
       }
       default: {
@@ -420,10 +425,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
-
-  // Handle the result
-  console.log(result);
+  await speakeasy.artifacts.createRemoteSource();
 }
 
 run();
@@ -444,10 +446,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
-
-  // Handle the result
-  console.log(result);
+  await speakeasy.artifacts.createRemoteSource();
 }
 
 run();
@@ -532,10 +531,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
-
-  // Handle the result
-  console.log(result);
+  await speakeasy.artifacts.createRemoteSource();
 }
 
 run();
@@ -559,7 +555,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource({
+  await speakeasy.artifacts.createRemoteSource({
     retries: {
       strategy: "backoff",
       backoff: {
@@ -571,9 +567,6 @@ async function run() {
       retryConnectionErrors: false,
     },
   });
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -601,10 +594,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.artifacts.createRemoteSource();
-
-  // Handle the result
-  console.log(result);
+  await speakeasy.artifacts.createRemoteSource();
 }
 
 run();
@@ -712,6 +702,108 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 </details>
 <!-- End Standalone functions [standalone-funcs] -->
+
+<!-- Start React hooks with TanStack Query [react-query] -->
+## React hooks with TanStack Query
+
+React hooks built on [TanStack Query][tanstack-query] are included in this SDK.
+These hooks and the utility functions provided alongside them can be used to
+build rich applications that pull data from the API using one of the most
+popular asynchronous state management library.
+
+[tanstack-query]: https://tanstack.com/query/v5/docs/framework/react/overview
+
+To learn about this feature and how to get started, check
+[REACT_QUERY.md](./REACT_QUERY.md).
+
+> [!WARNING]
+>
+> This feature is currently in **preview** and is subject to breaking changes
+> within the current major version of the SDK as we gather user feedback on it.
+
+<details>
+
+<summary>Available React hooks</summary>
+
+- [`useArtifactsCreateRemoteSourceMutation`](docs/sdks/artifacts/README.md#createremotesource) - Configure a new remote source
+- [`useArtifactsGetBlob`](docs/sdks/artifacts/README.md#getblob) - Get blob for a particular digest
+- [`useArtifactsGetManifest`](docs/sdks/artifacts/README.md#getmanifest) - Get manifest for a particular reference
+- [`useArtifactsGetNamespaces`](docs/sdks/artifacts/README.md#getnamespaces) - Each namespace contains many revisions.
+- [`useArtifactsGetRevisions`](docs/sdks/artifacts/README.md#getrevisions)
+- [`useArtifactsGetTags`](docs/sdks/artifacts/README.md#gettags)
+- [`useArtifactsListRemoteSources`](docs/sdks/artifacts/README.md#listremotesources) - Get remote sources attached to a particular namespace
+- [`useArtifactsPostTagsMutation`](docs/sdks/artifacts/README.md#posttags) - Add tags to an existing revision
+- [`useArtifactsPreflightMutation`](docs/sdks/artifacts/README.md#preflight) - Get access token for communicating with OCI distribution endpoints
+- [`useArtifactsSetArchivedMutation`](docs/sdks/artifacts/README.md#setarchived) - Set whether a namespace is archived
+- [`useArtifactsSetVisibilityMutation`](docs/sdks/artifacts/README.md#setvisibility) - Set visibility of a namespace with an existing metadata entry
+- [`useAuthGetAccess`](docs/sdks/auth/README.md#getaccess) - Get access allowances for a particular workspace
+- [`useAuthGetAccessToken`](docs/sdks/auth/README.md#getaccesstoken) - Get or refresh an access token for the current workspace.
+- [`useAuthGetUser`](docs/sdks/auth/README.md#getuser) - Get information about the current user.
+- [`useAuthValidateApiKey`](docs/sdks/auth/README.md#validateapikey) - Validate the current api key.
+- [`useCodeSamplesGenerateCodeSamplePreviewAsyncMutation`](docs/sdks/codesamples/README.md#generatecodesamplepreviewasync) - Initiate asynchronous Code Sample preview generation from a file and configuration parameters, receiving an async JobID response for polling.
+- [`useCodeSamplesGenerateCodeSamplePreviewMutation`](docs/sdks/codesamples/README.md#generatecodesamplepreview) - Generate Code Sample previews from a file and configuration parameters.
+- [`useCodeSamplesGet`](docs/sdks/codesamples/README.md#get) - Retrieve usage snippets
+- [`useCodeSamplesGetCodeSamplePreviewAsync`](docs/sdks/codesamples/README.md#getcodesamplepreviewasync) - Poll for the result of an asynchronous Code Sample preview generation.
+- [`useEventsGetEventsByTarget`](docs/sdks/events/README.md#geteventsbytarget) - Load recent events for a particular workspace
+- [`useEventsGetTargets`](docs/sdks/events/README.md#gettargets) - Load targets for a particular workspace
+- [`useEventsGetTargetsDeprecated`](docs/sdks/events/README.md#gettargetsdeprecated) - Load targets for a particular workspace
+- [`useEventsPostMutation`](docs/sdks/events/README.md#post) - Post events for a specific workspace
+- [`useEventsSearch`](docs/sdks/events/README.md#search) - Search events for a particular workspace by any field
+- [`useGithubCheckAccess`](docs/sdks/github/README.md#checkaccess)
+- [`useGithubCheckPublishingPRs`](docs/sdks/github/README.md#checkpublishingprs)
+- [`useGithubCheckPublishingSecrets`](docs/sdks/github/README.md#checkpublishingsecrets)
+- [`useGithubConfigureCodeSamplesMutation`](docs/sdks/github/README.md#configurecodesamples)
+- [`useGithubConfigureMintlifyRepoMutation`](docs/sdks/github/README.md#configuremintlifyrepo)
+- [`useGithubConfigureTargetMutation`](docs/sdks/github/README.md#configuretarget)
+- [`useGithubGetAction`](docs/sdks/github/README.md#getaction)
+- [`useGithubGetSetup`](docs/sdks/github/README.md#getsetup)
+- [`useGithubLinkGithubMutation`](docs/sdks/github/README.md#linkgithub)
+- [`useGithubStorePublishingSecretsMutation`](docs/sdks/github/README.md#storepublishingsecrets)
+- [`useGithubTriggerActionMutation`](docs/sdks/github/README.md#triggeraction)
+- [`useOrganizationsCreateBillingAddOnsMutation`](docs/sdks/organizations/README.md#createbillingaddons) - Create billing add ons
+- [`useOrganizationsCreateFreeTrialMutation`](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
+- [`useOrganizationsCreateMutation`](docs/sdks/organizations/README.md#create) - Create an organization
+- [`useOrganizationsDeleteBillingAddOnMutation`](docs/sdks/organizations/README.md#deletebillingaddon) - Delete billing add ons
+- [`useOrganizationsGet`](docs/sdks/organizations/README.md#get) - Get organization
+- [`useOrganizationsGetAll`](docs/sdks/organizations/README.md#getall) - Get organizations for a user
+- [`useOrganizationsGetBillingAddOns`](docs/sdks/organizations/README.md#getbillingaddons) - Get billing add ons
+- [`useOrganizationsGetUsage`](docs/sdks/organizations/README.md#getusage) - Get billing usage summary for a particular organization
+- [`usePublishingTokensCreateMutation`](docs/sdks/publishingtokens/README.md#create) - Create a publishing token for a workspace
+- [`usePublishingTokensDeleteMutation`](docs/sdks/publishingtokens/README.md#delete) - Delete a specific publishing token
+- [`usePublishingTokensGet`](docs/sdks/publishingtokens/README.md#get) - Get a specific publishing token
+- [`usePublishingTokensList`](docs/sdks/publishingtokens/README.md#list) - Get publishing tokens for a workspace
+- [`usePublishingTokensResolveMetadata`](docs/sdks/publishingtokens/README.md#resolvemetadata) - Get metadata about the token
+- [`usePublishingTokensResolveTarget`](docs/sdks/publishingtokens/README.md#resolvetarget) - Get a specific publishing token target
+- [`usePublishingTokensUpdateMutation`](docs/sdks/publishingtokens/README.md#update) - Updates the validitity period of a publishing token
+- [`useReportsGetChangesReportSignedUrl`](docs/sdks/reports/README.md#getchangesreportsignedurl) - Get the signed access url for the change reports for a particular document.
+- [`useReportsGetLintingReportSignedUrl`](docs/sdks/reports/README.md#getlintingreportsignedurl) - Get the signed access url for the linting reports for a particular document.
+- [`useReportsUploadReportMutation`](docs/sdks/reports/README.md#uploadreport) - Upload a report.
+- [`useSchemaStoreCreateSchemaStoreItemMutation`](docs/sdks/schemastore/README.md#createschemastoreitem) - Create a schema in the schema store
+- [`useShortURLsCreateMutation`](docs/sdks/shorturls/README.md#create) - Shorten a URL.
+- [`useSubscriptionsActivateSubscriptionNamespaceMutation`](docs/sdks/subscriptions/README.md#activatesubscriptionnamespace) - Activate an ignored namespace for a subscription
+- [`useSubscriptionsIgnoreSubscriptionNamespaceMutation`](docs/sdks/subscriptions/README.md#ignoresubscriptionnamespace) - Ignored a namespace for a subscription
+- [`useSuggestSuggestItemsMutation`](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
+- [`useSuggestSuggestMutation`](docs/sdks/suggest/README.md#suggest) - Generate suggestions for improving an OpenAPI document.
+- [`useSuggestSuggestOpenAPIMutation`](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
+- [`useSuggestSuggestOpenAPIRegistryMutation`](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
+- [`useWorkspacesCreateMutation`](docs/sdks/workspaces/README.md#create) - Create a workspace
+- [`useWorkspacesCreateTokenMutation`](docs/sdks/workspaces/README.md#createtoken) - Create a token for a particular workspace
+- [`useWorkspacesDeleteTokenMutation`](docs/sdks/workspaces/README.md#deletetoken) - Delete a token for a particular workspace
+- [`useWorkspacesGet`](docs/sdks/workspaces/README.md#get) - Get workspace by context
+- [`useWorkspacesGetAll`](docs/sdks/workspaces/README.md#getall) - Get workspaces for a user
+- [`useWorkspacesGetByID`](docs/sdks/workspaces/README.md#getbyid) - Get workspace
+- [`useWorkspacesGetFeatureFlags`](docs/sdks/workspaces/README.md#getfeatureflags) - Get workspace feature flags
+- [`useWorkspacesGetSettings`](docs/sdks/workspaces/README.md#getsettings) - Get workspace settings
+- [`useWorkspacesGetTeam`](docs/sdks/workspaces/README.md#getteam) - Get team members for a particular workspace
+- [`useWorkspacesGetTokens`](docs/sdks/workspaces/README.md#gettokens) - Get tokens for a particular workspace
+- [`useWorkspacesGrantAccessMutation`](docs/sdks/workspaces/README.md#grantaccess) - Grant a user access to a particular workspace
+- [`useWorkspacesRevokeAccessMutation`](docs/sdks/workspaces/README.md#revokeaccess) - Revoke a user's access to a particular workspace
+- [`useWorkspacesSetFeatureFlagsMutation`](docs/sdks/workspaces/README.md#setfeatureflags) - Set workspace feature flags
+- [`useWorkspacesUpdateMutation`](docs/sdks/workspaces/README.md#update) - Update workspace details
+- [`useWorkspacesUpdateSettingsMutation`](docs/sdks/workspaces/README.md#updatesettings) - Update workspace settings
+
+</details>
+<!-- End React hooks with TanStack Query [react-query] -->
 
 <!-- Start Global Parameters [global-parameters] -->
 ## Global Parameters

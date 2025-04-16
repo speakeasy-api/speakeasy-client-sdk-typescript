@@ -52,10 +52,6 @@ export type SearchWorkspaceEventsRequest = {
   limit?: number | undefined;
 };
 
-export type SearchWorkspaceEventsResponse =
-  | shared.ErrorT
-  | Array<shared.CliEvent>;
-
 /** @internal */
 export const SearchWorkspaceEventsGlobals$inboundSchema: z.ZodType<
   SearchWorkspaceEventsGlobals,
@@ -217,63 +213,5 @@ export function searchWorkspaceEventsRequestFromJSON(
     jsonString,
     (x) => SearchWorkspaceEventsRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'SearchWorkspaceEventsRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const SearchWorkspaceEventsResponse$inboundSchema: z.ZodType<
-  SearchWorkspaceEventsResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  z.array(shared.CliEvent$inboundSchema),
-]);
-
-/** @internal */
-export type SearchWorkspaceEventsResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | Array<shared.CliEvent$Outbound>;
-
-/** @internal */
-export const SearchWorkspaceEventsResponse$outboundSchema: z.ZodType<
-  SearchWorkspaceEventsResponse$Outbound,
-  z.ZodTypeDef,
-  SearchWorkspaceEventsResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  z.array(shared.CliEvent$outboundSchema),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace SearchWorkspaceEventsResponse$ {
-  /** @deprecated use `SearchWorkspaceEventsResponse$inboundSchema` instead. */
-  export const inboundSchema = SearchWorkspaceEventsResponse$inboundSchema;
-  /** @deprecated use `SearchWorkspaceEventsResponse$outboundSchema` instead. */
-  export const outboundSchema = SearchWorkspaceEventsResponse$outboundSchema;
-  /** @deprecated use `SearchWorkspaceEventsResponse$Outbound` instead. */
-  export type Outbound = SearchWorkspaceEventsResponse$Outbound;
-}
-
-export function searchWorkspaceEventsResponseToJSON(
-  searchWorkspaceEventsResponse: SearchWorkspaceEventsResponse,
-): string {
-  return JSON.stringify(
-    SearchWorkspaceEventsResponse$outboundSchema.parse(
-      searchWorkspaceEventsResponse,
-    ),
-  );
-}
-
-export function searchWorkspaceEventsResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<SearchWorkspaceEventsResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => SearchWorkspaceEventsResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SearchWorkspaceEventsResponse' from JSON`,
   );
 }

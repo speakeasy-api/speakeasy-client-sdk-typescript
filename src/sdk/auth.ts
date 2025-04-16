@@ -35,7 +35,7 @@ export class Auth extends ClientSDK {
   async getAccessToken(
     request: operations.GetAccessTokenRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetAccessTokenResponse> {
+  ): Promise<shared.AccessToken> {
     return unwrapAsync(authGetAccessToken(
       this,
       request,
@@ -48,7 +48,7 @@ export class Auth extends ClientSDK {
    */
   async getUser(
     options?: RequestOptions,
-  ): Promise<operations.GetUserResponse> {
+  ): Promise<shared.User> {
     return unwrapAsync(authGetUser(
       this,
       options,
@@ -60,7 +60,7 @@ export class Auth extends ClientSDK {
    */
   async validateApiKey(
     options?: RequestOptions,
-  ): Promise<operations.ValidateApiKeyResponse> {
+  ): Promise<shared.ApiKeyDetails> {
     return unwrapAsync(authValidateApiKey(
       this,
       options,

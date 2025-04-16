@@ -19,7 +19,7 @@ export class Events extends ClientSDK {
   async getEventsByTarget(
     request: operations.GetWorkspaceEventsByTargetRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceEventsByTargetResponse> {
+  ): Promise<Array<shared.CliEvent>> {
     return unwrapAsync(eventsGetEventsByTarget(
       this,
       request,
@@ -33,7 +33,7 @@ export class Events extends ClientSDK {
   async getTargets(
     request: operations.GetWorkspaceTargetsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceTargetsResponse> {
+  ): Promise<Array<shared.TargetSDK>> {
     return unwrapAsync(eventsGetTargets(
       this,
       request,
@@ -47,7 +47,7 @@ export class Events extends ClientSDK {
   async getTargetsDeprecated(
     request: operations.GetWorkspaceTargetsDeprecatedRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceTargetsDeprecatedResponse> {
+  ): Promise<Array<shared.TargetSDK>> {
     return unwrapAsync(eventsGetTargetsDeprecated(
       this,
       request,
@@ -64,7 +64,7 @@ export class Events extends ClientSDK {
   async post(
     request: operations.PostWorkspaceEventsRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(eventsPost(
       this,
       request,
@@ -78,7 +78,7 @@ export class Events extends ClientSDK {
   async search(
     request: operations.SearchWorkspaceEventsRequest,
     options?: RequestOptions,
-  ): Promise<operations.SearchWorkspaceEventsResponse> {
+  ): Promise<Array<shared.CliEvent>> {
     return unwrapAsync(eventsSearch(
       this,
       request,

@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetPublishingTokenPublicMetadataRequest = {
   /**
@@ -26,10 +25,6 @@ export type GetPublishingTokenPublicMetadataResponseBody = {
   validUntil?: Date | undefined;
   workspaceId?: string | undefined;
 };
-
-export type GetPublishingTokenPublicMetadataResponse =
-  | shared.ErrorT
-  | GetPublishingTokenPublicMetadataResponseBody;
 
 /** @internal */
 export const GetPublishingTokenPublicMetadataRequest$inboundSchema: z.ZodType<
@@ -190,72 +185,5 @@ export function getPublishingTokenPublicMetadataResponseBodyFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetPublishingTokenPublicMetadataResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetPublishingTokenPublicMetadataResponse$inboundSchema: z.ZodType<
-  GetPublishingTokenPublicMetadataResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  z.lazy(() => GetPublishingTokenPublicMetadataResponseBody$inboundSchema),
-]);
-
-/** @internal */
-export type GetPublishingTokenPublicMetadataResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | GetPublishingTokenPublicMetadataResponseBody$Outbound;
-
-/** @internal */
-export const GetPublishingTokenPublicMetadataResponse$outboundSchema: z.ZodType<
-  GetPublishingTokenPublicMetadataResponse$Outbound,
-  z.ZodTypeDef,
-  GetPublishingTokenPublicMetadataResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  z.lazy(() => GetPublishingTokenPublicMetadataResponseBody$outboundSchema),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPublishingTokenPublicMetadataResponse$ {
-  /** @deprecated use `GetPublishingTokenPublicMetadataResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetPublishingTokenPublicMetadataResponse$inboundSchema;
-  /** @deprecated use `GetPublishingTokenPublicMetadataResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetPublishingTokenPublicMetadataResponse$outboundSchema;
-  /** @deprecated use `GetPublishingTokenPublicMetadataResponse$Outbound` instead. */
-  export type Outbound = GetPublishingTokenPublicMetadataResponse$Outbound;
-}
-
-export function getPublishingTokenPublicMetadataResponseToJSON(
-  getPublishingTokenPublicMetadataResponse:
-    GetPublishingTokenPublicMetadataResponse,
-): string {
-  return JSON.stringify(
-    GetPublishingTokenPublicMetadataResponse$outboundSchema.parse(
-      getPublishingTokenPublicMetadataResponse,
-    ),
-  );
-}
-
-export function getPublishingTokenPublicMetadataResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<
-  GetPublishingTokenPublicMetadataResponse,
-  SDKValidationError
-> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetPublishingTokenPublicMetadataResponse$inboundSchema.parse(
-        JSON.parse(x),
-      ),
-    `Failed to parse 'GetPublishingTokenPublicMetadataResponse' from JSON`,
   );
 }

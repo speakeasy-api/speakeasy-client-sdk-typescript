@@ -74,6 +74,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useSchemaStoreCreateSchemaStoreItemMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/schemaStoreCreateSchemaStoreItem.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -85,10 +102,11 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateSchemaStoreItemResponse](../../sdk/models/operations/createschemastoreitemresponse.md)\>**
+**Promise\<[shared.SchemaStoreItem](../../sdk/models/shared/schemastoreitem.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |

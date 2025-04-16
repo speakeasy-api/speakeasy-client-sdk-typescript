@@ -32,7 +32,7 @@ export class Workspaces extends ClientSDK {
   async create(
     request: shared.Workspace,
     options?: RequestOptions,
-  ): Promise<operations.CreateWorkspaceResponse> {
+  ): Promise<shared.Workspace> {
     return unwrapAsync(workspacesCreate(
       this,
       request,
@@ -46,7 +46,7 @@ export class Workspaces extends ClientSDK {
   async createToken(
     request: operations.CreateWorkspaceTokenRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(workspacesCreateToken(
       this,
       request,
@@ -60,7 +60,7 @@ export class Workspaces extends ClientSDK {
   async deleteToken(
     request: operations.DeleteWorkspaceTokenRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(workspacesDeleteToken(
       this,
       request,
@@ -76,7 +76,7 @@ export class Workspaces extends ClientSDK {
    */
   async get(
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceByContextResponse> {
+  ): Promise<shared.WorkspaceAndOrganization> {
     return unwrapAsync(workspacesGet(
       this,
       options,
@@ -91,7 +91,7 @@ export class Workspaces extends ClientSDK {
    */
   async getAll(
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspacesResponse> {
+  ): Promise<Array<shared.Workspace>> {
     return unwrapAsync(workspacesGetAll(
       this,
       options,
@@ -107,7 +107,7 @@ export class Workspaces extends ClientSDK {
   async getByID(
     request: operations.GetWorkspaceRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceResponse> {
+  ): Promise<shared.Workspace> {
     return unwrapAsync(workspacesGetByID(
       this,
       request,
@@ -121,7 +121,7 @@ export class Workspaces extends ClientSDK {
   async getFeatureFlags(
     request: operations.GetWorkspaceFeatureFlagsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceFeatureFlagsResponse> {
+  ): Promise<shared.WorkspaceFeatureFlagResponse> {
     return unwrapAsync(workspacesGetFeatureFlags(
       this,
       request,
@@ -138,7 +138,7 @@ export class Workspaces extends ClientSDK {
   async getSettings(
     request: operations.GetWorkspaceSettingsRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceSettingsResponse> {
+  ): Promise<shared.WorkspaceSettings> {
     return unwrapAsync(workspacesGetSettings(
       this,
       request,
@@ -152,7 +152,7 @@ export class Workspaces extends ClientSDK {
   async getTeam(
     request: operations.GetWorkspaceTeamRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceTeamResponse> {
+  ): Promise<shared.WorkspaceTeamResponse> {
     return unwrapAsync(workspacesGetTeam(
       this,
       request,
@@ -166,7 +166,7 @@ export class Workspaces extends ClientSDK {
   async getTokens(
     request: operations.GetWorkspaceTokensRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetWorkspaceTokensResponse> {
+  ): Promise<Array<shared.WorkspaceToken>> {
     return unwrapAsync(workspacesGetTokens(
       this,
       request,
@@ -180,7 +180,7 @@ export class Workspaces extends ClientSDK {
   async grantAccess(
     request: operations.GrantUserAccessToWorkspaceRequest,
     options?: RequestOptions,
-  ): Promise<operations.GrantUserAccessToWorkspaceResponse> {
+  ): Promise<shared.WorkspaceInviteResponse> {
     return unwrapAsync(workspacesGrantAccess(
       this,
       request,
@@ -194,7 +194,7 @@ export class Workspaces extends ClientSDK {
   async revokeAccess(
     request: operations.RevokeUserAccessToWorkspaceRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(workspacesRevokeAccess(
       this,
       request,
@@ -208,7 +208,7 @@ export class Workspaces extends ClientSDK {
   async setFeatureFlags(
     request: shared.WorkspaceFeatureFlagRequest,
     options?: RequestOptions,
-  ): Promise<operations.SetWorkspaceFeatureFlagsResponse> {
+  ): Promise<shared.WorkspaceFeatureFlagResponse> {
     return unwrapAsync(workspacesSetFeatureFlags(
       this,
       request,
@@ -225,7 +225,7 @@ export class Workspaces extends ClientSDK {
   async update(
     request: operations.UpdateWorkspaceDetailsRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(workspacesUpdate(
       this,
       request,
@@ -242,7 +242,7 @@ export class Workspaces extends ClientSDK {
   async updateSettings(
     request: operations.UpdateWorkspaceSettingsRequest,
     options?: RequestOptions,
-  ): Promise<shared.ErrorT | undefined> {
+  ): Promise<void> {
     return unwrapAsync(workspacesUpdateSettings(
       this,
       request,

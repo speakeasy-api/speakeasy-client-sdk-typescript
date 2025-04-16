@@ -23,8 +23,6 @@ Creates a free trial for an organization`,
       };
     }
 
-    const value = result.value;
-
-    return formatResult(value, apiCall);
+    return formatResult(void 0, apiCall);
   },
 };

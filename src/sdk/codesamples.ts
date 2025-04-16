@@ -21,7 +21,7 @@ export class CodeSamples extends ClientSDK {
   async generateCodeSamplePreview(
     request: shared.CodeSampleSchemaInput,
     options?: RequestOptions,
-  ): Promise<operations.GenerateCodeSamplePreviewResponse> {
+  ): Promise<shared.UsageSnippets> {
     return unwrapAsync(codeSamplesGenerateCodeSamplePreview(
       this,
       request,
@@ -38,7 +38,7 @@ export class CodeSamples extends ClientSDK {
   async generateCodeSamplePreviewAsync(
     request: shared.CodeSampleSchemaInput,
     options?: RequestOptions,
-  ): Promise<operations.GenerateCodeSamplePreviewAsyncResponse> {
+  ): Promise<operations.GenerateCodeSamplePreviewAsyncResponseBody> {
     return unwrapAsync(codeSamplesGenerateCodeSamplePreviewAsync(
       this,
       request,
@@ -55,7 +55,7 @@ export class CodeSamples extends ClientSDK {
   async get(
     request: operations.GetCodeSamplesRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetCodeSamplesResponse> {
+  ): Promise<shared.UsageSnippets> {
     return unwrapAsync(codeSamplesGet(
       this,
       request,

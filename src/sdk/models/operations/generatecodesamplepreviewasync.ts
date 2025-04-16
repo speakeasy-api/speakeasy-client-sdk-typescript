@@ -23,10 +23,6 @@ export type GenerateCodeSamplePreviewAsyncResponseBody = {
   status: shared.CodeSamplesJobStatus;
 };
 
-export type GenerateCodeSamplePreviewAsyncResponse =
-  | shared.ErrorT
-  | GenerateCodeSamplePreviewAsyncResponseBody;
-
 /** @internal */
 export const GenerateCodeSamplePreviewAsyncResponseBody$inboundSchema:
   z.ZodType<GenerateCodeSamplePreviewAsyncResponseBody, z.ZodTypeDef, unknown> =
@@ -99,67 +95,5 @@ export function generateCodeSamplePreviewAsyncResponseBodyFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GenerateCodeSamplePreviewAsyncResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const GenerateCodeSamplePreviewAsyncResponse$inboundSchema: z.ZodType<
-  GenerateCodeSamplePreviewAsyncResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  shared.ErrorT$inboundSchema,
-  z.lazy(() => GenerateCodeSamplePreviewAsyncResponseBody$inboundSchema),
-]);
-
-/** @internal */
-export type GenerateCodeSamplePreviewAsyncResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | GenerateCodeSamplePreviewAsyncResponseBody$Outbound;
-
-/** @internal */
-export const GenerateCodeSamplePreviewAsyncResponse$outboundSchema: z.ZodType<
-  GenerateCodeSamplePreviewAsyncResponse$Outbound,
-  z.ZodTypeDef,
-  GenerateCodeSamplePreviewAsyncResponse
-> = z.union([
-  shared.ErrorT$outboundSchema,
-  z.lazy(() => GenerateCodeSamplePreviewAsyncResponseBody$outboundSchema),
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GenerateCodeSamplePreviewAsyncResponse$ {
-  /** @deprecated use `GenerateCodeSamplePreviewAsyncResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GenerateCodeSamplePreviewAsyncResponse$inboundSchema;
-  /** @deprecated use `GenerateCodeSamplePreviewAsyncResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GenerateCodeSamplePreviewAsyncResponse$outboundSchema;
-  /** @deprecated use `GenerateCodeSamplePreviewAsyncResponse$Outbound` instead. */
-  export type Outbound = GenerateCodeSamplePreviewAsyncResponse$Outbound;
-}
-
-export function generateCodeSamplePreviewAsyncResponseToJSON(
-  generateCodeSamplePreviewAsyncResponse:
-    GenerateCodeSamplePreviewAsyncResponse,
-): string {
-  return JSON.stringify(
-    GenerateCodeSamplePreviewAsyncResponse$outboundSchema.parse(
-      generateCodeSamplePreviewAsyncResponse,
-    ),
-  );
-}
-
-export function generateCodeSamplePreviewAsyncResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GenerateCodeSamplePreviewAsyncResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GenerateCodeSamplePreviewAsyncResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GenerateCodeSamplePreviewAsyncResponse' from JSON`,
   );
 }

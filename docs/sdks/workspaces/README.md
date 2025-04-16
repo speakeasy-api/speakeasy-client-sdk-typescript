@@ -96,6 +96,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWorkspacesCreateMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesCreate.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -107,13 +124,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.CreateWorkspaceResponse](../../sdk/models/operations/createworkspaceresponse.md)\>**
+**Promise\<[shared.Workspace](../../sdk/models/shared/workspace.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## createToken
 
@@ -131,7 +149,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.createToken({
+  await speakeasy.workspaces.createToken({
     workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
@@ -143,8 +161,7 @@ async function run() {
     },
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -185,11 +202,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWorkspacesCreateTokenMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesCreateToken.js";
 ```
 
 ### Parameters
@@ -203,13 +236,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## deleteToken
 
@@ -227,13 +261,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.deleteToken({
+  await speakeasy.workspaces.deleteToken({
     workspaceId: "<id>",
     tokenID: "<id>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -267,11 +300,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWorkspacesDeleteTokenMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesDeleteToken.js";
 ```
 
 ### Parameters
@@ -285,13 +334,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## get
 
@@ -350,6 +400,33 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWorkspacesGet,
+  useWorkspacesGetSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWorkspacesGet,
+  
+  // Utility to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAllWorkspacesGet,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesGet.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -360,13 +437,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWorkspaceByContextResponse](../../sdk/models/operations/getworkspacebycontextresponse.md)\>**
+**Promise\<[shared.WorkspaceAndOrganization](../../sdk/models/shared/workspaceandorganization.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getAll
 
@@ -425,6 +503,33 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWorkspacesGetAll,
+  useWorkspacesGetAllSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWorkspacesGetAll,
+  
+  // Utility to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateAllWorkspacesGetAll,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesGetAll.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -435,13 +540,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWorkspacesResponse](../../sdk/models/operations/getworkspacesresponse.md)\>**
+**Promise\<[shared.Workspace[]](../../models/.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getByID
 
@@ -504,6 +610,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWorkspacesGetByID,
+  useWorkspacesGetByIDSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWorkspacesGetByID,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWorkspacesGetByID,
+  invalidateAllWorkspacesGetByID,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesGetByID.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -515,13 +649,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWorkspaceResponse](../../sdk/models/operations/getworkspaceresponse.md)\>**
+**Promise\<[shared.Workspace](../../sdk/models/shared/workspace.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getFeatureFlags
 
@@ -584,6 +719,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWorkspacesGetFeatureFlags,
+  useWorkspacesGetFeatureFlagsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWorkspacesGetFeatureFlags,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWorkspacesGetFeatureFlags,
+  invalidateAllWorkspacesGetFeatureFlags,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesGetFeatureFlags.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -595,13 +758,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWorkspaceFeatureFlagsResponse](../../sdk/models/operations/getworkspacefeatureflagsresponse.md)\>**
+**Promise\<[shared.WorkspaceFeatureFlagResponse](../../sdk/models/shared/workspacefeatureflagresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 5XX              | application/json |
+| errors.SDKError  | 4XX              | \*/\*            |
 
 ## getSettings
 
@@ -664,6 +828,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWorkspacesGetSettings,
+  useWorkspacesGetSettingsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWorkspacesGetSettings,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWorkspacesGetSettings,
+  invalidateAllWorkspacesGetSettings,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesGetSettings.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -675,13 +867,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWorkspaceSettingsResponse](../../sdk/models/operations/getworkspacesettingsresponse.md)\>**
+**Promise\<[shared.WorkspaceSettings](../../sdk/models/shared/workspacesettings.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getTeam
 
@@ -744,6 +937,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWorkspacesGetTeam,
+  useWorkspacesGetTeamSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWorkspacesGetTeam,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWorkspacesGetTeam,
+  invalidateAllWorkspacesGetTeam,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesGetTeam.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -755,13 +976,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWorkspaceTeamResponse](../../sdk/models/operations/getworkspaceteamresponse.md)\>**
+**Promise\<[shared.WorkspaceTeamResponse](../../sdk/models/shared/workspaceteamresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## getTokens
 
@@ -824,6 +1046,34 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useWorkspacesGetTokens,
+  useWorkspacesGetTokensSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchWorkspacesGetTokens,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateWorkspacesGetTokens,
+  invalidateAllWorkspacesGetTokens,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesGetTokens.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -835,13 +1085,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GetWorkspaceTokensResponse](../../sdk/models/operations/getworkspacetokensresponse.md)\>**
+**Promise\<[shared.WorkspaceToken[]](../../models/.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## grantAccess
 
@@ -906,6 +1157,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWorkspacesGrantAccessMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesGrantAccess.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -917,13 +1185,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.GrantUserAccessToWorkspaceResponse](../../sdk/models/operations/grantuseraccesstoworkspaceresponse.md)\>**
+**Promise\<[shared.WorkspaceInviteResponse](../../sdk/models/shared/workspaceinviteresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## revokeAccess
 
@@ -941,13 +1210,12 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.revokeAccess({
+  await speakeasy.workspaces.revokeAccess({
     workspaceId: "<id>",
     userId: "<id>",
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -981,11 +1249,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWorkspacesRevokeAccessMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesRevokeAccess.js";
 ```
 
 ### Parameters
@@ -999,13 +1283,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## setFeatureFlags
 
@@ -1074,6 +1359,23 @@ async function run() {
 run();
 ```
 
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWorkspacesSetFeatureFlagsMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesSetFeatureFlags.js";
+```
+
 ### Parameters
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
@@ -1085,13 +1387,14 @@ run();
 
 ### Response
 
-**Promise\<[operations.SetWorkspaceFeatureFlagsResponse](../../sdk/models/operations/setworkspacefeatureflagsresponse.md)\>**
+**Promise\<[shared.WorkspaceFeatureFlagResponse](../../sdk/models/shared/workspacefeatureflagresponse.md)\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 5XX              | application/json |
+| errors.SDKError  | 4XX              | \*/\*            |
 
 ## update
 
@@ -1109,7 +1412,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.update({
+  await speakeasy.workspaces.update({
     workspaceId: "<id>",
     workspace: {
       createdAt: new Date("2025-07-28T19:04:48.565Z"),
@@ -1122,8 +1425,7 @@ async function run() {
     },
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -1165,11 +1467,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWorkspacesUpdateMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesUpdate.js";
 ```
 
 ### Parameters
@@ -1183,13 +1501,14 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
 
 ## updateSettings
 
@@ -1207,7 +1526,7 @@ const speakeasy = new Speakeasy({
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.updateSettings({
+  await speakeasy.workspaces.updateSettings({
     workspaceId: "<id>",
     workspaceSettings: {
       createdAt: new Date("2023-07-05T11:43:28.305Z"),
@@ -1217,8 +1536,7 @@ async function run() {
     },
   });
 
-  // Handle the result
-  console.log(result);
+
 }
 
 run();
@@ -1257,11 +1575,27 @@ async function run() {
 
   const { value: result } = res;
 
-  // Handle the result
-  console.log(result);
+  
 }
 
 run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Mutation hook for triggering the API call.
+  useWorkspacesUpdateSettingsMutation
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/workspacesUpdateSettings.js";
 ```
 
 ### Parameters
@@ -1275,10 +1609,11 @@ run();
 
 ### Response
 
-**Promise\<[shared.ErrorT](../../sdk/models/shared/errort.md)\>**
+**Promise\<void\>**
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4XX, 5XX        | \*/\*           |
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |

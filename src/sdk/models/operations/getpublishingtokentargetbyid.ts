@@ -6,7 +6,6 @@ import * as z from "zod";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetPublishingTokenTargetByIDRequest = {
   /**
@@ -19,10 +18,6 @@ export type GetPublishingTokenTargetByIDRequest = {
  * OK
  */
 export type GetPublishingTokenTargetByIDResponseBody = {};
-
-export type GetPublishingTokenTargetByIDResponse =
-  | GetPublishingTokenTargetByIDResponseBody
-  | shared.ErrorT;
 
 /** @internal */
 export const GetPublishingTokenTargetByIDRequest$inboundSchema: z.ZodType<
@@ -139,66 +134,5 @@ export function getPublishingTokenTargetByIDResponseBodyFromJSON(
         JSON.parse(x),
       ),
     `Failed to parse 'GetPublishingTokenTargetByIDResponseBody' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetPublishingTokenTargetByIDResponse$inboundSchema: z.ZodType<
-  GetPublishingTokenTargetByIDResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([
-  z.lazy(() => GetPublishingTokenTargetByIDResponseBody$inboundSchema),
-  shared.ErrorT$inboundSchema,
-]);
-
-/** @internal */
-export type GetPublishingTokenTargetByIDResponse$Outbound =
-  | GetPublishingTokenTargetByIDResponseBody$Outbound
-  | shared.ErrorT$Outbound;
-
-/** @internal */
-export const GetPublishingTokenTargetByIDResponse$outboundSchema: z.ZodType<
-  GetPublishingTokenTargetByIDResponse$Outbound,
-  z.ZodTypeDef,
-  GetPublishingTokenTargetByIDResponse
-> = z.union([
-  z.lazy(() => GetPublishingTokenTargetByIDResponseBody$outboundSchema),
-  shared.ErrorT$outboundSchema,
-]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetPublishingTokenTargetByIDResponse$ {
-  /** @deprecated use `GetPublishingTokenTargetByIDResponse$inboundSchema` instead. */
-  export const inboundSchema =
-    GetPublishingTokenTargetByIDResponse$inboundSchema;
-  /** @deprecated use `GetPublishingTokenTargetByIDResponse$outboundSchema` instead. */
-  export const outboundSchema =
-    GetPublishingTokenTargetByIDResponse$outboundSchema;
-  /** @deprecated use `GetPublishingTokenTargetByIDResponse$Outbound` instead. */
-  export type Outbound = GetPublishingTokenTargetByIDResponse$Outbound;
-}
-
-export function getPublishingTokenTargetByIDResponseToJSON(
-  getPublishingTokenTargetByIDResponse: GetPublishingTokenTargetByIDResponse,
-): string {
-  return JSON.stringify(
-    GetPublishingTokenTargetByIDResponse$outboundSchema.parse(
-      getPublishingTokenTargetByIDResponse,
-    ),
-  );
-}
-
-export function getPublishingTokenTargetByIDResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetPublishingTokenTargetByIDResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) =>
-      GetPublishingTokenTargetByIDResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetPublishingTokenTargetByIDResponse' from JSON`,
   );
 }

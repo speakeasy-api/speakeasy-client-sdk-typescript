@@ -7,7 +7,6 @@ import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
-import * as shared from "../shared/index.js";
 
 export type GetAccessTokenRequest = {
   /**
@@ -15,8 +14,6 @@ export type GetAccessTokenRequest = {
    */
   workspaceId: string;
 };
-
-export type GetAccessTokenResponse = shared.ErrorT | shared.AccessToken;
 
 /** @internal */
 export const GetAccessTokenRequest$inboundSchema: z.ZodType<
@@ -77,55 +74,5 @@ export function getAccessTokenRequestFromJSON(
     jsonString,
     (x) => GetAccessTokenRequest$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetAccessTokenRequest' from JSON`,
-  );
-}
-
-/** @internal */
-export const GetAccessTokenResponse$inboundSchema: z.ZodType<
-  GetAccessTokenResponse,
-  z.ZodTypeDef,
-  unknown
-> = z.union([shared.ErrorT$inboundSchema, shared.AccessToken$inboundSchema]);
-
-/** @internal */
-export type GetAccessTokenResponse$Outbound =
-  | shared.ErrorT$Outbound
-  | shared.AccessToken$Outbound;
-
-/** @internal */
-export const GetAccessTokenResponse$outboundSchema: z.ZodType<
-  GetAccessTokenResponse$Outbound,
-  z.ZodTypeDef,
-  GetAccessTokenResponse
-> = z.union([shared.ErrorT$outboundSchema, shared.AccessToken$outboundSchema]);
-
-/**
- * @internal
- * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
- */
-export namespace GetAccessTokenResponse$ {
-  /** @deprecated use `GetAccessTokenResponse$inboundSchema` instead. */
-  export const inboundSchema = GetAccessTokenResponse$inboundSchema;
-  /** @deprecated use `GetAccessTokenResponse$outboundSchema` instead. */
-  export const outboundSchema = GetAccessTokenResponse$outboundSchema;
-  /** @deprecated use `GetAccessTokenResponse$Outbound` instead. */
-  export type Outbound = GetAccessTokenResponse$Outbound;
-}
-
-export function getAccessTokenResponseToJSON(
-  getAccessTokenResponse: GetAccessTokenResponse,
-): string {
-  return JSON.stringify(
-    GetAccessTokenResponse$outboundSchema.parse(getAccessTokenResponse),
-  );
-}
-
-export function getAccessTokenResponseFromJSON(
-  jsonString: string,
-): SafeParseResult<GetAccessTokenResponse, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => GetAccessTokenResponse$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'GetAccessTokenResponse' from JSON`,
   );
 }
