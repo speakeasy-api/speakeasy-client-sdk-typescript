@@ -56,6 +56,13 @@ import { tool$organizationsGet } from "./tools/organizationsGet.js";
 import { tool$organizationsGetAll } from "./tools/organizationsGetAll.js";
 import { tool$organizationsGetBillingAddOns } from "./tools/organizationsGetBillingAddOns.js";
 import { tool$organizationsGetUsage } from "./tools/organizationsGetUsage.js";
+import { tool$publishingTokensCreate } from "./tools/publishingTokensCreate.js";
+import { tool$publishingTokensDelete } from "./tools/publishingTokensDelete.js";
+import { tool$publishingTokensGet } from "./tools/publishingTokensGet.js";
+import { tool$publishingTokensList } from "./tools/publishingTokensList.js";
+import { tool$publishingTokensResolveMetadata } from "./tools/publishingTokensResolveMetadata.js";
+import { tool$publishingTokensResolveTarget } from "./tools/publishingTokensResolveTarget.js";
+import { tool$publishingTokensUpdate } from "./tools/publishingTokensUpdate.js";
 import { tool$reportsGetChangesReportSignedUrl } from "./tools/reportsGetChangesReportSignedUrl.js";
 import { tool$reportsGetLintingReportSignedUrl } from "./tools/reportsGetLintingReportSignedUrl.js";
 import { tool$reportsUploadReport } from "./tools/reportsUploadReport.js";
@@ -94,7 +101,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Speakeasy",
-    version: "4.0.0-rc.3",
+    version: "4.0.0-rc.4",
   });
 
   const client = new SpeakeasyCore({
@@ -163,6 +170,13 @@ export function createMCPServer(deps: {
   tool(tool$organizationsGetAll);
   tool(tool$organizationsGetBillingAddOns);
   tool(tool$organizationsGetUsage);
+  tool(tool$publishingTokensCreate);
+  tool(tool$publishingTokensDelete);
+  tool(tool$publishingTokensGet);
+  tool(tool$publishingTokensList);
+  tool(tool$publishingTokensResolveMetadata);
+  tool(tool$publishingTokensResolveTarget);
+  tool(tool$publishingTokensUpdate);
   tool(tool$reportsGetChangesReportSignedUrl);
   tool(tool$reportsGetLintingReportSignedUrl);
   tool(tool$reportsUploadReport);

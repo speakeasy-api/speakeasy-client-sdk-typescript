@@ -9,6 +9,7 @@ import { CodeSamples } from "./codesamples.js";
 import { Events } from "./events.js";
 import { Github } from "./github.js";
 import { Organizations } from "./organizations.js";
+import { PublishingTokens } from "./publishingtokens.js";
 import { Reports } from "./reports.js";
 import { SchemaStore } from "./schemastore.js";
 import { ShortURLs } from "./shorturls.js";
@@ -40,6 +41,11 @@ export class Speakeasy extends ClientSDK {
   private _organizations?: Organizations;
   get organizations(): Organizations {
     return (this._organizations ??= new Organizations(this._options));
+  }
+
+  private _publishingTokens?: PublishingTokens;
+  get publishingTokens(): PublishingTokens {
+    return (this._publishingTokens ??= new PublishingTokens(this._options));
   }
 
   private _reports?: Reports;

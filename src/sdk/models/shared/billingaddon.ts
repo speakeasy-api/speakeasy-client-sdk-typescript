@@ -13,6 +13,7 @@ export const BillingAddOn = {
   Webhooks: "webhooks",
   SDKTesting: "sdk_testing",
   CustomCodeRegions: "custom_code_regions",
+  SnippetAi: "snippet_ai",
 } as const;
 export type BillingAddOn = OpenEnum<typeof BillingAddOn>;
 
