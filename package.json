@@ -1,6 +1,6 @@
 {
   "name": "@speakeasy-api/speakeasy-client-sdk-typescript",
-  "version": "4.0.0-rc.6",
+  "version": "5.0.0-rc.1",
   "author": "Speakeasy",
   "bin": {
     "mcp": "bin/mcp-server.js"
