@@ -107,7 +107,7 @@ export class PublishingTokens extends ClientSDK {
   async resolveTarget(
     request: operations.GetPublishingTokenTargetByIDRequest,
     options?: RequestOptions,
-  ): Promise<operations.GetPublishingTokenTargetByIDResponseBody> {
+  ): Promise<string> {
     return unwrapAsync(publishingTokensResolveTarget(
       this,
       request,

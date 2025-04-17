@@ -25,8 +25,7 @@ import {
   TupleToPrefixes,
 } from "./_types.js";
 
-export type PublishingTokensResolveTargetQueryData =
-  operations.GetPublishingTokenTargetByIDResponseBody;
+export type PublishingTokensResolveTargetQueryData = string;
 
 /**
  * Get a specific publishing token target

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 711b3f6457c659edd2d9b9d7c32fc154
+  docChecksum: 8e7108c1d91dd68426e05e155eea40e5
   docVersion: 0.4.0
-  speakeasyVersion: 1.533.0
-  generationVersion: 2.578.0
-  releaseVersion: 5.0.0-rc.2
-  configChecksum: 5141713c865752a34cd24b435a6406e4
+  speakeasyVersion: 1.535.1
+  generationVersion: 2.585.2
+  releaseVersion: 5.0.0-rc.3
+  configChecksum: a8581a8568addb152ff1ac3208075dc8
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -26,7 +26,7 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.4
     globals: 2.82.2
-    mcpServer: 0.9.1
+    mcpServer: 0.9.2
     nameOverrides: 2.81.2
     nullables: 0.1.1
     openEnums: 0.1.1
@@ -79,7 +79,6 @@ generatedFiles:
   - docs/sdk/models/operations/getpublishingtokenpublicmetadatarequest.md
   - docs/sdk/models/operations/getpublishingtokenpublicmetadataresponsebody.md
   - docs/sdk/models/operations/getpublishingtokentargetbyidrequest.md
-  - docs/sdk/models/operations/getpublishingtokentargetbyidresponsebody.md
   - docs/sdk/models/operations/getrevisionsrequest.md
   - docs/sdk/models/operations/gettagsrequest.md
   - docs/sdk/models/operations/getworkspaceaccessrequest.md
@@ -1326,6 +1325,7 @@ examples:
       responses:
         "200":
           application/json: {}
+          text/plain: "<value>"
         4XX:
           application/json: {"message": "<value>", "status_code": 398362}
   updatePublishingTokenExpiration:

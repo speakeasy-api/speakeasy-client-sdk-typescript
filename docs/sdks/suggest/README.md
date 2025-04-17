@@ -42,9 +42,7 @@ async function run() {
         },
         {
           message: "<value>",
-          path: [
-
-          ],
+          path: [],
           type: "<value>",
         },
       ],
@@ -111,9 +109,7 @@ async function run() {
         },
         {
           message: "<value>",
-          path: [
-  
-          ],
+          path: [],
           type: "<value>",
         },
       ],
@@ -208,9 +204,7 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.suggest.suggestItems({
-    items: [
-
-    ],
+    items: [],
     prompt: "<value>",
   });
 
@@ -239,9 +233,7 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await suggestSuggestItems(speakeasy, {
-    items: [
-  
-    ],
+    items: [],
     prompt: "<value>",
   });
 
