@@ -624,7 +624,7 @@ import {
 
 ### Response
 
-**Promise\<[operations.GetPublishingTokenTargetByIDResponseBody](../../sdk/models/operations/getpublishingtokentargetbyidresponsebody.md)\>**
+**Promise\<[string](../../models/.md)\>**
 
 ### Errors
 
