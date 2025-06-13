@@ -31,7 +31,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.publishingTokens.create();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -56,15 +55,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await publishingTokensCreate(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("publishingTokensCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -153,14 +149,12 @@ async function run() {
   const res = await publishingTokensDelete(speakeasy, {
     tokenID: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("publishingTokensDelete failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -223,7 +217,6 @@ async function run() {
     tokenID: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -250,15 +243,12 @@ async function run() {
   const res = await publishingTokensGet(speakeasy, {
     tokenID: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("publishingTokensGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -330,7 +320,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.publishingTokens.list();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -355,15 +344,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await publishingTokensList(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("publishingTokensList failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -435,7 +421,6 @@ async function run() {
     tokenID: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -462,15 +447,12 @@ async function run() {
   const res = await publishingTokensResolveMetadata(speakeasy, {
     tokenID: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("publishingTokensResolveMetadata failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -544,7 +526,6 @@ async function run() {
     tokenID: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -571,15 +552,12 @@ async function run() {
   const res = await publishingTokensResolveTarget(speakeasy, {
     tokenID: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("publishingTokensResolveTarget failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -679,14 +657,12 @@ async function run() {
   const res = await publishingTokensUpdate(speakeasy, {
     tokenID: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("publishingTokensUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

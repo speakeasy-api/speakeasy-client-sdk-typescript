@@ -6,8 +6,8 @@
 import { Secrets } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: Secrets = {
-  apiKeyConfigured: false,
-  publishingSecretsConfigured: false,
+  apiKeyConfigured: true,
+  publishingSecretsConfigured: true,
 };
 ```
 

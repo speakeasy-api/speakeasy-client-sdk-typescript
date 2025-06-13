@@ -10,7 +10,9 @@ import { AddTags } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/mode
 let value: AddTags = {
   revisionDigest: "<value>",
   tags: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
 };
 ```

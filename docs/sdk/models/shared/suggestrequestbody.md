@@ -10,31 +10,21 @@ let value: SuggestRequestBody = {
     {
       message: "<value>",
       path: [
-        "/srv",
+        "/lib",
+        "/usr/X11R6",
       ],
       type: "<value>",
     },
   ],
   oasSummary: {
     info: {
-      description:
-        "opposite dowse strategy peppery lest incidentally shiny although",
+      description: "yowza huge mutate anguished wring",
       license: {},
       summary: "<value>",
       title: "<value>",
       version: "<value>",
     },
-    operations: [
-      {
-        description: "whose flashy lazy along how punctually strictly ha",
-        method: "<value>",
-        operationId: "<id>",
-        path: "/private/var",
-        tags: [
-          "<value>",
-        ],
-      },
-    ],
+    operations: [],
   },
   suggestionType: "method-names",
 };

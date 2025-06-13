@@ -14,18 +14,18 @@ let value: WorkspaceAndOrganization = {
     id: "<id>",
     name: "<value>",
     slug: "<value>",
-    ssoActivated: false,
+    ssoActivated: true,
     telemetryDisabled: false,
-    updatedAt: new Date("2023-05-06T16:26:41.472Z"),
+    updatedAt: new Date("2023-04-29T03:38:38.048Z"),
   },
   workspace: {
-    createdAt: new Date("2025-08-27T07:37:11.693Z"),
+    createdAt: new Date("2025-10-08T15:14:40.826Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    updatedAt: new Date("2023-04-29T03:38:38.048Z"),
-    verified: false,
+    updatedAt: new Date("2024-03-05T12:16:59.020Z"),
+    verified: true,
   },
 };
 ```

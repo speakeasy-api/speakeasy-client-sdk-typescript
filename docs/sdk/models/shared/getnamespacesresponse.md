@@ -8,10 +8,10 @@ import { GetNamespacesResponse } from "@speakeasy-api/speakeasy-client-sdk-types
 let value: GetNamespacesResponse = {
   items: [
     {
-      createdAt: new Date("2025-11-06T02:22:29.445Z"),
+      createdAt: new Date("2023-10-19T10:46:32.430Z"),
       id: "<id>",
       name: "<value>",
-      updatedAt: new Date("2023-10-19T10:46:32.430Z"),
+      updatedAt: new Date("2023-01-24T18:39:38.372Z"),
     },
   ],
 };

@@ -30,7 +30,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.auth.getAccess({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -55,15 +54,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await authGetAccess(speakeasy, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("authGetAccess failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -132,7 +128,6 @@ async function run() {
     workspaceId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -155,15 +150,12 @@ async function run() {
   const res = await authGetAccessToken(speakeasy, {
     workspaceId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("authGetAccessToken failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -235,7 +227,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.auth.getUser();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -260,15 +251,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await authGetUser(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("authGetUser failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -338,7 +326,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.auth.validateApiKey();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -363,15 +350,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await authValidateApiKey(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("authValidateApiKey failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

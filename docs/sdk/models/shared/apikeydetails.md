@@ -8,14 +8,16 @@ import { ApiKeyDetails } from "@speakeasy-api/speakeasy-client-sdk-typescript/sd
 let value: ApiKeyDetails = {
   accountTypeV2: "enterprise",
   billingAddOns: [
-    "custom_code_regions",
+    "snippet_ai",
   ],
   enabledFeatures: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   orgSlug: "<value>",
-  telemetryDisabled: false,
-  workspaceCreatedAt: new Date("2025-06-14T11:09:37.293Z"),
+  telemetryDisabled: true,
+  workspaceCreatedAt: new Date("2023-11-11T17:23:02.996Z"),
   workspaceId: "<id>",
   workspaceSlug: "<value>",
 };

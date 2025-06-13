@@ -34,7 +34,6 @@ async function run() {
     schemaFile: await openAsBlob("example.file"),
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -63,15 +62,12 @@ async function run() {
     language: "<value>",
     schemaFile: await openAsBlob("example.file"),
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("codeSamplesGenerateCodeSamplePreview failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -136,7 +132,6 @@ async function run() {
     schemaFile: await openAsBlob("example.file"),
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -165,15 +160,12 @@ async function run() {
     language: "<value>",
     schemaFile: await openAsBlob("example.file"),
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("codeSamplesGenerateCodeSamplePreviewAsync failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -235,7 +227,13 @@ async function run() {
   const result = await speakeasy.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPets",
+      "g",
+      "e",
+      "t",
+      "P",
+      "e",
+      "t",
+      "s",
     ],
     methodPaths: [
       {
@@ -249,7 +247,6 @@ async function run() {
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -276,7 +273,13 @@ async function run() {
   const res = await codeSamplesGet(speakeasy, {
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "getPets",
+      "g",
+      "e",
+      "t",
+      "P",
+      "e",
+      "t",
+      "s",
     ],
     methodPaths: [
       {
@@ -289,15 +292,12 @@ async function run() {
       "javascript",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("codeSamplesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -371,7 +371,6 @@ async function run() {
     jobID: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -398,15 +397,12 @@ async function run() {
   const res = await codeSamplesGetCodeSamplePreviewAsync(speakeasy, {
     jobID: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("codeSamplesGetCodeSamplePreviewAsync failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

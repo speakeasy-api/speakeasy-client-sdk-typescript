@@ -9,12 +9,12 @@ import { GithubSetupStateResponse } from "@speakeasy-api/speakeasy-client-sdk-ty
 
 let value: GithubSetupStateResponse = {
   actions: {
-    generationActionConfigured: false,
+    generationActionConfigured: true,
     publishActionConfigured: false,
   },
-  appInstalled: false,
+  appInstalled: true,
   secrets: {
-    apiKeyConfigured: false,
+    apiKeyConfigured: true,
     publishingSecretsConfigured: false,
   },
 };

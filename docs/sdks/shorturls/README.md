@@ -26,10 +26,9 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.shortURLs.create({
-    url: "https://probable-heating.com/",
+    url: "https://exalted-heroine.org/",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -54,17 +53,14 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await shortURLsCreate(speakeasy, {
-    url: "https://probable-heating.com/",
+    url: "https://exalted-heroine.org/",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("shortURLsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -334,21 +334,21 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-Some methods specify known errors which can be thrown. All the known errors are enumerated in the `sdk/models/errors/errors.ts` module. The known errors for a method are documented under the *Errors* tables in SDK docs. For example, the `createRemoteSource` method may throw the following errors:
+[`SpeakeasyError`](./src/sdk/models/errors/speakeasyerror.ts) is the base class for all HTTP error responses. It has the following properties:
 
-| Error Type      | Status Code | Content Type     |
-| --------------- | ----------- | ---------------- |
-| errors.ErrorT   | 4XX         | application/json |
-| errors.SDKError | 5XX         | \*/\*            |
+| Property            | Type       | Description                                                                             |
+| ------------------- | ---------- | --------------------------------------------------------------------------------------- |
+| `error.message`     | `string`   | Error message                                                                           |
+| `error.statusCode`  | `number`   | HTTP response status code eg `404`                                                      |
+| `error.headers`     | `Headers`  | HTTP response headers                                                                   |
+| `error.body`        | `string`   | HTTP body. Can be empty string if no body is returned.                                  |
+| `error.rawResponse` | `Response` | Raw HTTP response                                                                       |
+| `error.data$`       |            | Optional. Some errors may contain structured data. [See Error Classes](#error-classes). |
 
-If the method throws an error and it is not captured by the known errors, it will default to throwing a `SDKError`.
-
+### Example
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
-import {
-  ErrorT,
-  SDKValidationError,
-} from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors";
+import * as errors from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/errors";
 
 const speakeasy = new Speakeasy({
   security: {
@@ -359,24 +359,18 @@ const speakeasy = new Speakeasy({
 async function run() {
   try {
     await speakeasy.artifacts.createRemoteSource();
-  } catch (err) {
-    switch (true) {
-      // The server response does not match the expected SDK schema
-      case (err instanceof SDKValidationError): {
-        // Pretty-print will provide a human-readable multi-line error message
-        console.error(err.pretty());
-        // Raw value may also be inspected
-        console.error(err.rawValue);
-        return;
-      }
-      case (err instanceof ErrorT): {
-        // Handle err.data$: ErrorTData
-        console.error(err);
-        return;
-      }
-      default: {
-        // Other errors such as network errors, see HTTPClientErrors for more details
-        throw err;
+  } catch (error) {
+    // The base class for HTTP error responses
+    if (error instanceof errors.SpeakeasyError) {
+      console.log(error.message);
+      console.log(error.statusCode);
+      console.log(error.body);
+      console.log(error.headers);
+
+      // Depending on the method different errors may be thrown
+      if (error instanceof errors.ErrorT) {
+        console.log(error.data$.message); // string
+        console.log(error.data$.statusCode); // number
       }
     }
   }
@@ -386,17 +380,29 @@ run();
 
 ```
 
-Validation errors can also occur when either method arguments or data returned from the server do not match the expected format. The `SDKValidationError` that is thrown as a result will capture the raw value that failed validation in an attribute called `rawValue`. Additionally, a `pretty()` method is available on this error that can be used to log a nicely formatted multi-line string since validation errors can list many issues and the plain error string may be difficult read when debugging.
+### Error Classes
+**Primary errors:**
+* [`SpeakeasyError`](./src/sdk/models/errors/speakeasyerror.ts): The base class for HTTP error responses.
+  * [`ErrorT`](docs/sdk/models/errors/errort.md): The `Status` type defines a logical error model. *
 
-In some rare cases, the SDK can fail to get a response from the server or even make the request due to unexpected circumstances such as network conditions. These types of errors are captured in the `sdk/models/errors/httpclienterrors.ts` module:
+<details><summary>Less common errors (6)</summary>
 
-| HTTP Client Error                                    | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- |
-| RequestAbortedError                                  | HTTP request was aborted by the client               |
-| RequestTimeoutError                                  | HTTP request timed out due to an AbortSignal signal  |
-| ConnectionError                                      | HTTP client was unable to make a request to a server |
-| InvalidRequestError                                  | Any input used to create a request is invalid        |
-| UnexpectedClientError                                | Unrecognised or unexpected error                     |
+<br />
+
+**Network errors:**
+* [`ConnectionError`](./src/sdk/models/errors/httpclienterrors.ts): HTTP client was unable to make a request to a server.
+* [`RequestTimeoutError`](./src/sdk/models/errors/httpclienterrors.ts): HTTP request timed out due to an AbortSignal signal.
+* [`RequestAbortedError`](./src/sdk/models/errors/httpclienterrors.ts): HTTP request was aborted by the client.
+* [`InvalidRequestError`](./src/sdk/models/errors/httpclienterrors.ts): Any input used to create a request is invalid.
+* [`UnexpectedClientError`](./src/sdk/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
+
+
+**Inherit from [`SpeakeasyError`](./src/sdk/models/errors/speakeasyerror.ts)**:
+* [`ResponseValidationError`](./src/sdk/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
+
+</details>
+
+\* Check [the method documentation](#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 
@@ -408,9 +414,9 @@ In some rare cases, the SDK can fail to get a response from the server or even m
 
 You can override the default server globally by passing a server name to the `server: keyof typeof ServerList` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name   | Server                              | Description |
-| ------ | ----------------------------------- | ----------- |
-| `prod` | `https://api.prod.speakeasyapi.dev` |             |
+| Name   | Server                           | Description |
+| ------ | -------------------------------- | ----------- |
+| `prod` | `https://api.prod.speakeasy.com` |             |
 
 #### Example
 
@@ -439,7 +445,7 @@ The default server can also be overridden globally by passing a URL to the `serv
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
-  serverURL: "https://api.prod.speakeasyapi.dev",
+  serverURL: "https://api.prod.speakeasy.com",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -826,14 +832,15 @@ The following global parameter is available.
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
-const speakeasy = new Speakeasy();
+const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
+});
 
 async function run() {
   const result = await speakeasy.auth.getAccessToken({
     workspaceId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -872,7 +879,6 @@ async function run() {
     schemaFile: await openAsBlob("example.file"),
   });
 
-  // Handle the result
   console.log(result);
 }
 

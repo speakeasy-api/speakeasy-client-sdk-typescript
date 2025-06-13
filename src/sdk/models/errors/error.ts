@@ -4,6 +4,7 @@
 
 import * as z from "zod";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { SpeakeasyError } from "./speakeasyerror.js";
 
 /**
  * The `Status` type defines a logical error model
@@ -22,23 +23,19 @@ export type ErrorTData = {
 /**
  * The `Status` type defines a logical error model
  */
-export class ErrorT extends Error {
-  /**
-   * The HTTP status code
-   */
-  statusCode: number;
-
+export class ErrorT extends SpeakeasyError {
   /** The original data that was passed to this error instance. */
   data$: ErrorTData;
 
-  constructor(err: ErrorTData) {
+  constructor(
+    err: ErrorTData,
+    httpMeta: { response: Response; request: Request; body: string },
+  ) {
     const message = "message" in err && typeof err.message === "string"
       ? err.message
       : `API error occurred: ${JSON.stringify(err)}`;
-    super(message);
+    super(message, httpMeta);
     this.data$ = err;
-
-    this.statusCode = err.statusCode;
 
     this.name = "ErrorT";
   }
@@ -49,13 +46,20 @@ export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
   .object({
     message: z.string(),
     status_code: z.number().int(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
   })
   .transform((v) => {
     const remapped = remap$(v, {
       "status_code": "statusCode",
     });
 
-    return new ErrorT(remapped);
+    return new ErrorT(remapped, {
+      request: v.request$,
+      response: v.response$,
+      body: v.body$,
+    });
   });
 
 /** @internal */

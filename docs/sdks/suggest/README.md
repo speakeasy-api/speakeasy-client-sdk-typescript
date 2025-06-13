@@ -35,20 +35,14 @@ async function run() {
         {
           message: "<value>",
           path: [
-            "/opt/include",
-            "/opt/share",
+            "/usr/src",
           ],
-          type: "<value>",
-        },
-        {
-          message: "<value>",
-          path: [],
           type: "<value>",
         },
       ],
       oasSummary: {
         info: {
-          description: "amid traffic the unfortunately underneath what father lovely out",
+          description: "prioritize bell vainly",
           license: {},
           summary: "<value>",
           title: "<value>",
@@ -56,22 +50,21 @@ async function run() {
         },
         operations: [
           {
-            description: "times dull than except",
+            description: "though since instead accurate safe unnaturally charming",
             method: "<value>",
             operationId: "<id>",
-            path: "/mnt",
+            path: "/usr/local/bin",
             tags: [
-              "<value>",
-              "<value>",
+              "<value 1>",
+              "<value 2>",
             ],
           },
         ],
       },
-      suggestionType: "diagnostics-only",
+      suggestionType: "method-names",
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -102,20 +95,14 @@ async function run() {
         {
           message: "<value>",
           path: [
-            "/opt/include",
-            "/opt/share",
+            "/usr/src",
           ],
-          type: "<value>",
-        },
-        {
-          message: "<value>",
-          path: [],
           type: "<value>",
         },
       ],
       oasSummary: {
         info: {
-          description: "amid traffic the unfortunately underneath what father lovely out",
+          description: "prioritize bell vainly",
           license: {},
           summary: "<value>",
           title: "<value>",
@@ -123,29 +110,26 @@ async function run() {
         },
         operations: [
           {
-            description: "times dull than except",
+            description: "though since instead accurate safe unnaturally charming",
             method: "<value>",
             operationId: "<id>",
-            path: "/mnt",
+            path: "/usr/local/bin",
             tags: [
-              "<value>",
-              "<value>",
+              "<value 1>",
+              "<value 2>",
             ],
           },
         ],
       },
-      suggestionType: "diagnostics-only",
+      suggestionType: "method-names",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("suggestSuggest failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -204,11 +188,12 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.suggest.suggestItems({
-    items: [],
+    items: [
+      "<value 1>",
+    ],
     prompt: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -233,18 +218,17 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await suggestSuggestItems(speakeasy, {
-    items: [],
+    items: [
+      "<value 1>",
+    ],
     prompt: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("suggestSuggestItems failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -310,7 +294,6 @@ async function run() {
     },
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -341,15 +324,12 @@ async function run() {
       schema: await openAsBlob("example.file"),
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("suggestSuggestOpenAPI failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -413,7 +393,6 @@ async function run() {
     revisionReference: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -442,15 +421,12 @@ async function run() {
     namespaceName: "<value>",
     revisionReference: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("suggestSuggestOpenAPIRegistry failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

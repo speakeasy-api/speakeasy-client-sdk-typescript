@@ -10,11 +10,11 @@ import { RemoteSource } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk
 let value: RemoteSource = {
   inputs: [
     {
-      registryUrl: "https://unknown-testimonial.org",
+      registryUrl: "https://untidy-zebra.net",
     },
   ],
   output: {
-    registryUrl: "https://cluttered-cellar.biz",
+    registryUrl: "https://comfortable-executor.name/",
   },
 };
 ```

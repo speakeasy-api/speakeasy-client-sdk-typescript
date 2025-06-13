@@ -4,7 +4,10 @@
 
 import { SpeakeasyCore } from "../core.js";
 import { appendForm, encodeJSON } from "../lib/encodings.js";
-import { readableStreamToArrayBuffer } from "../lib/files.js";
+import {
+  getContentTypeFromFileName,
+  readableStreamToArrayBuffer,
+} from "../lib/files.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -18,8 +21,9 @@ import {
   RequestTimeoutError,
   UnexpectedClientError,
 } from "../sdk/models/errors/httpclienterrors.js";
-import { SDKError } from "../sdk/models/errors/sdkerror.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import { APICall, APIPromise } from "../sdk/types/async.js";
 import { isBlobLike } from "../sdk/types/blobs.js";
@@ -36,13 +40,14 @@ export function reportsUploadReport(
 ): APIPromise<
   Result<
     operations.UploadReportUploadedReport,
-    | SDKError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | SpeakeasyError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -60,13 +65,14 @@ async function $do(
   [
     Result<
       operations.UploadReportUploadedReport,
-      | SDKError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | SpeakeasyError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -87,13 +93,17 @@ async function $do(
     appendForm(body, "file", payload.file);
   } else if (isReadableStream(payload.file.content)) {
     const buffer = await readableStreamToArrayBuffer(payload.file.content);
-    const blob = new Blob([buffer], { type: "application/octet-stream" });
-    appendForm(body, "file", blob);
+    const contentType = getContentTypeFromFileName(payload.file.fileName)
+      || "application/octet-stream";
+    const blob = new Blob([buffer], { type: contentType });
+    appendForm(body, "file", blob, payload.file.fileName);
   } else {
+    const contentType = getContentTypeFromFileName(payload.file.fileName)
+      || "application/octet-stream";
     appendForm(
       body,
       "file",
-      new Blob([payload.file.content], { type: "application/octet-stream" }),
+      new Blob([payload.file.content], { type: contentType }),
       payload.file.fileName,
     );
   }
@@ -108,6 +118,7 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "uploadReport",
     oAuth2Scopes: [],
@@ -128,6 +139,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -148,18 +160,19 @@ async function $do(
 
   const [result] = await M.match<
     operations.UploadReportUploadedReport,
-    | SDKError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | SpeakeasyError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.json("2XX", operations.UploadReportUploadedReport$inboundSchema),
     M.fail("4XX"),
     M.fail("5XX"),
-  )(response);
+  )(response, req);
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

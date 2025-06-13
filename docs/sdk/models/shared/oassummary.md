@@ -7,23 +7,13 @@ import { OASSummary } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/m
 
 let value: OASSummary = {
   info: {
-    description: "tensely transplant quip over meh jaggedly",
+    description: "yowza huge mutate anguished wring",
     license: {},
     summary: "<value>",
     title: "<value>",
     version: "<value>",
   },
-  operations: [
-    {
-      description: "worth owlishly yowza hmph finally through fast",
-      method: "<value>",
-      operationId: "<id>",
-      path: "/opt/lib",
-      tags: [
-        "<value>",
-      ],
-    },
-  ],
+  operations: [],
 };
 ```
 

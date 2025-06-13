@@ -9,29 +9,11 @@ import { OrganizationUsageResponse } from "@speakeasy-api/speakeasy-client-sdk-t
 
 let value: OrganizationUsageResponse = {
   allowedLanguages: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
-  totalAllowedLanguages: 562064,
-  usage: [
-    {
-      accessible: false,
-      accessibleFeatures: [
-        "<value>",
-      ],
-      genLockIds: [
-        "<value>",
-      ],
-      language: "<value>",
-      maxOperations: 522206,
-      numberOfOperations: 165177,
-      usedFeatures: [
-        "<value>",
-      ],
-      workspaces: [
-        "<value>",
-      ],
-    },
-  ],
+  totalAllowedLanguages: 522206,
+  usage: [],
 };
 ```
 

@@ -15,7 +15,7 @@ let value: Organization = {
   slug: "<value>",
   ssoActivated: false,
   telemetryDisabled: false,
-  updatedAt: new Date("2024-09-21T03:00:08.692Z"),
+  updatedAt: new Date("2024-01-29T03:29:26.043Z"),
 };
 ```
 

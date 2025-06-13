@@ -6,7 +6,6 @@
 import { GrantUserAccessToWorkspaceRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
 let value: GrantUserAccessToWorkspaceRequest = {
-  workspaceId: "<id>",
   email: "Sebastian.Paucek6@yahoo.com",
 };
 ```
