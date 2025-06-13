@@ -7,39 +7,6 @@ import { SuggestRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/s
 
 let value: SuggestRequest = {
   xSessionId: "<id>",
-  suggestRequestBody: {
-    diagnostics: [
-      {
-        message: "<value>",
-        path: [
-          "/var/mail",
-        ],
-        type: "<value>",
-      },
-    ],
-    oasSummary: {
-      info: {
-        description: "circa excepting upon",
-        license: {},
-        summary: "<value>",
-        title: "<value>",
-        version: "<value>",
-      },
-      operations: [
-        {
-          description:
-            "even oddly overconfidently spanish wherever strait knowledgeably hopeful huzzah",
-          method: "<value>",
-          operationId: "<id>",
-          path: "/home/user/dir",
-          tags: [
-            "<value>",
-          ],
-        },
-      ],
-    },
-    suggestionType: "diagnostics-only",
-  },
 };
 ```
 

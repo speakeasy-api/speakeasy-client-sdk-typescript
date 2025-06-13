@@ -58,14 +58,12 @@ async function run() {
     subscriptionID: "<id>",
     namespaceName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("subscriptionsActivateSubscriptionNamespace failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -156,14 +154,12 @@ async function run() {
     subscriptionID: "<id>",
     namespaceName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("subscriptionsIgnoreSubscriptionNamespace failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

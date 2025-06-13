@@ -31,7 +31,6 @@ async function run() {
     documentChecksum: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -58,15 +57,12 @@ async function run() {
   const res = await reportsGetChangesReportSignedUrl(speakeasy, {
     documentChecksum: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsGetChangesReportSignedUrl failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -139,7 +135,6 @@ async function run() {
     documentChecksum: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -166,15 +161,12 @@ async function run() {
   const res = await reportsGetLintingReportSignedUrl(speakeasy, {
     documentChecksum: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsGetLintingReportSignedUrl failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -249,7 +241,6 @@ async function run() {
     file: await openAsBlob("example.file"),
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -278,15 +269,12 @@ async function run() {
     data: {},
     file: await openAsBlob("example.file"),
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("reportsUploadReport failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

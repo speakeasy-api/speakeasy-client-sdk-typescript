@@ -5,9 +5,7 @@
 ```typescript
 import { GetWorkspaceSettingsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
-let value: GetWorkspaceSettingsRequest = {
-  workspaceId: "<id>",
-};
+let value: GetWorkspaceSettingsRequest = {};
 ```
 
 ## Fields

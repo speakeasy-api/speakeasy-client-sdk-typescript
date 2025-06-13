@@ -4,7 +4,10 @@
 
 import { SpeakeasyCore } from "../core.js";
 import { appendForm } from "../lib/encodings.js";
-import { readableStreamToArrayBuffer } from "../lib/files.js";
+import {
+  getContentTypeFromFileName,
+  readableStreamToArrayBuffer,
+} from "../lib/files.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -19,8 +22,9 @@ import {
   UnexpectedClientError,
 } from "../sdk/models/errors/httpclienterrors.js";
 import * as errors from "../sdk/models/errors/index.js";
-import { SDKError } from "../sdk/models/errors/sdkerror.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { APICall, APIPromise } from "../sdk/types/async.js";
@@ -42,14 +46,14 @@ export function codeSamplesGenerateCodeSamplePreviewAsync(
   Result<
     operations.GenerateCodeSamplePreviewAsyncResponseBody,
     | errors.ErrorT
-    | errors.ErrorT
-    | SDKError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | SpeakeasyError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >
 > {
   return new APIPromise($do(
@@ -68,14 +72,14 @@ async function $do(
     Result<
       operations.GenerateCodeSamplePreviewAsyncResponseBody,
       | errors.ErrorT
-      | errors.ErrorT
-      | SDKError
-      | SDKValidationError
-      | UnexpectedClientError
-      | InvalidRequestError
+      | SpeakeasyError
+      | ResponseValidationError
+      | ConnectionError
       | RequestAbortedError
       | RequestTimeoutError
-      | ConnectionError
+      | InvalidRequestError
+      | UnexpectedClientError
+      | SDKValidationError
     >,
     APICall,
   ]
@@ -98,15 +102,17 @@ async function $do(
     const buffer = await readableStreamToArrayBuffer(
       payload.schema_file.content,
     );
-    const blob = new Blob([buffer], { type: "application/octet-stream" });
-    appendForm(body, "schema_file", blob);
+    const contentType = getContentTypeFromFileName(payload.schema_file.fileName)
+      || "application/octet-stream";
+    const blob = new Blob([buffer], { type: contentType });
+    appendForm(body, "schema_file", blob, payload.schema_file.fileName);
   } else {
+    const contentType = getContentTypeFromFileName(payload.schema_file.fileName)
+      || "application/octet-stream";
     appendForm(
       body,
       "schema_file",
-      new Blob([payload.schema_file.content], {
-        type: "application/octet-stream",
-      }),
+      new Blob([payload.schema_file.content], { type: contentType }),
       payload.schema_file.fileName,
     );
   }
@@ -130,6 +136,7 @@ async function $do(
   const requestSecurity = resolveGlobalSecurity(securityInput);
 
   const context = {
+    options: client._options,
     baseURL: options?.serverURL ?? client._baseURL ?? "",
     operationID: "generateCodeSamplePreviewAsync",
     oAuth2Scopes: [],
@@ -150,6 +157,7 @@ async function $do(
     path: path,
     headers: headers,
     body: body,
+    userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
   if (!requestRes.ok) {
@@ -175,14 +183,14 @@ async function $do(
   const [result] = await M.match<
     operations.GenerateCodeSamplePreviewAsyncResponseBody,
     | errors.ErrorT
-    | errors.ErrorT
-    | SDKError
-    | SDKValidationError
-    | UnexpectedClientError
-    | InvalidRequestError
+    | SpeakeasyError
+    | ResponseValidationError
+    | ConnectionError
     | RequestAbortedError
     | RequestTimeoutError
-    | ConnectionError
+    | InvalidRequestError
+    | UnexpectedClientError
+    | SDKValidationError
   >(
     M.json(
       202,
@@ -190,7 +198,7 @@ async function $do(
     ),
     M.jsonErr("4XX", errors.ErrorT$inboundSchema),
     M.jsonErr("5XX", errors.ErrorT$inboundSchema),
-  )(response, { extraFields: responseFields });
+  )(response, req, { extraFields: responseFields });
   if (!result.ok) {
     return [result, { status: "complete", request: req, response }];
   }

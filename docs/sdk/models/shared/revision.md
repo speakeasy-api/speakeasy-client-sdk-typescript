@@ -12,9 +12,10 @@ let value: Revision = {
   id: "<id>",
   namespaceName: "<value>",
   tags: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
-  updatedAt: new Date("2024-12-29T21:20:56.889Z"),
+  updatedAt: new Date("2023-08-13T12:31:12.890Z"),
 };
 ```
 

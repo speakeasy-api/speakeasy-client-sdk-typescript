@@ -61,14 +61,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await artifactsCreateRemoteSource(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("artifactsCreateRemoteSource failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -134,7 +132,6 @@ async function run() {
     digest: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -164,15 +161,12 @@ async function run() {
     namespaceName: "<value>",
     digest: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("artifactsGetBlob failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -249,7 +243,6 @@ async function run() {
     revisionReference: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -279,15 +272,12 @@ async function run() {
     namespaceName: "<value>",
     revisionReference: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("artifactsGetManifest failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -359,7 +349,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.artifacts.getNamespaces();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -384,15 +373,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await artifactsGetNamespaces(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("artifactsGetNamespaces failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -462,7 +448,6 @@ async function run() {
     namespaceName: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -489,15 +474,12 @@ async function run() {
   const res = await artifactsGetRevisions(speakeasy, {
     namespaceName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("artifactsGetRevisions failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -569,7 +551,6 @@ async function run() {
     namespaceName: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -596,15 +577,12 @@ async function run() {
   const res = await artifactsGetTags(speakeasy, {
     namespaceName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("artifactsGetTags failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -678,7 +656,6 @@ async function run() {
     namespaceName: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -705,15 +682,12 @@ async function run() {
   const res = await artifactsListRemoteSources(speakeasy, {
     namespaceName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("artifactsListRemoteSources failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -813,14 +787,12 @@ async function run() {
   const res = await artifactsPostTags(speakeasy, {
     namespaceName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("artifactsPostTags failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -881,7 +853,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.artifacts.preflight();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -906,15 +877,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await artifactsPreflight(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("artifactsPreflight failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1003,14 +971,12 @@ async function run() {
   const res = await artifactsSetArchived(speakeasy, {
     namespaceName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("artifactsSetArchived failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1099,14 +1065,12 @@ async function run() {
   const res = await artifactsSetVisibility(speakeasy, {
     namespaceName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("artifactsSetVisibility failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

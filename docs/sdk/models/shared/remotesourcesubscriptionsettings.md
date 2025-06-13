@@ -6,12 +6,11 @@
 import { RemoteSourceSubscriptionSettings } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: RemoteSourceSubscriptionSettings = {
-  baseSpecNamespaces: [
-    "<value>",
-  ],
+  baseSpecNamespaces: [],
   outputNamespace: "<value>",
   overlayNamespaces: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
 };
 ```

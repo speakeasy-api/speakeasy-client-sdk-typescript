@@ -6,8 +6,8 @@
 import { Actions } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: Actions = {
-  generationActionConfigured: false,
-  publishActionConfigured: false,
+  generationActionConfigured: true,
+  publishActionConfigured: true,
 };
 ```
 

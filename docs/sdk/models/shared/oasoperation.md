@@ -11,7 +11,7 @@ let value: OASOperation = {
   operationId: "<id>",
   path: "/usr/local/bin",
   tags: [
-    "<value>",
+    "<value 1>",
   ],
 };
 ```

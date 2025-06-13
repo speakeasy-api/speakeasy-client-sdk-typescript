@@ -23,6 +23,7 @@ Load recent events for a particular workspace
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -30,11 +31,9 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.events.getEventsByTarget({
-    workspaceId: "<id>",
     targetId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -52,6 +51,7 @@ import { eventsGetEventsByTarget } from "@speakeasy-api/speakeasy-client-sdk-typ
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -59,18 +59,14 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await eventsGetEventsByTarget(speakeasy, {
-    workspaceId: "<id>",
     targetId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("eventsGetEventsByTarget failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -142,7 +138,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.events.getTargets({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -167,15 +162,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await eventsGetTargets(speakeasy, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("eventsGetTargets failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -239,17 +231,15 @@ Load targets for a particular workspace
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const result = await speakeasy.events.getTargetsDeprecated({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.events.getTargetsDeprecated({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -267,24 +257,20 @@ import { eventsGetTargetsDeprecated } from "@speakeasy-api/speakeasy-client-sdk-
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const res = await eventsGetTargetsDeprecated(speakeasy, {
-    workspaceId: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await eventsGetTargetsDeprecated(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("eventsGetTargetsDeprecated failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -348,6 +334,7 @@ Sends an array of events to be stored for a particular workspace.
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -355,14 +342,13 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   await speakeasy.events.post({
-    workspaceId: "<id>",
     requestBody: [
       {
-        createdAt: new Date("2025-03-02T10:07:28.113Z"),
+        createdAt: new Date("2023-02-16T09:12:42.397Z"),
         executionId: "<id>",
         id: "<id>",
-        interactionType: "AUTHENTICATE",
-        localStartedAt: new Date("2025-08-12T17:54:17.538Z"),
+        interactionType: "QUICKSTART",
+        localStartedAt: new Date("2024-01-24T01:13:51.002Z"),
         speakeasyApiKeyName: "<value>",
         speakeasyVersion: "<value>",
         success: true,
@@ -388,6 +374,7 @@ import { eventsPost } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -395,14 +382,13 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await eventsPost(speakeasy, {
-    workspaceId: "<id>",
     requestBody: [
       {
-        createdAt: new Date("2025-03-02T10:07:28.113Z"),
+        createdAt: new Date("2023-02-16T09:12:42.397Z"),
         executionId: "<id>",
         id: "<id>",
-        interactionType: "AUTHENTICATE",
-        localStartedAt: new Date("2025-08-12T17:54:17.538Z"),
+        interactionType: "QUICKSTART",
+        localStartedAt: new Date("2024-01-24T01:13:51.002Z"),
         speakeasyApiKeyName: "<value>",
         speakeasyVersion: "<value>",
         success: true,
@@ -410,14 +396,12 @@ async function run() {
       },
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("eventsPost failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -470,17 +454,15 @@ Search events for a particular workspace by any field
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const result = await speakeasy.events.search({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.events.search({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -498,24 +480,20 @@ import { eventsSearch } from "@speakeasy-api/speakeasy-client-sdk-typescript/fun
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const res = await eventsSearch(speakeasy, {
-    workspaceId: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await eventsSearch(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("eventsSearch failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

@@ -5,22 +5,7 @@
 ```typescript
 import { PostWorkspaceEventsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
-let value: PostWorkspaceEventsRequest = {
-  workspaceId: "<id>",
-  requestBody: [
-    {
-      createdAt: new Date("2025-11-05T20:35:28.386Z"),
-      executionId: "<id>",
-      id: "<id>",
-      interactionType: "TOMBSTONE",
-      localStartedAt: new Date("2024-04-20T05:34:53.347Z"),
-      speakeasyApiKeyName: "<value>",
-      speakeasyVersion: "<value>",
-      success: false,
-      workspaceId: "<id>",
-    },
-  ],
-};
+let value: PostWorkspaceEventsRequest = {};
 ```
 
 ## Fields

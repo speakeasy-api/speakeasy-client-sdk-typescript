@@ -7,15 +7,7 @@
 
 ```typescript
 const value: shared.UsageSnippets = {
-  snippets: [
-    {
-      code: "<value>",
-      language: "<value>",
-      method: "<value>",
-      operationId: "<id>",
-      path: "/home/user/dir",
-    },
-  ],
+  snippets: [],
 };
 ```
 

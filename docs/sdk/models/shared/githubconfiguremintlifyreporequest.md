@@ -10,9 +10,7 @@ import { GithubConfigureMintlifyRepoRequest } from "@speakeasy-api/speakeasy-cli
 let value: GithubConfigureMintlifyRepoRequest = {
   input: "<value>",
   org: "<value>",
-  overlays: [
-    "<value>",
-  ],
+  overlays: [],
   repo: "<value>",
 };
 ```

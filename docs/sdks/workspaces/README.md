@@ -40,16 +40,15 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.create({
-    createdAt: new Date("2024-06-17T07:14:55.338Z"),
+    createdAt: new Date("2023-11-18T13:41:10.525Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    updatedAt: new Date("2024-11-30T17:06:07.804Z"),
+    updatedAt: new Date("2024-11-21T08:36:32.740Z"),
     verified: true,
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -74,23 +73,20 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesCreate(speakeasy, {
-    createdAt: new Date("2024-06-17T07:14:55.338Z"),
+    createdAt: new Date("2023-11-18T13:41:10.525Z"),
     id: "<id>",
     name: "<value>",
     organizationId: "<id>",
     slug: "<value>",
-    updatedAt: new Date("2024-11-30T17:06:07.804Z"),
+    updatedAt: new Date("2024-11-21T08:36:32.740Z"),
     verified: true,
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -143,6 +139,7 @@ Create a token for a particular workspace
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -150,10 +147,9 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   await speakeasy.workspaces.createToken({
-    workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
-      createdAt: new Date("2023-08-16T02:33:00.784Z"),
+      createdAt: new Date("2024-10-04T10:23:04.522Z"),
       id: "<id>",
       key: "<key>",
       name: "<value>",
@@ -178,6 +174,7 @@ import { workspacesCreateToken } from "@speakeasy-api/speakeasy-client-sdk-types
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -185,24 +182,21 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesCreateToken(speakeasy, {
-    workspaceId: "<id>",
     workspaceToken: {
       alg: "<value>",
-      createdAt: new Date("2023-08-16T02:33:00.784Z"),
+      createdAt: new Date("2024-10-04T10:23:04.522Z"),
       id: "<id>",
       key: "<key>",
       name: "<value>",
       workspaceId: "<id>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("workspacesCreateToken failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -255,6 +249,7 @@ Delete a token for a particular workspace
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -262,7 +257,6 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   await speakeasy.workspaces.deleteToken({
-    workspaceId: "<id>",
     tokenID: "<id>",
   });
 
@@ -283,6 +277,7 @@ import { workspacesDeleteToken } from "@speakeasy-api/speakeasy-client-sdk-types
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -290,17 +285,14 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesDeleteToken(speakeasy, {
-    workspaceId: "<id>",
     tokenID: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("workspacesDeleteToken failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -361,7 +353,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.workspaces.get();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -386,15 +377,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesGet(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -464,7 +452,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.workspaces.getAll();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -489,15 +476,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesGetAll(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesGetAll failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -559,17 +543,15 @@ Get information about a particular workspace.
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getByID({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getByID({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -587,24 +569,20 @@ import { workspacesGetByID } from "@speakeasy-api/speakeasy-client-sdk-typescrip
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const res = await workspacesGetByID(speakeasy, {
-    workspaceId: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await workspacesGetByID(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesGetByID failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -668,17 +646,15 @@ Get workspace feature flags
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getFeatureFlags({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getFeatureFlags({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -696,24 +672,20 @@ import { workspacesGetFeatureFlags } from "@speakeasy-api/speakeasy-client-sdk-t
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const res = await workspacesGetFeatureFlags(speakeasy, {
-    workspaceId: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await workspacesGetFeatureFlags(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesGetFeatureFlags failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -777,17 +749,15 @@ Get settings about a particular workspace.
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getSettings({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getSettings({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -805,24 +775,20 @@ import { workspacesGetSettings } from "@speakeasy-api/speakeasy-client-sdk-types
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const res = await workspacesGetSettings(speakeasy, {
-    workspaceId: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await workspacesGetSettings(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesGetSettings failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -886,17 +852,15 @@ Get team members for a particular workspace
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getTeam({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getTeam({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -914,24 +878,20 @@ import { workspacesGetTeam } from "@speakeasy-api/speakeasy-client-sdk-typescrip
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const res = await workspacesGetTeam(speakeasy, {
-    workspaceId: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await workspacesGetTeam(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesGetTeam failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -995,17 +955,15 @@ Get tokens for a particular workspace
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const result = await speakeasy.workspaces.getTokens({
-    workspaceId: "<id>",
-  });
+  const result = await speakeasy.workspaces.getTokens({});
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1023,24 +981,20 @@ import { workspacesGetTokens } from "@speakeasy-api/speakeasy-client-sdk-typescr
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
 });
 
 async function run() {
-  const res = await workspacesGetTokens(speakeasy, {
-    workspaceId: "<id>",
-  });
-
-  if (!res.ok) {
-    throw res.error;
+  const res = await workspacesGetTokens(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesGetTokens failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1104,6 +1058,7 @@ Grant a user access to a particular workspace
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -1111,11 +1066,9 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.grantAccess({
-    workspaceId: "<id>",
-    email: "Lucinda.Batz8@hotmail.com",
+    email: "Idella24@gmail.com",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1133,6 +1086,7 @@ import { workspacesGrantAccess } from "@speakeasy-api/speakeasy-client-sdk-types
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -1140,18 +1094,14 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesGrantAccess(speakeasy, {
-    workspaceId: "<id>",
-    email: "Lucinda.Batz8@hotmail.com",
+    email: "Idella24@gmail.com",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesGrantAccess failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1204,6 +1154,7 @@ Revoke a user's access to a particular workspace
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -1211,7 +1162,6 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   await speakeasy.workspaces.revokeAccess({
-    workspaceId: "<id>",
     userId: "<id>",
   });
 
@@ -1232,6 +1182,7 @@ import { workspacesRevokeAccess } from "@speakeasy-api/speakeasy-client-sdk-type
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -1239,17 +1190,14 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesRevokeAccess(speakeasy, {
-    workspaceId: "<id>",
     userId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("workspacesRevokeAccess failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1309,13 +1257,9 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   const result = await speakeasy.workspaces.setFeatureFlags({
-    featureFlags: [
-      "skip_schema_registry",
-      "webhooks",
-    ],
+    featureFlags: [],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -1340,20 +1284,14 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesSetFeatureFlags(speakeasy, {
-    featureFlags: [
-      "skip_schema_registry",
-      "webhooks",
-    ],
+    featureFlags: [],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("workspacesSetFeatureFlags failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -1406,6 +1344,7 @@ Update information about a particular workspace.
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -1413,14 +1352,13 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   await speakeasy.workspaces.update({
-    workspaceId: "<id>",
     workspace: {
-      createdAt: new Date("2025-07-28T19:04:48.565Z"),
+      createdAt: new Date("2023-08-02T22:30:24.264Z"),
       id: "<id>",
       name: "<value>",
       organizationId: "<id>",
       slug: "<value>",
-      updatedAt: new Date("2024-10-16T10:52:42.015Z"),
+      updatedAt: new Date("2025-01-24T03:53:13.581Z"),
       verified: true,
     },
   });
@@ -1442,6 +1380,7 @@ import { workspacesUpdate } from "@speakeasy-api/speakeasy-client-sdk-typescript
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -1449,25 +1388,22 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesUpdate(speakeasy, {
-    workspaceId: "<id>",
     workspace: {
-      createdAt: new Date("2025-07-28T19:04:48.565Z"),
+      createdAt: new Date("2023-08-02T22:30:24.264Z"),
       id: "<id>",
       name: "<value>",
       organizationId: "<id>",
       slug: "<value>",
-      updatedAt: new Date("2024-10-16T10:52:42.015Z"),
+      updatedAt: new Date("2025-01-24T03:53:13.581Z"),
       verified: true,
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("workspacesUpdate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1520,6 +1456,7 @@ Update settings about a particular workspace.
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
 const speakeasy = new Speakeasy({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -1527,11 +1464,10 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   await speakeasy.workspaces.updateSettings({
-    workspaceId: "<id>",
     workspaceSettings: {
-      createdAt: new Date("2023-07-05T11:43:28.305Z"),
-      updatedAt: new Date("2024-05-14T05:39:21.874Z"),
-      webhookUrl: "https://grown-pharmacopoeia.net",
+      createdAt: new Date("2025-03-09T15:48:09.330Z"),
+      updatedAt: new Date("2025-11-24T16:37:53.492Z"),
+      webhookUrl: "https://wobbly-lid.org",
       workspaceId: "<id>",
     },
   });
@@ -1553,6 +1489,7 @@ import { workspacesUpdateSettings } from "@speakeasy-api/speakeasy-client-sdk-ty
 // Use `SpeakeasyCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
 const speakeasy = new SpeakeasyCore({
+  workspaceId: "<id>",
   security: {
     apiKey: "<YOUR_API_KEY_HERE>",
   },
@@ -1560,22 +1497,19 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await workspacesUpdateSettings(speakeasy, {
-    workspaceId: "<id>",
     workspaceSettings: {
-      createdAt: new Date("2023-07-05T11:43:28.305Z"),
-      updatedAt: new Date("2024-05-14T05:39:21.874Z"),
-      webhookUrl: "https://grown-pharmacopoeia.net",
+      createdAt: new Date("2025-03-09T15:48:09.330Z"),
+      updatedAt: new Date("2025-11-24T16:37:53.492Z"),
+      webhookUrl: "https://wobbly-lid.org",
       workspaceId: "<id>",
     },
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("workspacesUpdateSettings failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

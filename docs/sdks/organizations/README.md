@@ -34,16 +34,15 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.organizations.create({
     accountType: "scale-up",
-    createdAt: new Date("2024-11-30T17:06:07.804Z"),
+    createdAt: new Date("2025-10-26T09:05:00.560Z"),
     id: "<id>",
     name: "<value>",
     slug: "<value>",
-    ssoActivated: true,
-    telemetryDisabled: true,
-    updatedAt: new Date("2023-03-17T15:39:20.911Z"),
+    ssoActivated: false,
+    telemetryDisabled: false,
+    updatedAt: new Date("2023-12-23T08:00:51.380Z"),
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -69,23 +68,20 @@ const speakeasy = new SpeakeasyCore({
 async function run() {
   const res = await organizationsCreate(speakeasy, {
     accountType: "scale-up",
-    createdAt: new Date("2024-11-30T17:06:07.804Z"),
+    createdAt: new Date("2025-10-26T09:05:00.560Z"),
     id: "<id>",
     name: "<value>",
     slug: "<value>",
-    ssoActivated: true,
-    telemetryDisabled: true,
-    updatedAt: new Date("2023-03-17T15:39:20.911Z"),
+    ssoActivated: false,
+    telemetryDisabled: false,
+    updatedAt: new Date("2023-12-23T08:00:51.380Z"),
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("organizationsCreate failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -146,13 +142,10 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.organizations.createBillingAddOns({
     addOns: [
-      "sdk_testing",
-      "sdk_testing",
-      "webhooks",
+      "custom_code_regions",
     ],
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -178,20 +171,15 @@ const speakeasy = new SpeakeasyCore({
 async function run() {
   const res = await organizationsCreateBillingAddOns(speakeasy, {
     addOns: [
-      "sdk_testing",
-      "sdk_testing",
-      "webhooks",
+      "custom_code_regions",
     ],
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("organizationsCreateBillingAddOns failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -276,14 +264,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await organizationsCreateFreeTrial(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("organizationsCreateFreeTrial failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -342,7 +328,7 @@ const speakeasy = new Speakeasy({
 
 async function run() {
   await speakeasy.organizations.deleteBillingAddOn({
-    addOn: "custom_code_regions",
+    addOn: "sdk_testing",
   });
 
 
@@ -369,16 +355,14 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await organizationsDeleteBillingAddOn(speakeasy, {
-    addOn: "custom_code_regions",
+    addOn: "sdk_testing",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("organizationsDeleteBillingAddOn failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -441,7 +425,6 @@ async function run() {
     organizationID: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -468,15 +451,12 @@ async function run() {
   const res = await organizationsGet(speakeasy, {
     organizationID: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("organizationsGet failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -548,7 +528,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.organizations.getAll();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -573,15 +552,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await organizationsGetAll(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("organizationsGetAll failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -651,7 +627,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.organizations.getBillingAddOns();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -676,15 +651,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await organizationsGetBillingAddOns(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("organizationsGetBillingAddOns failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -754,7 +726,6 @@ const speakeasy = new Speakeasy({
 async function run() {
   const result = await speakeasy.organizations.getUsage();
 
-  // Handle the result
   console.log(result);
 }
 
@@ -779,15 +750,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await organizationsGetUsage(speakeasy);
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("organizationsGetUsage failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();

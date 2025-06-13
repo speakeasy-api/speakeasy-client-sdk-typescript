@@ -8,20 +8,14 @@ import { OrganizationUsage } from "@speakeasy-api/speakeasy-client-sdk-typescrip
 let value: OrganizationUsage = {
   accessible: false,
   accessibleFeatures: [
-    "<value>",
+    "<value 1>",
   ],
-  genLockIds: [
-    "<value>",
-  ],
+  genLockIds: [],
   language: "<value>",
-  maxOperations: 894069,
-  numberOfOperations: 286038,
-  usedFeatures: [
-    "<value>",
-  ],
-  workspaces: [
-    "<value>",
-  ],
+  maxOperations: 131985,
+  numberOfOperations: 421782,
+  usedFeatures: [],
+  workspaces: [],
 };
 ```
 

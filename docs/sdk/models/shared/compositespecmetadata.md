@@ -9,11 +9,14 @@ let value: CompositeSpecMetadata = {
   subscriptionId: "<id>",
   subscriptionSettings: {
     baseSpecNamespaces: [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
+      "<value 3>",
     ],
     outputNamespace: "<value>",
     overlayNamespaces: [
-      "<value>",
+      "<value 1>",
+      "<value 2>",
     ],
   },
 };

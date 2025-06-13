@@ -5,9 +5,7 @@
 ```typescript
 import { SearchWorkspaceEventsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
-let value: SearchWorkspaceEventsRequest = {
-  workspaceId: "<id>",
-};
+let value: SearchWorkspaceEventsRequest = {};
 ```
 
 ## Fields

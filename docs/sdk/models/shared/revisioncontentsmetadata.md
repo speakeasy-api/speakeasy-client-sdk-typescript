@@ -6,22 +6,24 @@
 import { RevisionContentsMetadata } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: RevisionContentsMetadata = {
-  containsCodeSamples: false,
-  createdAt: new Date("2023-03-29T23:52:27.454Z"),
-  description:
-    "among jubilantly fireplace physical rebuild per definitive gracefully failing unfinished",
+  containsCodeSamples: true,
+  createdAt: new Date("2025-12-31T02:32:30.098Z"),
+  description: "bidet singe kowtow crafty nor obscure",
   hash: "<value>",
   namespace: "<value>",
-  numOverlayActions: 955994,
+  numOverlayActions: 277293,
   operationIds: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   revisionDigest: "<value>",
   tags: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
   ],
   title: "<value>",
-  type: "OPENAPI_BUNDLE",
+  type: "OPENAPI_OVERLAY",
   version: "<value>",
   workspaceId: "<id>",
 };

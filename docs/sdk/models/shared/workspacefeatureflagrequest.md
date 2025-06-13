@@ -8,9 +8,7 @@ A request to add workspace feature flags
 import { WorkspaceFeatureFlagRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: WorkspaceFeatureFlagRequest = {
-  featureFlags: [
-    "schema_registry",
-  ],
+  featureFlags: [],
 };
 ```
 

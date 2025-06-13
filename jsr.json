@@ -2,7 +2,7 @@
 
 {
   "name": "@speakeasy-api/speakeasy-client-sdk-typescript",
-  "version": "5.0.0-rc.3",
+  "version": "5.0.0-rc.4",
   "exports": {
     ".": "./src/index.ts",    
     "./sdk/models/errors": "./src/sdk/models/errors/index.ts",    

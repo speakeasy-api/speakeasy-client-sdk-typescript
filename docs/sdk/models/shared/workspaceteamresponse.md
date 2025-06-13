@@ -10,14 +10,14 @@ import { WorkspaceTeamResponse } from "@speakeasy-api/speakeasy-client-sdk-types
 let value: WorkspaceTeamResponse = {
   users: [
     {
-      admin: false,
-      confirmed: false,
-      createdAt: new Date("2024-11-24T21:10:46.683Z"),
-      displayName: "Elvera.Mohr",
-      email: "Maud59@gmail.com",
+      admin: true,
+      confirmed: true,
+      createdAt: new Date("2024-10-27T01:43:45.295Z"),
+      displayName: "Henri69",
+      email: "Jairo1@yahoo.com",
       emailVerified: false,
       id: "<id>",
-      updatedAt: new Date("2024-01-02T05:13:39.423Z"),
+      updatedAt: new Date("2023-02-06T14:06:48.353Z"),
       whitelisted: false,
     },
   ],

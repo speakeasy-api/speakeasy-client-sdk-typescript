@@ -13,7 +13,7 @@ export const ServerProd = "prod";
  * Contains the list of servers available to the SDK
  */
 export const ServerList = {
-  [ServerProd]: "https://api.prod.speakeasyapi.dev",
+  [ServerProd]: "https://api.prod.speakeasy.com",
 } as const;
 
 export type SDKOptions = {
@@ -36,6 +36,10 @@ export type SDKOptions = {
    * Allows overriding the default server URL used by the SDK
    */
   serverURL?: string | undefined;
+  /**
+   * Allows overriding the default user agent used by the SDK
+   */
+  userAgent?: string | undefined;
   /**
    * Allows overriding the default retry config used by the SDK
    */
@@ -61,8 +65,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "0.4.0",
-  sdkVersion: "5.0.0-rc.3",
-  genVersion: "2.585.2",
+  sdkVersion: "5.0.0-rc.4",
+  genVersion: "2.628.0",
   userAgent:
-    "speakeasy-sdk/typescript 5.0.0-rc.3 2.585.2 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript",
+    "speakeasy-sdk/typescript 5.0.0-rc.4 2.628.0 0.4.0 @speakeasy-api/speakeasy-client-sdk-typescript",
 } as const;

@@ -5,17 +5,7 @@
 ```typescript
 import { CreateWorkspaceTokenRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
-let value: CreateWorkspaceTokenRequest = {
-  workspaceId: "<id>",
-  workspaceToken: {
-    alg: "<value>",
-    createdAt: new Date("2023-10-18T04:12:26.286Z"),
-    id: "<id>",
-    key: "<key>",
-    name: "<value>",
-    workspaceId: "<id>",
-  },
-};
+let value: CreateWorkspaceTokenRequest = {};
 ```
 
 ## Fields

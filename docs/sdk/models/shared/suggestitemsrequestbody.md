@@ -7,7 +7,9 @@ import { SuggestItemsRequestBody } from "@speakeasy-api/speakeasy-client-sdk-typ
 
 let value: SuggestItemsRequestBody = {
   items: [
-    "<value>",
+    "<value 1>",
+    "<value 2>",
+    "<value 3>",
   ],
   prompt: "<value>",
 };

@@ -65,14 +65,12 @@ async function run() {
     org: "<value>",
     repo: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("githubCheckAccess failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -146,7 +144,6 @@ async function run() {
     repo: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -175,15 +172,12 @@ async function run() {
     org: "<value>",
     repo: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("githubCheckPublishingPRs failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -255,7 +249,6 @@ async function run() {
     generateGenLockId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -282,15 +275,12 @@ async function run() {
   const res = await githubCheckPublishingSecrets(speakeasy, {
     generateGenLockId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("githubCheckPublishingSecrets failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -364,7 +354,6 @@ async function run() {
     targetName: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -393,15 +382,12 @@ async function run() {
     repo: "<value>",
     targetName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("githubConfigureCodeSamples failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -462,7 +448,7 @@ async function run() {
     input: "<value>",
     org: "<value>",
     overlays: [
-      "<value>",
+      "<value 1>",
     ],
     repo: "<value>",
   });
@@ -494,18 +480,16 @@ async function run() {
     input: "<value>",
     org: "<value>",
     overlays: [
-      "<value>",
+      "<value 1>",
     ],
     repo: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("githubConfigureMintlifyRepo failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -594,14 +578,12 @@ async function run() {
     org: "<value>",
     repoName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("githubConfigureTarget failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -663,7 +645,6 @@ async function run() {
     repo: "<value>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -691,15 +672,12 @@ async function run() {
     org: "<value>",
     repo: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("githubGetAction failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -773,7 +751,6 @@ async function run() {
     generateGenLockId: "<id>",
   });
 
-  // Handle the result
   console.log(result);
 }
 
@@ -802,15 +779,12 @@ async function run() {
     repo: "<value>",
     generateGenLockId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("githubGetSetup failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  // Handle the result
-  console.log(result);
 }
 
 run();
@@ -904,14 +878,12 @@ const speakeasy = new SpeakeasyCore({
 
 async function run() {
   const res = await githubLinkGithub(speakeasy, {});
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("githubLinkGithub failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -998,14 +970,12 @@ async function run() {
   const res = await githubStorePublishingSecrets(speakeasy, {
     generateGenLockId: "<id>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("githubStorePublishingSecrets failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();
@@ -1096,14 +1066,12 @@ async function run() {
     org: "<value>",
     repoName: "<value>",
   });
-
-  if (!res.ok) {
-    throw res.error;
+  if (res.ok) {
+    const { value: result } = res;
+    
+  } else {
+    console.log("githubTriggerAction failed:", res.error);
   }
-
-  const { value: result } = res;
-
-  
 }
 
 run();

@@ -6,7 +6,6 @@
 import { DeleteWorkspaceTokenRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
 let value: DeleteWorkspaceTokenRequest = {
-  workspaceId: "<id>",
   tokenID: "<id>",
 };
 ```

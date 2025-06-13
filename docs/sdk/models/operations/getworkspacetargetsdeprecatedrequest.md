@@ -5,9 +5,7 @@
 ```typescript
 import { GetWorkspaceTargetsDeprecatedRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
-let value: GetWorkspaceTargetsDeprecatedRequest = {
-  workspaceId: "<id>",
-};
+let value: GetWorkspaceTargetsDeprecatedRequest = {};
 ```
 
 ## Fields

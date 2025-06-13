@@ -6,7 +6,6 @@
 import { RevokeUserAccessToWorkspaceRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
 let value: RevokeUserAccessToWorkspaceRequest = {
-  workspaceId: "<id>",
   userId: "<id>",
 };
 ```

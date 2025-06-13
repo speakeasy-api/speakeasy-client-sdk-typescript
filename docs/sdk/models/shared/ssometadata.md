@@ -8,10 +8,8 @@ SSO metadata for a workspace
 import { SSOMetadata } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: SSOMetadata = {
-  ssoActivated: false,
-  ssoDomains: [
-    "<value>",
-  ],
+  ssoActivated: true,
+  ssoDomains: [],
 };
 ```
 

@@ -13,7 +13,7 @@ let value: CliEvent = {
   localStartedAt: new Date("2025-12-31T06:45:11.818Z"),
   speakeasyApiKeyName: "<value>",
   speakeasyVersion: "<value>",
-  success: false,
+  success: true,
   workspaceId: "<id>",
 };
 ```
