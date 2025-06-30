@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 17226457b23fc2563102eb22d263bc30
+  docChecksum: e0ab62d51241a027c4f5e73fc8860a3f
   docVersion: 0.4.0
-  speakeasyVersion: 1.561.0
-  generationVersion: 2.628.0
-  releaseVersion: 5.0.0-rc.4
-  configChecksum: f3d6e491d6a8639407af1874416c9ae0
+  speakeasyVersion: 1.571.2
+  generationVersion: 2.640.2
+  releaseVersion: 5.0.0-rc.5
+  configChecksum: aa8ec15dde661bbd4cffa7d38a0b35c7
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -14,7 +14,7 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.11
+    constsAndDefaults: 0.1.12
     core: 3.21.11
     deepObjectParams: 0.1.0
     defaultEnabledRetries: 0.1.0
@@ -179,6 +179,7 @@ generatedFiles:
   - docs/sdk/models/shared/publishingtoken.md
   - docs/sdk/models/shared/pullrequestmetadata.md
   - docs/sdk/models/shared/relationship.md
+  - docs/sdk/models/shared/relativediff.md
   - docs/sdk/models/shared/remotedocument.md
   - docs/sdk/models/shared/remotesource.md
   - docs/sdk/models/shared/remotesourcesubscriptionsettings.md
@@ -605,6 +606,7 @@ generatedFiles:
   - src/sdk/models/shared/preflightrequest.ts
   - src/sdk/models/shared/preflighttoken.ts
   - src/sdk/models/shared/publishingtoken.ts
+  - src/sdk/models/shared/relativediff.ts
   - src/sdk/models/shared/remotedocument.ts
   - src/sdk/models/shared/remotesource.ts
   - src/sdk/models/shared/remotesourcesubscriptionsettings.ts
