@@ -18,6 +18,7 @@ Checks if generation is permitted for a particular run of the CLI
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceAccess" method="get" path="/v1/workspace/access" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -118,6 +119,7 @@ Get or refresh an access token for the current workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getAccessToken" method="get" path="/v1/auth/access_token" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -215,6 +217,7 @@ Get information about the current user.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getUser" method="get" path="/v1/user" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -314,6 +317,7 @@ Validate the current api key.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="validateApiKey" method="get" path="/v1/auth/validate" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 89968bf0-a755-4d50-9acb-d47410010f05
 management:
-  docChecksum: 17226457b23fc2563102eb22d263bc30
+  docChecksum: 9fe547b1abb3170dfb491aa3c76e07b2
   docVersion: 0.4.0
-  speakeasyVersion: 1.561.0
-  generationVersion: 2.628.0
-  releaseVersion: 5.0.0-rc.4
-  configChecksum: f3d6e491d6a8639407af1874416c9ae0
+  speakeasyVersion: 1.592.1
+  generationVersion: 2.667.0
+  releaseVersion: 5.0.0-rc.5
+  configChecksum: 8f32dff730a6cfb096db6739defc4fe5
   repoURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-api/speakeasy-client-sdk-typescript
@@ -14,8 +14,8 @@ management:
 features:
   typescript:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.11
-    core: 3.21.11
+    constsAndDefaults: 0.1.12
+    core: 3.21.16
     deepObjectParams: 0.1.0
     defaultEnabledRetries: 0.1.0
     deprecations: 2.81.1
@@ -26,7 +26,7 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalServerURLs: 2.82.5
     globals: 2.82.2
-    mcpServer: 0.9.2
+    mcpServer: 0.9.3
     nameOverrides: 2.81.2
     nullables: 0.1.1
     openEnums: 0.1.1
@@ -179,6 +179,7 @@ generatedFiles:
   - docs/sdk/models/shared/publishingtoken.md
   - docs/sdk/models/shared/pullrequestmetadata.md
   - docs/sdk/models/shared/relationship.md
+  - docs/sdk/models/shared/relativediff.md
   - docs/sdk/models/shared/remotedocument.md
   - docs/sdk/models/shared/remotesource.md
   - docs/sdk/models/shared/remotesourcesubscriptionsettings.md
@@ -231,6 +232,10 @@ generatedFiles:
   - docs/sdks/suggest/README.md
   - docs/sdks/workspaces/README.md
   - eslint.config.mjs
+  - examples/.env.template
+  - examples/README.md
+  - examples/artifactsCreateRemoteSource.example.ts
+  - examples/package.json
   - jsr.json
   - package.json
   - src/core.ts
@@ -605,6 +610,7 @@ generatedFiles:
   - src/sdk/models/shared/preflightrequest.ts
   - src/sdk/models/shared/preflighttoken.ts
   - src/sdk/models/shared/publishingtoken.ts
+  - src/sdk/models/shared/relativediff.ts
   - src/sdk/models/shared/remotedocument.ts
   - src/sdk/models/shared/remotesource.ts
   - src/sdk/models/shared/remotesourcesubscriptionsettings.ts

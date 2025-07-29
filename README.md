@@ -383,7 +383,7 @@ run();
 ### Error Classes
 **Primary errors:**
 * [`SpeakeasyError`](./src/sdk/models/errors/speakeasyerror.ts): The base class for HTTP error responses.
-  * [`ErrorT`](docs/sdk/models/errors/errort.md): The `Status` type defines a logical error model. *
+  * [`ErrorT`](./src/sdk/models/errors/errort.ts): The `Status` type defines a logical error model. *
 
 <details><summary>Less common errors (6)</summary>
 
