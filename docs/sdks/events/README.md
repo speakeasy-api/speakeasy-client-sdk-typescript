@@ -19,6 +19,7 @@ Load recent events for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceEventsByTarget" method="get" path="/v1/workspace/{workspace_id}/events/targets/{target_id}/events" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -126,6 +127,7 @@ Load targets for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceTargets" method="get" path="/v1/workspace/events/targets" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -227,6 +229,7 @@ Load targets for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceTargetsDeprecated" method="get" path="/v1/workspace/{workspace_id}/events/targets" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -330,6 +333,7 @@ Sends an array of events to be stored for a particular workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="postWorkspaceEvents" method="post" path="/v1/workspace/{workspace_id}/events" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -450,6 +454,7 @@ Search events for a particular workspace by any field
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="searchWorkspaceEvents" method="get" path="/v1/workspace/{workspace_id}/events" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
