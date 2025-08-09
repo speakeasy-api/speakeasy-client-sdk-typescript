@@ -23,6 +23,7 @@ REST APIs for managing the github integration
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="checkGithubAccess" method="get" path="/v1/github/check_access" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -128,6 +129,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="githubCheckPublishingPRs" method="get" path="/v1/github/publishing_prs" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -235,6 +237,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="githubCheckPublishingSecrets" method="get" path="/v1/github/publishing_secrets" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -338,6 +341,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="githubConfigureCodeSamples" method="post" path="/v1/github/configure_code_samples" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -434,6 +438,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="githubConfigureMintlifyRepo" method="post" path="/v1/github/configure_mintlify_repo" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -536,6 +541,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="githubConfigureTarget" method="post" path="/v1/github/configure_target" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -630,6 +636,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getGitHubAction" method="get" path="/v1/github/action" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -735,6 +742,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getGithubSetupState" method="get" path="/v1/github/setup" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -842,6 +850,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="linkGithubAccess" method="post" path="/v1/github/link" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -930,6 +939,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="githubStorePublishingSecrets" method="post" path="/v1/github/publishing_secrets" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -1022,6 +1032,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="githubTriggerAction" method="post" path="/v1/github/trigger_action" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

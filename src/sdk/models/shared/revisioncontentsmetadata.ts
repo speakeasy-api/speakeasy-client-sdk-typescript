@@ -8,6 +8,12 @@ import { safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+import {
+  RelativeDiff,
+  RelativeDiff$inboundSchema,
+  RelativeDiff$Outbound,
+  RelativeDiff$outboundSchema,
+} from "./relativediff.js";
 
 export const RevisionContentsMetadataType = {
   OpenapiBundle: "OPENAPI_BUNDLE",
@@ -43,6 +49,10 @@ export type RevisionContentsMetadata = {
    * The operation IDs contained in the OAS. Will be empty if the OAS is an overlay.
    */
   operationIds: Array<string>;
+  /**
+   * A relative diff between the current revision and the previous revision.
+   */
+  relativeDiff?: RelativeDiff | undefined;
   /**
    * The digest of the parent bundle
    */
@@ -100,6 +110,7 @@ export const RevisionContentsMetadata$inboundSchema: z.ZodType<
   namespace: z.string(),
   num_overlay_actions: z.number().int(),
   operation_ids: z.array(z.string()),
+  relative_diff: RelativeDiff$inboundSchema.optional(),
   revision_digest: z.string(),
   tags: z.array(z.string()),
   title: z.string(),
@@ -112,6 +123,7 @@ export const RevisionContentsMetadata$inboundSchema: z.ZodType<
     "created_at": "createdAt",
     "num_overlay_actions": "numOverlayActions",
     "operation_ids": "operationIds",
+    "relative_diff": "relativeDiff",
     "revision_digest": "revisionDigest",
     "workspace_id": "workspaceId",
   });
@@ -126,6 +138,7 @@ export type RevisionContentsMetadata$Outbound = {
   namespace: string;
   num_overlay_actions: number;
   operation_ids: Array<string>;
+  relative_diff?: RelativeDiff$Outbound | undefined;
   revision_digest: string;
   tags: Array<string>;
   title: string;
@@ -147,6 +160,7 @@ export const RevisionContentsMetadata$outboundSchema: z.ZodType<
   namespace: z.string(),
   numOverlayActions: z.number().int(),
   operationIds: z.array(z.string()),
+  relativeDiff: RelativeDiff$outboundSchema.optional(),
   revisionDigest: z.string(),
   tags: z.array(z.string()),
   title: z.string(),
@@ -159,6 +173,7 @@ export const RevisionContentsMetadata$outboundSchema: z.ZodType<
     createdAt: "created_at",
     numOverlayActions: "num_overlay_actions",
     operationIds: "operation_ids",
+    relativeDiff: "relative_diff",
     revisionDigest: "revision_digest",
     workspaceId: "workspace_id",
   });

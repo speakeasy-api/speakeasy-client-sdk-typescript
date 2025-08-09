@@ -1,30 +1,30 @@
-speakeasyVersion: 1.561.0
+speakeasyVersion: 1.600.2
 sources:
     my-source:
-        sourceNamespace: my-source
-        sourceRevisionDigest: sha256:2e5dc78239617b9501f2028df534aa4601c61396c89a582390d75a797fc228cc
-        sourceBlobDigest: sha256:0442ef7698d8979dd825b3eab0ab868ac86580f4cffcd3e0dff7afdd6191e6d9
+        sourceNamespace: ts-client-source
+        sourceRevisionDigest: sha256:802dc7b246c02d418741629981a8b0d57f6993d67f0d2cf26bc3654db30ba01a
+        sourceBlobDigest: sha256:ec4ec370491ceb2ff1df4ba4a12bb743c761566998c5dd22e1d8730a8654d7e3
         tags:
             - latest
-            - speakeasy-sdk-regen-1746577270
+            - speakeasy-sdk-regen-1753835013
             - 0.4.0
 targets:
     speakeasy-client-sdk-typescript:
         source: my-source
-        sourceNamespace: my-source
-        sourceRevisionDigest: sha256:2e5dc78239617b9501f2028df534aa4601c61396c89a582390d75a797fc228cc
-        sourceBlobDigest: sha256:0442ef7698d8979dd825b3eab0ab868ac86580f4cffcd3e0dff7afdd6191e6d9
+        sourceNamespace: ts-client-source
+        sourceRevisionDigest: sha256:802dc7b246c02d418741629981a8b0d57f6993d67f0d2cf26bc3654db30ba01a
+        sourceBlobDigest: sha256:ec4ec370491ceb2ff1df4ba4a12bb743c761566998c5dd22e1d8730a8654d7e3
         codeSamplesNamespace: my-source-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:65717f579dccb319b073cb22e553e23bd3419cf420967387c00d148c041f5dc1
+        codeSamplesRevisionDigest: sha256:45183a9500c3d20e52ad7fb69cba2ff792e1b68bcb584cd48829aead5309a960
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         my-source:
             inputs:
-                - location: https://speakeasy.com/openapi.yaml
+                - location: https://spec.speakeasy.com/speakeasy-self/speakeasy-self/speakeasy-api
             registry:
-                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/my-source
+                location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/ts-client-source
     targets:
         speakeasy-client-sdk-typescript:
             target: typescript
