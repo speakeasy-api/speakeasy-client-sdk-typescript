@@ -1340,7 +1340,3 @@ examples:
           application/json: {"message": "<value>", "status_code": 436496}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes Detected:
-  * `speakeasy.artifacts.getNamespaces()`:  `response.items.[].latestRevisionMetadata.relativeDiff` **Added**
-  * `speakeasy.artifacts.getRevisions()`:  `response.items.[].contentsMetadata.relativeDiff` **Added**
