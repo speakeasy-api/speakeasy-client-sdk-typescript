@@ -44,6 +44,9 @@ jobs:
           echo "Git status after speakeasy run:"
           git status
 
+          # Reset ignored files to avoid counting them as changes
+          git checkout HEAD -- .speakeasy/gen.lock .speakeasy/workflow.lock 2>/dev/null || true
+
           if [ -n "$(git status --porcelain)" ]; then
             echo "changes_detected=true" >> $GITHUB_OUTPUT
             echo "Non-deterministic changes detected!"
