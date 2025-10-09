@@ -73,12 +73,9 @@ bun add @tanstack/react-query react react-dom
 ### Yarn
 
 ```bash
-yarn add @speakeasy-api/speakeasy-client-sdk-typescript zod
+yarn add @speakeasy-api/speakeasy-client-sdk-typescript
 # Install optional peer dependencies if you plan to use React hooks
 yarn add @tanstack/react-query react react-dom
-
-# Note that Yarn does not install peer dependencies automatically. You will need
-# to install zod as shown above.
 ```
 
 
@@ -287,7 +284,6 @@ run();
 
 * [create](docs/sdks/shorturls/README.md#create) - Shorten a URL.
 
-
 ### [subscriptions](docs/sdks/subscriptions/README.md)
 
 * [activateSubscriptionNamespace](docs/sdks/subscriptions/README.md#activatesubscriptionnamespace) - Activate an ignored namespace for a subscription
@@ -379,7 +375,7 @@ run();
 ### Error Classes
 **Primary errors:**
 * [`SpeakeasyError`](./src/sdk/models/errors/speakeasyerror.ts): The base class for HTTP error responses.
-  * [`ErrorT`](docs/sdk/models/errors/errort.md): The `Status` type defines a logical error model. *
+  * [`ErrorT`](./src/sdk/models/errors/errort.ts): The `Status` type defines a logical error model. *
 
 <details><summary>Less common errors (6)</summary>
 
@@ -503,7 +499,7 @@ httpClient.addHook("requestError", (error, request) => {
   console.groupEnd();
 });
 
-const sdk = new Speakeasy({ httpClient });
+const sdk = new Speakeasy({ httpClient: httpClient });
 ```
 <!-- End Custom HTTP Client [http-client] -->
 

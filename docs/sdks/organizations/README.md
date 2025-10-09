@@ -22,6 +22,7 @@ Creates an organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createOrganization" method="post" path="/v1/organization" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -130,6 +131,7 @@ Create billing add ons
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createBillingAddOns" method="post" path="/v1/organization/add_ons" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -228,6 +230,7 @@ Creates a free trial for an organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createFreeTrial" method="post" path="/v1/organization/free_trial" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -317,6 +320,7 @@ Delete billing add ons
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteBillingAddOn" method="delete" path="/v1/organization/add_ons/{add_on}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -411,6 +415,7 @@ Get information about a particular organization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getOrganization" method="get" path="/v1/organization/{organizationID}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -516,6 +521,7 @@ Returns a list of organizations a user has access too
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getOrganizations" method="get" path="/v1/organizations" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -615,6 +621,7 @@ Get billing add ons
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getBillingAddOns" method="get" path="/v1/organization/add_ons" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -714,6 +721,7 @@ Returns a billing usage summary by target languages for a particular organizatio
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getOrganizationUsage" method="get" path="/v1/organization/usage" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

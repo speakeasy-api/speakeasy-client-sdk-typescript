@@ -25,6 +25,7 @@ Configure a new remote source
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createRemoteSource" method="post" path="/v1/artifacts/remote_sources" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -115,6 +116,7 @@ Get blob for a particular digest
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getBlob" method="get" path="/v1/oci/v2/{organization_slug}/{workspace_slug}/{namespace_name}/blobs/{digest}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -226,6 +228,7 @@ Get manifest for a particular reference
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getManifest" method="get" path="/v1/oci/v2/{organization_slug}/{workspace_slug}/{namespace_name}/manifests/{revision_reference}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -337,6 +340,7 @@ Each namespace contains many revisions.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getNamespaces" method="get" path="/v1/artifacts/namespaces" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -434,6 +438,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getRevisions" method="get" path="/v1/artifacts/namespaces/{namespace_name}/revisions" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -537,6 +542,7 @@ import {
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getTags" method="get" path="/v1/artifacts/namespaces/{namespace_name}/tags" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -642,6 +648,7 @@ Get remote sources attached to a particular namespace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="listRemoteSources" method="get" path="/v1/artifacts/remote_sources" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -747,6 +754,7 @@ Add tags to an existing revision
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="postTags" method="post" path="/v1/artifacts/namespaces/{namespace_name}/tags" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -841,6 +849,7 @@ Get access token for communicating with OCI distribution endpoints
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="preflight" method="post" path="/v1/artifacts/preflight" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -931,6 +940,7 @@ Set whether a namespace is archived
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="archiveNamespace" method="post" path="/v1/artifacts/namespaces/{namespace_name}/archive" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -1025,6 +1035,7 @@ Set visibility of a namespace with an existing metadata entry
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="setVisibility" method="post" path="/v1/artifacts/namespaces/{namespace_name}/visibility" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
