@@ -17,6 +17,7 @@ Get the signed access url for the change reports for a particular document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getChangesReportSignedUrl" method="get" path="/v1/reports/changes/{documentChecksum}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -121,6 +122,7 @@ Get the signed access url for the linting reports for a particular document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getLintingReportSignedUrl" method="get" path="/v1/reports/linting/{documentChecksum}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -225,6 +227,7 @@ Upload a report.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="uploadReport" method="post" path="/v1/reports" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { openAsBlob } from "node:fs";

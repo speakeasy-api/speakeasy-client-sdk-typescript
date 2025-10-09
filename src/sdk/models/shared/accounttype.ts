@@ -13,6 +13,7 @@ export const AccountType = {
   Free: "free",
   ScaleUp: "scale-up",
   Business: "business",
+  Oss: "oss",
   Enterprise: "enterprise",
 } as const;
 export type AccountType = OpenEnum<typeof AccountType>;

@@ -6,7 +6,7 @@
 import { ApiKeyDetails } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: ApiKeyDetails = {
-  accountTypeV2: "enterprise",
+  accountTypeV2: "oss",
   billingAddOns: [
     "snippet_ai",
   ],

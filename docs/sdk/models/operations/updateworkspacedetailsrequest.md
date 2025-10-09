@@ -5,7 +5,17 @@
 ```typescript
 import { UpdateWorkspaceDetailsRequest } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
-let value: UpdateWorkspaceDetailsRequest = {};
+let value: UpdateWorkspaceDetailsRequest = {
+  workspace: {
+    createdAt: new Date("2023-11-16T00:00:08.537Z"),
+    id: "<id>",
+    name: "<value>",
+    organizationId: "<id>",
+    slug: "<value>",
+    updatedAt: new Date("2024-06-14T01:29:49.528Z"),
+    verified: true,
+  },
+};
 ```
 
 ## Fields

@@ -9,7 +9,7 @@ import { WorkspaceAndOrganization } from "@speakeasy-api/speakeasy-client-sdk-ty
 
 let value: WorkspaceAndOrganization = {
   organization: {
-    accountType: "business",
+    accountType: "oss",
     createdAt: new Date("2023-06-23T09:04:56.583Z"),
     id: "<id>",
     name: "<value>",

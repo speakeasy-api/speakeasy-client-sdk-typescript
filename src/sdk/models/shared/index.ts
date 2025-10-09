@@ -42,6 +42,7 @@ export * from "./organizationusageresponse.js";
 export * from "./preflightrequest.js";
 export * from "./preflighttoken.js";
 export * from "./publishingtoken.js";
+export * from "./relativediff.js";
 export * from "./remotedocument.js";
 export * from "./remotesource.js";
 export * from "./remotesourcesubscriptionsettings.js";

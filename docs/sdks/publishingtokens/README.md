@@ -19,6 +19,7 @@ Creates a publishing token for the current workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createPublishingToken" method="post" path="/v1/publishing-tokens" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -109,6 +110,7 @@ Delete a particular publishing token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deletePublishingToken" method="delete" path="/v1/publishing-tokens/{tokenID}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -203,6 +205,7 @@ Get information about a particular publishing token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getPublishingTokenByID" method="get" path="/v1/publishing-tokens/{tokenID}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -308,6 +311,7 @@ Returns a publishing token for the current workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getPublishingToken" method="get" path="/v1/publishing-tokens" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -407,6 +411,7 @@ Get information about a particular publishing token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getPublishingTokenPublicMetadata" method="get" path="/v1/publishing-tokens/{tokenID}/metadata" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -512,6 +517,7 @@ Get information about a particular publishing token target.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getPublishingTokenTargetByID" method="get" path="/v1/publishing-tokens/{tokenID}/target" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -617,6 +623,7 @@ Updates the validity period of a particular publishing token.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updatePublishingTokenExpiration" method="put" path="/v1/publishing-tokens/{tokenID}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
