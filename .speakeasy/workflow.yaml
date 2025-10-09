@@ -5,7 +5,7 @@ sources:
         inputs:
             - location: https://spec.speakeasy.com/speakeasy-self/speakeasy-self/speakeasy-api
         registry:
-            location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/ts-client-source
+            location: registry.speakeasyapi.dev/speakeasy-self/speakeasy-self/my-source
 targets:
     speakeasy-client-sdk-typescript:
         target: typescript
