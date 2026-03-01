@@ -1,5 +1,4 @@
 # Events
-(*events*)
 
 ## Overview
 
@@ -10,6 +9,7 @@ REST APIs for managing events captured by a speakeasy binary (CLI, GitHub Action
 * [getEventsByTarget](#geteventsbytarget) - Load recent events for a particular workspace
 * [getTargets](#gettargets) - Load targets for a particular workspace
 * [getTargetsDeprecated](#gettargetsdeprecated) - Load targets for a particular workspace
+* [getTargetsSummary](#gettargetssummary) - Load a lean summary of targets for a workspace with pagination. Returns only essential fields needed by the dashboard UI.
 * [post](#post) - Post events for a specific workspace
 * [search](#search) - Search events for a particular workspace by any field
 
@@ -19,6 +19,7 @@ Load recent events for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceEventsByTarget" method="get" path="/v1/workspace/{workspace_id}/events/targets/{target_id}/events" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -126,6 +127,7 @@ Load targets for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceTargets" method="get" path="/v1/workspace/events/targets" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -227,6 +229,7 @@ Load targets for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceTargetsDeprecated" method="get" path="/v1/workspace/{workspace_id}/events/targets" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -324,12 +327,122 @@ import {
 | errors.ErrorT    | 5XX              | application/json |
 | errors.SDKError  | 4XX              | \*/\*            |
 
+## getTargetsSummary
+
+Load a lean summary of targets for a workspace with pagination. Returns only essential fields needed by the dashboard UI.
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceTargetsSummary" method="get" path="/v1/workspace/events/targets/summary" -->
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const result = await speakeasy.events.getTargetsSummary({});
+
+  for await (const page of result) {
+    console.log(page);
+  }
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { SpeakeasyCore } from "@speakeasy-api/speakeasy-client-sdk-typescript/core.js";
+import { eventsGetTargetsSummary } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs/eventsGetTargetsSummary.js";
+
+// Use `SpeakeasyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const speakeasy = new SpeakeasyCore({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const res = await eventsGetTargetsSummary(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    for await (const page of result) {
+    console.log(page);
+  }
+  } else {
+    console.log("eventsGetTargetsSummary failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useEventsGetTargetsSummary,
+  useEventsGetTargetsSummarySuspense,
+  // Query hooks suitable for building infinite scrolling or "load more" UIs.
+  useEventsGetTargetsSummaryInfinite,
+  useEventsGetTargetsSummaryInfiniteSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchEventsGetTargetsSummary,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateEventsGetTargetsSummary,
+  invalidateAllEventsGetTargetsSummary,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/eventsGetTargetsSummary.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetWorkspaceTargetsSummaryRequest](../../sdk/models/operations/getworkspacetargetssummaryrequest.md)                                                               | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetWorkspaceTargetsSummaryResponse](../../sdk/models/operations/getworkspacetargetssummaryresponse.md)\>**
+
+### Errors
+
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 5XX              | application/json |
+| errors.SDKError  | 4XX              | \*/\*            |
+
 ## post
 
 Sends an array of events to be stored for a particular workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="postWorkspaceEvents" method="post" path="/v1/workspace/{workspace_id}/events" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -450,6 +563,7 @@ Search events for a particular workspace by any field
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="searchWorkspaceEvents" method="get" path="/v1/workspace/{workspace_id}/events" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

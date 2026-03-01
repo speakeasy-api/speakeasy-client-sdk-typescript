@@ -5,33 +5,60 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { githubGetAction } from "../funcs/githubGetAction.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildGithubGetActionQuery,
+  GithubGetActionQueryData,
+  prefetchGithubGetAction,
+  queryKeyGithubGetAction,
+} from "./githubGetAction.core.js";
+export {
+  buildGithubGetActionQuery,
+  type GithubGetActionQueryData,
+  prefetchGithubGetAction,
+  queryKeyGithubGetAction,
+};
 
-export type GithubGetActionQueryData = shared.GithubGetActionResponse;
+export type GithubGetActionQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 export function useGithubGetAction(
   request: operations.GetGitHubActionRequest,
-  options?: QueryHookOptions<GithubGetActionQueryData>,
-): UseQueryResult<GithubGetActionQueryData, Error> {
+  options?: QueryHookOptions<
+    GithubGetActionQueryData,
+    GithubGetActionQueryError
+  >,
+): UseQueryResult<GithubGetActionQueryData, GithubGetActionQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildGithubGetActionQuery(
@@ -45,8 +72,11 @@ export function useGithubGetAction(
 
 export function useGithubGetActionSuspense(
   request: operations.GetGitHubActionRequest,
-  options?: SuspenseQueryHookOptions<GithubGetActionQueryData>,
-): UseSuspenseQueryResult<GithubGetActionQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    GithubGetActionQueryData,
+    GithubGetActionQueryError
+  >,
+): UseSuspenseQueryResult<GithubGetActionQueryData, GithubGetActionQueryError> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildGithubGetActionQuery(
@@ -55,19 +85,6 @@ export function useGithubGetActionSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchGithubGetAction(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetGitHubActionRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildGithubGetActionQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -113,47 +130,4 @@ export function invalidateAllGithubGetAction(
       "getAction",
     ],
   });
-}
-
-export function buildGithubGetActionQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetGitHubActionRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<GithubGetActionQueryData>;
-} {
-  return {
-    queryKey: queryKeyGithubGetAction({
-      targetName: request.targetName,
-      org: request.org,
-      repo: request.repo,
-    }),
-    queryFn: async function githubGetActionQueryFn(
-      ctx,
-    ): Promise<GithubGetActionQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(githubGetAction(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyGithubGetAction(
-  parameters: { targetName?: string | undefined; org: string; repo: string },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Github",
-    "getAction",
-    parameters,
-  ];
 }

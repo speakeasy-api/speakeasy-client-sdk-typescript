@@ -35,6 +35,7 @@ import { tool$codeSamplesGetCodeSamplePreviewAsync } from "./tools/codeSamplesGe
 import { tool$eventsGetEventsByTarget } from "./tools/eventsGetEventsByTarget.js";
 import { tool$eventsGetTargets } from "./tools/eventsGetTargets.js";
 import { tool$eventsGetTargetsDeprecated } from "./tools/eventsGetTargetsDeprecated.js";
+import { tool$eventsGetTargetsSummary } from "./tools/eventsGetTargetsSummary.js";
 import { tool$eventsPost } from "./tools/eventsPost.js";
 import { tool$eventsSearch } from "./tools/eventsSearch.js";
 import { tool$githubCheckAccess } from "./tools/githubCheckAccess.js";
@@ -55,6 +56,7 @@ import { tool$organizationsDeleteBillingAddOn } from "./tools/organizationsDelet
 import { tool$organizationsGet } from "./tools/organizationsGet.js";
 import { tool$organizationsGetAll } from "./tools/organizationsGetAll.js";
 import { tool$organizationsGetBillingAddOns } from "./tools/organizationsGetBillingAddOns.js";
+import { tool$organizationsGetBillingOperations } from "./tools/organizationsGetBillingOperations.js";
 import { tool$organizationsGetUsage } from "./tools/organizationsGetUsage.js";
 import { tool$publishingTokensCreate } from "./tools/publishingTokensCreate.js";
 import { tool$publishingTokensDelete } from "./tools/publishingTokensDelete.js";
@@ -101,7 +103,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Speakeasy",
-    version: "5.0.0-rc.4",
+    version: "5.0.0-rc.5",
   });
 
   const client = new SpeakeasyCore({
@@ -169,6 +171,7 @@ export function createMCPServer(deps: {
   tool(tool$organizationsGet);
   tool(tool$organizationsGetAll);
   tool(tool$organizationsGetBillingAddOns);
+  tool(tool$organizationsGetBillingOperations);
   tool(tool$organizationsGetUsage);
   tool(tool$publishingTokensCreate);
   tool(tool$publishingTokensDelete);
@@ -206,6 +209,7 @@ export function createMCPServer(deps: {
   tool(tool$eventsGetEventsByTarget);
   tool(tool$eventsGetTargets);
   tool(tool$eventsGetTargetsDeprecated);
+  tool(tool$eventsGetTargetsSummary);
   tool(tool$eventsPost);
   tool(tool$eventsSearch);
 

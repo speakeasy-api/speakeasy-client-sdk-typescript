@@ -5,33 +5,63 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { artifactsGetRevisions } from "../funcs/artifactsGetRevisions.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  ArtifactsGetRevisionsQueryData,
+  buildArtifactsGetRevisionsQuery,
+  prefetchArtifactsGetRevisions,
+  queryKeyArtifactsGetRevisions,
+} from "./artifactsGetRevisions.core.js";
+export {
+  type ArtifactsGetRevisionsQueryData,
+  buildArtifactsGetRevisionsQuery,
+  prefetchArtifactsGetRevisions,
+  queryKeyArtifactsGetRevisions,
+};
 
-export type ArtifactsGetRevisionsQueryData = shared.GetRevisionsResponse;
+export type ArtifactsGetRevisionsQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 export function useArtifactsGetRevisions(
   request: operations.GetRevisionsRequest,
-  options?: QueryHookOptions<ArtifactsGetRevisionsQueryData>,
-): UseQueryResult<ArtifactsGetRevisionsQueryData, Error> {
+  options?: QueryHookOptions<
+    ArtifactsGetRevisionsQueryData,
+    ArtifactsGetRevisionsQueryError
+  >,
+): UseQueryResult<
+  ArtifactsGetRevisionsQueryData,
+  ArtifactsGetRevisionsQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildArtifactsGetRevisionsQuery(
@@ -45,8 +75,14 @@ export function useArtifactsGetRevisions(
 
 export function useArtifactsGetRevisionsSuspense(
   request: operations.GetRevisionsRequest,
-  options?: SuspenseQueryHookOptions<ArtifactsGetRevisionsQueryData>,
-): UseSuspenseQueryResult<ArtifactsGetRevisionsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ArtifactsGetRevisionsQueryData,
+    ArtifactsGetRevisionsQueryError
+  >,
+): UseSuspenseQueryResult<
+  ArtifactsGetRevisionsQueryData,
+  ArtifactsGetRevisionsQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildArtifactsGetRevisionsQuery(
@@ -55,19 +91,6 @@ export function useArtifactsGetRevisionsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchArtifactsGetRevisions(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetRevisionsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildArtifactsGetRevisionsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -114,49 +137,4 @@ export function invalidateAllArtifactsGetRevisions(
       "getRevisions",
     ],
   });
-}
-
-export function buildArtifactsGetRevisionsQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetRevisionsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ArtifactsGetRevisionsQueryData>;
-} {
-  return {
-    queryKey: queryKeyArtifactsGetRevisions(request.namespaceName, {
-      nextPageToken: request.nextPageToken,
-    }),
-    queryFn: async function artifactsGetRevisionsQueryFn(
-      ctx,
-    ): Promise<ArtifactsGetRevisionsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(artifactsGetRevisions(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyArtifactsGetRevisions(
-  namespaceName: string,
-  parameters: { nextPageToken?: string | undefined },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Artifacts",
-    "getRevisions",
-    namespaceName,
-    parameters,
-  ];
 }

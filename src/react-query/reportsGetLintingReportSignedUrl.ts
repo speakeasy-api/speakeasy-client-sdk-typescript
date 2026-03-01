@@ -5,36 +5,64 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { reportsGetLintingReportSignedUrl } from "../funcs/reportsGetLintingReportSignedUrl.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildReportsGetLintingReportSignedUrlQuery,
+  prefetchReportsGetLintingReportSignedUrl,
+  queryKeyReportsGetLintingReportSignedUrl,
+  ReportsGetLintingReportSignedUrlQueryData,
+} from "./reportsGetLintingReportSignedUrl.core.js";
+export {
+  buildReportsGetLintingReportSignedUrlQuery,
+  prefetchReportsGetLintingReportSignedUrl,
+  queryKeyReportsGetLintingReportSignedUrl,
+  type ReportsGetLintingReportSignedUrlQueryData,
+};
 
-export type ReportsGetLintingReportSignedUrlQueryData =
-  operations.GetLintingReportSignedUrlSignedAccess;
+export type ReportsGetLintingReportSignedUrlQueryError =
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get the signed access url for the linting reports for a particular document.
  */
 export function useReportsGetLintingReportSignedUrl(
   request: operations.GetLintingReportSignedUrlRequest,
-  options?: QueryHookOptions<ReportsGetLintingReportSignedUrlQueryData>,
-): UseQueryResult<ReportsGetLintingReportSignedUrlQueryData, Error> {
+  options?: QueryHookOptions<
+    ReportsGetLintingReportSignedUrlQueryData,
+    ReportsGetLintingReportSignedUrlQueryError
+  >,
+): UseQueryResult<
+  ReportsGetLintingReportSignedUrlQueryData,
+  ReportsGetLintingReportSignedUrlQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildReportsGetLintingReportSignedUrlQuery(
@@ -51,8 +79,14 @@ export function useReportsGetLintingReportSignedUrl(
  */
 export function useReportsGetLintingReportSignedUrlSuspense(
   request: operations.GetLintingReportSignedUrlRequest,
-  options?: SuspenseQueryHookOptions<ReportsGetLintingReportSignedUrlQueryData>,
-): UseSuspenseQueryResult<ReportsGetLintingReportSignedUrlQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ReportsGetLintingReportSignedUrlQueryData,
+    ReportsGetLintingReportSignedUrlQueryError
+  >,
+): UseSuspenseQueryResult<
+  ReportsGetLintingReportSignedUrlQueryData,
+  ReportsGetLintingReportSignedUrlQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildReportsGetLintingReportSignedUrlQuery(
@@ -61,19 +95,6 @@ export function useReportsGetLintingReportSignedUrlSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchReportsGetLintingReportSignedUrl(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetLintingReportSignedUrlRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildReportsGetLintingReportSignedUrlQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -118,47 +139,4 @@ export function invalidateAllReportsGetLintingReportSignedUrl(
       "getLintingReportSignedUrl",
     ],
   });
-}
-
-export function buildReportsGetLintingReportSignedUrlQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetLintingReportSignedUrlRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ReportsGetLintingReportSignedUrlQueryData>;
-} {
-  return {
-    queryKey: queryKeyReportsGetLintingReportSignedUrl(
-      request.documentChecksum,
-    ),
-    queryFn: async function reportsGetLintingReportSignedUrlQueryFn(
-      ctx,
-    ): Promise<ReportsGetLintingReportSignedUrlQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(reportsGetLintingReportSignedUrl(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyReportsGetLintingReportSignedUrl(
-  documentChecksum: string,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Reports",
-    "getLintingReportSignedUrl",
-    documentChecksum,
-  ];
 }

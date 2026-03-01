@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { organizationsCreate } from "../funcs/organizationsCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -23,6 +34,17 @@ export type OrganizationsCreateMutationVariables = {
 
 export type OrganizationsCreateMutationData = shared.Organization;
 
+export type OrganizationsCreateMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create an organization
  *
@@ -32,12 +54,12 @@ export type OrganizationsCreateMutationData = shared.Organization;
 export function useOrganizationsCreateMutation(
   options?: MutationHookOptions<
     OrganizationsCreateMutationData,
-    Error,
+    OrganizationsCreateMutationError,
     OrganizationsCreateMutationVariables
   >,
 ): UseMutationResult<
   OrganizationsCreateMutationData,
-  Error,
+  OrganizationsCreateMutationError,
   OrganizationsCreateMutationVariables
 > {
   const client = useSpeakeasyContext();

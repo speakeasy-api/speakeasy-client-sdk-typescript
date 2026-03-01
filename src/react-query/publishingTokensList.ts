@@ -5,23 +5,47 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { publishingTokensList } from "../funcs/publishingTokensList.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import { useSpeakeasyContext } from "./_context.js";
 import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
+import {
+  buildPublishingTokensListQuery,
+  prefetchPublishingTokensList,
+  PublishingTokensListQueryData,
+  queryKeyPublishingTokensList,
+} from "./publishingTokensList.core.js";
+export {
+  buildPublishingTokensListQuery,
+  prefetchPublishingTokensList,
+  type PublishingTokensListQueryData,
+  queryKeyPublishingTokensList,
+};
 
-export type PublishingTokensListQueryData = Array<shared.PublishingToken>;
+export type PublishingTokensListQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get publishing tokens for a workspace
@@ -30,8 +54,14 @@ export type PublishingTokensListQueryData = Array<shared.PublishingToken>;
  * Returns a publishing token for the current workspace
  */
 export function usePublishingTokensList(
-  options?: QueryHookOptions<PublishingTokensListQueryData>,
-): UseQueryResult<PublishingTokensListQueryData, Error> {
+  options?: QueryHookOptions<
+    PublishingTokensListQueryData,
+    PublishingTokensListQueryError
+  >,
+): UseQueryResult<
+  PublishingTokensListQueryData,
+  PublishingTokensListQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildPublishingTokensListQuery(
@@ -49,8 +79,14 @@ export function usePublishingTokensList(
  * Returns a publishing token for the current workspace
  */
 export function usePublishingTokensListSuspense(
-  options?: SuspenseQueryHookOptions<PublishingTokensListQueryData>,
-): UseSuspenseQueryResult<PublishingTokensListQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PublishingTokensListQueryData,
+    PublishingTokensListQueryError
+  >,
+): UseSuspenseQueryResult<
+  PublishingTokensListQueryData,
+  PublishingTokensListQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildPublishingTokensListQuery(
@@ -58,17 +94,6 @@ export function usePublishingTokensListSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPublishingTokensList(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPublishingTokensListQuery(
-      client$,
-    ),
   });
 }
 
@@ -93,40 +118,4 @@ export function invalidateAllPublishingTokensList(
       "list",
     ],
   });
-}
-
-export function buildPublishingTokensListQuery(
-  client$: SpeakeasyCore,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PublishingTokensListQueryData>;
-} {
-  return {
-    queryKey: queryKeyPublishingTokensList(),
-    queryFn: async function publishingTokensListQueryFn(
-      ctx,
-    ): Promise<PublishingTokensListQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(publishingTokensList(
-        client$,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPublishingTokensList(): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "PublishingTokens",
-    "list",
-  ];
 }

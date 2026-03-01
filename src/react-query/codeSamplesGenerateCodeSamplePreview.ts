@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { codeSamplesGenerateCodeSamplePreview } from "../funcs/codeSamplesGenerateCodeSamplePreview.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -24,6 +35,17 @@ export type CodeSamplesGenerateCodeSamplePreviewMutationVariables = {
 export type CodeSamplesGenerateCodeSamplePreviewMutationData =
   shared.UsageSnippets;
 
+export type CodeSamplesGenerateCodeSamplePreviewMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Generate Code Sample previews from a file and configuration parameters.
  *
@@ -33,12 +55,12 @@ export type CodeSamplesGenerateCodeSamplePreviewMutationData =
 export function useCodeSamplesGenerateCodeSamplePreviewMutation(
   options?: MutationHookOptions<
     CodeSamplesGenerateCodeSamplePreviewMutationData,
-    Error,
+    CodeSamplesGenerateCodeSamplePreviewMutationError,
     CodeSamplesGenerateCodeSamplePreviewMutationVariables
   >,
 ): UseMutationResult<
   CodeSamplesGenerateCodeSamplePreviewMutationData,
-  Error,
+  CodeSamplesGenerateCodeSamplePreviewMutationError,
   CodeSamplesGenerateCodeSamplePreviewMutationVariables
 > {
   const client = useSpeakeasyContext();

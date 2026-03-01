@@ -5,30 +5,57 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { authValidateApiKey } from "../funcs/authValidateApiKey.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import { useSpeakeasyContext } from "./_context.js";
 import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
+import {
+  AuthValidateApiKeyQueryData,
+  buildAuthValidateApiKeyQuery,
+  prefetchAuthValidateApiKey,
+  queryKeyAuthValidateApiKey,
+} from "./authValidateApiKey.core.js";
+export {
+  type AuthValidateApiKeyQueryData,
+  buildAuthValidateApiKeyQuery,
+  prefetchAuthValidateApiKey,
+  queryKeyAuthValidateApiKey,
+};
 
-export type AuthValidateApiKeyQueryData = shared.ApiKeyDetails;
+export type AuthValidateApiKeyQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Validate the current api key.
  */
 export function useAuthValidateApiKey(
-  options?: QueryHookOptions<AuthValidateApiKeyQueryData>,
-): UseQueryResult<AuthValidateApiKeyQueryData, Error> {
+  options?: QueryHookOptions<
+    AuthValidateApiKeyQueryData,
+    AuthValidateApiKeyQueryError
+  >,
+): UseQueryResult<AuthValidateApiKeyQueryData, AuthValidateApiKeyQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildAuthValidateApiKeyQuery(
@@ -43,8 +70,14 @@ export function useAuthValidateApiKey(
  * Validate the current api key.
  */
 export function useAuthValidateApiKeySuspense(
-  options?: SuspenseQueryHookOptions<AuthValidateApiKeyQueryData>,
-): UseSuspenseQueryResult<AuthValidateApiKeyQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    AuthValidateApiKeyQueryData,
+    AuthValidateApiKeyQueryError
+  >,
+): UseSuspenseQueryResult<
+  AuthValidateApiKeyQueryData,
+  AuthValidateApiKeyQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildAuthValidateApiKeyQuery(
@@ -52,17 +85,6 @@ export function useAuthValidateApiKeySuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchAuthValidateApiKey(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildAuthValidateApiKeyQuery(
-      client$,
-    ),
   });
 }
 
@@ -87,40 +109,4 @@ export function invalidateAllAuthValidateApiKey(
       "validateApiKey",
     ],
   });
-}
-
-export function buildAuthValidateApiKeyQuery(
-  client$: SpeakeasyCore,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<AuthValidateApiKeyQueryData>;
-} {
-  return {
-    queryKey: queryKeyAuthValidateApiKey(),
-    queryFn: async function authValidateApiKeyQueryFn(
-      ctx,
-    ): Promise<AuthValidateApiKeyQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(authValidateApiKey(
-        client$,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyAuthValidateApiKey(): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Auth",
-    "validateApiKey",
-  ];
 }

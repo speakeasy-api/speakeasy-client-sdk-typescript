@@ -5,36 +5,66 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { eventsGetEventsByTarget } from "../funcs/eventsGetEventsByTarget.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildEventsGetEventsByTargetQuery,
+  EventsGetEventsByTargetQueryData,
+  prefetchEventsGetEventsByTarget,
+  queryKeyEventsGetEventsByTarget,
+} from "./eventsGetEventsByTarget.core.js";
+export {
+  buildEventsGetEventsByTargetQuery,
+  type EventsGetEventsByTargetQueryData,
+  prefetchEventsGetEventsByTarget,
+  queryKeyEventsGetEventsByTarget,
+};
 
-export type EventsGetEventsByTargetQueryData = Array<shared.CliEvent>;
+export type EventsGetEventsByTargetQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Load recent events for a particular workspace
  */
 export function useEventsGetEventsByTarget(
   request: operations.GetWorkspaceEventsByTargetRequest,
-  options?: QueryHookOptions<EventsGetEventsByTargetQueryData>,
-): UseQueryResult<EventsGetEventsByTargetQueryData, Error> {
+  options?: QueryHookOptions<
+    EventsGetEventsByTargetQueryData,
+    EventsGetEventsByTargetQueryError
+  >,
+): UseQueryResult<
+  EventsGetEventsByTargetQueryData,
+  EventsGetEventsByTargetQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildEventsGetEventsByTargetQuery(
@@ -51,8 +81,14 @@ export function useEventsGetEventsByTarget(
  */
 export function useEventsGetEventsByTargetSuspense(
   request: operations.GetWorkspaceEventsByTargetRequest,
-  options?: SuspenseQueryHookOptions<EventsGetEventsByTargetQueryData>,
-): UseSuspenseQueryResult<EventsGetEventsByTargetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EventsGetEventsByTargetQueryData,
+    EventsGetEventsByTargetQueryError
+  >,
+): UseSuspenseQueryResult<
+  EventsGetEventsByTargetQueryData,
+  EventsGetEventsByTargetQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildEventsGetEventsByTargetQuery(
@@ -61,19 +97,6 @@ export function useEventsGetEventsByTargetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEventsGetEventsByTarget(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceEventsByTargetRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEventsGetEventsByTargetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -125,53 +148,4 @@ export function invalidateAllEventsGetEventsByTarget(
       "getEventsByTarget",
     ],
   });
-}
-
-export function buildEventsGetEventsByTargetQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceEventsByTargetRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EventsGetEventsByTargetQueryData>;
-} {
-  return {
-    queryKey: queryKeyEventsGetEventsByTarget(
-      request.workspaceId,
-      request.targetId,
-      { afterCreatedAt: request.afterCreatedAt },
-    ),
-    queryFn: async function eventsGetEventsByTargetQueryFn(
-      ctx,
-    ): Promise<EventsGetEventsByTargetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(eventsGetEventsByTarget(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEventsGetEventsByTarget(
-  workspaceId: string | undefined,
-  targetId: string,
-  parameters: { afterCreatedAt?: Date | undefined },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Events",
-    "getEventsByTarget",
-    workspaceId,
-    targetId,
-    parameters,
-  ];
 }

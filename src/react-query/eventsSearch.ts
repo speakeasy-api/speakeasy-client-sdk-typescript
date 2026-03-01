@@ -5,36 +5,61 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { eventsSearch } from "../funcs/eventsSearch.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildEventsSearchQuery,
+  EventsSearchQueryData,
+  prefetchEventsSearch,
+  queryKeyEventsSearch,
+} from "./eventsSearch.core.js";
+export {
+  buildEventsSearchQuery,
+  type EventsSearchQueryData,
+  prefetchEventsSearch,
+  queryKeyEventsSearch,
+};
 
-export type EventsSearchQueryData = Array<shared.CliEvent>;
+export type EventsSearchQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Search events for a particular workspace by any field
  */
 export function useEventsSearch(
   request: operations.SearchWorkspaceEventsRequest,
-  options?: QueryHookOptions<EventsSearchQueryData>,
-): UseQueryResult<EventsSearchQueryData, Error> {
+  options?: QueryHookOptions<EventsSearchQueryData, EventsSearchQueryError>,
+): UseQueryResult<EventsSearchQueryData, EventsSearchQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildEventsSearchQuery(
@@ -51,8 +76,11 @@ export function useEventsSearch(
  */
 export function useEventsSearchSuspense(
   request: operations.SearchWorkspaceEventsRequest,
-  options?: SuspenseQueryHookOptions<EventsSearchQueryData>,
-): UseSuspenseQueryResult<EventsSearchQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EventsSearchQueryData,
+    EventsSearchQueryError
+  >,
+): UseSuspenseQueryResult<EventsSearchQueryData, EventsSearchQueryError> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildEventsSearchQuery(
@@ -61,19 +89,6 @@ export function useEventsSearchSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEventsSearch(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.SearchWorkspaceEventsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEventsSearchQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -141,63 +156,4 @@ export function invalidateAllEventsSearch(
       "search",
     ],
   });
-}
-
-export function buildEventsSearchQuery(
-  client$: SpeakeasyCore,
-  request: operations.SearchWorkspaceEventsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<EventsSearchQueryData>;
-} {
-  return {
-    queryKey: queryKeyEventsSearch(request.workspaceId, {
-      sourceRevisionDigest: request.sourceRevisionDigest,
-      lintReportDigest: request.lintReportDigest,
-      openapiDiffReportDigest: request.openapiDiffReportDigest,
-      interactionType: request.interactionType,
-      generateGenLockId: request.generateGenLockId,
-      executionId: request.executionId,
-      success: request.success,
-      limit: request.limit,
-    }),
-    queryFn: async function eventsSearchQueryFn(
-      ctx,
-    ): Promise<EventsSearchQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(eventsSearch(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEventsSearch(
-  workspaceId: string | undefined,
-  parameters: {
-    sourceRevisionDigest?: string | undefined;
-    lintReportDigest?: string | undefined;
-    openapiDiffReportDigest?: string | undefined;
-    interactionType?: shared.InteractionType | undefined;
-    generateGenLockId?: string | undefined;
-    executionId?: string | undefined;
-    success?: boolean | undefined;
-    limit?: number | undefined;
-  },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Events",
-    "search",
-    workspaceId,
-    parameters,
-  ];
 }

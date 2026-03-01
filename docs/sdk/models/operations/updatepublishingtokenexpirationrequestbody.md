@@ -8,7 +8,7 @@ The publishing token to update
 import { UpdatePublishingTokenExpirationRequestBody } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/operations";
 
 let value: UpdatePublishingTokenExpirationRequestBody = {
-  validUntil: new Date("2024-10-04T07:15:30.008Z"),
+  validUntil: new Date("2025-10-04T07:15:30.008Z"),
 };
 ```
 

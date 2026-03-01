@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { codeSamplesGet } from "../funcs/codeSamplesGet.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildCodeSamplesGetQuery,
+  CodeSamplesGetQueryData,
+  prefetchCodeSamplesGet,
+  queryKeyCodeSamplesGet,
+} from "./codeSamplesGet.core.js";
+export {
+  buildCodeSamplesGetQuery,
+  type CodeSamplesGetQueryData,
+  prefetchCodeSamplesGet,
+  queryKeyCodeSamplesGet,
+};
 
-export type CodeSamplesGetQueryData = shared.UsageSnippets;
+export type CodeSamplesGetQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Retrieve usage snippets
@@ -36,8 +60,8 @@ export type CodeSamplesGetQueryData = shared.UsageSnippets;
  */
 export function useCodeSamplesGet(
   request: operations.GetCodeSamplesRequest,
-  options?: QueryHookOptions<CodeSamplesGetQueryData>,
-): UseQueryResult<CodeSamplesGetQueryData, Error> {
+  options?: QueryHookOptions<CodeSamplesGetQueryData, CodeSamplesGetQueryError>,
+): UseQueryResult<CodeSamplesGetQueryData, CodeSamplesGetQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildCodeSamplesGetQuery(
@@ -57,8 +81,11 @@ export function useCodeSamplesGet(
  */
 export function useCodeSamplesGetSuspense(
   request: operations.GetCodeSamplesRequest,
-  options?: SuspenseQueryHookOptions<CodeSamplesGetQueryData>,
-): UseSuspenseQueryResult<CodeSamplesGetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    CodeSamplesGetQueryData,
+    CodeSamplesGetQueryError
+  >,
+): UseSuspenseQueryResult<CodeSamplesGetQueryData, CodeSamplesGetQueryError> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildCodeSamplesGetQuery(
@@ -67,19 +94,6 @@ export function useCodeSamplesGetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCodeSamplesGet(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetCodeSamplesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCodeSamplesGetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -135,53 +149,4 @@ export function invalidateAllCodeSamplesGet(
       "get",
     ],
   });
-}
-
-export function buildCodeSamplesGetQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetCodeSamplesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<CodeSamplesGetQueryData>;
-} {
-  return {
-    queryKey: queryKeyCodeSamplesGet({
-      registryUrl: request.registryUrl,
-      operationIds: request.operationIds,
-      methodPaths: request.methodPaths,
-      languages: request.languages,
-    }),
-    queryFn: async function codeSamplesGetQueryFn(
-      ctx,
-    ): Promise<CodeSamplesGetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(codeSamplesGet(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCodeSamplesGet(
-  parameters: {
-    registryUrl: string;
-    operationIds?: Array<string> | undefined;
-    methodPaths?: Array<operations.MethodPaths> | undefined;
-    languages?: Array<string> | undefined;
-  },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "CodeSamples",
-    "get",
-    parameters,
-  ];
 }

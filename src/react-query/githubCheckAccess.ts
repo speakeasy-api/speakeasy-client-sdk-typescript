@@ -5,32 +5,60 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { githubCheckAccess } from "../funcs/githubCheckAccess.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildGithubCheckAccessQuery,
+  GithubCheckAccessQueryData,
+  prefetchGithubCheckAccess,
+  queryKeyGithubCheckAccess,
+} from "./githubCheckAccess.core.js";
+export {
+  buildGithubCheckAccessQuery,
+  type GithubCheckAccessQueryData,
+  prefetchGithubCheckAccess,
+  queryKeyGithubCheckAccess,
+};
 
-export type GithubCheckAccessQueryData = void;
+export type GithubCheckAccessQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 export function useGithubCheckAccess(
   request: operations.CheckGithubAccessRequest,
-  options?: QueryHookOptions<GithubCheckAccessQueryData>,
-): UseQueryResult<GithubCheckAccessQueryData, Error> {
+  options?: QueryHookOptions<
+    GithubCheckAccessQueryData,
+    GithubCheckAccessQueryError
+  >,
+): UseQueryResult<GithubCheckAccessQueryData, GithubCheckAccessQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildGithubCheckAccessQuery(
@@ -44,8 +72,14 @@ export function useGithubCheckAccess(
 
 export function useGithubCheckAccessSuspense(
   request: operations.CheckGithubAccessRequest,
-  options?: SuspenseQueryHookOptions<GithubCheckAccessQueryData>,
-): UseSuspenseQueryResult<GithubCheckAccessQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    GithubCheckAccessQueryData,
+    GithubCheckAccessQueryError
+  >,
+): UseSuspenseQueryResult<
+  GithubCheckAccessQueryData,
+  GithubCheckAccessQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildGithubCheckAccessQuery(
@@ -54,19 +88,6 @@ export function useGithubCheckAccessSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchGithubCheckAccess(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.CheckGithubAccessRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildGithubCheckAccessQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -108,48 +129,4 @@ export function invalidateAllGithubCheckAccess(
       "checkAccess",
     ],
   });
-}
-
-export function buildGithubCheckAccessQuery(
-  client$: SpeakeasyCore,
-  request: operations.CheckGithubAccessRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<GithubCheckAccessQueryData>;
-} {
-  return {
-    queryKey: queryKeyGithubCheckAccess({
-      org: request.org,
-      repo: request.repo,
-    }),
-    queryFn: async function githubCheckAccessQueryFn(
-      ctx,
-    ): Promise<GithubCheckAccessQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(githubCheckAccess(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyGithubCheckAccess(
-  parameters: { org: string; repo: string },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Github",
-    "checkAccess",
-    parameters,
-  ];
 }

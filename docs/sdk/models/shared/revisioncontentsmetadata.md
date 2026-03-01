@@ -7,7 +7,7 @@ import { RevisionContentsMetadata } from "@speakeasy-api/speakeasy-client-sdk-ty
 
 let value: RevisionContentsMetadata = {
   containsCodeSamples: true,
-  createdAt: new Date("2025-12-31T02:32:30.098Z"),
+  createdAt: new Date("2026-12-31T02:32:30.098Z"),
   description: "bidet singe kowtow crafty nor obscure",
   hash: "<value>",
   namespace: "<value>",
@@ -18,10 +18,13 @@ let value: RevisionContentsMetadata = {
     "<value 3>",
   ],
   revisionDigest: "<value>",
-  tags: [
-    "<value 1>",
-    "<value 2>",
+  serverUrls: [
+    {
+      description: "boo er yippee rudely edible simplistic impressive mortally",
+      url: "https://primary-heating.org/",
+    },
   ],
+  tags: [],
   title: "<value>",
   type: "OPENAPI_OVERLAY",
   version: "<value>",
@@ -40,7 +43,9 @@ let value: RevisionContentsMetadata = {
 | `namespace`                                                                                       | *string*                                                                                          | :heavy_check_mark:                                                                                | The fully qualified namespace                                                                     |
 | `numOverlayActions`                                                                               | *number*                                                                                          | :heavy_check_mark:                                                                                | The number of overlay actions in the OAS. Will be 0 if the OAS is not an overlay.                 |
 | `operationIds`                                                                                    | *string*[]                                                                                        | :heavy_check_mark:                                                                                | The operation IDs contained in the OAS. Will be empty if the OAS is an overlay.                   |
+| `relativeDiff`                                                                                    | [shared.RelativeDiff](../../../sdk/models/shared/relativediff.md)                                 | :heavy_minus_sign:                                                                                | A relative diff between the current revision and the previous revision.                           |
 | `revisionDigest`                                                                                  | *string*                                                                                          | :heavy_check_mark:                                                                                | The digest of the parent bundle                                                                   |
+| `serverUrls`                                                                                      | [shared.Server](../../../sdk/models/shared/server.md)[]                                           | :heavy_check_mark:                                                                                | The servers contained in the OAS. Will be empty if the OAS is an overlay.                         |
 | `tags`                                                                                            | *string*[]                                                                                        | :heavy_check_mark:                                                                                | The tags contained in the OAS -- NOT the OCI tags. Will be empty if the OAS is an overlay.        |
 | `title`                                                                                           | *string*                                                                                          | :heavy_check_mark:                                                                                | The OAS title                                                                                     |
 | `type`                                                                                            | [shared.RevisionContentsMetadataType](../../../sdk/models/shared/revisioncontentsmetadatatype.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |

@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { artifactsCreateRemoteSource } from "../funcs/artifactsCreateRemoteSource.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -23,18 +34,29 @@ export type ArtifactsCreateRemoteSourceMutationVariables = {
 
 export type ArtifactsCreateRemoteSourceMutationData = void;
 
+export type ArtifactsCreateRemoteSourceMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Configure a new remote source
  */
 export function useArtifactsCreateRemoteSourceMutation(
   options?: MutationHookOptions<
     ArtifactsCreateRemoteSourceMutationData,
-    Error,
+    ArtifactsCreateRemoteSourceMutationError,
     ArtifactsCreateRemoteSourceMutationVariables
   >,
 ): UseMutationResult<
   ArtifactsCreateRemoteSourceMutationData,
-  Error,
+  ArtifactsCreateRemoteSourceMutationError,
   ArtifactsCreateRemoteSourceMutationVariables
 > {
   const client = useSpeakeasyContext();

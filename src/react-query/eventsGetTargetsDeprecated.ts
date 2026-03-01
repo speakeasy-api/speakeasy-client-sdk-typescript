@@ -5,36 +5,66 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { eventsGetTargetsDeprecated } from "../funcs/eventsGetTargetsDeprecated.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildEventsGetTargetsDeprecatedQuery,
+  EventsGetTargetsDeprecatedQueryData,
+  prefetchEventsGetTargetsDeprecated,
+  queryKeyEventsGetTargetsDeprecated,
+} from "./eventsGetTargetsDeprecated.core.js";
+export {
+  buildEventsGetTargetsDeprecatedQuery,
+  type EventsGetTargetsDeprecatedQueryData,
+  prefetchEventsGetTargetsDeprecated,
+  queryKeyEventsGetTargetsDeprecated,
+};
 
-export type EventsGetTargetsDeprecatedQueryData = Array<shared.TargetSDK>;
+export type EventsGetTargetsDeprecatedQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Load targets for a particular workspace
  */
 export function useEventsGetTargetsDeprecated(
   request: operations.GetWorkspaceTargetsDeprecatedRequest,
-  options?: QueryHookOptions<EventsGetTargetsDeprecatedQueryData>,
-): UseQueryResult<EventsGetTargetsDeprecatedQueryData, Error> {
+  options?: QueryHookOptions<
+    EventsGetTargetsDeprecatedQueryData,
+    EventsGetTargetsDeprecatedQueryError
+  >,
+): UseQueryResult<
+  EventsGetTargetsDeprecatedQueryData,
+  EventsGetTargetsDeprecatedQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildEventsGetTargetsDeprecatedQuery(
@@ -51,8 +81,14 @@ export function useEventsGetTargetsDeprecated(
  */
 export function useEventsGetTargetsDeprecatedSuspense(
   request: operations.GetWorkspaceTargetsDeprecatedRequest,
-  options?: SuspenseQueryHookOptions<EventsGetTargetsDeprecatedQueryData>,
-): UseSuspenseQueryResult<EventsGetTargetsDeprecatedQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    EventsGetTargetsDeprecatedQueryData,
+    EventsGetTargetsDeprecatedQueryError
+  >,
+): UseSuspenseQueryResult<
+  EventsGetTargetsDeprecatedQueryData,
+  EventsGetTargetsDeprecatedQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildEventsGetTargetsDeprecatedQuery(
@@ -61,19 +97,6 @@ export function useEventsGetTargetsDeprecatedSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchEventsGetTargetsDeprecated(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceTargetsDeprecatedRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildEventsGetTargetsDeprecatedQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -123,49 +146,4 @@ export function invalidateAllEventsGetTargetsDeprecated(
       "getTargetsDeprecated",
     ],
   });
-}
-
-export function buildEventsGetTargetsDeprecatedQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceTargetsDeprecatedRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<EventsGetTargetsDeprecatedQueryData>;
-} {
-  return {
-    queryKey: queryKeyEventsGetTargetsDeprecated(request.workspaceId, {
-      afterLastEventCreatedAt: request.afterLastEventCreatedAt,
-    }),
-    queryFn: async function eventsGetTargetsDeprecatedQueryFn(
-      ctx,
-    ): Promise<EventsGetTargetsDeprecatedQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(eventsGetTargetsDeprecated(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyEventsGetTargetsDeprecated(
-  workspaceId: string | undefined,
-  parameters: { afterLastEventCreatedAt?: Date | undefined },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Events",
-    "getTargetsDeprecated",
-    workspaceId,
-    parameters,
-  ];
 }

@@ -5,35 +5,63 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { artifactsGetBlob } from "../funcs/artifactsGetBlob.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  ArtifactsGetBlobQueryData,
+  buildArtifactsGetBlobQuery,
+  prefetchArtifactsGetBlob,
+  queryKeyArtifactsGetBlob,
+} from "./artifactsGetBlob.core.js";
+export {
+  type ArtifactsGetBlobQueryData,
+  buildArtifactsGetBlobQuery,
+  prefetchArtifactsGetBlob,
+  queryKeyArtifactsGetBlob,
+};
 
-export type ArtifactsGetBlobQueryData = ReadableStream<Uint8Array>;
+export type ArtifactsGetBlobQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get blob for a particular digest
  */
 export function useArtifactsGetBlob(
   request: operations.GetBlobRequest,
-  options?: QueryHookOptions<ArtifactsGetBlobQueryData>,
-): UseQueryResult<ArtifactsGetBlobQueryData, Error> {
+  options?: QueryHookOptions<
+    ArtifactsGetBlobQueryData,
+    ArtifactsGetBlobQueryError
+  >,
+): UseQueryResult<ArtifactsGetBlobQueryData, ArtifactsGetBlobQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildArtifactsGetBlobQuery(
@@ -50,8 +78,14 @@ export function useArtifactsGetBlob(
  */
 export function useArtifactsGetBlobSuspense(
   request: operations.GetBlobRequest,
-  options?: SuspenseQueryHookOptions<ArtifactsGetBlobQueryData>,
-): UseSuspenseQueryResult<ArtifactsGetBlobQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ArtifactsGetBlobQueryData,
+    ArtifactsGetBlobQueryError
+  >,
+): UseSuspenseQueryResult<
+  ArtifactsGetBlobQueryData,
+  ArtifactsGetBlobQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildArtifactsGetBlobQuery(
@@ -60,19 +94,6 @@ export function useArtifactsGetBlobSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchArtifactsGetBlob(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetBlobRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildArtifactsGetBlobQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -126,56 +147,4 @@ export function invalidateAllArtifactsGetBlob(
       "getBlob",
     ],
   });
-}
-
-export function buildArtifactsGetBlobQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetBlobRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ArtifactsGetBlobQueryData>;
-} {
-  return {
-    queryKey: queryKeyArtifactsGetBlob(
-      request.organizationSlug,
-      request.workspaceSlug,
-      request.namespaceName,
-      request.digest,
-    ),
-    queryFn: async function artifactsGetBlobQueryFn(
-      ctx,
-    ): Promise<ArtifactsGetBlobQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(artifactsGetBlob(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyArtifactsGetBlob(
-  organizationSlug: string,
-  workspaceSlug: string,
-  namespaceName: string,
-  digest: string,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Artifacts",
-    "getBlob",
-    organizationSlug,
-    workspaceSlug,
-    namespaceName,
-    digest,
-  ];
 }

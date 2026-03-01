@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { organizationsCreateBillingAddOns } from "../funcs/organizationsCreateBillingAddOns.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -24,18 +35,29 @@ export type OrganizationsCreateBillingAddOnsMutationVariables = {
 export type OrganizationsCreateBillingAddOnsMutationData =
   shared.OrganizationBillingAddOnResponse;
 
+export type OrganizationsCreateBillingAddOnsMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create billing add ons
  */
 export function useOrganizationsCreateBillingAddOnsMutation(
   options?: MutationHookOptions<
     OrganizationsCreateBillingAddOnsMutationData,
-    Error,
+    OrganizationsCreateBillingAddOnsMutationError,
     OrganizationsCreateBillingAddOnsMutationVariables
   >,
 ): UseMutationResult<
   OrganizationsCreateBillingAddOnsMutationData,
-  Error,
+  OrganizationsCreateBillingAddOnsMutationError,
   OrganizationsCreateBillingAddOnsMutationVariables
 > {
   const client = useSpeakeasyContext();

@@ -6,7 +6,7 @@
 import { SchemaStoreItem } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: SchemaStoreItem = {
-  createdAt: new Date("2024-09-29T22:06:43.079Z"),
+  createdAt: new Date("2025-09-29T22:06:43.079Z"),
   format: "json",
   id: "<id>",
   packageName: "<value>",

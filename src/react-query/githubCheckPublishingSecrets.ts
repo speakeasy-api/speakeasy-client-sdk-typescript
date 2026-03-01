@@ -5,34 +5,63 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { githubCheckPublishingSecrets } from "../funcs/githubCheckPublishingSecrets.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildGithubCheckPublishingSecretsQuery,
+  GithubCheckPublishingSecretsQueryData,
+  prefetchGithubCheckPublishingSecrets,
+  queryKeyGithubCheckPublishingSecrets,
+} from "./githubCheckPublishingSecrets.core.js";
+export {
+  buildGithubCheckPublishingSecretsQuery,
+  type GithubCheckPublishingSecretsQueryData,
+  prefetchGithubCheckPublishingSecrets,
+  queryKeyGithubCheckPublishingSecrets,
+};
 
-export type GithubCheckPublishingSecretsQueryData =
-  shared.GithubMissingPublishingSecretsResponse;
+export type GithubCheckPublishingSecretsQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 export function useGithubCheckPublishingSecrets(
   request: operations.GithubCheckPublishingSecretsRequest,
-  options?: QueryHookOptions<GithubCheckPublishingSecretsQueryData>,
-): UseQueryResult<GithubCheckPublishingSecretsQueryData, Error> {
+  options?: QueryHookOptions<
+    GithubCheckPublishingSecretsQueryData,
+    GithubCheckPublishingSecretsQueryError
+  >,
+): UseQueryResult<
+  GithubCheckPublishingSecretsQueryData,
+  GithubCheckPublishingSecretsQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildGithubCheckPublishingSecretsQuery(
@@ -46,8 +75,14 @@ export function useGithubCheckPublishingSecrets(
 
 export function useGithubCheckPublishingSecretsSuspense(
   request: operations.GithubCheckPublishingSecretsRequest,
-  options?: SuspenseQueryHookOptions<GithubCheckPublishingSecretsQueryData>,
-): UseSuspenseQueryResult<GithubCheckPublishingSecretsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    GithubCheckPublishingSecretsQueryData,
+    GithubCheckPublishingSecretsQueryError
+  >,
+): UseSuspenseQueryResult<
+  GithubCheckPublishingSecretsQueryData,
+  GithubCheckPublishingSecretsQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildGithubCheckPublishingSecretsQuery(
@@ -56,19 +91,6 @@ export function useGithubCheckPublishingSecretsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchGithubCheckPublishingSecrets(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GithubCheckPublishingSecretsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildGithubCheckPublishingSecretsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -110,47 +132,4 @@ export function invalidateAllGithubCheckPublishingSecrets(
       "checkPublishingSecrets",
     ],
   });
-}
-
-export function buildGithubCheckPublishingSecretsQuery(
-  client$: SpeakeasyCore,
-  request: operations.GithubCheckPublishingSecretsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<GithubCheckPublishingSecretsQueryData>;
-} {
-  return {
-    queryKey: queryKeyGithubCheckPublishingSecrets({
-      generateGenLockId: request.generateGenLockId,
-    }),
-    queryFn: async function githubCheckPublishingSecretsQueryFn(
-      ctx,
-    ): Promise<GithubCheckPublishingSecretsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(githubCheckPublishingSecrets(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyGithubCheckPublishingSecrets(
-  parameters: { generateGenLockId: string },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Github",
-    "checkPublishingSecrets",
-    parameters,
-  ];
 }

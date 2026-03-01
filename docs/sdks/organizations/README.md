@@ -1,5 +1,4 @@
 # Organizations
-(*organizations*)
 
 ## Overview
 
@@ -14,6 +13,7 @@ REST APIs for managing Organizations (speakeasy L1 Tenancy construct)
 * [get](#get) - Get organization
 * [getAll](#getall) - Get organizations for a user
 * [getBillingAddOns](#getbillingaddons) - Get billing add ons
+* [getBillingOperations](#getbillingoperations) - Get billing operations breakdown for an organization
 * [getUsage](#getusage) - Get billing usage summary for a particular organization
 
 ## create
@@ -22,6 +22,7 @@ Creates an organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createOrganization" method="post" path="/v1/organization" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -130,6 +131,7 @@ Create billing add ons
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createBillingAddOns" method="post" path="/v1/organization/add_ons" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -228,6 +230,7 @@ Creates a free trial for an organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createFreeTrial" method="post" path="/v1/organization/free_trial" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -317,6 +320,7 @@ Delete billing add ons
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteBillingAddOn" method="delete" path="/v1/organization/add_ons/{add_on}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -411,6 +415,7 @@ Get information about a particular organization.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getOrganization" method="get" path="/v1/organization/{organizationID}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -516,6 +521,7 @@ Returns a list of organizations a user has access too
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getOrganizations" method="get" path="/v1/organizations" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -615,6 +621,7 @@ Get billing add ons
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getBillingAddOns" method="get" path="/v1/organization/add_ons" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -708,12 +715,116 @@ import {
 | errors.ErrorT    | 5XX              | application/json |
 | errors.SDKError  | 4XX              | \*/\*            |
 
+## getBillingOperations
+
+Returns a breakdown of billing operations by spec and target for an organization.
+The billing formula is: Total = sum(operationIds per spec x targets per spec)
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="getBillingOperations" method="get" path="/v1/organization/billing_operations" -->
+```typescript
+import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
+
+const speakeasy = new Speakeasy({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const result = await speakeasy.organizations.getBillingOperations({});
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { SpeakeasyCore } from "@speakeasy-api/speakeasy-client-sdk-typescript/core.js";
+import { organizationsGetBillingOperations } from "@speakeasy-api/speakeasy-client-sdk-typescript/funcs/organizationsGetBillingOperations.js";
+
+// Use `SpeakeasyCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const speakeasy = new SpeakeasyCore({
+  security: {
+    apiKey: "<YOUR_API_KEY_HERE>",
+  },
+});
+
+async function run() {
+  const res = await organizationsGetBillingOperations(speakeasy, {});
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("organizationsGetBillingOperations failed:", res.error);
+  }
+}
+
+run();
+```
+
+### React hooks and utilities
+
+This method can be used in React components through the following hooks and
+associated utilities.
+
+> Check out [this guide][hook-guide] for information about each of the utilities
+> below and how to get started using React hooks.
+
+[hook-guide]: ../../../REACT_QUERY.md
+
+```tsx
+import {
+  // Query hooks for fetching data.
+  useOrganizationsGetBillingOperations,
+  useOrganizationsGetBillingOperationsSuspense,
+
+  // Utility for prefetching data during server-side rendering and in React
+  // Server Components that will be immediately available to client components
+  // using the hooks.
+  prefetchOrganizationsGetBillingOperations,
+  
+  // Utilities to invalidate the query cache for this query in response to
+  // mutations and other user actions.
+  invalidateOrganizationsGetBillingOperations,
+  invalidateAllOrganizationsGetBillingOperations,
+} from "@speakeasy-api/speakeasy-client-sdk-typescript/react-query/organizationsGetBillingOperations.js";
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetBillingOperationsRequest](../../sdk/models/operations/getbillingoperationsrequest.md)                                                                           | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[shared.BillingOperationsResponse](../../sdk/models/shared/billingoperationsresponse.md)\>**
+
+### Errors
+
+| Error Type       | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.ErrorT    | 4XX              | application/json |
+| errors.SDKError  | 5XX              | \*/\*            |
+
 ## getUsage
 
 Returns a billing usage summary by target languages for a particular organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getOrganizationUsage" method="get" path="/v1/organization/usage" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

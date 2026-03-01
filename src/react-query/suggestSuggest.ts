@@ -11,6 +11,16 @@ import { SpeakeasyCore } from "../core.js";
 import { suggestSuggest } from "../funcs/suggestSuggest.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -23,6 +33,16 @@ export type SuggestSuggestMutationVariables = {
 
 export type SuggestSuggestMutationData = ReadableStream<Uint8Array>;
 
+export type SuggestSuggestMutationError =
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Generate suggestions for improving an OpenAPI document.
  *
@@ -32,12 +52,12 @@ export type SuggestSuggestMutationData = ReadableStream<Uint8Array>;
 export function useSuggestSuggestMutation(
   options?: MutationHookOptions<
     SuggestSuggestMutationData,
-    Error,
+    SuggestSuggestMutationError,
     SuggestSuggestMutationVariables
   >,
 ): UseMutationResult<
   SuggestSuggestMutationData,
-  Error,
+  SuggestSuggestMutationError,
   SuggestSuggestMutationVariables
 > {
   const client = useSpeakeasyContext();

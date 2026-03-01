@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { workspacesUpdateSettings } from "../funcs/workspacesUpdateSettings.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -23,6 +34,17 @@ export type WorkspacesUpdateSettingsMutationVariables = {
 
 export type WorkspacesUpdateSettingsMutationData = void;
 
+export type WorkspacesUpdateSettingsMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Update workspace settings
  *
@@ -32,12 +54,12 @@ export type WorkspacesUpdateSettingsMutationData = void;
 export function useWorkspacesUpdateSettingsMutation(
   options?: MutationHookOptions<
     WorkspacesUpdateSettingsMutationData,
-    Error,
+    WorkspacesUpdateSettingsMutationError,
     WorkspacesUpdateSettingsMutationVariables
   >,
 ): UseMutationResult<
   WorkspacesUpdateSettingsMutationData,
-  Error,
+  WorkspacesUpdateSettingsMutationError,
   WorkspacesUpdateSettingsMutationVariables
 > {
   const client = useSpeakeasyContext();

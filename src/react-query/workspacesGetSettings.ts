@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { workspacesGetSettings } from "../funcs/workspacesGetSettings.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildWorkspacesGetSettingsQuery,
+  prefetchWorkspacesGetSettings,
+  queryKeyWorkspacesGetSettings,
+  WorkspacesGetSettingsQueryData,
+} from "./workspacesGetSettings.core.js";
+export {
+  buildWorkspacesGetSettingsQuery,
+  prefetchWorkspacesGetSettings,
+  queryKeyWorkspacesGetSettings,
+  type WorkspacesGetSettingsQueryData,
+};
 
-export type WorkspacesGetSettingsQueryData = shared.WorkspaceSettings;
+export type WorkspacesGetSettingsQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get workspace settings
@@ -36,8 +60,14 @@ export type WorkspacesGetSettingsQueryData = shared.WorkspaceSettings;
  */
 export function useWorkspacesGetSettings(
   request: operations.GetWorkspaceSettingsRequest,
-  options?: QueryHookOptions<WorkspacesGetSettingsQueryData>,
-): UseQueryResult<WorkspacesGetSettingsQueryData, Error> {
+  options?: QueryHookOptions<
+    WorkspacesGetSettingsQueryData,
+    WorkspacesGetSettingsQueryError
+  >,
+): UseQueryResult<
+  WorkspacesGetSettingsQueryData,
+  WorkspacesGetSettingsQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildWorkspacesGetSettingsQuery(
@@ -57,8 +87,14 @@ export function useWorkspacesGetSettings(
  */
 export function useWorkspacesGetSettingsSuspense(
   request: operations.GetWorkspaceSettingsRequest,
-  options?: SuspenseQueryHookOptions<WorkspacesGetSettingsQueryData>,
-): UseSuspenseQueryResult<WorkspacesGetSettingsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WorkspacesGetSettingsQueryData,
+    WorkspacesGetSettingsQueryError
+  >,
+): UseSuspenseQueryResult<
+  WorkspacesGetSettingsQueryData,
+  WorkspacesGetSettingsQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildWorkspacesGetSettingsQuery(
@@ -67,19 +103,6 @@ export function useWorkspacesGetSettingsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchWorkspacesGetSettings(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceSettingsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWorkspacesGetSettingsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -121,45 +144,4 @@ export function invalidateAllWorkspacesGetSettings(
       "getSettings",
     ],
   });
-}
-
-export function buildWorkspacesGetSettingsQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceSettingsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WorkspacesGetSettingsQueryData>;
-} {
-  return {
-    queryKey: queryKeyWorkspacesGetSettings(request.workspaceId),
-    queryFn: async function workspacesGetSettingsQueryFn(
-      ctx,
-    ): Promise<WorkspacesGetSettingsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(workspacesGetSettings(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWorkspacesGetSettings(
-  workspaceId: string | undefined,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Workspaces",
-    "getSettings",
-    workspaceId,
-  ];
 }

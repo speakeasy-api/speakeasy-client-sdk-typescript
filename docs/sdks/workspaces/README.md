@@ -1,5 +1,4 @@
 # Workspaces
-(*workspaces*)
 
 ## Overview
 
@@ -29,6 +28,7 @@ Creates a workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createWorkspace" method="post" path="/v1/workspace" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -135,6 +135,7 @@ Create a token for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createWorkspaceToken" method="post" path="/v1/workspace/{workspace_id}/tokens" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -245,6 +246,7 @@ Delete a token for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="deleteWorkspaceToken" method="delete" path="/v1/workspace/{workspace_id}/tokens/{tokenID}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -341,6 +343,7 @@ Get information about a particular workspace by context.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceByContext" method="get" path="/v1/workspace" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -440,6 +443,7 @@ Returns a list of workspaces a user has access too
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaces" method="get" path="/v1/workspaces" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -539,6 +543,7 @@ Get information about a particular workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspace" method="get" path="/v1/workspace/{workspace_id}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -642,6 +647,7 @@ Get workspace feature flags
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceFeatureFlags" method="get" path="/v1/workspace/{workspace_id}/feature_flags" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -745,6 +751,7 @@ Get settings about a particular workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceSettings" method="get" path="/v1/workspace/{workspace_id}/settings" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -848,6 +855,7 @@ Get team members for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceTeam" method="get" path="/v1/workspace/{workspace_id}/team" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -951,6 +959,7 @@ Get tokens for a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getWorkspaceTokens" method="get" path="/v1/workspace/{workspace_id}/tokens" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -1054,6 +1063,7 @@ Grant a user access to a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="grantUserAccessToWorkspace" method="put" path="/v1/workspace/{workspace_id}/team/email/{email}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -1150,6 +1160,7 @@ Revoke a user's access to a particular workspace
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="revokeUserAccessToWorkspace" method="delete" path="/v1/workspace/{workspace_id}/team/{userId}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -1246,6 +1257,7 @@ Set workspace feature flags
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="setWorkspaceFeatureFlags" method="post" path="/v1/workspace/feature_flags" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -1340,6 +1352,7 @@ Update information about a particular workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateWorkspaceDetails" method="post" path="/v1/workspace/{workspace_id}/details" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -1452,6 +1465,7 @@ Update settings about a particular workspace.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="updateWorkspaceSettings" method="put" path="/v1/workspace/{workspace_id}/settings" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

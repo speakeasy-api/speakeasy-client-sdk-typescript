@@ -8,7 +8,7 @@ A token used to publish to a target
 import { PublishingToken } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: PublishingToken = {
-  createdAt: new Date("2023-11-25T09:06:39.311Z"),
+  createdAt: new Date("2024-11-24T09:06:39.311Z"),
   createdBy: "<value>",
   id: "<id>",
   organizationId: "<id>",
@@ -16,7 +16,7 @@ let value: PublishingToken = {
   targetResource: "document",
   token: "<value>",
   tokenName: "<value>",
-  validUntil: new Date("2023-05-31T13:52:10.127Z"),
+  validUntil: new Date("2024-05-30T13:52:10.127Z"),
   workspaceId: "<id>",
 };
 ```
