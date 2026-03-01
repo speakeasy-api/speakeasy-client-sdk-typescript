@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { workspacesCreate } from "../funcs/workspacesCreate.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -23,6 +34,17 @@ export type WorkspacesCreateMutationVariables = {
 
 export type WorkspacesCreateMutationData = shared.Workspace;
 
+export type WorkspacesCreateMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a workspace
  *
@@ -32,12 +54,12 @@ export type WorkspacesCreateMutationData = shared.Workspace;
 export function useWorkspacesCreateMutation(
   options?: MutationHookOptions<
     WorkspacesCreateMutationData,
-    Error,
+    WorkspacesCreateMutationError,
     WorkspacesCreateMutationVariables
   >,
 ): UseMutationResult<
   WorkspacesCreateMutationData,
-  Error,
+  WorkspacesCreateMutationError,
   WorkspacesCreateMutationVariables
 > {
   const client = useSpeakeasyContext();

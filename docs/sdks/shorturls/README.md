@@ -1,5 +1,4 @@
 # ShortURLs
-(*shortURLs*)
 
 ## Overview
 
@@ -15,6 +14,7 @@ Shorten a URL.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="create" method="post" path="/v1/short_urls" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

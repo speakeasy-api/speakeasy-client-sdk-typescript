@@ -5,36 +5,64 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { reportsGetChangesReportSignedUrl } from "../funcs/reportsGetChangesReportSignedUrl.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildReportsGetChangesReportSignedUrlQuery,
+  prefetchReportsGetChangesReportSignedUrl,
+  queryKeyReportsGetChangesReportSignedUrl,
+  ReportsGetChangesReportSignedUrlQueryData,
+} from "./reportsGetChangesReportSignedUrl.core.js";
+export {
+  buildReportsGetChangesReportSignedUrlQuery,
+  prefetchReportsGetChangesReportSignedUrl,
+  queryKeyReportsGetChangesReportSignedUrl,
+  type ReportsGetChangesReportSignedUrlQueryData,
+};
 
-export type ReportsGetChangesReportSignedUrlQueryData =
-  operations.GetChangesReportSignedUrlSignedAccess;
+export type ReportsGetChangesReportSignedUrlQueryError =
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get the signed access url for the change reports for a particular document.
  */
 export function useReportsGetChangesReportSignedUrl(
   request: operations.GetChangesReportSignedUrlRequest,
-  options?: QueryHookOptions<ReportsGetChangesReportSignedUrlQueryData>,
-): UseQueryResult<ReportsGetChangesReportSignedUrlQueryData, Error> {
+  options?: QueryHookOptions<
+    ReportsGetChangesReportSignedUrlQueryData,
+    ReportsGetChangesReportSignedUrlQueryError
+  >,
+): UseQueryResult<
+  ReportsGetChangesReportSignedUrlQueryData,
+  ReportsGetChangesReportSignedUrlQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildReportsGetChangesReportSignedUrlQuery(
@@ -51,8 +79,14 @@ export function useReportsGetChangesReportSignedUrl(
  */
 export function useReportsGetChangesReportSignedUrlSuspense(
   request: operations.GetChangesReportSignedUrlRequest,
-  options?: SuspenseQueryHookOptions<ReportsGetChangesReportSignedUrlQueryData>,
-): UseSuspenseQueryResult<ReportsGetChangesReportSignedUrlQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ReportsGetChangesReportSignedUrlQueryData,
+    ReportsGetChangesReportSignedUrlQueryError
+  >,
+): UseSuspenseQueryResult<
+  ReportsGetChangesReportSignedUrlQueryData,
+  ReportsGetChangesReportSignedUrlQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildReportsGetChangesReportSignedUrlQuery(
@@ -61,19 +95,6 @@ export function useReportsGetChangesReportSignedUrlSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchReportsGetChangesReportSignedUrl(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetChangesReportSignedUrlRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildReportsGetChangesReportSignedUrlQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -118,47 +139,4 @@ export function invalidateAllReportsGetChangesReportSignedUrl(
       "getChangesReportSignedUrl",
     ],
   });
-}
-
-export function buildReportsGetChangesReportSignedUrlQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetChangesReportSignedUrlRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ReportsGetChangesReportSignedUrlQueryData>;
-} {
-  return {
-    queryKey: queryKeyReportsGetChangesReportSignedUrl(
-      request.documentChecksum,
-    ),
-    queryFn: async function reportsGetChangesReportSignedUrlQueryFn(
-      ctx,
-    ): Promise<ReportsGetChangesReportSignedUrlQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(reportsGetChangesReportSignedUrl(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyReportsGetChangesReportSignedUrl(
-  documentChecksum: string,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Reports",
-    "getChangesReportSignedUrl",
-    documentChecksum,
-  ];
 }

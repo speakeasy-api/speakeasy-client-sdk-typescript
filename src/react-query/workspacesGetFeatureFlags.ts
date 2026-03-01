@@ -5,37 +5,66 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { workspacesGetFeatureFlags } from "../funcs/workspacesGetFeatureFlags.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildWorkspacesGetFeatureFlagsQuery,
+  prefetchWorkspacesGetFeatureFlags,
+  queryKeyWorkspacesGetFeatureFlags,
+  WorkspacesGetFeatureFlagsQueryData,
+} from "./workspacesGetFeatureFlags.core.js";
+export {
+  buildWorkspacesGetFeatureFlagsQuery,
+  prefetchWorkspacesGetFeatureFlags,
+  queryKeyWorkspacesGetFeatureFlags,
+  type WorkspacesGetFeatureFlagsQueryData,
+};
 
-export type WorkspacesGetFeatureFlagsQueryData =
-  shared.WorkspaceFeatureFlagResponse;
+export type WorkspacesGetFeatureFlagsQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get workspace feature flags
  */
 export function useWorkspacesGetFeatureFlags(
   request: operations.GetWorkspaceFeatureFlagsRequest,
-  options?: QueryHookOptions<WorkspacesGetFeatureFlagsQueryData>,
-): UseQueryResult<WorkspacesGetFeatureFlagsQueryData, Error> {
+  options?: QueryHookOptions<
+    WorkspacesGetFeatureFlagsQueryData,
+    WorkspacesGetFeatureFlagsQueryError
+  >,
+): UseQueryResult<
+  WorkspacesGetFeatureFlagsQueryData,
+  WorkspacesGetFeatureFlagsQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildWorkspacesGetFeatureFlagsQuery(
@@ -52,8 +81,14 @@ export function useWorkspacesGetFeatureFlags(
  */
 export function useWorkspacesGetFeatureFlagsSuspense(
   request: operations.GetWorkspaceFeatureFlagsRequest,
-  options?: SuspenseQueryHookOptions<WorkspacesGetFeatureFlagsQueryData>,
-): UseSuspenseQueryResult<WorkspacesGetFeatureFlagsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WorkspacesGetFeatureFlagsQueryData,
+    WorkspacesGetFeatureFlagsQueryError
+  >,
+): UseSuspenseQueryResult<
+  WorkspacesGetFeatureFlagsQueryData,
+  WorkspacesGetFeatureFlagsQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildWorkspacesGetFeatureFlagsQuery(
@@ -62,19 +97,6 @@ export function useWorkspacesGetFeatureFlagsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchWorkspacesGetFeatureFlags(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceFeatureFlagsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWorkspacesGetFeatureFlagsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -116,45 +138,4 @@ export function invalidateAllWorkspacesGetFeatureFlags(
       "getFeatureFlags",
     ],
   });
-}
-
-export function buildWorkspacesGetFeatureFlagsQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceFeatureFlagsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WorkspacesGetFeatureFlagsQueryData>;
-} {
-  return {
-    queryKey: queryKeyWorkspacesGetFeatureFlags(request.workspaceId),
-    queryFn: async function workspacesGetFeatureFlagsQueryFn(
-      ctx,
-    ): Promise<WorkspacesGetFeatureFlagsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(workspacesGetFeatureFlags(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWorkspacesGetFeatureFlags(
-  workspaceId: string | undefined,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Workspaces",
-    "getFeatureFlags",
-    workspaceId,
-  ];
 }

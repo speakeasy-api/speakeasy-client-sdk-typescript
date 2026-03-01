@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { codeSamplesGetCodeSamplePreviewAsync } from "../funcs/codeSamplesGetCodeSamplePreviewAsync.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildCodeSamplesGetCodeSamplePreviewAsyncQuery,
+  CodeSamplesGetCodeSamplePreviewAsyncQueryData,
+  prefetchCodeSamplesGetCodeSamplePreviewAsync,
+  queryKeyCodeSamplesGetCodeSamplePreviewAsync,
+} from "./codeSamplesGetCodeSamplePreviewAsync.core.js";
+export {
+  buildCodeSamplesGetCodeSamplePreviewAsyncQuery,
+  type CodeSamplesGetCodeSamplePreviewAsyncQueryData,
+  prefetchCodeSamplesGetCodeSamplePreviewAsync,
+  queryKeyCodeSamplesGetCodeSamplePreviewAsync,
+};
 
-export type CodeSamplesGetCodeSamplePreviewAsyncQueryData =
-  operations.GetCodeSamplePreviewAsyncResponse;
+export type CodeSamplesGetCodeSamplePreviewAsyncQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Poll for the result of an asynchronous Code Sample preview generation.
@@ -36,8 +60,14 @@ export type CodeSamplesGetCodeSamplePreviewAsyncQueryData =
  */
 export function useCodeSamplesGetCodeSamplePreviewAsync(
   request: operations.GetCodeSamplePreviewAsyncRequest,
-  options?: QueryHookOptions<CodeSamplesGetCodeSamplePreviewAsyncQueryData>,
-): UseQueryResult<CodeSamplesGetCodeSamplePreviewAsyncQueryData, Error> {
+  options?: QueryHookOptions<
+    CodeSamplesGetCodeSamplePreviewAsyncQueryData,
+    CodeSamplesGetCodeSamplePreviewAsyncQueryError
+  >,
+): UseQueryResult<
+  CodeSamplesGetCodeSamplePreviewAsyncQueryData,
+  CodeSamplesGetCodeSamplePreviewAsyncQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildCodeSamplesGetCodeSamplePreviewAsyncQuery(
@@ -58,11 +88,12 @@ export function useCodeSamplesGetCodeSamplePreviewAsync(
 export function useCodeSamplesGetCodeSamplePreviewAsyncSuspense(
   request: operations.GetCodeSamplePreviewAsyncRequest,
   options?: SuspenseQueryHookOptions<
-    CodeSamplesGetCodeSamplePreviewAsyncQueryData
+    CodeSamplesGetCodeSamplePreviewAsyncQueryData,
+    CodeSamplesGetCodeSamplePreviewAsyncQueryError
   >,
 ): UseSuspenseQueryResult<
   CodeSamplesGetCodeSamplePreviewAsyncQueryData,
-  Error
+  CodeSamplesGetCodeSamplePreviewAsyncQueryError
 > {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
@@ -72,19 +103,6 @@ export function useCodeSamplesGetCodeSamplePreviewAsyncSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchCodeSamplesGetCodeSamplePreviewAsync(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetCodeSamplePreviewAsyncRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildCodeSamplesGetCodeSamplePreviewAsyncQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -129,45 +147,4 @@ export function invalidateAllCodeSamplesGetCodeSamplePreviewAsync(
       "getCodeSamplePreviewAsync",
     ],
   });
-}
-
-export function buildCodeSamplesGetCodeSamplePreviewAsyncQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetCodeSamplePreviewAsyncRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<CodeSamplesGetCodeSamplePreviewAsyncQueryData>;
-} {
-  return {
-    queryKey: queryKeyCodeSamplesGetCodeSamplePreviewAsync(request.jobID),
-    queryFn: async function codeSamplesGetCodeSamplePreviewAsyncQueryFn(
-      ctx,
-    ): Promise<CodeSamplesGetCodeSamplePreviewAsyncQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(codeSamplesGetCodeSamplePreviewAsync(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyCodeSamplesGetCodeSamplePreviewAsync(
-  jobID: string,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "CodeSamples",
-    "getCodeSamplePreviewAsync",
-    jobID,
-  ];
 }

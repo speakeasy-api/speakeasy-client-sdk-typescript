@@ -5,36 +5,63 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { workspacesGetTeam } from "../funcs/workspacesGetTeam.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildWorkspacesGetTeamQuery,
+  prefetchWorkspacesGetTeam,
+  queryKeyWorkspacesGetTeam,
+  WorkspacesGetTeamQueryData,
+} from "./workspacesGetTeam.core.js";
+export {
+  buildWorkspacesGetTeamQuery,
+  prefetchWorkspacesGetTeam,
+  queryKeyWorkspacesGetTeam,
+  type WorkspacesGetTeamQueryData,
+};
 
-export type WorkspacesGetTeamQueryData = shared.WorkspaceTeamResponse;
+export type WorkspacesGetTeamQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get team members for a particular workspace
  */
 export function useWorkspacesGetTeam(
   request: operations.GetWorkspaceTeamRequest,
-  options?: QueryHookOptions<WorkspacesGetTeamQueryData>,
-): UseQueryResult<WorkspacesGetTeamQueryData, Error> {
+  options?: QueryHookOptions<
+    WorkspacesGetTeamQueryData,
+    WorkspacesGetTeamQueryError
+  >,
+): UseQueryResult<WorkspacesGetTeamQueryData, WorkspacesGetTeamQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildWorkspacesGetTeamQuery(
@@ -51,8 +78,14 @@ export function useWorkspacesGetTeam(
  */
 export function useWorkspacesGetTeamSuspense(
   request: operations.GetWorkspaceTeamRequest,
-  options?: SuspenseQueryHookOptions<WorkspacesGetTeamQueryData>,
-): UseSuspenseQueryResult<WorkspacesGetTeamQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WorkspacesGetTeamQueryData,
+    WorkspacesGetTeamQueryError
+  >,
+): UseSuspenseQueryResult<
+  WorkspacesGetTeamQueryData,
+  WorkspacesGetTeamQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildWorkspacesGetTeamQuery(
@@ -61,19 +94,6 @@ export function useWorkspacesGetTeamSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchWorkspacesGetTeam(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceTeamRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWorkspacesGetTeamQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -115,45 +135,4 @@ export function invalidateAllWorkspacesGetTeam(
       "getTeam",
     ],
   });
-}
-
-export function buildWorkspacesGetTeamQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceTeamRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WorkspacesGetTeamQueryData>;
-} {
-  return {
-    queryKey: queryKeyWorkspacesGetTeam(request.workspaceId),
-    queryFn: async function workspacesGetTeamQueryFn(
-      ctx,
-    ): Promise<WorkspacesGetTeamQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(workspacesGetTeam(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWorkspacesGetTeam(
-  workspaceId: string | undefined,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Workspaces",
-    "getTeam",
-    workspaceId,
-  ];
 }

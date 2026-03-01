@@ -5,27 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { publishingTokensResolveTarget } from "../funcs/publishingTokensResolveTarget.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildPublishingTokensResolveTargetQuery,
+  prefetchPublishingTokensResolveTarget,
+  PublishingTokensResolveTargetQueryData,
+  queryKeyPublishingTokensResolveTarget,
+} from "./publishingTokensResolveTarget.core.js";
+export {
+  buildPublishingTokensResolveTargetQuery,
+  prefetchPublishingTokensResolveTarget,
+  type PublishingTokensResolveTargetQueryData,
+  queryKeyPublishingTokensResolveTarget,
+};
 
-export type PublishingTokensResolveTargetQueryData = string;
+export type PublishingTokensResolveTargetQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get a specific publishing token target
@@ -35,8 +60,14 @@ export type PublishingTokensResolveTargetQueryData = string;
  */
 export function usePublishingTokensResolveTarget(
   request: operations.GetPublishingTokenTargetByIDRequest,
-  options?: QueryHookOptions<PublishingTokensResolveTargetQueryData>,
-): UseQueryResult<PublishingTokensResolveTargetQueryData, Error> {
+  options?: QueryHookOptions<
+    PublishingTokensResolveTargetQueryData,
+    PublishingTokensResolveTargetQueryError
+  >,
+): UseQueryResult<
+  PublishingTokensResolveTargetQueryData,
+  PublishingTokensResolveTargetQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildPublishingTokensResolveTargetQuery(
@@ -56,8 +87,14 @@ export function usePublishingTokensResolveTarget(
  */
 export function usePublishingTokensResolveTargetSuspense(
   request: operations.GetPublishingTokenTargetByIDRequest,
-  options?: SuspenseQueryHookOptions<PublishingTokensResolveTargetQueryData>,
-): UseSuspenseQueryResult<PublishingTokensResolveTargetQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PublishingTokensResolveTargetQueryData,
+    PublishingTokensResolveTargetQueryError
+  >,
+): UseSuspenseQueryResult<
+  PublishingTokensResolveTargetQueryData,
+  PublishingTokensResolveTargetQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildPublishingTokensResolveTargetQuery(
@@ -66,19 +103,6 @@ export function usePublishingTokensResolveTargetSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPublishingTokensResolveTarget(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetPublishingTokenTargetByIDRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPublishingTokensResolveTargetQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -120,45 +144,4 @@ export function invalidateAllPublishingTokensResolveTarget(
       "resolveTarget",
     ],
   });
-}
-
-export function buildPublishingTokensResolveTargetQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetPublishingTokenTargetByIDRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PublishingTokensResolveTargetQueryData>;
-} {
-  return {
-    queryKey: queryKeyPublishingTokensResolveTarget(request.tokenID),
-    queryFn: async function publishingTokensResolveTargetQueryFn(
-      ctx,
-    ): Promise<PublishingTokensResolveTargetQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(publishingTokensResolveTarget(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPublishingTokensResolveTarget(
-  tokenID: string,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "PublishingTokens",
-    "resolveTarget",
-    tokenID,
-  ];
 }

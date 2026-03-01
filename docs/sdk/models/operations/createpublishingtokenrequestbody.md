@@ -11,7 +11,7 @@ let value: CreatePublishingTokenRequestBody = {
   targetId: "<id>",
   targetResource: "<value>",
   tokenName: "<value>",
-  validUntil: new Date("2023-10-12T16:59:12.606Z"),
+  validUntil: new Date("2024-10-11T16:59:12.606Z"),
 };
 ```
 

@@ -5,36 +5,66 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { artifactsGetManifest } from "../funcs/artifactsGetManifest.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  ArtifactsGetManifestQueryData,
+  buildArtifactsGetManifestQuery,
+  prefetchArtifactsGetManifest,
+  queryKeyArtifactsGetManifest,
+} from "./artifactsGetManifest.core.js";
+export {
+  type ArtifactsGetManifestQueryData,
+  buildArtifactsGetManifestQuery,
+  prefetchArtifactsGetManifest,
+  queryKeyArtifactsGetManifest,
+};
 
-export type ArtifactsGetManifestQueryData = shared.Manifest;
+export type ArtifactsGetManifestQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get manifest for a particular reference
  */
 export function useArtifactsGetManifest(
   request: operations.GetManifestRequest,
-  options?: QueryHookOptions<ArtifactsGetManifestQueryData>,
-): UseQueryResult<ArtifactsGetManifestQueryData, Error> {
+  options?: QueryHookOptions<
+    ArtifactsGetManifestQueryData,
+    ArtifactsGetManifestQueryError
+  >,
+): UseQueryResult<
+  ArtifactsGetManifestQueryData,
+  ArtifactsGetManifestQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildArtifactsGetManifestQuery(
@@ -51,8 +81,14 @@ export function useArtifactsGetManifest(
  */
 export function useArtifactsGetManifestSuspense(
   request: operations.GetManifestRequest,
-  options?: SuspenseQueryHookOptions<ArtifactsGetManifestQueryData>,
-): UseSuspenseQueryResult<ArtifactsGetManifestQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ArtifactsGetManifestQueryData,
+    ArtifactsGetManifestQueryError
+  >,
+): UseSuspenseQueryResult<
+  ArtifactsGetManifestQueryData,
+  ArtifactsGetManifestQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildArtifactsGetManifestQuery(
@@ -61,19 +97,6 @@ export function useArtifactsGetManifestSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchArtifactsGetManifest(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetManifestRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildArtifactsGetManifestQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -127,56 +150,4 @@ export function invalidateAllArtifactsGetManifest(
       "getManifest",
     ],
   });
-}
-
-export function buildArtifactsGetManifestQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetManifestRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ArtifactsGetManifestQueryData>;
-} {
-  return {
-    queryKey: queryKeyArtifactsGetManifest(
-      request.organizationSlug,
-      request.workspaceSlug,
-      request.namespaceName,
-      request.revisionReference,
-    ),
-    queryFn: async function artifactsGetManifestQueryFn(
-      ctx,
-    ): Promise<ArtifactsGetManifestQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(artifactsGetManifest(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyArtifactsGetManifest(
-  organizationSlug: string,
-  workspaceSlug: string,
-  namespaceName: string,
-  revisionReference: string,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Artifacts",
-    "getManifest",
-    organizationSlug,
-    workspaceSlug,
-    namespaceName,
-    revisionReference,
-  ];
 }

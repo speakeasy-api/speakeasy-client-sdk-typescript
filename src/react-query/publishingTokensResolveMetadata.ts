@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { publishingTokensResolveMetadata } from "../funcs/publishingTokensResolveMetadata.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildPublishingTokensResolveMetadataQuery,
+  prefetchPublishingTokensResolveMetadata,
+  PublishingTokensResolveMetadataQueryData,
+  queryKeyPublishingTokensResolveMetadata,
+} from "./publishingTokensResolveMetadata.core.js";
+export {
+  buildPublishingTokensResolveMetadataQuery,
+  prefetchPublishingTokensResolveMetadata,
+  type PublishingTokensResolveMetadataQueryData,
+  queryKeyPublishingTokensResolveMetadata,
+};
 
-export type PublishingTokensResolveMetadataQueryData =
-  operations.GetPublishingTokenPublicMetadataResponseBody;
+export type PublishingTokensResolveMetadataQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get metadata about the token
@@ -36,8 +60,14 @@ export type PublishingTokensResolveMetadataQueryData =
  */
 export function usePublishingTokensResolveMetadata(
   request: operations.GetPublishingTokenPublicMetadataRequest,
-  options?: QueryHookOptions<PublishingTokensResolveMetadataQueryData>,
-): UseQueryResult<PublishingTokensResolveMetadataQueryData, Error> {
+  options?: QueryHookOptions<
+    PublishingTokensResolveMetadataQueryData,
+    PublishingTokensResolveMetadataQueryError
+  >,
+): UseQueryResult<
+  PublishingTokensResolveMetadataQueryData,
+  PublishingTokensResolveMetadataQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildPublishingTokensResolveMetadataQuery(
@@ -57,8 +87,14 @@ export function usePublishingTokensResolveMetadata(
  */
 export function usePublishingTokensResolveMetadataSuspense(
   request: operations.GetPublishingTokenPublicMetadataRequest,
-  options?: SuspenseQueryHookOptions<PublishingTokensResolveMetadataQueryData>,
-): UseSuspenseQueryResult<PublishingTokensResolveMetadataQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    PublishingTokensResolveMetadataQueryData,
+    PublishingTokensResolveMetadataQueryError
+  >,
+): UseSuspenseQueryResult<
+  PublishingTokensResolveMetadataQueryData,
+  PublishingTokensResolveMetadataQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildPublishingTokensResolveMetadataQuery(
@@ -67,19 +103,6 @@ export function usePublishingTokensResolveMetadataSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchPublishingTokensResolveMetadata(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetPublishingTokenPublicMetadataRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildPublishingTokensResolveMetadataQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -124,45 +147,4 @@ export function invalidateAllPublishingTokensResolveMetadata(
       "resolveMetadata",
     ],
   });
-}
-
-export function buildPublishingTokensResolveMetadataQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetPublishingTokenPublicMetadataRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<PublishingTokensResolveMetadataQueryData>;
-} {
-  return {
-    queryKey: queryKeyPublishingTokensResolveMetadata(request.tokenID),
-    queryFn: async function publishingTokensResolveMetadataQueryFn(
-      ctx,
-    ): Promise<PublishingTokensResolveMetadataQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(publishingTokensResolveMetadata(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyPublishingTokensResolveMetadata(
-  tokenID: string,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "PublishingTokens",
-    "resolveMetadata",
-    tokenID,
-  ];
 }

@@ -5,28 +5,50 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { authGetAccess } from "../funcs/authGetAccess.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  AuthGetAccessQueryData,
+  buildAuthGetAccessQuery,
+  prefetchAuthGetAccess,
+  queryKeyAuthGetAccess,
+} from "./authGetAccess.core.js";
+export {
+  type AuthGetAccessQueryData,
+  buildAuthGetAccessQuery,
+  prefetchAuthGetAccess,
+  queryKeyAuthGetAccess,
+};
 
-export type AuthGetAccessQueryData = shared.AccessDetails;
+export type AuthGetAccessQueryError =
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get access allowances for a particular workspace
@@ -36,8 +58,8 @@ export type AuthGetAccessQueryData = shared.AccessDetails;
  */
 export function useAuthGetAccess(
   request: operations.GetWorkspaceAccessRequest,
-  options?: QueryHookOptions<AuthGetAccessQueryData>,
-): UseQueryResult<AuthGetAccessQueryData, Error> {
+  options?: QueryHookOptions<AuthGetAccessQueryData, AuthGetAccessQueryError>,
+): UseQueryResult<AuthGetAccessQueryData, AuthGetAccessQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildAuthGetAccessQuery(
@@ -57,8 +79,11 @@ export function useAuthGetAccess(
  */
 export function useAuthGetAccessSuspense(
   request: operations.GetWorkspaceAccessRequest,
-  options?: SuspenseQueryHookOptions<AuthGetAccessQueryData>,
-): UseSuspenseQueryResult<AuthGetAccessQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    AuthGetAccessQueryData,
+    AuthGetAccessQueryError
+  >,
+): UseSuspenseQueryResult<AuthGetAccessQueryData, AuthGetAccessQueryError> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildAuthGetAccessQuery(
@@ -67,19 +92,6 @@ export function useAuthGetAccessSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchAuthGetAccess(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceAccessRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildAuthGetAccessQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -133,51 +145,4 @@ export function invalidateAllAuthGetAccess(
       "getAccess",
     ],
   });
-}
-
-export function buildAuthGetAccessQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceAccessRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<AuthGetAccessQueryData>;
-} {
-  return {
-    queryKey: queryKeyAuthGetAccess({
-      genLockId: request.genLockId,
-      targetType: request.targetType,
-      passive: request.passive,
-    }),
-    queryFn: async function authGetAccessQueryFn(
-      ctx,
-    ): Promise<AuthGetAccessQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(authGetAccess(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyAuthGetAccess(
-  parameters: {
-    genLockId?: string | undefined;
-    targetType?: string | undefined;
-    passive?: boolean | undefined;
-  },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Auth",
-    "getAccess",
-    parameters,
-  ];
 }

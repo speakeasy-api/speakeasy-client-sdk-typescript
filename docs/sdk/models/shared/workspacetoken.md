@@ -9,7 +9,7 @@ import { WorkspaceToken } from "@speakeasy-api/speakeasy-client-sdk-typescript/s
 
 let value: WorkspaceToken = {
   alg: "<value>",
-  createdAt: new Date("2024-04-19T04:59:33.478Z"),
+  createdAt: new Date("2025-04-19T04:59:33.478Z"),
   id: "<id>",
   key: "<key>",
   name: "<value>",

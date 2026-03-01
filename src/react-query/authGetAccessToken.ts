@@ -5,36 +5,63 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { authGetAccessToken } from "../funcs/authGetAccessToken.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  AuthGetAccessTokenQueryData,
+  buildAuthGetAccessTokenQuery,
+  prefetchAuthGetAccessToken,
+  queryKeyAuthGetAccessToken,
+} from "./authGetAccessToken.core.js";
+export {
+  type AuthGetAccessTokenQueryData,
+  buildAuthGetAccessTokenQuery,
+  prefetchAuthGetAccessToken,
+  queryKeyAuthGetAccessToken,
+};
 
-export type AuthGetAccessTokenQueryData = shared.AccessToken;
+export type AuthGetAccessTokenQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get or refresh an access token for the current workspace.
  */
 export function useAuthGetAccessToken(
   request: operations.GetAccessTokenRequest,
-  options?: QueryHookOptions<AuthGetAccessTokenQueryData>,
-): UseQueryResult<AuthGetAccessTokenQueryData, Error> {
+  options?: QueryHookOptions<
+    AuthGetAccessTokenQueryData,
+    AuthGetAccessTokenQueryError
+  >,
+): UseQueryResult<AuthGetAccessTokenQueryData, AuthGetAccessTokenQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildAuthGetAccessTokenQuery(
@@ -51,8 +78,14 @@ export function useAuthGetAccessToken(
  */
 export function useAuthGetAccessTokenSuspense(
   request: operations.GetAccessTokenRequest,
-  options?: SuspenseQueryHookOptions<AuthGetAccessTokenQueryData>,
-): UseSuspenseQueryResult<AuthGetAccessTokenQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    AuthGetAccessTokenQueryData,
+    AuthGetAccessTokenQueryError
+  >,
+): UseSuspenseQueryResult<
+  AuthGetAccessTokenQueryData,
+  AuthGetAccessTokenQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildAuthGetAccessTokenQuery(
@@ -61,19 +94,6 @@ export function useAuthGetAccessTokenSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchAuthGetAccessToken(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetAccessTokenRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildAuthGetAccessTokenQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -115,45 +135,4 @@ export function invalidateAllAuthGetAccessToken(
       "getAccessToken",
     ],
   });
-}
-
-export function buildAuthGetAccessTokenQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetAccessTokenRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<AuthGetAccessTokenQueryData>;
-} {
-  return {
-    queryKey: queryKeyAuthGetAccessToken({ workspaceId: request.workspaceId }),
-    queryFn: async function authGetAccessTokenQueryFn(
-      ctx,
-    ): Promise<AuthGetAccessTokenQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(authGetAccessToken(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyAuthGetAccessToken(
-  parameters: { workspaceId: string },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Auth",
-    "getAccessToken",
-    parameters,
-  ];
 }

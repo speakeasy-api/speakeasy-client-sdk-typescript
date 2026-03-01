@@ -6,11 +6,11 @@
 import { CliEvent } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: CliEvent = {
-  createdAt: new Date("2023-06-30T13:14:36.159Z"),
+  createdAt: new Date("2024-06-29T13:14:36.159Z"),
   executionId: "<id>",
   id: "<id>",
   interactionType: "CONFIGURE",
-  localStartedAt: new Date("2025-12-31T06:45:11.818Z"),
+  localStartedAt: new Date("2026-12-31T06:45:11.818Z"),
   speakeasyApiKeyName: "<value>",
   speakeasyVersion: "<value>",
   success: true,

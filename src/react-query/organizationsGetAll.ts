@@ -5,23 +5,47 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { organizationsGetAll } from "../funcs/organizationsGetAll.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import { useSpeakeasyContext } from "./_context.js";
 import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
+import {
+  buildOrganizationsGetAllQuery,
+  OrganizationsGetAllQueryData,
+  prefetchOrganizationsGetAll,
+  queryKeyOrganizationsGetAll,
+} from "./organizationsGetAll.core.js";
+export {
+  buildOrganizationsGetAllQuery,
+  type OrganizationsGetAllQueryData,
+  prefetchOrganizationsGetAll,
+  queryKeyOrganizationsGetAll,
+};
 
-export type OrganizationsGetAllQueryData = Array<shared.Organization>;
+export type OrganizationsGetAllQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get organizations for a user
@@ -30,8 +54,11 @@ export type OrganizationsGetAllQueryData = Array<shared.Organization>;
  * Returns a list of organizations a user has access too
  */
 export function useOrganizationsGetAll(
-  options?: QueryHookOptions<OrganizationsGetAllQueryData>,
-): UseQueryResult<OrganizationsGetAllQueryData, Error> {
+  options?: QueryHookOptions<
+    OrganizationsGetAllQueryData,
+    OrganizationsGetAllQueryError
+  >,
+): UseQueryResult<OrganizationsGetAllQueryData, OrganizationsGetAllQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildOrganizationsGetAllQuery(
@@ -49,8 +76,14 @@ export function useOrganizationsGetAll(
  * Returns a list of organizations a user has access too
  */
 export function useOrganizationsGetAllSuspense(
-  options?: SuspenseQueryHookOptions<OrganizationsGetAllQueryData>,
-): UseSuspenseQueryResult<OrganizationsGetAllQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    OrganizationsGetAllQueryData,
+    OrganizationsGetAllQueryError
+  >,
+): UseSuspenseQueryResult<
+  OrganizationsGetAllQueryData,
+  OrganizationsGetAllQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildOrganizationsGetAllQuery(
@@ -58,17 +91,6 @@ export function useOrganizationsGetAllSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchOrganizationsGetAll(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildOrganizationsGetAllQuery(
-      client$,
-    ),
   });
 }
 
@@ -93,40 +115,4 @@ export function invalidateAllOrganizationsGetAll(
       "getAll",
     ],
   });
-}
-
-export function buildOrganizationsGetAllQuery(
-  client$: SpeakeasyCore,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<OrganizationsGetAllQueryData>;
-} {
-  return {
-    queryKey: queryKeyOrganizationsGetAll(),
-    queryFn: async function organizationsGetAllQueryFn(
-      ctx,
-    ): Promise<OrganizationsGetAllQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(organizationsGetAll(
-        client$,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyOrganizationsGetAll(): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Organizations",
-    "getAll",
-  ];
 }

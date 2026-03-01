@@ -5,9 +5,11 @@
 import { eventsGetEventsByTarget } from "../funcs/eventsGetEventsByTarget.js";
 import { eventsGetTargets } from "../funcs/eventsGetTargets.js";
 import { eventsGetTargetsDeprecated } from "../funcs/eventsGetTargetsDeprecated.js";
+import { eventsGetTargetsSummary } from "../funcs/eventsGetTargetsSummary.js";
 import { eventsPost } from "../funcs/eventsPost.js";
 import { eventsSearch } from "../funcs/eventsSearch.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
+import { PageIterator, unwrapResultIterator } from "../sdk/types/operations.js";
 import * as operations from "./models/operations/index.js";
 import * as shared from "./models/shared/index.js";
 import { unwrapAsync } from "./types/fp.js";
@@ -49,6 +51,25 @@ export class Events extends ClientSDK {
     options?: RequestOptions,
   ): Promise<Array<shared.TargetSDK>> {
     return unwrapAsync(eventsGetTargetsDeprecated(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Load a lean summary of targets for a workspace with pagination. Returns only essential fields needed by the dashboard UI.
+   */
+  async getTargetsSummary(
+    request: operations.GetWorkspaceTargetsSummaryRequest,
+    options?: RequestOptions,
+  ): Promise<
+    PageIterator<
+      operations.GetWorkspaceTargetsSummaryResponse,
+      { cursor: string }
+    >
+  > {
+    return unwrapResultIterator(eventsGetTargetsSummary(
       this,
       request,
       options,

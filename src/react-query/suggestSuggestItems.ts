@@ -11,6 +11,16 @@ import { SpeakeasyCore } from "../core.js";
 import { suggestSuggestItems } from "../funcs/suggestSuggestItems.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -23,18 +33,28 @@ export type SuggestSuggestItemsMutationVariables = {
 
 export type SuggestSuggestItemsMutationData = Array<string>;
 
+export type SuggestSuggestItemsMutationError =
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Generate generic suggestions for a list of items.
  */
 export function useSuggestSuggestItemsMutation(
   options?: MutationHookOptions<
     SuggestSuggestItemsMutationData,
-    Error,
+    SuggestSuggestItemsMutationError,
     SuggestSuggestItemsMutationVariables
   >,
 ): UseMutationResult<
   SuggestSuggestItemsMutationData,
-  Error,
+  SuggestSuggestItemsMutationError,
   SuggestSuggestItemsMutationVariables
 > {
   const client = useSpeakeasyContext();

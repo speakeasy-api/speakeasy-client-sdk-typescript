@@ -9,13 +9,13 @@ import { Organization } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk
 
 let value: Organization = {
   accountType: "enterprise",
-  createdAt: new Date("2023-06-29T18:21:41.585Z"),
+  createdAt: new Date("2024-06-28T18:21:41.585Z"),
   id: "<id>",
   name: "<value>",
   slug: "<value>",
   ssoActivated: false,
   telemetryDisabled: false,
-  updatedAt: new Date("2024-01-29T03:29:26.043Z"),
+  updatedAt: new Date("2025-01-28T03:29:26.043Z"),
 };
 ```
 

@@ -11,6 +11,16 @@ import { SpeakeasyCore } from "../core.js";
 import { reportsUploadReport } from "../funcs/reportsUploadReport.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -24,18 +34,28 @@ export type ReportsUploadReportMutationVariables = {
 export type ReportsUploadReportMutationData =
   operations.UploadReportUploadedReport;
 
+export type ReportsUploadReportMutationError =
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Upload a report.
  */
 export function useReportsUploadReportMutation(
   options?: MutationHookOptions<
     ReportsUploadReportMutationData,
-    Error,
+    ReportsUploadReportMutationError,
     ReportsUploadReportMutationVariables
   >,
 ): UseMutationResult<
   ReportsUploadReportMutationData,
-  Error,
+  ReportsUploadReportMutationError,
   ReportsUploadReportMutationVariables
 > {
   const client = useSpeakeasyContext();

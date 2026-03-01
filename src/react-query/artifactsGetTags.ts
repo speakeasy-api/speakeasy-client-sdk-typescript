@@ -5,33 +5,60 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { artifactsGetTags } from "../funcs/artifactsGetTags.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  ArtifactsGetTagsQueryData,
+  buildArtifactsGetTagsQuery,
+  prefetchArtifactsGetTags,
+  queryKeyArtifactsGetTags,
+} from "./artifactsGetTags.core.js";
+export {
+  type ArtifactsGetTagsQueryData,
+  buildArtifactsGetTagsQuery,
+  prefetchArtifactsGetTags,
+  queryKeyArtifactsGetTags,
+};
 
-export type ArtifactsGetTagsQueryData = shared.GetTagsResponse;
+export type ArtifactsGetTagsQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 export function useArtifactsGetTags(
   request: operations.GetTagsRequest,
-  options?: QueryHookOptions<ArtifactsGetTagsQueryData>,
-): UseQueryResult<ArtifactsGetTagsQueryData, Error> {
+  options?: QueryHookOptions<
+    ArtifactsGetTagsQueryData,
+    ArtifactsGetTagsQueryError
+  >,
+): UseQueryResult<ArtifactsGetTagsQueryData, ArtifactsGetTagsQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildArtifactsGetTagsQuery(
@@ -45,8 +72,14 @@ export function useArtifactsGetTags(
 
 export function useArtifactsGetTagsSuspense(
   request: operations.GetTagsRequest,
-  options?: SuspenseQueryHookOptions<ArtifactsGetTagsQueryData>,
-): UseSuspenseQueryResult<ArtifactsGetTagsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ArtifactsGetTagsQueryData,
+    ArtifactsGetTagsQueryError
+  >,
+): UseSuspenseQueryResult<
+  ArtifactsGetTagsQueryData,
+  ArtifactsGetTagsQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildArtifactsGetTagsQuery(
@@ -55,19 +88,6 @@ export function useArtifactsGetTagsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchArtifactsGetTags(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetTagsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildArtifactsGetTagsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -109,43 +129,4 @@ export function invalidateAllArtifactsGetTags(
       "getTags",
     ],
   });
-}
-
-export function buildArtifactsGetTagsQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetTagsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ArtifactsGetTagsQueryData>;
-} {
-  return {
-    queryKey: queryKeyArtifactsGetTags(request.namespaceName),
-    queryFn: async function artifactsGetTagsQueryFn(
-      ctx,
-    ): Promise<ArtifactsGetTagsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(artifactsGetTags(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyArtifactsGetTags(namespaceName: string): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Artifacts",
-    "getTags",
-    namespaceName,
-  ];
 }

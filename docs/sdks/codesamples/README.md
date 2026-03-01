@@ -1,5 +1,4 @@
 # CodeSamples
-(*codeSamples*)
 
 ## Overview
 
@@ -18,6 +17,7 @@ This endpoint generates Code Sample previews from a file and configuration param
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="generateCodeSamplePreview" method="post" path="/v1/code_sample/preview" example="default" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { openAsBlob } from "node:fs";
@@ -116,6 +116,7 @@ This endpoint generates Code Sample previews from a file and configuration param
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="generateCodeSamplePreviewAsync" method="post" path="/v1/code_sample/preview/async" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { openAsBlob } from "node:fs";
@@ -214,6 +215,7 @@ Retrieve usage snippets from an OpenAPI document stored in the registry. Support
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getCodeSamples" method="get" path="/v1/code_sample" example="default" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -227,13 +229,7 @@ async function run() {
   const result = await speakeasy.codeSamples.get({
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "g",
-      "e",
-      "t",
-      "P",
-      "e",
-      "t",
-      "s",
+      "getPets",
     ],
     methodPaths: [
       {
@@ -273,13 +269,7 @@ async function run() {
   const res = await codeSamplesGet(speakeasy, {
     registryUrl: "https://spec.speakeasy.com/my-org/my-workspace/my-source",
     operationIds: [
-      "g",
-      "e",
-      "t",
-      "P",
-      "e",
-      "t",
-      "s",
+      "getPets",
     ],
     methodPaths: [
       {
@@ -357,6 +347,7 @@ Poll for the result of an asynchronous Code Sample preview generation.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="getCodeSamplePreviewAsync" method="get" path="/v1/code_sample/preview/async/{jobID}" example="default" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

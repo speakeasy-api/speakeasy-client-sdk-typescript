@@ -5,23 +5,47 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { workspacesGetAll } from "../funcs/workspacesGetAll.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import { useSpeakeasyContext } from "./_context.js";
 import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
+import {
+  buildWorkspacesGetAllQuery,
+  prefetchWorkspacesGetAll,
+  queryKeyWorkspacesGetAll,
+  WorkspacesGetAllQueryData,
+} from "./workspacesGetAll.core.js";
+export {
+  buildWorkspacesGetAllQuery,
+  prefetchWorkspacesGetAll,
+  queryKeyWorkspacesGetAll,
+  type WorkspacesGetAllQueryData,
+};
 
-export type WorkspacesGetAllQueryData = Array<shared.Workspace>;
+export type WorkspacesGetAllQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get workspaces for a user
@@ -30,8 +54,11 @@ export type WorkspacesGetAllQueryData = Array<shared.Workspace>;
  * Returns a list of workspaces a user has access too
  */
 export function useWorkspacesGetAll(
-  options?: QueryHookOptions<WorkspacesGetAllQueryData>,
-): UseQueryResult<WorkspacesGetAllQueryData, Error> {
+  options?: QueryHookOptions<
+    WorkspacesGetAllQueryData,
+    WorkspacesGetAllQueryError
+  >,
+): UseQueryResult<WorkspacesGetAllQueryData, WorkspacesGetAllQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildWorkspacesGetAllQuery(
@@ -49,8 +76,14 @@ export function useWorkspacesGetAll(
  * Returns a list of workspaces a user has access too
  */
 export function useWorkspacesGetAllSuspense(
-  options?: SuspenseQueryHookOptions<WorkspacesGetAllQueryData>,
-): UseSuspenseQueryResult<WorkspacesGetAllQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WorkspacesGetAllQueryData,
+    WorkspacesGetAllQueryError
+  >,
+): UseSuspenseQueryResult<
+  WorkspacesGetAllQueryData,
+  WorkspacesGetAllQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildWorkspacesGetAllQuery(
@@ -58,17 +91,6 @@ export function useWorkspacesGetAllSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchWorkspacesGetAll(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWorkspacesGetAllQuery(
-      client$,
-    ),
   });
 }
 
@@ -93,40 +115,4 @@ export function invalidateAllWorkspacesGetAll(
       "getAll",
     ],
   });
-}
-
-export function buildWorkspacesGetAllQuery(
-  client$: SpeakeasyCore,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WorkspacesGetAllQueryData>;
-} {
-  return {
-    queryKey: queryKeyWorkspacesGetAll(),
-    queryFn: async function workspacesGetAllQueryFn(
-      ctx,
-    ): Promise<WorkspacesGetAllQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(workspacesGetAll(
-        client$,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWorkspacesGetAll(): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Workspaces",
-    "getAll",
-  ];
 }

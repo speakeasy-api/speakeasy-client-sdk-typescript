@@ -9,6 +9,7 @@ import { organizationsDeleteBillingAddOn } from "../funcs/organizationsDeleteBil
 import { organizationsGet } from "../funcs/organizationsGet.js";
 import { organizationsGetAll } from "../funcs/organizationsGetAll.js";
 import { organizationsGetBillingAddOns } from "../funcs/organizationsGetBillingAddOns.js";
+import { organizationsGetBillingOperations } from "../funcs/organizationsGetBillingOperations.js";
 import { organizationsGetUsage } from "../funcs/organizationsGetUsage.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "./models/operations/index.js";
@@ -116,6 +117,24 @@ export class Organizations extends ClientSDK {
   ): Promise<shared.OrganizationBillingAddOnResponse> {
     return unwrapAsync(organizationsGetBillingAddOns(
       this,
+      options,
+    ));
+  }
+
+  /**
+   * Get billing operations breakdown for an organization
+   *
+   * @remarks
+   * Returns a breakdown of billing operations by spec and target for an organization.
+   * The billing formula is: Total = sum(operationIds per spec x targets per spec)
+   */
+  async getBillingOperations(
+    request: operations.GetBillingOperationsRequest,
+    options?: RequestOptions,
+  ): Promise<shared.BillingOperationsResponse> {
+    return unwrapAsync(organizationsGetBillingOperations(
+      this,
+      request,
       options,
     ));
   }

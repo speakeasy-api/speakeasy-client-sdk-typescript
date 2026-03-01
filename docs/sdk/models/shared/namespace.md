@@ -8,10 +8,10 @@ A namespace contains many revisions.
 import { Namespace } from "@speakeasy-api/speakeasy-client-sdk-typescript/sdk/models/shared";
 
 let value: Namespace = {
-  createdAt: new Date("2025-01-28T08:46:24.999Z"),
+  createdAt: new Date("2026-01-28T08:46:24.999Z"),
   id: "<id>",
   name: "<value>",
-  updatedAt: new Date("2023-12-30T01:59:14.256Z"),
+  updatedAt: new Date("2024-12-29T01:59:14.256Z"),
 };
 ```
 

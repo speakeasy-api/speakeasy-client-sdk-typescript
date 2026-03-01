@@ -5,36 +5,66 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { artifactsListRemoteSources } from "../funcs/artifactsListRemoteSources.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  ArtifactsListRemoteSourcesQueryData,
+  buildArtifactsListRemoteSourcesQuery,
+  prefetchArtifactsListRemoteSources,
+  queryKeyArtifactsListRemoteSources,
+} from "./artifactsListRemoteSources.core.js";
+export {
+  type ArtifactsListRemoteSourcesQueryData,
+  buildArtifactsListRemoteSourcesQuery,
+  prefetchArtifactsListRemoteSources,
+  queryKeyArtifactsListRemoteSources,
+};
 
-export type ArtifactsListRemoteSourcesQueryData = shared.RemoteSource;
+export type ArtifactsListRemoteSourcesQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get remote sources attached to a particular namespace
  */
 export function useArtifactsListRemoteSources(
   request: operations.ListRemoteSourcesRequest,
-  options?: QueryHookOptions<ArtifactsListRemoteSourcesQueryData>,
-): UseQueryResult<ArtifactsListRemoteSourcesQueryData, Error> {
+  options?: QueryHookOptions<
+    ArtifactsListRemoteSourcesQueryData,
+    ArtifactsListRemoteSourcesQueryError
+  >,
+): UseQueryResult<
+  ArtifactsListRemoteSourcesQueryData,
+  ArtifactsListRemoteSourcesQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildArtifactsListRemoteSourcesQuery(
@@ -51,8 +81,14 @@ export function useArtifactsListRemoteSources(
  */
 export function useArtifactsListRemoteSourcesSuspense(
   request: operations.ListRemoteSourcesRequest,
-  options?: SuspenseQueryHookOptions<ArtifactsListRemoteSourcesQueryData>,
-): UseSuspenseQueryResult<ArtifactsListRemoteSourcesQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    ArtifactsListRemoteSourcesQueryData,
+    ArtifactsListRemoteSourcesQueryError
+  >,
+): UseSuspenseQueryResult<
+  ArtifactsListRemoteSourcesQueryData,
+  ArtifactsListRemoteSourcesQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildArtifactsListRemoteSourcesQuery(
@@ -61,19 +97,6 @@ export function useArtifactsListRemoteSourcesSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchArtifactsListRemoteSources(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.ListRemoteSourcesRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildArtifactsListRemoteSourcesQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -115,47 +138,4 @@ export function invalidateAllArtifactsListRemoteSources(
       "listRemoteSources",
     ],
   });
-}
-
-export function buildArtifactsListRemoteSourcesQuery(
-  client$: SpeakeasyCore,
-  request: operations.ListRemoteSourcesRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<ArtifactsListRemoteSourcesQueryData>;
-} {
-  return {
-    queryKey: queryKeyArtifactsListRemoteSources({
-      namespaceName: request.namespaceName,
-    }),
-    queryFn: async function artifactsListRemoteSourcesQueryFn(
-      ctx,
-    ): Promise<ArtifactsListRemoteSourcesQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(artifactsListRemoteSources(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyArtifactsListRemoteSources(
-  parameters: { namespaceName: string },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Artifacts",
-    "listRemoteSources",
-    parameters,
-  ];
 }

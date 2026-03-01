@@ -1,5 +1,4 @@
 # SchemaStore
-(*schemaStore*)
 
 ## Overview
 
@@ -13,6 +12,7 @@ Create a schema in the schema store
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="createSchemaStoreItem" method="post" path="/v1/schema_store" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

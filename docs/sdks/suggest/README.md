@@ -1,5 +1,4 @@
 # Suggest
-(*suggest*)
 
 ## Overview
 
@@ -18,6 +17,7 @@ Get suggestions from an LLM model for improving an OpenAPI document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="suggest" method="post" path="/v1/suggest/openapi_from_summary" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -163,7 +163,7 @@ import {
 
 ### Response
 
-**Promise\<[ReadableStream<Uint8Array>](../../models/.md)\>**
+**Promise\<[ReadableStream<Uint8Array>](../../models/schema.md)\>**
 
 ### Errors
 
@@ -177,6 +177,7 @@ Generate generic suggestions for a list of items.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="suggestItems" method="post" path="/v1/suggest/items" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -276,6 +277,7 @@ Get suggestions from an LLM model for improving an OpenAPI document.
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="suggestOpenAPI" method="post" path="/v1/suggest/openapi" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 import { openAsBlob } from "node:fs";
@@ -363,7 +365,7 @@ import {
 
 ### Response
 
-**Promise\<[ReadableStream<Uint8Array>](../../models/.md)\>**
+**Promise\<[ReadableStream<Uint8Array>](../../models/schema.md)\>**
 
 ### Errors
 
@@ -377,6 +379,7 @@ Get suggestions from an LLM model for improving an OpenAPI document stored in th
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="suggestOpenAPIRegistry" method="post" path="/v1/suggest/openapi/{namespace_name}/{revision_reference}" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -460,7 +463,7 @@ import {
 
 ### Response
 
-**Promise\<[ReadableStream<Uint8Array>](../../models/.md)\>**
+**Promise\<[ReadableStream<Uint8Array>](../../models/schema.md)\>**
 
 ### Errors
 

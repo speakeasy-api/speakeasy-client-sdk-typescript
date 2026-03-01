@@ -5,30 +5,54 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { authGetUser } from "../funcs/authGetUser.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import { useSpeakeasyContext } from "./_context.js";
 import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
+import {
+  AuthGetUserQueryData,
+  buildAuthGetUserQuery,
+  prefetchAuthGetUser,
+  queryKeyAuthGetUser,
+} from "./authGetUser.core.js";
+export {
+  type AuthGetUserQueryData,
+  buildAuthGetUserQuery,
+  prefetchAuthGetUser,
+  queryKeyAuthGetUser,
+};
 
-export type AuthGetUserQueryData = shared.User;
+export type AuthGetUserQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get information about the current user.
  */
 export function useAuthGetUser(
-  options?: QueryHookOptions<AuthGetUserQueryData>,
-): UseQueryResult<AuthGetUserQueryData, Error> {
+  options?: QueryHookOptions<AuthGetUserQueryData, AuthGetUserQueryError>,
+): UseQueryResult<AuthGetUserQueryData, AuthGetUserQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildAuthGetUserQuery(
@@ -43,8 +67,11 @@ export function useAuthGetUser(
  * Get information about the current user.
  */
 export function useAuthGetUserSuspense(
-  options?: SuspenseQueryHookOptions<AuthGetUserQueryData>,
-): UseSuspenseQueryResult<AuthGetUserQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    AuthGetUserQueryData,
+    AuthGetUserQueryError
+  >,
+): UseSuspenseQueryResult<AuthGetUserQueryData, AuthGetUserQueryError> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildAuthGetUserQuery(
@@ -52,17 +79,6 @@ export function useAuthGetUserSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchAuthGetUser(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildAuthGetUserQuery(
-      client$,
-    ),
   });
 }
 
@@ -87,34 +103,4 @@ export function invalidateAllAuthGetUser(
       "getUser",
     ],
   });
-}
-
-export function buildAuthGetUserQuery(
-  client$: SpeakeasyCore,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<AuthGetUserQueryData>;
-} {
-  return {
-    queryKey: queryKeyAuthGetUser(),
-    queryFn: async function authGetUserQueryFn(
-      ctx,
-    ): Promise<AuthGetUserQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(authGetUser(
-        client$,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyAuthGetUser(): QueryKey {
-  return ["@speakeasy-api/speakeasy-client-sdk-typescript", "Auth", "getUser"];
 }

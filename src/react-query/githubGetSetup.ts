@@ -5,33 +5,57 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { githubGetSetup } from "../funcs/githubGetSetup.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildGithubGetSetupQuery,
+  GithubGetSetupQueryData,
+  prefetchGithubGetSetup,
+  queryKeyGithubGetSetup,
+} from "./githubGetSetup.core.js";
+export {
+  buildGithubGetSetupQuery,
+  type GithubGetSetupQueryData,
+  prefetchGithubGetSetup,
+  queryKeyGithubGetSetup,
+};
 
-export type GithubGetSetupQueryData = shared.GithubSetupStateResponse;
+export type GithubGetSetupQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 export function useGithubGetSetup(
   request: operations.GetGithubSetupStateRequest,
-  options?: QueryHookOptions<GithubGetSetupQueryData>,
-): UseQueryResult<GithubGetSetupQueryData, Error> {
+  options?: QueryHookOptions<GithubGetSetupQueryData, GithubGetSetupQueryError>,
+): UseQueryResult<GithubGetSetupQueryData, GithubGetSetupQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildGithubGetSetupQuery(
@@ -45,8 +69,11 @@ export function useGithubGetSetup(
 
 export function useGithubGetSetupSuspense(
   request: operations.GetGithubSetupStateRequest,
-  options?: SuspenseQueryHookOptions<GithubGetSetupQueryData>,
-): UseSuspenseQueryResult<GithubGetSetupQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    GithubGetSetupQueryData,
+    GithubGetSetupQueryError
+  >,
+): UseSuspenseQueryResult<GithubGetSetupQueryData, GithubGetSetupQueryError> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildGithubGetSetupQuery(
@@ -55,19 +82,6 @@ export function useGithubGetSetupSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchGithubGetSetup(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetGithubSetupStateRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildGithubGetSetupQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -113,47 +127,4 @@ export function invalidateAllGithubGetSetup(
       "getSetup",
     ],
   });
-}
-
-export function buildGithubGetSetupQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetGithubSetupStateRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (context: QueryFunctionContext) => Promise<GithubGetSetupQueryData>;
-} {
-  return {
-    queryKey: queryKeyGithubGetSetup({
-      org: request.org,
-      repo: request.repo,
-      generateGenLockId: request.generateGenLockId,
-    }),
-    queryFn: async function githubGetSetupQueryFn(
-      ctx,
-    ): Promise<GithubGetSetupQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(githubGetSetup(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyGithubGetSetup(
-  parameters: { org: string; repo: string; generateGenLockId: string },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Github",
-    "getSetup",
-    parameters,
-  ];
 }

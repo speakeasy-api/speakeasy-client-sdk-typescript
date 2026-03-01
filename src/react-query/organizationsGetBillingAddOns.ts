@@ -5,31 +5,60 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { organizationsGetBillingAddOns } from "../funcs/organizationsGetBillingAddOns.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import { useSpeakeasyContext } from "./_context.js";
 import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
+import {
+  buildOrganizationsGetBillingAddOnsQuery,
+  OrganizationsGetBillingAddOnsQueryData,
+  prefetchOrganizationsGetBillingAddOns,
+  queryKeyOrganizationsGetBillingAddOns,
+} from "./organizationsGetBillingAddOns.core.js";
+export {
+  buildOrganizationsGetBillingAddOnsQuery,
+  type OrganizationsGetBillingAddOnsQueryData,
+  prefetchOrganizationsGetBillingAddOns,
+  queryKeyOrganizationsGetBillingAddOns,
+};
 
-export type OrganizationsGetBillingAddOnsQueryData =
-  shared.OrganizationBillingAddOnResponse;
+export type OrganizationsGetBillingAddOnsQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get billing add ons
  */
 export function useOrganizationsGetBillingAddOns(
-  options?: QueryHookOptions<OrganizationsGetBillingAddOnsQueryData>,
-): UseQueryResult<OrganizationsGetBillingAddOnsQueryData, Error> {
+  options?: QueryHookOptions<
+    OrganizationsGetBillingAddOnsQueryData,
+    OrganizationsGetBillingAddOnsQueryError
+  >,
+): UseQueryResult<
+  OrganizationsGetBillingAddOnsQueryData,
+  OrganizationsGetBillingAddOnsQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildOrganizationsGetBillingAddOnsQuery(
@@ -44,8 +73,14 @@ export function useOrganizationsGetBillingAddOns(
  * Get billing add ons
  */
 export function useOrganizationsGetBillingAddOnsSuspense(
-  options?: SuspenseQueryHookOptions<OrganizationsGetBillingAddOnsQueryData>,
-): UseSuspenseQueryResult<OrganizationsGetBillingAddOnsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    OrganizationsGetBillingAddOnsQueryData,
+    OrganizationsGetBillingAddOnsQueryError
+  >,
+): UseSuspenseQueryResult<
+  OrganizationsGetBillingAddOnsQueryData,
+  OrganizationsGetBillingAddOnsQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildOrganizationsGetBillingAddOnsQuery(
@@ -53,17 +88,6 @@ export function useOrganizationsGetBillingAddOnsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchOrganizationsGetBillingAddOns(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildOrganizationsGetBillingAddOnsQuery(
-      client$,
-    ),
   });
 }
 
@@ -88,40 +112,4 @@ export function invalidateAllOrganizationsGetBillingAddOns(
       "getBillingAddOns",
     ],
   });
-}
-
-export function buildOrganizationsGetBillingAddOnsQuery(
-  client$: SpeakeasyCore,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<OrganizationsGetBillingAddOnsQueryData>;
-} {
-  return {
-    queryKey: queryKeyOrganizationsGetBillingAddOns(),
-    queryFn: async function organizationsGetBillingAddOnsQueryFn(
-      ctx,
-    ): Promise<OrganizationsGetBillingAddOnsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(organizationsGetBillingAddOns(
-        client$,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyOrganizationsGetBillingAddOns(): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Organizations",
-    "getBillingAddOns",
-  ];
 }

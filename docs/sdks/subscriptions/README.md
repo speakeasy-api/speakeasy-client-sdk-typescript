@@ -1,5 +1,4 @@
 # Subscriptions
-(*subscriptions*)
 
 ## Overview
 
@@ -16,6 +15,7 @@ Activate an ignored namespace for a subscription
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="activateSubscriptionNamespace" method="post" path="/v1/subscriptions/{subscriptionID}/{namespaceName}/activate" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 
@@ -112,6 +112,7 @@ Ignored a namespace for a subscription
 
 ### Example Usage
 
+<!-- UsageSnippet language="typescript" operationID="ignoreSubscriptionNamespace" method="post" path="/v1/subscriptions/{subscriptionID}/{namespaceName}/ignore" -->
 ```typescript
 import { Speakeasy } from "@speakeasy-api/speakeasy-client-sdk-typescript";
 

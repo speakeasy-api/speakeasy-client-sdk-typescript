@@ -5,28 +5,52 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { workspacesGetByID } from "../funcs/workspacesGetByID.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildWorkspacesGetByIDQuery,
+  prefetchWorkspacesGetByID,
+  queryKeyWorkspacesGetByID,
+  WorkspacesGetByIDQueryData,
+} from "./workspacesGetByID.core.js";
+export {
+  buildWorkspacesGetByIDQuery,
+  prefetchWorkspacesGetByID,
+  queryKeyWorkspacesGetByID,
+  type WorkspacesGetByIDQueryData,
+};
 
-export type WorkspacesGetByIDQueryData = shared.Workspace;
+export type WorkspacesGetByIDQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 /**
  * Get workspace
@@ -36,8 +60,11 @@ export type WorkspacesGetByIDQueryData = shared.Workspace;
  */
 export function useWorkspacesGetByID(
   request: operations.GetWorkspaceRequest,
-  options?: QueryHookOptions<WorkspacesGetByIDQueryData>,
-): UseQueryResult<WorkspacesGetByIDQueryData, Error> {
+  options?: QueryHookOptions<
+    WorkspacesGetByIDQueryData,
+    WorkspacesGetByIDQueryError
+  >,
+): UseQueryResult<WorkspacesGetByIDQueryData, WorkspacesGetByIDQueryError> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildWorkspacesGetByIDQuery(
@@ -57,8 +84,14 @@ export function useWorkspacesGetByID(
  */
 export function useWorkspacesGetByIDSuspense(
   request: operations.GetWorkspaceRequest,
-  options?: SuspenseQueryHookOptions<WorkspacesGetByIDQueryData>,
-): UseSuspenseQueryResult<WorkspacesGetByIDQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    WorkspacesGetByIDQueryData,
+    WorkspacesGetByIDQueryError
+  >,
+): UseSuspenseQueryResult<
+  WorkspacesGetByIDQueryData,
+  WorkspacesGetByIDQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildWorkspacesGetByIDQuery(
@@ -67,19 +100,6 @@ export function useWorkspacesGetByIDSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchWorkspacesGetByID(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildWorkspacesGetByIDQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -121,45 +141,4 @@ export function invalidateAllWorkspacesGetByID(
       "getByID",
     ],
   });
-}
-
-export function buildWorkspacesGetByIDQuery(
-  client$: SpeakeasyCore,
-  request: operations.GetWorkspaceRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<WorkspacesGetByIDQueryData>;
-} {
-  return {
-    queryKey: queryKeyWorkspacesGetByID(request.workspaceId),
-    queryFn: async function workspacesGetByIDQueryFn(
-      ctx,
-    ): Promise<WorkspacesGetByIDQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(workspacesGetByID(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyWorkspacesGetByID(
-  workspaceId: string | undefined,
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Workspaces",
-    "getByID",
-    workspaceId,
-  ];
 }

@@ -5,34 +5,63 @@
 import {
   InvalidateQueryFilters,
   QueryClient,
-  QueryFunctionContext,
-  QueryKey,
   useQuery,
   UseQueryResult,
   useSuspenseQuery,
   UseSuspenseQueryResult,
 } from "@tanstack/react-query";
-import { SpeakeasyCore } from "../core.js";
-import { githubCheckPublishingPRs } from "../funcs/githubCheckPublishingPRs.js";
-import { combineSignals } from "../lib/primitives.js";
-import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
-import * as shared from "../sdk/models/shared/index.js";
-import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import {
   QueryHookOptions,
   SuspenseQueryHookOptions,
   TupleToPrefixes,
 } from "./_types.js";
+import {
+  buildGithubCheckPublishingPRsQuery,
+  GithubCheckPublishingPRsQueryData,
+  prefetchGithubCheckPublishingPRs,
+  queryKeyGithubCheckPublishingPRs,
+} from "./githubCheckPublishingPRs.core.js";
+export {
+  buildGithubCheckPublishingPRsQuery,
+  type GithubCheckPublishingPRsQueryData,
+  prefetchGithubCheckPublishingPRs,
+  queryKeyGithubCheckPublishingPRs,
+};
 
-export type GithubCheckPublishingPRsQueryData =
-  shared.GithubPublishingPRResponse;
+export type GithubCheckPublishingPRsQueryError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
 
 export function useGithubCheckPublishingPRs(
   request: operations.GithubCheckPublishingPRsRequest,
-  options?: QueryHookOptions<GithubCheckPublishingPRsQueryData>,
-): UseQueryResult<GithubCheckPublishingPRsQueryData, Error> {
+  options?: QueryHookOptions<
+    GithubCheckPublishingPRsQueryData,
+    GithubCheckPublishingPRsQueryError
+  >,
+): UseQueryResult<
+  GithubCheckPublishingPRsQueryData,
+  GithubCheckPublishingPRsQueryError
+> {
   const client = useSpeakeasyContext();
   return useQuery({
     ...buildGithubCheckPublishingPRsQuery(
@@ -46,8 +75,14 @@ export function useGithubCheckPublishingPRs(
 
 export function useGithubCheckPublishingPRsSuspense(
   request: operations.GithubCheckPublishingPRsRequest,
-  options?: SuspenseQueryHookOptions<GithubCheckPublishingPRsQueryData>,
-): UseSuspenseQueryResult<GithubCheckPublishingPRsQueryData, Error> {
+  options?: SuspenseQueryHookOptions<
+    GithubCheckPublishingPRsQueryData,
+    GithubCheckPublishingPRsQueryError
+  >,
+): UseSuspenseQueryResult<
+  GithubCheckPublishingPRsQueryData,
+  GithubCheckPublishingPRsQueryError
+> {
   const client = useSpeakeasyContext();
   return useSuspenseQuery({
     ...buildGithubCheckPublishingPRsQuery(
@@ -56,19 +91,6 @@ export function useGithubCheckPublishingPRsSuspense(
       options,
     ),
     ...options,
-  });
-}
-
-export function prefetchGithubCheckPublishingPRs(
-  queryClient: QueryClient,
-  client$: SpeakeasyCore,
-  request: operations.GithubCheckPublishingPRsRequest,
-): Promise<void> {
-  return queryClient.prefetchQuery({
-    ...buildGithubCheckPublishingPRsQuery(
-      client$,
-      request,
-    ),
   });
 }
 
@@ -114,49 +136,4 @@ export function invalidateAllGithubCheckPublishingPRs(
       "checkPublishingPRs",
     ],
   });
-}
-
-export function buildGithubCheckPublishingPRsQuery(
-  client$: SpeakeasyCore,
-  request: operations.GithubCheckPublishingPRsRequest,
-  options?: RequestOptions,
-): {
-  queryKey: QueryKey;
-  queryFn: (
-    context: QueryFunctionContext,
-  ) => Promise<GithubCheckPublishingPRsQueryData>;
-} {
-  return {
-    queryKey: queryKeyGithubCheckPublishingPRs({
-      generateGenLockId: request.generateGenLockId,
-      org: request.org,
-      repo: request.repo,
-    }),
-    queryFn: async function githubCheckPublishingPRsQueryFn(
-      ctx,
-    ): Promise<GithubCheckPublishingPRsQueryData> {
-      const sig = combineSignals(ctx.signal, options?.fetchOptions?.signal);
-      const mergedOptions = {
-        ...options,
-        fetchOptions: { ...options?.fetchOptions, signal: sig },
-      };
-
-      return unwrapAsync(githubCheckPublishingPRs(
-        client$,
-        request,
-        mergedOptions,
-      ));
-    },
-  };
-}
-
-export function queryKeyGithubCheckPublishingPRs(
-  parameters: { generateGenLockId: string; org: string; repo: string },
-): QueryKey {
-  return [
-    "@speakeasy-api/speakeasy-client-sdk-typescript",
-    "Github",
-    "checkPublishingPRs",
-    parameters,
-  ];
 }

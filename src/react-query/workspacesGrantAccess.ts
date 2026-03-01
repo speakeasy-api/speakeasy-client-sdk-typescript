@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { workspacesGrantAccess } from "../funcs/workspacesGrantAccess.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
@@ -24,18 +35,29 @@ export type WorkspacesGrantAccessMutationVariables = {
 
 export type WorkspacesGrantAccessMutationData = shared.WorkspaceInviteResponse;
 
+export type WorkspacesGrantAccessMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Grant a user access to a particular workspace
  */
 export function useWorkspacesGrantAccessMutation(
   options?: MutationHookOptions<
     WorkspacesGrantAccessMutationData,
-    Error,
+    WorkspacesGrantAccessMutationError,
     WorkspacesGrantAccessMutationVariables
   >,
 ): UseMutationResult<
   WorkspacesGrantAccessMutationData,
-  Error,
+  WorkspacesGrantAccessMutationError,
   WorkspacesGrantAccessMutationVariables
 > {
   const client = useSpeakeasyContext();

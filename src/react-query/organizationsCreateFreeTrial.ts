@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { organizationsCreateFreeTrial } from "../funcs/organizationsCreateFreeTrial.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
 import { MutationHookOptions } from "./_types.js";
@@ -21,6 +32,17 @@ export type OrganizationsCreateFreeTrialMutationVariables = {
 
 export type OrganizationsCreateFreeTrialMutationData = void;
 
+export type OrganizationsCreateFreeTrialMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Create a free trial for an organization
  *
@@ -30,12 +52,12 @@ export type OrganizationsCreateFreeTrialMutationData = void;
 export function useOrganizationsCreateFreeTrialMutation(
   options?: MutationHookOptions<
     OrganizationsCreateFreeTrialMutationData,
-    Error,
+    OrganizationsCreateFreeTrialMutationError,
     OrganizationsCreateFreeTrialMutationVariables
   >,
 ): UseMutationResult<
   OrganizationsCreateFreeTrialMutationData,
-  Error,
+  OrganizationsCreateFreeTrialMutationError,
   OrganizationsCreateFreeTrialMutationVariables
 > {
   const client = useSpeakeasyContext();

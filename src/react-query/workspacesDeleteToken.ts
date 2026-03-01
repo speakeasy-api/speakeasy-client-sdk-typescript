@@ -11,6 +11,17 @@ import { SpeakeasyCore } from "../core.js";
 import { workspacesDeleteToken } from "../funcs/workspacesDeleteToken.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
+import {
+  ConnectionError,
+  InvalidRequestError,
+  RequestAbortedError,
+  RequestTimeoutError,
+  UnexpectedClientError,
+} from "../sdk/models/errors/httpclienterrors.js";
+import * as errors from "../sdk/models/errors/index.js";
+import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
+import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
+import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
 import * as operations from "../sdk/models/operations/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 import { useSpeakeasyContext } from "./_context.js";
@@ -23,18 +34,29 @@ export type WorkspacesDeleteTokenMutationVariables = {
 
 export type WorkspacesDeleteTokenMutationData = void;
 
+export type WorkspacesDeleteTokenMutationError =
+  | errors.ErrorT
+  | SpeakeasyError
+  | ResponseValidationError
+  | ConnectionError
+  | RequestAbortedError
+  | RequestTimeoutError
+  | InvalidRequestError
+  | UnexpectedClientError
+  | SDKValidationError;
+
 /**
  * Delete a token for a particular workspace
  */
 export function useWorkspacesDeleteTokenMutation(
   options?: MutationHookOptions<
     WorkspacesDeleteTokenMutationData,
-    Error,
+    WorkspacesDeleteTokenMutationError,
     WorkspacesDeleteTokenMutationVariables
   >,
 ): UseMutationResult<
   WorkspacesDeleteTokenMutationData,
-  Error,
+  WorkspacesDeleteTokenMutationError,
   WorkspacesDeleteTokenMutationVariables
 > {
   const client = useSpeakeasyContext();
