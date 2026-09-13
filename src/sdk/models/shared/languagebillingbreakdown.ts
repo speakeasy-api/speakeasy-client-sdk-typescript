@@ -15,108 +15,90 @@ import {
 } from "./targetbillingbreakdown.js";
 
 /**
- * Contains the billing breakdown for a single spec/namespace
+ * Contains the billing breakdown for a single language
  */
-export type SpecBillingBreakdown = {
+export type LanguageBillingBreakdown = {
   /**
-   * Billable units for this spec (operation_count x target_count)
+   * Total billable units contributed by targets in this language
    */
   billableUnits: number;
   /**
-   * Whether the spec/namespace is archived
+   * The generated SDK language
    */
-  isArchived: boolean;
+  language: string;
   /**
-   * The namespace name for this spec
-   */
-  namespace: string;
-  /**
-   * Number of operations in this spec
+   * Number of operations from the latest generation event for this language
    */
   operationCount: number;
   /**
-   * List of operation IDs (only included when include_operation_ids is true)
-   */
-  operationIds?: Array<string> | undefined;
-  /**
-   * Number of targets using this spec
+   * Number of generated SDK targets for this language
    */
   targetCount: number;
   /**
-   * List of targets using this spec
+   * List of generated targets for this language
    */
   targets: Array<TargetBillingBreakdown>;
 };
 
 /** @internal */
-export const SpecBillingBreakdown$inboundSchema: z.ZodType<
-  SpecBillingBreakdown,
+export const LanguageBillingBreakdown$inboundSchema: z.ZodType<
+  LanguageBillingBreakdown,
   z.ZodTypeDef,
   unknown
 > = z.object({
   billable_units: z.number().int(),
-  is_archived: z.boolean(),
-  namespace: z.string(),
+  language: z.string(),
   operation_count: z.number().int(),
-  operation_ids: z.array(z.string()).optional(),
   target_count: z.number().int(),
   targets: z.array(TargetBillingBreakdown$inboundSchema),
 }).transform((v) => {
   return remap$(v, {
     "billable_units": "billableUnits",
-    "is_archived": "isArchived",
     "operation_count": "operationCount",
-    "operation_ids": "operationIds",
     "target_count": "targetCount",
   });
 });
 /** @internal */
-export type SpecBillingBreakdown$Outbound = {
+export type LanguageBillingBreakdown$Outbound = {
   billable_units: number;
-  is_archived: boolean;
-  namespace: string;
+  language: string;
   operation_count: number;
-  operation_ids?: Array<string> | undefined;
   target_count: number;
   targets: Array<TargetBillingBreakdown$Outbound>;
 };
 
 /** @internal */
-export const SpecBillingBreakdown$outboundSchema: z.ZodType<
-  SpecBillingBreakdown$Outbound,
+export const LanguageBillingBreakdown$outboundSchema: z.ZodType<
+  LanguageBillingBreakdown$Outbound,
   z.ZodTypeDef,
-  SpecBillingBreakdown
+  LanguageBillingBreakdown
 > = z.object({
   billableUnits: z.number().int(),
-  isArchived: z.boolean(),
-  namespace: z.string(),
+  language: z.string(),
   operationCount: z.number().int(),
-  operationIds: z.array(z.string()).optional(),
   targetCount: z.number().int(),
   targets: z.array(TargetBillingBreakdown$outboundSchema),
 }).transform((v) => {
   return remap$(v, {
     billableUnits: "billable_units",
-    isArchived: "is_archived",
     operationCount: "operation_count",
-    operationIds: "operation_ids",
     targetCount: "target_count",
   });
 });
 
-export function specBillingBreakdownToJSON(
-  specBillingBreakdown: SpecBillingBreakdown,
+export function languageBillingBreakdownToJSON(
+  languageBillingBreakdown: LanguageBillingBreakdown,
 ): string {
   return JSON.stringify(
-    SpecBillingBreakdown$outboundSchema.parse(specBillingBreakdown),
+    LanguageBillingBreakdown$outboundSchema.parse(languageBillingBreakdown),
   );
 }
-export function specBillingBreakdownFromJSON(
+export function languageBillingBreakdownFromJSON(
   jsonString: string,
-): SafeParseResult<SpecBillingBreakdown, SDKValidationError> {
+): SafeParseResult<LanguageBillingBreakdown, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => SpecBillingBreakdown$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'SpecBillingBreakdown' from JSON`,
+    (x) => LanguageBillingBreakdown$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'LanguageBillingBreakdown' from JSON`,
   );
 }

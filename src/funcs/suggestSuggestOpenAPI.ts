@@ -4,11 +4,18 @@
 
 import * as z from "zod/v3";
 import { SpeakeasyCore } from "../core.js";
-import { appendForm, encodeJSON, encodeSimple } from "../lib/encodings.js";
 import {
+  appendForm,
+  encodeJSON,
+  encodeSimple,
+  normalizeBlob,
+} from "../lib/encodings.js";
+import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -93,7 +100,10 @@ async function $do(
   const body = new FormData();
 
   if (isBlobLike(payload.RequestBody.schema)) {
-    appendForm(body, "schema", payload.RequestBody.schema);
+    const file = payload.RequestBody.schema;
+    const blob = await normalizeBlob(file);
+    const name = "name" in file ? (file.name as string) : undefined;
+    appendForm(body, "schema", blob, name);
   } else if (isReadableStream(payload.RequestBody.schema.content)) {
     const buffer = await readableStreamToArrayBuffer(
       payload.RequestBody.schema.content,
@@ -101,8 +111,12 @@ async function $do(
     const contentType =
       getContentTypeFromFileName(payload.RequestBody.schema.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body, "schema", blob, payload.RequestBody.schema.fileName);
+    appendForm(
+      body,
+      "schema",
+      bytesToBlob(buffer, contentType),
+      payload.RequestBody.schema.fileName,
+    );
   } else {
     const contentType =
       getContentTypeFromFileName(payload.RequestBody.schema.fileName)
@@ -110,7 +124,7 @@ async function $do(
     appendForm(
       body,
       "schema",
-      new Blob([payload.RequestBody.schema.content], { type: contentType }),
+      bytesToBlob(payload.RequestBody.schema.content, contentType),
       payload.RequestBody.schema.fileName,
     );
   }
@@ -167,7 +181,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });

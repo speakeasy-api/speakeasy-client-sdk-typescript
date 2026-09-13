@@ -25,9 +25,9 @@ export type Organization = {
   name: string;
   slug: string;
   ssoActivated: boolean;
-  ssoConnectionId?: string | null | undefined;
   telemetryDisabled: boolean;
   updatedAt: Date;
+  workosId?: string | null | undefined;
 };
 
 /** @internal */
@@ -46,18 +46,18 @@ export const Organization$inboundSchema: z.ZodType<
   name: z.string(),
   slug: z.string(),
   sso_activated: z.boolean(),
-  sso_connection_id: z.nullable(z.string()).optional(),
   telemetry_disabled: z.boolean(),
   updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+  workos_id: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     "account_type": "accountType",
     "created_at": "createdAt",
     "free_trial_expiry": "freeTrialExpiry",
     "sso_activated": "ssoActivated",
-    "sso_connection_id": "ssoConnectionId",
     "telemetry_disabled": "telemetryDisabled",
     "updated_at": "updatedAt",
+    "workos_id": "workosId",
   });
 });
 /** @internal */
@@ -70,9 +70,9 @@ export type Organization$Outbound = {
   name: string;
   slug: string;
   sso_activated: boolean;
-  sso_connection_id?: string | null | undefined;
   telemetry_disabled: boolean;
   updated_at: string;
+  workos_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -90,18 +90,18 @@ export const Organization$outboundSchema: z.ZodType<
   name: z.string(),
   slug: z.string(),
   ssoActivated: z.boolean(),
-  ssoConnectionId: z.nullable(z.string()).optional(),
   telemetryDisabled: z.boolean(),
   updatedAt: z.date().transform(v => v.toISOString()),
+  workosId: z.nullable(z.string()).optional(),
 }).transform((v) => {
   return remap$(v, {
     accountType: "account_type",
     createdAt: "created_at",
     freeTrialExpiry: "free_trial_expiry",
     ssoActivated: "sso_activated",
-    ssoConnectionId: "sso_connection_id",
     telemetryDisabled: "telemetry_disabled",
     updatedAt: "updated_at",
+    workosId: "workos_id",
   });
 });
 
