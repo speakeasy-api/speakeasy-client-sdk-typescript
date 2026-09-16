@@ -27,6 +27,16 @@ export type ApiKeyDetails = {
    */
   featureFlags?: Array<string> | undefined;
   generationAccessUnlimited?: boolean | undefined;
+  /**
+   * Signed JWT (EdDSA/Ed25519) asserting the workspace's commercial license
+   *
+   * @remarks
+   * entitlements at time of issue. Verified offline by the open-source
+   * generator against its embedded JWK set; may be persisted as an offline
+   * license file. Only present for commercially-entitled workspaces when
+   * license signing is configured.
+   */
+  licenseJwt?: string | null | undefined;
   orgSlug: string;
   telemetryDisabled: boolean;
   /**
@@ -48,6 +58,7 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<
   enabled_features: z.array(z.string()),
   feature_flags: z.array(z.string()).optional(),
   generation_access_unlimited: z.boolean().optional(),
+  license_jwt: z.nullable(z.string()).optional(),
   org_slug: z.string(),
   telemetry_disabled: z.boolean(),
   workspace_created_at: z.string().datetime({ offset: true }).transform(v =>
@@ -62,6 +73,7 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<
     "enabled_features": "enabledFeatures",
     "feature_flags": "featureFlags",
     "generation_access_unlimited": "generationAccessUnlimited",
+    "license_jwt": "licenseJwt",
     "org_slug": "orgSlug",
     "telemetry_disabled": "telemetryDisabled",
     "workspace_created_at": "workspaceCreatedAt",
@@ -76,6 +88,7 @@ export type ApiKeyDetails$Outbound = {
   enabled_features: Array<string>;
   feature_flags?: Array<string> | undefined;
   generation_access_unlimited?: boolean | undefined;
+  license_jwt?: string | null | undefined;
   org_slug: string;
   telemetry_disabled: boolean;
   workspace_created_at: string;
@@ -94,6 +107,7 @@ export const ApiKeyDetails$outboundSchema: z.ZodType<
   enabledFeatures: z.array(z.string()),
   featureFlags: z.array(z.string()).optional(),
   generationAccessUnlimited: z.boolean().optional(),
+  licenseJwt: z.nullable(z.string()).optional(),
   orgSlug: z.string(),
   telemetryDisabled: z.boolean(),
   workspaceCreatedAt: z.date().transform(v => v.toISOString()),
@@ -106,6 +120,7 @@ export const ApiKeyDetails$outboundSchema: z.ZodType<
     enabledFeatures: "enabled_features",
     featureFlags: "feature_flags",
     generationAccessUnlimited: "generation_access_unlimited",
+    licenseJwt: "license_jwt",
     orgSlug: "org_slug",
     telemetryDisabled: "telemetry_disabled",
     workspaceCreatedAt: "workspace_created_at",
