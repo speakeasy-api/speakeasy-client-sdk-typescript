@@ -3,26 +3,18 @@
  */
 
 import { organizationsGetBillingOperations } from "../../funcs/organizationsGetBillingOperations.js";
-import * as operations from "../../sdk/models/operations/index.js";
 import { formatResult, ToolDefinition } from "../tools.js";
 
-const args = {
-  request: operations.GetBillingOperationsRequest$inboundSchema,
-};
-
-export const tool$organizationsGetBillingOperations: ToolDefinition<
-  typeof args
-> = {
+export const tool$organizationsGetBillingOperations: ToolDefinition = {
   name: "organizations-get-billing-operations",
   description: `Get billing operations breakdown for an organization
 
-Returns a breakdown of billing operations by spec and target for an organization.
-The billing formula is: Total = sum(operationIds per spec x targets per spec)`,
-  args,
-  tool: async (client, args, ctx) => {
+Returns a breakdown of billing operations by language and generated SDK target
+for an organization. Each language row is sourced from generation events,
+and target rows optionally include the source spec namespace when available.`,
+  tool: async (client, ctx) => {
     const [result, apiCall] = await organizationsGetBillingOperations(
       client,
-      args.request,
       { fetchOptions: { signal: ctx.signal } },
     ).$inspect();
 
