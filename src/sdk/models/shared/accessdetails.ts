@@ -19,7 +19,19 @@ export type Level = ClosedEnum<typeof Level>;
 export type AccessDetails = {
   generationAllowed: boolean;
   level?: Level | undefined;
+  /**
+   * Signed JWT (EdDSA/Ed25519) asserting the workspace's commercial license
+   *
+   * @remarks
+   * entitlements at time of issue. Verified offline by the open-source
+   * generator against its embedded JWK set; may be persisted as an offline
+   * license file. Only present whenever generation is not blocked and license
+   * signing is configured; scoped to the requested target for free-tier
+   * workspaces, unrestricted otherwise.
+   */
+  licenseJwt?: string | null | undefined;
   message: string;
+  statusCode?: string | undefined;
 };
 
 /** @internal */
@@ -38,17 +50,23 @@ export const AccessDetails$inboundSchema: z.ZodType<
 > = z.object({
   generation_allowed: z.boolean(),
   level: Level$inboundSchema.optional(),
+  license_jwt: z.nullable(z.string()).optional(),
   message: z.string(),
+  status_code: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     "generation_allowed": "generationAllowed",
+    "license_jwt": "licenseJwt",
+    "status_code": "statusCode",
   });
 });
 /** @internal */
 export type AccessDetails$Outbound = {
   generation_allowed: boolean;
   level?: string | undefined;
+  license_jwt?: string | null | undefined;
   message: string;
+  status_code?: string | undefined;
 };
 
 /** @internal */
@@ -59,10 +77,14 @@ export const AccessDetails$outboundSchema: z.ZodType<
 > = z.object({
   generationAllowed: z.boolean(),
   level: Level$outboundSchema.optional(),
+  licenseJwt: z.nullable(z.string()).optional(),
   message: z.string(),
+  statusCode: z.string().optional(),
 }).transform((v) => {
   return remap$(v, {
     generationAllowed: "generation_allowed",
+    licenseJwt: "license_jwt",
+    statusCode: "status_code",
   });
 });
 

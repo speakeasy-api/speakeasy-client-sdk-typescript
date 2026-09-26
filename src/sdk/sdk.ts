@@ -15,6 +15,7 @@ import { SchemaStore } from "./schemastore.js";
 import { ShortURLs } from "./shorturls.js";
 import { Subscriptions } from "./subscriptions.js";
 import { Suggest } from "./suggest.js";
+import { Webhooks } from "./webhooks.js";
 import { Workspaces } from "./workspaces.js";
 
 export class Speakeasy extends ClientSDK {
@@ -28,6 +29,11 @@ export class Speakeasy extends ClientSDK {
     return (this._auth ??= new Auth(this._options));
   }
 
+  private _organizations?: Organizations;
+  get organizations(): Organizations {
+    return (this._organizations ??= new Organizations(this._options));
+  }
+
   private _codeSamples?: CodeSamples;
   get codeSamples(): CodeSamples {
     return (this._codeSamples ??= new CodeSamples(this._options));
@@ -36,11 +42,6 @@ export class Speakeasy extends ClientSDK {
   private _github?: Github;
   get github(): Github {
     return (this._github ??= new Github(this._options));
-  }
-
-  private _organizations?: Organizations;
-  get organizations(): Organizations {
-    return (this._organizations ??= new Organizations(this._options));
   }
 
   private _publishingTokens?: PublishingTokens;
@@ -71,6 +72,11 @@ export class Speakeasy extends ClientSDK {
   private _suggest?: Suggest;
   get suggest(): Suggest {
     return (this._suggest ??= new Suggest(this._options));
+  }
+
+  private _webhooks?: Webhooks;
+  get webhooks(): Webhooks {
+    return (this._webhooks ??= new Webhooks(this._options));
   }
 
   private _workspaces?: Workspaces;
