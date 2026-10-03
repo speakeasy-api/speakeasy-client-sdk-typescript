@@ -27,7 +27,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 typescript:
-  version: 5.0.0-rc.5
+  version: 5.0.0-rc.6
   acceptHeaderEnum: true
   additionalDependencies:
     dependencies: {}
@@ -36,6 +36,7 @@ typescript:
   additionalPackageJSON: {}
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
   author: Speakeasy
   baseErrorName: SpeakeasyError
   clientServerStatusCodesAsErrors: true
@@ -45,7 +46,9 @@ typescript:
   enableMCPServer: true
   enableReactQuery: true
   enumFormat: union
+  eventStreamClassName: EventStream
   exportZodModelNamespace: false
+  fixEnumNameSanitization: false
   flatAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: body-first
@@ -75,10 +78,14 @@ typescript:
   packageName: '@speakeasy-api/speakeasy-client-sdk-typescript'
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
+  requestExtras: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2
   unionStrategy: left-to-right
   usageSDKInitImports: []
   useIndexModules: true
+  useOxlint: false
+  useTsgo: false
   zodVersion: v3
