@@ -3,11 +3,13 @@
  */
 
 import { SpeakeasyCore } from "../core.js";
-import { appendForm } from "../lib/encodings.js";
+import { appendForm, normalizeBlob } from "../lib/encodings.js";
 import {
+  bytesToBlob,
   getContentTypeFromFileName,
   readableStreamToArrayBuffer,
 } from "../lib/files.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
 import { safeParse } from "../lib/schemas.js";
@@ -97,22 +99,29 @@ async function $do(
 
   appendForm(body, "language", payload.language);
   if (isBlobLike(payload.schema_file)) {
-    appendForm(body, "schema_file", payload.schema_file);
+    const file = payload.schema_file;
+    const blob = await normalizeBlob(file);
+    const name = "name" in file ? (file.name as string) : undefined;
+    appendForm(body, "schema_file", blob, name);
   } else if (isReadableStream(payload.schema_file.content)) {
     const buffer = await readableStreamToArrayBuffer(
       payload.schema_file.content,
     );
     const contentType = getContentTypeFromFileName(payload.schema_file.fileName)
       || "application/octet-stream";
-    const blob = new Blob([buffer], { type: contentType });
-    appendForm(body, "schema_file", blob, payload.schema_file.fileName);
+    appendForm(
+      body,
+      "schema_file",
+      bytesToBlob(buffer, contentType),
+      payload.schema_file.fileName,
+    );
   } else {
     const contentType = getContentTypeFromFileName(payload.schema_file.fileName)
       || "application/octet-stream";
     appendForm(
       body,
       "schema_file",
-      new Blob([payload.schema_file.content], { type: contentType }),
+      bytesToBlob(payload.schema_file.content, contentType),
       payload.schema_file.fileName,
     );
   }
@@ -167,7 +176,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
