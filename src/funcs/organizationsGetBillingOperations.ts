@@ -3,10 +3,9 @@
  */
 
 import { SpeakeasyCore } from "../core.js";
-import { encodeFormQuery } from "../lib/encodings.js";
+import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
-import { safeParse } from "../lib/schemas.js";
 import { RequestOptions } from "../lib/sdks.js";
 import { extractSecurity, resolveGlobalSecurity } from "../lib/security.js";
 import { pathToFunc } from "../lib/url.js";
@@ -21,7 +20,6 @@ import * as errors from "../sdk/models/errors/index.js";
 import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
 import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
-import * as operations from "../sdk/models/operations/index.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { APICall, APIPromise } from "../sdk/types/async.js";
 import { Result } from "../sdk/types/fp.js";
@@ -30,12 +28,12 @@ import { Result } from "../sdk/types/fp.js";
  * Get billing operations breakdown for an organization
  *
  * @remarks
- * Returns a breakdown of billing operations by spec and target for an organization.
- * The billing formula is: Total = sum(operationIds per spec x targets per spec)
+ * Returns a breakdown of billing operations by language and generated SDK target
+ * for an organization. Each language row is sourced from generation events,
+ * and target rows optionally include the source spec namespace when available.
  */
 export function organizationsGetBillingOperations(
   client: SpeakeasyCore,
-  request: operations.GetBillingOperationsRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -53,14 +51,12 @@ export function organizationsGetBillingOperations(
 > {
   return new APIPromise($do(
     client,
-    request,
     options,
   ));
 }
 
 async function $do(
   client: SpeakeasyCore,
-  request: operations.GetBillingOperationsRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -79,23 +75,7 @@ async function $do(
     APICall,
   ]
 > {
-  const parsed = safeParse(
-    request,
-    (value) =>
-      operations.GetBillingOperationsRequest$outboundSchema.parse(value),
-    "Input validation failed",
-  );
-  if (!parsed.ok) {
-    return [parsed, { status: "invalid" }];
-  }
-  const payload = parsed.value;
-  const body = null;
-
   const path = pathToFunc("/v1/organization/billing_operations")();
-
-  const query = encodeFormQuery({
-    "include_operation_ids": payload.include_operation_ids,
-  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -125,8 +105,6 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
-    query: query,
-    body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
   }, options);
@@ -137,7 +115,8 @@ async function $do(
 
   const doResult = await client._do(req, {
     context,
-    errorCodes: ["4XX", "5XX"],
+    isErrorStatusCode: (statusCode: number) =>
+      matchStatusCode({ status: statusCode } as Response, ["4XX", "5XX"]),
     retryConfig: context.retryConfig,
     retryCodes: context.retryCodes,
   });
