@@ -49,15 +49,27 @@ import { tool$githubGetSetup } from "./tools/githubGetSetup.js";
 import { tool$githubLinkGithub } from "./tools/githubLinkGithub.js";
 import { tool$githubStorePublishingSecrets } from "./tools/githubStorePublishingSecrets.js";
 import { tool$githubTriggerAction } from "./tools/githubTriggerAction.js";
+import { tool$organizationsActivateLanguage } from "./tools/organizationsActivateLanguage.js";
+import { tool$organizationsCancelSubscription } from "./tools/organizationsCancelSubscription.js";
 import { tool$organizationsCreate } from "./tools/organizationsCreate.js";
 import { tool$organizationsCreateBillingAddOns } from "./tools/organizationsCreateBillingAddOns.js";
 import { tool$organizationsCreateFreeTrial } from "./tools/organizationsCreateFreeTrial.js";
+import { tool$organizationsCreateLanguageCheckoutSession } from "./tools/organizationsCreateLanguageCheckoutSession.js";
+import { tool$organizationsDeactivateLanguage } from "./tools/organizationsDeactivateLanguage.js";
 import { tool$organizationsDeleteBillingAddOn } from "./tools/organizationsDeleteBillingAddOn.js";
 import { tool$organizationsGet } from "./tools/organizationsGet.js";
 import { tool$organizationsGetAll } from "./tools/organizationsGetAll.js";
 import { tool$organizationsGetBillingAddOns } from "./tools/organizationsGetBillingAddOns.js";
+import { tool$organizationsGetBillingEmail } from "./tools/organizationsGetBillingEmail.js";
 import { tool$organizationsGetBillingOperations } from "./tools/organizationsGetBillingOperations.js";
+import { tool$organizationsGetBusinessTierPrices } from "./tools/organizationsGetBusinessTierPrices.js";
+import { tool$organizationsGetLanguages } from "./tools/organizationsGetLanguages.js";
+import { tool$organizationsGetSubscription } from "./tools/organizationsGetSubscription.js";
+import { tool$organizationsGetTrialTargets } from "./tools/organizationsGetTrialTargets.js";
 import { tool$organizationsGetUsage } from "./tools/organizationsGetUsage.js";
+import { tool$organizationsHandleCheckoutCallback } from "./tools/organizationsHandleCheckoutCallback.js";
+import { tool$organizationsRevertSubscriptionCancellation } from "./tools/organizationsRevertSubscriptionCancellation.js";
+import { tool$organizationsUpsertBillingEmail } from "./tools/organizationsUpsertBillingEmail.js";
 import { tool$publishingTokensCreate } from "./tools/publishingTokensCreate.js";
 import { tool$publishingTokensDelete } from "./tools/publishingTokensDelete.js";
 import { tool$publishingTokensGet } from "./tools/publishingTokensGet.js";
@@ -76,6 +88,7 @@ import { tool$suggestSuggest } from "./tools/suggestSuggest.js";
 import { tool$suggestSuggestItems } from "./tools/suggestSuggestItems.js";
 import { tool$suggestSuggestOpenAPI } from "./tools/suggestSuggestOpenAPI.js";
 import { tool$suggestSuggestOpenAPIRegistry } from "./tools/suggestSuggestOpenAPIRegistry.js";
+import { tool$webhooksHandleStripeWebhook } from "./tools/webhooksHandleStripeWebhook.js";
 import { tool$workspacesCreate } from "./tools/workspacesCreate.js";
 import { tool$workspacesCreateToken } from "./tools/workspacesCreateToken.js";
 import { tool$workspacesDeleteToken } from "./tools/workspacesDeleteToken.js";
@@ -103,7 +116,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "Speakeasy",
-    version: "5.0.0-rc.5",
+    version: "5.0.0-rc.6",
   });
 
   const client = new SpeakeasyCore({
@@ -149,6 +162,27 @@ export function createMCPServer(deps: {
   tool(tool$authGetAccessToken);
   tool(tool$authGetUser);
   tool(tool$authValidateApiKey);
+  tool(tool$organizationsActivateLanguage);
+  tool(tool$organizationsCancelSubscription);
+  tool(tool$organizationsCreate);
+  tool(tool$organizationsCreateBillingAddOns);
+  tool(tool$organizationsCreateFreeTrial);
+  tool(tool$organizationsCreateLanguageCheckoutSession);
+  tool(tool$organizationsDeactivateLanguage);
+  tool(tool$organizationsDeleteBillingAddOn);
+  tool(tool$organizationsGet);
+  tool(tool$organizationsGetAll);
+  tool(tool$organizationsGetBillingAddOns);
+  tool(tool$organizationsGetBillingEmail);
+  tool(tool$organizationsGetBillingOperations);
+  tool(tool$organizationsGetBusinessTierPrices);
+  tool(tool$organizationsGetLanguages);
+  tool(tool$organizationsGetSubscription);
+  tool(tool$organizationsGetTrialTargets);
+  tool(tool$organizationsGetUsage);
+  tool(tool$organizationsHandleCheckoutCallback);
+  tool(tool$organizationsRevertSubscriptionCancellation);
+  tool(tool$organizationsUpsertBillingEmail);
   tool(tool$codeSamplesGenerateCodeSamplePreview);
   tool(tool$codeSamplesGenerateCodeSamplePreviewAsync);
   tool(tool$codeSamplesGet);
@@ -164,15 +198,6 @@ export function createMCPServer(deps: {
   tool(tool$githubLinkGithub);
   tool(tool$githubStorePublishingSecrets);
   tool(tool$githubTriggerAction);
-  tool(tool$organizationsCreate);
-  tool(tool$organizationsCreateBillingAddOns);
-  tool(tool$organizationsCreateFreeTrial);
-  tool(tool$organizationsDeleteBillingAddOn);
-  tool(tool$organizationsGet);
-  tool(tool$organizationsGetAll);
-  tool(tool$organizationsGetBillingAddOns);
-  tool(tool$organizationsGetBillingOperations);
-  tool(tool$organizationsGetUsage);
   tool(tool$publishingTokensCreate);
   tool(tool$publishingTokensDelete);
   tool(tool$publishingTokensGet);
@@ -191,6 +216,7 @@ export function createMCPServer(deps: {
   tool(tool$suggestSuggestItems);
   tool(tool$suggestSuggestOpenAPI);
   tool(tool$suggestSuggestOpenAPIRegistry);
+  tool(tool$webhooksHandleStripeWebhook);
   tool(tool$workspacesCreate);
   tool(tool$workspacesCreateToken);
   tool(tool$workspacesDeleteToken);
