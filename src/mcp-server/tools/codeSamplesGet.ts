@@ -20,7 +20,7 @@ Retrieve usage snippets from an OpenAPI document stored in the registry. Support
     const [result, apiCall] = await codeSamplesGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

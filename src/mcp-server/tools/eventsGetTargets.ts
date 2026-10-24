@@ -18,7 +18,7 @@ export const tool$eventsGetTargets: ToolDefinition<typeof args> = {
     const [result, apiCall] = await eventsGetTargets(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

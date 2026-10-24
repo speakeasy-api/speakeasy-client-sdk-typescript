@@ -20,7 +20,7 @@ export const tool$organizationsCreateBillingAddOns: ToolDefinition<
     const [result, apiCall] = await organizationsCreateBillingAddOns(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

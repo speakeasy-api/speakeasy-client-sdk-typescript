@@ -13,7 +13,7 @@ Returns a billing usage summary by target languages for a particular organizatio
   tool: async (client, ctx) => {
     const [result, apiCall] = await organizationsGetUsage(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
