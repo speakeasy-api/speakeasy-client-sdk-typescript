@@ -23,7 +23,7 @@ Poll for the result of an asynchronous Code Sample preview generation.`,
     const [result, apiCall] = await codeSamplesGetCodeSamplePreviewAsync(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
