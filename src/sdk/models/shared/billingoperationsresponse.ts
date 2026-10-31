@@ -8,26 +8,26 @@ import { safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  SpecBillingBreakdown,
-  SpecBillingBreakdown$inboundSchema,
-  SpecBillingBreakdown$Outbound,
-  SpecBillingBreakdown$outboundSchema,
-} from "./specbillingbreakdown.js";
+  LanguageBillingBreakdown,
+  LanguageBillingBreakdown$inboundSchema,
+  LanguageBillingBreakdown$Outbound,
+  LanguageBillingBreakdown$outboundSchema,
+} from "./languagebillingbreakdown.js";
 
 /**
  * Contains the billing operations breakdown for an organization
  */
 export type BillingOperationsResponse = {
   /**
-   * Billing breakdown for each spec/namespace
+   * Billing breakdown for each language
    */
-  specs: Array<SpecBillingBreakdown>;
+  languages: Array<LanguageBillingBreakdown>;
   /**
-   * Total billable units (operations x targets per spec)
+   * Total billable units across all generated targets
    */
   totalBillableUnits: number;
   /**
-   * Total count of unique operations across all specs
+   * Total count of unique operations across all languages
    */
   totalUniqueOperations: number;
 };
@@ -38,7 +38,7 @@ export const BillingOperationsResponse$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
-  specs: z.array(SpecBillingBreakdown$inboundSchema),
+  languages: z.array(LanguageBillingBreakdown$inboundSchema),
   total_billable_units: z.number().int(),
   total_unique_operations: z.number().int(),
 }).transform((v) => {
@@ -49,7 +49,7 @@ export const BillingOperationsResponse$inboundSchema: z.ZodType<
 });
 /** @internal */
 export type BillingOperationsResponse$Outbound = {
-  specs: Array<SpecBillingBreakdown$Outbound>;
+  languages: Array<LanguageBillingBreakdown$Outbound>;
   total_billable_units: number;
   total_unique_operations: number;
 };
@@ -60,7 +60,7 @@ export const BillingOperationsResponse$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   BillingOperationsResponse
 > = z.object({
-  specs: z.array(SpecBillingBreakdown$outboundSchema),
+  languages: z.array(LanguageBillingBreakdown$outboundSchema),
   totalBillableUnits: z.number().int(),
   totalUniqueOperations: z.number().int(),
 }).transform((v) => {

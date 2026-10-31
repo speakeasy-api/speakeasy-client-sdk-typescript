@@ -11,7 +11,7 @@ export const tool$artifactsGetNamespaces: ToolDefinition = {
   tool: async (client, ctx) => {
     const [result, apiCall] = await artifactsGetNamespaces(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

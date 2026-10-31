@@ -5,13 +5,45 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
 import { safeParse } from "../../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
+
+/**
+ * The billing status of this target
+ */
+export const BillingStatus = {
+  Active: "active",
+  Trialing: "trialing",
+  Delinquent: "delinquent",
+  Canceled: "canceled",
+  Deactivating: "deactivating",
+} as const;
+/**
+ * The billing status of this target
+ */
+export type BillingStatus = ClosedEnum<typeof BillingStatus>;
 
 /**
  * Contains the billing breakdown for a single target
  */
 export type TargetBillingBreakdown = {
+  /**
+   * The billing status of this target
+   */
+  billingStatus?: BillingStatus | undefined;
+  /**
+   * Whether this target can be deactivated (subject to 2-week cooldown)
+   */
+  canDeactivate?: boolean | undefined;
+  /**
+   * Whether the target has been deactivated by the user
+   */
+  deactivated?: boolean | undefined;
+  /**
+   * Timestamp when the target is scheduled to be deactivated (for self-serve business tier)
+   */
+  deactivationScheduledAt?: Date | undefined;
   /**
    * The generation lock ID for this target
    */
@@ -25,6 +57,14 @@ export type TargetBillingBreakdown = {
    */
   lastGeneratedAt?: Date | undefined;
   /**
+   * Source spec namespace slug when the generation event is linked to a spec
+   */
+  namespaceName?: string | undefined;
+  /**
+   * Number of operations captured on the generation event for this target
+   */
+  operationCount: number;
+  /**
    * The target type (e.g., typescript, python)
    */
   target: string;
@@ -32,7 +72,24 @@ export type TargetBillingBreakdown = {
    * The workflow name of this target
    */
   targetName: string;
+  /**
+   * Timestamp when the trial period ends for this target
+   */
+  trialEndsAt?: Date | undefined;
+  /**
+   * Slug of the workspace that owns this target
+   */
+  workspaceSlug: string;
 };
+
+/** @internal */
+export const BillingStatus$inboundSchema: z.ZodNativeEnum<
+  typeof BillingStatus
+> = z.nativeEnum(BillingStatus);
+/** @internal */
+export const BillingStatus$outboundSchema: z.ZodNativeEnum<
+  typeof BillingStatus
+> = BillingStatus$inboundSchema;
 
 /** @internal */
 export const TargetBillingBreakdown$inboundSchema: z.ZodType<
@@ -40,28 +97,55 @@ export const TargetBillingBreakdown$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = z.object({
+  billing_status: BillingStatus$inboundSchema.optional(),
+  can_deactivate: z.boolean().optional(),
+  deactivated: z.boolean().optional(),
+  deactivation_scheduled_at: z.string().datetime({ offset: true }).transform(
+    v => new Date(v)
+  ).optional(),
   gen_lock_id: z.string(),
   is_active: z.boolean(),
   last_generated_at: z.string().datetime({ offset: true }).transform(v =>
     new Date(v)
   ).optional(),
+  namespace_name: z.string().optional(),
+  operation_count: z.number().int(),
   target: z.string(),
   target_name: z.string(),
+  trial_ends_at: z.string().datetime({ offset: true }).transform(v =>
+    new Date(v)
+  ).optional(),
+  workspace_slug: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    "billing_status": "billingStatus",
+    "can_deactivate": "canDeactivate",
+    "deactivation_scheduled_at": "deactivationScheduledAt",
     "gen_lock_id": "genLockId",
     "is_active": "isActive",
     "last_generated_at": "lastGeneratedAt",
+    "namespace_name": "namespaceName",
+    "operation_count": "operationCount",
     "target_name": "targetName",
+    "trial_ends_at": "trialEndsAt",
+    "workspace_slug": "workspaceSlug",
   });
 });
 /** @internal */
 export type TargetBillingBreakdown$Outbound = {
+  billing_status?: string | undefined;
+  can_deactivate?: boolean | undefined;
+  deactivated?: boolean | undefined;
+  deactivation_scheduled_at?: string | undefined;
   gen_lock_id: string;
   is_active: boolean;
   last_generated_at?: string | undefined;
+  namespace_name?: string | undefined;
+  operation_count: number;
   target: string;
   target_name: string;
+  trial_ends_at?: string | undefined;
+  workspace_slug: string;
 };
 
 /** @internal */
@@ -70,17 +154,32 @@ export const TargetBillingBreakdown$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   TargetBillingBreakdown
 > = z.object({
+  billingStatus: BillingStatus$outboundSchema.optional(),
+  canDeactivate: z.boolean().optional(),
+  deactivated: z.boolean().optional(),
+  deactivationScheduledAt: z.date().transform(v => v.toISOString()).optional(),
   genLockId: z.string(),
   isActive: z.boolean(),
   lastGeneratedAt: z.date().transform(v => v.toISOString()).optional(),
+  namespaceName: z.string().optional(),
+  operationCount: z.number().int(),
   target: z.string(),
   targetName: z.string(),
+  trialEndsAt: z.date().transform(v => v.toISOString()).optional(),
+  workspaceSlug: z.string(),
 }).transform((v) => {
   return remap$(v, {
+    billingStatus: "billing_status",
+    canDeactivate: "can_deactivate",
+    deactivationScheduledAt: "deactivation_scheduled_at",
     genLockId: "gen_lock_id",
     isActive: "is_active",
     lastGeneratedAt: "last_generated_at",
+    namespaceName: "namespace_name",
+    operationCount: "operation_count",
     targetName: "target_name",
+    trialEndsAt: "trial_ends_at",
+    workspaceSlug: "workspace_slug",
   });
 });
 
