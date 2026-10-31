@@ -13,7 +13,7 @@ Creates a free trial for an organization`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await organizationsCreateFreeTrial(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

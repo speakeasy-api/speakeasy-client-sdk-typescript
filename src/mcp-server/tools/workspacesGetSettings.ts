@@ -20,7 +20,7 @@ Get settings about a particular workspace.`,
     const [result, apiCall] = await workspacesGetSettings(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
