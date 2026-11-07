@@ -20,7 +20,7 @@ Creates a workspace`,
     const [result, apiCall] = await workspacesCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
