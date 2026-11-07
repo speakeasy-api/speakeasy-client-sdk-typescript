@@ -20,7 +20,7 @@ Creates a publishing token for the current workspace`,
     const [result, apiCall] = await publishingTokensCreate(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Sends an array of events to be stored for a particular workspace.`,
     const [result, apiCall] = await eventsPost(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

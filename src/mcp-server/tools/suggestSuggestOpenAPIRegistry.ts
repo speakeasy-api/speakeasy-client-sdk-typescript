@@ -21,7 +21,7 @@ Get suggestions from an LLM model for improving an OpenAPI document stored in th
     const [result, apiCall] = await suggestSuggestOpenAPIRegistry(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
