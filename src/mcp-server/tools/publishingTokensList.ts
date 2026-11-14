@@ -13,7 +13,7 @@ Returns a publishing token for the current workspace`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await publishingTokensList(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

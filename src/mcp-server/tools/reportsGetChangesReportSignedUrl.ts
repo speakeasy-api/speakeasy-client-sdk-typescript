@@ -21,7 +21,7 @@ export const tool$reportsGetChangesReportSignedUrl: ToolDefinition<
     const [result, apiCall] = await reportsGetChangesReportSignedUrl(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

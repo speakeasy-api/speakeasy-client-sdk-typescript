@@ -13,7 +13,7 @@ Get information about a particular workspace by context.`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await workspacesGet(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
