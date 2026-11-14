@@ -20,7 +20,7 @@ export const tool$subscriptionsIgnoreSubscriptionNamespace: ToolDefinition<
     const [result, apiCall] = await subscriptionsIgnoreSubscriptionNamespace(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

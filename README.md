@@ -16,7 +16,8 @@
 <!-- Start Summary [summary] -->
 ## Summary
 
-Speakeasy API: The Subscriptions API manages subscriptions for CLI and registry events
+Speakeasy API: The Speakeasy API allows teams to manage common operations with their APIs
+The Subscriptions API manages subscriptions for CLI and registry events
 
 For more information about the API: [The Speakeasy Platform Documentation](/docs)
 <!-- End Summary [summary] -->
@@ -253,15 +254,27 @@ run();
 
 ### [Organizations](docs/sdks/organizations/README.md)
 
+* [activateLanguage](docs/sdks/organizations/README.md#activatelanguage) - Activate language
+* [cancelSubscription](docs/sdks/organizations/README.md#cancelsubscription) - Cancel subscription
 * [create](docs/sdks/organizations/README.md#create) - Create an organization
 * [createBillingAddOns](docs/sdks/organizations/README.md#createbillingaddons) - Create billing add ons
 * [createFreeTrial](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
+* [createLanguageCheckoutSession](docs/sdks/organizations/README.md#createlanguagecheckoutsession) - Create language checkout session
+* [deactivateLanguage](docs/sdks/organizations/README.md#deactivatelanguage) - Deactivate language
 * [deleteBillingAddOn](docs/sdks/organizations/README.md#deletebillingaddon) - Delete billing add ons
 * [get](docs/sdks/organizations/README.md#get) - Get organization
 * [getAll](docs/sdks/organizations/README.md#getall) - Get organizations for a user
 * [getBillingAddOns](docs/sdks/organizations/README.md#getbillingaddons) - Get billing add ons
+* [getBillingEmail](docs/sdks/organizations/README.md#getbillingemail) - Get billing email for an organization
 * [getBillingOperations](docs/sdks/organizations/README.md#getbillingoperations) - Get billing operations breakdown for an organization
+* [getBusinessTierPrices](docs/sdks/organizations/README.md#getbusinesstierprices) - Get business tier prices
+* [getLanguages](docs/sdks/organizations/README.md#getlanguages) - Get language billing configurations
+* [getSubscription](docs/sdks/organizations/README.md#getsubscription) - Get organization subscription
+* [getTrialTargets](docs/sdks/organizations/README.md#gettrialtargets) - Get trial targets
 * [getUsage](docs/sdks/organizations/README.md#getusage) - Get billing usage summary for a particular organization
+* [handleCheckoutCallback](docs/sdks/organizations/README.md#handlecheckoutcallback) - Checkout callback
+* [revertSubscriptionCancellation](docs/sdks/organizations/README.md#revertsubscriptioncancellation) - Revert subscription cancellation
+* [upsertBillingEmail](docs/sdks/organizations/README.md#upsertbillingemail) - Create or update billing email
 
 ### [PublishingTokens](docs/sdks/publishingtokens/README.md)
 
@@ -298,6 +311,10 @@ run();
 * [suggestItems](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 * [suggestOpenAPI](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 * [suggestOpenAPIRegistry](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
+
+### [Webhooks](docs/sdks/webhooks/README.md)
+
+* [handleStripeWebhook](docs/sdks/webhooks/README.md#handlestripewebhook) - Handle Stripe webhook
 
 ### [Workspaces](docs/sdks/workspaces/README.md)
 
@@ -664,15 +681,27 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`githubLinkGithub`](docs/sdks/github/README.md#linkgithub)
 - [`githubStorePublishingSecrets`](docs/sdks/github/README.md#storepublishingsecrets)
 - [`githubTriggerAction`](docs/sdks/github/README.md#triggeraction)
+- [`organizationsActivateLanguage`](docs/sdks/organizations/README.md#activatelanguage) - Activate language
+- [`organizationsCancelSubscription`](docs/sdks/organizations/README.md#cancelsubscription) - Cancel subscription
 - [`organizationsCreate`](docs/sdks/organizations/README.md#create) - Create an organization
 - [`organizationsCreateBillingAddOns`](docs/sdks/organizations/README.md#createbillingaddons) - Create billing add ons
 - [`organizationsCreateFreeTrial`](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
+- [`organizationsCreateLanguageCheckoutSession`](docs/sdks/organizations/README.md#createlanguagecheckoutsession) - Create language checkout session
+- [`organizationsDeactivateLanguage`](docs/sdks/organizations/README.md#deactivatelanguage) - Deactivate language
 - [`organizationsDeleteBillingAddOn`](docs/sdks/organizations/README.md#deletebillingaddon) - Delete billing add ons
 - [`organizationsGet`](docs/sdks/organizations/README.md#get) - Get organization
 - [`organizationsGetAll`](docs/sdks/organizations/README.md#getall) - Get organizations for a user
 - [`organizationsGetBillingAddOns`](docs/sdks/organizations/README.md#getbillingaddons) - Get billing add ons
+- [`organizationsGetBillingEmail`](docs/sdks/organizations/README.md#getbillingemail) - Get billing email for an organization
 - [`organizationsGetBillingOperations`](docs/sdks/organizations/README.md#getbillingoperations) - Get billing operations breakdown for an organization
+- [`organizationsGetBusinessTierPrices`](docs/sdks/organizations/README.md#getbusinesstierprices) - Get business tier prices
+- [`organizationsGetLanguages`](docs/sdks/organizations/README.md#getlanguages) - Get language billing configurations
+- [`organizationsGetSubscription`](docs/sdks/organizations/README.md#getsubscription) - Get organization subscription
+- [`organizationsGetTrialTargets`](docs/sdks/organizations/README.md#gettrialtargets) - Get trial targets
 - [`organizationsGetUsage`](docs/sdks/organizations/README.md#getusage) - Get billing usage summary for a particular organization
+- [`organizationsHandleCheckoutCallback`](docs/sdks/organizations/README.md#handlecheckoutcallback) - Checkout callback
+- [`organizationsRevertSubscriptionCancellation`](docs/sdks/organizations/README.md#revertsubscriptioncancellation) - Revert subscription cancellation
+- [`organizationsUpsertBillingEmail`](docs/sdks/organizations/README.md#upsertbillingemail) - Create or update billing email
 - [`publishingTokensCreate`](docs/sdks/publishingtokens/README.md#create) - Create a publishing token for a workspace
 - [`publishingTokensDelete`](docs/sdks/publishingtokens/README.md#delete) - Delete a specific publishing token
 - [`publishingTokensGet`](docs/sdks/publishingtokens/README.md#get) - Get a specific publishing token
@@ -691,6 +720,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`suggestSuggestItems`](docs/sdks/suggest/README.md#suggestitems) - Generate generic suggestions for a list of items.
 - [`suggestSuggestOpenAPI`](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 - [`suggestSuggestOpenAPIRegistry`](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
+- [`webhooksHandleStripeWebhook`](docs/sdks/webhooks/README.md#handlestripewebhook) - Handle Stripe webhook
 - [`workspacesCreate`](docs/sdks/workspaces/README.md#create) - Create a workspace
 - [`workspacesCreateToken`](docs/sdks/workspaces/README.md#createtoken) - Create a token for a particular workspace
 - [`workspacesDeleteToken`](docs/sdks/workspaces/README.md#deletetoken) - Delete a token for a particular workspace
@@ -768,15 +798,27 @@ To learn about this feature and how to get started, check
 - [`useGithubLinkGithubMutation`](docs/sdks/github/README.md#linkgithub)
 - [`useGithubStorePublishingSecretsMutation`](docs/sdks/github/README.md#storepublishingsecrets)
 - [`useGithubTriggerActionMutation`](docs/sdks/github/README.md#triggeraction)
+- [`useOrganizationsActivateLanguageMutation`](docs/sdks/organizations/README.md#activatelanguage) - Activate language
+- [`useOrganizationsCancelSubscriptionMutation`](docs/sdks/organizations/README.md#cancelsubscription) - Cancel subscription
 - [`useOrganizationsCreateBillingAddOnsMutation`](docs/sdks/organizations/README.md#createbillingaddons) - Create billing add ons
 - [`useOrganizationsCreateFreeTrialMutation`](docs/sdks/organizations/README.md#createfreetrial) - Create a free trial for an organization
+- [`useOrganizationsCreateLanguageCheckoutSessionMutation`](docs/sdks/organizations/README.md#createlanguagecheckoutsession) - Create language checkout session
 - [`useOrganizationsCreateMutation`](docs/sdks/organizations/README.md#create) - Create an organization
+- [`useOrganizationsDeactivateLanguageMutation`](docs/sdks/organizations/README.md#deactivatelanguage) - Deactivate language
 - [`useOrganizationsDeleteBillingAddOnMutation`](docs/sdks/organizations/README.md#deletebillingaddon) - Delete billing add ons
 - [`useOrganizationsGet`](docs/sdks/organizations/README.md#get) - Get organization
 - [`useOrganizationsGetAll`](docs/sdks/organizations/README.md#getall) - Get organizations for a user
 - [`useOrganizationsGetBillingAddOns`](docs/sdks/organizations/README.md#getbillingaddons) - Get billing add ons
+- [`useOrganizationsGetBillingEmail`](docs/sdks/organizations/README.md#getbillingemail) - Get billing email for an organization
 - [`useOrganizationsGetBillingOperations`](docs/sdks/organizations/README.md#getbillingoperations) - Get billing operations breakdown for an organization
+- [`useOrganizationsGetBusinessTierPrices`](docs/sdks/organizations/README.md#getbusinesstierprices) - Get business tier prices
+- [`useOrganizationsGetLanguages`](docs/sdks/organizations/README.md#getlanguages) - Get language billing configurations
+- [`useOrganizationsGetSubscription`](docs/sdks/organizations/README.md#getsubscription) - Get organization subscription
+- [`useOrganizationsGetTrialTargets`](docs/sdks/organizations/README.md#gettrialtargets) - Get trial targets
 - [`useOrganizationsGetUsage`](docs/sdks/organizations/README.md#getusage) - Get billing usage summary for a particular organization
+- [`useOrganizationsHandleCheckoutCallback`](docs/sdks/organizations/README.md#handlecheckoutcallback) - Checkout callback
+- [`useOrganizationsRevertSubscriptionCancellationMutation`](docs/sdks/organizations/README.md#revertsubscriptioncancellation) - Revert subscription cancellation
+- [`useOrganizationsUpsertBillingEmailMutation`](docs/sdks/organizations/README.md#upsertbillingemail) - Create or update billing email
 - [`usePublishingTokensCreateMutation`](docs/sdks/publishingtokens/README.md#create) - Create a publishing token for a workspace
 - [`usePublishingTokensDeleteMutation`](docs/sdks/publishingtokens/README.md#delete) - Delete a specific publishing token
 - [`usePublishingTokensGet`](docs/sdks/publishingtokens/README.md#get) - Get a specific publishing token
@@ -795,6 +837,7 @@ To learn about this feature and how to get started, check
 - [`useSuggestSuggestMutation`](docs/sdks/suggest/README.md#suggest) - Generate suggestions for improving an OpenAPI document.
 - [`useSuggestSuggestOpenAPIMutation`](docs/sdks/suggest/README.md#suggestopenapi) - (DEPRECATED) Generate suggestions for improving an OpenAPI document.
 - [`useSuggestSuggestOpenAPIRegistryMutation`](docs/sdks/suggest/README.md#suggestopenapiregistry) - Generate suggestions for improving an OpenAPI document stored in the registry.
+- [`useWebhooksHandleStripeWebhookMutation`](docs/sdks/webhooks/README.md#handlestripewebhook) - Handle Stripe webhook
 - [`useWorkspacesCreateMutation`](docs/sdks/workspaces/README.md#create) - Create a workspace
 - [`useWorkspacesCreateTokenMutation`](docs/sdks/workspaces/README.md#createtoken) - Create a token for a particular workspace
 - [`useWorkspacesDeleteTokenMutation`](docs/sdks/workspaces/README.md#deletetoken) - Delete a token for a particular workspace

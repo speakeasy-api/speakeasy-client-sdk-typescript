@@ -20,7 +20,7 @@ Get information about a particular organization.`,
     const [result, apiCall] = await organizationsGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {
