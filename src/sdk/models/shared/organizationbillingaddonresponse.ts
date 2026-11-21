@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,13 +25,15 @@ export const OrganizationBillingAddOnResponse$inboundSchema: z.ZodType<
   OrganizationBillingAddOnResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  add_ons: z.array(BillingAddOn$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "add_ons": "addOns",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    add_ons: z.array(BillingAddOn$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "add_ons": "addOns",
+    });
+  })
+);
 /** @internal */
 export type OrganizationBillingAddOnResponse$Outbound = {
   add_ons: Array<string>;
@@ -42,13 +44,15 @@ export const OrganizationBillingAddOnResponse$outboundSchema: z.ZodType<
   OrganizationBillingAddOnResponse$Outbound,
   z.ZodTypeDef,
   OrganizationBillingAddOnResponse
-> = z.object({
-  addOns: z.array(BillingAddOn$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    addOns: "add_ons",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    addOns: z.array(BillingAddOn$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      addOns: "add_ons",
+    });
+  })
+);
 
 export function organizationBillingAddOnResponseToJSON(
   organizationBillingAddOnResponse: OrganizationBillingAddOnResponse,

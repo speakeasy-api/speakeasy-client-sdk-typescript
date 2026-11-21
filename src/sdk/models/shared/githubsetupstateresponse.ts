@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,15 +29,17 @@ export type GithubSetupStateResponse = {
 
 /** @internal */
 export const Actions$inboundSchema: z.ZodType<Actions, z.ZodTypeDef, unknown> =
-  z.object({
-    generation_action_configured: z.boolean(),
-    publish_action_configured: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "generation_action_configured": "generationActionConfigured",
-      "publish_action_configured": "publishActionConfigured",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generation_action_configured: z.boolean(),
+      publish_action_configured: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "generation_action_configured": "generationActionConfigured",
+        "publish_action_configured": "publishActionConfigured",
+      });
+    })
+  );
 /** @internal */
 export type Actions$Outbound = {
   generation_action_configured: boolean;
@@ -49,15 +51,17 @@ export const Actions$outboundSchema: z.ZodType<
   Actions$Outbound,
   z.ZodTypeDef,
   Actions
-> = z.object({
-  generationActionConfigured: z.boolean(),
-  publishActionConfigured: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    generationActionConfigured: "generation_action_configured",
-    publishActionConfigured: "publish_action_configured",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    generationActionConfigured: z.boolean(),
+    publishActionConfigured: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      generationActionConfigured: "generation_action_configured",
+      publishActionConfigured: "publish_action_configured",
+    });
+  })
+);
 
 export function actionsToJSON(actions: Actions): string {
   return JSON.stringify(Actions$outboundSchema.parse(actions));
@@ -74,15 +78,17 @@ export function actionsFromJSON(
 
 /** @internal */
 export const Secrets$inboundSchema: z.ZodType<Secrets, z.ZodTypeDef, unknown> =
-  z.object({
-    api_key_configured: z.boolean(),
-    publishing_secrets_configured: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "api_key_configured": "apiKeyConfigured",
-      "publishing_secrets_configured": "publishingSecretsConfigured",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      api_key_configured: z.boolean(),
+      publishing_secrets_configured: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "api_key_configured": "apiKeyConfigured",
+        "publishing_secrets_configured": "publishingSecretsConfigured",
+      });
+    })
+  );
 /** @internal */
 export type Secrets$Outbound = {
   api_key_configured: boolean;
@@ -94,15 +100,17 @@ export const Secrets$outboundSchema: z.ZodType<
   Secrets$Outbound,
   z.ZodTypeDef,
   Secrets
-> = z.object({
-  apiKeyConfigured: z.boolean(),
-  publishingSecretsConfigured: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKeyConfigured: "api_key_configured",
-    publishingSecretsConfigured: "publishing_secrets_configured",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKeyConfigured: z.boolean(),
+    publishingSecretsConfigured: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKeyConfigured: "api_key_configured",
+      publishingSecretsConfigured: "publishing_secrets_configured",
+    });
+  })
+);
 
 export function secretsToJSON(secrets: Secrets): string {
   return JSON.stringify(Secrets$outboundSchema.parse(secrets));
@@ -122,15 +130,17 @@ export const GithubSetupStateResponse$inboundSchema: z.ZodType<
   GithubSetupStateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  actions: z.lazy(() => Actions$inboundSchema),
-  app_installed: z.boolean(),
-  secrets: z.lazy(() => Secrets$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "app_installed": "appInstalled",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actions: z.lazy(() => Actions$inboundSchema),
+    app_installed: z.boolean(),
+    secrets: z.lazy(() => Secrets$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "app_installed": "appInstalled",
+    });
+  })
+);
 /** @internal */
 export type GithubSetupStateResponse$Outbound = {
   actions: Actions$Outbound;
@@ -143,15 +153,17 @@ export const GithubSetupStateResponse$outboundSchema: z.ZodType<
   GithubSetupStateResponse$Outbound,
   z.ZodTypeDef,
   GithubSetupStateResponse
-> = z.object({
-  actions: z.lazy(() => Actions$outboundSchema),
-  appInstalled: z.boolean(),
-  secrets: z.lazy(() => Secrets$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    appInstalled: "app_installed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    actions: z.lazy(() => Actions$outboundSchema),
+    appInstalled: z.boolean(),
+    secrets: z.lazy(() => Secrets$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      appInstalled: "app_installed",
+    });
+  })
+);
 
 export function githubSetupStateResponseToJSON(
   githubSetupStateResponse: GithubSetupStateResponse,

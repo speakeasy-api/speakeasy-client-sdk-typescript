@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,12 +40,14 @@ export const V2Descriptor$inboundSchema: z.ZodType<
   V2Descriptor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  annotations: Annotations$inboundSchema.optional(),
-  digest: z.string().optional(),
-  mediaType: z.string().optional(),
-  size: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: Annotations$inboundSchema.optional(),
+    digest: z.string().optional(),
+    mediaType: z.string().optional(),
+    size: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type V2Descriptor$Outbound = {
   annotations?: Annotations$Outbound | undefined;
@@ -59,12 +61,14 @@ export const V2Descriptor$outboundSchema: z.ZodType<
   V2Descriptor$Outbound,
   z.ZodTypeDef,
   V2Descriptor
-> = z.object({
-  annotations: Annotations$outboundSchema.optional(),
-  digest: z.string().optional(),
-  mediaType: z.string().optional(),
-  size: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: Annotations$outboundSchema.optional(),
+    digest: z.string().optional(),
+    mediaType: z.string().optional(),
+    size: z.number().int().optional(),
+  })
+);
 
 export function v2DescriptorToJSON(v2Descriptor: V2Descriptor): string {
   return JSON.stringify(V2Descriptor$outboundSchema.parse(v2Descriptor));

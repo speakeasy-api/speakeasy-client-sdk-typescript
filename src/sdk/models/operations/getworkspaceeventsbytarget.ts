@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,13 +32,15 @@ export const GetWorkspaceEventsByTargetGlobals$inboundSchema: z.ZodType<
   GetWorkspaceEventsByTargetGlobals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceEventsByTargetGlobals$Outbound = {
   workspace_id?: string | undefined;
@@ -49,13 +51,15 @@ export const GetWorkspaceEventsByTargetGlobals$outboundSchema: z.ZodType<
   GetWorkspaceEventsByTargetGlobals$Outbound,
   z.ZodTypeDef,
   GetWorkspaceEventsByTargetGlobals
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function getWorkspaceEventsByTargetGlobalsToJSON(
   getWorkspaceEventsByTargetGlobals: GetWorkspaceEventsByTargetGlobals,
@@ -81,19 +85,21 @@ export const GetWorkspaceEventsByTargetRequest$inboundSchema: z.ZodType<
   GetWorkspaceEventsByTargetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-  target_id: z.string(),
-  after_created_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-    "target_id": "targetId",
-    "after_created_at": "afterCreatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+    target_id: z.string(),
+    after_created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+      "target_id": "targetId",
+      "after_created_at": "afterCreatedAt",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceEventsByTargetRequest$Outbound = {
   workspace_id?: string | undefined;
@@ -106,17 +112,19 @@ export const GetWorkspaceEventsByTargetRequest$outboundSchema: z.ZodType<
   GetWorkspaceEventsByTargetRequest$Outbound,
   z.ZodTypeDef,
   GetWorkspaceEventsByTargetRequest
-> = z.object({
-  workspaceId: z.string().optional(),
-  targetId: z.string(),
-  afterCreatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-    targetId: "target_id",
-    afterCreatedAt: "after_created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+    targetId: z.string(),
+    afterCreatedAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+      targetId: "target_id",
+      afterCreatedAt: "after_created_at",
+    });
+  })
+);
 
 export function getWorkspaceEventsByTargetRequestToJSON(
   getWorkspaceEventsByTargetRequest: GetWorkspaceEventsByTargetRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -33,17 +33,18 @@ export const GetWorkspaceTargetsSummaryRequest$inboundSchema: z.ZodType<
   GetWorkspaceTargetsSummaryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after_last_event_created_at: z.string().datetime({ offset: true }).transform(
-    v => new Date(v)
-  ).optional(),
-  limit: z.number().int().default(50),
-  cursor: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "after_last_event_created_at": "afterLastEventCreatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after_last_event_created_at: z.string().datetime({ offset: true })
+      .transform(v => new Date(v)).optional(),
+    limit: z.number().int().default(50),
+    cursor: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "after_last_event_created_at": "afterLastEventCreatedAt",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceTargetsSummaryRequest$Outbound = {
   after_last_event_created_at?: string | undefined;
@@ -56,15 +57,18 @@ export const GetWorkspaceTargetsSummaryRequest$outboundSchema: z.ZodType<
   GetWorkspaceTargetsSummaryRequest$Outbound,
   z.ZodTypeDef,
   GetWorkspaceTargetsSummaryRequest
-> = z.object({
-  afterLastEventCreatedAt: z.date().transform(v => v.toISOString()).optional(),
-  limit: z.number().int().default(50),
-  cursor: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    afterLastEventCreatedAt: "after_last_event_created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    afterLastEventCreatedAt: z.date().transform(v => v.toISOString())
+      .optional(),
+    limit: z.number().int().default(50),
+    cursor: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      afterLastEventCreatedAt: "after_last_event_created_at",
+    });
+  })
+);
 
 export function getWorkspaceTargetsSummaryRequestToJSON(
   getWorkspaceTargetsSummaryRequest: GetWorkspaceTargetsSummaryRequest,
@@ -90,13 +94,15 @@ export const GetWorkspaceTargetsSummaryResponse$inboundSchema: z.ZodType<
   GetWorkspaceTargetsSummaryResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Result: shared.TargetsSummaryPage$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Result: shared.TargetsSummaryPage$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceTargetsSummaryResponse$Outbound = {
   Result: shared.TargetsSummaryPage$Outbound;
@@ -107,13 +113,15 @@ export const GetWorkspaceTargetsSummaryResponse$outboundSchema: z.ZodType<
   GetWorkspaceTargetsSummaryResponse$Outbound,
   z.ZodTypeDef,
   GetWorkspaceTargetsSummaryResponse
-> = z.object({
-  result: shared.TargetsSummaryPage$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    result: shared.TargetsSummaryPage$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      result: "Result",
+    });
+  })
+);
 
 export function getWorkspaceTargetsSummaryResponseToJSON(
   getWorkspaceTargetsSummaryResponse: GetWorkspaceTargetsSummaryResponse,

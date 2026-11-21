@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,17 +29,19 @@ export const FeatureFlag$inboundSchema: z.ZodType<
   FeatureFlag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  feature_flag: WorkspaceFeatureFlag$inboundSchema,
-  trial_ends_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "feature_flag": "featureFlag",
-    "trial_ends_at": "trialEndsAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    feature_flag: WorkspaceFeatureFlag$inboundSchema,
+    trial_ends_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "feature_flag": "featureFlag",
+      "trial_ends_at": "trialEndsAt",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlag$Outbound = {
   feature_flag: string;
@@ -51,15 +53,18 @@ export const FeatureFlag$outboundSchema: z.ZodType<
   FeatureFlag$Outbound,
   z.ZodTypeDef,
   FeatureFlag
-> = z.object({
-  featureFlag: WorkspaceFeatureFlag$outboundSchema,
-  trialEndsAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    featureFlag: "feature_flag",
-    trialEndsAt: "trial_ends_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    featureFlag: WorkspaceFeatureFlag$outboundSchema,
+    trialEndsAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      featureFlag: "feature_flag",
+      trialEndsAt: "trial_ends_at",
+    });
+  })
+);
 
 export function featureFlagToJSON(featureFlag: FeatureFlag): string {
   return JSON.stringify(FeatureFlag$outboundSchema.parse(featureFlag));

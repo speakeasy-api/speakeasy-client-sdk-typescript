@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,16 +30,18 @@ export type UploadReportUploadedReport = {
 };
 
 /** @internal */
-export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .object({
-    content: z.union([
-      z.instanceof(ReadableStream<Uint8Array>),
-      z.instanceof(Blob),
-      z.instanceof(ArrayBuffer),
-      z.instanceof(Uint8Array),
-    ]),
-    fileName: z.string(),
-  });
+export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      content: z.union([
+        z.instanceof(ReadableStream<Uint8Array>),
+        z.instanceof(Blob),
+        z.instanceof(ArrayBuffer),
+        z.instanceof(Uint8Array),
+      ]),
+      fileName: z.string(),
+    })
+  );
 /** @internal */
 export type FileT$Outbound = {
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
@@ -51,15 +53,17 @@ export const FileT$outboundSchema: z.ZodType<
   FileT$Outbound,
   z.ZodTypeDef,
   FileT
-> = z.object({
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-  fileName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+    fileName: z.string(),
+  })
+);
 
 export function fileToJSON(fileT: FileT): string {
   return JSON.stringify(FileT$outboundSchema.parse(fileT));
@@ -79,10 +83,12 @@ export const UploadReportRequestBody$inboundSchema: z.ZodType<
   UploadReportRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: shared.Report$inboundSchema,
-  file: z.lazy(() => FileT$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: shared.Report$inboundSchema,
+    file: z.lazy(() => FileT$inboundSchema),
+  })
+);
 /** @internal */
 export type UploadReportRequestBody$Outbound = {
   data: shared.Report$Outbound;
@@ -94,10 +100,12 @@ export const UploadReportRequestBody$outboundSchema: z.ZodType<
   UploadReportRequestBody$Outbound,
   z.ZodTypeDef,
   UploadReportRequestBody
-> = z.object({
-  data: shared.Report$outboundSchema,
-  file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: shared.Report$outboundSchema,
+    file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
+  })
+);
 
 export function uploadReportRequestBodyToJSON(
   uploadReportRequestBody: UploadReportRequestBody,
@@ -121,9 +129,11 @@ export const UploadReportUploadedReport$inboundSchema: z.ZodType<
   UploadReportUploadedReport,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 /** @internal */
 export type UploadReportUploadedReport$Outbound = {
   url: string;
@@ -134,9 +144,11 @@ export const UploadReportUploadedReport$outboundSchema: z.ZodType<
   UploadReportUploadedReport$Outbound,
   z.ZodTypeDef,
   UploadReportUploadedReport
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 
 export function uploadReportUploadedReportToJSON(
   uploadReportUploadedReport: UploadReportUploadedReport,

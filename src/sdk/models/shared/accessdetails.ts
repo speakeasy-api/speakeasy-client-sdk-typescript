@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,13 +19,24 @@ export type Level = ClosedEnum<typeof Level>;
 export type AccessDetails = {
   generationAllowed: boolean;
   level?: Level | undefined;
+  /**
+   * Signed JWT (EdDSA/Ed25519) asserting the workspace's commercial license
+   *
+   * @remarks
+   * entitlements at time of issue. Verified offline by the open-source
+   * generator against its embedded JWK set; may be persisted as an offline
+   * license file. Only present whenever generation is not blocked and license
+   * signing is configured; scoped to the requested target for free-tier
+   * workspaces, unrestricted otherwise.
+   */
+  licenseJwt?: string | null | undefined;
   message: string;
+  statusCode?: string | undefined;
 };
 
 /** @internal */
-export const Level$inboundSchema: z.ZodNativeEnum<typeof Level> = z.nativeEnum(
-  Level,
-);
+export const Level$inboundSchema: z.ZodNativeEnum<typeof Level> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Level));
 /** @internal */
 export const Level$outboundSchema: z.ZodNativeEnum<typeof Level> =
   Level$inboundSchema;
@@ -35,20 +46,28 @@ export const AccessDetails$inboundSchema: z.ZodType<
   AccessDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  generation_allowed: z.boolean(),
-  level: Level$inboundSchema.optional(),
-  message: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "generation_allowed": "generationAllowed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    generation_allowed: z.boolean(),
+    level: Level$inboundSchema.optional(),
+    license_jwt: z.nullable(z.string()).optional(),
+    message: z.string(),
+    status_code: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "generation_allowed": "generationAllowed",
+      "license_jwt": "licenseJwt",
+      "status_code": "statusCode",
+    });
+  })
+);
 /** @internal */
 export type AccessDetails$Outbound = {
   generation_allowed: boolean;
   level?: string | undefined;
+  license_jwt?: string | null | undefined;
   message: string;
+  status_code?: string | undefined;
 };
 
 /** @internal */
@@ -56,15 +75,21 @@ export const AccessDetails$outboundSchema: z.ZodType<
   AccessDetails$Outbound,
   z.ZodTypeDef,
   AccessDetails
-> = z.object({
-  generationAllowed: z.boolean(),
-  level: Level$outboundSchema.optional(),
-  message: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    generationAllowed: "generation_allowed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    generationAllowed: z.boolean(),
+    level: Level$outboundSchema.optional(),
+    licenseJwt: z.nullable(z.string()).optional(),
+    message: z.string(),
+    statusCode: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      generationAllowed: "generation_allowed",
+      licenseJwt: "license_jwt",
+      statusCode: "status_code",
+    });
+  })
+);
 
 export function accessDetailsToJSON(accessDetails: AccessDetails): string {
   return JSON.stringify(AccessDetails$outboundSchema.parse(accessDetails));

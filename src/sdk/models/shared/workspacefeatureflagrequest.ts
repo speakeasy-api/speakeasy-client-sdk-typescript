@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,13 +25,15 @@ export const WorkspaceFeatureFlagRequest$inboundSchema: z.ZodType<
   WorkspaceFeatureFlagRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  feature_flags: z.array(WorkspaceFeatureFlag$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "feature_flags": "featureFlags",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    feature_flags: z.array(WorkspaceFeatureFlag$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "feature_flags": "featureFlags",
+    });
+  })
+);
 /** @internal */
 export type WorkspaceFeatureFlagRequest$Outbound = {
   feature_flags: Array<string>;
@@ -42,13 +44,15 @@ export const WorkspaceFeatureFlagRequest$outboundSchema: z.ZodType<
   WorkspaceFeatureFlagRequest$Outbound,
   z.ZodTypeDef,
   WorkspaceFeatureFlagRequest
-> = z.object({
-  featureFlags: z.array(WorkspaceFeatureFlag$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    featureFlags: "feature_flags",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    featureFlags: z.array(WorkspaceFeatureFlag$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      featureFlags: "feature_flags",
+    });
+  })
+);
 
 export function workspaceFeatureFlagRequestToJSON(
   workspaceFeatureFlagRequest: WorkspaceFeatureFlagRequest,

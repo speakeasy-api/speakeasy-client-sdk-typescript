@@ -11,7 +11,6 @@ import { SpeakeasyCore } from "../core.js";
 import { organizationsGetBillingOperations } from "../funcs/organizationsGetBillingOperations.js";
 import { combineSignals } from "../lib/primitives.js";
 import { RequestOptions } from "../lib/sdks.js";
-import * as operations from "../sdk/models/operations/index.js";
 import * as shared from "../sdk/models/shared/index.js";
 import { unwrapAsync } from "../sdk/types/fp.js";
 export type OrganizationsGetBillingOperationsQueryData =
@@ -20,13 +19,11 @@ export type OrganizationsGetBillingOperationsQueryData =
 export function prefetchOrganizationsGetBillingOperations(
   queryClient: QueryClient,
   client$: SpeakeasyCore,
-  request: operations.GetBillingOperationsRequest,
   options?: RequestOptions,
 ): Promise<void> {
   return queryClient.prefetchQuery({
     ...buildOrganizationsGetBillingOperationsQuery(
       client$,
-      request,
       options,
     ),
   });
@@ -34,7 +31,6 @@ export function prefetchOrganizationsGetBillingOperations(
 
 export function buildOrganizationsGetBillingOperationsQuery(
   client$: SpeakeasyCore,
-  request: operations.GetBillingOperationsRequest,
   options?: RequestOptions,
 ): {
   queryKey: QueryKey;
@@ -43,9 +39,7 @@ export function buildOrganizationsGetBillingOperationsQuery(
   ) => Promise<OrganizationsGetBillingOperationsQueryData>;
 } {
   return {
-    queryKey: queryKeyOrganizationsGetBillingOperations({
-      includeOperationIds: request.includeOperationIds,
-    }),
+    queryKey: queryKeyOrganizationsGetBillingOperations(),
     queryFn: async function organizationsGetBillingOperationsQueryFn(
       ctx,
     ): Promise<OrganizationsGetBillingOperationsQueryData> {
@@ -62,20 +56,16 @@ export function buildOrganizationsGetBillingOperationsQuery(
 
       return unwrapAsync(organizationsGetBillingOperations(
         client$,
-        request,
         mergedOptions,
       ));
     },
   };
 }
 
-export function queryKeyOrganizationsGetBillingOperations(
-  parameters: { includeOperationIds?: boolean | undefined },
-): QueryKey {
+export function queryKeyOrganizationsGetBillingOperations(): QueryKey {
   return [
     "@speakeasy-api/speakeasy-client-sdk-typescript",
     "Organizations",
     "getBillingOperations",
-    parameters,
   ];
 }

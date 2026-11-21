@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,13 +38,15 @@ export const GithubConfigureMintlifyRepoRequest$inboundSchema: z.ZodType<
   GithubConfigureMintlifyRepoRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.string(),
-  org: z.string(),
-  overlays: z.array(z.string()),
-  repo: z.string(),
-  subdirectory: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.string(),
+    org: z.string(),
+    overlays: z.array(z.string()),
+    repo: z.string(),
+    subdirectory: z.string().optional(),
+  })
+);
 /** @internal */
 export type GithubConfigureMintlifyRepoRequest$Outbound = {
   input: string;
@@ -59,13 +61,15 @@ export const GithubConfigureMintlifyRepoRequest$outboundSchema: z.ZodType<
   GithubConfigureMintlifyRepoRequest$Outbound,
   z.ZodTypeDef,
   GithubConfigureMintlifyRepoRequest
-> = z.object({
-  input: z.string(),
-  org: z.string(),
-  overlays: z.array(z.string()),
-  repo: z.string(),
-  subdirectory: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.string(),
+    org: z.string(),
+    overlays: z.array(z.string()),
+    repo: z.string(),
+    subdirectory: z.string().optional(),
+  })
+);
 
 export function githubConfigureMintlifyRepoRequestToJSON(
   githubConfigureMintlifyRepoRequest: GithubConfigureMintlifyRepoRequest,

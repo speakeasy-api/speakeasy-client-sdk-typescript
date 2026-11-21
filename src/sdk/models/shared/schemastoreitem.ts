@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,8 +25,8 @@ export type SchemaStoreItem = {
 };
 
 /** @internal */
-export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
+export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Format));
 /** @internal */
 export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
   Format$inboundSchema;
@@ -36,18 +36,22 @@ export const SchemaStoreItem$inboundSchema: z.ZodType<
   SchemaStoreItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  format: Format$inboundSchema,
-  id: z.string(),
-  packageName: z.string(),
-  sdkClassname: z.string(),
-  spec: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    format: Format$inboundSchema,
+    id: z.string(),
+    packageName: z.string(),
+    sdkClassname: z.string(),
+    spec: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type SchemaStoreItem$Outbound = {
   created_at: string;
@@ -63,18 +67,20 @@ export const SchemaStoreItem$outboundSchema: z.ZodType<
   SchemaStoreItem$Outbound,
   z.ZodTypeDef,
   SchemaStoreItem
-> = z.object({
-  createdAt: z.date().transform(v => v.toISOString()),
-  format: Format$outboundSchema,
-  id: z.string(),
-  packageName: z.string(),
-  sdkClassname: z.string(),
-  spec: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.date().transform(v => v.toISOString()),
+    format: Format$outboundSchema,
+    id: z.string(),
+    packageName: z.string(),
+    sdkClassname: z.string(),
+    spec: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function schemaStoreItemToJSON(
   schemaStoreItem: SchemaStoreItem,

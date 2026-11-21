@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -27,19 +27,21 @@ export const SuggestOpenAPIRegistryRequest$inboundSchema: z.ZodType<
   SuggestOpenAPIRegistryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "x-session-id": z.string(),
-  namespace_name: z.string(),
-  revision_reference: z.string(),
-  SuggestRequestBody: shared.SuggestRequestBody$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "x-session-id": "xSessionId",
-    "namespace_name": "namespaceName",
-    "revision_reference": "revisionReference",
-    "SuggestRequestBody": "suggestRequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "x-session-id": z.string(),
+    namespace_name: z.string(),
+    revision_reference: z.string(),
+    SuggestRequestBody: shared.SuggestRequestBody$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "x-session-id": "xSessionId",
+      "namespace_name": "namespaceName",
+      "revision_reference": "revisionReference",
+      "SuggestRequestBody": "suggestRequestBody",
+    });
+  })
+);
 /** @internal */
 export type SuggestOpenAPIRegistryRequest$Outbound = {
   "x-session-id": string;
@@ -53,19 +55,21 @@ export const SuggestOpenAPIRegistryRequest$outboundSchema: z.ZodType<
   SuggestOpenAPIRegistryRequest$Outbound,
   z.ZodTypeDef,
   SuggestOpenAPIRegistryRequest
-> = z.object({
-  xSessionId: z.string(),
-  namespaceName: z.string(),
-  revisionReference: z.string(),
-  suggestRequestBody: shared.SuggestRequestBody$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xSessionId: "x-session-id",
-    namespaceName: "namespace_name",
-    revisionReference: "revision_reference",
-    suggestRequestBody: "SuggestRequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xSessionId: z.string(),
+    namespaceName: z.string(),
+    revisionReference: z.string(),
+    suggestRequestBody: shared.SuggestRequestBody$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xSessionId: "x-session-id",
+      namespaceName: "namespace_name",
+      revisionReference: "revision_reference",
+      suggestRequestBody: "SuggestRequestBody",
+    });
+  })
+);
 
 export function suggestOpenAPIRegistryRequestToJSON(
   suggestOpenAPIRegistryRequest: SuggestOpenAPIRegistryRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,19 +20,25 @@ export const WorkspaceSettings$inboundSchema: z.ZodType<
   WorkspaceSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  webhook_url: z.string(),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "webhook_url": "webhookUrl",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    webhook_url: z.string(),
+    workspace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "webhook_url": "webhookUrl",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type WorkspaceSettings$Outbound = {
   created_at: string;
@@ -46,19 +52,21 @@ export const WorkspaceSettings$outboundSchema: z.ZodType<
   WorkspaceSettings$Outbound,
   z.ZodTypeDef,
   WorkspaceSettings
-> = z.object({
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  webhookUrl: z.string(),
-  workspaceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    webhookUrl: "webhook_url",
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    webhookUrl: z.string(),
+    workspaceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      webhookUrl: "webhook_url",
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function workspaceSettingsToJSON(
   workspaceSettings: WorkspaceSettings,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,18 +19,19 @@ export type Report = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Type));
 /** @internal */
 export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
   Type$inboundSchema;
 
 /** @internal */
-export const Report$inboundSchema: z.ZodType<Report, z.ZodTypeDef, unknown> = z
-  .object({
-    type: Type$inboundSchema.optional(),
-  });
+export const Report$inboundSchema: z.ZodType<Report, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: Type$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type Report$Outbound = {
   type?: string | undefined;
@@ -41,9 +42,11 @@ export const Report$outboundSchema: z.ZodType<
   Report$Outbound,
   z.ZodTypeDef,
   Report
-> = z.object({
-  type: Type$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: Type$outboundSchema.optional(),
+  })
+);
 
 export function reportToJSON(report: Report): string {
   return JSON.stringify(Report$outboundSchema.parse(report));

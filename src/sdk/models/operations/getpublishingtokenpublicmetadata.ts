@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,9 +31,11 @@ export const GetPublishingTokenPublicMetadataRequest$inboundSchema: z.ZodType<
   GetPublishingTokenPublicMetadataRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tokenID: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tokenID: z.string(),
+  })
+);
 /** @internal */
 export type GetPublishingTokenPublicMetadataRequest$Outbound = {
   tokenID: string;
@@ -44,9 +46,11 @@ export const GetPublishingTokenPublicMetadataRequest$outboundSchema: z.ZodType<
   GetPublishingTokenPublicMetadataRequest$Outbound,
   z.ZodTypeDef,
   GetPublishingTokenPublicMetadataRequest
-> = z.object({
-  tokenID: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tokenID: z.string(),
+  })
+);
 
 export function getPublishingTokenPublicMetadataRequestToJSON(
   getPublishingTokenPublicMetadataRequest:
@@ -80,23 +84,25 @@ export const GetPublishingTokenPublicMetadataResponseBody$inboundSchema:
     GetPublishingTokenPublicMetadataResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    organization_id: z.string().optional(),
-    target_id: z.string().optional(),
-    target_resource: z.string().optional(),
-    valid_until: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ).optional(),
-    workspace_id: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "organization_id": "organizationId",
-      "target_id": "targetId",
-      "target_resource": "targetResource",
-      "valid_until": "validUntil",
-      "workspace_id": "workspaceId",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      organization_id: z.string().optional(),
+      target_id: z.string().optional(),
+      target_resource: z.string().optional(),
+      valid_until: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ).optional(),
+      workspace_id: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "organization_id": "organizationId",
+        "target_id": "targetId",
+        "target_resource": "targetResource",
+        "valid_until": "validUntil",
+        "workspace_id": "workspaceId",
+      });
+    })
+  );
 /** @internal */
 export type GetPublishingTokenPublicMetadataResponseBody$Outbound = {
   organization_id?: string | undefined;
@@ -112,21 +118,23 @@ export const GetPublishingTokenPublicMetadataResponseBody$outboundSchema:
     GetPublishingTokenPublicMetadataResponseBody$Outbound,
     z.ZodTypeDef,
     GetPublishingTokenPublicMetadataResponseBody
-  > = z.object({
-    organizationId: z.string().optional(),
-    targetId: z.string().optional(),
-    targetResource: z.string().optional(),
-    validUntil: z.date().transform(v => v.toISOString()).optional(),
-    workspaceId: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      organizationId: "organization_id",
-      targetId: "target_id",
-      targetResource: "target_resource",
-      validUntil: "valid_until",
-      workspaceId: "workspace_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      organizationId: z.string().optional(),
+      targetId: z.string().optional(),
+      targetResource: z.string().optional(),
+      validUntil: z.date().transform(v => v.toISOString()).optional(),
+      workspaceId: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        organizationId: "organization_id",
+        targetId: "target_id",
+        targetResource: "target_resource",
+        validUntil: "valid_until",
+        workspaceId: "workspace_id",
+      });
+    })
+  );
 
 export function getPublishingTokenPublicMetadataResponseBodyToJSON(
   getPublishingTokenPublicMetadataResponseBody:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,15 +26,17 @@ export const Relationship$inboundSchema: z.ZodType<
   Relationship,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_id: z.string(),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "user_id": "userId",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_id: z.string(),
+    workspace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_id": "userId",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type Relationship$Outbound = {
   user_id: string;
@@ -46,15 +48,17 @@ export const Relationship$outboundSchema: z.ZodType<
   Relationship$Outbound,
   z.ZodTypeDef,
   Relationship
-> = z.object({
-  userId: z.string(),
-  workspaceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+    workspaceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function relationshipToJSON(relationship: Relationship): string {
   return JSON.stringify(Relationship$outboundSchema.parse(relationship));
@@ -74,14 +78,16 @@ export const WorkspaceInviteResponse$inboundSchema: z.ZodType<
   WorkspaceInviteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  invite_link: z.nullable(z.string()).optional(),
-  relationship: z.lazy(() => Relationship$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "invite_link": "inviteLink",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invite_link: z.nullable(z.string()).optional(),
+    relationship: z.lazy(() => Relationship$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "invite_link": "inviteLink",
+    });
+  })
+);
 /** @internal */
 export type WorkspaceInviteResponse$Outbound = {
   invite_link?: string | null | undefined;
@@ -93,14 +99,16 @@ export const WorkspaceInviteResponse$outboundSchema: z.ZodType<
   WorkspaceInviteResponse$Outbound,
   z.ZodTypeDef,
   WorkspaceInviteResponse
-> = z.object({
-  inviteLink: z.nullable(z.string()).optional(),
-  relationship: z.lazy(() => Relationship$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    inviteLink: "invite_link",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inviteLink: z.nullable(z.string()).optional(),
+    relationship: z.lazy(() => Relationship$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      inviteLink: "invite_link",
+    });
+  })
+);
 
 export function workspaceInviteResponseToJSON(
   workspaceInviteResponse: WorkspaceInviteResponse,

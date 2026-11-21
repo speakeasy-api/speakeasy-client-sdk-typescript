@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -26,13 +26,15 @@ export const CreateWorkspaceTokenGlobals$inboundSchema: z.ZodType<
   CreateWorkspaceTokenGlobals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type CreateWorkspaceTokenGlobals$Outbound = {
   workspace_id?: string | undefined;
@@ -43,13 +45,15 @@ export const CreateWorkspaceTokenGlobals$outboundSchema: z.ZodType<
   CreateWorkspaceTokenGlobals$Outbound,
   z.ZodTypeDef,
   CreateWorkspaceTokenGlobals
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function createWorkspaceTokenGlobalsToJSON(
   createWorkspaceTokenGlobals: CreateWorkspaceTokenGlobals,
@@ -75,15 +79,17 @@ export const CreateWorkspaceTokenRequest$inboundSchema: z.ZodType<
   CreateWorkspaceTokenRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-  WorkspaceToken: shared.WorkspaceToken$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-    "WorkspaceToken": "workspaceToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+    WorkspaceToken: shared.WorkspaceToken$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+      "WorkspaceToken": "workspaceToken",
+    });
+  })
+);
 /** @internal */
 export type CreateWorkspaceTokenRequest$Outbound = {
   workspace_id?: string | undefined;
@@ -95,15 +101,17 @@ export const CreateWorkspaceTokenRequest$outboundSchema: z.ZodType<
   CreateWorkspaceTokenRequest$Outbound,
   z.ZodTypeDef,
   CreateWorkspaceTokenRequest
-> = z.object({
-  workspaceId: z.string().optional(),
-  workspaceToken: shared.WorkspaceToken$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-    workspaceToken: "WorkspaceToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+    workspaceToken: shared.WorkspaceToken$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+      workspaceToken: "WorkspaceToken",
+    });
+  })
+);
 
 export function createWorkspaceTokenRequestToJSON(
   createWorkspaceTokenRequest: CreateWorkspaceTokenRequest,

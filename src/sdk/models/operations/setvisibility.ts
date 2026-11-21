@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,9 +28,11 @@ export const SetVisibilityRequestBody$inboundSchema: z.ZodType<
   SetVisibilityRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  public: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    public: z.boolean(),
+  })
+);
 /** @internal */
 export type SetVisibilityRequestBody$Outbound = {
   public: boolean;
@@ -41,9 +43,11 @@ export const SetVisibilityRequestBody$outboundSchema: z.ZodType<
   SetVisibilityRequestBody$Outbound,
   z.ZodTypeDef,
   SetVisibilityRequestBody
-> = z.object({
-  public: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    public: z.boolean(),
+  })
+);
 
 export function setVisibilityRequestBodyToJSON(
   setVisibilityRequestBody: SetVisibilityRequestBody,
@@ -67,15 +71,18 @@ export const SetVisibilityRequest$inboundSchema: z.ZodType<
   SetVisibilityRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  namespace_name: z.string(),
-  RequestBody: z.lazy(() => SetVisibilityRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "namespace_name": "namespaceName",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace_name: z.string(),
+    RequestBody: z.lazy(() => SetVisibilityRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "namespace_name": "namespaceName",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type SetVisibilityRequest$Outbound = {
   namespace_name: string;
@@ -87,15 +94,18 @@ export const SetVisibilityRequest$outboundSchema: z.ZodType<
   SetVisibilityRequest$Outbound,
   z.ZodTypeDef,
   SetVisibilityRequest
-> = z.object({
-  namespaceName: z.string(),
-  requestBody: z.lazy(() => SetVisibilityRequestBody$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    namespaceName: "namespace_name",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespaceName: z.string(),
+    requestBody: z.lazy(() => SetVisibilityRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      namespaceName: "namespace_name",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function setVisibilityRequestToJSON(
   setVisibilityRequest: SetVisibilityRequest,

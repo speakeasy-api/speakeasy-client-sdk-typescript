@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import { SpeakeasyError } from "./speakeasyerror.js";
 
 /**
@@ -40,25 +41,27 @@ export class ErrorT extends SpeakeasyError {
 }
 
 /** @internal */
-export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
-  .object({
-    message: z.string(),
-    status_code: z.number().int(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-  .transform((v) => {
-    const remapped = remap$(v, {
-      "status_code": "statusCode",
-    });
+export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      status_code: z.number().int(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        const remapped = remap$(v, {
+          "status_code": "statusCode",
+        });
 
-    return new ErrorT(remapped, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+        return new ErrorT(remapped, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ErrorT$Outbound = {
@@ -71,15 +74,17 @@ export const ErrorT$outboundSchema: z.ZodType<
   ErrorT$Outbound,
   z.ZodTypeDef,
   ErrorT
-> = z.instanceof(ErrorT)
-  .transform(v => v.data$)
-  .pipe(
-    z.object({
-      message: z.string(),
-      statusCode: z.number().int(),
-    }).transform((v) => {
-      return remap$(v, {
-        statusCode: "status_code",
-      });
-    }),
-  );
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(ErrorT)
+    .transform(v => v.data$)
+    .pipe(
+      z.object({
+        message: z.string(),
+        statusCode: z.number().int(),
+      }).transform((v) => {
+        return remap$(v, {
+          statusCode: "status_code",
+        });
+      }),
+    )
+);

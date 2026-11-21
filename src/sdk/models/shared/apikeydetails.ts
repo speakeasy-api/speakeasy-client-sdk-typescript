@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,6 +27,16 @@ export type ApiKeyDetails = {
    */
   featureFlags?: Array<string> | undefined;
   generationAccessUnlimited?: boolean | undefined;
+  /**
+   * Signed JWT (EdDSA/Ed25519) asserting the workspace's commercial license
+   *
+   * @remarks
+   * entitlements at time of issue. Verified offline by the open-source
+   * generator against its embedded JWK set; may be persisted as an offline
+   * license file. Only present for commercially-entitled workspaces when
+   * license signing is configured.
+   */
+  licenseJwt?: string | null | undefined;
   orgSlug: string;
   telemetryDisabled: boolean;
   /**
@@ -42,33 +52,37 @@ export const ApiKeyDetails$inboundSchema: z.ZodType<
   ApiKeyDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  account_type_v2: AccountType$inboundSchema,
-  billing_add_ons: z.array(BillingAddOn$inboundSchema),
-  enabled_features: z.array(z.string()),
-  feature_flags: z.array(z.string()).optional(),
-  generation_access_unlimited: z.boolean().optional(),
-  org_slug: z.string(),
-  telemetry_disabled: z.boolean(),
-  workspace_created_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  workspace_id: z.string(),
-  workspace_slug: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "account_type_v2": "accountTypeV2",
-    "billing_add_ons": "billingAddOns",
-    "enabled_features": "enabledFeatures",
-    "feature_flags": "featureFlags",
-    "generation_access_unlimited": "generationAccessUnlimited",
-    "org_slug": "orgSlug",
-    "telemetry_disabled": "telemetryDisabled",
-    "workspace_created_at": "workspaceCreatedAt",
-    "workspace_id": "workspaceId",
-    "workspace_slug": "workspaceSlug",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    account_type_v2: AccountType$inboundSchema,
+    billing_add_ons: z.array(BillingAddOn$inboundSchema),
+    enabled_features: z.array(z.string()),
+    feature_flags: z.array(z.string()).optional(),
+    generation_access_unlimited: z.boolean().optional(),
+    license_jwt: z.nullable(z.string()).optional(),
+    org_slug: z.string(),
+    telemetry_disabled: z.boolean(),
+    workspace_created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    workspace_id: z.string(),
+    workspace_slug: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "account_type_v2": "accountTypeV2",
+      "billing_add_ons": "billingAddOns",
+      "enabled_features": "enabledFeatures",
+      "feature_flags": "featureFlags",
+      "generation_access_unlimited": "generationAccessUnlimited",
+      "license_jwt": "licenseJwt",
+      "org_slug": "orgSlug",
+      "telemetry_disabled": "telemetryDisabled",
+      "workspace_created_at": "workspaceCreatedAt",
+      "workspace_id": "workspaceId",
+      "workspace_slug": "workspaceSlug",
+    });
+  })
+);
 /** @internal */
 export type ApiKeyDetails$Outbound = {
   account_type_v2: string;
@@ -76,6 +90,7 @@ export type ApiKeyDetails$Outbound = {
   enabled_features: Array<string>;
   feature_flags?: Array<string> | undefined;
   generation_access_unlimited?: boolean | undefined;
+  license_jwt?: string | null | undefined;
   org_slug: string;
   telemetry_disabled: boolean;
   workspace_created_at: string;
@@ -88,31 +103,35 @@ export const ApiKeyDetails$outboundSchema: z.ZodType<
   ApiKeyDetails$Outbound,
   z.ZodTypeDef,
   ApiKeyDetails
-> = z.object({
-  accountTypeV2: AccountType$outboundSchema,
-  billingAddOns: z.array(BillingAddOn$outboundSchema),
-  enabledFeatures: z.array(z.string()),
-  featureFlags: z.array(z.string()).optional(),
-  generationAccessUnlimited: z.boolean().optional(),
-  orgSlug: z.string(),
-  telemetryDisabled: z.boolean(),
-  workspaceCreatedAt: z.date().transform(v => v.toISOString()),
-  workspaceId: z.string(),
-  workspaceSlug: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    accountTypeV2: "account_type_v2",
-    billingAddOns: "billing_add_ons",
-    enabledFeatures: "enabled_features",
-    featureFlags: "feature_flags",
-    generationAccessUnlimited: "generation_access_unlimited",
-    orgSlug: "org_slug",
-    telemetryDisabled: "telemetry_disabled",
-    workspaceCreatedAt: "workspace_created_at",
-    workspaceId: "workspace_id",
-    workspaceSlug: "workspace_slug",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountTypeV2: AccountType$outboundSchema,
+    billingAddOns: z.array(BillingAddOn$outboundSchema),
+    enabledFeatures: z.array(z.string()),
+    featureFlags: z.array(z.string()).optional(),
+    generationAccessUnlimited: z.boolean().optional(),
+    licenseJwt: z.nullable(z.string()).optional(),
+    orgSlug: z.string(),
+    telemetryDisabled: z.boolean(),
+    workspaceCreatedAt: z.date().transform(v => v.toISOString()),
+    workspaceId: z.string(),
+    workspaceSlug: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      accountTypeV2: "account_type_v2",
+      billingAddOns: "billing_add_ons",
+      enabledFeatures: "enabled_features",
+      featureFlags: "feature_flags",
+      generationAccessUnlimited: "generation_access_unlimited",
+      licenseJwt: "license_jwt",
+      orgSlug: "org_slug",
+      telemetryDisabled: "telemetry_disabled",
+      workspaceCreatedAt: "workspace_created_at",
+      workspaceId: "workspace_id",
+      workspaceSlug: "workspace_slug",
+    });
+  })
+);
 
 export function apiKeyDetailsToJSON(apiKeyDetails: ApiKeyDetails): string {
   return JSON.stringify(ApiKeyDetails$outboundSchema.parse(apiKeyDetails));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const GetOrganizationRequest$inboundSchema: z.ZodType<
   GetOrganizationRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  organizationID: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organizationID: z.string(),
+  })
+);
 /** @internal */
 export type GetOrganizationRequest$Outbound = {
   organizationID: string;
@@ -32,9 +34,11 @@ export const GetOrganizationRequest$outboundSchema: z.ZodType<
   GetOrganizationRequest$Outbound,
   z.ZodTypeDef,
   GetOrganizationRequest
-> = z.object({
-  organizationID: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organizationID: z.string(),
+  })
+);
 
 export function getOrganizationRequestToJSON(
   getOrganizationRequest: GetOrganizationRequest,

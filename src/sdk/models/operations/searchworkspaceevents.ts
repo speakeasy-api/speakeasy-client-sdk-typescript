@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -57,13 +57,15 @@ export const SearchWorkspaceEventsGlobals$inboundSchema: z.ZodType<
   SearchWorkspaceEventsGlobals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type SearchWorkspaceEventsGlobals$Outbound = {
   workspace_id?: string | undefined;
@@ -74,13 +76,15 @@ export const SearchWorkspaceEventsGlobals$outboundSchema: z.ZodType<
   SearchWorkspaceEventsGlobals$Outbound,
   z.ZodTypeDef,
   SearchWorkspaceEventsGlobals
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function searchWorkspaceEventsGlobalsToJSON(
   searchWorkspaceEventsGlobals: SearchWorkspaceEventsGlobals,
@@ -106,27 +110,29 @@ export const SearchWorkspaceEventsRequest$inboundSchema: z.ZodType<
   SearchWorkspaceEventsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-  source_revision_digest: z.string().optional(),
-  lint_report_digest: z.string().optional(),
-  openapi_diff_report_digest: z.string().optional(),
-  interaction_type: shared.InteractionType$inboundSchema.optional(),
-  generate_gen_lock_id: z.string().optional(),
-  execution_id: z.string().optional(),
-  success: z.boolean().optional(),
-  limit: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-    "source_revision_digest": "sourceRevisionDigest",
-    "lint_report_digest": "lintReportDigest",
-    "openapi_diff_report_digest": "openapiDiffReportDigest",
-    "interaction_type": "interactionType",
-    "generate_gen_lock_id": "generateGenLockId",
-    "execution_id": "executionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+    source_revision_digest: z.string().optional(),
+    lint_report_digest: z.string().optional(),
+    openapi_diff_report_digest: z.string().optional(),
+    interaction_type: shared.InteractionType$inboundSchema.optional(),
+    generate_gen_lock_id: z.string().optional(),
+    execution_id: z.string().optional(),
+    success: z.boolean().optional(),
+    limit: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+      "source_revision_digest": "sourceRevisionDigest",
+      "lint_report_digest": "lintReportDigest",
+      "openapi_diff_report_digest": "openapiDiffReportDigest",
+      "interaction_type": "interactionType",
+      "generate_gen_lock_id": "generateGenLockId",
+      "execution_id": "executionId",
+    });
+  })
+);
 /** @internal */
 export type SearchWorkspaceEventsRequest$Outbound = {
   workspace_id?: string | undefined;
@@ -145,27 +151,29 @@ export const SearchWorkspaceEventsRequest$outboundSchema: z.ZodType<
   SearchWorkspaceEventsRequest$Outbound,
   z.ZodTypeDef,
   SearchWorkspaceEventsRequest
-> = z.object({
-  workspaceId: z.string().optional(),
-  sourceRevisionDigest: z.string().optional(),
-  lintReportDigest: z.string().optional(),
-  openapiDiffReportDigest: z.string().optional(),
-  interactionType: shared.InteractionType$outboundSchema.optional(),
-  generateGenLockId: z.string().optional(),
-  executionId: z.string().optional(),
-  success: z.boolean().optional(),
-  limit: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-    sourceRevisionDigest: "source_revision_digest",
-    lintReportDigest: "lint_report_digest",
-    openapiDiffReportDigest: "openapi_diff_report_digest",
-    interactionType: "interaction_type",
-    generateGenLockId: "generate_gen_lock_id",
-    executionId: "execution_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+    sourceRevisionDigest: z.string().optional(),
+    lintReportDigest: z.string().optional(),
+    openapiDiffReportDigest: z.string().optional(),
+    interactionType: shared.InteractionType$outboundSchema.optional(),
+    generateGenLockId: z.string().optional(),
+    executionId: z.string().optional(),
+    success: z.boolean().optional(),
+    limit: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+      sourceRevisionDigest: "source_revision_digest",
+      lintReportDigest: "lint_report_digest",
+      openapiDiffReportDigest: "openapi_diff_report_digest",
+      interactionType: "interaction_type",
+      generateGenLockId: "generate_gen_lock_id",
+      executionId: "execution_id",
+    });
+  })
+);
 
 export function searchWorkspaceEventsRequestToJSON(
   searchWorkspaceEventsRequest: SearchWorkspaceEventsRequest,

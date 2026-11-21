@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,20 +38,22 @@ export const OrganizationUsageResponse$inboundSchema: z.ZodType<
   OrganizationUsageResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowed_languages: z.array(z.string()),
-  free_trial_expiry: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  total_allowed_languages: z.number().int(),
-  usage: z.array(OrganizationUsage$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "allowed_languages": "allowedLanguages",
-    "free_trial_expiry": "freeTrialExpiry",
-    "total_allowed_languages": "totalAllowedLanguages",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowed_languages: z.array(z.string()),
+    free_trial_expiry: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    total_allowed_languages: z.number().int(),
+    usage: z.array(OrganizationUsage$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "allowed_languages": "allowedLanguages",
+      "free_trial_expiry": "freeTrialExpiry",
+      "total_allowed_languages": "totalAllowedLanguages",
+    });
+  })
+);
 /** @internal */
 export type OrganizationUsageResponse$Outbound = {
   allowed_languages: Array<string>;
@@ -65,18 +67,20 @@ export const OrganizationUsageResponse$outboundSchema: z.ZodType<
   OrganizationUsageResponse$Outbound,
   z.ZodTypeDef,
   OrganizationUsageResponse
-> = z.object({
-  allowedLanguages: z.array(z.string()),
-  freeTrialExpiry: z.date().transform(v => v.toISOString()).optional(),
-  totalAllowedLanguages: z.number().int(),
-  usage: z.array(OrganizationUsage$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    allowedLanguages: "allowed_languages",
-    freeTrialExpiry: "free_trial_expiry",
-    totalAllowedLanguages: "total_allowed_languages",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedLanguages: z.array(z.string()),
+    freeTrialExpiry: z.date().transform(v => v.toISOString()).optional(),
+    totalAllowedLanguages: z.number().int(),
+    usage: z.array(OrganizationUsage$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      allowedLanguages: "allowed_languages",
+      freeTrialExpiry: "free_trial_expiry",
+      totalAllowedLanguages: "total_allowed_languages",
+    });
+  })
+);
 
 export function organizationUsageResponseToJSON(
   organizationUsageResponse: OrganizationUsageResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const GithubMissingPublishingSecretsResponse$inboundSchema: z.ZodType<
   GithubMissingPublishingSecretsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  missing_secrets: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "missing_secrets": "missingSecrets",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    missing_secrets: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "missing_secrets": "missingSecrets",
+    });
+  })
+);
 /** @internal */
 export type GithubMissingPublishingSecretsResponse$Outbound = {
   missing_secrets?: Array<string> | undefined;
@@ -37,13 +39,15 @@ export const GithubMissingPublishingSecretsResponse$outboundSchema: z.ZodType<
   GithubMissingPublishingSecretsResponse$Outbound,
   z.ZodTypeDef,
   GithubMissingPublishingSecretsResponse
-> = z.object({
-  missingSecrets: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    missingSecrets: "missing_secrets",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    missingSecrets: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      missingSecrets: "missing_secrets",
+    });
+  })
+);
 
 export function githubMissingPublishingSecretsResponseToJSON(
   githubMissingPublishingSecretsResponse:

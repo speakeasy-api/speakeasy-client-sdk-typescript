@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,11 +30,13 @@ export const RemoteSource$inboundSchema: z.ZodType<
   RemoteSource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  inputs: z.array(RemoteDocument$inboundSchema),
-  output: RemoteDocument$inboundSchema,
-  overlays: z.array(RemoteDocument$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputs: z.array(RemoteDocument$inboundSchema),
+    output: RemoteDocument$inboundSchema,
+    overlays: z.array(RemoteDocument$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type RemoteSource$Outbound = {
   inputs: Array<RemoteDocument$Outbound>;
@@ -47,11 +49,13 @@ export const RemoteSource$outboundSchema: z.ZodType<
   RemoteSource$Outbound,
   z.ZodTypeDef,
   RemoteSource
-> = z.object({
-  inputs: z.array(RemoteDocument$outboundSchema),
-  output: RemoteDocument$outboundSchema,
-  overlays: z.array(RemoteDocument$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputs: z.array(RemoteDocument$outboundSchema),
+    output: RemoteDocument$outboundSchema,
+    overlays: z.array(RemoteDocument$outboundSchema).optional(),
+  })
+);
 
 export function remoteSourceToJSON(remoteSource: RemoteSource): string {
   return JSON.stringify(RemoteSource$outboundSchema.parse(remoteSource));

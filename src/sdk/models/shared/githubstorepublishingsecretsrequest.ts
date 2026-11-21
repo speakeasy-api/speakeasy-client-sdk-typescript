@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,14 +27,16 @@ export const GithubStorePublishingSecretsRequest$inboundSchema: z.ZodType<
   GithubStorePublishingSecretsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  generate_gen_lock_id: z.string(),
-  secrets: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "generate_gen_lock_id": "generateGenLockId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    generate_gen_lock_id: z.string(),
+    secrets: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "generate_gen_lock_id": "generateGenLockId",
+    });
+  })
+);
 /** @internal */
 export type GithubStorePublishingSecretsRequest$Outbound = {
   generate_gen_lock_id: string;
@@ -46,14 +48,16 @@ export const GithubStorePublishingSecretsRequest$outboundSchema: z.ZodType<
   GithubStorePublishingSecretsRequest$Outbound,
   z.ZodTypeDef,
   GithubStorePublishingSecretsRequest
-> = z.object({
-  generateGenLockId: z.string(),
-  secrets: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    generateGenLockId: "generate_gen_lock_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    generateGenLockId: z.string(),
+    secrets: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      generateGenLockId: "generate_gen_lock_id",
+    });
+  })
+);
 
 export function githubStorePublishingSecretsRequestToJSON(
   githubStorePublishingSecretsRequest: GithubStorePublishingSecretsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const GetAccessTokenRequest$inboundSchema: z.ZodType<
   GetAccessTokenRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type GetAccessTokenRequest$Outbound = {
   workspace_id: string;
@@ -37,13 +39,15 @@ export const GetAccessTokenRequest$outboundSchema: z.ZodType<
   GetAccessTokenRequest$Outbound,
   z.ZodTypeDef,
   GetAccessTokenRequest
-> = z.object({
-  workspaceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function getAccessTokenRequestToJSON(
   getAccessTokenRequest: GetAccessTokenRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -22,15 +22,17 @@ export const PostTagsRequest$inboundSchema: z.ZodType<
   PostTagsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  namespace_name: z.string(),
-  AddTags: shared.AddTags$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "namespace_name": "namespaceName",
-    "AddTags": "addTags",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace_name: z.string(),
+    AddTags: shared.AddTags$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "namespace_name": "namespaceName",
+      "AddTags": "addTags",
+    });
+  })
+);
 /** @internal */
 export type PostTagsRequest$Outbound = {
   namespace_name: string;
@@ -42,15 +44,17 @@ export const PostTagsRequest$outboundSchema: z.ZodType<
   PostTagsRequest$Outbound,
   z.ZodTypeDef,
   PostTagsRequest
-> = z.object({
-  namespaceName: z.string(),
-  addTags: shared.AddTags$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    namespaceName: "namespace_name",
-    addTags: "AddTags",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespaceName: z.string(),
+    addTags: shared.AddTags$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      namespaceName: "namespace_name",
+      addTags: "AddTags",
+    });
+  })
+);
 
 export function postTagsRequestToJSON(
   postTagsRequest: PostTagsRequest,

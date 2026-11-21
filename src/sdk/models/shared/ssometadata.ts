@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const SSOMetadata$inboundSchema: z.ZodType<
   SSOMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sso_activated: z.boolean(),
-  sso_domains: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "sso_activated": "ssoActivated",
-    "sso_domains": "ssoDomains",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sso_activated: z.boolean(),
+    sso_domains: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "sso_activated": "ssoActivated",
+      "sso_domains": "ssoDomains",
+    });
+  })
+);
 /** @internal */
 export type SSOMetadata$Outbound = {
   sso_activated: boolean;
@@ -41,15 +43,17 @@ export const SSOMetadata$outboundSchema: z.ZodType<
   SSOMetadata$Outbound,
   z.ZodTypeDef,
   SSOMetadata
-> = z.object({
-  ssoActivated: z.boolean(),
-  ssoDomains: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    ssoActivated: "sso_activated",
-    ssoDomains: "sso_domains",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssoActivated: z.boolean(),
+    ssoDomains: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      ssoActivated: "sso_activated",
+      ssoDomains: "sso_domains",
+    });
+  })
+);
 
 export function ssoMetadataToJSON(ssoMetadata: SSOMetadata): string {
   return JSON.stringify(SSOMetadata$outboundSchema.parse(ssoMetadata));

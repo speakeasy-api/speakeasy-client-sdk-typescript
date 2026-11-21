@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,13 +35,15 @@ export const UsageSnippet$inboundSchema: z.ZodType<
   UsageSnippet,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  language: z.string(),
-  method: z.any().optional(),
-  operationId: z.string(),
-  path: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    language: z.string(),
+    method: z.any().optional(),
+    operationId: z.string(),
+    path: z.string(),
+  })
+);
 /** @internal */
 export type UsageSnippet$Outbound = {
   code: string;
@@ -56,13 +58,15 @@ export const UsageSnippet$outboundSchema: z.ZodType<
   UsageSnippet$Outbound,
   z.ZodTypeDef,
   UsageSnippet
-> = z.object({
-  code: z.string(),
-  language: z.string(),
-  method: z.any().optional(),
-  operationId: z.string(),
-  path: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    language: z.string(),
+    method: z.any().optional(),
+    operationId: z.string(),
+    path: z.string(),
+  })
+);
 
 export function usageSnippetToJSON(usageSnippet: UsageSnippet): string {
   return JSON.stringify(UsageSnippet$outboundSchema.parse(usageSnippet));

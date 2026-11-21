@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -22,15 +22,17 @@ export const SuggestRequest$inboundSchema: z.ZodType<
   SuggestRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "x-session-id": z.string(),
-  SuggestRequestBody: shared.SuggestRequestBody$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "x-session-id": "xSessionId",
-    "SuggestRequestBody": "suggestRequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "x-session-id": z.string(),
+    SuggestRequestBody: shared.SuggestRequestBody$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "x-session-id": "xSessionId",
+      "SuggestRequestBody": "suggestRequestBody",
+    });
+  })
+);
 /** @internal */
 export type SuggestRequest$Outbound = {
   "x-session-id": string;
@@ -42,15 +44,17 @@ export const SuggestRequest$outboundSchema: z.ZodType<
   SuggestRequest$Outbound,
   z.ZodTypeDef,
   SuggestRequest
-> = z.object({
-  xSessionId: z.string(),
-  suggestRequestBody: shared.SuggestRequestBody$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xSessionId: "x-session-id",
-    suggestRequestBody: "SuggestRequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xSessionId: z.string(),
+    suggestRequestBody: shared.SuggestRequestBody$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xSessionId: "x-session-id",
+      suggestRequestBody: "SuggestRequestBody",
+    });
+  })
+);
 
 export function suggestRequestToJSON(suggestRequest: SuggestRequest): string {
   return JSON.stringify(SuggestRequest$outboundSchema.parse(suggestRequest));

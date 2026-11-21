@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,26 +49,29 @@ export const PullRequestMetadata$inboundSchema: z.ZodType<
   PullRequestMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  base_branch: z.string().optional(),
-  can_merge: z.boolean().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  description: z.string().optional(),
-  head_branch: z.string().optional(),
-  labels: z.array(z.string()).optional(),
-  requested_reviewers: z.array(z.string()).optional(),
-  status: z.string().optional(),
-  title: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "base_branch": "baseBranch",
-    "can_merge": "canMerge",
-    "created_at": "createdAt",
-    "head_branch": "headBranch",
-    "requested_reviewers": "requestedReviewers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    base_branch: z.string().optional(),
+    can_merge: z.boolean().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    description: z.string().optional(),
+    head_branch: z.string().optional(),
+    labels: z.array(z.string()).optional(),
+    requested_reviewers: z.array(z.string()).optional(),
+    status: z.string().optional(),
+    title: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "base_branch": "baseBranch",
+      "can_merge": "canMerge",
+      "created_at": "createdAt",
+      "head_branch": "headBranch",
+      "requested_reviewers": "requestedReviewers",
+    });
+  })
+);
 /** @internal */
 export type PullRequestMetadata$Outbound = {
   base_branch?: string | undefined;
@@ -87,25 +90,27 @@ export const PullRequestMetadata$outboundSchema: z.ZodType<
   PullRequestMetadata$Outbound,
   z.ZodTypeDef,
   PullRequestMetadata
-> = z.object({
-  baseBranch: z.string().optional(),
-  canMerge: z.boolean().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  description: z.string().optional(),
-  headBranch: z.string().optional(),
-  labels: z.array(z.string()).optional(),
-  requestedReviewers: z.array(z.string()).optional(),
-  status: z.string().optional(),
-  title: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    baseBranch: "base_branch",
-    canMerge: "can_merge",
-    createdAt: "created_at",
-    headBranch: "head_branch",
-    requestedReviewers: "requested_reviewers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    baseBranch: z.string().optional(),
+    canMerge: z.boolean().optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    description: z.string().optional(),
+    headBranch: z.string().optional(),
+    labels: z.array(z.string()).optional(),
+    requestedReviewers: z.array(z.string()).optional(),
+    status: z.string().optional(),
+    title: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      baseBranch: "base_branch",
+      canMerge: "can_merge",
+      createdAt: "created_at",
+      headBranch: "head_branch",
+      requestedReviewers: "requested_reviewers",
+    });
+  })
+);
 
 export function pullRequestMetadataToJSON(
   pullRequestMetadata: PullRequestMetadata,
@@ -129,18 +134,20 @@ export const GithubPublishingPRResponse$inboundSchema: z.ZodType<
   GithubPublishingPRResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  pending_version: z.string().optional(),
-  pull_request: z.string().optional(),
-  pull_request_metadata: z.lazy(() => PullRequestMetadata$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "pending_version": "pendingVersion",
-    "pull_request": "pullRequest",
-    "pull_request_metadata": "pullRequestMetadata",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pending_version: z.string().optional(),
+    pull_request: z.string().optional(),
+    pull_request_metadata: z.lazy(() => PullRequestMetadata$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "pending_version": "pendingVersion",
+      "pull_request": "pullRequest",
+      "pull_request_metadata": "pullRequestMetadata",
+    });
+  })
+);
 /** @internal */
 export type GithubPublishingPRResponse$Outbound = {
   pending_version?: string | undefined;
@@ -153,18 +160,20 @@ export const GithubPublishingPRResponse$outboundSchema: z.ZodType<
   GithubPublishingPRResponse$Outbound,
   z.ZodTypeDef,
   GithubPublishingPRResponse
-> = z.object({
-  pendingVersion: z.string().optional(),
-  pullRequest: z.string().optional(),
-  pullRequestMetadata: z.lazy(() => PullRequestMetadata$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pendingVersion: "pending_version",
-    pullRequest: "pull_request",
-    pullRequestMetadata: "pull_request_metadata",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pendingVersion: z.string().optional(),
+    pullRequest: z.string().optional(),
+    pullRequestMetadata: z.lazy(() => PullRequestMetadata$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pendingVersion: "pending_version",
+      pullRequest: "pull_request",
+      pullRequestMetadata: "pull_request_metadata",
+    });
+  })
+);
 
 export function githubPublishingPRResponseToJSON(
   githubPublishingPRResponse: GithubPublishingPRResponse,
