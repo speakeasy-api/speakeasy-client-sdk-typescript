@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,30 +30,34 @@ export const WorkspaceToken$inboundSchema: z.ZodType<
   WorkspaceToken,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  alg: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by: z.nullable(z.string()).optional(),
-  created_by_name: z.nullable(z.string()).optional(),
-  created_by_photo_url: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  id: z.string(),
-  key: z.string(),
-  last_used: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  name: z.string(),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "created_by": "createdBy",
-    "created_by_name": "createdByName",
-    "created_by_photo_url": "createdByPhotoUrl",
-    "last_used": "lastUsed",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alg: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by: z.nullable(z.string()).optional(),
+    created_by_name: z.nullable(z.string()).optional(),
+    created_by_photo_url: z.nullable(z.string()).optional(),
+    email: z.nullable(z.string()).optional(),
+    id: z.string(),
+    key: z.string(),
+    last_used: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    name: z.string(),
+    workspace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "created_by": "createdBy",
+      "created_by_name": "createdByName",
+      "created_by_photo_url": "createdByPhotoUrl",
+      "last_used": "lastUsed",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type WorkspaceToken$Outbound = {
   alg: string;
@@ -74,28 +78,30 @@ export const WorkspaceToken$outboundSchema: z.ZodType<
   WorkspaceToken$Outbound,
   z.ZodTypeDef,
   WorkspaceToken
-> = z.object({
-  alg: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  createdBy: z.nullable(z.string()).optional(),
-  createdByName: z.nullable(z.string()).optional(),
-  createdByPhotoUrl: z.nullable(z.string()).optional(),
-  email: z.nullable(z.string()).optional(),
-  id: z.string(),
-  key: z.string(),
-  lastUsed: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  name: z.string(),
-  workspaceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    createdBy: "created_by",
-    createdByName: "created_by_name",
-    createdByPhotoUrl: "created_by_photo_url",
-    lastUsed: "last_used",
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    alg: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    createdBy: z.nullable(z.string()).optional(),
+    createdByName: z.nullable(z.string()).optional(),
+    createdByPhotoUrl: z.nullable(z.string()).optional(),
+    email: z.nullable(z.string()).optional(),
+    id: z.string(),
+    key: z.string(),
+    lastUsed: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    name: z.string(),
+    workspaceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      createdBy: "created_by",
+      createdByName: "created_by_name",
+      createdByPhotoUrl: "created_by_photo_url",
+      lastUsed: "last_used",
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function workspaceTokenToJSON(workspaceToken: WorkspaceToken): string {
   return JSON.stringify(WorkspaceToken$outboundSchema.parse(workspaceToken));

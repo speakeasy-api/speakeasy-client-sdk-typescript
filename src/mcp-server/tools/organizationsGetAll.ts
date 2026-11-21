@@ -13,7 +13,7 @@ Returns a list of organizations a user has access too`,
   tool: async (client, ctx) => {
     const [result, apiCall] = await organizationsGetAll(
       client,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

@@ -20,7 +20,7 @@ Get information about a particular publishing token.`,
     const [result, apiCall] = await publishingTokensGet(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

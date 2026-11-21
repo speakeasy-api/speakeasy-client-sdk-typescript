@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -34,9 +34,11 @@ export const GetCodeSamplePreviewAsyncRequest$inboundSchema: z.ZodType<
   GetCodeSamplePreviewAsyncRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  jobID: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    jobID: z.string(),
+  })
+);
 /** @internal */
 export type GetCodeSamplePreviewAsyncRequest$Outbound = {
   jobID: string;
@@ -47,9 +49,11 @@ export const GetCodeSamplePreviewAsyncRequest$outboundSchema: z.ZodType<
   GetCodeSamplePreviewAsyncRequest$Outbound,
   z.ZodTypeDef,
   GetCodeSamplePreviewAsyncRequest
-> = z.object({
-  jobID: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    jobID: z.string(),
+  })
+);
 
 export function getCodeSamplePreviewAsyncRequestToJSON(
   getCodeSamplePreviewAsyncRequest: GetCodeSamplePreviewAsyncRequest,
@@ -75,9 +79,11 @@ export const GetCodeSamplePreviewAsyncResponseBody$inboundSchema: z.ZodType<
   GetCodeSamplePreviewAsyncResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: shared.CodeSamplesJobStatus$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: shared.CodeSamplesJobStatus$inboundSchema,
+  })
+);
 /** @internal */
 export type GetCodeSamplePreviewAsyncResponseBody$Outbound = {
   status: string;
@@ -88,9 +94,11 @@ export const GetCodeSamplePreviewAsyncResponseBody$outboundSchema: z.ZodType<
   GetCodeSamplePreviewAsyncResponseBody$Outbound,
   z.ZodTypeDef,
   GetCodeSamplePreviewAsyncResponseBody
-> = z.object({
-  status: shared.CodeSamplesJobStatus$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: shared.CodeSamplesJobStatus$outboundSchema,
+  })
+);
 
 export function getCodeSamplePreviewAsyncResponseBodyToJSON(
   getCodeSamplePreviewAsyncResponseBody: GetCodeSamplePreviewAsyncResponseBody,
@@ -117,10 +125,12 @@ export const GetCodeSamplePreviewAsyncResponse$inboundSchema: z.ZodType<
   GetCodeSamplePreviewAsyncResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  shared.UsageSnippets$inboundSchema,
-  z.lazy(() => GetCodeSamplePreviewAsyncResponseBody$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    shared.UsageSnippets$inboundSchema,
+    z.lazy(() => GetCodeSamplePreviewAsyncResponseBody$inboundSchema),
+  ])
+);
 /** @internal */
 export type GetCodeSamplePreviewAsyncResponse$Outbound =
   | shared.UsageSnippets$Outbound
@@ -131,10 +141,12 @@ export const GetCodeSamplePreviewAsyncResponse$outboundSchema: z.ZodType<
   GetCodeSamplePreviewAsyncResponse$Outbound,
   z.ZodTypeDef,
   GetCodeSamplePreviewAsyncResponse
-> = z.union([
-  shared.UsageSnippets$outboundSchema,
-  z.lazy(() => GetCodeSamplePreviewAsyncResponseBody$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    shared.UsageSnippets$outboundSchema,
+    z.lazy(() => GetCodeSamplePreviewAsyncResponseBody$outboundSchema),
+  ])
+);
 
 export function getCodeSamplePreviewAsyncResponseToJSON(
   getCodeSamplePreviewAsyncResponse: GetCodeSamplePreviewAsyncResponse,

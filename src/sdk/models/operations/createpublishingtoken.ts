@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,21 +23,23 @@ export const CreatePublishingTokenRequestBody$inboundSchema: z.ZodType<
   CreatePublishingTokenRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  target_id: z.string(),
-  target_resource: z.string(),
-  token_name: z.string(),
-  valid_until: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "target_id": "targetId",
-    "target_resource": "targetResource",
-    "token_name": "tokenName",
-    "valid_until": "validUntil",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    target_id: z.string(),
+    target_resource: z.string(),
+    token_name: z.string(),
+    valid_until: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "target_id": "targetId",
+      "target_resource": "targetResource",
+      "token_name": "tokenName",
+      "valid_until": "validUntil",
+    });
+  })
+);
 /** @internal */
 export type CreatePublishingTokenRequestBody$Outbound = {
   target_id: string;
@@ -51,19 +53,21 @@ export const CreatePublishingTokenRequestBody$outboundSchema: z.ZodType<
   CreatePublishingTokenRequestBody$Outbound,
   z.ZodTypeDef,
   CreatePublishingTokenRequestBody
-> = z.object({
-  targetId: z.string(),
-  targetResource: z.string(),
-  tokenName: z.string(),
-  validUntil: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    targetId: "target_id",
-    targetResource: "target_resource",
-    tokenName: "token_name",
-    validUntil: "valid_until",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    targetId: z.string(),
+    targetResource: z.string(),
+    tokenName: z.string(),
+    validUntil: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      targetId: "target_id",
+      targetResource: "target_resource",
+      tokenName: "token_name",
+      validUntil: "valid_until",
+    });
+  })
+);
 
 export function createPublishingTokenRequestBodyToJSON(
   createPublishingTokenRequestBody: CreatePublishingTokenRequestBody,

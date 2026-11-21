@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,18 +20,20 @@ export const GetBlobRequest$inboundSchema: z.ZodType<
   GetBlobRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  organization_slug: z.string(),
-  workspace_slug: z.string(),
-  namespace_name: z.string(),
-  digest: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "organization_slug": "organizationSlug",
-    "workspace_slug": "workspaceSlug",
-    "namespace_name": "namespaceName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organization_slug: z.string(),
+    workspace_slug: z.string(),
+    namespace_name: z.string(),
+    digest: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "organization_slug": "organizationSlug",
+      "workspace_slug": "workspaceSlug",
+      "namespace_name": "namespaceName",
+    });
+  })
+);
 /** @internal */
 export type GetBlobRequest$Outbound = {
   organization_slug: string;
@@ -45,18 +47,20 @@ export const GetBlobRequest$outboundSchema: z.ZodType<
   GetBlobRequest$Outbound,
   z.ZodTypeDef,
   GetBlobRequest
-> = z.object({
-  organizationSlug: z.string(),
-  workspaceSlug: z.string(),
-  namespaceName: z.string(),
-  digest: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    organizationSlug: "organization_slug",
-    workspaceSlug: "workspace_slug",
-    namespaceName: "namespace_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organizationSlug: z.string(),
+    workspaceSlug: z.string(),
+    namespaceName: z.string(),
+    digest: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      organizationSlug: "organization_slug",
+      workspaceSlug: "workspace_slug",
+      namespaceName: "namespace_name",
+    });
+  })
+);
 
 export function getBlobRequestToJSON(getBlobRequest: GetBlobRequest): string {
   return JSON.stringify(GetBlobRequest$outboundSchema.parse(getBlobRequest));

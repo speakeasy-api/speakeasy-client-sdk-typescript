@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,19 +20,21 @@ export const RemoteSourceSubscriptionSettings$inboundSchema: z.ZodType<
   RemoteSourceSubscriptionSettings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  base_spec_namespaces: z.array(z.string()),
-  ignored_namespaces: z.array(z.string()).optional(),
-  output_namespace: z.string(),
-  overlay_namespaces: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "base_spec_namespaces": "baseSpecNamespaces",
-    "ignored_namespaces": "ignoredNamespaces",
-    "output_namespace": "outputNamespace",
-    "overlay_namespaces": "overlayNamespaces",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    base_spec_namespaces: z.array(z.string()),
+    ignored_namespaces: z.array(z.string()).optional(),
+    output_namespace: z.string(),
+    overlay_namespaces: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "base_spec_namespaces": "baseSpecNamespaces",
+      "ignored_namespaces": "ignoredNamespaces",
+      "output_namespace": "outputNamespace",
+      "overlay_namespaces": "overlayNamespaces",
+    });
+  })
+);
 /** @internal */
 export type RemoteSourceSubscriptionSettings$Outbound = {
   base_spec_namespaces: Array<string>;
@@ -46,19 +48,21 @@ export const RemoteSourceSubscriptionSettings$outboundSchema: z.ZodType<
   RemoteSourceSubscriptionSettings$Outbound,
   z.ZodTypeDef,
   RemoteSourceSubscriptionSettings
-> = z.object({
-  baseSpecNamespaces: z.array(z.string()),
-  ignoredNamespaces: z.array(z.string()).optional(),
-  outputNamespace: z.string(),
-  overlayNamespaces: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    baseSpecNamespaces: "base_spec_namespaces",
-    ignoredNamespaces: "ignored_namespaces",
-    outputNamespace: "output_namespace",
-    overlayNamespaces: "overlay_namespaces",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    baseSpecNamespaces: z.array(z.string()),
+    ignoredNamespaces: z.array(z.string()).optional(),
+    outputNamespace: z.string(),
+    overlayNamespaces: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      baseSpecNamespaces: "base_spec_namespaces",
+      ignoredNamespaces: "ignored_namespaces",
+      outputNamespace: "output_namespace",
+      overlayNamespaces: "overlay_namespaces",
+    });
+  })
+);
 
 export function remoteSourceSubscriptionSettingsToJSON(
   remoteSourceSubscriptionSettings: RemoteSourceSubscriptionSettings,

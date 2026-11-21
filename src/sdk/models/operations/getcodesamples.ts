@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -38,10 +38,12 @@ export const MethodPaths$inboundSchema: z.ZodType<
   MethodPaths,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  method: shared.HttpMethod$inboundSchema,
-  path: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    method: shared.HttpMethod$inboundSchema,
+    path: z.string(),
+  })
+);
 /** @internal */
 export type MethodPaths$Outbound = {
   method: string;
@@ -53,10 +55,12 @@ export const MethodPaths$outboundSchema: z.ZodType<
   MethodPaths$Outbound,
   z.ZodTypeDef,
   MethodPaths
-> = z.object({
-  method: shared.HttpMethod$outboundSchema,
-  path: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    method: shared.HttpMethod$outboundSchema,
+    path: z.string(),
+  })
+);
 
 export function methodPathsToJSON(methodPaths: MethodPaths): string {
   return JSON.stringify(MethodPaths$outboundSchema.parse(methodPaths));
@@ -76,18 +80,20 @@ export const GetCodeSamplesRequest$inboundSchema: z.ZodType<
   GetCodeSamplesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  registry_url: z.string(),
-  operation_ids: z.array(z.string()).optional(),
-  method_paths: z.array(z.lazy(() => MethodPaths$inboundSchema)).optional(),
-  languages: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "registry_url": "registryUrl",
-    "operation_ids": "operationIds",
-    "method_paths": "methodPaths",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    registry_url: z.string(),
+    operation_ids: z.array(z.string()).optional(),
+    method_paths: z.array(z.lazy(() => MethodPaths$inboundSchema)).optional(),
+    languages: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "registry_url": "registryUrl",
+      "operation_ids": "operationIds",
+      "method_paths": "methodPaths",
+    });
+  })
+);
 /** @internal */
 export type GetCodeSamplesRequest$Outbound = {
   registry_url: string;
@@ -101,18 +107,20 @@ export const GetCodeSamplesRequest$outboundSchema: z.ZodType<
   GetCodeSamplesRequest$Outbound,
   z.ZodTypeDef,
   GetCodeSamplesRequest
-> = z.object({
-  registryUrl: z.string(),
-  operationIds: z.array(z.string()).optional(),
-  methodPaths: z.array(z.lazy(() => MethodPaths$outboundSchema)).optional(),
-  languages: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    registryUrl: "registry_url",
-    operationIds: "operation_ids",
-    methodPaths: "method_paths",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    registryUrl: z.string(),
+    operationIds: z.array(z.string()).optional(),
+    methodPaths: z.array(z.lazy(() => MethodPaths$outboundSchema)).optional(),
+    languages: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      registryUrl: "registry_url",
+      operationIds: "operation_ids",
+      methodPaths: "method_paths",
+    });
+  })
+);
 
 export function getCodeSamplesRequestToJSON(
   getCodeSamplesRequest: GetCodeSamplesRequest,

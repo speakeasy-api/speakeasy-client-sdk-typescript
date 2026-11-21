@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,13 +24,15 @@ export const GetWorkspaceGlobals$inboundSchema: z.ZodType<
   GetWorkspaceGlobals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceGlobals$Outbound = {
   workspace_id?: string | undefined;
@@ -41,13 +43,15 @@ export const GetWorkspaceGlobals$outboundSchema: z.ZodType<
   GetWorkspaceGlobals$Outbound,
   z.ZodTypeDef,
   GetWorkspaceGlobals
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function getWorkspaceGlobalsToJSON(
   getWorkspaceGlobals: GetWorkspaceGlobals,
@@ -71,13 +75,15 @@ export const GetWorkspaceRequest$inboundSchema: z.ZodType<
   GetWorkspaceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceRequest$Outbound = {
   workspace_id?: string | undefined;
@@ -88,13 +94,15 @@ export const GetWorkspaceRequest$outboundSchema: z.ZodType<
   GetWorkspaceRequest$Outbound,
   z.ZodTypeDef,
   GetWorkspaceRequest
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function getWorkspaceRequestToJSON(
   getWorkspaceRequest: GetWorkspaceRequest,

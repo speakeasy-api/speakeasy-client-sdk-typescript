@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const GetGithubSetupStateRequest$inboundSchema: z.ZodType<
   GetGithubSetupStateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org: z.string(),
-  repo: z.string(),
-  generate_gen_lock_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "generate_gen_lock_id": "generateGenLockId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    repo: z.string(),
+    generate_gen_lock_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "generate_gen_lock_id": "generateGenLockId",
+    });
+  })
+);
 /** @internal */
 export type GetGithubSetupStateRequest$Outbound = {
   org: string;
@@ -40,15 +42,17 @@ export const GetGithubSetupStateRequest$outboundSchema: z.ZodType<
   GetGithubSetupStateRequest$Outbound,
   z.ZodTypeDef,
   GetGithubSetupStateRequest
-> = z.object({
-  org: z.string(),
-  repo: z.string(),
-  generateGenLockId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    generateGenLockId: "generate_gen_lock_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    repo: z.string(),
+    generateGenLockId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      generateGenLockId: "generate_gen_lock_id",
+    });
+  })
+);
 
 export function getGithubSetupStateRequestToJSON(
   getGithubSetupStateRequest: GetGithubSetupStateRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,9 +26,11 @@ export const GetLintingReportSignedUrlRequest$inboundSchema: z.ZodType<
   GetLintingReportSignedUrlRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  documentChecksum: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    documentChecksum: z.string(),
+  })
+);
 /** @internal */
 export type GetLintingReportSignedUrlRequest$Outbound = {
   documentChecksum: string;
@@ -39,9 +41,11 @@ export const GetLintingReportSignedUrlRequest$outboundSchema: z.ZodType<
   GetLintingReportSignedUrlRequest$Outbound,
   z.ZodTypeDef,
   GetLintingReportSignedUrlRequest
-> = z.object({
-  documentChecksum: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    documentChecksum: z.string(),
+  })
+);
 
 export function getLintingReportSignedUrlRequestToJSON(
   getLintingReportSignedUrlRequest: GetLintingReportSignedUrlRequest,
@@ -67,9 +71,11 @@ export const GetLintingReportSignedUrlSignedAccess$inboundSchema: z.ZodType<
   GetLintingReportSignedUrlSignedAccess,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 /** @internal */
 export type GetLintingReportSignedUrlSignedAccess$Outbound = {
   url: string;
@@ -80,9 +86,11 @@ export const GetLintingReportSignedUrlSignedAccess$outboundSchema: z.ZodType<
   GetLintingReportSignedUrlSignedAccess$Outbound,
   z.ZodTypeDef,
   GetLintingReportSignedUrlSignedAccess
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 
 export function getLintingReportSignedUrlSignedAccessToJSON(
   getLintingReportSignedUrlSignedAccess: GetLintingReportSignedUrlSignedAccess,

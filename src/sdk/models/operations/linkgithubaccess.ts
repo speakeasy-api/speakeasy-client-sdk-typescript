@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,17 +19,19 @@ export const LinkGithubAccessRequest$inboundSchema: z.ZodType<
   LinkGithubAccessRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  installation_id: z.string().optional(),
-  github_org: z.string().optional(),
-  github_oidc_token: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "installation_id": "installationId",
-    "github_org": "githubOrg",
-    "github_oidc_token": "githubOidcToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    installation_id: z.string().optional(),
+    github_org: z.string().optional(),
+    github_oidc_token: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "installation_id": "installationId",
+      "github_org": "githubOrg",
+      "github_oidc_token": "githubOidcToken",
+    });
+  })
+);
 /** @internal */
 export type LinkGithubAccessRequest$Outbound = {
   installation_id?: string | undefined;
@@ -42,17 +44,19 @@ export const LinkGithubAccessRequest$outboundSchema: z.ZodType<
   LinkGithubAccessRequest$Outbound,
   z.ZodTypeDef,
   LinkGithubAccessRequest
-> = z.object({
-  installationId: z.string().optional(),
-  githubOrg: z.string().optional(),
-  githubOidcToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    installationId: "installation_id",
-    githubOrg: "github_org",
-    githubOidcToken: "github_oidc_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    installationId: z.string().optional(),
+    githubOrg: z.string().optional(),
+    githubOidcToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      installationId: "installation_id",
+      githubOrg: "github_org",
+      githubOidcToken: "github_oidc_token",
+    });
+  })
+);
 
 export function linkGithubAccessRequestToJSON(
   linkGithubAccessRequest: LinkGithubAccessRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -43,21 +43,23 @@ export const GithubTriggerActionRequest$inboundSchema: z.ZodType<
   GithubTriggerActionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  force: z.boolean().optional(),
-  gen_lock_id: z.string(),
-  org: z.string(),
-  repo_name: z.string(),
-  set_version: z.string().optional(),
-  target_name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "gen_lock_id": "genLockId",
-    "repo_name": "repoName",
-    "set_version": "setVersion",
-    "target_name": "targetName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    force: z.boolean().optional(),
+    gen_lock_id: z.string(),
+    org: z.string(),
+    repo_name: z.string(),
+    set_version: z.string().optional(),
+    target_name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "gen_lock_id": "genLockId",
+      "repo_name": "repoName",
+      "set_version": "setVersion",
+      "target_name": "targetName",
+    });
+  })
+);
 /** @internal */
 export type GithubTriggerActionRequest$Outbound = {
   force?: boolean | undefined;
@@ -73,21 +75,23 @@ export const GithubTriggerActionRequest$outboundSchema: z.ZodType<
   GithubTriggerActionRequest$Outbound,
   z.ZodTypeDef,
   GithubTriggerActionRequest
-> = z.object({
-  force: z.boolean().optional(),
-  genLockId: z.string(),
-  org: z.string(),
-  repoName: z.string(),
-  setVersion: z.string().optional(),
-  targetName: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    genLockId: "gen_lock_id",
-    repoName: "repo_name",
-    setVersion: "set_version",
-    targetName: "target_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    force: z.boolean().optional(),
+    genLockId: z.string(),
+    org: z.string(),
+    repoName: z.string(),
+    setVersion: z.string().optional(),
+    targetName: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      genLockId: "gen_lock_id",
+      repoName: "repo_name",
+      setVersion: "set_version",
+      targetName: "target_name",
+    });
+  })
+);
 
 export function githubTriggerActionRequestToJSON(
   githubTriggerActionRequest: GithubTriggerActionRequest,

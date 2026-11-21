@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,12 +31,14 @@ export const Diagnostic$inboundSchema: z.ZodType<
   Diagnostic,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  helpMessage: z.string().optional(),
-  message: z.string(),
-  path: z.array(z.string()),
-  type: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    helpMessage: z.string().optional(),
+    message: z.string(),
+    path: z.array(z.string()),
+    type: z.string(),
+  })
+);
 /** @internal */
 export type Diagnostic$Outbound = {
   helpMessage?: string | undefined;
@@ -50,12 +52,14 @@ export const Diagnostic$outboundSchema: z.ZodType<
   Diagnostic$Outbound,
   z.ZodTypeDef,
   Diagnostic
-> = z.object({
-  helpMessage: z.string().optional(),
-  message: z.string(),
-  path: z.array(z.string()),
-  type: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    helpMessage: z.string().optional(),
+    message: z.string(),
+    path: z.array(z.string()),
+    type: z.string(),
+  })
+);
 
 export function diagnosticToJSON(diagnostic: Diagnostic): string {
   return JSON.stringify(Diagnostic$outboundSchema.parse(diagnostic));

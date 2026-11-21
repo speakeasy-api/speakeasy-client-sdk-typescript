@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,10 +38,12 @@ export const WorkspaceAndOrganization$inboundSchema: z.ZodType<
   WorkspaceAndOrganization,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  organization: Organization$inboundSchema,
-  workspace: Workspace$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organization: Organization$inboundSchema,
+    workspace: Workspace$inboundSchema,
+  })
+);
 /** @internal */
 export type WorkspaceAndOrganization$Outbound = {
   organization: Organization$Outbound;
@@ -53,10 +55,12 @@ export const WorkspaceAndOrganization$outboundSchema: z.ZodType<
   WorkspaceAndOrganization$Outbound,
   z.ZodTypeDef,
   WorkspaceAndOrganization
-> = z.object({
-  organization: Organization$outboundSchema,
-  workspace: Workspace$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organization: Organization$outboundSchema,
+    workspace: Workspace$outboundSchema,
+  })
+);
 
 export function workspaceAndOrganizationToJSON(
   workspaceAndOrganization: WorkspaceAndOrganization,

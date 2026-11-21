@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,17 +36,19 @@ export type UpdatePublishingTokenExpirationRequest = {
 /** @internal */
 export const UpdatePublishingTokenExpirationRequestBody$inboundSchema:
   z.ZodType<UpdatePublishingTokenExpirationRequestBody, z.ZodTypeDef, unknown> =
-    z.object({
-      token_name: z.string().optional(),
-      valid_until: z.string().datetime({ offset: true }).transform(v =>
-        new Date(v)
-      ),
-    }).transform((v) => {
-      return remap$(v, {
-        "token_name": "tokenName",
-        "valid_until": "validUntil",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        token_name: z.string().optional(),
+        valid_until: z.string().datetime({ offset: true }).transform(v =>
+          new Date(v)
+        ),
+      }).transform((v) => {
+        return remap$(v, {
+          "token_name": "tokenName",
+          "valid_until": "validUntil",
+        });
+      })
+    );
 /** @internal */
 export type UpdatePublishingTokenExpirationRequestBody$Outbound = {
   token_name?: string | undefined;
@@ -59,15 +61,17 @@ export const UpdatePublishingTokenExpirationRequestBody$outboundSchema:
     UpdatePublishingTokenExpirationRequestBody$Outbound,
     z.ZodTypeDef,
     UpdatePublishingTokenExpirationRequestBody
-  > = z.object({
-    tokenName: z.string().optional(),
-    validUntil: z.date().transform(v => v.toISOString()),
-  }).transform((v) => {
-    return remap$(v, {
-      tokenName: "token_name",
-      validUntil: "valid_until",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      tokenName: z.string().optional(),
+      validUntil: z.date().transform(v => v.toISOString()),
+    }).transform((v) => {
+      return remap$(v, {
+        tokenName: "token_name",
+        validUntil: "valid_until",
+      });
+    })
+  );
 
 export function updatePublishingTokenExpirationRequestBodyToJSON(
   updatePublishingTokenExpirationRequestBody:
@@ -100,16 +104,18 @@ export const UpdatePublishingTokenExpirationRequest$inboundSchema: z.ZodType<
   UpdatePublishingTokenExpirationRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tokenID: z.string(),
-  RequestBody: z.lazy(() =>
-    UpdatePublishingTokenExpirationRequestBody$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tokenID: z.string(),
+    RequestBody: z.lazy(() =>
+      UpdatePublishingTokenExpirationRequestBody$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdatePublishingTokenExpirationRequest$Outbound = {
   tokenID: string;
@@ -121,16 +127,18 @@ export const UpdatePublishingTokenExpirationRequest$outboundSchema: z.ZodType<
   UpdatePublishingTokenExpirationRequest$Outbound,
   z.ZodTypeDef,
   UpdatePublishingTokenExpirationRequest
-> = z.object({
-  tokenID: z.string(),
-  requestBody: z.lazy(() =>
-    UpdatePublishingTokenExpirationRequestBody$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tokenID: z.string(),
+    requestBody: z.lazy(() =>
+      UpdatePublishingTokenExpirationRequestBody$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updatePublishingTokenExpirationRequestToJSON(
   updatePublishingTokenExpirationRequest:

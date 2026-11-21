@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,22 +32,28 @@ export const Revision$inboundSchema: z.ZodType<
   Revision,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  contents_metadata: RevisionContentsMetadata$inboundSchema.optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  digest: z.string(),
-  id: z.string(),
-  namespace_name: z.string(),
-  tags: z.array(z.string()),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "contents_metadata": "contentsMetadata",
-    "created_at": "createdAt",
-    "namespace_name": "namespaceName",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    contents_metadata: RevisionContentsMetadata$inboundSchema.optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    digest: z.string(),
+    id: z.string(),
+    namespace_name: z.string(),
+    tags: z.array(z.string()),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "contents_metadata": "contentsMetadata",
+      "created_at": "createdAt",
+      "namespace_name": "namespaceName",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type Revision$Outbound = {
   contents_metadata?: RevisionContentsMetadata$Outbound | undefined;
@@ -64,22 +70,24 @@ export const Revision$outboundSchema: z.ZodType<
   Revision$Outbound,
   z.ZodTypeDef,
   Revision
-> = z.object({
-  contentsMetadata: RevisionContentsMetadata$outboundSchema.optional(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  digest: z.string(),
-  id: z.string(),
-  namespaceName: z.string(),
-  tags: z.array(z.string()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    contentsMetadata: "contents_metadata",
-    createdAt: "created_at",
-    namespaceName: "namespace_name",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    contentsMetadata: RevisionContentsMetadata$outboundSchema.optional(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    digest: z.string(),
+    id: z.string(),
+    namespaceName: z.string(),
+    tags: z.array(z.string()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      contentsMetadata: "contents_metadata",
+      createdAt: "created_at",
+      namespaceName: "namespace_name",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function revisionToJSON(revision: Revision): string {
   return JSON.stringify(Revision$outboundSchema.parse(revision));

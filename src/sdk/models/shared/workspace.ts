@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,24 +33,30 @@ export const Workspace$inboundSchema: z.ZodType<
   Workspace,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  id: z.string(),
-  inactive: z.boolean().optional(),
-  name: z.string(),
-  organization_id: z.string(),
-  slug: z.string(),
-  telemetry_disabled: z.boolean().optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  verified: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "organization_id": "organizationId",
-    "telemetry_disabled": "telemetryDisabled",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    id: z.string(),
+    inactive: z.boolean().optional(),
+    name: z.string(),
+    organization_id: z.string(),
+    slug: z.string(),
+    telemetry_disabled: z.boolean().optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    verified: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "organization_id": "organizationId",
+      "telemetry_disabled": "telemetryDisabled",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type Workspace$Outbound = {
   created_at: string;
@@ -69,24 +75,26 @@ export const Workspace$outboundSchema: z.ZodType<
   Workspace$Outbound,
   z.ZodTypeDef,
   Workspace
-> = z.object({
-  createdAt: z.date().transform(v => v.toISOString()),
-  id: z.string(),
-  inactive: z.boolean().optional(),
-  name: z.string(),
-  organizationId: z.string(),
-  slug: z.string(),
-  telemetryDisabled: z.boolean().optional(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  verified: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    organizationId: "organization_id",
-    telemetryDisabled: "telemetry_disabled",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.date().transform(v => v.toISOString()),
+    id: z.string(),
+    inactive: z.boolean().optional(),
+    name: z.string(),
+    organizationId: z.string(),
+    slug: z.string(),
+    telemetryDisabled: z.boolean().optional(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    verified: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      organizationId: "organization_id",
+      telemetryDisabled: "telemetry_disabled",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function workspaceToJSON(workspace: Workspace): string {
   return JSON.stringify(Workspace$outboundSchema.parse(workspace));

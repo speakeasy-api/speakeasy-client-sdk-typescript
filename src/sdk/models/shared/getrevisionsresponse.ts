@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,14 +24,16 @@ export const GetRevisionsResponse$inboundSchema: z.ZodType<
   GetRevisionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  items: z.array(Revision$inboundSchema),
-  next_page_token: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "next_page_token": "nextPageToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(Revision$inboundSchema),
+    next_page_token: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_page_token": "nextPageToken",
+    });
+  })
+);
 /** @internal */
 export type GetRevisionsResponse$Outbound = {
   items: Array<Revision$Outbound>;
@@ -43,14 +45,16 @@ export const GetRevisionsResponse$outboundSchema: z.ZodType<
   GetRevisionsResponse$Outbound,
   z.ZodTypeDef,
   GetRevisionsResponse
-> = z.object({
-  items: z.array(Revision$outboundSchema),
-  nextPageToken: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    nextPageToken: "next_page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(Revision$outboundSchema),
+    nextPageToken: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      nextPageToken: "next_page_token",
+    });
+  })
+);
 
 export function getRevisionsResponseToJSON(
   getRevisionsResponse: GetRevisionsResponse,

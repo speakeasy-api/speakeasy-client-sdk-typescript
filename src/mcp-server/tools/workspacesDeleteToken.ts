@@ -18,7 +18,7 @@ export const tool$workspacesDeleteToken: ToolDefinition<typeof args> = {
     const [result, apiCall] = await workspacesDeleteToken(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

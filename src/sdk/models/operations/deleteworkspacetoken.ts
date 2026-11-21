@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,13 +28,15 @@ export const DeleteWorkspaceTokenGlobals$inboundSchema: z.ZodType<
   DeleteWorkspaceTokenGlobals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type DeleteWorkspaceTokenGlobals$Outbound = {
   workspace_id?: string | undefined;
@@ -45,13 +47,15 @@ export const DeleteWorkspaceTokenGlobals$outboundSchema: z.ZodType<
   DeleteWorkspaceTokenGlobals$Outbound,
   z.ZodTypeDef,
   DeleteWorkspaceTokenGlobals
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function deleteWorkspaceTokenGlobalsToJSON(
   deleteWorkspaceTokenGlobals: DeleteWorkspaceTokenGlobals,
@@ -77,14 +81,16 @@ export const DeleteWorkspaceTokenRequest$inboundSchema: z.ZodType<
   DeleteWorkspaceTokenRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-  tokenID: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+    tokenID: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type DeleteWorkspaceTokenRequest$Outbound = {
   workspace_id?: string | undefined;
@@ -96,14 +102,16 @@ export const DeleteWorkspaceTokenRequest$outboundSchema: z.ZodType<
   DeleteWorkspaceTokenRequest$Outbound,
   z.ZodTypeDef,
   DeleteWorkspaceTokenRequest
-> = z.object({
-  workspaceId: z.string().optional(),
-  tokenID: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+    tokenID: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function deleteWorkspaceTokenRequestToJSON(
   deleteWorkspaceTokenRequest: DeleteWorkspaceTokenRequest,

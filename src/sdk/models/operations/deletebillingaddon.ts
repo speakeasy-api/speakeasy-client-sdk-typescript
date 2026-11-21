@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -21,13 +21,15 @@ export const DeleteBillingAddOnRequest$inboundSchema: z.ZodType<
   DeleteBillingAddOnRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  add_on: shared.BillingAddOn$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "add_on": "addOn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    add_on: shared.BillingAddOn$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "add_on": "addOn",
+    });
+  })
+);
 /** @internal */
 export type DeleteBillingAddOnRequest$Outbound = {
   add_on: string;
@@ -38,13 +40,15 @@ export const DeleteBillingAddOnRequest$outboundSchema: z.ZodType<
   DeleteBillingAddOnRequest$Outbound,
   z.ZodTypeDef,
   DeleteBillingAddOnRequest
-> = z.object({
-  addOn: shared.BillingAddOn$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    addOn: "add_on",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    addOn: shared.BillingAddOn$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      addOn: "add_on",
+    });
+  })
+);
 
 export function deleteBillingAddOnRequestToJSON(
   deleteBillingAddOnRequest: DeleteBillingAddOnRequest,

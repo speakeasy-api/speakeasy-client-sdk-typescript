@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -56,15 +56,17 @@ export const CompositeSpecMetadata$inboundSchema: z.ZodType<
   CompositeSpecMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  subscription_id: z.string(),
-  subscription_settings: RemoteSourceSubscriptionSettings$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "subscription_id": "subscriptionId",
-    "subscription_settings": "subscriptionSettings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    subscription_id: z.string(),
+    subscription_settings: RemoteSourceSubscriptionSettings$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "subscription_id": "subscriptionId",
+      "subscription_settings": "subscriptionSettings",
+    });
+  })
+);
 /** @internal */
 export type CompositeSpecMetadata$Outbound = {
   subscription_id: string;
@@ -76,15 +78,17 @@ export const CompositeSpecMetadata$outboundSchema: z.ZodType<
   CompositeSpecMetadata$Outbound,
   z.ZodTypeDef,
   CompositeSpecMetadata
-> = z.object({
-  subscriptionId: z.string(),
-  subscriptionSettings: RemoteSourceSubscriptionSettings$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    subscriptionId: "subscription_id",
-    subscriptionSettings: "subscription_settings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    subscriptionId: z.string(),
+    subscriptionSettings: RemoteSourceSubscriptionSettings$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      subscriptionId: "subscription_id",
+      subscriptionSettings: "subscription_settings",
+    });
+  })
+);
 
 export function compositeSpecMetadataToJSON(
   compositeSpecMetadata: CompositeSpecMetadata,
@@ -108,26 +112,33 @@ export const Namespace$inboundSchema: z.ZodType<
   Namespace,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  archived_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  composite_spec_metadata: z.lazy(() => CompositeSpecMetadata$inboundSchema)
-    .optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  id: z.string(),
-  latest_revision_metadata: RevisionContentsMetadata$inboundSchema.optional(),
-  name: z.string(),
-  public: z.boolean().optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "archived_at": "archivedAt",
-    "composite_spec_metadata": "compositeSpecMetadata",
-    "created_at": "createdAt",
-    "latest_revision_metadata": "latestRevisionMetadata",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    archived_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    composite_spec_metadata: z.lazy(() => CompositeSpecMetadata$inboundSchema)
+      .optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    id: z.string(),
+    latest_revision_metadata: RevisionContentsMetadata$inboundSchema.optional(),
+    name: z.string(),
+    public: z.boolean().optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "archived_at": "archivedAt",
+      "composite_spec_metadata": "compositeSpecMetadata",
+      "created_at": "createdAt",
+      "latest_revision_metadata": "latestRevisionMetadata",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type Namespace$Outbound = {
   archived_at?: string | undefined;
@@ -145,25 +156,27 @@ export const Namespace$outboundSchema: z.ZodType<
   Namespace$Outbound,
   z.ZodTypeDef,
   Namespace
-> = z.object({
-  archivedAt: z.date().transform(v => v.toISOString()).optional(),
-  compositeSpecMetadata: z.lazy(() => CompositeSpecMetadata$outboundSchema)
-    .optional(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  id: z.string(),
-  latestRevisionMetadata: RevisionContentsMetadata$outboundSchema.optional(),
-  name: z.string(),
-  public: z.boolean().optional(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    archivedAt: "archived_at",
-    compositeSpecMetadata: "composite_spec_metadata",
-    createdAt: "created_at",
-    latestRevisionMetadata: "latest_revision_metadata",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    archivedAt: z.date().transform(v => v.toISOString()).optional(),
+    compositeSpecMetadata: z.lazy(() => CompositeSpecMetadata$outboundSchema)
+      .optional(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    id: z.string(),
+    latestRevisionMetadata: RevisionContentsMetadata$outboundSchema.optional(),
+    name: z.string(),
+    public: z.boolean().optional(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      archivedAt: "archived_at",
+      compositeSpecMetadata: "composite_spec_metadata",
+      createdAt: "created_at",
+      latestRevisionMetadata: "latest_revision_metadata",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function namespaceToJSON(namespace: Namespace): string {
   return JSON.stringify(Namespace$outboundSchema.parse(namespace));

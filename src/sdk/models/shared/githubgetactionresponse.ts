@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,15 +27,17 @@ export const GithubGetActionResponse$inboundSchema: z.ZodType<
   GithubGetActionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_status: z.string().optional(),
-  run_url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_status": "runStatus",
-    "run_url": "runUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_status: z.string().optional(),
+    run_url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_status": "runStatus",
+      "run_url": "runUrl",
+    });
+  })
+);
 /** @internal */
 export type GithubGetActionResponse$Outbound = {
   run_status?: string | undefined;
@@ -47,15 +49,17 @@ export const GithubGetActionResponse$outboundSchema: z.ZodType<
   GithubGetActionResponse$Outbound,
   z.ZodTypeDef,
   GithubGetActionResponse
-> = z.object({
-  runStatus: z.string().optional(),
-  runUrl: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runStatus: "run_status",
-    runUrl: "run_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runStatus: z.string().optional(),
+    runUrl: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runStatus: "run_status",
+      runUrl: "run_url",
+    });
+  })
+);
 
 export function githubGetActionResponseToJSON(
   githubGetActionResponse: GithubGetActionResponse,

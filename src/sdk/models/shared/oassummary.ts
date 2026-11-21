@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const OASSummary$inboundSchema: z.ZodType<
   OASSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  info: OASInfo$inboundSchema,
-  operations: z.array(OASOperation$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    info: OASInfo$inboundSchema,
+    operations: z.array(OASOperation$inboundSchema),
+  })
+);
 /** @internal */
 export type OASSummary$Outbound = {
   info: OASInfo$Outbound;
@@ -44,10 +46,12 @@ export const OASSummary$outboundSchema: z.ZodType<
   OASSummary$Outbound,
   z.ZodTypeDef,
   OASSummary
-> = z.object({
-  info: OASInfo$outboundSchema,
-  operations: z.array(OASOperation$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    info: OASInfo$outboundSchema,
+    operations: z.array(OASOperation$outboundSchema),
+  })
+);
 
 export function oasSummaryToJSON(oasSummary: OASSummary): string {
   return JSON.stringify(OASSummary$outboundSchema.parse(oasSummary));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -50,13 +50,15 @@ export const Manifest$inboundSchema: z.ZodType<
   Manifest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  annotations: Annotations$inboundSchema.optional(),
-  artifactType: z.string().optional(),
-  layers: z.array(V2Descriptor$inboundSchema).optional(),
-  mediaType: z.string().optional(),
-  schemaVersion: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: Annotations$inboundSchema.optional(),
+    artifactType: z.string().optional(),
+    layers: z.array(V2Descriptor$inboundSchema).optional(),
+    mediaType: z.string().optional(),
+    schemaVersion: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type Manifest$Outbound = {
   annotations?: Annotations$Outbound | undefined;
@@ -71,13 +73,15 @@ export const Manifest$outboundSchema: z.ZodType<
   Manifest$Outbound,
   z.ZodTypeDef,
   Manifest
-> = z.object({
-  annotations: Annotations$outboundSchema.optional(),
-  artifactType: z.string().optional(),
-  layers: z.array(V2Descriptor$outboundSchema).optional(),
-  mediaType: z.string().optional(),
-  schemaVersion: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    annotations: Annotations$outboundSchema.optional(),
+    artifactType: z.string().optional(),
+    layers: z.array(V2Descriptor$outboundSchema).optional(),
+    mediaType: z.string().optional(),
+    schemaVersion: z.number().int().optional(),
+  })
+);
 
 export function manifestToJSON(manifest: Manifest): string {
   return JSON.stringify(Manifest$outboundSchema.parse(manifest));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const PreflightToken$inboundSchema: z.ZodType<
   PreflightToken,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  auth_token: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "auth_token": "authToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auth_token: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "auth_token": "authToken",
+    });
+  })
+);
 /** @internal */
 export type PreflightToken$Outbound = {
   auth_token?: string | undefined;
@@ -37,13 +39,15 @@ export const PreflightToken$outboundSchema: z.ZodType<
   PreflightToken$Outbound,
   z.ZodTypeDef,
   PreflightToken
-> = z.object({
-  authToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    authToken: "auth_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      authToken: "auth_token",
+    });
+  })
+);
 
 export function preflightTokenToJSON(preflightToken: PreflightToken): string {
   return JSON.stringify(PreflightToken$outboundSchema.parse(preflightToken));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,11 +36,13 @@ export const GithubConfigureCodeSamplesResponse$inboundSchema: z.ZodType<
   GithubConfigureCodeSamplesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  codeSampleOverlayRegistryURL: z.string(),
-  ghActionID: z.string().optional(),
-  source: WorkflowDocument$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeSampleOverlayRegistryURL: z.string(),
+    ghActionID: z.string().optional(),
+    source: WorkflowDocument$inboundSchema,
+  })
+);
 /** @internal */
 export type GithubConfigureCodeSamplesResponse$Outbound = {
   codeSampleOverlayRegistryURL: string;
@@ -53,11 +55,13 @@ export const GithubConfigureCodeSamplesResponse$outboundSchema: z.ZodType<
   GithubConfigureCodeSamplesResponse$Outbound,
   z.ZodTypeDef,
   GithubConfigureCodeSamplesResponse
-> = z.object({
-  codeSampleOverlayRegistryURL: z.string(),
-  ghActionID: z.string().optional(),
-  source: WorkflowDocument$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeSampleOverlayRegistryURL: z.string(),
+    ghActionID: z.string().optional(),
+    source: WorkflowDocument$outboundSchema,
+  })
+);
 
 export function githubConfigureCodeSamplesResponseToJSON(
   githubConfigureCodeSamplesResponse: GithubConfigureCodeSamplesResponse,

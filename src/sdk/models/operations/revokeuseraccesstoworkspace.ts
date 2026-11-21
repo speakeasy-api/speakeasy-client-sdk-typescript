@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,13 +28,15 @@ export const RevokeUserAccessToWorkspaceGlobals$inboundSchema: z.ZodType<
   RevokeUserAccessToWorkspaceGlobals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type RevokeUserAccessToWorkspaceGlobals$Outbound = {
   workspace_id?: string | undefined;
@@ -45,13 +47,15 @@ export const RevokeUserAccessToWorkspaceGlobals$outboundSchema: z.ZodType<
   RevokeUserAccessToWorkspaceGlobals$Outbound,
   z.ZodTypeDef,
   RevokeUserAccessToWorkspaceGlobals
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function revokeUserAccessToWorkspaceGlobalsToJSON(
   revokeUserAccessToWorkspaceGlobals: RevokeUserAccessToWorkspaceGlobals,
@@ -78,14 +82,16 @@ export const RevokeUserAccessToWorkspaceRequest$inboundSchema: z.ZodType<
   RevokeUserAccessToWorkspaceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-  userId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+    userId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type RevokeUserAccessToWorkspaceRequest$Outbound = {
   workspace_id?: string | undefined;
@@ -97,14 +103,16 @@ export const RevokeUserAccessToWorkspaceRequest$outboundSchema: z.ZodType<
   RevokeUserAccessToWorkspaceRequest$Outbound,
   z.ZodTypeDef,
   RevokeUserAccessToWorkspaceRequest
-> = z.object({
-  workspaceId: z.string().optional(),
-  userId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+    userId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function revokeUserAccessToWorkspaceRequestToJSON(
   revokeUserAccessToWorkspaceRequest: RevokeUserAccessToWorkspaceRequest,

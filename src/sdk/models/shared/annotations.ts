@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -64,36 +64,39 @@ export const Annotations$inboundSchema: z.ZodType<
   Annotations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "org.opencontainers.image.authors": z.string().optional(),
-  "org.opencontainers.image.created": z.string().optional(),
-  "org.opencontainers.image.description": z.string().optional(),
-  "org.opencontainers.image.documentation": z.string().optional(),
-  "org.opencontainers.image.licenses": z.string().optional(),
-  "org.opencontainers.image.ref.name": z.string().optional(),
-  "org.opencontainers.image.revision": z.string().optional(),
-  "org.opencontainers.image.source": z.string().optional(),
-  "org.opencontainers.image.title": z.string().optional(),
-  "org.opencontainers.image.url": z.string().optional(),
-  "org.opencontainers.image.vendor": z.string().optional(),
-  "org.opencontainers.image.version": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org.opencontainers.image.authors": "orgOpencontainersImageAuthors",
-    "org.opencontainers.image.created": "orgOpencontainersImageCreated",
-    "org.opencontainers.image.description": "orgOpencontainersImageDescription",
-    "org.opencontainers.image.documentation":
-      "orgOpencontainersImageDocumentation",
-    "org.opencontainers.image.licenses": "orgOpencontainersImageLicenses",
-    "org.opencontainers.image.ref.name": "orgOpencontainersImageRefName",
-    "org.opencontainers.image.revision": "orgOpencontainersImageRevision",
-    "org.opencontainers.image.source": "orgOpencontainersImageSource",
-    "org.opencontainers.image.title": "orgOpencontainersImageTitle",
-    "org.opencontainers.image.url": "orgOpencontainersImageUrl",
-    "org.opencontainers.image.vendor": "orgOpencontainersImageVendor",
-    "org.opencontainers.image.version": "orgOpencontainersImageVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "org.opencontainers.image.authors": z.string().optional(),
+    "org.opencontainers.image.created": z.string().optional(),
+    "org.opencontainers.image.description": z.string().optional(),
+    "org.opencontainers.image.documentation": z.string().optional(),
+    "org.opencontainers.image.licenses": z.string().optional(),
+    "org.opencontainers.image.ref.name": z.string().optional(),
+    "org.opencontainers.image.revision": z.string().optional(),
+    "org.opencontainers.image.source": z.string().optional(),
+    "org.opencontainers.image.title": z.string().optional(),
+    "org.opencontainers.image.url": z.string().optional(),
+    "org.opencontainers.image.vendor": z.string().optional(),
+    "org.opencontainers.image.version": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org.opencontainers.image.authors": "orgOpencontainersImageAuthors",
+      "org.opencontainers.image.created": "orgOpencontainersImageCreated",
+      "org.opencontainers.image.description":
+        "orgOpencontainersImageDescription",
+      "org.opencontainers.image.documentation":
+        "orgOpencontainersImageDocumentation",
+      "org.opencontainers.image.licenses": "orgOpencontainersImageLicenses",
+      "org.opencontainers.image.ref.name": "orgOpencontainersImageRefName",
+      "org.opencontainers.image.revision": "orgOpencontainersImageRevision",
+      "org.opencontainers.image.source": "orgOpencontainersImageSource",
+      "org.opencontainers.image.title": "orgOpencontainersImageTitle",
+      "org.opencontainers.image.url": "orgOpencontainersImageUrl",
+      "org.opencontainers.image.vendor": "orgOpencontainersImageVendor",
+      "org.opencontainers.image.version": "orgOpencontainersImageVersion",
+    });
+  })
+);
 /** @internal */
 export type Annotations$Outbound = {
   "org.opencontainers.image.authors"?: string | undefined;
@@ -115,36 +118,38 @@ export const Annotations$outboundSchema: z.ZodType<
   Annotations$Outbound,
   z.ZodTypeDef,
   Annotations
-> = z.object({
-  orgOpencontainersImageAuthors: z.string().optional(),
-  orgOpencontainersImageCreated: z.string().optional(),
-  orgOpencontainersImageDescription: z.string().optional(),
-  orgOpencontainersImageDocumentation: z.string().optional(),
-  orgOpencontainersImageLicenses: z.string().optional(),
-  orgOpencontainersImageRefName: z.string().optional(),
-  orgOpencontainersImageRevision: z.string().optional(),
-  orgOpencontainersImageSource: z.string().optional(),
-  orgOpencontainersImageTitle: z.string().optional(),
-  orgOpencontainersImageUrl: z.string().optional(),
-  orgOpencontainersImageVendor: z.string().optional(),
-  orgOpencontainersImageVersion: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgOpencontainersImageAuthors: "org.opencontainers.image.authors",
-    orgOpencontainersImageCreated: "org.opencontainers.image.created",
-    orgOpencontainersImageDescription: "org.opencontainers.image.description",
-    orgOpencontainersImageDocumentation:
-      "org.opencontainers.image.documentation",
-    orgOpencontainersImageLicenses: "org.opencontainers.image.licenses",
-    orgOpencontainersImageRefName: "org.opencontainers.image.ref.name",
-    orgOpencontainersImageRevision: "org.opencontainers.image.revision",
-    orgOpencontainersImageSource: "org.opencontainers.image.source",
-    orgOpencontainersImageTitle: "org.opencontainers.image.title",
-    orgOpencontainersImageUrl: "org.opencontainers.image.url",
-    orgOpencontainersImageVendor: "org.opencontainers.image.vendor",
-    orgOpencontainersImageVersion: "org.opencontainers.image.version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgOpencontainersImageAuthors: z.string().optional(),
+    orgOpencontainersImageCreated: z.string().optional(),
+    orgOpencontainersImageDescription: z.string().optional(),
+    orgOpencontainersImageDocumentation: z.string().optional(),
+    orgOpencontainersImageLicenses: z.string().optional(),
+    orgOpencontainersImageRefName: z.string().optional(),
+    orgOpencontainersImageRevision: z.string().optional(),
+    orgOpencontainersImageSource: z.string().optional(),
+    orgOpencontainersImageTitle: z.string().optional(),
+    orgOpencontainersImageUrl: z.string().optional(),
+    orgOpencontainersImageVendor: z.string().optional(),
+    orgOpencontainersImageVersion: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgOpencontainersImageAuthors: "org.opencontainers.image.authors",
+      orgOpencontainersImageCreated: "org.opencontainers.image.created",
+      orgOpencontainersImageDescription: "org.opencontainers.image.description",
+      orgOpencontainersImageDocumentation:
+        "org.opencontainers.image.documentation",
+      orgOpencontainersImageLicenses: "org.opencontainers.image.licenses",
+      orgOpencontainersImageRefName: "org.opencontainers.image.ref.name",
+      orgOpencontainersImageRevision: "org.opencontainers.image.revision",
+      orgOpencontainersImageSource: "org.opencontainers.image.source",
+      orgOpencontainersImageTitle: "org.opencontainers.image.title",
+      orgOpencontainersImageUrl: "org.opencontainers.image.url",
+      orgOpencontainersImageVendor: "org.opencontainers.image.vendor",
+      orgOpencontainersImageVersion: "org.opencontainers.image.version",
+    });
+  })
+);
 
 export function annotationsToJSON(annotations: Annotations): string {
   return JSON.stringify(Annotations$outboundSchema.parse(annotations));
