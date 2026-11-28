@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const GithubConfigureCodeSamplesRequest$inboundSchema: z.ZodType<
   GithubConfigureCodeSamplesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org: z.string(),
-  repo: z.string(),
-  targetName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    repo: z.string(),
+    targetName: z.string(),
+  })
+);
 /** @internal */
 export type GithubConfigureCodeSamplesRequest$Outbound = {
   org: string;
@@ -47,11 +49,13 @@ export const GithubConfigureCodeSamplesRequest$outboundSchema: z.ZodType<
   GithubConfigureCodeSamplesRequest$Outbound,
   z.ZodTypeDef,
   GithubConfigureCodeSamplesRequest
-> = z.object({
-  org: z.string(),
-  repo: z.string(),
-  targetName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    repo: z.string(),
+    targetName: z.string(),
+  })
+);
 
 export function githubConfigureCodeSamplesRequestToJSON(
   githubConfigureCodeSamplesRequest: GithubConfigureCodeSamplesRequest,

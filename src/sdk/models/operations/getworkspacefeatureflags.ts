@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,13 +24,15 @@ export const GetWorkspaceFeatureFlagsGlobals$inboundSchema: z.ZodType<
   GetWorkspaceFeatureFlagsGlobals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceFeatureFlagsGlobals$Outbound = {
   workspace_id?: string | undefined;
@@ -41,13 +43,15 @@ export const GetWorkspaceFeatureFlagsGlobals$outboundSchema: z.ZodType<
   GetWorkspaceFeatureFlagsGlobals$Outbound,
   z.ZodTypeDef,
   GetWorkspaceFeatureFlagsGlobals
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function getWorkspaceFeatureFlagsGlobalsToJSON(
   getWorkspaceFeatureFlagsGlobals: GetWorkspaceFeatureFlagsGlobals,
@@ -73,13 +77,15 @@ export const GetWorkspaceFeatureFlagsRequest$inboundSchema: z.ZodType<
   GetWorkspaceFeatureFlagsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceFeatureFlagsRequest$Outbound = {
   workspace_id?: string | undefined;
@@ -90,13 +96,15 @@ export const GetWorkspaceFeatureFlagsRequest$outboundSchema: z.ZodType<
   GetWorkspaceFeatureFlagsRequest$Outbound,
   z.ZodTypeDef,
   GetWorkspaceFeatureFlagsRequest
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function getWorkspaceFeatureFlagsRequestToJSON(
   getWorkspaceFeatureFlagsRequest: GetWorkspaceFeatureFlagsRequest,

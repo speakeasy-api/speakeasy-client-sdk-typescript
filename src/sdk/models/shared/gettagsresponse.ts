@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const GetTagsResponse$inboundSchema: z.ZodType<
   GetTagsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  items: z.array(Tag$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(Tag$inboundSchema),
+  })
+);
 /** @internal */
 export type GetTagsResponse$Outbound = {
   items: Array<Tag$Outbound>;
@@ -35,9 +37,11 @@ export const GetTagsResponse$outboundSchema: z.ZodType<
   GetTagsResponse$Outbound,
   z.ZodTypeDef,
   GetTagsResponse
-> = z.object({
-  items: z.array(Tag$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(Tag$outboundSchema),
+  })
+);
 
 export function getTagsResponseToJSON(
   getTagsResponse: GetTagsResponse,

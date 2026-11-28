@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const ShortURL$inboundSchema: z.ZodType<
   ShortURL,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  full_url: z.string(),
-  short_url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "full_url": "fullUrl",
-    "short_url": "shortUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    full_url: z.string(),
+    short_url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "full_url": "fullUrl",
+      "short_url": "shortUrl",
+    });
+  })
+);
 /** @internal */
 export type ShortURL$Outbound = {
   full_url: string;
@@ -38,15 +40,17 @@ export const ShortURL$outboundSchema: z.ZodType<
   ShortURL$Outbound,
   z.ZodTypeDef,
   ShortURL
-> = z.object({
-  fullUrl: z.string(),
-  shortUrl: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fullUrl: "full_url",
-    shortUrl: "short_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fullUrl: z.string(),
+    shortUrl: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fullUrl: "full_url",
+      shortUrl: "short_url",
+    });
+  })
+);
 
 export function shortURLToJSON(shortURL: ShortURL): string {
   return JSON.stringify(ShortURL$outboundSchema.parse(shortURL));

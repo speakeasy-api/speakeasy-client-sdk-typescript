@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -42,15 +42,17 @@ export const SchemaFile$inboundSchema: z.ZodType<
   SchemaFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-  fileName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+    fileName: z.string(),
+  })
+);
 /** @internal */
 export type SchemaFile$Outbound = {
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
@@ -62,15 +64,17 @@ export const SchemaFile$outboundSchema: z.ZodType<
   SchemaFile$Outbound,
   z.ZodTypeDef,
   SchemaFile
-> = z.object({
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-  fileName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+    fileName: z.string(),
+  })
+);
 
 export function schemaFileToJSON(schemaFile: SchemaFile): string {
   return JSON.stringify(SchemaFile$outboundSchema.parse(schemaFile));
@@ -90,20 +94,22 @@ export const CodeSampleSchemaInput$inboundSchema: z.ZodType<
   CodeSampleSchemaInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  language: z.string(),
-  operation_ids: z.array(z.string()).optional(),
-  package_name: z.string().optional(),
-  schema_file: z.lazy(() => SchemaFile$inboundSchema),
-  sdk_class_name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "operation_ids": "operationIds",
-    "package_name": "packageName",
-    "schema_file": "schemaFile",
-    "sdk_class_name": "sdkClassName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    language: z.string(),
+    operation_ids: z.array(z.string()).optional(),
+    package_name: z.string().optional(),
+    schema_file: z.lazy(() => SchemaFile$inboundSchema),
+    sdk_class_name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "operation_ids": "operationIds",
+      "package_name": "packageName",
+      "schema_file": "schemaFile",
+      "sdk_class_name": "sdkClassName",
+    });
+  })
+);
 /** @internal */
 export type CodeSampleSchemaInput$Outbound = {
   language: string;
@@ -118,20 +124,22 @@ export const CodeSampleSchemaInput$outboundSchema: z.ZodType<
   CodeSampleSchemaInput$Outbound,
   z.ZodTypeDef,
   CodeSampleSchemaInput
-> = z.object({
-  language: z.string(),
-  operationIds: z.array(z.string()).optional(),
-  packageName: z.string().optional(),
-  schemaFile: z.lazy(() => SchemaFile$outboundSchema).or(blobLikeSchema),
-  sdkClassName: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    operationIds: "operation_ids",
-    packageName: "package_name",
-    schemaFile: "schema_file",
-    sdkClassName: "sdk_class_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    language: z.string(),
+    operationIds: z.array(z.string()).optional(),
+    packageName: z.string().optional(),
+    schemaFile: z.lazy(() => SchemaFile$outboundSchema).or(blobLikeSchema),
+    sdkClassName: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      operationIds: "operation_ids",
+      packageName: "package_name",
+      schemaFile: "schema_file",
+      sdkClassName: "sdk_class_name",
+    });
+  })
+);
 
 export function codeSampleSchemaInputToJSON(
   codeSampleSchemaInput: CodeSampleSchemaInput,

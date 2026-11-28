@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const GetRevisionsRequest$inboundSchema: z.ZodType<
   GetRevisionsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  namespace_name: z.string(),
-  next_page_token: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "namespace_name": "namespaceName",
-    "next_page_token": "nextPageToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace_name: z.string(),
+    next_page_token: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "namespace_name": "namespaceName",
+      "next_page_token": "nextPageToken",
+    });
+  })
+);
 /** @internal */
 export type GetRevisionsRequest$Outbound = {
   namespace_name: string;
@@ -41,15 +43,17 @@ export const GetRevisionsRequest$outboundSchema: z.ZodType<
   GetRevisionsRequest$Outbound,
   z.ZodTypeDef,
   GetRevisionsRequest
-> = z.object({
-  namespaceName: z.string(),
-  nextPageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    namespaceName: "namespace_name",
-    nextPageToken: "next_page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespaceName: z.string(),
+    nextPageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      namespaceName: "namespace_name",
+      nextPageToken: "next_page_token",
+    });
+  })
+);
 
 export function getRevisionsRequestToJSON(
   getRevisionsRequest: GetRevisionsRequest,

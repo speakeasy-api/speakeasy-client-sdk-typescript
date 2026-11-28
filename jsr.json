@@ -2,11 +2,12 @@
 
 {
   "name": "@speakeasy-api/speakeasy-client-sdk-typescript",
-  "version": "5.0.0-rc.5",
+  "version": "5.0.0-rc.6",
   "exports": {
-    ".": "./src/index.ts",    
-    "./sdk/models/errors": "./src/sdk/models/errors/index.ts",    
-    "./sdk/models/shared": "./src/sdk/models/shared/index.ts",    
+    ".": "./src/index.ts",
+    "./node": "./src/node.ts",
+    "./sdk/models/errors": "./src/sdk/models/errors/index.ts",
+    "./sdk/models/shared": "./src/sdk/models/shared/index.ts",
     "./sdk/models/operations": "./src/sdk/models/operations/index.ts",
     "./lib/config": "./src/lib/config.ts",
     "./lib/http": "./src/lib/http.ts",

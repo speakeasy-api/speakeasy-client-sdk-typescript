@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,21 +23,23 @@ export const OASOperation$inboundSchema: z.ZodType<
   OASOperation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string(),
-  group_override: z.string().optional(),
-  method: z.string(),
-  method_name_override: z.string().optional(),
-  operation_id: z.string(),
-  path: z.string(),
-  tags: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "group_override": "groupOverride",
-    "method_name_override": "methodNameOverride",
-    "operation_id": "operationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    group_override: z.string().optional(),
+    method: z.string(),
+    method_name_override: z.string().optional(),
+    operation_id: z.string(),
+    path: z.string(),
+    tags: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "group_override": "groupOverride",
+      "method_name_override": "methodNameOverride",
+      "operation_id": "operationId",
+    });
+  })
+);
 /** @internal */
 export type OASOperation$Outbound = {
   description: string;
@@ -54,21 +56,23 @@ export const OASOperation$outboundSchema: z.ZodType<
   OASOperation$Outbound,
   z.ZodTypeDef,
   OASOperation
-> = z.object({
-  description: z.string(),
-  groupOverride: z.string().optional(),
-  method: z.string(),
-  methodNameOverride: z.string().optional(),
-  operationId: z.string(),
-  path: z.string(),
-  tags: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    groupOverride: "group_override",
-    methodNameOverride: "method_name_override",
-    operationId: "operation_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    groupOverride: z.string().optional(),
+    method: z.string(),
+    methodNameOverride: z.string().optional(),
+    operationId: z.string(),
+    path: z.string(),
+    tags: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      groupOverride: "group_override",
+      methodNameOverride: "method_name_override",
+      operationId: "operation_id",
+    });
+  })
+);
 
 export function oasOperationToJSON(oasOperation: OASOperation): string {
   return JSON.stringify(OASOperation$outboundSchema.parse(oasOperation));

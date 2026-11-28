@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,19 +23,21 @@ export const GetManifestRequest$inboundSchema: z.ZodType<
   GetManifestRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  organization_slug: z.string(),
-  workspace_slug: z.string(),
-  namespace_name: z.string(),
-  revision_reference: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "organization_slug": "organizationSlug",
-    "workspace_slug": "workspaceSlug",
-    "namespace_name": "namespaceName",
-    "revision_reference": "revisionReference",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organization_slug: z.string(),
+    workspace_slug: z.string(),
+    namespace_name: z.string(),
+    revision_reference: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "organization_slug": "organizationSlug",
+      "workspace_slug": "workspaceSlug",
+      "namespace_name": "namespaceName",
+      "revision_reference": "revisionReference",
+    });
+  })
+);
 /** @internal */
 export type GetManifestRequest$Outbound = {
   organization_slug: string;
@@ -49,19 +51,21 @@ export const GetManifestRequest$outboundSchema: z.ZodType<
   GetManifestRequest$Outbound,
   z.ZodTypeDef,
   GetManifestRequest
-> = z.object({
-  organizationSlug: z.string(),
-  workspaceSlug: z.string(),
-  namespaceName: z.string(),
-  revisionReference: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    organizationSlug: "organization_slug",
-    workspaceSlug: "workspace_slug",
-    namespaceName: "namespace_name",
-    revisionReference: "revision_reference",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organizationSlug: z.string(),
+    workspaceSlug: z.string(),
+    namespaceName: z.string(),
+    revisionReference: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      organizationSlug: "organization_slug",
+      workspaceSlug: "workspace_slug",
+      namespaceName: "namespace_name",
+      revisionReference: "revision_reference",
+    });
+  })
+);
 
 export function getManifestRequestToJSON(
   getManifestRequest: GetManifestRequest,

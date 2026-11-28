@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,14 +24,16 @@ export type AddTags = {
 
 /** @internal */
 export const AddTags$inboundSchema: z.ZodType<AddTags, z.ZodTypeDef, unknown> =
-  z.object({
-    revision_digest: z.string(),
-    tags: z.array(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "revision_digest": "revisionDigest",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      revision_digest: z.string(),
+      tags: z.array(z.string()),
+    }).transform((v) => {
+      return remap$(v, {
+        "revision_digest": "revisionDigest",
+      });
+    })
+  );
 /** @internal */
 export type AddTags$Outbound = {
   revision_digest: string;
@@ -43,14 +45,16 @@ export const AddTags$outboundSchema: z.ZodType<
   AddTags$Outbound,
   z.ZodTypeDef,
   AddTags
-> = z.object({
-  revisionDigest: z.string(),
-  tags: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    revisionDigest: "revision_digest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    revisionDigest: z.string(),
+    tags: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      revisionDigest: "revision_digest",
+    });
+  })
+);
 
 export function addTagsToJSON(addTags: AddTags): string {
   return JSON.stringify(AddTags$outboundSchema.parse(addTags));

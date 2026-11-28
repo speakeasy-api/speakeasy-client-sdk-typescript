@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +21,13 @@ export const GetGitHubActionRequest$inboundSchema: z.ZodType<
   GetGitHubActionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  targetName: z.string().optional(),
-  org: z.string(),
-  repo: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    targetName: z.string().optional(),
+    org: z.string(),
+    repo: z.string(),
+  })
+);
 /** @internal */
 export type GetGitHubActionRequest$Outbound = {
   targetName?: string | undefined;
@@ -38,11 +40,13 @@ export const GetGitHubActionRequest$outboundSchema: z.ZodType<
   GetGitHubActionRequest$Outbound,
   z.ZodTypeDef,
   GetGitHubActionRequest
-> = z.object({
-  targetName: z.string().optional(),
-  org: z.string(),
-  repo: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    targetName: z.string().optional(),
+    org: z.string(),
+    repo: z.string(),
+  })
+);
 
 export function getGitHubActionRequestToJSON(
   getGitHubActionRequest: GetGitHubActionRequest,

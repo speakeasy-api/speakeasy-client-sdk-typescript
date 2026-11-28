@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,24 +48,26 @@ export const OrganizationUsage$inboundSchema: z.ZodType<
   OrganizationUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accessible: z.boolean(),
-  accessible_features: z.array(z.string()),
-  gen_lock_ids: z.array(z.string()),
-  language: z.string(),
-  max_operations: z.number().int(),
-  number_of_operations: z.number().int(),
-  used_features: z.array(z.string()),
-  workspaces: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "accessible_features": "accessibleFeatures",
-    "gen_lock_ids": "genLockIds",
-    "max_operations": "maxOperations",
-    "number_of_operations": "numberOfOperations",
-    "used_features": "usedFeatures",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessible: z.boolean(),
+    accessible_features: z.array(z.string()),
+    gen_lock_ids: z.array(z.string()),
+    language: z.string(),
+    max_operations: z.number().int(),
+    number_of_operations: z.number().int(),
+    used_features: z.array(z.string()),
+    workspaces: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "accessible_features": "accessibleFeatures",
+      "gen_lock_ids": "genLockIds",
+      "max_operations": "maxOperations",
+      "number_of_operations": "numberOfOperations",
+      "used_features": "usedFeatures",
+    });
+  })
+);
 /** @internal */
 export type OrganizationUsage$Outbound = {
   accessible: boolean;
@@ -83,24 +85,26 @@ export const OrganizationUsage$outboundSchema: z.ZodType<
   OrganizationUsage$Outbound,
   z.ZodTypeDef,
   OrganizationUsage
-> = z.object({
-  accessible: z.boolean(),
-  accessibleFeatures: z.array(z.string()),
-  genLockIds: z.array(z.string()),
-  language: z.string(),
-  maxOperations: z.number().int(),
-  numberOfOperations: z.number().int(),
-  usedFeatures: z.array(z.string()),
-  workspaces: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    accessibleFeatures: "accessible_features",
-    genLockIds: "gen_lock_ids",
-    maxOperations: "max_operations",
-    numberOfOperations: "number_of_operations",
-    usedFeatures: "used_features",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessible: z.boolean(),
+    accessibleFeatures: z.array(z.string()),
+    genLockIds: z.array(z.string()),
+    language: z.string(),
+    maxOperations: z.number().int(),
+    numberOfOperations: z.number().int(),
+    usedFeatures: z.array(z.string()),
+    workspaces: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      accessibleFeatures: "accessible_features",
+      genLockIds: "gen_lock_ids",
+      maxOperations: "max_operations",
+      numberOfOperations: "number_of_operations",
+      usedFeatures: "used_features",
+    });
+  })
+);
 
 export function organizationUsageToJSON(
   organizationUsage: OrganizationUsage,

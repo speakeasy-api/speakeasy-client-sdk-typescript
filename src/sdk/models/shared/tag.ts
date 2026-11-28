@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,18 +22,20 @@ export type Tag = {
 };
 
 /** @internal */
-export const Tag$inboundSchema: z.ZodType<Tag, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    namespace_name: z.string(),
-    revision_digest: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "namespace_name": "namespaceName",
-      "revision_digest": "revisionDigest",
-    });
-  });
+export const Tag$inboundSchema: z.ZodType<Tag, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      namespace_name: z.string(),
+      revision_digest: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "namespace_name": "namespaceName",
+        "revision_digest": "revisionDigest",
+      });
+    })
+  );
 /** @internal */
 export type Tag$Outbound = {
   id: string;
@@ -43,18 +45,20 @@ export type Tag$Outbound = {
 };
 
 /** @internal */
-export const Tag$outboundSchema: z.ZodType<Tag$Outbound, z.ZodTypeDef, Tag> = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    namespaceName: z.string(),
-    revisionDigest: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      namespaceName: "namespace_name",
-      revisionDigest: "revision_digest",
-    });
-  });
+export const Tag$outboundSchema: z.ZodType<Tag$Outbound, z.ZodTypeDef, Tag> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      namespaceName: z.string(),
+      revisionDigest: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        namespaceName: "namespace_name",
+        revisionDigest: "revision_digest",
+      });
+    })
+  );
 
 export function tagToJSON(tag: Tag): string {
   return JSON.stringify(Tag$outboundSchema.parse(tag));

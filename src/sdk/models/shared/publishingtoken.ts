@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,7 +35,7 @@ export type PublishingToken = {
 /** @internal */
 export const TargetResource$inboundSchema: z.ZodNativeEnum<
   typeof TargetResource
-> = z.nativeEnum(TargetResource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TargetResource));
 /** @internal */
 export const TargetResource$outboundSchema: z.ZodNativeEnum<
   typeof TargetResource
@@ -46,36 +46,41 @@ export const PublishingToken$inboundSchema: z.ZodType<
   PublishingToken,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  created_by: z.string(),
-  id: z.string(),
-  organization_id: z.string(),
-  target_id: z.string(),
-  target_resource: TargetResource$inboundSchema,
-  token: z.string(),
-  token_name: z.string(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_by: z.string().optional(),
-  valid_until: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "created_by": "createdBy",
-    "organization_id": "organizationId",
-    "target_id": "targetId",
-    "target_resource": "targetResource",
-    "token_name": "tokenName",
-    "updated_at": "updatedAt",
-    "updated_by": "updatedBy",
-    "valid_until": "validUntil",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    created_by: z.string(),
+    id: z.string(),
+    organization_id: z.string(),
+    target_id: z.string(),
+    target_resource: TargetResource$inboundSchema,
+    token: z.string(),
+    token_name: z.string(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_by: z.string().optional(),
+    valid_until: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    workspace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "created_by": "createdBy",
+      "organization_id": "organizationId",
+      "target_id": "targetId",
+      "target_resource": "targetResource",
+      "token_name": "tokenName",
+      "updated_at": "updatedAt",
+      "updated_by": "updatedBy",
+      "valid_until": "validUntil",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type PublishingToken$Outbound = {
   created_at: string;
@@ -97,33 +102,35 @@ export const PublishingToken$outboundSchema: z.ZodType<
   PublishingToken$Outbound,
   z.ZodTypeDef,
   PublishingToken
-> = z.object({
-  createdAt: z.date().transform(v => v.toISOString()),
-  createdBy: z.string(),
-  id: z.string(),
-  organizationId: z.string(),
-  targetId: z.string(),
-  targetResource: TargetResource$outboundSchema,
-  token: z.string(),
-  tokenName: z.string(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedBy: z.string().optional(),
-  validUntil: z.date().transform(v => v.toISOString()),
-  workspaceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    createdBy: "created_by",
-    organizationId: "organization_id",
-    targetId: "target_id",
-    targetResource: "target_resource",
-    tokenName: "token_name",
-    updatedAt: "updated_at",
-    updatedBy: "updated_by",
-    validUntil: "valid_until",
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.date().transform(v => v.toISOString()),
+    createdBy: z.string(),
+    id: z.string(),
+    organizationId: z.string(),
+    targetId: z.string(),
+    targetResource: TargetResource$outboundSchema,
+    token: z.string(),
+    tokenName: z.string(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedBy: z.string().optional(),
+    validUntil: z.date().transform(v => v.toISOString()),
+    workspaceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      createdBy: "created_by",
+      organizationId: "organization_id",
+      targetId: "target_id",
+      targetResource: "target_resource",
+      tokenName: "token_name",
+      updatedAt: "updated_at",
+      updatedBy: "updated_by",
+      validUntil: "valid_until",
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function publishingTokenToJSON(
   publishingToken: PublishingToken,

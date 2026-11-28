@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,11 +27,13 @@ export const GetWorkspaceAccessRequest$inboundSchema: z.ZodType<
   GetWorkspaceAccessRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  genLockId: z.string().optional(),
-  targetType: z.string().optional(),
-  passive: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    genLockId: z.string().optional(),
+    targetType: z.string().optional(),
+    passive: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type GetWorkspaceAccessRequest$Outbound = {
   genLockId?: string | undefined;
@@ -44,11 +46,13 @@ export const GetWorkspaceAccessRequest$outboundSchema: z.ZodType<
   GetWorkspaceAccessRequest$Outbound,
   z.ZodTypeDef,
   GetWorkspaceAccessRequest
-> = z.object({
-  genLockId: z.string().optional(),
-  targetType: z.string().optional(),
-  passive: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    genLockId: z.string().optional(),
+    targetType: z.string().optional(),
+    passive: z.boolean().optional(),
+  })
+);
 
 export function getWorkspaceAccessRequestToJSON(
   getWorkspaceAccessRequest: GetWorkspaceAccessRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -32,16 +32,18 @@ export type SuggestOpenAPIRequest = {
 };
 
 /** @internal */
-export const Schema$inboundSchema: z.ZodType<Schema, z.ZodTypeDef, unknown> = z
-  .object({
-    content: z.union([
-      z.instanceof(ReadableStream<Uint8Array>),
-      z.instanceof(Blob),
-      z.instanceof(ArrayBuffer),
-      z.instanceof(Uint8Array),
-    ]),
-    fileName: z.string(),
-  });
+export const Schema$inboundSchema: z.ZodType<Schema, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      content: z.union([
+        z.instanceof(ReadableStream<Uint8Array>),
+        z.instanceof(Blob),
+        z.instanceof(ArrayBuffer),
+        z.instanceof(Uint8Array),
+      ]),
+      fileName: z.string(),
+    })
+  );
 /** @internal */
 export type Schema$Outbound = {
   content: ReadableStream<Uint8Array> | Blob | ArrayBuffer | Uint8Array;
@@ -53,15 +55,17 @@ export const Schema$outboundSchema: z.ZodType<
   Schema$Outbound,
   z.ZodTypeDef,
   Schema
-> = z.object({
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-  fileName: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+    fileName: z.string(),
+  })
+);
 
 export function schemaToJSON(schema: Schema): string {
   return JSON.stringify(Schema$outboundSchema.parse(schema));
@@ -81,10 +85,12 @@ export const SuggestOpenAPIRequestBody$inboundSchema: z.ZodType<
   SuggestOpenAPIRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  opts: shared.SuggestOptsOld$inboundSchema.optional(),
-  schema: z.lazy(() => Schema$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    opts: shared.SuggestOptsOld$inboundSchema.optional(),
+    schema: z.lazy(() => Schema$inboundSchema),
+  })
+);
 /** @internal */
 export type SuggestOpenAPIRequestBody$Outbound = {
   opts?: shared.SuggestOptsOld$Outbound | undefined;
@@ -96,10 +102,12 @@ export const SuggestOpenAPIRequestBody$outboundSchema: z.ZodType<
   SuggestOpenAPIRequestBody$Outbound,
   z.ZodTypeDef,
   SuggestOpenAPIRequestBody
-> = z.object({
-  opts: shared.SuggestOptsOld$outboundSchema.optional(),
-  schema: z.lazy(() => Schema$outboundSchema).or(blobLikeSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    opts: shared.SuggestOptsOld$outboundSchema.optional(),
+    schema: z.lazy(() => Schema$outboundSchema).or(blobLikeSchema),
+  })
+);
 
 export function suggestOpenAPIRequestBodyToJSON(
   suggestOpenAPIRequestBody: SuggestOpenAPIRequestBody,
@@ -123,15 +131,17 @@ export const SuggestOpenAPIRequest$inboundSchema: z.ZodType<
   SuggestOpenAPIRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "x-session-id": z.string(),
-  RequestBody: z.lazy(() => SuggestOpenAPIRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "x-session-id": "xSessionId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "x-session-id": z.string(),
+    RequestBody: z.lazy(() => SuggestOpenAPIRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "x-session-id": "xSessionId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type SuggestOpenAPIRequest$Outbound = {
   "x-session-id": string;
@@ -143,15 +153,17 @@ export const SuggestOpenAPIRequest$outboundSchema: z.ZodType<
   SuggestOpenAPIRequest$Outbound,
   z.ZodTypeDef,
   SuggestOpenAPIRequest
-> = z.object({
-  xSessionId: z.string(),
-  requestBody: z.lazy(() => SuggestOpenAPIRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xSessionId: "x-session-id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xSessionId: z.string(),
+    requestBody: z.lazy(() => SuggestOpenAPIRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xSessionId: "x-session-id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function suggestOpenAPIRequestToJSON(
   suggestOpenAPIRequest: SuggestOpenAPIRequest,

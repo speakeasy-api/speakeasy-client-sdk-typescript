@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -37,16 +37,18 @@ export const TargetsSummaryPage$inboundSchema: z.ZodType<
   TargetsSummaryPage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  has_more: z.boolean(),
-  next_cursor: z.nullable(z.string()).optional(),
-  targets: z.array(TargetSDKSummary$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "next_cursor": "nextCursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    has_more: z.boolean(),
+    next_cursor: z.nullable(z.string()).optional(),
+    targets: z.array(TargetSDKSummary$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "next_cursor": "nextCursor",
+    });
+  })
+);
 /** @internal */
 export type TargetsSummaryPage$Outbound = {
   has_more: boolean;
@@ -59,16 +61,18 @@ export const TargetsSummaryPage$outboundSchema: z.ZodType<
   TargetsSummaryPage$Outbound,
   z.ZodTypeDef,
   TargetsSummaryPage
-> = z.object({
-  hasMore: z.boolean(),
-  nextCursor: z.nullable(z.string()).optional(),
-  targets: z.array(TargetSDKSummary$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-    nextCursor: "next_cursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hasMore: z.boolean(),
+    nextCursor: z.nullable(z.string()).optional(),
+    targets: z.array(TargetSDKSummary$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+      nextCursor: "next_cursor",
+    });
+  })
+);
 
 export function targetsSummaryPageToJSON(
   targetsSummaryPage: TargetsSummaryPage,

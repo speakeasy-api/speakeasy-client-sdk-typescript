@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +21,13 @@ export type WorkflowDocument = {
 };
 
 /** @internal */
-export const Auth$inboundSchema: z.ZodType<Auth, z.ZodTypeDef, unknown> = z
-  .object({
-    header: z.string(),
-    secret: z.string(),
-  });
+export const Auth$inboundSchema: z.ZodType<Auth, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      header: z.string(),
+      secret: z.string(),
+    })
+  );
 /** @internal */
 export type Auth$Outbound = {
   header: string;
@@ -34,10 +36,12 @@ export type Auth$Outbound = {
 
 /** @internal */
 export const Auth$outboundSchema: z.ZodType<Auth$Outbound, z.ZodTypeDef, Auth> =
-  z.object({
-    header: z.string(),
-    secret: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      header: z.string(),
+      secret: z.string(),
+    })
+  );
 
 export function authToJSON(auth: Auth): string {
   return JSON.stringify(Auth$outboundSchema.parse(auth));
@@ -57,10 +61,12 @@ export const WorkflowDocument$inboundSchema: z.ZodType<
   WorkflowDocument,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  auth: z.lazy(() => Auth$inboundSchema).optional(),
-  location: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auth: z.lazy(() => Auth$inboundSchema).optional(),
+    location: z.string(),
+  })
+);
 /** @internal */
 export type WorkflowDocument$Outbound = {
   auth?: Auth$Outbound | undefined;
@@ -72,10 +78,12 @@ export const WorkflowDocument$outboundSchema: z.ZodType<
   WorkflowDocument$Outbound,
   z.ZodTypeDef,
   WorkflowDocument
-> = z.object({
-  auth: z.lazy(() => Auth$outboundSchema).optional(),
-  location: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    auth: z.lazy(() => Auth$outboundSchema).optional(),
+    location: z.string(),
+  })
+);
 
 export function workflowDocumentToJSON(
   workflowDocument: WorkflowDocument,

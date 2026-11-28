@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -89,7 +89,9 @@ export type RevisionContentsMetadata = {
 /** @internal */
 export const RevisionContentsMetadataType$inboundSchema: z.ZodNativeEnum<
   typeof RevisionContentsMetadataType
-> = z.nativeEnum(RevisionContentsMetadataType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RevisionContentsMetadataType)
+);
 /** @internal */
 export const RevisionContentsMetadataType$outboundSchema: z.ZodNativeEnum<
   typeof RevisionContentsMetadataType
@@ -100,34 +102,38 @@ export const RevisionContentsMetadata$inboundSchema: z.ZodType<
   RevisionContentsMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  contains_code_samples: z.boolean(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  description: z.string(),
-  hash: z.string(),
-  namespace: z.string(),
-  num_overlay_actions: z.number().int(),
-  operation_ids: z.array(z.string()),
-  relative_diff: RelativeDiff$inboundSchema.optional(),
-  revision_digest: z.string(),
-  server_urls: z.array(Server$inboundSchema),
-  tags: z.array(z.string()),
-  title: z.string(),
-  type: RevisionContentsMetadataType$inboundSchema,
-  version: z.string(),
-  workspace_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "contains_code_samples": "containsCodeSamples",
-    "created_at": "createdAt",
-    "num_overlay_actions": "numOverlayActions",
-    "operation_ids": "operationIds",
-    "relative_diff": "relativeDiff",
-    "revision_digest": "revisionDigest",
-    "server_urls": "serverUrls",
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    contains_code_samples: z.boolean(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    description: z.string(),
+    hash: z.string(),
+    namespace: z.string(),
+    num_overlay_actions: z.number().int(),
+    operation_ids: z.array(z.string()),
+    relative_diff: RelativeDiff$inboundSchema.optional(),
+    revision_digest: z.string(),
+    server_urls: z.array(Server$inboundSchema),
+    tags: z.array(z.string()),
+    title: z.string(),
+    type: RevisionContentsMetadataType$inboundSchema,
+    version: z.string(),
+    workspace_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "contains_code_samples": "containsCodeSamples",
+      "created_at": "createdAt",
+      "num_overlay_actions": "numOverlayActions",
+      "operation_ids": "operationIds",
+      "relative_diff": "relativeDiff",
+      "revision_digest": "revisionDigest",
+      "server_urls": "serverUrls",
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type RevisionContentsMetadata$Outbound = {
   contains_code_samples: boolean;
@@ -152,34 +158,36 @@ export const RevisionContentsMetadata$outboundSchema: z.ZodType<
   RevisionContentsMetadata$Outbound,
   z.ZodTypeDef,
   RevisionContentsMetadata
-> = z.object({
-  containsCodeSamples: z.boolean(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  description: z.string(),
-  hash: z.string(),
-  namespace: z.string(),
-  numOverlayActions: z.number().int(),
-  operationIds: z.array(z.string()),
-  relativeDiff: RelativeDiff$outboundSchema.optional(),
-  revisionDigest: z.string(),
-  serverUrls: z.array(Server$outboundSchema),
-  tags: z.array(z.string()),
-  title: z.string(),
-  type: RevisionContentsMetadataType$outboundSchema,
-  version: z.string(),
-  workspaceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    containsCodeSamples: "contains_code_samples",
-    createdAt: "created_at",
-    numOverlayActions: "num_overlay_actions",
-    operationIds: "operation_ids",
-    relativeDiff: "relative_diff",
-    revisionDigest: "revision_digest",
-    serverUrls: "server_urls",
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    containsCodeSamples: z.boolean(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    description: z.string(),
+    hash: z.string(),
+    namespace: z.string(),
+    numOverlayActions: z.number().int(),
+    operationIds: z.array(z.string()),
+    relativeDiff: RelativeDiff$outboundSchema.optional(),
+    revisionDigest: z.string(),
+    serverUrls: z.array(Server$outboundSchema),
+    tags: z.array(z.string()),
+    title: z.string(),
+    type: RevisionContentsMetadataType$outboundSchema,
+    version: z.string(),
+    workspaceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      containsCodeSamples: "contains_code_samples",
+      createdAt: "created_at",
+      numOverlayActions: "num_overlay_actions",
+      operationIds: "operation_ids",
+      relativeDiff: "relative_diff",
+      revisionDigest: "revision_digest",
+      serverUrls: "server_urls",
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function revisionContentsMetadataToJSON(
   revisionContentsMetadata: RevisionContentsMetadata,

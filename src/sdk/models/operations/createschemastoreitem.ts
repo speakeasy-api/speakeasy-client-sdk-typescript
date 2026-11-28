@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,8 +40,8 @@ export type CreateSchemaStoreItemRequestBody = {
 };
 
 /** @internal */
-export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
+export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Format));
 /** @internal */
 export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
   Format$inboundSchema;
@@ -51,12 +51,14 @@ export const CreateSchemaStoreItemRequestBody$inboundSchema: z.ZodType<
   CreateSchemaStoreItemRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  format: Format$inboundSchema,
-  packageName: z.string(),
-  sdkClassname: z.string(),
-  spec: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: Format$inboundSchema,
+    packageName: z.string(),
+    sdkClassname: z.string(),
+    spec: z.string(),
+  })
+);
 /** @internal */
 export type CreateSchemaStoreItemRequestBody$Outbound = {
   format: string;
@@ -70,12 +72,14 @@ export const CreateSchemaStoreItemRequestBody$outboundSchema: z.ZodType<
   CreateSchemaStoreItemRequestBody$Outbound,
   z.ZodTypeDef,
   CreateSchemaStoreItemRequestBody
-> = z.object({
-  format: Format$outboundSchema,
-  packageName: z.string(),
-  sdkClassname: z.string(),
-  spec: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: Format$outboundSchema,
+    packageName: z.string(),
+    sdkClassname: z.string(),
+    spec: z.string(),
+  })
+);
 
 export function createSchemaStoreItemRequestBodyToJSON(
   createSchemaStoreItemRequestBody: CreateSchemaStoreItemRequestBody,

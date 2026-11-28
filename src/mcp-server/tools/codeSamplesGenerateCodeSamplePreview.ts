@@ -23,7 +23,7 @@ This endpoint generates Code Sample previews from a file and configuration param
     const [result, apiCall] = await codeSamplesGenerateCodeSamplePreview(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

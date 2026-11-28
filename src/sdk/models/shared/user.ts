@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -76,44 +76,46 @@ export type User = {
 };
 
 /** @internal */
-export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> = z
-  .object({
-    admin: z.boolean(),
-    confirmed: z.boolean(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    default_workspace_id: z.nullable(z.string()).optional(),
-    display_name: z.string(),
-    email: z.string(),
-    email_verified: z.boolean(),
-    github_handle: z.nullable(z.string()).optional(),
-    has_created_api_key: z.boolean().optional(),
-    id: z.string(),
-    internal: z.boolean().optional(),
-    last_login_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    photo_url: z.nullable(z.string()).optional(),
-    pylon_identity_hash: z.string().optional(),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    whitelisted: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-      "default_workspace_id": "defaultWorkspaceId",
-      "display_name": "displayName",
-      "email_verified": "emailVerified",
-      "github_handle": "githubHandle",
-      "has_created_api_key": "hasCreatedApiKey",
-      "last_login_at": "lastLoginAt",
-      "photo_url": "photoUrl",
-      "pylon_identity_hash": "pylonIdentityHash",
-      "updated_at": "updatedAt",
-    });
-  });
+export const User$inboundSchema: z.ZodType<User, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      admin: z.boolean(),
+      confirmed: z.boolean(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      default_workspace_id: z.nullable(z.string()).optional(),
+      display_name: z.string(),
+      email: z.string(),
+      email_verified: z.boolean(),
+      github_handle: z.nullable(z.string()).optional(),
+      has_created_api_key: z.boolean().optional(),
+      id: z.string(),
+      internal: z.boolean().optional(),
+      last_login_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      photo_url: z.nullable(z.string()).optional(),
+      pylon_identity_hash: z.string().optional(),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      whitelisted: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "created_at": "createdAt",
+        "default_workspace_id": "defaultWorkspaceId",
+        "display_name": "displayName",
+        "email_verified": "emailVerified",
+        "github_handle": "githubHandle",
+        "has_created_api_key": "hasCreatedApiKey",
+        "last_login_at": "lastLoginAt",
+        "photo_url": "photoUrl",
+        "pylon_identity_hash": "pylonIdentityHash",
+        "updated_at": "updatedAt",
+      });
+    })
+  );
 /** @internal */
 export type User$Outbound = {
   admin: boolean;
@@ -136,38 +138,40 @@ export type User$Outbound = {
 
 /** @internal */
 export const User$outboundSchema: z.ZodType<User$Outbound, z.ZodTypeDef, User> =
-  z.object({
-    admin: z.boolean(),
-    confirmed: z.boolean(),
-    createdAt: z.date().transform(v => v.toISOString()),
-    defaultWorkspaceId: z.nullable(z.string()).optional(),
-    displayName: z.string(),
-    email: z.string(),
-    emailVerified: z.boolean(),
-    githubHandle: z.nullable(z.string()).optional(),
-    hasCreatedApiKey: z.boolean().optional(),
-    id: z.string(),
-    internal: z.boolean().optional(),
-    lastLoginAt: z.nullable(z.date().transform(v => v.toISOString()))
-      .optional(),
-    photoUrl: z.nullable(z.string()).optional(),
-    pylonIdentityHash: z.string().optional(),
-    updatedAt: z.date().transform(v => v.toISOString()),
-    whitelisted: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      createdAt: "created_at",
-      defaultWorkspaceId: "default_workspace_id",
-      displayName: "display_name",
-      emailVerified: "email_verified",
-      githubHandle: "github_handle",
-      hasCreatedApiKey: "has_created_api_key",
-      lastLoginAt: "last_login_at",
-      photoUrl: "photo_url",
-      pylonIdentityHash: "pylon_identity_hash",
-      updatedAt: "updated_at",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      admin: z.boolean(),
+      confirmed: z.boolean(),
+      createdAt: z.date().transform(v => v.toISOString()),
+      defaultWorkspaceId: z.nullable(z.string()).optional(),
+      displayName: z.string(),
+      email: z.string(),
+      emailVerified: z.boolean(),
+      githubHandle: z.nullable(z.string()).optional(),
+      hasCreatedApiKey: z.boolean().optional(),
+      id: z.string(),
+      internal: z.boolean().optional(),
+      lastLoginAt: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      photoUrl: z.nullable(z.string()).optional(),
+      pylonIdentityHash: z.string().optional(),
+      updatedAt: z.date().transform(v => v.toISOString()),
+      whitelisted: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        createdAt: "created_at",
+        defaultWorkspaceId: "default_workspace_id",
+        displayName: "display_name",
+        emailVerified: "email_verified",
+        githubHandle: "github_handle",
+        hasCreatedApiKey: "has_created_api_key",
+        lastLoginAt: "last_login_at",
+        photoUrl: "photo_url",
+        pylonIdentityHash: "pylon_identity_hash",
+        updatedAt: "updated_at",
+      });
+    })
+  );
 
 export function userToJSON(user: User): string {
   return JSON.stringify(User$outboundSchema.parse(user));

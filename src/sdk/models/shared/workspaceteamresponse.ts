@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,14 +36,16 @@ export const WorkspaceTeamResponse$inboundSchema: z.ZodType<
   WorkspaceTeamResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sso_metadata: SSOMetadata$inboundSchema.optional(),
-  users: z.array(User$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "sso_metadata": "ssoMetadata",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sso_metadata: SSOMetadata$inboundSchema.optional(),
+    users: z.array(User$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "sso_metadata": "ssoMetadata",
+    });
+  })
+);
 /** @internal */
 export type WorkspaceTeamResponse$Outbound = {
   sso_metadata?: SSOMetadata$Outbound | undefined;
@@ -55,14 +57,16 @@ export const WorkspaceTeamResponse$outboundSchema: z.ZodType<
   WorkspaceTeamResponse$Outbound,
   z.ZodTypeDef,
   WorkspaceTeamResponse
-> = z.object({
-  ssoMetadata: SSOMetadata$outboundSchema.optional(),
-  users: z.array(User$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    ssoMetadata: "sso_metadata",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssoMetadata: SSOMetadata$outboundSchema.optional(),
+    users: z.array(User$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      ssoMetadata: "sso_metadata",
+    });
+  })
+);
 
 export function workspaceTeamResponseToJSON(
   workspaceTeamResponse: WorkspaceTeamResponse,
