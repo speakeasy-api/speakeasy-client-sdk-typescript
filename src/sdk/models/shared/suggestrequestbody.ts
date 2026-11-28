@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,7 +38,9 @@ export type SuggestRequestBody = {
 /** @internal */
 export const SuggestRequestBodySuggestionType$inboundSchema: z.ZodNativeEnum<
   typeof SuggestRequestBodySuggestionType
-> = z.nativeEnum(SuggestRequestBodySuggestionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SuggestRequestBodySuggestionType)
+);
 /** @internal */
 export const SuggestRequestBodySuggestionType$outboundSchema: z.ZodNativeEnum<
   typeof SuggestRequestBodySuggestionType
@@ -49,16 +51,18 @@ export const SuggestRequestBody$inboundSchema: z.ZodType<
   SuggestRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  diagnostics: z.array(Diagnostic$inboundSchema),
-  oas_summary: OASSummary$inboundSchema,
-  suggestion_type: SuggestRequestBodySuggestionType$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "oas_summary": "oasSummary",
-    "suggestion_type": "suggestionType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    diagnostics: z.array(Diagnostic$inboundSchema),
+    oas_summary: OASSummary$inboundSchema,
+    suggestion_type: SuggestRequestBodySuggestionType$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "oas_summary": "oasSummary",
+      "suggestion_type": "suggestionType",
+    });
+  })
+);
 /** @internal */
 export type SuggestRequestBody$Outbound = {
   diagnostics: Array<Diagnostic$Outbound>;
@@ -71,16 +75,18 @@ export const SuggestRequestBody$outboundSchema: z.ZodType<
   SuggestRequestBody$Outbound,
   z.ZodTypeDef,
   SuggestRequestBody
-> = z.object({
-  diagnostics: z.array(Diagnostic$outboundSchema),
-  oasSummary: OASSummary$outboundSchema,
-  suggestionType: SuggestRequestBodySuggestionType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    oasSummary: "oas_summary",
-    suggestionType: "suggestion_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    diagnostics: z.array(Diagnostic$outboundSchema),
+    oasSummary: OASSummary$outboundSchema,
+    suggestionType: SuggestRequestBodySuggestionType$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      oasSummary: "oas_summary",
+      suggestionType: "suggestion_type",
+    });
+  })
+);
 
 export function suggestRequestBodyToJSON(
   suggestRequestBody: SuggestRequestBody,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const GetTagsRequest$inboundSchema: z.ZodType<
   GetTagsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  namespace_name: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "namespace_name": "namespaceName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace_name: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "namespace_name": "namespaceName",
+    });
+  })
+);
 /** @internal */
 export type GetTagsRequest$Outbound = {
   namespace_name: string;
@@ -34,13 +36,15 @@ export const GetTagsRequest$outboundSchema: z.ZodType<
   GetTagsRequest$Outbound,
   z.ZodTypeDef,
   GetTagsRequest
-> = z.object({
-  namespaceName: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    namespaceName: "namespace_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespaceName: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      namespaceName: "namespace_name",
+    });
+  })
+);
 
 export function getTagsRequestToJSON(getTagsRequest: GetTagsRequest): string {
   return JSON.stringify(GetTagsRequest$outboundSchema.parse(getTagsRequest));

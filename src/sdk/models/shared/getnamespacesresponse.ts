@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const GetNamespacesResponse$inboundSchema: z.ZodType<
   GetNamespacesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  items: z.array(Namespace$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(Namespace$inboundSchema),
+  })
+);
 /** @internal */
 export type GetNamespacesResponse$Outbound = {
   items: Array<Namespace$Outbound>;
@@ -35,9 +37,11 @@ export const GetNamespacesResponse$outboundSchema: z.ZodType<
   GetNamespacesResponse$Outbound,
   z.ZodTypeDef,
   GetNamespacesResponse
-> = z.object({
-  items: z.array(Namespace$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(Namespace$outboundSchema),
+  })
+);
 
 export function getNamespacesResponseToJSON(
   getNamespacesResponse: GetNamespacesResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,8 +49,8 @@ export type AccessToken = {
 };
 
 /** @internal */
-export const Claims$inboundSchema: z.ZodType<Claims, z.ZodTypeDef, unknown> = z
-  .object({});
+export const Claims$inboundSchema: z.ZodType<Claims, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type Claims$Outbound = {};
 
@@ -59,7 +59,7 @@ export const Claims$outboundSchema: z.ZodType<
   Claims$Outbound,
   z.ZodTypeDef,
   Claims
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function claimsToJSON(claims: Claims): string {
   return JSON.stringify(Claims$outboundSchema.parse(claims));
@@ -79,21 +79,24 @@ export const AccessTokenUser$inboundSchema: z.ZodType<
   AccessTokenUser,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  admin: z.boolean().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  display_name: z.string().optional(),
-  email: z.string().optional(),
-  email_verified: z.boolean().optional(),
-  id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "display_name": "displayName",
-    "email_verified": "emailVerified",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    admin: z.boolean().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    display_name: z.string().optional(),
+    email: z.string().optional(),
+    email_verified: z.boolean().optional(),
+    id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "display_name": "displayName",
+      "email_verified": "emailVerified",
+    });
+  })
+);
 /** @internal */
 export type AccessTokenUser$Outbound = {
   admin?: boolean | undefined;
@@ -109,20 +112,22 @@ export const AccessTokenUser$outboundSchema: z.ZodType<
   AccessTokenUser$Outbound,
   z.ZodTypeDef,
   AccessTokenUser
-> = z.object({
-  admin: z.boolean().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  displayName: z.string().optional(),
-  email: z.string().optional(),
-  emailVerified: z.boolean().optional(),
-  id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    displayName: "display_name",
-    emailVerified: "email_verified",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    admin: z.boolean().optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    displayName: z.string().optional(),
+    email: z.string().optional(),
+    emailVerified: z.boolean().optional(),
+    id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      displayName: "display_name",
+      emailVerified: "email_verified",
+    });
+  })
+);
 
 export function accessTokenUserToJSON(
   accessTokenUser: AccessTokenUser,
@@ -144,18 +149,21 @@ export const Workspaces$inboundSchema: z.ZodType<
   Workspaces,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  account_type: AccountType$inboundSchema.optional(),
-  id: z.string().optional(),
-  name: z.string().optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "account_type": "accountType",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    account_type: AccountType$inboundSchema.optional(),
+    id: z.string().optional(),
+    name: z.string().optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "account_type": "accountType",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type Workspaces$Outbound = {
   account_type?: string | undefined;
@@ -169,17 +177,19 @@ export const Workspaces$outboundSchema: z.ZodType<
   Workspaces$Outbound,
   z.ZodTypeDef,
   Workspaces
-> = z.object({
-  accountType: AccountType$outboundSchema.optional(),
-  id: z.string().optional(),
-  name: z.string().optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accountType: "account_type",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountType: AccountType$outboundSchema.optional(),
+    id: z.string().optional(),
+    name: z.string().optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accountType: "account_type",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function workspacesToJSON(workspaces: Workspaces): string {
   return JSON.stringify(Workspaces$outboundSchema.parse(workspaces));
@@ -199,18 +209,20 @@ export const AccessToken$inboundSchema: z.ZodType<
   AccessToken,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access_token: z.string(),
-  claims: z.lazy(() => Claims$inboundSchema),
-  feature_flags: z.array(FeatureFlag$inboundSchema).optional(),
-  user: z.lazy(() => AccessTokenUser$inboundSchema),
-  workspaces: z.array(z.lazy(() => Workspaces$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_token": "accessToken",
-    "feature_flags": "featureFlags",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access_token: z.string(),
+    claims: z.lazy(() => Claims$inboundSchema),
+    feature_flags: z.array(FeatureFlag$inboundSchema).optional(),
+    user: z.lazy(() => AccessTokenUser$inboundSchema),
+    workspaces: z.array(z.lazy(() => Workspaces$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "access_token": "accessToken",
+      "feature_flags": "featureFlags",
+    });
+  })
+);
 /** @internal */
 export type AccessToken$Outbound = {
   access_token: string;
@@ -225,18 +237,20 @@ export const AccessToken$outboundSchema: z.ZodType<
   AccessToken$Outbound,
   z.ZodTypeDef,
   AccessToken
-> = z.object({
-  accessToken: z.string(),
-  claims: z.lazy(() => Claims$outboundSchema),
-  featureFlags: z.array(FeatureFlag$outboundSchema).optional(),
-  user: z.lazy(() => AccessTokenUser$outboundSchema),
-  workspaces: z.array(z.lazy(() => Workspaces$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accessToken: "access_token",
-    featureFlags: "feature_flags",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessToken: z.string(),
+    claims: z.lazy(() => Claims$outboundSchema),
+    featureFlags: z.array(FeatureFlag$outboundSchema).optional(),
+    user: z.lazy(() => AccessTokenUser$outboundSchema),
+    workspaces: z.array(z.lazy(() => Workspaces$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accessToken: "access_token",
+      featureFlags: "feature_flags",
+    });
+  })
+);
 
 export function accessTokenToJSON(accessToken: AccessToken): string {
   return JSON.stringify(AccessToken$outboundSchema.parse(accessToken));

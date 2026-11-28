@@ -20,7 +20,7 @@ Checks if generation is permitted for a particular run of the CLI`,
     const [result, apiCall] = await authGetAccess(
       client,
       args.request,
-      { fetchOptions: { signal: ctx.signal } },
+      { fetchOptions: { signal: ctx.mcpReq.signal } },
     ).$inspect();
 
     if (!result.ok) {

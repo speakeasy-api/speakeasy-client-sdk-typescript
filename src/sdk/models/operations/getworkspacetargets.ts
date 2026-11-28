@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,15 +20,16 @@ export const GetWorkspaceTargetsRequest$inboundSchema: z.ZodType<
   GetWorkspaceTargetsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after_last_event_created_at: z.string().datetime({ offset: true }).transform(
-    v => new Date(v)
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "after_last_event_created_at": "afterLastEventCreatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after_last_event_created_at: z.string().datetime({ offset: true })
+      .transform(v => new Date(v)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "after_last_event_created_at": "afterLastEventCreatedAt",
+    });
+  })
+);
 /** @internal */
 export type GetWorkspaceTargetsRequest$Outbound = {
   after_last_event_created_at?: string | undefined;
@@ -39,13 +40,16 @@ export const GetWorkspaceTargetsRequest$outboundSchema: z.ZodType<
   GetWorkspaceTargetsRequest$Outbound,
   z.ZodTypeDef,
   GetWorkspaceTargetsRequest
-> = z.object({
-  afterLastEventCreatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    afterLastEventCreatedAt: "after_last_event_created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    afterLastEventCreatedAt: z.date().transform(v => v.toISOString())
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      afterLastEventCreatedAt: "after_last_event_created_at",
+    });
+  })
+);
 
 export function getWorkspaceTargetsRequestToJSON(
   getWorkspaceTargetsRequest: GetWorkspaceTargetsRequest,

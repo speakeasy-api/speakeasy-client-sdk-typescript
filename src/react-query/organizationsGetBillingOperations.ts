@@ -21,13 +21,8 @@ import * as errors from "../sdk/models/errors/index.js";
 import { ResponseValidationError } from "../sdk/models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../sdk/models/errors/sdkvalidationerror.js";
 import { SpeakeasyError } from "../sdk/models/errors/speakeasyerror.js";
-import * as operations from "../sdk/models/operations/index.js";
 import { useSpeakeasyContext } from "./_context.js";
-import {
-  QueryHookOptions,
-  SuspenseQueryHookOptions,
-  TupleToPrefixes,
-} from "./_types.js";
+import { QueryHookOptions, SuspenseQueryHookOptions } from "./_types.js";
 import {
   buildOrganizationsGetBillingOperationsQuery,
   OrganizationsGetBillingOperationsQueryData,
@@ -56,11 +51,11 @@ export type OrganizationsGetBillingOperationsQueryError =
  * Get billing operations breakdown for an organization
  *
  * @remarks
- * Returns a breakdown of billing operations by spec and target for an organization.
- * The billing formula is: Total = sum(operationIds per spec x targets per spec)
+ * Returns a breakdown of billing operations by language and generated SDK target
+ * for an organization. Each language row is sourced from generation events,
+ * and target rows optionally include the source spec namespace when available.
  */
 export function useOrganizationsGetBillingOperations(
-  request: operations.GetBillingOperationsRequest,
   options?: QueryHookOptions<
     OrganizationsGetBillingOperationsQueryData,
     OrganizationsGetBillingOperationsQueryError
@@ -73,7 +68,6 @@ export function useOrganizationsGetBillingOperations(
   return useQuery({
     ...buildOrganizationsGetBillingOperationsQuery(
       client,
-      request,
       options,
     ),
     ...options,
@@ -84,11 +78,11 @@ export function useOrganizationsGetBillingOperations(
  * Get billing operations breakdown for an organization
  *
  * @remarks
- * Returns a breakdown of billing operations by spec and target for an organization.
- * The billing formula is: Total = sum(operationIds per spec x targets per spec)
+ * Returns a breakdown of billing operations by language and generated SDK target
+ * for an organization. Each language row is sourced from generation events,
+ * and target rows optionally include the source spec namespace when available.
  */
 export function useOrganizationsGetBillingOperationsSuspense(
-  request: operations.GetBillingOperationsRequest,
   options?: SuspenseQueryHookOptions<
     OrganizationsGetBillingOperationsQueryData,
     OrganizationsGetBillingOperationsQueryError
@@ -101,7 +95,6 @@ export function useOrganizationsGetBillingOperationsSuspense(
   return useSuspenseQuery({
     ...buildOrganizationsGetBillingOperationsQuery(
       client,
-      request,
       options,
     ),
     ...options,
@@ -110,33 +103,14 @@ export function useOrganizationsGetBillingOperationsSuspense(
 
 export function setOrganizationsGetBillingOperationsData(
   client: QueryClient,
-  queryKeyBase: [parameters: { includeOperationIds?: boolean | undefined }],
   data: OrganizationsGetBillingOperationsQueryData,
 ): OrganizationsGetBillingOperationsQueryData | undefined {
-  const key = queryKeyOrganizationsGetBillingOperations(...queryKeyBase);
+  const key = queryKeyOrganizationsGetBillingOperations();
 
   return client.setQueryData<OrganizationsGetBillingOperationsQueryData>(
     key,
     data,
   );
-}
-
-export function invalidateOrganizationsGetBillingOperations(
-  client: QueryClient,
-  queryKeyBase: TupleToPrefixes<
-    [parameters: { includeOperationIds?: boolean | undefined }]
-  >,
-  filters?: Omit<InvalidateQueryFilters, "queryKey" | "predicate" | "exact">,
-): Promise<void> {
-  return client.invalidateQueries({
-    ...filters,
-    queryKey: [
-      "@speakeasy-api/speakeasy-client-sdk-typescript",
-      "Organizations",
-      "getBillingOperations",
-      ...queryKeyBase,
-    ],
-  });
 }
 
 export function invalidateAllOrganizationsGetBillingOperations(

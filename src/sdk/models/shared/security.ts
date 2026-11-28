@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,17 +19,19 @@ export const Security$inboundSchema: z.ZodType<
   Security,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  APIKey: z.string().optional(),
-  Bearer: z.string().optional(),
-  WorkspaceIdentifier: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "APIKey": "apiKey",
-    "Bearer": "bearer",
-    "WorkspaceIdentifier": "workspaceIdentifier",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    APIKey: z.string().optional(),
+    Bearer: z.string().optional(),
+    WorkspaceIdentifier: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "APIKey": "apiKey",
+      "Bearer": "bearer",
+      "WorkspaceIdentifier": "workspaceIdentifier",
+    });
+  })
+);
 /** @internal */
 export type Security$Outbound = {
   APIKey?: string | undefined;
@@ -42,17 +44,19 @@ export const Security$outboundSchema: z.ZodType<
   Security$Outbound,
   z.ZodTypeDef,
   Security
-> = z.object({
-  apiKey: z.string().optional(),
-  bearer: z.string().optional(),
-  workspaceIdentifier: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKey: "APIKey",
-    bearer: "Bearer",
-    workspaceIdentifier: "WorkspaceIdentifier",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKey: z.string().optional(),
+    bearer: z.string().optional(),
+    workspaceIdentifier: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKey: "APIKey",
+      bearer: "Bearer",
+      workspaceIdentifier: "WorkspaceIdentifier",
+    });
+  })
+);
 
 export function securityToJSON(security: Security): string {
   return JSON.stringify(Security$outboundSchema.parse(security));

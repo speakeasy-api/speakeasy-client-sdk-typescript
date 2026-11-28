@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const CreateRequestBody$inboundSchema: z.ZodType<
   CreateRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 /** @internal */
 export type CreateRequestBody$Outbound = {
   url: string;
@@ -32,9 +34,11 @@ export const CreateRequestBody$outboundSchema: z.ZodType<
   CreateRequestBody$Outbound,
   z.ZodTypeDef,
   CreateRequestBody
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 
 export function createRequestBodyToJSON(
   createRequestBody: CreateRequestBody,

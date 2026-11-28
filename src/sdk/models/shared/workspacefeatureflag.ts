@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
 import { OpenEnum } from "../../types/enums.js";
 
@@ -25,10 +26,14 @@ export const WorkspaceFeatureFlag$inboundSchema: z.ZodType<
   WorkspaceFeatureFlag,
   z.ZodTypeDef,
   unknown
-> = openEnums.inboundSchema(WorkspaceFeatureFlag);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.inboundSchema(WorkspaceFeatureFlag)
+);
 /** @internal */
 export const WorkspaceFeatureFlag$outboundSchema: z.ZodType<
   string,
   z.ZodTypeDef,
   WorkspaceFeatureFlag
-> = openEnums.outboundSchema(WorkspaceFeatureFlag);
+> = /* @__PURE__ */ lazySchema$(() =>
+  openEnums.outboundSchema(WorkspaceFeatureFlag)
+);

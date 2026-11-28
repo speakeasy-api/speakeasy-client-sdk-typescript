@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,9 @@ export type Organization = {
   name: string;
   slug: string;
   ssoActivated: boolean;
-  ssoConnectionId?: string | null | undefined;
   telemetryDisabled: boolean;
   updatedAt: Date;
+  workosId?: string | null | undefined;
 };
 
 /** @internal */
@@ -35,31 +35,37 @@ export const Organization$inboundSchema: z.ZodType<
   Organization,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  account_type: AccountType$inboundSchema,
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  free_trial_expiry: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  id: z.string(),
-  internal: z.boolean().optional(),
-  name: z.string(),
-  slug: z.string(),
-  sso_activated: z.boolean(),
-  sso_connection_id: z.nullable(z.string()).optional(),
-  telemetry_disabled: z.boolean(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "account_type": "accountType",
-    "created_at": "createdAt",
-    "free_trial_expiry": "freeTrialExpiry",
-    "sso_activated": "ssoActivated",
-    "sso_connection_id": "ssoConnectionId",
-    "telemetry_disabled": "telemetryDisabled",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    account_type: AccountType$inboundSchema,
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    free_trial_expiry: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    id: z.string(),
+    internal: z.boolean().optional(),
+    name: z.string(),
+    slug: z.string(),
+    sso_activated: z.boolean(),
+    telemetry_disabled: z.boolean(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    workos_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "account_type": "accountType",
+      "created_at": "createdAt",
+      "free_trial_expiry": "freeTrialExpiry",
+      "sso_activated": "ssoActivated",
+      "telemetry_disabled": "telemetryDisabled",
+      "updated_at": "updatedAt",
+      "workos_id": "workosId",
+    });
+  })
+);
 /** @internal */
 export type Organization$Outbound = {
   account_type: string;
@@ -70,9 +76,9 @@ export type Organization$Outbound = {
   name: string;
   slug: string;
   sso_activated: boolean;
-  sso_connection_id?: string | null | undefined;
   telemetry_disabled: boolean;
   updated_at: string;
+  workos_id?: string | null | undefined;
 };
 
 /** @internal */
@@ -80,30 +86,32 @@ export const Organization$outboundSchema: z.ZodType<
   Organization$Outbound,
   z.ZodTypeDef,
   Organization
-> = z.object({
-  accountType: AccountType$outboundSchema,
-  createdAt: z.date().transform(v => v.toISOString()),
-  freeTrialExpiry: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  id: z.string(),
-  internal: z.boolean().optional(),
-  name: z.string(),
-  slug: z.string(),
-  ssoActivated: z.boolean(),
-  ssoConnectionId: z.nullable(z.string()).optional(),
-  telemetryDisabled: z.boolean(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    accountType: "account_type",
-    createdAt: "created_at",
-    freeTrialExpiry: "free_trial_expiry",
-    ssoActivated: "sso_activated",
-    ssoConnectionId: "sso_connection_id",
-    telemetryDisabled: "telemetry_disabled",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accountType: AccountType$outboundSchema,
+    createdAt: z.date().transform(v => v.toISOString()),
+    freeTrialExpiry: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    id: z.string(),
+    internal: z.boolean().optional(),
+    name: z.string(),
+    slug: z.string(),
+    ssoActivated: z.boolean(),
+    telemetryDisabled: z.boolean(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    workosId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accountType: "account_type",
+      createdAt: "created_at",
+      freeTrialExpiry: "free_trial_expiry",
+      ssoActivated: "sso_activated",
+      telemetryDisabled: "telemetry_disabled",
+      updatedAt: "updated_at",
+      workosId: "workos_id",
+    });
+  })
+);
 
 export function organizationToJSON(organization: Organization): string {
   return JSON.stringify(Organization$outboundSchema.parse(organization));

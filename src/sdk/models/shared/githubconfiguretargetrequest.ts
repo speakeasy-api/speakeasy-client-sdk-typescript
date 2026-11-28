@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,14 +27,16 @@ export const GithubConfigureTargetRequest$inboundSchema: z.ZodType<
   GithubConfigureTargetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org: z.string(),
-  repo_name: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "repo_name": "repoName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    repo_name: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "repo_name": "repoName",
+    });
+  })
+);
 /** @internal */
 export type GithubConfigureTargetRequest$Outbound = {
   org: string;
@@ -46,14 +48,16 @@ export const GithubConfigureTargetRequest$outboundSchema: z.ZodType<
   GithubConfigureTargetRequest$Outbound,
   z.ZodTypeDef,
   GithubConfigureTargetRequest
-> = z.object({
-  org: z.string(),
-  repoName: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    repoName: "repo_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    repoName: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      repoName: "repo_name",
+    });
+  })
+);
 
 export function githubConfigureTargetRequestToJSON(
   githubConfigureTargetRequest: GithubConfigureTargetRequest,

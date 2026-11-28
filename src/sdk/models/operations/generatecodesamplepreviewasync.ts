@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -26,14 +26,16 @@ export type GenerateCodeSamplePreviewAsyncResponseBody = {
 /** @internal */
 export const GenerateCodeSamplePreviewAsyncResponseBody$inboundSchema:
   z.ZodType<GenerateCodeSamplePreviewAsyncResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      job_id: z.string(),
-      status: shared.CodeSamplesJobStatus$inboundSchema,
-    }).transform((v) => {
-      return remap$(v, {
-        "job_id": "jobId",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        job_id: z.string(),
+        status: shared.CodeSamplesJobStatus$inboundSchema,
+      }).transform((v) => {
+        return remap$(v, {
+          "job_id": "jobId",
+        });
+      })
+    );
 /** @internal */
 export type GenerateCodeSamplePreviewAsyncResponseBody$Outbound = {
   job_id: string;
@@ -46,14 +48,16 @@ export const GenerateCodeSamplePreviewAsyncResponseBody$outboundSchema:
     GenerateCodeSamplePreviewAsyncResponseBody$Outbound,
     z.ZodTypeDef,
     GenerateCodeSamplePreviewAsyncResponseBody
-  > = z.object({
-    jobId: z.string(),
-    status: shared.CodeSamplesJobStatus$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      jobId: "job_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      jobId: z.string(),
+      status: shared.CodeSamplesJobStatus$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        jobId: "job_id",
+      });
+    })
+  );
 
 export function generateCodeSamplePreviewAsyncResponseBodyToJSON(
   generateCodeSamplePreviewAsyncResponseBody:

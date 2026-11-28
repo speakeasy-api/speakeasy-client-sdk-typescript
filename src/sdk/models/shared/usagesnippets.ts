@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const UsageSnippets$inboundSchema: z.ZodType<
   UsageSnippets,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  snippets: z.array(UsageSnippet$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    snippets: z.array(UsageSnippet$inboundSchema),
+  })
+);
 /** @internal */
 export type UsageSnippets$Outbound = {
   snippets: Array<UsageSnippet$Outbound>;
@@ -35,9 +37,11 @@ export const UsageSnippets$outboundSchema: z.ZodType<
   UsageSnippets$Outbound,
   z.ZodTypeDef,
   UsageSnippets
-> = z.object({
-  snippets: z.array(UsageSnippet$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    snippets: z.array(UsageSnippet$outboundSchema),
+  })
+);
 
 export function usageSnippetsToJSON(usageSnippets: UsageSnippets): string {
   return JSON.stringify(UsageSnippets$outboundSchema.parse(usageSnippets));

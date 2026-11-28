@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,9 +26,11 @@ export const GetChangesReportSignedUrlRequest$inboundSchema: z.ZodType<
   GetChangesReportSignedUrlRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  documentChecksum: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    documentChecksum: z.string(),
+  })
+);
 /** @internal */
 export type GetChangesReportSignedUrlRequest$Outbound = {
   documentChecksum: string;
@@ -39,9 +41,11 @@ export const GetChangesReportSignedUrlRequest$outboundSchema: z.ZodType<
   GetChangesReportSignedUrlRequest$Outbound,
   z.ZodTypeDef,
   GetChangesReportSignedUrlRequest
-> = z.object({
-  documentChecksum: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    documentChecksum: z.string(),
+  })
+);
 
 export function getChangesReportSignedUrlRequestToJSON(
   getChangesReportSignedUrlRequest: GetChangesReportSignedUrlRequest,
@@ -67,9 +71,11 @@ export const GetChangesReportSignedUrlSignedAccess$inboundSchema: z.ZodType<
   GetChangesReportSignedUrlSignedAccess,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 /** @internal */
 export type GetChangesReportSignedUrlSignedAccess$Outbound = {
   url: string;
@@ -80,9 +86,11 @@ export const GetChangesReportSignedUrlSignedAccess$outboundSchema: z.ZodType<
   GetChangesReportSignedUrlSignedAccess$Outbound,
   z.ZodTypeDef,
   GetChangesReportSignedUrlSignedAccess
-> = z.object({
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+  })
+);
 
 export function getChangesReportSignedUrlSignedAccessToJSON(
   getChangesReportSignedUrlSignedAccess: GetChangesReportSignedUrlSignedAccess,

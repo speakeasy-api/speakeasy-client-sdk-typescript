@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const GetPublishingTokenTargetByIDRequest$inboundSchema: z.ZodType<
   GetPublishingTokenTargetByIDRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tokenID: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tokenID: z.string(),
+  })
+);
 /** @internal */
 export type GetPublishingTokenTargetByIDRequest$Outbound = {
   tokenID: string;
@@ -32,9 +34,11 @@ export const GetPublishingTokenTargetByIDRequest$outboundSchema: z.ZodType<
   GetPublishingTokenTargetByIDRequest$Outbound,
   z.ZodTypeDef,
   GetPublishingTokenTargetByIDRequest
-> = z.object({
-  tokenID: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tokenID: z.string(),
+  })
+);
 
 export function getPublishingTokenTargetByIDRequestToJSON(
   getPublishingTokenTargetByIDRequest: GetPublishingTokenTargetByIDRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const RemoteDocument$inboundSchema: z.ZodType<
   RemoteDocument,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  registry_url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "registry_url": "registryUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    registry_url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "registry_url": "registryUrl",
+    });
+  })
+);
 /** @internal */
 export type RemoteDocument$Outbound = {
   registry_url: string;
@@ -37,13 +39,15 @@ export const RemoteDocument$outboundSchema: z.ZodType<
   RemoteDocument$Outbound,
   z.ZodTypeDef,
   RemoteDocument
-> = z.object({
-  registryUrl: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    registryUrl: "registry_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    registryUrl: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      registryUrl: "registry_url",
+    });
+  })
+);
 
 export function remoteDocumentToJSON(remoteDocument: RemoteDocument): string {
   return JSON.stringify(RemoteDocument$outboundSchema.parse(remoteDocument));

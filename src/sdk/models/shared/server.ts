@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,12 +20,14 @@ export type Server = {
 };
 
 /** @internal */
-export const Server$inboundSchema: z.ZodType<Server, z.ZodTypeDef, unknown> = z
-  .object({
-    description: z.string(),
-    id: z.string().optional(),
-    url: z.string(),
-  });
+export const Server$inboundSchema: z.ZodType<Server, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string(),
+      id: z.string().optional(),
+      url: z.string(),
+    })
+  );
 /** @internal */
 export type Server$Outbound = {
   description: string;
@@ -38,11 +40,13 @@ export const Server$outboundSchema: z.ZodType<
   Server$Outbound,
   z.ZodTypeDef,
   Server
-> = z.object({
-  description: z.string(),
-  id: z.string().optional(),
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    id: z.string().optional(),
+    url: z.string(),
+  })
+);
 
 export function serverToJSON(server: Server): string {
   return JSON.stringify(Server$outboundSchema.parse(server));

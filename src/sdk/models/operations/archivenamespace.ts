@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,9 +28,11 @@ export const ArchiveNamespaceRequestBody$inboundSchema: z.ZodType<
   ArchiveNamespaceRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  archived: z.boolean().default(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    archived: z.boolean().default(true),
+  })
+);
 /** @internal */
 export type ArchiveNamespaceRequestBody$Outbound = {
   archived: boolean;
@@ -41,9 +43,11 @@ export const ArchiveNamespaceRequestBody$outboundSchema: z.ZodType<
   ArchiveNamespaceRequestBody$Outbound,
   z.ZodTypeDef,
   ArchiveNamespaceRequestBody
-> = z.object({
-  archived: z.boolean().default(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    archived: z.boolean().default(true),
+  })
+);
 
 export function archiveNamespaceRequestBodyToJSON(
   archiveNamespaceRequestBody: ArchiveNamespaceRequestBody,
@@ -69,16 +73,18 @@ export const ArchiveNamespaceRequest$inboundSchema: z.ZodType<
   ArchiveNamespaceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  namespace_name: z.string(),
-  RequestBody: z.lazy(() => ArchiveNamespaceRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "namespace_name": "namespaceName",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespace_name: z.string(),
+    RequestBody: z.lazy(() => ArchiveNamespaceRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "namespace_name": "namespaceName",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type ArchiveNamespaceRequest$Outbound = {
   namespace_name: string;
@@ -90,16 +96,18 @@ export const ArchiveNamespaceRequest$outboundSchema: z.ZodType<
   ArchiveNamespaceRequest$Outbound,
   z.ZodTypeDef,
   ArchiveNamespaceRequest
-> = z.object({
-  namespaceName: z.string(),
-  requestBody: z.lazy(() => ArchiveNamespaceRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    namespaceName: "namespace_name",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    namespaceName: z.string(),
+    requestBody: z.lazy(() => ArchiveNamespaceRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      namespaceName: "namespace_name",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function archiveNamespaceRequestToJSON(
   archiveNamespaceRequest: ArchiveNamespaceRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,15 +27,17 @@ export const RelativeDiff$inboundSchema: z.ZodType<
   RelativeDiff,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  added_lines: z.number().int().optional(),
-  removed_lines: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "added_lines": "addedLines",
-    "removed_lines": "removedLines",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    added_lines: z.number().int().optional(),
+    removed_lines: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "added_lines": "addedLines",
+      "removed_lines": "removedLines",
+    });
+  })
+);
 /** @internal */
 export type RelativeDiff$Outbound = {
   added_lines?: number | undefined;
@@ -47,15 +49,17 @@ export const RelativeDiff$outboundSchema: z.ZodType<
   RelativeDiff$Outbound,
   z.ZodTypeDef,
   RelativeDiff
-> = z.object({
-  addedLines: z.number().int().optional(),
-  removedLines: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    addedLines: "added_lines",
-    removedLines: "removed_lines",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    addedLines: z.number().int().optional(),
+    removedLines: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      addedLines: "added_lines",
+      removedLines: "removed_lines",
+    });
+  })
+);
 
 export function relativeDiffToJSON(relativeDiff: RelativeDiff): string {
   return JSON.stringify(RelativeDiff$outboundSchema.parse(relativeDiff));

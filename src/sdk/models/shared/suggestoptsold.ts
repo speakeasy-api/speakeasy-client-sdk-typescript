@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,7 +29,7 @@ export type SuggestOptsOld = {
 /** @internal */
 export const SuggestionType$inboundSchema: z.ZodNativeEnum<
   typeof SuggestionType
-> = z.nativeEnum(SuggestionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SuggestionType));
 /** @internal */
 export const SuggestionType$outboundSchema: z.ZodNativeEnum<
   typeof SuggestionType
@@ -40,14 +40,16 @@ export const SuggestOptsOld$inboundSchema: z.ZodType<
   SuggestOptsOld,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  diagnostics: z.array(Diagnostic$inboundSchema).optional(),
-  suggestion_type: SuggestionType$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "suggestion_type": "suggestionType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    diagnostics: z.array(Diagnostic$inboundSchema).optional(),
+    suggestion_type: SuggestionType$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "suggestion_type": "suggestionType",
+    });
+  })
+);
 /** @internal */
 export type SuggestOptsOld$Outbound = {
   diagnostics?: Array<Diagnostic$Outbound> | undefined;
@@ -59,14 +61,16 @@ export const SuggestOptsOld$outboundSchema: z.ZodType<
   SuggestOptsOld$Outbound,
   z.ZodTypeDef,
   SuggestOptsOld
-> = z.object({
-  diagnostics: z.array(Diagnostic$outboundSchema).optional(),
-  suggestionType: SuggestionType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    suggestionType: "suggestion_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    diagnostics: z.array(Diagnostic$outboundSchema).optional(),
+    suggestionType: SuggestionType$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      suggestionType: "suggestion_type",
+    });
+  })
+);
 
 export function suggestOptsOldToJSON(suggestOptsOld: SuggestOptsOld): string {
   return JSON.stringify(SuggestOptsOld$outboundSchema.parse(suggestOptsOld));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../../lib/primitives.js";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import * as shared from "../shared/index.js";
@@ -26,13 +26,15 @@ export const PostWorkspaceEventsGlobals$inboundSchema: z.ZodType<
   PostWorkspaceEventsGlobals,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+    });
+  })
+);
 /** @internal */
 export type PostWorkspaceEventsGlobals$Outbound = {
   workspace_id?: string | undefined;
@@ -43,13 +45,15 @@ export const PostWorkspaceEventsGlobals$outboundSchema: z.ZodType<
   PostWorkspaceEventsGlobals$Outbound,
   z.ZodTypeDef,
   PostWorkspaceEventsGlobals
-> = z.object({
-  workspaceId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+    });
+  })
+);
 
 export function postWorkspaceEventsGlobalsToJSON(
   postWorkspaceEventsGlobals: PostWorkspaceEventsGlobals,
@@ -73,15 +77,17 @@ export const PostWorkspaceEventsRequest$inboundSchema: z.ZodType<
   PostWorkspaceEventsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  workspace_id: z.string().optional(),
-  RequestBody: z.array(shared.CliEvent$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "workspace_id": "workspaceId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspace_id: z.string().optional(),
+    RequestBody: z.array(shared.CliEvent$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "workspace_id": "workspaceId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type PostWorkspaceEventsRequest$Outbound = {
   workspace_id?: string | undefined;
@@ -93,15 +99,17 @@ export const PostWorkspaceEventsRequest$outboundSchema: z.ZodType<
   PostWorkspaceEventsRequest$Outbound,
   z.ZodTypeDef,
   PostWorkspaceEventsRequest
-> = z.object({
-  workspaceId: z.string().optional(),
-  requestBody: z.array(shared.CliEvent$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    workspaceId: "workspace_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workspaceId: z.string().optional(),
+    requestBody: z.array(shared.CliEvent$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      workspaceId: "workspace_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function postWorkspaceEventsRequestToJSON(
   postWorkspaceEventsRequest: PostWorkspaceEventsRequest,

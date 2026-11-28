@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,9 +21,11 @@ export type OASInfo = {
 
 /** @internal */
 export const License$inboundSchema: z.ZodType<License, z.ZodTypeDef, unknown> =
-  z.object({
-    identifier: z.string().optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      identifier: z.string().optional(),
+    })
+  );
 /** @internal */
 export type License$Outbound = {
   identifier?: string | undefined;
@@ -34,9 +36,11 @@ export const License$outboundSchema: z.ZodType<
   License$Outbound,
   z.ZodTypeDef,
   License
-> = z.object({
-  identifier: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identifier: z.string().optional(),
+  })
+);
 
 export function licenseToJSON(license: License): string {
   return JSON.stringify(License$outboundSchema.parse(license));
@@ -53,13 +57,15 @@ export function licenseFromJSON(
 
 /** @internal */
 export const OASInfo$inboundSchema: z.ZodType<OASInfo, z.ZodTypeDef, unknown> =
-  z.object({
-    description: z.string(),
-    license: z.lazy(() => License$inboundSchema),
-    summary: z.string(),
-    title: z.string(),
-    version: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      description: z.string(),
+      license: z.lazy(() => License$inboundSchema),
+      summary: z.string(),
+      title: z.string(),
+      version: z.string(),
+    })
+  );
 /** @internal */
 export type OASInfo$Outbound = {
   description: string;
@@ -74,13 +80,15 @@ export const OASInfo$outboundSchema: z.ZodType<
   OASInfo$Outbound,
   z.ZodTypeDef,
   OASInfo
-> = z.object({
-  description: z.string(),
-  license: z.lazy(() => License$outboundSchema),
-  summary: z.string(),
-  title: z.string(),
-  version: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string(),
+    license: z.lazy(() => License$outboundSchema),
+    summary: z.string(),
+    title: z.string(),
+    version: z.string(),
+  })
+);
 
 export function oasInfoToJSON(oasInfo: OASInfo): string {
   return JSON.stringify(OASInfo$outboundSchema.parse(oasInfo));
